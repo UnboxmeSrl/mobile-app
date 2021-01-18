@@ -1,4 +1,7 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
-};
+  extends: ['standard-with-typescript', '@react-native-community'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+}
