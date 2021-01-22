@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		CE32358C25BB3359009A3838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE32358B25BB3359009A3838 /* GoogleService-Info.plist */; };
 		CE90C3DB25B8BF0A00C7DCC9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90C3DA25B8BF0A00C7DCC9 /* File.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		991F8A42921CF06CCCCC6D17 /* Pods-unboxme-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-unboxme-tvOSTests/Pods-unboxme-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CA6465E131532F46245D1E81 /* Pods-unboxme-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-unboxme-tvOS/Pods-unboxme-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		CC47D408CAB21809BD875A6F /* Pods-unboxme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.release.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.release.xcconfig"; sourceTree = "<group>"; };
+		CE32358B25BB3359009A3838 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE90C3A325B8B50100C7DCC9 /* unboxme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = unboxme.entitlements; path = unboxme/unboxme.entitlements; sourceTree = "<group>"; };
 		CE90C3D925B8BF0A00C7DCC9 /* unboxme-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unboxme-Bridging-Header.h"; sourceTree = "<group>"; };
 		CE90C3DA25B8BF0A00C7DCC9 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				CE90C3DA25B8BF0A00C7DCC9 /* File.swift */,
 				CE90C3D925B8BF0A00C7DCC9 /* unboxme-Bridging-Header.h */,
+				CE32358B25BB3359009A3838 /* GoogleService-Info.plist */,
 			);
 			name = unboxme;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CE32358C25BB3359009A3838 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,11 +244,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
