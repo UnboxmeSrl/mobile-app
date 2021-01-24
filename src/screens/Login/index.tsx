@@ -1,14 +1,8 @@
-import React from 'react'
-import { AppleLogin } from '../../components/AppleLogin'
-import styled from 'styled-components/native'
-import { FacebookLogin } from '../../components/FacebookLogin'
-import { GoogleLogin } from '../../components/GoogleLogin'
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`
+import React, { useContext } from 'react'
+import { AppleLogin } from '@components/Auth/AppleLogin'
+import { FacebookLogin } from '@components/Auth/FacebookLogin'
+import { GoogleLogin } from '@components/Auth/GoogleLogin'
+import { Container } from '@components/Container'
 
 export const LoginScreen: React.FC = () => (
   <Container>

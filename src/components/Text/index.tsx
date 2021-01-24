@@ -1,0 +1,53 @@
+import React from 'react'
+import styled from 'styled-components/native'
+import { withTheme } from '@services/withTheme'
+import { useTranslation } from 'react-i18next'
+import { FONTS } from '@const'
+
+const ThemedText = styled.Text`
+  color: ${({ reverted }) =>
+    reverted ? withTheme('black', 'white') : withTheme('white', 'black')};
+`
+const Regular = styled(ThemedText)`
+  fontSize: 14px
+  lineHeight: 18px
+`
+const Light = styled(Regular)`
+  font-family: ${FONTS.light};
+`
+const SemiBold = styled(Regular)`
+  font-family: ${FONTS.semiBold};
+`
+const Bold = styled(Regular)`
+  font-family: ${FONTS.bold};
+`
+
+const BaseText = ({
+  tKey,
+  tDefaultValue,
+  tOptions,
+  Component,
+  children,
+  ...rest
+}) => {
+  const { t } = useTranslation()
+
+  return (
+    <Component {...rest}>
+      {tKey ? t(tKey, tDefaultValue, tOptions) : children}
+    </Component>
+  )
+}
+
+export const RegularText = (props) => {
+  return <BaseText Component={Regular} {...props} />
+}
+export const LightText = (props) => {
+  return <BaseText Component={Light} {...props} />
+}
+export const SemiBoldText = (props) => {
+  return <BaseText Component={SemiBold} {...props} />
+}
+export const BoldText = (props) => {
+  return <BaseText Component={Bold} {...props} />
+}
