@@ -17,6 +17,7 @@
 		9DBCF799453543CC881EAEFF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2BE6071F2304C2B8F75A3D7 /* Montserrat-SemiBold.ttf */; };
 		A51C756C990D4C34ACE0C249 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B6124941CED4066852DA66C /* Montserrat-Bold.ttf */; };
 		CE32358C25BB3359009A3838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE32358B25BB3359009A3838 /* GoogleService-Info.plist */; };
+		CE59628725BDD2E900FF187D /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		CE90C3DB25B8BF0A00C7DCC9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90C3DA25B8BF0A00C7DCC9 /* File.swift */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +189,7 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 84KM93C3TE;
 						LastSwiftMigration = 1230;
 						ProvisioningStyle = Manual;
 					};
@@ -216,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE59628725BDD2E900FF187D /* main.jsbundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				CE32358C25BB3359009A3838 /* GoogleService-Info.plist in Resources */,
@@ -241,7 +244,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		8C0260D61704A5ABB4D8BE9B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -341,7 +344,7 @@
 				CODE_SIGN_ENTITLEMENTS = unboxme/unboxme.entitlements;
 				CODE_SIGN_IDENTITY = "Don't Code Sign";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 84KM93C3TE;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = unboxme/Info.plist;
@@ -353,7 +356,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.unboxme;
 				PRODUCT_NAME = unboxme;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.unboxme";
 				SWIFT_OBJC_BRIDGING_HEADER = "unboxme-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -370,7 +373,7 @@
 				CODE_SIGN_ENTITLEMENTS = unboxme/unboxme.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 84KM93C3TE;
 				INFOPLIST_FILE = unboxme/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
