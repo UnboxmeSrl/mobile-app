@@ -16,14 +16,14 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios beta
+### ios ios
 ```
-fastlane ios beta
+fastlane ios ios
 ```
 Push a new beta build to TestFlight
-### ios upload_firebase
+### ios android
 ```
-fastlane ios upload_firebase
+fastlane ios android
 ```
 
 

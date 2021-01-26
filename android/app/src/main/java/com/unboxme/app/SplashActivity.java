@@ -1,4 +1,4 @@
-package com.unboxme;
+package com.unboxme.app;
 
 import android.content.Intent;
 import android.os.Bundle;

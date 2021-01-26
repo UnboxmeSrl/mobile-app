@@ -1,4 +1,4 @@
-package com.unboxme;
+package com.unboxme.app;
 
 import com.facebook.react.ReactActivity;
 

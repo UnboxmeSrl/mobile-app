@@ -1,8 +1,35 @@
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 import com.android.build.OutputFile
+
+def getPassword(String currentUser, String keyChain) {
+   def stdout = new ByteArrayOutputStream()
+   def stderr = new ByteArrayOutputStream()
+   exec {
+       commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
+       standardOutput = stdout
+       errorOutput = stderr
+       ignoreExitValue true
+   }
+   //noinspection GroovyAssignabilityCheck
+      stdout.toString().trim()
+}
+
+def jsonFile = file('../../package.json')
+def packageJson = new groovy.json.JsonSlurper().parseText(jsonFile.text)
+def getMyVersionName = { ->
+  def name = packageJson.version
+  return name
+}
+def getMyVersionCode = { ->
+  def code = packageJson.buildNumber
+  return code
+}
+def pass = getPassword("mw","android_keystore")
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -131,11 +158,11 @@ android {
   }
 
   defaultConfig {
-    applicationId "com.unboxme"
+    applicationId "com.unboxme.app"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 1
-    versionName "1.0"
+    versionCode getMyVersionCode()
+    versionName getMyVersionName()
     multiDexEnabled true
   }
   splits {
@@ -147,6 +174,14 @@ android {
     }
   }
   signingConfigs {
+    release {
+      if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+        storeFile file(MYAPP_UPLOAD_STORE_FILE)
+        storePassword pass
+        keyAlias MYAPP_UPLOAD_KEY_ALIAS
+        keyPassword pass
+      }
+    }
     debug {
       storeFile file('debug.keystore')
       storePassword 'android'
@@ -161,7 +196,7 @@ android {
     release {
       // Caution! In production, you need to generate your own keystore file.
       // see https://reactnative.dev/docs/signed-apk-android.
-      signingConfig signingConfigs.debug
+      signingConfig signingConfigs.release
       minifyEnabled enableProguardInReleaseBuilds
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
     }

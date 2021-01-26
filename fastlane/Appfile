@@ -1,5 +1,6 @@
-app_identifier("com.unboxme") # The bundle identifier of your app
-apple_id("kontakt@marcinwalendowski.pl") # Your Apple email address
-
-itc_team_id("122573070") # App Store Connect Team ID
-team_id("84KM93C3TE") # Developer Portal Team ID
+app_identifier("com.unboxme.app")
+package_name("com.unboxme.app")
+apple_id("kontakt@marcinwalendowski.pl")
+itc_team_id("122573070")
+team_id("84KM93C3TE")
+json_key_file "./fastlane/pc-api-4719532666987937571-874-251b40c0fdf8.json"
