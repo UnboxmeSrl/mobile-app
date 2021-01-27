@@ -88,6 +88,7 @@ GEM
     fastlane-plugin-firebase_app_distribution (0.2.5)
     fastlane-plugin-increment_version_code (0.4.3)
     fastlane-plugin-increment_version_name (0.0.10)
+    fastlane-plugin-json (1.0.0)
     fastlane-plugin-load_json (0.0.1)
     gh_inspector (1.1.3)
     google-api-client (0.38.0)
@@ -201,6 +202,7 @@ DEPENDENCIES
   fastlane-plugin-firebase_app_distribution
   fastlane-plugin-increment_version_code
   fastlane-plugin-increment_version_name
+  fastlane-plugin-json
   fastlane-plugin-load_json
 
 BUNDLED WITH

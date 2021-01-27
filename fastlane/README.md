@@ -15,15 +15,37 @@ Install _fastlane_ using
 or alternatively using `brew install fastlane`
 
 # Available Actions
-## iOS
-### ios ios
+### increment_build
 ```
-fastlane ios ios
+fastlane increment_build
+```
+
+### release_all
+```
+fastlane release_all
+```
+
+
+----
+
+## iOS
+### ios build_and_upload
+```
+fastlane ios build_and_upload
 ```
 Push a new beta build to TestFlight
-### ios android
+
+----
+
+## Android
+### android build
 ```
-fastlane ios android
+fastlane android build
+```
+
+### android build_and_upload
+```
+fastlane android build_and_upload
 ```
 
 

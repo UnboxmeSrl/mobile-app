@@ -1,20 +1,41 @@
 default_platform(:ios)
 
+lane :increment_build do
+  sh("yarn global add json")
+  sh("json -I -f ../package.json -e 'this.buildNumber=this.buildNumber+1'")
+end
+
 platform :ios do
   desc "Push a new beta build to TestFlight"
-
-  lane :ios do
-    increment_build_number(xcodeproj: "./ios/unboxme.xcodeproj")
+  lane :build_and_upload do
     match(type: "appstore")
-    build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: false, export_method: "app-store")
+    build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: true, export_method: "app-store")
     upload_to_testflight
+    firebase_app_distribution(debug: true, app: "1:759842823698:android:0f442ba143dc90d4d602cb")
   end
-  lane :android do
+end
+
+platform :android do
+  lane :build do
     gradle(
-        task: 'bundle',
-        project_dir: 'android/',
-        build_type: 'Release',
-      )
-    firebase_app_distribution(debug: true, app: "1:759842823698:ios:bac6ef82bae23dedd602cb")
+      project_dir: './android',
+      task: 'bundle',
+      build_type: 'Release'
+    )
+    gradle(
+      project_dir: './android',
+      task: 'assemble',
+      build_type: 'Release'
+    )
   end
+  lane :build_and_upload do
+    build()
+    upload_to_play_store(track: 'internal', skip_upload_apk: true, release_status: 'draft')
+  end
+end
+
+lane :release_all do
+  increment_build
+  sh "fastlane ios build_and_upload"
+  sh "fastlane android build_and_upload"
 end
