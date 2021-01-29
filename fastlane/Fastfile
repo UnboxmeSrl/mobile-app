@@ -1,16 +1,15 @@
 default_platform(:ios)
 
 lane :increment_build do
-  sh("yarn global add json")
-  sh("json -I -f ../package.json -e 'this.buildNumber=this.buildNumber+1'")
+  sh("./increment_build.sh")
 end
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :build_and_upload do
-    match(type: "appstore")
+    match(type: "appstore", app_identifier: ["com.unboxme.app", "com.unboxme.app.OneSignalNotificationServiceExtension"])
     build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: true, export_method: "app-store")
-    upload_to_testflight
+    upload_to_testflight(skip_waiting_for_build_processing: true)
     firebase_app_distribution(debug: true, app: "1:759842823698:android:0f442ba143dc90d4d602cb")
   end
 end
@@ -37,5 +36,5 @@ end
 lane :release_all do
   increment_build
   sh "fastlane ios build_and_upload"
-  sh "fastlane android build_and_upload"
+#  sh "fastlane android build_and_upload"
 end

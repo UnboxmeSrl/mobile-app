@@ -4049,7 +4049,7 @@ internal-slot@^1.0.2:
     has "^1.0.3"
     side-channel "^1.0.2"
 
-invariant@2.2.4, invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -6412,6 +6412,13 @@ react-native-localize@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.0.1.tgz"
   integrity sha512-Tuf26iH7/pHd+yCAORD2EPLhkHdGTMEUXMiiKb4Pz69dE48R7C+MA30EqubE6qTlvAs6gHM+2E5dzLAxcGH5UA==
+
+react-native-onesignal@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.0.3.tgz#a55f856ff8f7cac36cc0bcce33dd474707ad59eb"
+  integrity sha512-QdBKsYAWn52g7sOG8NsKAHVgnF7PZ6Kk9fB98f/0nyJElvjff/mUWGE4waKUuwM2uh4c/EOX4n3P7Q/Wmz5Bvg==
+  dependencies:
+    invariant "^2.2.2"
 
 react-native-reanimated@^1.13.2:
   version "1.13.2"
