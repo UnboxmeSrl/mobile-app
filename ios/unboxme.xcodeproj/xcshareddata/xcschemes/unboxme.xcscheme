@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1130"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -10,7 +10,17 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "&#10;">
+               scriptText = "BUILD=$(jq &apos;.buildNumber&apos; ${PROJECT_DIR}/../package.json) &#10;VERSION=$(jq -r &apos;.version&apos; ${PROJECT_DIR}/../package.json) &#10;plutil -replace CFBundleVersion -string $BUILD &quot;${PROJECT_DIR}/unboxme/Info.plist&quot;&#10;plutil -replace CFBundleShortVersionString -string $VERSION &quot;${PROJECT_DIR}/unboxme/Info.plist&quot;&#10;plutil -replace CFBundleVersion -string $BUILD &quot;${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist&quot;&#10;plutil -replace CFBundleShortVersionString -string $VERSION &quot;${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist&quot;&#10;"
+               shellToInvoke = "/bin/sh">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+                     BuildableName = "unboxme.app"
+                     BlueprintName = "unboxme"
+                     ReferencedContainer = "container:unboxme.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
       </PreActions>

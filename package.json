@@ -8,9 +8,15 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
   },
   "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@invertase/react-native-apple-authentication": "^2.1.0",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
@@ -27,6 +33,7 @@
     "@types/ramda": "^0.27.35",
     "@types/styled-components": "^5.1.7",
     "@types/styled-components-react-native": "^5.1.0",
+    "husky": "^4.3.8",
     "i18n-js": "^3.8.0",
     "i18next": "^19.8.4",
     "ramda": "^0.27.1",
@@ -44,6 +51,7 @@
     "react-native-screens": "^2.16.1",
     "react-native-webview": "^11.2.0",
     "react-redux": "^7.2.2",
+    "standard-version": "^9.1.0",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {

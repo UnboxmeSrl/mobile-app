@@ -218,14 +218,24 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		CE81C96625C56F490040CCDB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		13B07F861A680F5B00A75B9A /* unboxme */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "unboxme" */;
 			buildPhases = (
 				8C0260D61704A5ABB4D8BE9B /* [CP] Check Pods Manifest.lock */,
-				CE4F6AC525C1BDCE0085031F /* SET BUILD NUMBER */,
 				FD10A7F022414F080027D42C /* Start Packager */,
+				CE81C96625C56F490040CCDB /* Headers */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -253,7 +263,6 @@
 				CEFA82BB25C35D580042609F /* Sources */,
 				CEFA82BC25C35D580042609F /* Frameworks */,
 				CEFA82BD25C35D580042609F /* Resources */,
-				CEE63B0725C49F40003476B2 /* SET VERION NAME */,
 			);
 			buildRules = (
 			);
@@ -421,42 +430,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		CE4F6AC525C1BDCE0085031F /* SET BUILD NUMBER */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "SET BUILD NUMBER";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "BUILD=$(jq '.buildNumber' ${PROJECT_DIR}/../package.json) \nVERSION=$(jq -r '.version' ${PROJECT_DIR}/../package.json) \nplutil -replace CFBundleVersion -string $BUILD \"${PROJECT_DIR}/unboxme/Info.plist\"\nplutil -replace CFBundleShortVersionString -string $VERSION \"${PROJECT_DIR}/unboxme/Info.plist\"\n\n";
-		};
-		CEE63B0725C49F40003476B2 /* SET VERION NAME */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "SET VERION NAME";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "BUILD=$(jq '.buildNumber' ${PROJECT_DIR}/../package.json) \nVERSION=$(jq -r '.version' ${PROJECT_DIR}/../package.json) \nplutil -replace CFBundleVersion -string $BUILD \"${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist\"\nplutil -replace CFBundleShortVersionString -string $VERSION \"${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist\"\n\n";
 		};
 		E2EEA9C88D43346D15250C90 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -709,7 +682,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 84KM93C3TE;
@@ -721,7 +694,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unboxme.app.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.unboxme.app.OneSignalNotificationServiceExtension";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.unboxme.app.OneSignalNotificationServiceExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
