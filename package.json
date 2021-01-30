@@ -1,7 +1,7 @@
 {
   "name": "unboxme",
   "version": "1.0.0",
-  "buildNumber": 64,
+  "buildNumber": 65,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
