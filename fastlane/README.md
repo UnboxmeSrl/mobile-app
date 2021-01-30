@@ -20,6 +20,11 @@ or alternatively using `brew install fastlane`
 fastlane increment_build
 ```
 
+### handle_changelog
+```
+fastlane handle_changelog
+```
+
 ### release_all
 ```
 fastlane release_all

@@ -2,14 +2,16 @@
   "types": [
     {"type": "feat", "section": "Features"},
     {"type": "fix", "section": "Bug Fixes"},
-    {"type": "chore"},
-    {"type": "docs"},
-    {"type": "style"},
+    {"type": "chore",
+      "hidden": true
+    },
+    {"type": "docs", "hidden": true},
+    {"type": "style", "hidden": true},
     {"type": "refactor"},
     {"type": "perf"},
-    {"type": "test"}
+    {"type": "test", "hidden": true}
   ],
-  "commitUrlFormat": "https://github.com/mokkapps/changelog-generator-demo/commits/{{hash}}",
-  "compareUrlFormat": "https://github.com/mokkapps/changelog-generator-demo/compare/{{previousTag}}...{{currentTag}}"
+  "commitUrlFormat": "https://github.com/UnboxmeSrl/mobile-app/commits/{{hash}}",
+  "compareUrlFormat": "https://github.com/UnboxmeSrl/mobile-app/compare/{{previousTag}}...{{currentTag}}"
 }
 

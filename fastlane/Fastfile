@@ -4,13 +4,21 @@ lane :increment_build do
   sh("./increment_build.sh")
 end
 
+lane :handle_changelog do
+  my_package_json = read_json(json_path: "./package.json")
+  version = my_package_json[:version]
+  changelog = read_changelog(section_identifier: "[#{version}]")
+end
+
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :build_and_upload do
-#    match(type: "development", app_identifier: ["com.unboxme.app", "com.unboxme.app.OneSignalNotificationServiceExtension"])
-#    build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: true, export_method: "app-store")
-    upload_to_testflight(skip_waiting_for_build_processing: true, changelog: '')
-    firebase_app_distribution(app: ENV["FIREBASE_IOS_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"])
+    match(type: "development", app_identifier: ["com.unboxme.app", "com.unboxme.app.OneSignalNotificationServiceExtension"])
+    build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: true, export_method: "app-store")
+    changelog_string = handle_changelog
+    puts changelog_string
+    upload_to_testflight(skip_waiting_for_build_processing: true, changelog: changelog_string)
+    firebase_app_distribution(app: ENV["FIREBASE_IOS_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog)
   end
 end
 
@@ -28,14 +36,15 @@ platform :android do
     )
   end
   lane :build_and_upload do
-    build()
+    build
+    changelog = handle_changelog
     upload_to_play_store(track: 'internal', skip_upload_apk: true, release_status: 'draft')
-    firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"])
+    firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog)
   end
 end
 
 lane :release_all do
   increment_build
   sh "fastlane ios build_and_upload"
-#  sh "fastlane android build_and_upload"
+  sh "fastlane android build_and_upload"
 end
