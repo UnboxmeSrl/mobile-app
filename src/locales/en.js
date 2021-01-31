@@ -3,5 +3,8 @@ export default {
     login: {
       continueWith: 'Continue with {{name}}',
     },
+    homepage: 'Homepage',
+    awards: 'Awards',
+    settings: 'Settings'
   },
 }

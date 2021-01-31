@@ -7,5 +7,5 @@ const _DARK_THEME = 'darkTheme'
 export const useDarkTheme = () => prop(_DARK_THEME, useContext(ThemeContext))
 
 export const useTheme = (lightTheme, darkTheme) => {
-  return useDarkTheme() ? darkTheme : lightTheme
+  return useDarkTheme() ? darkTheme : darkTheme
 }

@@ -33,12 +33,14 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.759842823698-c4dbmbov4g9mvn7prlj4c9hd8u01p73u</string>
+				<string>com.googleusercontent.apps.759842823698-9ipo0sf6fsqee2f1n8gh4a6l05u394c8</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>108</string>
+	<key>FacebookAppID</key>
+	<string>685306192164982</string>
 	<key>FacebookDisplayName</key>
 	<string>Unboxme</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -86,21 +88,7 @@
 		<string>Montserrat-Light.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
-		<string>AntDesign.ttf</string>
-		<string>Entypo.ttf</string>
-		<string>EvilIcons.ttf</string>
-		<string>Feather.ttf</string>
-		<string>FontAwesome.ttf</string>
-		<string>FontAwesome5_Brands.ttf</string>
-		<string>FontAwesome5_Regular.ttf</string>
-		<string>FontAwesome5_Solid.ttf</string>
-		<string>Fontisto.ttf</string>
-		<string>Foundation.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
-		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
-		<string>SimpleLineIcons.ttf</string>
-		<string>Zocial.ttf</string>
+		<string>Ionicons.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

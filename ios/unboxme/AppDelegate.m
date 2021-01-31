@@ -6,6 +6,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import "RNSplashScreen.h"
 @import Firebase;
 @import UIKit;
 
@@ -56,6 +57,7 @@ static void InitializeFlipper(UIApplication *application) {
   
   // Firebase
   [FIRApp configure];
+  [RNSplashScreen show];
   
   return YES;
 }

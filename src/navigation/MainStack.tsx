@@ -1,24 +1,18 @@
 import React from 'react'
-import {
-  DEFAULT_SCREEN_NAME,
-  SCREEN_NAMES,
-  screenOptions,
-  tabBarOptions,
-} from './constants'
+import { DEFAULT_SCREEN_NAME, STACK_NAMES, SCREEN_NAMES } from './constants'
+import { createStackNavigator } from '@react-navigation/stack'
+import { TabStack } from './TabStack'
 import { LoginScreen } from '@screens/Login'
-import { HomeScreen } from '@screens/Home'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-const Tab = createBottomTabNavigator()
+
+const Root = createStackNavigator()
 
 export function MainStack(): JSX.Element {
   return (
-    <Tab.Navigator
-      initialRouteName={DEFAULT_SCREEN_NAME}
-      screenOptions={screenOptions}
-      tabBarOptions={tabBarOptions}>
-      <Tab.Screen name={SCREEN_NAMES.HOME} component={HomeScreen} />
-      <Tab.Screen name={SCREEN_NAMES.AWARDS} component={HomeScreen} />
-      <Tab.Screen name={SCREEN_NAMES.SETTINGS} component={LoginScreen} />
-    </Tab.Navigator>
+    <Root.Navigator initialRouteName={DEFAULT_SCREEN_NAME} screenOptions={{
+      headerShown: false
+    }}>
+      <Root.Screen name={STACK_NAMES.TAB_STACK} component={TabStack} />
+      <Root.Screen name={SCREEN_NAMES.LOGIN} component={LoginScreen} />
+    </Root.Navigator>
   )
 }

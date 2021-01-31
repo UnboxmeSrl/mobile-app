@@ -8,15 +8,17 @@ import { AppGlobalHooks } from '@components/AppGlobalHooks'
 import { NavigationContainer } from '@nav/NavigationContainer'
 import { MainStack } from '@nav/MainStack'
 import { store } from '@redux/store'
+import { Splash } from '@components/Splash'
 
 const App: React.FC = () => (
   <Provider store={store}>
     <I18nextProvider i18n={i18n}>
       <ThemeProvider>
-        <NavigationContainer>
-          <MainStack />
-          <AppGlobalHooks />
-        </NavigationContainer>
+          <NavigationContainer>
+            <MainStack />
+            <AppGlobalHooks />
+            <Splash />
+          </NavigationContainer>
       </ThemeProvider>
     </I18nextProvider>
   </Provider>

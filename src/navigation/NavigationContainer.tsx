@@ -4,21 +4,27 @@ import {
   DarkTheme,
   DefaultTheme,
 } from '@react-navigation/native'
-import { enableScreens } from 'react-native-screens'
 import { useDarkTheme } from '@hooks/useTheme'
 import { navigationRef } from '@nav/RootNavigator'
+import styled from 'styled-components/native'
+import { propOr } from 'ramda'
 
-enableScreens()
+const Wrapper = styled.View`
+  flex: 1
+  backgroundColor: ${propOr('rgb(0,0,0)', 'bgColor')}
+`
 
 export const NavigationContainer = ({ children }) => {
   const isDarkTheme = useDarkTheme()
-  const theme = useMemo(() => (isDarkTheme ? DarkTheme : DefaultTheme), [
+  const theme = useMemo(() => (isDarkTheme ? DarkTheme : DarkTheme), [
     isDarkTheme,
   ])
 
   return (
-    <NavContainer ref={navigationRef} theme={theme}>
-      {children}
-    </NavContainer>
+    <Wrapper bgColor={theme.colors.background}>
+      <NavContainer ref={navigationRef} theme={theme}>
+        {children}
+      </NavContainer>
+    </Wrapper>
   )
 }
