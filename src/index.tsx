@@ -9,12 +9,14 @@ import { NavigationContainer } from '@nav/NavigationContainer'
 import { MainStack } from '@nav/MainStack'
 import { store } from '@redux/store'
 import { Splash } from '@components/Splash'
+import { StyledStatusBar } from '@components/StatusBar'
 
 const App: React.FC = () => (
   <Provider store={store}>
     <I18nextProvider i18n={i18n}>
       <ThemeProvider>
           <NavigationContainer>
+            <StyledStatusBar />
             <MainStack />
             <AppGlobalHooks />
             <Splash />

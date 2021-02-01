@@ -4,7 +4,11 @@ export default {
       continueWith: 'Continue with {{name}}',
     },
     homepage: 'Homepage',
-    awards: 'Awards',
-    settings: 'Settings'
+    awards: {
+      title: 'Awards',
+      weeklyInMilan: 'Weekly in Milan',
+      specialAwards: 'Special Awards'
+    },
+    settings: 'Settings',
   },
 }

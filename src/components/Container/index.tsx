@@ -5,19 +5,20 @@ import {SafeAreaView} from "react-native-safe-area-context"
 
 const StyledComponent = styled(SafeAreaView)`
   flex: 1
-  alignItems: center;
 `
-const Title = styled(BoldText)`
-  marginTop: 8px
-  marginLeft: 16px
+export const Title = styled(BoldText)`
   fontSize: 32px
   lineHeight: 32px
   align-self: flex-start
 `
+const Header = styled(Title)`
+  marginTop: 8px
+  marginLeft: 16px
+`
 
 export const Container = ({tKey, children}) => (
   <StyledComponent>
-    {tKey && <Title reverted tKey={tKey} />}
+    {tKey && <Header tKey={tKey} />}
     {children}
   </StyledComponent>
 )

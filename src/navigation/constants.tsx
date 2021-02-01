@@ -1,5 +1,6 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import {COLORS} from "@const";
 
 export const STACK_NAMES = {
   TAB_STACK: 'Tabs',
@@ -11,6 +12,22 @@ export const SCREEN_NAMES = {
   LOGIN: 'Login',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.TAB_STACK
+
+export const COMMON_STATUS_BAR = {
+  translucent: true,
+  backgroundColor: 'transparent',
+}
+
+export const LIGHT_STATUS_BAR = {
+  ...COMMON_STATUS_BAR,
+  barStyle: 'light-content',
+}
+
+export const DARK_STATUS_BAR = {
+  ...COMMON_STATUS_BAR,
+  barStyle: 'dark-content',
+}
+
 
 export const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
@@ -29,6 +46,6 @@ export const screenOptions = ({ route }) => ({
 })
 
 export const tabBarOptions = {
-  activeTintColor: 'tomato',
+  activeTintColor: COLORS.primary,
   inactiveTintColor: 'gray',
 }

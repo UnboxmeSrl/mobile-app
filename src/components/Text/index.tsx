@@ -51,3 +51,10 @@ export const SemiBoldText = (props) => {
 export const BoldText = (props) => {
   return <BaseText Component={Bold} {...props} />
 }
+
+export const SectionTitle = styled(SemiBoldText)`
+  fontSize: 20px
+  lineHeight: 24px
+  marginHorizontal: 16px
+  marginVertical: 16px
+`
