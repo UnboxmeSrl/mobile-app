@@ -1,13 +1,13 @@
 export default {
   translation: {
-    login: {
-      continueWith: 'Continue with {{name}}',
-    },
-    homepage: 'Homepage',
     awards: {
+      specialAwards: 'Special Awards',
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
-      specialAwards: 'Special Awards'
+    },
+    homepage: 'Homepage',
+    login: {
+      continueWith: 'Continue with {{name}}',
     },
     settings: 'Settings',
   },

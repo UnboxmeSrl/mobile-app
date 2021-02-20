@@ -7,8 +7,8 @@
     },
     {"type": "docs", "hidden": true},
     {"type": "style", "hidden": true},
-    {"type": "refactor"},
-    {"type": "perf"},
+    {"type": "refactor", "hidden": true},
+    {"type": "perf", "hidden":  true},
     {"type": "test", "hidden": true}
   ],
   "commitUrlFormat": "https://github.com/UnboxmeSrl/mobile-app/commits/{{hash}}",

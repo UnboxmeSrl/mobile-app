@@ -1,16 +1,17 @@
-import React, { createRef, useEffect, useState, useRef } from 'react'
 import LottieView from 'lottie-react-native'
+import { prop } from 'ramda'
+import React, { createRef, useEffect, useRef, useState } from 'react'
+import { Animated, useWindowDimensions } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import styled from 'styled-components/native'
-import { Dimensions, useWindowDimensions, Animated } from 'react-native'
-import { prop } from 'ramda'
 
 const Wrapper = styled(Animated.View)`
-  width: ${prop('width')}
-  height: ${prop('height')}
+  width: ${prop('width')}px
+  height: ${prop('height')}px
   position: absolute
-  backgroundColor: black
+  backgroundColor: white
 `
+const delay = __DEV__ ? 0 : 4200
 
 export const Splash = () => {
   const windowWidth = useWindowDimensions().width
@@ -26,21 +27,19 @@ export const Splash = () => {
       ref?.current?.play(0, 120)
       setTimeout(() => {
         setFadeOut(true)
-      }, 4200)
+      }, delay)
     }, 0)
   }, [])
 
   useEffect(() => {
-    if(fadeOut) {
-      Animated.timing(
-        fadeAnim,
-        {
-          toValue: 0,
-          duration: 500,
-        }
-      ).start(() => {
+    if (fadeOut) {
+      Animated.timing(fadeAnim, {
+        duration: 500,
+        toValue: 0,
+        useNativeDriver: true
+      }).start(() => {
         setShow(false)
-      });
+      })
     }
   }, [fadeOut, fadeAnim])
 
@@ -49,10 +48,11 @@ export const Splash = () => {
   }
   return (
     <Wrapper
-      width={windowWidth}
       height={windowHeight}
-      style={{ opacity: fadeAnim }}>
-      <LottieView ref={ref} source={require('src/assets/splash.json')} />
+      style={{ opacity: fadeAnim }}
+      width={windowWidth}
+    >
+      {/*<LottieView ref={ref} source={require('src/assets/splash.json')} />*/}
     </Wrapper>
   )
 }

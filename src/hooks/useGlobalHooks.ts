@@ -1,5 +1,7 @@
 import { useAuth } from './useAuth'
 
-export const useGlobalHooks = () => {
+export const useGlobalHooks = (): null => {
   useAuth()
+
+  return null
 }

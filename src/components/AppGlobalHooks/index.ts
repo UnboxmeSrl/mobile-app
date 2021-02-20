@@ -1,6 +1,6 @@
 import { useGlobalHooks } from '@hooks/useGlobalHooks'
 
-export const AppGlobalHooks = () => {
+export const AppGlobalHooks = (): null => {
   useGlobalHooks()
 
   return null

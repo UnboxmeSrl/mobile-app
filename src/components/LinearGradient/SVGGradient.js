@@ -1,6 +1,6 @@
 import React from 'react'
-import Svg, { Defs, Stop, LinearGradient, Rect } from 'react-native-svg'
 import { processColor } from 'react-native'
+import Svg, { Defs, LinearGradient, Rect,Stop } from 'react-native-svg'
 import styled from 'styled-components/native'
 
 const getAlpha = (color) => (processColor(color) >>> 24) / 0xff
@@ -12,10 +12,10 @@ const makeGradientConfig = (colors, locations) => {
 
   return colors.map((color, index) => (
     <Stop
+      key={index}
       offset={locations[index]}
       stopColor={color}
       stopOpacity={getAlpha(color)}
-      key={index}
     />
   ))
 }
@@ -41,16 +41,16 @@ const SVGGradient = ({
   const Gradient = (
     <Svg pointerEvents={pointerEvents} {...props}>
       <Defs>
-        <LinearGradient id="Gradient" x1={x1} y1={y1} x2={x2} y2={y2}>
+        <LinearGradient id="Gradient" x1={x1} x2={x2} y1={y1} y2={y2}>
           {makeGradientConfig(colors, locations)}
         </LinearGradient>
       </Defs>
       <Rect
-        height="100%"
-        width="100%"
         fill="url(#Gradient)"
+        height="100%"
         rx={borderRadius}
         ry={borderRadius}
+        width="100%"
       />
     </Svg>
   )

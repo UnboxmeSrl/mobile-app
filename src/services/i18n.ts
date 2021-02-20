@@ -1,17 +1,19 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
+
 import en from '../locales/en'
 import it from '../locales/it'
 
 const TRANSLATIONS = { en, it }
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18n.use(initReactI18next).init({
-  resources: TRANSLATIONS,
+  debug: __DEV__,
   interpolation: {
-    escapeValue: false, // not needed for react as it does escape per default to prevent xss!
+    escapeValue: false,
   },
-  debug: true,
   lng: 'en',
+  resources: TRANSLATIONS,
 })
 
 export default i18n

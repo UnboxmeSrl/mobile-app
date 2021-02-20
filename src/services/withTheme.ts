@@ -1,11 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { StyledProps } from 'styled-components'
+interface ITheme {
+  theme: {
+    darkTheme: boolean
+  }
+}
 
-export const withTheme = (
-  lightThemeValue: StyledProps<any>,
-  darkThemeValue: StyledProps<any>,
-): StyledProps<any> => ({
+export type WithThemeType = (
+  lightThemeValue: string | number,
+  darkThemeValue: string | number,
+) => (data: ITheme) => string | number
+
+export const withTheme: WithThemeType = (lightThemeValue, darkThemeValue) => ({
   theme: { darkTheme },
-}: {
-  theme: { darkTheme: boolean }
 }) => (darkTheme ? darkThemeValue : lightThemeValue)

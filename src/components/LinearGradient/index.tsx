@@ -1,6 +1,7 @@
 import React from 'react'
-import styled from 'styled-components/native'
 import SVGGradient from 'src/components/LinearGradient/SVGGradient'
+import styled from 'styled-components/native'
+
 import {
   DEFAULT_COLORS,
   DEFAULT_LOCATIONS,
@@ -25,23 +26,23 @@ const LinearGradient = ({
   pointerEvents = 'none',
 }) => (
   <Gradient
+    borderRadius={borderRadius}
+    colors={colors}
+    contentStyle={contentStyle}
+    locations={locations}
     pointerEvents={pointerEvents}
     start={start}
     stop={stop}
-    locations={locations}
-    colors={colors}
-    style={style}
-    borderRadius={borderRadius}
-    contentStyle={contentStyle}>
+    style={style}>
     {children}
   </Gradient>
 )
 
 LinearGradient.defaultProps = {
-  locations: DEFAULT_LOCATIONS,
-  contentStyle: {},
   borderRadius: 0,
   colors: DEFAULT_COLORS,
+  contentStyle: {},
+  locations: DEFAULT_LOCATIONS,
   start: DEFAULT_START,
   stop: DEFAULT_STOP,
 }

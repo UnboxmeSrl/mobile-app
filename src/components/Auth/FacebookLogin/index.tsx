@@ -1,39 +1,41 @@
-import React from 'react'
+import { GoogleSignin } from '@react-native-community/google-signin'
 import auth from '@react-native-firebase/auth'
+import React from 'react'
 import {
-  LoginManager,
   AccessToken,
   GraphRequest,
   GraphRequestManager,
+  LoginManager,
 } from 'react-native-fbsdk'
+
 import { LoginButton } from '../LoginButton'
-import { GoogleSignin } from '@react-native-community/google-signin'
 
 export const FacebookLogin: any = () => {
-  const onPress = async () => {
-    const result = await LoginManager.logInWithPermissions([
-      'public_profile',
-      'email',
-    ])
-
-    if (result.isCancelled) {
-      throw 'User cancelled the login process'
-    }
-
-    // Once signed in, get the users AccesToken
-    const data = await AccessToken.getCurrentAccessToken()
-
-    if (!data) {
-      throw 'Something went wrong obtaining access token'
-    }
-
-    // Create a Firebase credential with the AccessToken
-    const facebookCredential = auth.FacebookAuthProvider.credential(
-      data.accessToken,
-    )
-
-    // Sign-in the user with the credential
+  const onPress = async (): Promise<void> => {
     try {
+      const result = await LoginManager.logInWithPermissions([
+        'public_profile',
+        'email',
+      ])
+
+      // TODO
+      if (result.isCancelled) {
+        console.log('User cancelled the login process')
+        return
+      }
+
+      // Once signed in, get the users AccesToken
+      const data = await AccessToken.getCurrentAccessToken()
+
+      if (!data) {
+        console.log('Something went wrong obtaining access token')
+        return
+      }
+
+      const facebookCredential = auth.FacebookAuthProvider.credential(
+        data.accessToken,
+      )
+
       await auth().signInWithCredential(facebookCredential)
     } catch (e) {
       console.log(e)
@@ -85,5 +87,5 @@ export const FacebookLogin: any = () => {
     }
   }
 
-  return <LoginButton onPress={onPress} name={'Facebook'} />
+  return <LoginButton name={'Facebook'} onPress={onPress} />
 }

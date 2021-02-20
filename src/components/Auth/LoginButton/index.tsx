@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { SOCIAL_LOGIN_HEIGHT, SOCIAL_LOGIN_WIDTH } from '../constants'
-import { SemiBoldText } from '@components/Text'
+
 import { Button } from '@components/Button'
+import { SemiBoldText } from '@components/Text'
+
+import { SOCIAL_LOGIN_HEIGHT, SOCIAL_LOGIN_WIDTH } from '../constants'
 
 interface IProps {
   onPress: () => void

@@ -1,16 +1,17 @@
 import React from 'react'
-import styled from 'styled-components/native'
-import { withTheme } from '@services/withTheme'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components/native'
+
 import { FONTS } from '@const'
+import { withTheme } from '@services/withTheme'
+import { propOr } from 'ramda'
 
 const ThemedText = styled.Text`
-  color: ${({ reverted }) =>
-    reverted ? withTheme('black', 'white') : withTheme('white', 'black')};
+  color: ${propOr(withTheme('black', 'white'), 'color')};
 `
 const Regular = styled(ThemedText)`
-  fontSize: 14px
-  lineHeight: 18px
+  fontSize: 14px;
+  line-height: 18px;
 `
 const Light = styled(Regular)`
   font-family: ${FONTS.light};
@@ -53,7 +54,7 @@ export const BoldText = (props) => {
 }
 
 export const SectionTitle = styled(SemiBoldText)`
-  fontSize: 20px
+  fontSize: 20px;
   lineHeight: 24px
   marginHorizontal: 16px
   marginVertical: 16px

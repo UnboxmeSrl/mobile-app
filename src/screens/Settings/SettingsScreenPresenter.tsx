@@ -1,37 +1,11 @@
-import React, { useCallback } from 'react'
+import React  from 'react'
+
+import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { RegularText } from '@components/Text'
-import { Button } from '@components/Button'
-import styled from 'styled-components/native'
 
-const Info = styled.View`
-  margin-bottom: 32px;
-  justify-content: center;
-  align-items: center;
-`
-const Image = styled.Image`
-  height: 120px
-  width: 120px
-  border-radius: 60px
-`
-
-export const SettingsScreenPresenter: ({
-  onPress,
-  email,
-  photo,
-  displayName,
-}: {
-  onPress: any
-  email: any
-  photo: any
-  displayName: any
-}) => JSX.Element = ({ onPress, email, photo, displayName }) => (
+export const SettingsScreenPresenter = ({ onPress }: { onPress: object }) => (
   <Container tKey={'settings'}>
-    <Info>
-      {photo ? <Image source={{ uri: photo }} /> : null}
-      <RegularText reverted>{email}</RegularText>
-      <RegularText reverted>{displayName}</RegularText>
-    </Info>
     <Button onPress={onPress}>
       <RegularText>Log out</RegularText>
     </Button>

@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
-import auth from '@react-native-firebase/auth'
-
 import { GoogleSignin } from '@react-native-community/google-signin'
+import auth from '@react-native-firebase/auth'
+import React, { useCallback } from 'react'
+
 import { LoginButton } from '@components/Auth/LoginButton'
 import { GOOGLE_CONFIG_AUTH } from '@const'
 console.log(GOOGLE_CONFIG_AUTH)
@@ -19,5 +19,5 @@ export const GoogleLogin: any = () => {
     }
   }, [])
 
-  return <LoginButton onPress={onPress} name={'Google'} />
+  return <LoginButton name={'Google'} onPress={onPress} />
 }

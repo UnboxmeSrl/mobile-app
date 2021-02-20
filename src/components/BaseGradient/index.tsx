@@ -1,9 +1,10 @@
-import React, { memo } from 'react'
 import { prop, propOr } from 'ramda'
-import styled from 'styled-components/native'
-import LinearGradient from 'src/components/LinearGradient'
-import { TOP_GRADIENT_START, TOP_GRADIENT_STOP } from './constants'
+import React, { memo } from 'react'
 import { useWindowDimensions } from 'react-native'
+import LinearGradient from 'src/components/LinearGradient'
+import styled from 'styled-components/native'
+
+import { TOP_GRADIENT_START, TOP_GRADIENT_STOP } from './constants'
 
 const Base = styled(LinearGradient)`
   width: 100%
@@ -25,20 +26,20 @@ const BaseGradient = ({ style, top, height, colors }) => {
   if (top) {
     return (
       <TopGradient
-        style={style}
-        start={TOP_GRADIENT_START}
-        stop={TOP_GRADIENT_STOP}
         height={height}
         screenHeight={screenHeight}
+        start={TOP_GRADIENT_START}
+        stop={TOP_GRADIENT_STOP}
+        style={style}
       />
     )
   } else {
     return (
       <BottomGradient
-        style={style}
-        height={height}
         colors={colors}
+        height={height}
         screenHeight={screenHeight}
+        style={style}
       />
     )
   }
