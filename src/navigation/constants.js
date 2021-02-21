@@ -2,8 +2,9 @@ import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { COLORS } from '@const'
+import { SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
 
-export const DEFAULT_SCREEN_NAME = ERouterStacks.BottomStack
+export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 
 export const COMMON_STATUS_BAR = {
   backgroundColor: 'transparent',
@@ -24,9 +25,9 @@ export const DARK_STATUS_BAR = {
 export const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
     let iconName
-    if (route.name === ERouterScreens.Home) {
+    if (route.name === SCREEN_NAMES.Home) {
       iconName = focused ? 'home' : 'home-outline'
-    } else if (route.name === ERouterScreens.Awards) {
+    } else if (route.name === SCREEN_NAMES.Awards) {
       iconName = focused ? 'trophy' : 'trophy-outline'
     } else {
       iconName = focused ? 'person' : 'person-outline'

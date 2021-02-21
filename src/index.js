@@ -18,7 +18,7 @@ import i18n from '@services/i18n'
 
 enableScreens()
 
-class App extends Component {
+class Index extends Component {
   componentDidCatch(error, errorInfo) {
     // TODO
     console.log(error, errorInfo)
@@ -48,4 +48,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Index

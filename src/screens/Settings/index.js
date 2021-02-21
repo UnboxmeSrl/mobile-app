@@ -1,8 +1,8 @@
-
 import React, { useCallback } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 
 import { SettingsScreenPresenter } from './SettingsScreenPresenter'
+import { MODAL_NAMES } from '@const/navigation'
 
 export const SettingsScreen= () => {
   const { navigate } = useNavigation()
@@ -12,7 +12,7 @@ export const SettingsScreen= () => {
     // await GoogleSignin.signOut()
     // await persistor.purge()
 
-    navigate(ERouterScreens.Login)
+    navigate(MODAL_NAMES.Login)
   }, [])
 
   const props = {

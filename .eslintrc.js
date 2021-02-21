@@ -3,11 +3,6 @@ module.exports = {
     'react-native/react-native': true
   },
   extends: ['@react-native-community/eslint-config', 'standard', 'eslint-config-prettier'],
-  parserOptions: {
-    'ecmaFeatures': {
-      'jsx': true
-    }
-  },
   plugins: [
     'react',
     'react-native',

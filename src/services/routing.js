@@ -1,8 +1,7 @@
 import { has, identical,includes, not, path, pathOr } from 'ramda'
 import { store } from 'src/redux/store'
 import { createTruthMapUsingArrayOfKeys } from 'src/services/map'
-
-import { ERouterStacks } from '@types'
+import { STACK_NAMES } from '@const/navigation'
 
 const navigationActions = createTruthMapUsingArrayOfKeys([
   'Navigation/NAVIGATE',
@@ -26,7 +25,7 @@ const registerContextByRoute = {
 const getRouteName = (action) => {
   const routeName = pathOr(action.routeName, ['action', 'routeName'], action)
 
-  if (identical(routeName, ERouterStacks.BottomStack)) {
+  if (identical(routeName, STACK_NAMES.BottomStack)) {
     return path(['action', 'routeName', 'action', 'routeName'], action)
   }
 

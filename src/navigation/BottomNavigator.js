@@ -3,22 +3,22 @@ import { AwardsScreen } from '@screens/Awards'
 import { HomeScreen } from '@screens/Home'
 import { SettingsScreen } from '@screens/Settings'
 
-import { ERouterScreens } from '@types'
+import { SCREEN_NAMES } from '@const/navigation'
 
 export default createBottomTabNavigator(
   {
-    [ERouterScreens.Home]: {
+    [SCREEN_NAMES.Home]: {
       screen: HomeScreen,
     },
-    [ERouterScreens.Awards]: {
+    [SCREEN_NAMES.Awards]: {
       screen: AwardsScreen,
     },
-    [ERouterScreens.Settings]: {
+    [SCREEN_NAMES.Settings]: {
       screen: SettingsScreen,
     }
   },
   {
 
-    initialRouteName: ERouterScreens.Home,
+    initialRouteName: SCREEN_NAMES.Home,
   }
 )

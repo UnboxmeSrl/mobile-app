@@ -1,14 +1,12 @@
 import createNativeStackNavigator from 'react-native-screens/createNativeStackNavigator'
 import { createStackNavigator } from 'react-navigation-stack'
 import { last,length, prop, slice } from 'ramda'
-import { DARK } from 'src/constants/navigation'
 import BottomNavigator from 'src/navigation/BottomNavigator'
 import { MODALS } from 'src/navigation/modals'
 import pushScreens from 'src/navigation/pushScreens'
 import { makeStack, STACK_SUFFIX } from 'src/services/routing'
 
 import { COLORS } from '@const'
-import { ERouterStacks } from '@types'
 
 import { IS_IOS } from '../constants/common'
 
@@ -22,6 +20,7 @@ import {
   ModalSlideFromBottomIOS,
   rootScreensNavigationOptions
 } from './utils'
+import { STACK_NAMES } from '@const/navigation'
 
 let insertedKey = 0
 
@@ -42,7 +41,7 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
         stackAnimation: 'slide_from_right'
       }),
       headerMode: 'none',
-      initialRouteName: ERouterStacks.BottomStack
+      initialRouteName: STACK_NAMES.BottomStack
     }
   )
 
@@ -120,7 +119,7 @@ const RootStack = makeStack(
         screen: createNativeStackNavigator(
           {
             ...wrapIntoPushStackNavigators({
-              [ERouterStacks.BottomStack]: {
+              [STACK_NAMES.BottomStack]: {
                 path: '',
                 screen: BottomNavigator,
 

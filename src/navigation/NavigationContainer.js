@@ -15,10 +15,6 @@ class NavigationProvider extends MainStack {
     setTopLevelNavigator(props.navigation)
   }
 
-  componentDidCatch(error, errorInfo) {
-    // captureException(error, { extra: errorInfo })
-  }
-
   render() {
     const { children, ...props } = this.props
     const navigation = this.context || this.props.navigation
