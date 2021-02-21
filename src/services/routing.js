@@ -1,6 +1,7 @@
-import { includes, pathOr, path, not, has, identical } from 'ramda'
+import { has, identical,includes, not, path, pathOr } from 'ramda'
 import { store } from 'src/redux/store'
 import { createTruthMapUsingArrayOfKeys } from 'src/services/map'
+
 import { ERouterStacks } from '@types'
 
 const navigationActions = createTruthMapUsingArrayOfKeys([

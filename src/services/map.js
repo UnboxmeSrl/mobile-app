@@ -1,4 +1,4 @@
-import { pipe, map } from 'ramda'
+import { map,pipe } from 'ramda'
 
 export const createTruthMapUsingArrayOfKeys = pipe(
   map((item) => [item, true]),

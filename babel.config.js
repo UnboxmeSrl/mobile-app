@@ -1,26 +1,26 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
-  plugins: [
-    [
-      'module-resolver',
-      {
-        root: ['.'],
-        alias: {
-          src: './src',
-          '@components': './src/components',
-          '@const': './src/constants',
-          '@hooks': './src/hooks',
-          '@nav': './src/navigation',
-          '@screens': './src/screens',
-          '@services': './src/services',
-          '@redux': './src/redux',
-        },
-      },
-    ],
-  ],
   env: {
     production: {
       plugins: ['transform-remove-console'],
     },
   },
+  plugins: [
+    [
+      'module-resolver',
+      {
+        alias: {
+          '@components': './src/components',
+          '@const': './src/constants',
+          '@hooks': './src/hooks',
+          '@nav': './src/navigation',
+          '@redux': './src/redux',
+          '@screens': './src/screens',
+          '@services': './src/services',
+          'src': './src',
+        },
+        root: ['.'],
+      },
+    ],
+  ],
+  presets: ['module:metro-react-native-babel-preset'],
 }

@@ -1,24 +1,27 @@
-import { createStackNavigator } from 'react-navigation-stack'
 import createNativeStackNavigator from 'react-native-screens/createNativeStackNavigator'
-import { prop, length, slice, last } from 'ramda'
-import { makeStack, STACK_SUFFIX } from 'src/services/routing'
+import { createStackNavigator } from 'react-navigation-stack'
+import { last,length, prop, slice } from 'ramda'
+import { DARK } from 'src/constants/navigation'
 import BottomNavigator from 'src/navigation/BottomNavigator'
 import { MODALS } from 'src/navigation/modals'
 import pushScreens from 'src/navigation/pushScreens'
-import { DARK } from 'src/constants/navigation'
-import {
-  getRadius,
-  cardOverlay,
-  getCardStyle,
-  getTopOffset,
-  ModalSlideFromBottomIOS,
-  cardStyleInterpolator,
-  gestureResponseDistance,
-  rootScreensNavigationOptions
-} from './utils'
-import { IS_IOS } from '../constants/common'
+import { makeStack, STACK_SUFFIX } from 'src/services/routing'
+
 import { COLORS } from '@const'
 import { ERouterStacks } from '@types'
+
+import { IS_IOS } from '../constants/common'
+
+import {
+  cardOverlay,
+  cardStyleInterpolator,
+  gestureResponseDistance,
+  getCardStyle,
+  getRadius,
+  getTopOffset,
+  ModalSlideFromBottomIOS,
+  rootScreensNavigationOptions
+} from './utils'
 
 let insertedKey = 0
 
@@ -31,15 +34,15 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
   const navigator = createNativeStackNavigator(
     { ...pushScreens, [mainRouteName]: mainRouteConfig },
     {
-      initialRouteName: ERouterStacks.BottomStack,
-      headerMode: 'none',
       defaultNavigationOptions: ({ theme }) => ({
         cardShadowEnabled: false,
         cardStyle: {
           backgroundColor: theme === 'dark' ? COLORS.background : COLORS.white
         },
         stackAnimation: 'slide_from_right'
-      })
+      }),
+      headerMode: 'none',
+      initialRouteName: ERouterStacks.BottomStack
     }
   )
 
@@ -59,8 +62,8 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
         routes: [
           ...otherScreens,
           {
-            routeName: action.routeName,
-            key: `inserted-${insertedKey}`
+            key: `inserted-${insertedKey}`,
+            routeName: action.routeName
           },
           lastScreen
         ]
@@ -80,8 +83,8 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
 const wrapIntoPushStackNavigators = (routeConfigMap) =>
   Object.keys(routeConfigMap).reduce((prev, curr) => {
     prev[curr + STACK_SUFFIX] = {
-      screen: nativeStackPushRoutesFactory(curr, routeConfigMap[curr]),
-      path: ''
+      path: '',
+      screen: nativeStackPushRoutesFactory(curr, routeConfigMap[curr])
     }
     return prev
   }, {})
@@ -89,17 +92,17 @@ const wrapIntoPushStackNavigators = (routeConfigMap) =>
 const wrappedModals = Object.keys(MODALS).reduce(
   (prev, curr) => ({
     [curr]: {
-      screen: MODALS[curr],
       navigationOptions: {
         cardOverlay,
-        cardStyleInterpolator,
-        gestureResponseDistance,
         cardOverlayEnabled: !IS_IOS,
         cardStyle: getCardStyle(curr),
+        cardStyleInterpolator,
         cornerRadius: getRadius(curr),
-        topOffset: IS_IOS && getTopOffset(curr),
-        gestureEnabled: true
+        gestureEnabled: true,
+        gestureResponseDistance,
+        topOffset: IS_IOS && getTopOffset(curr)
       },
+      screen: MODALS[curr],
       ...(typeof MODALS[curr] === 'object' ? MODALS[curr] : {})
     },
     ...prev
@@ -118,8 +121,8 @@ const RootStack = makeStack(
           {
             ...wrapIntoPushStackNavigators({
               [ERouterStacks.BottomStack]: {
-                screen: BottomNavigator,
                 path: '',
+                screen: BottomNavigator,
 
               },
             }),
@@ -132,13 +135,13 @@ const RootStack = makeStack(
       ...wrappedModals
     },
     {
-      headerMode: 'none',
-      mode: 'modal',
       defaultNavigationOptions: {
         customStack: true,
         ...rootScreensNavigationOptions,
         ...ModalSlideFromBottomIOS
-      }
+      },
+      headerMode: 'none',
+      mode: 'modal'
     }
   )
 )

@@ -2,27 +2,21 @@ module.exports = {
   env: {
     'react-native/react-native': true
   },
-  extends: ['@react-native-community/eslint-config', 'standard-with-typescript', 'eslint-config-prettier'],
+  extends: ['@react-native-community/eslint-config', 'standard', 'eslint-config-prettier'],
   parserOptions: {
     'ecmaFeatures': {
       'jsx': true
-    },
-    'project': './tsconfig.json' // Required for Standard plugin
+    }
   },
   plugins: [
-    '@typescript-eslint',
     'react',
     'react-native',
     "sort-keys-fix",
-    'typescript-sort-keys',
     "better-styled-components",
     "simple-import-sort"
   ],
   root: true,
   rules: {
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/space-before-function-paren': ['off'],
-    '@typescript-eslint/strict-boolean-expressions': 'off',
     'better-styled-components/sort-declarations-alphabetically': 2,
     'prettier/prettier': 'off',
     'react/jsx-sort-props': 2,
@@ -46,9 +40,7 @@ module.exports = {
         ]
       }
     ],
-    "sort-keys-fix/sort-keys-fix": "warn",
-    "typescript-sort-keys/interface": "error",
-    "typescript-sort-keys/string-enum": "error",
+    "sort-keys-fix/sort-keys-fix": "warn"
   },
   settings: {
     'import/ignore': ['react-native'],

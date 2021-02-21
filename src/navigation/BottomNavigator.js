@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { ERouterScreens } from '@types'
-import { HomeScreen } from '@screens/Home'
 import { AwardsScreen } from '@screens/Awards'
+import { HomeScreen } from '@screens/Home'
 import { SettingsScreen } from '@screens/Settings'
+
+import { ERouterScreens } from '@types'
 
 export default createBottomTabNavigator(
   {
@@ -17,9 +18,7 @@ export default createBottomTabNavigator(
     }
   },
   {
+
     initialRouteName: ERouterScreens.Home,
-    defaultNavigationOptions: () => ({
-      tabBarVisible: true
-    })
   }
 )

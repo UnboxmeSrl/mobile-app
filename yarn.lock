@@ -8126,9 +8126,9 @@ react-native-safe-modules@^1.0.0:
   dependencies:
     dedent "^0.6.0"
 
-"react-native-screens@https://gitlab.flipfit.io/mobile-public/react-native-screens.git#flip6":
+"react-native-screens@git+ssh://git@github.com/UnboxmeSrl/react-native-screens#1.0.0-unboxme":
   version "2.16.1"
-  resolved "https://gitlab.flipfit.io/mobile-public/react-native-screens.git#aad2acf44f759dbddd12dd0c9fdd0a9999f973f5"
+  resolved "git+ssh://git@github.com/UnboxmeSrl/react-native-screens#cec0f586f20ee0bc4589f988e92b0a9262b7d4ea"
 
 react-native-snap-carousel@^3.9.1:
   version "3.9.1"

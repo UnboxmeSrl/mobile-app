@@ -1,14 +1,14 @@
 import React from 'react'
 import { Animated } from 'react-native'
 import {
-  TransitionSpecs,
   CardStyleInterpolators,
-  HeaderStyleInterpolators
-} from 'react-navigation-stack'
-import { cond, T, always, and, identical, pipe } from 'ramda'
+  HeaderStyleInterpolators,
+  TransitionSpecs} from 'react-navigation-stack'
+import { always, and, cond, identical, pipe,T } from 'ramda'
 import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
+
 import { IS_IOS } from '../constants/common'
 
 const IS_ANDROID = !IS_IOS
@@ -27,7 +27,7 @@ const Overlay = styled(Animated.View)`
 
 export const cardOverlay = ({ style }) => <Overlay style={style} />
 
-const withInFullscreen = (curr) => false //FULL_SCREEN_MODALS[curr]
+const withInFullscreen = (curr) => false // FULL_SCREEN_MODALS[curr]
 
 export const getTopOffset = cond([
   [withInFullscreen, always(0)],
@@ -43,9 +43,9 @@ export const getCardStyle = (curr, marginTop) =>
   IS_ANDROID
     ? {
         backgroundColor: COLORS.transparent,
-        marginTop: marginTop || getTopOffset(curr),
         borderTopLeftRadius: getRadius(curr),
-        borderTopRightRadius: getRadius(curr)
+        borderTopRightRadius: getRadius(curr),
+        marginTop: marginTop || getTopOffset(curr)
       }
     : undefined
 
@@ -65,20 +65,20 @@ const ModalTransitionSpec = IS_ANDROID
       ...TransitionSpecs.TransitionIOSSpec,
       config: {
         ...TransitionSpecs.TransitionIOSSpec.config,
-        restSpeedThreshold: 100,
-        restDisplacementThreshold: 40
+        restDisplacementThreshold: 40,
+        restSpeedThreshold: 100
       }
     }
   : undefined
 
 export const ModalSlideFromBottomIOS = {
-  gestureDirection: 'vertical',
-  transitionSpec: {
-    open: ModalTransitionSpec,
-    close: ModalTransitionSpec
-  },
   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-  headerStyleInterpolator: HeaderStyleInterpolators.forFade
+  gestureDirection: 'vertical',
+  headerStyleInterpolator: HeaderStyleInterpolators.forFade,
+  transitionSpec: {
+    close: ModalTransitionSpec,
+    open: ModalTransitionSpec
+  }
 }
 
 export const rootScreensNavigationOptions = {
@@ -89,6 +89,6 @@ export const rootScreensNavigationOptions = {
 }
 
 export const defaultCardStyleInterpolator = () => ({
-  containerStyle: { backgroundColor: null },
-  cardStyle: { backgroundColor: null }
+  cardStyle: { backgroundColor: null },
+  containerStyle: { backgroundColor: null }
 })
