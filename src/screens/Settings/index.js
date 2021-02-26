@@ -1,18 +1,27 @@
 import React, { useCallback } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
+import { GoogleSignin } from '@react-native-community/google-signin'
+import auth from '@react-native-firebase/auth'
+
+import { MODAL_NAMES } from '@const/navigation'
+import { persistor } from '@redux/store'
+import { logger } from '@services'
 
 import { SettingsScreenPresenter } from './SettingsScreenPresenter'
-import { MODAL_NAMES } from '@const/navigation'
 
 export const SettingsScreen= () => {
   const { navigate } = useNavigation()
   const onPress = useCallback(async () => {
-    // await auth().signOut()
-    // await GoogleSignin.revokeAccess()
-    // await GoogleSignin.signOut()
-    // await persistor.purge()
-
-    navigate(MODAL_NAMES.Login)
+    try {
+      logger.info('Logout start')
+      await auth().signOut()
+      await GoogleSignin.revokeAccess()
+      await GoogleSignin.signOut()
+      await persistor.purge()
+      logger.info('Logout succeded')
+    } catch(error) {
+      logger.error('Logout error', {error})
+    }
   }, [])
 
   const props = {

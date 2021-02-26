@@ -1,7 +1,7 @@
 export const FONTS = {
-  bold: 'Montserrat-Bold',
-  light: 'Montserrat-Light',
-  regular: 'Montserrat-Regular',
-  semiBold: 'Montserrat-SemiBold',
+  abrilFatface: 'AbrilFatface-Regular.ttf',
+  light: 'JosefinSans-Light',
+  regular: 'JosefinSans-Regular',
+  semiBold: 'JosefinSans-SemiBold',
   system: 'System',
 }

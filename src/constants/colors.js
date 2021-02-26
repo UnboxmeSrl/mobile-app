@@ -1,9 +1,14 @@
 export const COLORS = {
-  background: '#ffffff',
-  dark1: '#000000',
-  darkBg1: '#2f2f2f',
-  light1: '#ffffff',
-  lightBg1: '#dddddd',
-  primary: '#F5A278',
-  white: '#000000'
+  black: '#231B2E',
+  dark: '#491033',
+  error: '#A20A0A',
+  grey: '#BDBBC0',
+  lightGrey: '#E9E8EA',
+  links: '#000699',
+  primary: '#E9C0B1',
+  secondary: '#EED5CC',
+  success: '#01774D',
+  tertiary: '#F7EFEC',
+  veryLight: '#FAF6F5',
+  white: '#FFFFFF'
 }

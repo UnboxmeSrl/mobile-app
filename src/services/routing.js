@@ -1,4 +1,4 @@
-import { has, identical,includes, not, path, pathOr } from 'ramda'
+import { identical,includes, not, path, pathOr } from 'ramda'
 import { store } from 'src/redux/store'
 import { createTruthMapUsingArrayOfKeys } from 'src/services/map'
 import { STACK_NAMES } from '@const/navigation'

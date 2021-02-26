@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 
-import { BoldText } from '@components/Text'
+import { BodyText } from '@components/Text'
 
 export const Container = ({ tKey, children }) => (
   <StyledComponent>
@@ -12,10 +12,10 @@ export const Container = ({ tKey, children }) => (
 )
 
 const StyledComponent = styled(SafeAreaView)`
-  background-color: red;
+  background-color: lightblue;
   flex: 1;
 `
-export const Title = styled(BoldText)`
+export const Title = styled(BodyText)`
   fontSize: 32px
   lineHeight: 32px
   align-self: flex-start

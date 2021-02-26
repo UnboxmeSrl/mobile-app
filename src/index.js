@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { ReduxNetworkProvider } from 'react-native-offline'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { enableScreens } from 'react-native-screens'
 import { Provider } from 'react-redux'
 import 'react-native-gesture-handler'
 import crashlytics from '@react-native-firebase/crashlytics'
@@ -15,13 +14,12 @@ import { ThemeProvider } from '@components/ThemeProvider'
 import NavigationContainer from '@nav/NavigationContainer'
 import { persistor, store } from '@redux/store'
 import i18n from '@services/i18n'
+import { logger } from '@services/logger'
 
-enableScreens()
 
-class Index extends Component {
+class App extends Component {
   componentDidCatch(error, errorInfo) {
-    // TODO
-    console.log(error, errorInfo)
+    logger.error('componentDidCatch', {error, errorInfo})
     crashlytics().recordError(error)
   }
 
@@ -48,4 +46,4 @@ class Index extends Component {
   }
 }
 
-export default Index
+export default App

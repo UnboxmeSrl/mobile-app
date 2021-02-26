@@ -84,11 +84,14 @@
 	<string>We need to access your Location to send you proper notifications</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>AbrilFatface-Regular.ttf</string>
+		<string>JosefinSans-Light.ttf</string>
+		<string>JosefinSans-Regular.ttf</string>
+		<string>JosefinSans-SemiBold.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
 		<string>Montserrat-Light.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
-		<string>Ionicons.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
