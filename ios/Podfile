@@ -10,6 +10,7 @@ target 'unboxme' do
 
   use_flipper!({ 'Flipper' => '0.74.0' })
   pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'PanModal', '~> 1.2.7'
 
   post_install do |installer|

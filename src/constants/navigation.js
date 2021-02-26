@@ -7,9 +7,11 @@ export const MODAL_NAMES = {
   Login: 'Login',
 }
 export const SCREEN_NAMES = {
-  Home: 'Home',
   Awards: 'Awards',
-  Settings: 'Settings'
+  Home: 'Home',
+  Onboarding: 'Onboarding',
+  Settings: 'Settings',
+  SignUp: 'SignUp'
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

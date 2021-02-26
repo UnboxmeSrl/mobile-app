@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { propOr } from 'ramda'
 import styled from 'styled-components/native'
 
-import { FONTS } from '@const'
+import { COLORS, FONTS } from '@const'
 import { withTheme } from '@services/withTheme'
 
 const ThemedText = styled.Text`
-  color: ${propOr(withTheme('black', 'white'), 'color')};
+  color: ${propOr(withTheme(COLORS.black, COLORS.white), 'color')};
 `
 const H1Styled = styled(ThemedText)`
   fontFamily: ${FONTS.abrilFatface};
@@ -28,7 +28,7 @@ const SubtitleStyled = styled(H3Styled)`
   fontSize: 16px;
   lineHeight: 24px;
 `
-const CaptionStyled = styled(H1Styled)`
+const CaptionStyled = styled(H2Styled)`
   fontSize: 14px;
   lineHeight: 20px;
 `
@@ -40,8 +40,10 @@ const BodyStyled = styled(ThemedText)`
 const SmallStyled = styled(CaptionStyled)`
   fontFamily: ${FONTS.light};
 `
+const RegularStyled = styled(ThemedText)`
+  fontFamily: ${FONTS.light};
+`
 const TinyStyled = styled(CaptionStyled)`
-  fontFamily: ${FONTS.regular};
   fontSize: 12px;
   lineHeight: 16px;
 `
@@ -86,6 +88,9 @@ export const SmallText = (props) => {
 }
 export const TinyText = (props) => {
   return <BaseText Component={TinyStyled} {...props} />
+}
+export const Text = (props) => {
+  return <BaseText Component={RegularStyled} {...props} />
 }
 
 export const SectionTitle = styled(H1)`

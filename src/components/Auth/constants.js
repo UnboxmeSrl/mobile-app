@@ -1,2 +1,1 @@
-export const SOCIAL_LOGIN_WIDTH = '90%'
-export const SOCIAL_LOGIN_HEIGHT = 50
+export const SOCIAL_LOGIN_HEIGHT = 48

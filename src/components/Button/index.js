@@ -6,12 +6,12 @@ import { COLORS } from '@const'
 import { withTheme } from '@services/withTheme'
 
 const ThemedButton = styled.TouchableOpacity`
-  justifyContent: center
-  alignItems: center
-  backgroundColor: ${withTheme(COLORS.light1, COLORS.dark1)}
-  borderRadius: 6px
-  width: ${BUTTON_WIDTH}px
-  height:  ${BUTTON_HEIGHT}px
+  align-items: center;
+  background-color: ${withTheme(COLORS.primary, COLORS.dark)};
+  border-radius: 6px;
+  height:  ${BUTTON_HEIGHT}px;
+  justify-content: center;
+  width: ${BUTTON_WIDTH}px;
 `
 
 export const Button = ({ children, ...rest }) => {

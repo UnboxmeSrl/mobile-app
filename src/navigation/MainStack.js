@@ -7,8 +7,8 @@ import pushScreens from 'src/navigation/pushScreens'
 import { makeStack, STACK_SUFFIX } from 'src/services/routing'
 
 import { COLORS } from '@const'
-
-import { IS_IOS } from '../constants/common'
+import { SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
+import { IS_IOS } from '@const/common'
 
 import {
   cardOverlay,
@@ -20,7 +20,6 @@ import {
   ModalSlideFromBottomIOS,
   rootScreensNavigationOptions
 } from './utils'
-import { STACK_NAMES } from '@const/navigation'
 
 let insertedKey = 0
 
@@ -41,7 +40,7 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
         stackAnimation: 'slide_from_right'
       }),
       headerMode: 'none',
-      initialRouteName: STACK_NAMES.BottomStack
+      initialRouteName: SCREEN_NAMES.Onboarding
     }
   )
 
@@ -108,8 +107,6 @@ const wrappedModals = Object.keys(MODALS).reduce(
   }),
   {}
 )
-
-console.log(wrappedModals)
 
 const RootStack = makeStack(
   createMainNavigator(

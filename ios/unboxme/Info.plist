@@ -84,6 +84,7 @@
 	<string>We need to access your Location to send you proper notifications</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Ionicons.ttf</string>
 		<string>AbrilFatface-Regular.ttf</string>
 		<string>JosefinSans-Light.ttf</string>
 		<string>JosefinSans-Regular.ttf</string>

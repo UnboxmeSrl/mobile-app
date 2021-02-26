@@ -3,6 +3,7 @@ import { appleAuth } from '@invertase/react-native-apple-authentication'
 import auth from '@react-native-firebase/auth'
 
 import { LoginButton } from '@components/Auth/LoginButton'
+import { COLORS } from '@const'
 
 const onPress = async () => {
   const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -30,5 +31,5 @@ export const AppleLogin = () => {
     return null
   }
 
-  return <LoginButton name={'Apple'} onPress={onPress} />
+  return <LoginButton bgColor={COLORS.blackRaw} name={'Apple'} onPress={onPress}/>
 }
