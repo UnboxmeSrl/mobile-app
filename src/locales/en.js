@@ -11,24 +11,26 @@ export default {
     login: {
       alreadyHaveAccount: 'Already have an account?',
       continueWith: 'Continue with {{name}}',
-      otherOptions: 'Other sign up options'
+      otherOptions: 'Other sign up options',
     },
-    onboarding: 'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
+    onboarding:
+      'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
     otherSignUpOptions: {
-      title: 'Other sign up options'
+      title: 'Other sign up options',
     },
     privacyPolicy: 'Privacy Policy',
     settings: 'Settings',
     signUp: {
-      createAccount: 'Create your account to be able to get personalized boxes prepared for the needs of your skin, hair and your body',
+      createAccount:
+        'Create your account to be able to get personalized boxes prepared for the needs of your skin, hair and your body',
       createContent: 'Create an inspiring content related to your products!',
+      enterEmail: 'Enter your email address',
       orLogIn: 'or log in with email or phone number',
       signUpWith: 'Sign up with {{name}}',
-      tellEveryone: 'Tell everyone about your experience.\n' +
-        'Unlock new awards and have fun!',
+      tellEveryone: 'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
       withEmail: 'Sign up with email',
-      withPhone: 'Sign up with phone number'
+      withPhone: 'Sign up with phone number',
     },
-    termsOfUse: 'Terms of Use'
+    termsOfUse: 'Terms of Use',
   },
 }

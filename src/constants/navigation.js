@@ -5,6 +5,8 @@ export const STACK_NAMES = {
 }
 export const MODAL_NAMES = {
   Login: 'Login',
+  SignUpEmail: 'SignUpEmail',
+  SignUpPhone: 'SignUpPhone',
   WebView: 'WebView'
 }
 export const SCREEN_NAMES = {
@@ -13,7 +15,7 @@ export const SCREEN_NAMES = {
   Onboarding: 'Onboarding',
   OtherSignUp: 'OtherSignUp',
   Settings: 'Settings',
-  SignUp: 'SignUp'
+  SignUp: 'SignUp',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {
