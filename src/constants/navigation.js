@@ -5,11 +5,13 @@ export const STACK_NAMES = {
 }
 export const MODAL_NAMES = {
   Login: 'Login',
+  WebView: 'WebView'
 }
 export const SCREEN_NAMES = {
   Awards: 'Awards',
   Home: 'Home',
   Onboarding: 'Onboarding',
+  OtherSignUp: 'OtherSignUp',
   Settings: 'Settings',
   SignUp: 'SignUp'
 }

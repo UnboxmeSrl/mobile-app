@@ -3,6 +3,8 @@ export const COLORS = {
   blackRaw: '#000000',
   dark: '#491033',
   error: '#A20A0A',
+  facebook: '#4665A8',
+  google: '#4285F4',
   grey: '#BDBBC0',
   lightGrey: '#E9E8EA',
   links: '#000699',

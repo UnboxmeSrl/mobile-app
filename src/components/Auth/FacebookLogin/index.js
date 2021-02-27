@@ -8,7 +8,8 @@ import {
 import { GoogleSignin } from '@react-native-community/google-signin'
 import auth from '@react-native-firebase/auth'
 
-import { LoginButton } from '../LoginButton'
+import { Button } from '@components/Button'
+import { COLORS } from '@const'
 
 export const FacebookLogin = () => {
   const onPress = async () => {
@@ -87,5 +88,5 @@ export const FacebookLogin = () => {
     }
   }
 
-  return <LoginButton name={'Facebook'} onPress={onPress} />
+  return <Button bgColor={COLORS.facebook} onPress={onPress} tKey={'signUp.signUpWith'} tOptions={{name: 'Facebook'}} />
 }

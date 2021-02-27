@@ -2,9 +2,9 @@ import React, { useCallback } from 'react'
 import { GoogleSignin } from '@react-native-community/google-signin'
 import auth from '@react-native-firebase/auth'
 
-import { LoginButton } from '@components/Auth/LoginButton'
-import { GOOGLE_CONFIG_AUTH } from '@const'
-console.log(GOOGLE_CONFIG_AUTH)
+import { Button } from '@components/Button'
+import { COLORS, GOOGLE_CONFIG_AUTH } from '@const'
+
 GoogleSignin.configure(GOOGLE_CONFIG_AUTH)
 
 export const GoogleLogin = () => {
@@ -19,5 +19,5 @@ export const GoogleLogin = () => {
     }
   }, [])
 
-  return <LoginButton name={'Google'} onPress={onPress} />
+  return <Button bgColor={COLORS.google} onPress={onPress} tKey={'signUp.signUpWith'} tOptions={{name: 'Google'}} />
 }

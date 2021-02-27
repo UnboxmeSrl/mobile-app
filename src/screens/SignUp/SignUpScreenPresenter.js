@@ -1,17 +1,18 @@
 import React from 'react'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
 import { AppleLogin } from '@components/Auth/AppleLogin'
-import { OtherOptionsButton } from '@components/Auth/LoginButton'
+import { Button } from '@components/Button'
 import { Content } from '@components/Content'
 import { Policies } from '@components/Policies'
-import { BodyText, H3, Text } from '@components/Text'
+import { BodyText, H3 } from '@components/Text'
+import { TextButton } from '@components/TextButton'
+import { COLORS } from '@const'
 import { screenHeight,screenWidth } from '@const/common'
 
 import { IMAGES } from '../../assets/images'
 
-export const SignUpScreenPresenter = () => (
+export const SignUpScreenPresenter = ({onPress}) => (
     <Background resizeMode={'cover'} source={IMAGES.signUp}>
       <ContentStyled>
         <Header>
@@ -20,7 +21,8 @@ export const SignUpScreenPresenter = () => (
         </Header>
         <Buttons>
           <AppleLogin />
-          <OtherOptionsButton />
+          <Button onPress={onPress} tKey={'login.otherOptions'}/>
+          <AlreadyHaveButton color={COLORS.dark} tKey={'login.alreadyHaveAccount'}/>
         </Buttons>
         <PoliciesPart />
       </ContentStyled>
@@ -49,8 +51,11 @@ const PoliciesPart = styled(Policies)`
   flex: 0.1;
   justify-content: flex-end;
 `
-
 const Background = styled.ImageBackground`
   height: ${screenHeight}px;
   width: ${screenWidth}px;
+`
+const AlreadyHaveButton = styled(TextButton)`
+  align-items: flex-end;
+  margin-top: 12px;
 `

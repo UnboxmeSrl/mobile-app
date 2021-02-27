@@ -95,7 +95,7 @@ export const Text = (props) => {
 
 export const SectionTitle = styled(H1)`
   fontSize: 20px;
-  lineHeight: 24px
-  marginHorizontal: 16px
+  lineHeight: 24px;
+  marginHorizontal: 16px;
   marginVertical: 16px
 `

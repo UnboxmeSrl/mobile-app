@@ -1,19 +1,28 @@
 import React from 'react'
+import { propOr } from 'ramda'
 import styled from 'styled-components/native'
 
-import { BUTTON_HEIGHT, BUTTON_WIDTH } from '@components/Button/constants'
+import { BUTTON_HEIGHT } from '@components/Button/constants'
+import { Subtitle } from '@components/Text'
 import { COLORS } from '@const'
-import { withTheme } from '@services/withTheme'
+
+export const Button = ({ children, tKey, tOptions, ...rest }) => {
+  return <ThemedButton {...rest}>
+    {tKey ? <Text color={COLORS.white} tKey={tKey} tOptions={tOptions}/> : children}
+  </ThemedButton>
+}
+
 
 const ThemedButton = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${withTheme(COLORS.primary, COLORS.dark)};
-  border-radius: 6px;
-  height:  ${BUTTON_HEIGHT}px;
+  background-color: ${propOr(COLORS.primary, 'bgColor')};
+  border-radius: 16px;
+  height: ${BUTTON_HEIGHT}px;
   justify-content: center;
-  width: ${BUTTON_WIDTH}px;
+  margin-bottom: 12px;
+  width: 100%;
 `
 
-export const Button = ({ children, ...rest }) => {
-  return <ThemedButton {...rest}>{children}</ThemedButton>
-}
+const Text = styled(Subtitle)`
+  font-size: 18px;
+`

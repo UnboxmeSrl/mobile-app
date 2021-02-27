@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 import { AppleLogin } from '@components/Auth/AppleLogin'
 import { FacebookLogin } from '@components/Auth/FacebookLogin'
 import { GoogleLogin } from '@components/Auth/GoogleLogin'
-import { Container } from '@components/Container'
+import { Container } from '@components/RouteContainer'
 
 const Test = styled.View`
   flex: 1
