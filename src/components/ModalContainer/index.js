@@ -45,7 +45,8 @@ const Content = styled.View`
   background-color: white;
   border-radius: 30px;
   flex: 1;
-  padding-horizontal: 20px;
   padding-top: 32px;
 `
-const Title = styled(H3)``
+const Title = styled(H3)`
+  padding-horizontal: 20px;
+`

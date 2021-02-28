@@ -11,20 +11,29 @@ import { BodyText } from '@components/Text'
 import { BoldTextLink } from '@components/TextButton'
 import { COLORS } from '@const'
 
-export const OtherSignUpOptionsPresenter = ({ navigateToEmailModal}) => (
+export const OtherSignUpOptionsPresenter = ({
+  navigateToEmailModal,
+  onSuccess,
+  loading,
+  setLoading,
+}) => (
   <RouteContainer tKey={'otherSignUpOptions.title'} withArrow withPadding>
-      <Header>
-        <Body tKey={'signUp.createAccount'} />
-      </Header>
-      <Buttons>
-        <AppleLogin />
-        <FacebookLogin />
-        <GoogleLogin />
-        <OrLogInText color={COLORS.dark} tKey={'signUp.orLogIn'} />
-        <Button onPress={navigateToEmailModal} tKey={'signUp.withEmail'}/>
-        <Button tKey={'signUp.withPhone'}/>
-      </Buttons>
-      <PoliciesPart dark/>
+    <Header>
+      <Body tKey={'signUp.createAccount'} />
+    </Header>
+    <Buttons>
+      <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+      <FacebookLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+      <GoogleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+      <OrLogInText color={COLORS.dark} tKey={'signUp.orSignUp'} />
+      <Button
+        loading={loading}
+        onPress={navigateToEmailModal}
+        tKey={'signUp.withEmail'}
+      />
+      <Button loading={loading} tKey={'signUp.withPhone'} />
+    </Buttons>
+    <PoliciesPart dark />
   </RouteContainer>
 )
 

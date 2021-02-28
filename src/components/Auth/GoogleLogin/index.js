@@ -4,20 +4,32 @@ import auth from '@react-native-firebase/auth'
 
 import { Button } from '@components/Button'
 import { COLORS, GOOGLE_CONFIG_AUTH } from '@const'
+import { logger } from '@services'
 
 GoogleSignin.configure(GOOGLE_CONFIG_AUTH)
 
-export const GoogleLogin = () => {
+export const GoogleLogin = ({ onSuccess, setLoading, loading }) => {
   const onPress = useCallback(async () => {
     try {
-      const { idToken, ...rest } = await GoogleSignin.signIn()
-      console.log(rest)
+      setLoading(true)
+      const { idToken } = await GoogleSignin.signIn()
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
-      return await auth().signInWithCredential(googleCredential)
-    } catch (e) {
-      console.log({ e })
+      await auth().signInWithCredential(googleCredential)
+      onSuccess && onSuccess()
+      setLoading(false)
+    } catch (error) {
+      logger.error('Google Login', { error })
+      setLoading(false)
     }
-  }, [])
+  }, [onSuccess, setLoading])
 
-  return <Button bgColor={COLORS.google} onPress={onPress} tKey={'signUp.signUpWith'} tOptions={{name: 'Google'}} />
+  return (
+    <Button
+      bgColor={COLORS.google}
+      loading={loading}
+      onPress={onPress}
+      tKey={'signUp.signUpWith'}
+      tOptions={{ name: 'Google' }}
+    />
+  )
 }

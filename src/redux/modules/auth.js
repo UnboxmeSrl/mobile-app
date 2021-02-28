@@ -1,18 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { prop } from 'ramda'
 
-const _user = 'user'
+const NAMESPACE = 'auth'
 
-const initialState = { [_user]: {} }
+const _uid = 'uid'
+
+const initialState = {}
 
 export const authSlice = createSlice({
   initialState,
-  name: 'auth',
+  name: NAMESPACE,
   reducers: {
     resetAuth: () => initialState,
-    setUser: (state, { payload }) => (state[_user] = payload),
+    setUser: (state, { payload }) => payload,
   },
 })
 
 export const { setUser, resetAuth } = authSlice.actions
-
 export default authSlice.reducer
+
+export const selectState = prop(NAMESPACE)
+export const selectUserUid = createSelector(selectState, prop(_uid))

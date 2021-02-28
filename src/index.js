@@ -16,10 +16,9 @@ import { persistor, store } from '@redux/store'
 import i18n from '@services/i18n'
 import { logger } from '@services/logger'
 
-
 class App extends Component {
   componentDidCatch(error, errorInfo) {
-    logger.error('componentDidCatch', {error, errorInfo})
+    logger.error('componentDidCatch', { error, errorInfo })
     crashlytics().recordError(error)
   }
 

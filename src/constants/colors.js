@@ -1,5 +1,6 @@
 export const COLORS = {
-  black: '#231B2E',
+  black: '#231b2e',
+  black03: 'rgba(35, 27, 46, 0.4)',
   blackRaw: '#000000',
   dark: '#491033',
   error: '#A20A0A',
@@ -13,5 +14,5 @@ export const COLORS = {
   success: '#01774D',
   tertiary: '#F7EFEC',
   veryLight: '#FAF6F5',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
 }

@@ -10,58 +10,50 @@ const ThemedText = styled.Text`
   color: ${propOr(withTheme(COLORS.black, COLORS.white), 'color')};
 `
 const H1Styled = styled(ThemedText)`
-  fontFamily: ${FONTS.abrilFatface};
-  fontSize: 40px;
-  letterSpacing: 1.2px;
-  lineHeight: 56px;
+  font-family: ${FONTS.abrilFatface};
+  font-size: 40px;
+  letter-spacing: 1.2px;
+  line-height: 56px;
 `
 const H2Styled = styled(ThemedText)`
-  fontFamily: ${FONTS.semiBold};
-  fontSize: 32px;
-  lineHeight: 40px;
+  font-family: ${FONTS.semiBold};
+  font-size: 32px;
+  line-height: 40px;
 `
 const H3Styled = styled(H2Styled)`
-  fontSize: 24px;
-  lineHeight: 32px;
+  font-size: 24px;
+  line-height: 32px;
 `
 const SubtitleStyled = styled(H3Styled)`
-  fontSize: 16px;
-  lineHeight: 24px;
+  font-size: 16px;
+  line-height: 24px;
 `
 const CaptionStyled = styled(H2Styled)`
-  fontSize: 14px;
-  lineHeight: 20px;
+  font-size: 14px;
+  line-height: 20px;
 `
 const BodyStyled = styled(ThemedText)`
-  fontFamily: ${FONTS.light};
-  fontSize: 16px;
-  lineHeight: 24px;
+  font-family: ${FONTS.light};
+  font-size: 16px;
+  line-height: 24px;
 `
 const SmallStyled = styled(CaptionStyled)`
-  fontFamily: ${FONTS.light};
+  font-family: ${FONTS.light};
 `
 const RegularStyled = styled(ThemedText)`
-  fontFamily: ${FONTS.light};
+  font-family: ${FONTS.light};
 `
 const TinyStyled = styled(CaptionStyled)`
-  fontSize: 12px;
-  lineHeight: 16px;
+  font-family: ${FONTS.regular};
+  font-size: 12px;
+  line-height: 16px;
 `
 
-const BaseText = ({
-  tKey,
-  tDefaultValue,
-  tOptions,
-  Component,
-  children,
-  ...rest
-}) => {
+const BaseText = ({ tKey, tDefaultValue, tOptions, Component, children, ...rest }) => {
   const { t } = useTranslation()
 
   return (
-    <Component {...rest}>
-      {tKey ? t(tKey, tDefaultValue, tOptions) : children}
-    </Component>
+    <Component {...rest}>{tKey ? t(tKey, tDefaultValue, tOptions) : children}</Component>
   )
 }
 
@@ -94,8 +86,8 @@ export const Text = (props) => {
 }
 
 export const SectionTitle = styled(H1)`
-  fontSize: 20px;
-  lineHeight: 24px;
-  marginHorizontal: 16px;
-  marginVertical: 16px
+  fontsize: 20px;
+  lineheight: 24px;
+  marginhorizontal: 16px;
+  marginvertical: 16px;
 `

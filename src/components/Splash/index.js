@@ -11,7 +11,7 @@ const Wrapper = styled(Animated.View)`
   position: absolute
   backgroundColor: white
 `
-const delay = __DEV__ ? 0 : 4200
+const delay = __DEV__ ? 1000 : 4200
 
 export const Splash = () => {
   const windowWidth = useWindowDimensions().width
@@ -36,7 +36,7 @@ export const Splash = () => {
       Animated.timing(fadeAnim, {
         duration: 500,
         toValue: 0,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start(() => {
         setShow(false)
       })
@@ -47,11 +47,7 @@ export const Splash = () => {
     return null
   }
   return (
-    <Wrapper
-      height={windowHeight}
-      style={{ opacity: fadeAnim }}
-      width={windowWidth}
-    >
+    <Wrapper height={windowHeight} style={{ opacity: fadeAnim }} width={windowWidth}>
       {/* <LottieView ref={ref} source={require('src/assets/splash.json')} /> */}
     </Wrapper>
   )

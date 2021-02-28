@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Container } from '@components/RouteContainer'
+import { RouteContainer } from '@components/RouteContainer'
 
-export const HomeScreenPresenter = ({}) => (
-  <Container tKey={'Homepage'} />
-)
+export const HomeScreenPresenter = ({}) => <RouteContainer tKey={'Homepage'} />

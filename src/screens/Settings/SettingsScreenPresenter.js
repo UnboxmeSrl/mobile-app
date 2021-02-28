@@ -1,13 +1,10 @@
-import React  from 'react'
+import React from 'react'
 
 import { Button } from '@components/Button'
-import { Container } from '@components/RouteContainer'
-import { Body } from '@components/Text'
+import { RouteContainer } from '@components/RouteContainer'
 
 export const SettingsScreenPresenter = ({ onPress }) => (
-  <Container tKey={'settings'}>
-    <Button onPress={onPress}>
-      <Body>Log out</Body>
-    </Button>
-  </Container>
+  <RouteContainer tKey={'settings'}>
+    <Button onPress={onPress} tKey={'logout'} />
+  </RouteContainer>
 )

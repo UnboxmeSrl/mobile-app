@@ -1,5 +1,6 @@
+import 'react-native-get-random-values'
 import firebase from '@react-native-firebase/app'
-import functions from '@react-native-firebase/functions';
+import functions from '@react-native-firebase/functions'
 import { v1 } from 'uuid'
 
 const FUNCTION_NAME = 'logger'
@@ -11,10 +12,12 @@ const INFO = 'info'
 // }
 const sessionId = v1()
 
-const handleLog = ({message, data = {}, level}) => {
+const handleLog = ({ message, data = {}, level }) => {
   const { error: errorObject } = data
   const user = firebase?.auth()?.currentUser?.toJSON()
-  const error = errorObject ? { errorMessage: errorObject?.message, trace: errorObject?.stack} : undefined
+  const error = errorObject
+    ? { errorMessage: errorObject?.message, trace: errorObject?.stack }
+    : undefined
 
   if (level === INFO) {
     console.log(message, data)
@@ -24,20 +27,19 @@ const handleLog = ({message, data = {}, level}) => {
 
   const payload = {
     ...data,
+    error,
     sessionId,
     user,
-    error
   }
 
   functions()
-    .httpsCallable(FUNCTION_NAME)({level, message, payload})
-    .catch(e => {
+    .httpsCallable(FUNCTION_NAME)({ level, message, payload })
+    .catch((e) => {
       console.error(e)
     })
 }
 
-const info = (message, data) => handleLog({ data, level: INFO, message})
-const error = (message, data) => handleLog({ data, level: ERROR, message})
+const info = (message, data) => handleLog({ data, level: INFO, message })
+const error = (message, data) => handleLog({ data, level: ERROR, message })
 
 export const logger = { error, info }
-

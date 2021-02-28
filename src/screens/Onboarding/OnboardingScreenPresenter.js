@@ -5,21 +5,25 @@ import styled from 'styled-components/native'
 import { Content } from '@components/Content'
 import { Text } from '@components/Text'
 import { COLORS } from '@const'
-import { screenHeight,screenWidth } from '@const/common'
+import { screenHeight, screenWidth } from '@const/common'
 
 import { IMAGES } from '../../assets/images'
 
 const BUTTON_SIZE = 56
 
-export const OnboardingScreenPresenter = ({ onPress}) => (
-    <Background resizeMode={'cover'} source={IMAGES.onboarding}>
-      <ContentStyled>
-        <TextStyled tKey={'onboarding'} />
-        <Button onPress={onPress}>
-          <Ionicons color={COLORS.white} name={'arrow-forward-outline'} size={BUTTON_SIZE/2} />
-        </Button>
-      </ContentStyled>
-    </Background>
+export const OnboardingScreenPresenter = ({ onPress }) => (
+  <Background resizeMode={'cover'} source={IMAGES.onboarding}>
+    <ContentStyled>
+      <TextStyled tKey={'onboarding'} />
+      <Button onPress={onPress}>
+        <Ionicons
+          color={COLORS.white}
+          name={'arrow-forward-outline'}
+          size={BUTTON_SIZE / 2}
+        />
+      </Button>
+    </ContentStyled>
+  </Background>
 )
 
 const Background = styled.ImageBackground`
@@ -35,7 +39,6 @@ const TextStyled = styled(Text)`
   font-size: 24px;
   line-height: 36px;
   width: 70%;
-
 `
 const Button = styled.TouchableOpacity`
   align-items: center;

@@ -1,5 +1,6 @@
 /* Navigation utils used OUTSIDE <Screen />  */
 import { useMemo } from 'react'
+import { StackActions } from 'react-navigation'
 import { useNavigationState } from 'react-navigation-hooks'
 import { NavigationActions } from '@react-navigation/core'
 import { propOr } from 'ramda'
@@ -14,11 +15,20 @@ export function navigate(routeName, params, action) {
   navigator.dispatch(
     typeof routeName === 'string'
       ? NavigationActions.navigate({
-        action,
-        params,
-        routeName
-      })
+          action,
+          params,
+          routeName,
+        })
       : NavigationActions.navigate(routeName)
+  )
+}
+
+export function reset(routeName) {
+  navigator.dispatch(
+    StackActions.reset({
+      actions: [NavigationActions.navigate({ routeName })],
+      index: 0,
+    })
   )
 }
 
@@ -55,7 +65,7 @@ export const useCurrentRouteName = (nestingLevel = Infinity) => {
 
   return useMemo(() => getCurrentRouteName(navState, nestingLevel), [
     navState,
-    nestingLevel
+    nestingLevel,
   ])
 }
 

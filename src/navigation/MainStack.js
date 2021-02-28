@@ -1,14 +1,14 @@
 import createNativeStackNavigator from 'react-native-screens/createNativeStackNavigator'
 import { createStackNavigator } from 'react-navigation-stack'
-import { last,length, prop, slice } from 'ramda'
+import { last, length, prop, slice } from 'ramda'
 import BottomNavigator from 'src/navigation/BottomNavigator'
 import { MODALS } from 'src/navigation/modals'
 import pushScreens from 'src/navigation/pushScreens'
 import { makeStack, STACK_SUFFIX } from 'src/services/routing'
 
 import { COLORS } from '@const'
-import { SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
 import { IS_IOS } from '@const/common'
+import { MAIN_NAVIGATOR, SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
 
 import {
   cardOverlay,
@@ -18,15 +18,13 @@ import {
   getRadius,
   getTopOffset,
   ModalSlideFromBottomIOS,
-  rootScreensNavigationOptions
+  rootScreensNavigationOptions,
 } from './utils'
 
 let insertedKey = 0
 
 // This is topmost navigator contain only native navigator and modal screens. Can be Native for IOS but must be JS for android
-const createMainNavigator = IS_IOS
-  ? createNativeStackNavigator
-  : createStackNavigator
+const createMainNavigator = IS_IOS ? createNativeStackNavigator : createStackNavigator
 
 const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
   const navigator = createNativeStackNavigator(
@@ -35,12 +33,12 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
       defaultNavigationOptions: ({ theme }) => ({
         cardShadowEnabled: false,
         cardStyle: {
-          backgroundColor: theme === 'dark' ? COLORS.background : COLORS.white
+          backgroundColor: theme === 'dark' ? COLORS.background : COLORS.white,
         },
-        stackAnimation: 'slide_from_right'
+        stackAnimation: 'slide_from_right',
       }),
       headerMode: 'none',
-      initialRouteName: SCREEN_NAMES.Onboarding
+      initialRouteName: STACK_NAMES.BottomStack,
     }
   )
 
@@ -61,10 +59,10 @@ const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
           ...otherScreens,
           {
             key: `inserted-${insertedKey}`,
-            routeName: action.routeName
+            routeName: action.routeName,
           },
-          lastScreen
-        ]
+          lastScreen,
+        ],
       }
 
       insertedKey += 1
@@ -82,7 +80,7 @@ const wrapIntoPushStackNavigators = (routeConfigMap) =>
   Object.keys(routeConfigMap).reduce((prev, curr) => {
     prev[curr + STACK_SUFFIX] = {
       path: '',
-      screen: nativeStackPushRoutesFactory(curr, routeConfigMap[curr])
+      screen: nativeStackPushRoutesFactory(curr, routeConfigMap[curr]),
     }
     return prev
   }, {})
@@ -98,12 +96,12 @@ const wrappedModals = Object.keys(MODALS).reduce(
         cornerRadius: getRadius(curr),
         gestureEnabled: true,
         gestureResponseDistance,
-        topOffset: IS_IOS && getTopOffset(curr)
+        topOffset: IS_IOS && getTopOffset(curr),
       },
       screen: MODALS[curr],
-      ...(typeof MODALS[curr] === 'object' ? MODALS[curr] : {})
+      ...(typeof MODALS[curr] === 'object' ? MODALS[curr] : {}),
     },
-    ...prev
+    ...prev,
   }),
   {}
 )
@@ -111,7 +109,7 @@ const wrappedModals = Object.keys(MODALS).reduce(
 const RootStack = makeStack(
   createMainNavigator(
     {
-      mainNavigator: {
+      [MAIN_NAVIGATOR]: {
         path: '',
         screen: createNativeStackNavigator(
           {
@@ -119,25 +117,24 @@ const RootStack = makeStack(
               [STACK_NAMES.BottomStack]: {
                 path: '',
                 screen: BottomNavigator,
-
               },
             }),
           },
           {
-            headerMode: 'none'
+            headerMode: 'none',
           }
-        )
+        ),
       },
-      ...wrappedModals
+      ...wrappedModals,
     },
     {
       defaultNavigationOptions: {
         customStack: true,
         ...rootScreensNavigationOptions,
-        ...ModalSlideFromBottomIOS
+        ...ModalSlideFromBottomIOS,
       },
       headerMode: 'none',
-      mode: 'modal'
+      mode: 'modal',
     }
   )
 )

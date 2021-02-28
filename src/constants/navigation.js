@@ -1,13 +1,15 @@
 import { COLORS } from '@const'
 
+export const MAIN_NAVIGATOR = 'mainNavigator'
+
 export const STACK_NAMES = {
-  BottomStack: 'BottomStack'
+  BottomStack: 'BottomStack',
 }
 export const MODAL_NAMES = {
   Login: 'Login',
   SignUpEmail: 'SignUpEmail',
   SignUpPhone: 'SignUpPhone',
-  WebView: 'WebView'
+  WebView: 'WebView',
 }
 export const SCREEN_NAMES = {
   Awards: 'Awards',

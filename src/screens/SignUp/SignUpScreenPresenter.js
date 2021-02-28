@@ -8,29 +8,29 @@ import { Policies } from '@components/Policies'
 import { BodyText, H3 } from '@components/Text'
 import { TextButton } from '@components/TextButton'
 import { COLORS } from '@const'
-import { screenHeight,screenWidth } from '@const/common'
+import { screenHeight, screenWidth } from '@const/common'
 
 import { IMAGES } from '../../assets/images'
 
-export const SignUpScreenPresenter = ({onPress}) => (
-    <Background resizeMode={'cover'} source={IMAGES.signUp}>
-      <ContentStyled>
-        <Header>
-          <HeaderTitle tKey={'signUp.createContent'} />
-          <Body tKey={'signUp.tellEveryone'} />
-        </Header>
-        <Buttons>
-          <AppleLogin />
-          <Button onPress={onPress} tKey={'login.otherOptions'}/>
-          <AlreadyHaveButton color={COLORS.dark} tKey={'login.alreadyHaveAccount'}/>
-        </Buttons>
-        <PoliciesPart />
-      </ContentStyled>
-    </Background>
+export const SignUpScreenPresenter = ({ onPress, onSuccess, loading, setLoading }) => (
+  <Background resizeMode={'cover'} source={IMAGES.signUp}>
+    <ContentStyled>
+      <Header>
+        <HeaderTitle tKey={'signUp.createContent'} />
+        <Body tKey={'signUp.tellEveryone'} />
+      </Header>
+      <Buttons>
+        <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+        <Button loadingloading={loading} onPress={onPress} tKey={'login.otherOptions'} />
+        <AlreadyHaveButton color={COLORS.dark} tKey={'login.alreadyHaveAccount'} />
+      </Buttons>
+      <PoliciesPart />
+    </ContentStyled>
+  </Background>
 )
 
 const ContentStyled = styled(Content)`
-  flex: 1
+  flex: 1;
 `
 const Header = styled.View`
   flex: 0.3;
