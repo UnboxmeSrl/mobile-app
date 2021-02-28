@@ -14,5 +14,6 @@ export const COLORS = {
   success: '#01774D',
   tertiary: '#F7EFEC',
   veryLight: '#FAF6F5',
+  veryLight04: 'rgba(250,246, 245, 0.4)',
   white: '#FFFFFF',
 }

@@ -1,16 +1,11 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { SCREEN_NAMES } from '@const/navigation'
 
-export const TabBarIcon =  ({ focused, color, size }) => {
-  let iconName
-  if (route.name === SCREEN_NAMES.Home) {
-    iconName = focused ? 'home' : 'home-outline'
-  } else if (route.name === SCREEN_NAMES.Awards) {
-    iconName = focused ? 'trophy' : 'trophy-outline'
-  } else {
-    iconName = focused ? 'person' : 'person-outline'
-  }
+import { COLORS } from '@const'
 
-  return <Ionicons color={color} name={iconName} size={size} />
+export const TabBarIcon = ({ focused, icon, activeIcon }) => {
+  const iconName = focused ? activeIcon : icon
+  const color = focused ? COLORS.secondary : COLORS.veryLight04
+
+  return <Ionicons color={color} name={iconName} size={24} />
 }

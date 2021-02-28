@@ -10,11 +10,9 @@ import { logger, reset } from '@services'
 import { SettingsScreenPresenter } from './SettingsScreenPresenter'
 
 export const SettingsScreen = () => {
-  const { replace } = useNavigation()
   const onPress = useCallback(async () => {
     try {
       logger.info('Logout start')
-      replace({ index: 0, routeName: SCREEN_NAMES.Onboarding })
       await auth().signOut()
       await GoogleSignin.revokeAccess()
       await GoogleSignin.signOut()

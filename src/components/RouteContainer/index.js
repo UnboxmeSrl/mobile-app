@@ -7,14 +7,17 @@ import { Subtitle } from '@components/Text'
 
 const HEADER_HEIGHT = 48
 
-export const RouteContainer = ({ tKey, children, withArrow, withPadding }) => (
+export const RouteContainer = ({ tKey, children, withArrow, withPadding, style }) => (
   <StyledComponent>
-    {tKey && <Header>
-      {withArrow ? <Back /> : null }
-      <HeaderTitle tKey={tKey} /></Header>}
-      <Content withPadding={withPadding}>
-        {children}
-      </Content>
+    {tKey && (
+      <Header>
+        {withArrow ? <Back /> : null}
+        <HeaderTitle tKey={tKey} />
+      </Header>
+    )}
+    <Content style={style} withPadding={withPadding}>
+      {children}
+    </Content>
   </StyledComponent>
 )
 
@@ -36,6 +39,5 @@ const Back = styled(BackArrow)`
 `
 const Content = styled.View`
   flex: 1;
-  padding-horizontal: ${({ withPadding }) => withPadding ? 20 : 0}px;
+  padding-horizontal: ${({ withPadding }) => (withPadding ? 20 : 0)}px;
 `
-

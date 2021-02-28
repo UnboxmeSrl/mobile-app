@@ -1,10 +1,16 @@
 import React from 'react'
+import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
 import { RouteContainer } from '@components/RouteContainer'
 
 export const SettingsScreenPresenter = ({ onPress }) => (
-  <RouteContainer tKey={'settings'}>
+  <Container tKey={'settings'} withPadding>
     <Button onPress={onPress} tKey={'logout'} />
-  </RouteContainer>
+  </Container>
 )
+
+const Container = styled(RouteContainer)`
+  flex: 1;
+  justify-content: flex-end;
+`
