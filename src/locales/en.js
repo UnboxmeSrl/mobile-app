@@ -28,11 +28,22 @@ export default {
     logout: 'Logout',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
+    otherSignInOptions: {
+      title: 'Other sign in options',
+    },
     otherSignUpOptions: {
       title: 'Other sign up options',
     },
     privacyPolicy: 'Privacy Policy',
     settings: 'Settings',
+    signIn: {
+      getPersonalized:
+        'Get personalized boxes prepared for\n' +
+        'the needs of your skin, hair and your body',
+      orLogIn: 'or log in with email or phone number',
+      withEmail: 'Sign in with email',
+      withPhone: 'Sign in with phone number',
+    },
     signUp: {
       confirmPassword: 'Confirm your password',
       createAccount:
@@ -42,7 +53,7 @@ export default {
       enterPassword: 'Enter your password',
       orLogIn: 'or log in with email or phone number',
       orSignUp: 'or sign up with email or phone number',
-      signUpWith: 'Sign up with {{name}}',
+      signUpWith: 'Continue with {{name}}',
       tellEveryone:
         'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
       withEmail: 'Sign up with email',

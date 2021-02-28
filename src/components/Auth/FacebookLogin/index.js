@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { Alert } from 'react-native'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import auth from '@react-native-firebase/auth'
 
@@ -35,7 +36,17 @@ export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
     } catch (error) {
       setLoading(false)
       logger.error('FacebookError', { error })
-      // if (e?.code === 'auth/account-exists-with-different-credential') {
+      if (error?.code === 'auth/account-exists-with-different-credential') {
+        // TODO
+
+        Alert.alert(
+          'Whooops',
+          'Your email is already associated with another social provider. Please try to login with Google/Apple',
+          [{ onPress: () => console.log('OK Pressed'), text: 'OK' }],
+          { cancelable: false }
+        )
+      }
+
       //   const infoRequest = new GraphRequest(
       //     '/me',
       //     {

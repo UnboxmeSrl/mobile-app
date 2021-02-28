@@ -12,7 +12,13 @@ import { screenHeight, screenWidth } from '@const/common'
 
 import { IMAGES } from '../../assets/images'
 
-export const SignUpScreenPresenter = ({ onPress, onSuccess, loading, setLoading }) => (
+export const SignUpScreenPresenter = ({
+  navigateToSignUp,
+  navigateToSignIn,
+  onSuccess,
+  loading,
+  setLoading,
+}) => (
   <Background resizeMode={'cover'} source={IMAGES.signUp}>
     <ContentStyled>
       <Header>
@@ -21,8 +27,16 @@ export const SignUpScreenPresenter = ({ onPress, onSuccess, loading, setLoading 
       </Header>
       <Buttons>
         <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
-        <Button loadingloading={loading} onPress={onPress} tKey={'login.otherOptions'} />
-        <AlreadyHaveButton color={COLORS.dark} tKey={'login.alreadyHaveAccount'} />
+        <Button
+          loadingloading={loading}
+          onPress={navigateToSignUp}
+          tKey={'login.otherOptions'}
+        />
+        <AlreadyHaveButton
+          color={COLORS.dark}
+          onPress={navigateToSignIn}
+          tKey={'login.alreadyHaveAccount'}
+        />
       </Buttons>
       <PoliciesPart />
     </ContentStyled>

@@ -5,16 +5,10 @@ import { Button } from '@components/Button'
 import { Input } from '@components/Input'
 import { ModalContainer } from '@components/ModalContainer'
 import { PasswordInput } from '@components/PasswordInput'
-import { EMAIL_RULES, PASSWORD_RULES } from '@const/validators'
+import { EMAIL_RULES_LOGIN, PASSWORD_RULES } from '@const/validators'
 
-export const SignUpEmailPresenter = ({
-  onPress,
-  control,
-  errors,
-  confirmPasswordRules,
-  loading,
-}) => (
-  <ModalContainer tKey={'signUp.withEmail'}>
+export const SignInEmailPresenter = ({ onPress, control, errors, loading }) => (
+  <ModalContainer tKey={'signIn.withEmail'}>
     <Content>
       <Input
         autoCapitalize="none"
@@ -25,7 +19,7 @@ export const SignUpEmailPresenter = ({
         keyboardType="email-address"
         name="email"
         placeholderKey="signUp.enterEmail"
-        rules={EMAIL_RULES}
+        rules={EMAIL_RULES_LOGIN}
         textContentType="emailAddress"
       />
       <PasswordInput
@@ -35,13 +29,6 @@ export const SignUpEmailPresenter = ({
         placeholderKey={'signUp.enterPassword'}
         rules={PASSWORD_RULES}
         textContentType="newPassword"
-      />
-      <PasswordInput
-        control={control}
-        errors={errors}
-        name={'confirmPassword'}
-        placeholderKey={'signUp.confirmPassword'}
-        rules={confirmPasswordRules}
       />
       <SubmitButton loading={loading} onPress={onPress} tKey={'submit'} />
     </Content>

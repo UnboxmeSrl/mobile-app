@@ -9,8 +9,13 @@ import { SignUpScreenPresenter } from './SignUpScreenPresenter'
 export const SignUpScreen = () => {
   const [loading, setLoading] = useState(false)
   const { navigate } = useNavigation()
-  const onPress = useCallback(() => {
+
+  const navigateToSignUp = useCallback(() => {
     navigate(SCREEN_NAMES.OtherSignUp)
+  }, [navigate])
+
+  const navigateToSignIn = useCallback(() => {
+    navigate(SCREEN_NAMES.SignIn)
   }, [navigate])
 
   const onSuccess = useCallback(() => {
@@ -19,7 +24,8 @@ export const SignUpScreen = () => {
 
   const props = {
     loading,
-    onPress,
+    navigateToSignIn,
+    navigateToSignUp,
     onSuccess,
     setLoading,
   }

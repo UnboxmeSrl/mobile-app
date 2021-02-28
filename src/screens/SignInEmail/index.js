@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { reset } from '@services'
-import { loginEmailPassword } from '@services/auth'
+import { signInWithEmail } from '@services/auth'
 
 import { SignInEmailPresenter } from './SignInEmailPresenter'
 
-export const SignUpEmailModal = () => {
+export const SignInEmailModal = () => {
   const [loading, setLoading] = useState(false)
   const { control, handleSubmit, errors } = useForm()
 
@@ -16,9 +16,11 @@ export const SignUpEmailModal = () => {
       try {
         setLoading(true)
         const { email, password } = data
-        await loginEmailPassword(email, password)
+        const user = await signInWithEmail(email, password)
+        if (user) {
+          reset(MAIN_NAVIGATOR)
+        }
         setLoading(false)
-        reset(MAIN_NAVIGATOR)
       } catch (e) {
         setLoading(false)
       }
@@ -26,7 +28,7 @@ export const SignUpEmailModal = () => {
     [setLoading]
   )
 
-  const onPress = handleSubmit(onSubmit)
+  const onPress = handleSubmit(onSubmit, (error) => console.log(error))
 
   const props = {
     control,

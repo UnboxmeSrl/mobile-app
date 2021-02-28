@@ -24,7 +24,7 @@ export const Input = ({
   const errorKey = errors[name]?.message
   const errorMessage = t(`errors.${errorKey}`)
   // const label = t(`labelsForFields.${name}`)
-  console.log(RightIcon)
+
   return (
     <InputWrapper>
       {/* <Label>{label}</Label> */}
