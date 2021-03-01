@@ -45,7 +45,8 @@ export default createBottomTabNavigator(
       inactiveTintColor: COLORS.veryLight04,
       style: {
         backgroundColor: COLORS.black,
-        borderRadius: 24,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
         borderTopWidth: 0,
         height: 56,
       },

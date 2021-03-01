@@ -21,7 +21,6 @@ export const DARK_STATUS_BAR = {
   barStyle: 'dark-content',
 }
 
-
 export const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
     let iconName

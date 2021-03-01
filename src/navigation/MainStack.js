@@ -8,7 +8,7 @@ import { makeStack, STACK_SUFFIX } from 'src/services/routing'
 
 import { COLORS } from '@const'
 import { IS_IOS } from '@const/common'
-import { MAIN_NAVIGATOR, SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
+import { MAIN_NAVIGATOR, STACK_NAMES } from '@const/navigation'
 
 import {
   cardOverlay,

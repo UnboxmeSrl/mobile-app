@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import {
-  DarkTheme, DefaultTheme,
+  DarkTheme,
+  DefaultTheme,
   NavigationContainer as NavContainer,
 } from '@react-navigation/native'
 import { propOr } from 'ramda'
@@ -11,14 +12,12 @@ import { navigationRef } from '@services/navigation'
 
 const Wrapper = styled.View`
   flex: 1
-  backgroundColor: ${propOr('rgb(0,0,0)', 'bgColor')}
+  background-color: ${propOr('rgb(0,0,0)', 'bgColor')}
 `
 
 export const NavigationContainer = ({ children }) => {
   const isDarkTheme = useDarkTheme()
-  const theme = useMemo(() => (isDarkTheme ? DarkTheme : DefaultTheme), [
-    isDarkTheme,
-  ])
+  const theme = useMemo(() => (isDarkTheme ? DarkTheme : DefaultTheme), [isDarkTheme])
 
   return (
     <Wrapper>

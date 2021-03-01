@@ -8,9 +8,9 @@ import { Container } from '@components/RouteContainer'
 
 const Test = styled.View`
   flex: 1
-  backgroundColor: green
+  background-color: green
 `
-export const LoginScreen= () => {
+export const LoginScreen = () => {
   return (
     <Test>
       <AppleLogin />

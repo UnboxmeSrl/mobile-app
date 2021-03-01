@@ -2,7 +2,7 @@ import React from 'react'
 import { createAppContainer, NavigationContext } from 'react-navigation'
 import { DARK, LIGHT } from 'src/constants/navigation'
 import MainStack from 'src/navigation/MainStack'
-import { captureException, setTopLevelNavigator } from 'src/services'
+import { setTopLevelNavigator } from 'src/services'
 
 import { useTheme } from '@hooks/useTheme'
 

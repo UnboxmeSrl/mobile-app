@@ -3,8 +3,9 @@ import { Animated } from 'react-native'
 import {
   CardStyleInterpolators,
   HeaderStyleInterpolators,
-  TransitionSpecs} from 'react-navigation-stack'
-import { always, and, cond, identical, pipe,T } from 'ramda'
+  TransitionSpecs,
+} from 'react-navigation-stack'
+import { always, and, cond, identical, pipe, T } from 'ramda'
 import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
@@ -17,12 +18,12 @@ const DEFAULT_VERTICAL_OFFSET = 135
 const SWIPE_VERTICAL_OFFSET = IS_IOS ? DEFAULT_VERTICAL_OFFSET : 500 // TODO
 
 export const gestureResponseDistance = {
-  vertical: SWIPE_VERTICAL_OFFSET
+  vertical: SWIPE_VERTICAL_OFFSET,
 }
 
 const Overlay = styled(Animated.View)`
-  flex: 1
-  backgroundColor: ${COLORS.background}
+  background-color: ${COLORS.black03};
+  flex: 1;
 `
 
 export const cardOverlay = ({ style }) => <Overlay style={style} />
@@ -31,12 +32,12 @@ const withInFullscreen = (curr) => false // FULL_SCREEN_MODALS[curr]
 
 export const getTopOffset = cond([
   [withInFullscreen, always(0)],
-  [T, always(50)]
+  [T, always(50)],
 ])
 
 export const getRadius = cond([
   [withInFullscreen, always(0)],
-  [T, always(32)]
+  [T, always(32)],
 ])
 
 export const getCardStyle = (curr, marginTop) =>
@@ -45,7 +46,7 @@ export const getCardStyle = (curr, marginTop) =>
         backgroundColor: COLORS.transparent,
         borderTopLeftRadius: getRadius(curr),
         borderTopRightRadius: getRadius(curr),
-        marginTop: marginTop || getTopOffset(curr)
+        marginTop: marginTop || getTopOffset(curr),
       }
     : undefined
 
@@ -53,12 +54,11 @@ export const cardStyleInterpolator = (props) =>
   IS_ANDROID
     ? {
         overlayStyle: {
-          opacity: props.current.progress
+          opacity: props.current.progress,
         },
-        ...CardStyleInterpolators.forVerticalIOS(props)
+        ...CardStyleInterpolators.forVerticalIOS(props),
       }
     : undefined
-
 
 const ModalTransitionSpec = IS_ANDROID
   ? {
@@ -66,8 +66,8 @@ const ModalTransitionSpec = IS_ANDROID
       config: {
         ...TransitionSpecs.TransitionIOSSpec.config,
         restDisplacementThreshold: 40,
-        restSpeedThreshold: 100
-      }
+        restSpeedThreshold: 100,
+      },
     }
   : undefined
 
@@ -77,18 +77,18 @@ export const ModalSlideFromBottomIOS = {
   headerStyleInterpolator: HeaderStyleInterpolators.forFade,
   transitionSpec: {
     close: ModalTransitionSpec,
-    open: ModalTransitionSpec
-  }
+    open: ModalTransitionSpec,
+  },
 }
 
 export const rootScreensNavigationOptions = {
   cardShadowEnabled: false, // https://github.com/react-navigation/react-navigation/issues/7690
   cardStyle: {
-    backgroundColor: null
-  }
+    backgroundColor: null,
+  },
 }
 
 export const defaultCardStyleInterpolator = () => ({
   cardStyle: { backgroundColor: null },
-  containerStyle: { backgroundColor: null }
+  containerStyle: { backgroundColor: null },
 })

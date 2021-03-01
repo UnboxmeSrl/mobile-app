@@ -1,5 +1,4 @@
 import React from 'react'
-import { KeyboardAvoidingView } from 'react-native'
 import styled from 'styled-components/native'
 
 import { H3 } from '@components/Text'
@@ -43,7 +42,8 @@ const Handler = styled.View`
 
 const Content = styled.View`
   background-color: white;
-  border-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   flex: 1;
   padding-top: 32px;
 `

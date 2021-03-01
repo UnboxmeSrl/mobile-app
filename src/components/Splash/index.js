@@ -9,7 +9,7 @@ const Wrapper = styled(Animated.View)`
   width: ${prop('width')}px
   height: ${prop('height')}px
   position: absolute
-  backgroundColor: white
+  background-color: white
 `
 const delay = __DEV__ ? 1000 : 4200
 
