@@ -1,6 +1,11 @@
 export default {
   translation: {
     and: ' and ',
+    auth: {
+      enterCode: 'Enter verification code from SMS',
+      enterPhone: 'Enter phone number eg. +48111222333',
+      withPhone: 'Continue with Phone number',
+    },
     awards: {
       specialAwards: 'Special Awards',
       title: 'Awards',
@@ -26,6 +31,7 @@ export default {
       otherOptions: 'Other sign up options',
     },
     logout: 'Logout',
+    next: 'next',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
     otherSignInOptions: {

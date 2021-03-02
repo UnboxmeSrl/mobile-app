@@ -9,23 +9,30 @@ import { MODAL_NAMES } from '@const/navigation'
 
 export const Policies = ({ style, dark }) => {
   const { navigate } = useNavigation()
-  const navigateToWebview = useCallback((uri) => {
-    navigate({ params: { uri }, routeName: MODAL_NAMES.WebView})
-  }, [navigate])
-  const navigateToTerms = () => navigateToWebview('https://getlorem.com/privacy-policy')
-  const navigateToPrivacy = () => navigateToWebview('https://getlorem.com/privacy-policy')
+  const navigateToWebview = useCallback(
+    (uri) => {
+      navigate({ params: { uri }, routeName: MODAL_NAMES.WebView })
+    },
+    [navigate]
+  )
+  const navigateToTerms = () =>
+    navigateToWebview('https://policies.google.com/terms?hl=en-US')
+  const navigateToPrivacy = () =>
+    navigateToWebview('https://policies.google.com/privacy?hl=en-US')
   const color = dark ? COLORS.black : COLORS.white
 
   return (
     <View style={style}>
-      <Row><Text color={color} tKey={'bySigning'}/>
+      <Row>
+        <Text color={color} tKey={'bySigning'} />
       </Row>
       <Row>
-      <TextButton color={color} onPress={navigateToTerms} tKey={'termsOfUse'}/>
-      <Text color={color} tKey={'and'}/>
-      <TextButton color={color} onPress={navigateToPrivacy} tKey={'privacyPolicy'}/>
+        <TextButton color={color} onPress={navigateToTerms} tKey={'termsOfUse'} />
+        <Text color={color} tKey={'and'} />
+        <TextButton color={color} onPress={navigateToPrivacy} tKey={'privacyPolicy'} />
       </Row>
-    </View>)
+    </View>
+  )
 }
 
 const View = styled.View`
@@ -35,4 +42,3 @@ const Row = styled.View`
   flex-direction: row;
 `
 const Text = styled(SmallText)``
-

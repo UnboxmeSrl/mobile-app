@@ -1,4 +1,5 @@
 import { Alert } from 'react-native'
+import Toast from 'react-native-toast-message'
 import auth from '@react-native-firebase/auth'
 import { isEmpty } from 'ramda'
 
@@ -26,7 +27,7 @@ export const registerEmailAccount = async (email, password) => {
 export const signInWithEmail = async (email, password) => {
   try {
     const user = await auth().signInWithEmailAndPassword(email, password)
-    console.log({ user })
+
     return user
   } catch (error) {
     Alert.alert(
@@ -36,5 +37,28 @@ export const signInWithEmail = async (email, password) => {
       { cancelable: false }
     )
     logger.error('signInWithEmail', { error })
+  }
+}
+
+export const sendPhoneVerificationCode = async (phone) => {
+  try {
+    const confirmation = await auth().signInWithPhoneNumber(phone)
+
+    return confirmation
+  } catch (error) {
+    if (error.code === 'auth/invalid-verification-code') {
+      Toast.show({
+        text1: 'Error',
+        text2: 'Verification code is invalid or expired.',
+        type: 'error',
+      })
+    } else {
+      Toast.show({
+        text1: 'Error',
+        text2: error?.message,
+        type: 'error',
+      })
+    }
+    logger.error('sendPhoneVerificationCode', { error })
   }
 }

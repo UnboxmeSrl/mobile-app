@@ -1,4 +1,6 @@
 import React from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 import styled from 'styled-components/native'
 
 import { H3 } from '@components/Text'

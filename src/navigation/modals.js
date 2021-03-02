@@ -1,3 +1,4 @@
+import { AuthPhoneModal } from '@screens/AuthPhone'
 import { LoginScreen } from '@screens/Login'
 import { SignInEmailModal } from '@screens/SignInEmail'
 import { SignUpEmailModal } from '@screens/SignUpEmail'
@@ -19,5 +20,8 @@ export const MODALS = {
   },
   [MODAL_NAMES.SignUpPhone]: {
     screen: SignUpEmailModal,
+  },
+  [MODAL_NAMES.AuthPhone]: {
+    screen: AuthPhoneModal,
   },
 }

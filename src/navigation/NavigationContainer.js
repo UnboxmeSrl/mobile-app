@@ -1,4 +1,6 @@
 import React from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 import { createAppContainer, NavigationContext } from 'react-navigation'
 import { DARK, LIGHT } from 'src/constants/navigation'
 import MainStack from 'src/navigation/MainStack'
@@ -23,6 +25,7 @@ class NavigationProvider extends MainStack {
       <NavigationContext.Provider value={navigation}>
         <MainStack {...props} />
         {children}
+        <Toast ref={(ref) => Toast.setRef(ref)} topOffset={50} />
       </NavigationContext.Provider>
     )
   }

@@ -26,6 +26,7 @@ export const GoogleLogin = ({ onSuccess, setLoading, loading }) => {
   return (
     <Button
       bgColor={COLORS.google}
+      leftIconName={'logo-google'}
       loading={loading}
       onPress={onPress}
       tKey={'signUp.signUpWith'}

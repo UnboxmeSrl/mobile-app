@@ -13,6 +13,7 @@ import { COLORS } from '@const'
 
 export const OtherSignUpOptionsPresenter = ({
   navigateToEmailModal,
+  navigateToPhoneModal,
   onSuccess,
   loading,
   setLoading,
@@ -31,7 +32,11 @@ export const OtherSignUpOptionsPresenter = ({
         onPress={navigateToEmailModal}
         tKey={'signUp.withEmail'}
       />
-      <Button loading={loading} tKey={'signUp.withPhone'} />
+      <Button
+        loading={loading}
+        onPress={navigateToPhoneModal}
+        tKey={'signUp.withPhone'}
+      />
     </Buttons>
     <PoliciesPart dark />
   </RouteContainer>

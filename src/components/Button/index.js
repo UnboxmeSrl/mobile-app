@@ -1,5 +1,5 @@
 import React from 'react'
-import ActivityIndicatorViewNativeComponent from 'react-native/Libraries/Components/ActivityIndicator/ActivityIndicatorViewNativeComponent'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import { propOr } from 'ramda'
 import styled from 'styled-components/native'
 
@@ -7,9 +7,12 @@ import { BUTTON_HEIGHT } from '@components/Button/constants'
 import { Subtitle } from '@components/Text'
 import { COLORS } from '@const'
 
-export const Button = ({ children, tKey, tOptions, loading, ...rest }) => {
+export const Button = ({ children, tKey, tOptions, loading, leftIconName, ...rest }) => {
   return (
     <ThemedButton disabled={loading} loading={loading} {...rest}>
+      {leftIconName ? (
+        <LeftIcon color={COLORS.white} name={leftIconName} size={18} />
+      ) : null}
       {tKey ? <Text color={COLORS.white} tKey={tKey} tOptions={tOptions} /> : children}
       {loading ? <Loader /> : null}
     </ThemedButton>
@@ -30,6 +33,10 @@ const ThemedButton = styled.TouchableOpacity`
 const Loader = styled.ActivityIndicator`
   position: absolute;
   right: 20px;
+`
+const LeftIcon = styled(Ionicons)`
+  left: 20px;
+  position: absolute;
 `
 const Text = styled(Subtitle)`
   font-size: 18px;

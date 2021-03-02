@@ -18,6 +18,7 @@ export const SignUpScreenPresenter = ({
   onSuccess,
   loading,
   setLoading,
+  MainButton,
 }) => (
   <Background resizeMode={'cover'} source={IMAGES.signUp}>
     <ContentStyled>
@@ -26,7 +27,7 @@ export const SignUpScreenPresenter = ({
         <Body tKey={'signUp.tellEveryone'} />
       </Header>
       <Buttons>
-        <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+        <MainButton loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
         <Button
           loadingloading={loading}
           onPress={navigateToSignUp}

@@ -17,10 +17,10 @@ export const SignInEmailModal = () => {
         setLoading(true)
         const { email, password } = data
         const user = await signInWithEmail(email, password)
+        setLoading(false)
         if (user) {
           reset(MAIN_NAVIGATOR)
         }
-        setLoading(false)
       } catch (e) {
         setLoading(false)
       }

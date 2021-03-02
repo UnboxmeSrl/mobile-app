@@ -38,7 +38,7 @@ const ContentStyled = styled(Content)`
 const TextStyled = styled(Text)`
   font-size: 24px;
   line-height: 36px;
-  width: 70%;
+  width: 75%;
 `
 const Button = styled.TouchableOpacity`
   align-items: center;

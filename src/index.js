@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { ReduxNetworkProvider } from 'react-native-offline'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 import { Provider } from 'react-redux'
 import 'react-native-gesture-handler'
 import crashlytics from '@react-native-firebase/crashlytics'
@@ -35,6 +36,7 @@ class App extends Component {
                     <AppGlobalHooks />
                     <Splash />
                   </NavigationContainer>
+                  <Toast ref={(ref) => Toast.setRef(ref)} topOffset={50} />
                 </SafeAreaProvider>
               </ThemeProvider>
             </I18nextProvider>

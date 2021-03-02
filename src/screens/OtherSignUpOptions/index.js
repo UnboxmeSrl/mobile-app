@@ -14,7 +14,7 @@ export const OtherSingUpOptionsScreen = () => {
     navigate(MODAL_NAMES.SignUpEmail)
   }
   const navigateToPhoneModal = () => {
-    navigate(MODAL_NAMES.SignUpPhone)
+    navigate(MODAL_NAMES.AuthPhone)
   }
   const onSuccess = useCallback(() => {
     reset(MAIN_NAVIGATOR)

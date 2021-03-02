@@ -41,6 +41,7 @@ export const AppleLogin = ({ onSuccess, setLoading, loading }) => {
   return (
     <Button
       bgColor={COLORS.blackRaw}
+      leftIconName={'logo-apple'}
       loading={loading}
       onPress={handleAppleLogin}
       tKey={'signUp.signUpWith'}

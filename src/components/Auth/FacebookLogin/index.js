@@ -24,8 +24,8 @@ export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
 
       if (!data) {
         logger.error('Facebook Login - no data from getCurrentAccessToken')
-        return
         setLoading(false)
+        return
       }
 
       const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken)
@@ -97,6 +97,7 @@ export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
   return (
     <Button
       bgColor={COLORS.facebook}
+      leftIconName={'logo-facebook'}
       loading={loading}
       onPress={onPress}
       tKey={'signUp.signUpWith'}

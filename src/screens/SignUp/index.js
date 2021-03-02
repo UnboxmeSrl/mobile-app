@@ -1,10 +1,14 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 
+import { AppleLogin } from '@components/Auth/AppleLogin'
+import { GoogleLogin } from '@components/Auth/GoogleLogin'
+import { IS_IOS } from '@const/common'
 import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
 import { reset } from '@services'
 
 import { SignUpScreenPresenter } from './SignUpScreenPresenter'
+const MainButton = IS_IOS ? AppleLogin : GoogleLogin
 
 export const SignUpScreen = () => {
   const [loading, setLoading] = useState(false)
@@ -23,6 +27,7 @@ export const SignUpScreen = () => {
   }, [])
 
   const props = {
+    MainButton,
     loading,
     navigateToSignIn,
     navigateToSignUp,

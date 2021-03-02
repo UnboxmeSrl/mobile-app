@@ -6,6 +6,7 @@ export const STACK_NAMES = {
   BottomStack: 'BottomStack',
 }
 export const MODAL_NAMES = {
+  AuthPhone: 'AuthPhone',
   Login: 'Login',
   SignInEmail: 'SignInEmail',
   SignUpEmail: 'SignUpEmail',

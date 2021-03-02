@@ -10,5 +10,5 @@ export const OnboardingScreen = () => {
 
   const onPress = () => navigate(SCREEN_NAMES.SignUp)
 
-  return <OnboardingScreenPresenter onPress={onPress}/>
+  return <OnboardingScreenPresenter onPress={onPress} />
 }

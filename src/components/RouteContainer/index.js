@@ -23,6 +23,7 @@ export const RouteContainer = ({ tKey, children, withArrow, withPadding, style }
 
 const StyledComponent = styled(SafeAreaView)`
   flex: 1;
+  padding-bottom: 8px;
 `
 const Header = styled.View`
   align-items: center;
