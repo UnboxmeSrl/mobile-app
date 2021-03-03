@@ -21,3 +21,7 @@ export const PASSWORD_RULES = {
   minLength: { message: 'isTooShort', value: 6 },
   required: 'isRequired',
 }
+
+export const PHONE_RULES = {
+  required: 'isRequired',
+}

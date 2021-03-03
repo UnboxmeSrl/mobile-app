@@ -24,6 +24,10 @@ const H3Styled = styled(H2Styled)`
   font-size: 24px;
   line-height: 32px;
 `
+const ButtonStyled = styled(H3Styled)`
+  font-size: 18px;
+  line-height: 24px;
+`
 const SubtitleStyled = styled(H3Styled)`
   font-size: 16px;
   line-height: 24px;
@@ -83,6 +87,10 @@ export const TinyText = (props) => {
 }
 export const Text = (props) => {
   return <BaseText Component={RegularStyled} {...props} />
+}
+
+export const ButtonText = (props) => {
+  return <BaseText Component={ButtonStyled} {...props} />
 }
 
 export const SectionTitle = styled(H1)`

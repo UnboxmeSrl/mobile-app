@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import Toast from 'react-native-toast-message'
 import { useNavigation } from 'react-navigation-hooks'
 import { GoogleSignin } from '@react-native-community/google-signin'
 import auth from '@react-native-firebase/auth'
@@ -19,6 +20,10 @@ export const SettingsScreen = () => {
       await GoogleSignin.revokeAccess()
       await GoogleSignin.signOut()
       await persistor.purge()
+      Toast.show({
+        text1: 'Info',
+        text2: "You've been logged out",
+      })
       logger.info('Logout succeded')
     } catch (error) {
       logger.error('Logout error', { error })

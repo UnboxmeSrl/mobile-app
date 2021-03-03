@@ -1,5 +1,4 @@
 import React from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import styled from 'styled-components/native'
 
@@ -17,6 +16,7 @@ export const ModalContainer = ({ children, contentBased, tKey }) => (
       {tKey ? <Title tKey={tKey} /> : null}
       {children}
     </Content>
+    <Toast position={'top'} ref={(ref) => Toast.setRef(ref)} topOffset={4} />
   </Wrapper>
 )
 

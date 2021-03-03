@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import Toast from 'react-native-toast-message'
 
+import { MAIN_NAVIGATOR } from '@const/navigation'
+import { reset } from '@services'
 import { sendPhoneVerificationCode } from '@services/auth'
 
 import { AuthPhonePresenter } from './AuthPhonePresenter'
@@ -14,6 +17,7 @@ export const AuthPhoneModal = () => {
     async ({ phone }) => {
       setLoading(true)
       const confirmation = await sendPhoneVerificationCode(phone)
+
       setConfirm(confirmation)
       setLoading(false)
     },
@@ -22,9 +26,19 @@ export const AuthPhoneModal = () => {
 
   const verifyPhoneCode = useCallback(
     async ({ code }) => {
-      setLoading(true)
-      await confirm.confirm(code)
-      setLoading(false)
+      try {
+        setLoading(true)
+        await confirm.confirm(code)
+        setLoading(false)
+        reset(MAIN_NAVIGATOR)
+      } catch (error) {
+        Toast.show({
+          text1: 'Error',
+          text2: error?.message,
+          type: 'error',
+        })
+        setLoading(false)
+      }
     },
     [setLoading, confirm]
   )
@@ -32,7 +46,7 @@ export const AuthPhoneModal = () => {
   const onSubmit = confirm ? verifyPhoneCode : sendVerificationCode
 
   const onPress = handleSubmit(onSubmit)
-  const showCodeInput = confirm !== null
+  const showCodeInput = confirm && confirm.confirm
 
   const props = {
     confirm,

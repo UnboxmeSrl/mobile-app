@@ -4,7 +4,7 @@ import { propOr } from 'ramda'
 import styled from 'styled-components/native'
 
 import { BUTTON_HEIGHT } from '@components/Button/constants'
-import { Subtitle } from '@components/Text'
+import { ButtonText, Subtitle } from '@components/Text'
 import { COLORS } from '@const'
 
 export const Button = ({ children, tKey, tOptions, loading, leftIconName, ...rest }) => {
@@ -13,7 +13,11 @@ export const Button = ({ children, tKey, tOptions, loading, leftIconName, ...res
       {leftIconName ? (
         <LeftIcon color={COLORS.white} name={leftIconName} size={18} />
       ) : null}
-      {tKey ? <Text color={COLORS.white} tKey={tKey} tOptions={tOptions} /> : children}
+      {tKey ? (
+        <ButtonText color={COLORS.white} tKey={tKey} tOptions={tOptions} />
+      ) : (
+        children
+      )}
       {loading ? <Loader /> : null}
     </ThemedButton>
   )
@@ -24,7 +28,7 @@ const ThemedButton = styled.TouchableOpacity`
   background-color: ${propOr(COLORS.primary, 'bgColor')};
   border-radius: 16px;
   flex-direction: row;
-  height: ${BUTTON_HEIGHT}px;
+  height: 48px;
   justify-content: center;
   margin-bottom: 12px;
   opacity: ${({ loading }) => (loading ? 0.5 : 1)};
@@ -37,7 +41,4 @@ const Loader = styled.ActivityIndicator`
 const LeftIcon = styled(Ionicons)`
   left: 20px;
   position: absolute;
-`
-const Text = styled(Subtitle)`
-  font-size: 18px;
 `

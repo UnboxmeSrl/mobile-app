@@ -53,4 +53,6 @@ const Content = styled.ScrollView`
   padding-horizontal: 20px;
   padding-top: 20px;
 `
-const SubmitButton = styled(Button)``
+const SubmitButton = styled(Button)`
+  margin-top: 8px;
+`

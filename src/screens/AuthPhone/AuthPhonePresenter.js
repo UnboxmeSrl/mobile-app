@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { Input } from '@components/Input'
 import { ModalContainer } from '@components/ModalContainer'
+import { PHONE_RULES } from '@const/validators'
 
 export const AuthPhonePresenter = ({
   onPress,
@@ -22,19 +23,19 @@ export const AuthPhonePresenter = ({
         keyboardType="phone-pad"
         name="phone"
         placeholderKey="auth.enterPhone"
+        rules={PHONE_RULES}
         textContentType="telephoneNumber"
       />
-      {showCodeInput ? (
-        <Input
-          autoCompleteType="off"
-          control={control}
-          errors={errors}
-          keyboardType="number-pad"
-          name="code"
-          placeholderKey="auth.enterCode"
-          textContentType="oneTimeCode"
-        />
-      ) : null}
+      <Input
+        autoCompleteType="off"
+        control={control}
+        disabled={!showCodeInput}
+        errors={errors}
+        keyboardType="number-pad"
+        name="code"
+        placeholderKey="auth.enterCode"
+        textContentType="oneTimeCode"
+      />
       <SubmitButton loading={loading} onPress={onPress} tKey={'next'} />
     </Content>
   </ModalContainer>
@@ -47,5 +48,5 @@ const Content = styled.ScrollView`
 `
 const SubmitButton = styled(Button)`
   align-self: flex-end;
-  margin-top: 60px;
+  margin-top: 8px;
 `

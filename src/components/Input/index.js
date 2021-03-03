@@ -17,6 +17,7 @@ export const Input = ({
   placeholderKey,
   defaultValue = '',
   RightIcon,
+  disabled,
   ...rest
 }) => {
   const { t } = useTranslation()
@@ -26,7 +27,7 @@ export const Input = ({
   // const label = t(`labelsForFields.${name}`)
 
   return (
-    <InputWrapper>
+    <InputWrapper disabled={disabled}>
       {/* <Label>{label}</Label> */}
       <InputContent>
         <Controller
@@ -39,6 +40,7 @@ export const Input = ({
               onChangeText={onChange}
               value={value}
               {...rest}
+              editable={!disabled}
               numberOfLines={1}
               placeholder={placeholder}
               placeholderTextColor={COLORS.black03}
@@ -56,6 +58,7 @@ export const Input = ({
 const InputWrapper = styled.View`
   height: ${WRAPPER_HEIGHT}px;
   margin-bottom: 16px;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
 const InputContent = styled.View`
   align-items: center;

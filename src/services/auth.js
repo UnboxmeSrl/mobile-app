@@ -10,6 +10,11 @@ export const checkIfEmailIsAvailable = async (email) => {
     const providers = await auth().fetchSignInMethodsForEmail(email)
     return isEmpty(providers)
   } catch (error) {
+    Toast.show({
+      text1: 'Error',
+      text2: error?.message,
+      type: 'error',
+    })
     logger.error('checkIfEmailIsAvailable', { error })
   }
 }
@@ -20,6 +25,11 @@ export const registerEmailAccount = async (email, password) => {
     await res?.user?.sendEmailVerification()
     return res
   } catch (error) {
+    Toast.show({
+      text1: 'Error',
+      text2: error?.message,
+      type: 'error',
+    })
     logger.error('registerEmailAccount', { error })
   }
 }
@@ -43,7 +53,10 @@ export const signInWithEmail = async (email, password) => {
 export const sendPhoneVerificationCode = async (phone) => {
   try {
     const confirmation = await auth().signInWithPhoneNumber(phone)
-
+    Toast.show({
+      text1: 'Success',
+      text2: 'Verification code was sent',
+    })
     return confirmation
   } catch (error) {
     if (error.code === 'auth/invalid-verification-code') {
