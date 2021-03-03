@@ -25,3 +25,8 @@ export const PASSWORD_RULES = {
 export const PHONE_RULES = {
   required: 'isRequired',
 }
+export const CODE_RULES = {
+  maxLength: { message: 'isNotValid', value: 6 },
+  minLength: { message: 'isNotValid', value: 6 },
+  required: 'isRequired',
+}

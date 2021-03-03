@@ -20,6 +20,16 @@ or alternatively using `brew install fastlane`
 fastlane increment_build
 ```
 
+### getVersion
+```
+fastlane getVersion
+```
+
+### getBuildNumber
+```
+fastlane getBuildNumber
+```
+
 ### handle_changelog
 ```
 fastlane handle_changelog
@@ -34,23 +44,28 @@ fastlane release_all
 ----
 
 ## iOS
-### ios build_and_upload
+### iOS build_and_upload
 ```
-fastlane ios build_and_upload
+fastlane iOS build_and_upload
 ```
 Push a new beta build to TestFlight
+### iOS test
+```
+fastlane iOS test
+```
+
 
 ----
 
 ## Android
-### android build
+### Android build
 ```
-fastlane android build
+fastlane Android build
 ```
 
-### android build_and_upload
+### Android build_and_upload
 ```
-fastlane android build_and_upload
+fastlane Android build_and_upload
 ```
 
 

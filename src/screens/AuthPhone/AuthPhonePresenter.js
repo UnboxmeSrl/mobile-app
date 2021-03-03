@@ -4,6 +4,8 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { Input } from '@components/Input'
 import { ModalContainer } from '@components/ModalContainer'
+import { TextButton } from '@components/TextButton'
+import { COLORS } from '@const'
 import { PHONE_RULES } from '@const/validators'
 
 export const AuthPhonePresenter = ({
@@ -12,6 +14,11 @@ export const AuthPhonePresenter = ({
   errors,
   loading,
   showCodeInput,
+  tKey,
+  codeRules,
+  resendCode,
+  resendDisabled,
+  timer,
 }) => (
   <ModalContainer tKey={'auth.withPhone'}>
     <Content>
@@ -34,9 +41,20 @@ export const AuthPhonePresenter = ({
         keyboardType="number-pad"
         name="code"
         placeholderKey="auth.enterCode"
+        rules={codeRules}
         textContentType="oneTimeCode"
       />
-      <SubmitButton loading={loading} onPress={onPress} tKey={'next'} />
+      <SubmitButton loading={loading} onPress={onPress} tKey={tKey} />
+
+      {showCodeInput ? (
+        <ResendButton
+          color={COLORS.dark}
+          disabled={resendDisabled}
+          extraText={timer}
+          onPress={resendCode}
+          tKey={'auth.resendCode'}
+        />
+      ) : null}
     </Content>
   </ModalContainer>
 )
@@ -50,3 +68,4 @@ const SubmitButton = styled(Button)`
   align-self: flex-end;
   margin-top: 8px;
 `
+const ResendButton = styled(TextButton)``

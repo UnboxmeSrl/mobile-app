@@ -4,6 +4,9 @@ export default {
     auth: {
       enterCode: 'Enter verification code from SMS',
       enterPhone: 'Enter phone number eg. +48111222333',
+      resendCode: 'Resend verification code',
+      sendVerificationCode: 'Send verification message',
+      verifyCode: 'Verify code',
       withPhone: 'Continue with Phone number',
     },
     awards: {
@@ -14,6 +17,7 @@ export default {
     bySigning: 'By signing up, you agree to UnboxMe’s',
     errors: {
       alreadyRegistered: 'Email is already registered',
+      isNotValid: 'Value is not valid',
       isNotValidEmail: 'Email is not valid',
       isRequired: 'Field is required',
       isTooShort: 'Your password is too short',

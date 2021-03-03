@@ -11,7 +11,7 @@ const Wrapper = styled(Animated.View)`
   position: absolute
   background-color: white
 `
-const delay = __DEV__ ? 1000 : 4200
+const delay = 500
 
 export const Splash = () => {
   const windowWidth = useWindowDimensions().width

@@ -13,6 +13,7 @@ import { COLORS } from '@const'
 
 export const SignInPresenter = ({
   navigateToEmailModal,
+  navigateToPhoneModal,
   onSuccess,
   loading,
   setLoading,
@@ -31,7 +32,11 @@ export const SignInPresenter = ({
         onPress={navigateToEmailModal}
         tKey={'signIn.withEmail'}
       />
-      <Button loading={loading} tKey={'signIn.withPhone'} />
+      <Button
+        loading={loading}
+        onPress={navigateToPhoneModal}
+        tKey={'signIn.withPhone'}
+      />
     </Buttons>
     <PoliciesPart dark />
   </RouteContainer>

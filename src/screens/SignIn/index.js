@@ -14,7 +14,7 @@ export const SignInScreen = () => {
     navigate(MODAL_NAMES.SignInEmail)
   }
   const navigateToPhoneModal = () => {
-    navigate(MODAL_NAMES.SignUpPhone)
+    navigate(MODAL_NAMES.AuthPhone)
   }
   const onSuccess = useCallback(() => {
     reset(MAIN_NAVIGATOR)

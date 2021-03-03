@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Toast from 'react-native-toast-message'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
+import { CODE_RULES } from '@const/validators'
 import { reset } from '@services'
 import { sendPhoneVerificationCode } from '@services/auth'
 
@@ -11,7 +12,10 @@ import { AuthPhonePresenter } from './AuthPhonePresenter'
 export const AuthPhoneModal = () => {
   const [loading, setLoading] = useState(false)
   const [confirm, setConfirm] = useState(null)
-  const { control, handleSubmit, errors } = useForm()
+  const [timer, setTimer] = useState(60)
+
+  const { control, handleSubmit, errors, watch } = useForm()
+  const phone = watch('phone')
 
   const sendVerificationCode = useCallback(
     async ({ phone }) => {
@@ -43,19 +47,48 @@ export const AuthPhoneModal = () => {
     [setLoading, confirm]
   )
 
+  useEffect(() => {
+    if (confirm) {
+      setConfirm(null)
+    }
+  }, [phone])
+
+  const resendCode = useCallback(() => {
+    sendVerificationCode({ phone })
+  }, [phone, sendVerificationCode])
+
+  useEffect(() => {
+    let timer = null
+    if (confirm?.confirm) {
+      timer = setInterval(() => setTimer((timer) => Math.max(0, timer - 1)), 1000)
+    }
+    return () => {
+      if (timer) {
+        clearInterval(timer)
+      }
+    }
+  }, [confirm])
+
   const onSubmit = confirm ? verifyPhoneCode : sendVerificationCode
 
   const onPress = handleSubmit(onSubmit)
   const showCodeInput = confirm && confirm.confirm
-
+  const tKey = showCodeInput ? 'auth.verifyCode' : 'auth.sendVerificationCode'
+  const codeRules = showCodeInput ? CODE_RULES : {}
+  const resendDisabled = timer > 0
   const props = {
+    codeRules,
     confirm,
     control,
     errors,
     handleSubmit,
     loading,
     onPress,
+    resendCode,
+    resendDisabled,
     showCodeInput,
+    tKey,
+    timer,
   }
 
   return <AuthPhonePresenter {...props} />

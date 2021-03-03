@@ -4,13 +4,28 @@ lane :increment_build do
   sh("./increment_build.sh")
 end
 
-lane :handle_changelog do
+lane :getVersion do
   my_package_json = read_json(json_path: "./package.json")
-  version = my_package_json[:version]
+  my_package_json[:version]
+end
+
+lane :getBuildNumber do
+  my_package_json = read_json(json_path: "./package.json")
+  my_package_json[:buildNumber]
+end
+
+lane :handle_changelog do
+  version = getVersion()
   read_changelog(section_identifier: "[#{version}]")
 end
 
-platform :ios do
+lane :notify_slack do
+  version = getVersion()
+  buildNumber = getBuildNumber()
+  slack(message: "*Unboxme #{version} (#{buildNumber})* was distributed for #{lane_context[SharedValues::PLATFORM_NAME]}", default_payloads: [])
+end
+
+platform :iOS do
   desc "Push a new beta build to TestFlight"
   lane :build_and_upload do
     match(type: "development", app_identifier: ["com.unboxme.app", "com.unboxme.app.OneSignalNotificationServiceExtension"])
@@ -18,10 +33,11 @@ platform :ios do
     changelog_data = handle_changelog
     upload_to_testflight(skip_waiting_for_build_processing: true, changelog: changelog_data)
     firebase_app_distribution(app: ENV["FIREBASE_IOS_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data)
+    notify_slack
   end
 end
 
-platform :android do
+platform :Android do
   lane :build do
     gradle(
       project_dir: './android',
@@ -39,6 +55,7 @@ platform :android do
     changelog_data = handle_changelog
     upload_to_play_store(track: 'internal', skip_upload_apk: true, release_status: 'draft')
     firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data)
+    notify_slack
   end
 end
 
