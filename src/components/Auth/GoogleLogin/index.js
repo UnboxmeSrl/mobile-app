@@ -15,8 +15,8 @@ export const GoogleLogin = ({ onSuccess, setLoading, loading }) => {
       const { idToken } = await GoogleSignin.signIn()
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
       await auth().signInWithCredential(googleCredential)
-      onSuccess && onSuccess()
       setLoading(false)
+      onSuccess && onSuccess()
     } catch (error) {
       logger.error('Google Login', { error })
       setLoading(false)

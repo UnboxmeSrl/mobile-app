@@ -26,8 +26,9 @@ export const AppleLogin = ({ onSuccess, setLoading, loading }) => {
         await auth().signInWithCredential(appleCredential)
         setLoading(false)
         onSuccess && onSuccess()
+      } else {
+        setLoading(false)
       }
-      setLoading(false)
     } catch (error) {
       logger.error('handleAppleLogin', { error })
       setLoading(false)

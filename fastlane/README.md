@@ -35,6 +35,11 @@ fastlane getBuildNumber
 fastlane handle_changelog
 ```
 
+### notify_slack
+```
+fastlane notify_slack
+```
+
 ### release_all
 ```
 fastlane release_all
@@ -49,11 +54,6 @@ fastlane release_all
 fastlane iOS build_and_upload
 ```
 Push a new beta build to TestFlight
-### iOS test
-```
-fastlane iOS test
-```
-
 
 ----
 
