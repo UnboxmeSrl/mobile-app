@@ -10,7 +10,7 @@ import { reset } from '@services'
 
 export const useAuth = () => {
   const [initializing, setInitializing] = useState(true)
-  const { replace, curr } = useNavigation()
+  const { replace } = useNavigation()
   const dispatch = useDispatch()
 
   // Handle user state changes
