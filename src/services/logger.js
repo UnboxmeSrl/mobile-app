@@ -16,7 +16,11 @@ const handleLog = ({ message, data = {}, level }) => {
   const { error: errorObject } = data
   const user = firebase?.auth()?.currentUser?.toJSON()
   const error = errorObject
-    ? { errorMessage: errorObject?.message, trace: errorObject?.stack }
+    ? {
+        code: errorObject?.code,
+        errorMessage: errorObject?.message,
+        trace: errorObject?.stack,
+      }
     : undefined
 
   if (level === INFO) {
