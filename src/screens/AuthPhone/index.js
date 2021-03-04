@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Toast from 'react-native-toast-message'
+import { useSelector } from 'react-redux'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { CODE_RULES } from '@const/validators'
+import { selectUserUid } from '@redux/modules/auth'
 import { reset } from '@services'
 import { sendPhoneVerificationCode } from '@services/auth'
 
@@ -13,7 +15,7 @@ export const AuthPhoneModal = () => {
   const [loading, setLoading] = useState(false)
   const [confirm, setConfirm] = useState(null)
   const [timer, setTimer] = useState(60)
-
+  const userId = useSelector(selectUserUid)
   const { control, handleSubmit, errors, watch } = useForm()
   const phone = watch('phone')
 
@@ -46,6 +48,13 @@ export const AuthPhoneModal = () => {
     },
     [setLoading, confirm]
   )
+
+  // auto validation for android
+  useEffect(() => {
+    if (confirm?.confirm && userId) {
+      reset(MAIN_NAVIGATOR)
+    }
+  }, [confirm, userId])
 
   useEffect(() => {
     if (confirm) {
