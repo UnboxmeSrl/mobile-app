@@ -23,6 +23,12 @@ export default {
       isTooShort: 'Your password is too short',
       passwordsDontMatch: "Your passwords don't match",
     },
+    gender: {
+      female: 'Female',
+      male: 'Male',
+      nonBinary: 'Non-Binary',
+      preferNotToSay: 'Prefer not to say',
+    },
     homepage: 'Homepage',
     labelsForFields: {
       confirmPassword: 'Password',
@@ -33,9 +39,10 @@ export default {
       alreadyHaveAccount: 'Already have an account?',
       continueWith: 'Continue with {{name}}',
       otherOptions: 'Other sign up options',
+      skip: 'Skip',
     },
     logout: 'Logout',
-    next: 'next',
+    next: 'Next',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
     otherSignInOptions: {
@@ -43,6 +50,11 @@ export default {
     },
     otherSignUpOptions: {
       title: 'Other sign up options',
+    },
+    placeholders: {
+      name: 'Name',
+      nickname: 'Nickname',
+      surname: 'Surname',
     },
     privacyPolicy: 'Privacy Policy',
     settings: 'Settings',
@@ -71,5 +83,10 @@ export default {
     },
     submit: 'Submit',
     termsOfUse: 'Terms of Use',
+    wizard: {
+      genderStep: 'Gender',
+      nameStep:
+        'We use your data to personalize your experience and boxes. We never share it.',
+    },
   },
 }

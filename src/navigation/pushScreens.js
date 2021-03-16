@@ -2,6 +2,7 @@ import { OnboardingScreen } from '@screens/Onboarding'
 import { OtherSingUpOptionsScreen } from '@screens/OtherSignUpOptions'
 import { SignInScreen } from '@screens/SignIn'
 import { SignUpScreen } from '@screens/SignUp'
+import { WizardScreen } from '@screens/Wizard'
 
 import { SCREEN_NAMES } from '@const/navigation'
 
@@ -17,5 +18,8 @@ export default {
   },
   [SCREEN_NAMES.SignIn]: {
     screen: SignInScreen,
+  },
+  [SCREEN_NAMES.Wizard]: {
+    screen: WizardScreen,
   },
 }

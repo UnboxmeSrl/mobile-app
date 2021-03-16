@@ -39,6 +39,7 @@ export const SignUpScreenPresenter = ({
           tKey={'login.alreadyHaveAccount'}
         />
       </Buttons>
+      <Button loadingloading={loading} onPress={onSuccess} tKey={'login.skip'} />
       <PoliciesPart />
     </ContentStyled>
   </Background>

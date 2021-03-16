@@ -30,3 +30,7 @@ export const CODE_RULES = {
   minLength: { message: 'isNotValid', value: 6 },
   required: 'isRequired',
 }
+
+export const REQUIRED_RULE = {
+  required: 'isRequired',
+}

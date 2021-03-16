@@ -25,6 +25,7 @@
     "@react-native-firebase/app": "^10.8.1",
     "@react-native-firebase/auth": "^10.6.4",
     "@react-native-firebase/crashlytics": "^10.6.4",
+    "@react-native-firebase/firestore": "^11.1.0",
     "@react-native-firebase/functions": "^10.8.1",
     "@react-native-firebase/in-app-messaging": "^10.6.4",
     "@react-native-firebase/messaging": "^10.8.1",

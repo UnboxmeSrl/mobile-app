@@ -21,6 +21,7 @@ export const SCREEN_NAMES = {
   Settings: 'Settings',
   SignIn: 'SignIn',
   SignUp: 'SignUp',
+  Wizard: 'Wizard',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {
