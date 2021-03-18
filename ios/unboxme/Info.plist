@@ -86,13 +86,9 @@
 	<array>
 		<string>Ionicons.ttf</string>
 		<string>AbrilFatface-Regular.ttf</string>
-		<string>JosefinSans-Light.ttf</string>
-		<string>JosefinSans-Regular.ttf</string>
-		<string>JosefinSans-SemiBold.ttf</string>
-		<string>Montserrat-Bold.ttf</string>
-		<string>Montserrat-Light.ttf</string>
-		<string>Montserrat-Regular.ttf</string>
-		<string>Montserrat-SemiBold.ttf</string>
+		<string>FuturaNewDemi-Reg.ttf</string>
+		<string>FuturaNewLight-Reg.ttf</string>
+		<string>FuturaNewMedium-Reg.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

@@ -10,7 +10,12 @@ import { FREELANCE_TYPES } from '@const/agency'
 import { REQUIRED_RULE } from '@const/validators'
 import { _agencyName, _city, _isAgency } from '@redux/modules/auth'
 
-export const WizardStepAgencyPresenter = ({ control, errors, onPress }) => {
+export const WizardStepAgencyPresenter = ({
+  control,
+  errors,
+  onPress,
+  isAgencyValue,
+}) => {
   return (
     <StepContent>
       <Controller
@@ -26,14 +31,16 @@ export const WizardStepAgencyPresenter = ({ control, errors, onPress }) => {
           />
         )}
       />
-      <Input
-        autoFocus
-        control={control}
-        errors={errors}
-        name={_agencyName}
-        placeholderKey="placeholders.agency"
-        rules={REQUIRED_RULE}
-      />
+      {isAgencyValue ? (
+        <Input
+          autoFocus
+          control={control}
+          errors={errors}
+          name={_agencyName}
+          placeholderKey="placeholders.agency"
+          rules={REQUIRED_RULE}
+        />
+      ) : null}
       <Button onPress={onPress} tKey={'next'} />
     </StepContent>
   )

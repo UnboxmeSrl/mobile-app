@@ -38,5 +38,5 @@ const ProgressLine = styled.View`
 `
 const Text = styled(Caption)`
   text-align: right;
-  width: 24px;
+  width: 30px;
 `

@@ -16,7 +16,8 @@ import { WizardStepAgencyPresenter } from './WizardStepAgencyPresenter'
 export const WizardStepAgency = ({ navigateToNextStep }) => {
   const isAgency = useSelector(selectIsAgency)
   const agencyName = useSelector(selectAgencyName)
-  const { control, handleSubmit, errors, reset } = useForm()
+  const { control, handleSubmit, errors, reset, watch } = useForm()
+  const isAgencyValue = watch(_isAgency)
 
   const onSubmit = async (values) => {
     await updateMe({ payload: values, upsert: true })
@@ -31,6 +32,7 @@ export const WizardStepAgency = ({ navigateToNextStep }) => {
   const props = {
     control,
     errors,
+    isAgencyValue,
     onPress,
   }
   return <WizardStepAgencyPresenter {...props} />

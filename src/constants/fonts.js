@@ -1,7 +1,7 @@
 export const FONTS = {
   abrilFatface: 'AbrilFatface-Regular.ttf',
-  light: 'JosefinSans-Light',
-  regular: 'JosefinSans-Regular',
-  semiBold: 'JosefinSans-SemiBold',
+  demi: 'FuturaNewDemi-Reg',
+  light: 'FuturaNewLight-Reg',
+  medium: 'FuturaNewMedium-Reg',
   system: 'System',
 }

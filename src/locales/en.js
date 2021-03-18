@@ -15,6 +15,8 @@ export default {
       weeklyInMilan: 'Weekly in Milan',
     },
     bySigning: 'By signing up, you agree to UnboxMe’s',
+    connectInstagram: 'Connect your instagram account',
+    connectTikTok: 'Connect your Tik Tok account',
     errors: {
       alreadyRegistered: 'Email is already registered',
       isNotValid: 'Value is not valid',
@@ -91,6 +93,7 @@ export default {
     wizard: {
       agency: 'Your agency',
       city: 'Your city',
+      connect: 'Connect your\n' + 'social networks',
       dateOfBirth: 'Date of birth',
       genderStep: 'Gender',
       nameStep:

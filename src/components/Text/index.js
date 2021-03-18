@@ -16,7 +16,7 @@ const H1Styled = styled(ThemedText)`
   line-height: 56px;
 `
 const H2Styled = styled(ThemedText)`
-  font-family: ${FONTS.semiBold};
+  font-family: ${FONTS.demi};
   font-size: 32px;
   line-height: 40px;
 `
@@ -24,17 +24,27 @@ const H3Styled = styled(H2Styled)`
   font-size: 24px;
   line-height: 32px;
 `
-const ButtonStyled = styled(H3Styled)`
+const ButtonStyled = styled(ThemedText)`
+  font-family: ${FONTS.medium};
   font-size: 18px;
   line-height: 24px;
 `
-const SubtitleStyled = styled(H3Styled)`
+const SubtitleStyled = styled(ButtonStyled)`
   font-size: 16px;
   line-height: 24px;
 `
-const CaptionStyled = styled(H2Styled)`
+const CaptionStyled = styled(ButtonStyled)`
   font-size: 14px;
   line-height: 20px;
+`
+const BigLightStyled = styled(ThemedText)`
+  font-family: ${FONTS.light};
+  font-size: 18px;
+  line-height: 36px;
+`
+const ButtonLightStyled = styled(BigLightStyled)`
+  font-size: 18px;
+  line-height: 24px;
 `
 const BodyStyled = styled(ThemedText)`
   font-family: ${FONTS.light};
@@ -48,7 +58,7 @@ const RegularStyled = styled(ThemedText)`
   font-family: ${FONTS.light};
 `
 const TinyStyled = styled(CaptionStyled)`
-  font-family: ${FONTS.regular};
+  font-family: ${FONTS.medium};
   font-size: 12px;
   line-height: 16px;
 `
