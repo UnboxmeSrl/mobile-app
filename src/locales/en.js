@@ -30,6 +30,8 @@ export default {
       preferNotToSay: 'Prefer not to say',
     },
     homepage: 'Homepage',
+    iWorkAgency: 'I work with Agency',
+    imFreelancer: 'I am as freelancer',
     labelsForFields: {
       confirmPassword: 'Password',
       email: 'Email',
@@ -52,6 +54,9 @@ export default {
       title: 'Other sign up options',
     },
     placeholders: {
+      agency: 'Your agency',
+      city: 'Your city',
+      dateOfBirth: 'Date of birth',
       name: 'Name',
       nickname: 'Nickname',
       surname: 'Surname',
@@ -84,6 +89,9 @@ export default {
     submit: 'Submit',
     termsOfUse: 'Terms of Use',
     wizard: {
+      agency: 'Your agency',
+      city: 'Your city',
+      dateOfBirth: 'Date of birth',
       genderStep: 'Gender',
       nameStep:
         'We use your data to personalize your experience and boxes. We never share it.',

@@ -33,13 +33,16 @@ export const useAuth = () => {
         const data = documentSnapshot.data()
         dispatch(updateUser(data))
       })
-
     firestore()
       .collection('users')
       .doc(userId)
       .get()
       .then((user) => {
-        updateUser(user.data())
+        const data = user.data()
+        dispatch(updateUser(data))
+      })
+      .catch((e) => {
+        console.log(e)
       })
 
     // Stop listening for updates when no longer required
