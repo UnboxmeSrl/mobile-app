@@ -5,13 +5,14 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { format } from 'date-fns'
 import styled from 'styled-components/native'
 
+import InputDateAndroid from '@components/InputDate/index'
 import { TinyText } from '@components/Text'
 import { COLORS, FONTS } from '@const'
 
 const WRAPPER_HEIGHT = 54
 const INPUT_HEIGHT = 44
 
-export const InputDate = ({
+const InputDateiOS = ({
   control,
   name,
   errors,
@@ -67,6 +68,8 @@ export const InputDate = ({
     </>
   )
 }
+
+export default InputDateiOS
 
 const InputWrapper = styled.View`
   height: ${WRAPPER_HEIGHT}px;
