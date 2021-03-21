@@ -16,7 +16,7 @@ module.exports = {
           '@redux': './src/redux',
           '@screens': './src/screens',
           '@services': './src/services',
-          'src': './src',
+          src: './src',
         },
         root: ['.'],
       },

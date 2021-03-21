@@ -1,20 +1,18 @@
 import { Alert } from 'react-native'
-import Toast from 'react-native-toast-message'
 import auth from '@react-native-firebase/auth'
 import { isEmpty } from 'ramda'
 
+import i18n from '@services/i18n'
+
 import { logger } from './logger'
+import { showToastError, showToastSuccess } from './toast'
 
 export const checkIfEmailIsAvailable = async (email) => {
   try {
     const providers = await auth().fetchSignInMethodsForEmail(email)
     return isEmpty(providers)
   } catch (error) {
-    Toast.show({
-      text1: 'Error',
-      text2: error?.message,
-      type: 'error',
-    })
+    showToastError(error?.message)
     logger.error('checkIfEmailIsAvailable', { error })
   }
 }
@@ -25,11 +23,7 @@ export const registerEmailAccount = async (email, password) => {
     await res?.user?.sendEmailVerification()
     return res
   } catch (error) {
-    Toast.show({
-      text1: 'Error',
-      text2: error?.message,
-      type: 'error',
-    })
+    showToastError(error?.message)
     logger.error('registerEmailAccount', { error })
   }
 }
@@ -37,14 +31,15 @@ export const registerEmailAccount = async (email, password) => {
 export const signInWithEmail = async (email, password) => {
   try {
     const user = await auth().signInWithEmailAndPassword(email, password)
-
     return user
   } catch (error) {
     Alert.alert(
-      'Whooops',
-      'The email and password combination is not correct. Please try again.',
-      [{ onPress: () => console.log('OK Pressed'), text: 'OK' }],
-      { cancelable: false }
+      i18n.t('auth.whoops'),
+      i18n.t('auth.wrongCombination'),
+      [{ text: 'OK' }],
+      {
+        cancelable: false,
+      }
     )
     logger.error('signInWithEmail', { error })
   }
@@ -53,24 +48,13 @@ export const signInWithEmail = async (email, password) => {
 export const sendPhoneVerificationCode = async (phone) => {
   try {
     const confirmation = await auth().signInWithPhoneNumber(phone)
-    Toast.show({
-      text1: 'Success',
-      text2: 'Verification code was sent',
-    })
+    showToastSuccess(i18n.t('auth.codeSent'))
     return confirmation
   } catch (error) {
     if (error.code === 'auth/invalid-verification-code') {
-      Toast.show({
-        text1: 'Error',
-        text2: 'Verification code is invalid or expired.',
-        type: 'error',
-      })
+      showToastError(i18n.t('auth.wrongCode'))
     } else {
-      Toast.show({
-        text1: 'Error',
-        text2: error?.message,
-        type: 'error',
-      })
+      showToastError(error?.message)
     }
     logger.error('sendPhoneVerificationCode', { error })
   }

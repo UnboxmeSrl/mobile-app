@@ -1,26 +1,28 @@
-import { identical,includes, not, path, pathOr } from 'ramda'
+import { identical, includes, map, not, path, pathOr, pipe } from 'ramda'
 import { store } from 'src/redux/store'
-import { createTruthMapUsingArrayOfKeys } from 'src/services/map'
+
 import { STACK_NAMES } from '@const/navigation'
+
+const createTruthMapUsingArrayOfKeys = pipe(
+  map((item) => [item, true]),
+  (entries) => new Map(entries)
+)
 
 const navigationActions = createTruthMapUsingArrayOfKeys([
   'Navigation/NAVIGATE',
   'Navigation/PUSH',
   'Navigation/REPLACE',
   'Navigation/JUMP_TO',
-  'Navigation/RESET'
+  'Navigation/RESET',
 ])
 
 export const STACK_SUFFIX = '-stack'
 
-export const routesWithNoAuthRequired = createTruthMapUsingArrayOfKeys([
-])
+export const routesWithNoAuthRequired = createTruthMapUsingArrayOfKeys([])
 
-export const routesWhenNotLoggedIn = [
-]
+export const routesWhenNotLoggedIn = []
 
-const registerContextByRoute = {
-}
+const registerContextByRoute = {}
 
 const getRouteName = (action) => {
   const routeName = pathOr(action.routeName, ['action', 'routeName'], action)
@@ -32,11 +34,7 @@ const getRouteName = (action) => {
   return routeName
 }
 
-const getStateForUnauthorizedAction = (
-  action,
-  navState,
-  defaultGetStateForAction
-) => {
+const getStateForUnauthorizedAction = (action, navState, defaultGetStateForAction) => {
   const routeName = getRouteName(action)
 
   // return defaultGetStateForAction(

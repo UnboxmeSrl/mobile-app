@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth'
 
 import { Button } from '@components/Button'
 import { COLORS } from '@const'
-import { logger } from '@services'
+import { logger, showToastError } from '@services'
 
 export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
   const onPress = useCallback(async () => {
@@ -38,7 +38,7 @@ export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
       logger.error('FacebookError', { error })
       if (error?.code === 'auth/account-exists-with-different-credential') {
         // TODO
-
+        showToastError('12321321')
         Alert.alert(
           'Whooops',
           'Your email is already associated with another social provider. Please try to login with Google/Apple',
@@ -92,7 +92,7 @@ export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
       //   new GraphRequestManager().addRequest(infoRequest).start()
       // }
     }
-  }, [onSuccess, setLoading])
+  }, [onSuccess, setLoading, showToastError])
 
   return (
     <Button

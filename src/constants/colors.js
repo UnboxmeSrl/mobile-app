@@ -10,6 +10,7 @@ export const COLORS = {
   lightGrey: '#E9E8EA',
   links: '#000699',
   primary: '#E9C0B1',
+  primaryDark: '#BF9281',
   secondary: '#EED5CC',
   success: '#01774D',
   tertiary: '#F7EFEC',

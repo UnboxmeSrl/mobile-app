@@ -24,12 +24,18 @@ export const Policies = ({ style, dark }) => {
   return (
     <View style={style}>
       <Row>
-        <Text color={color} tKey={'bySigning'} />
+        <Text color={color} tKey={'auth.bySigning'} />
       </Row>
       <Row>
-        <TextButton color={color} onPress={navigateToTerms} tKey={'termsOfUse'} />
+        <Button
+          color={color}
+          fontSize={14}
+          onPress={navigateToTerms}
+          small
+          tKey={'termsOfUse'}
+        />
         <Text color={color} tKey={'and'} />
-        <TextButton color={color} onPress={navigateToPrivacy} tKey={'privacyPolicy'} />
+        <Button color={color} onPress={navigateToPrivacy} tKey={'privacyPolicy'} />
       </Row>
     </View>
   )
@@ -42,3 +48,9 @@ const Row = styled.View`
   flex-direction: row;
 `
 const Text = styled(SmallText)``
+const Button = styled(TextButton).attrs({
+  textStyle: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
+})``

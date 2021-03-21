@@ -4,9 +4,20 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { RouteContainer } from '@components/RouteContainer'
 
-export const SettingsScreenPresenter = ({ onPress, isLogged }) => (
+export const SettingsScreenPresenter = ({
+  onPress,
+  isAuthenticated,
+  navigateToOnboarding,
+  navigateToLogin,
+}) => (
   <Container tKey={'settings'} withPadding>
-    {isLogged ? <Button onPress={onPress} tKey={'logout'} /> : null}
+    <Button onPress={navigateToOnboarding} tKey={'onboardingTitle'} />
+
+    {isAuthenticated ? (
+      <Button onPress={onPress} tKey={'logout'} />
+    ) : (
+      <Button onPress={navigateToLogin} tKey={'loginTitle'} />
+    )}
   </Container>
 )
 

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { CODE_RULES } from '@const/validators'
-import { selectUserUid } from '@redux/modules/auth'
+import { selectUid } from '@redux/modules/auth'
 import { reset } from '@services'
 import { sendPhoneVerificationCode } from '@services/auth'
 
@@ -15,7 +15,7 @@ export const AuthPhoneModal = () => {
   const [loading, setLoading] = useState(false)
   const [confirm, setConfirm] = useState(null)
   const [timer, setTimer] = useState(60)
-  const userId = useSelector(selectUserUid)
+  const userId = useSelector(selectUid)
   const { control, handleSubmit, errors, watch } = useForm()
   const phone = watch('phone')
 
@@ -23,7 +23,7 @@ export const AuthPhoneModal = () => {
     async ({ phone }) => {
       setLoading(true)
       const confirmation = await sendPhoneVerificationCode(phone)
-
+      console.log({ confirmation: confirmation.confirm })
       setConfirm(confirmation)
       setLoading(false)
     },
@@ -56,12 +56,6 @@ export const AuthPhoneModal = () => {
     }
   }, [confirm, userId])
 
-  useEffect(() => {
-    if (confirm) {
-      setConfirm(null)
-    }
-  }, [phone])
-
   const resendCode = useCallback(() => {
     sendVerificationCode({ phone })
   }, [phone, sendVerificationCode])
@@ -79,7 +73,7 @@ export const AuthPhoneModal = () => {
   }, [confirm])
 
   const onSubmit = confirm ? verifyPhoneCode : sendVerificationCode
-
+  console.log(confirm)
   const onPress = handleSubmit(onSubmit)
   const showCodeInput = confirm && confirm.confirm
   const tKey = showCodeInput ? 'auth.verifyCode' : 'auth.sendVerificationCode'

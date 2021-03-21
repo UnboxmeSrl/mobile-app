@@ -1,26 +1,31 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { WizardStepNamePresenter } from '@components/WizardStepName/WizardStepNamePresenter'
-import { selectName, selectUsername } from '@redux/modules/auth'
-
-import { updateMe } from '../../firestore/updateMe'
+import {
+  _fullName,
+  _username,
+  selectFullName,
+  selectUsername,
+  updateMe,
+} from '@redux/modules/auth'
 
 export const WizardStepName = ({ navigateToNextStep }) => {
-  const name = useSelector(selectName)
+  const fullName = useSelector(selectFullName)
   const username = useSelector(selectUsername)
   const { control, handleSubmit, errors, reset } = useForm()
+  const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    await updateMe({ payload: values, upsert: true })
+    dispatch(updateMe(values))
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)
 
   useEffect(() => {
-    reset({ name, username })
-  }, [name, username])
+    reset({ [_fullName]: fullName, [_username]: username })
+  }, [fullName, reset, username])
 
   const props = {
     control,

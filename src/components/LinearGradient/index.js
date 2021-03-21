@@ -33,7 +33,8 @@ const LinearGradient = ({
     pointerEvents={pointerEvents}
     start={start}
     stop={stop}
-    style={style}>
+    style={style}
+  >
     {children}
   </Gradient>
 )

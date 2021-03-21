@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { selectGender, selectName } from '@redux/modules/auth'
-
-import { updateMe } from '../../firestore/updateMe'
+import { selectGender, updateMe } from '@redux/modules/auth'
 
 import { WizardStepGenderPresenter } from './WizardStepGenderPresenter'
 
 export const WizardStepGender = ({ navigateToNextStep }) => {
   const { control, handleSubmit, errors, watch, register } = useForm()
   const defaultValue = useSelector(selectGender)
+  const dispatch = useDispatch()
+
   const onSubmit = async (payload) => {
-    updateMe({ payload })
+    dispatch(updateMe(payload))
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)
@@ -20,7 +20,7 @@ export const WizardStepGender = ({ navigateToNextStep }) => {
 
   useEffect(() => {
     register({ gender: defaultValue })
-  }, [defaultValue])
+  }, [defaultValue, register])
 
   const props = {
     control,

@@ -4,12 +4,8 @@ import { ThemeContext } from 'styled-components/native'
 
 const _DARK_THEME = 'darkTheme'
 
-export const useDarkTheme = () =>
-  prop(_DARK_THEME, useContext(ThemeContext))
+export const useDarkTheme = () => prop(_DARK_THEME, useContext(ThemeContext))
 
-export const useTheme = (
-  lightTheme,
-  darkTheme,
-) => {
+export const useTheme = (lightTheme, darkTheme) => {
   return useDarkTheme() ? darkTheme : lightTheme
 }

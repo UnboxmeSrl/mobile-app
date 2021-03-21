@@ -1,20 +1,27 @@
 export default {
   translation: {
+    Error: 'Error',
+    Success: 'Success',
     and: ' and ',
     auth: {
+      bySigning: 'By signing up, you agree to UnboxMe’s',
+      codeSent: 'Verification code was sent',
       enterCode: 'Enter verification code from SMS',
       enterPhone: 'Enter phone number eg. +48111222333',
       resendCode: 'Resend verification code',
       sendVerificationCode: 'Send verification message',
       verifyCode: 'Verify code',
+      whoops: 'Whooops',
       withPhone: 'Continue with Phone number',
+      wrongCode: 'Verification code is invalid or expired',
+      wrongCombination:
+        'The email and password combination is not correct. Please try again.',
     },
     awards: {
       specialAwards: 'Special Awards',
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
     },
-    bySigning: 'By signing up, you agree to UnboxMe’s',
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
     errors: {
@@ -31,6 +38,9 @@ export default {
       nonBinary: 'Non-Binary',
       preferNotToSay: 'Prefer not to say',
     },
+    home: {
+      boxesAvailable: 'boxes available this month',
+    },
     homepage: 'Homepage',
     iWorkAgency: 'I work with Agency',
     imFreelancer: 'I am as freelancer',
@@ -45,10 +55,12 @@ export default {
       otherOptions: 'Other sign up options',
       skip: 'Skip',
     },
+    loginTitle: 'Login',
     logout: 'Logout',
     next: 'Next',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
+    onboardingTitle: 'Onboarding',
     otherSignInOptions: {
       title: 'Other sign in options',
     },

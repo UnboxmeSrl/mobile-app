@@ -1,9 +1,13 @@
 import React, { createRef, useEffect, useRef, useState } from 'react'
 import { Animated, useWindowDimensions } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
-import LottieView from 'lottie-react-native'
+import { useSelector } from 'react-redux'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
+
+import { SCREEN_NAMES } from '@const/navigation'
+import { selectIsAuthenticated, selectIsAuthInitialized } from '@redux/modules/auth'
+import { navigate } from '@services'
 
 const Wrapper = styled(Animated.View)`
   width: ${prop('width')}px
@@ -20,16 +24,23 @@ export const Splash = () => {
   const [show, setShow] = useState(true)
   const fadeAnim = useRef(new Animated.Value(1)).current
   const ref = createRef()
+  const authInitialized = useSelector(selectIsAuthInitialized)
+  const isAuthenticated = useSelector(selectIsAuthenticated)
 
   useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide()
-      ref?.current?.play(0, 120)
+    if (show && authInitialized) {
+      if (!isAuthenticated) {
+        navigate(SCREEN_NAMES.Onboarding)
+      }
       setTimeout(() => {
-        setFadeOut(true)
-      }, delay)
-    }, 0)
-  }, [])
+        SplashScreen.hide()
+        ref?.current?.play(0, 120)
+        setTimeout(() => {
+          setFadeOut(true)
+        }, delay)
+      }, 0)
+    }
+  }, [ref, authInitialized, isAuthenticated, show])
 
   useEffect(() => {
     if (fadeOut) {

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import { Controller } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/native'
 
+import { FormContext } from '@components/Form/context'
 import { TinyText } from '@components/Text'
 import { COLORS, FONTS } from '@const'
 
@@ -20,10 +21,21 @@ export const Input = ({
   disabled,
   ...rest
 }) => {
+  const { getReturnKeyType, handleSubmitEditing } = useContext(FormContext)
   const { t } = useTranslation()
   const placeholder = t(placeholderKey, '')
   const errorKey = errors[name]?.message
   const errorMessage = t(`errors.${errorKey}`)
+
+  const { returnKeyType } = useMemo(
+    () => ({
+      returnKeyType: getReturnKeyType && getReturnKeyType(name),
+    }),
+    [getReturnKeyType, name]
+  )
+  const onFieldSubmit = useCallback(() => {
+    handleSubmitEditing(name)
+  }, [handleSubmitEditing, name])
   // const label = t(`labelsForFields.${name}`)
 
   return (
@@ -34,16 +46,19 @@ export const Input = ({
           control={control}
           defaultValue={defaultValue}
           name={name}
-          render={({ onChange, onBlur, value }) => (
+          render={({ onChange, onBlur, value, ref }) => (
             <TextInput
               onBlur={onBlur}
               onChangeText={onChange}
+              ref={ref}
               value={value}
               {...rest}
               editable={!disabled}
               numberOfLines={1}
+              onSubmitEditing={onFieldSubmit}
               placeholder={placeholder}
               placeholderTextColor={COLORS.black03}
+              returnKeyType={returnKeyType}
             />
           )}
           rules={rules}

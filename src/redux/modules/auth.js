@@ -1,45 +1,58 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
-import { prop } from 'ramda'
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
+import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
+import { prop, propOr } from 'ramda'
 
-const NAMESPACE = 'auth'
+import { USERS_COLLECTION } from '@const/firebase'
+import { createReduxModule } from '@redux/createModule'
 
-const _uid = 'uid'
-const _name = 'name'
-const _gender = 'gender'
-const _username = 'username'
+export const AUTH_NAMESPACE = 'auth'
+
+export const _initialized = 'initialized'
+export const _uid = 'uid'
+export const _fullName = 'fullName'
+export const _gender = 'gender'
+export const _username = 'username'
 export const _city = 'city'
-export const _dateOfBirth = 'dateOfBirth'
-export const _isAgency = 'isAgency'
+export const _dobTs = 'dobTs'
+export const _hasAgency = 'hasAgency'
 export const _agencyName = 'agencyName'
 
-const initialState = {}
+const initialState = {
+  [_initialized]: false,
+}
 
-export const authSlice = createSlice({
-  initialState,
-  name: NAMESPACE,
-  reducers: {
-    resetAuth: () => initialState,
-    setUser: (state, { payload }) => payload,
-    updateUser: (state, { payload }) => {
-      const data = {
-        ...state,
-        ...payload,
-      }
-      return data
-    },
-  },
-})
+const ref = firestore().collection(USERS_COLLECTION)
 
-export const { setUser, resetAuth, updateUser } = authSlice.actions
-export default authSlice.reducer
+export const updateMe = createAsyncThunk(
+  `${AUTH_NAMESPACE}/updateMe`,
+  async (payload) => {
+    const user = auth().currentUser
+    const uid = user?.uid
+    const doc = await ref.doc(uid).get()
 
-export const selectState = prop(NAMESPACE)
-export const selectUserUid = createSelector(selectState, prop(_uid))
-export const selectIsUserLogged = createSelector(selectUserUid, Boolean)
-export const selectName = createSelector(selectState, prop(_name))
+    if (doc.exists) {
+      return await ref.doc(uid).update({ ...payload, uid })
+    } else {
+      return await ref.doc(uid).set({ uid, ...payload })
+    }
+  }
+)
+
+const {
+  slice,
+  selectors: { selectState },
+} = createReduxModule({ initialState, name: AUTH_NAMESPACE })
+
+export const selectUid = createSelector(selectState, prop(_uid))
+export const selectIsAuthenticated = createSelector(selectUid, Boolean)
+export const selectFullName = createSelector(selectState, prop(_fullName))
 export const selectGender = createSelector(selectState, prop(_gender))
 export const selectUsername = createSelector(selectState, prop(_username))
-export const selectDateOfBirth = createSelector(selectState, prop(_dateOfBirth))
+export const selectDobTs = createSelector(selectState, propOr(+new Date(), _dobTs))
 export const selectCity = createSelector(selectState, prop(_city))
-export const selectIsAgency = createSelector(selectState, prop(_isAgency))
+export const selectHasAgency = createSelector(selectState, prop(_hasAgency))
 export const selectAgencyName = createSelector(selectState, prop(_agencyName))
+export const selectIsAuthInitialized = createSelector(selectState, prop(_initialized))
+
+export default slice

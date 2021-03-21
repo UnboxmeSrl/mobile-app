@@ -6,6 +6,7 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { Input } from '@components/Input'
 import { Select } from '@components/Select'
+import { StepContent } from '@components/WizardStep'
 import { COLORS, GENDER_OPTIONS } from '@const'
 import { PHONE_RULES, REQUIRED_RULE } from '@const/validators'
 
@@ -30,5 +31,3 @@ export const WizardStepGenderPresenter = ({
     </StepContent>
   )
 }
-
-const StepContent = styled.View``

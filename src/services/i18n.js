@@ -15,4 +15,6 @@ i18n.use(initReactI18next).init({
   resources: TRANSLATIONS,
 })
 
+export const t = i18n.t
+
 export default i18n

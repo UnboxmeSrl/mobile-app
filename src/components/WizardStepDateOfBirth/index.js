@@ -1,32 +1,30 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
-import { format, parseISO } from 'date-fns'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { _dateOfBirth, selectDateOfBirth } from '@redux/modules/auth'
-
-import { updateMe } from '../../firestore/updateMe'
+import { _dobTs, selectDobTs, updateMe } from '@redux/modules/auth'
 
 import { WizardStepDateOfBirthPresenter } from './WizardStepDateOfBirthPresenter'
 
 export const WizardStepDateOfBirth = ({ navigateToNextStep }) => {
-  const dateOfBirth = useSelector(selectDateOfBirth)
-  const date = dateOfBirth ? new Date(dateOfBirth) : new Date()
+  const dateOfBirth = useSelector(selectDobTs)
+
   const { control, handleSubmit, errors, reset } = useForm({
-    defaultValues: { [_dateOfBirth]: date },
+    defaultValues: { [_dobTs]: dateOfBirth },
   })
+  const dispatch = useDispatch()
+
   const onSubmit = async (values) => {
-    const timestamp = +values[_dateOfBirth]
-    await updateMe({
-      payload: { [_dateOfBirth]: timestamp },
-      upsert: true,
-    })
+    console.log(values)
+    const timestamp = +values[_dobTs]
+    dispatch(updateMe({ [_dobTs]: timestamp }))
+
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)
 
   useEffect(() => {
-    reset({ dateOfBirth: date })
+    reset({ [_dobTs]: dateOfBirth })
   }, [reset, dateOfBirth])
 
   const props = {

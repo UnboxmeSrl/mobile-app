@@ -5,7 +5,7 @@ import {
   HeaderStyleInterpolators,
   TransitionSpecs,
 } from 'react-navigation-stack'
-import { always, and, cond, identical, pipe, T } from 'ramda'
+import { always, cond, T } from 'ramda'
 import styled from 'styled-components/native'
 
 import { COLORS } from '@const'

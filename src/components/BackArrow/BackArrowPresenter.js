@@ -8,7 +8,7 @@ const BUTTON_SIZE = 48
 
 export const BackArrowPresenter = ({ onPress, style }) => (
   <Button onPress={onPress} style={style}>
-    <Ionicons color={COLORS.black} name={'arrow-back-outline'} size={BUTTON_SIZE/2} />
+    <Ionicons color={COLORS.black} name={'arrow-back-outline'} size={BUTTON_SIZE / 2} />
   </Button>
 )
 

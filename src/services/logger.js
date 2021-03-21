@@ -3,6 +3,8 @@ import firebase from '@react-native-firebase/app'
 import functions from '@react-native-firebase/functions'
 import { v1 } from 'uuid'
 
+import { appBuildNumber, appVersion, deviceId } from '@const/device'
+
 const FUNCTION_NAME = 'logger'
 const ERROR = 'error'
 const INFO = 'info'
@@ -10,7 +12,7 @@ const INFO = 'info'
 // if (__DEV__) {
 //   functions().useFunctionsEmulator('http://localhost:5001');
 // }
-const sessionId = v1()
+export const runningSessionId = v1()
 
 const handleLog = ({ message, data = {}, level }) => {
   const { error: errorObject } = data
@@ -30,10 +32,13 @@ const handleLog = ({ message, data = {}, level }) => {
   }
 
   const payload = {
-    ...data,
+    appBuildNumber,
+    appVersion,
+    deviceId,
     error,
-    sessionId,
+    runningSessionId,
     user,
+    ...data,
   }
 
   functions()

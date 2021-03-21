@@ -29,6 +29,7 @@ export const InputDate = ({
     <>
       <InputWrapper disabled={disabled}>
         <InputContent>
+          <IconWrapper>{RightIcon}</IconWrapper>
           <Controller
             control={control}
             name={name}
@@ -46,21 +47,20 @@ export const InputDate = ({
                     display="default"
                     is24Hour={true}
                     onChange={(event, value) => {
-                      onChange(value)
+                      onChange(+value)
                     }}
                     style={{
                       opacity: 0.011,
                       position: 'absolute',
                       width: '100%',
                     }}
-                    value={value}
+                    value={new Date(value)}
                   />
                 </>
               )
             }}
             rules={rules}
           />
-          {RightIcon}
         </InputContent>
         {errorKey ? <ErrorText numberOfLines={1}>{errorMessage}</ErrorText> : null}
       </InputWrapper>
@@ -91,4 +91,8 @@ const ErrorText = styled(TinyText)`
   color: ${COLORS.error};
   margin-top: 6px;
   text-align: right;
+`
+const IconWrapper = styled.View`
+  position: absolute;
+  right: 10px;
 `

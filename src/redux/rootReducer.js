@@ -4,7 +4,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import auth from '@redux/modules/auth'
 
 const rootReducer = combineReducers({
-  auth: auth,
+  auth: auth.reducer,
   network,
 })
 

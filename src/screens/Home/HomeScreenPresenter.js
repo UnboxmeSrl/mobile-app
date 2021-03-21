@@ -1,18 +1,24 @@
 import React from 'react'
+import styled from 'styled-components/native'
 
+import { BoxTile, BoxTile2 } from '@components/BoxTile'
 import { Button } from '@components/Button'
-import { ProgressBar } from '@components/ProgressBar'
 import { RouteContainer } from '@components/RouteContainer'
-import { SCREEN_NAMES } from '@const/navigation'
-import { navigate } from '@services'
+import { H3 } from '@components/Text'
+import { COLORS } from '@const'
 
-export const HomeScreenPresenter = ({}) => (
-  <RouteContainer tKey={'Homepage'}>
-    <ProgressBar currentStepIndex={1} stepsLength={10} />
-    <Button
-      onPress={() => {
-        navigate(SCREEN_NAMES.Wizard)
-      }}
-    />
+export const HomeScreenPresenter = ({ onPress }) => (
+  <RouteContainer withPadding>
+    <TextWrapper>
+      <H3 color={COLORS.primary}>2 </H3>
+      <H3 tKey={'home.boxesAvailable'} />
+    </TextWrapper>
+    <BoxTile />
+    <BoxTile2 />
   </RouteContainer>
 )
+
+export const TextWrapper = styled.View`
+  flex-direction: row;
+  margin-top: 16px;
+`

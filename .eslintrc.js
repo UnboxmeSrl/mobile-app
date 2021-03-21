@@ -2,7 +2,11 @@ module.exports = {
   env: {
     'react-native/react-native': true,
   },
-  extends: ['@react-native-community/eslint-config', 'standard', 'eslint-config-prettier'],
+  extends: [
+    '@react-native-community/eslint-config',
+    'standard',
+    'eslint-config-prettier',
+  ],
   plugins: [
     'react',
     'react-native',
@@ -15,6 +19,13 @@ module.exports = {
   root: true,
   rules: {
     'better-styled-components/sort-declarations-alphabetically': 2,
+    'react-hooks/exhaustive-deps': [
+      'error',
+      {
+        enableDangerousAutofixThisMayCauseInfiniteLoops: true,
+      },
+    ],
+    'react-hooks/rules-of-hooks': 'error',
     'react/jsx-sort-props': 2,
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': [

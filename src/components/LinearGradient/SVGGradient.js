@@ -1,6 +1,6 @@
 import React from 'react'
 import { processColor } from 'react-native'
-import Svg, { Defs, LinearGradient, Rect,Stop } from 'react-native-svg'
+import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg'
 import styled from 'styled-components/native'
 
 const getAlpha = (color) => (processColor(color) >>> 24) / 0xff

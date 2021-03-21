@@ -4,9 +4,10 @@ import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
 import { InputDate } from '@components/InputDate'
+import { StepContent } from '@components/WizardStep'
 import { COLORS } from '@const'
 import { REQUIRED_RULE } from '@const/validators'
-import { _dateOfBirth } from '@redux/modules/auth'
+import { _dobTs } from '@redux/modules/auth'
 
 export const WizardStepDateOfBirthPresenter = ({ control, errors, onPress, value }) => {
   return (
@@ -16,7 +17,7 @@ export const WizardStepDateOfBirthPresenter = ({ control, errors, onPress, value
         control={control}
         defaultValue={value}
         errors={errors}
-        name={_dateOfBirth}
+        name={_dobTs}
         placeholderKey="placeholders.dateOfBirth"
         rules={REQUIRED_RULE}
         textContentType="name"
@@ -26,5 +27,3 @@ export const WizardStepDateOfBirthPresenter = ({ control, errors, onPress, value
     </StepContent>
   )
 }
-
-const StepContent = styled.View``

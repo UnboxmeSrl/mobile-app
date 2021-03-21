@@ -7,27 +7,27 @@ import { WizardStepSocial } from '@components/WizardStepSocial'
 
 export const STEPS = [
   {
-    component: WizardStepSocial,
-    tKeyHeader: 'wizard.connect',
-  },
-  {
-    component: WizardStepAgency,
-    tKeyHeader: 'wizard.agency',
-  },
-  {
-    component: WizardStepCity,
-    tKeyHeader: 'wizard.city',
-  },
-  {
-    component: WizardStepDateOfBirth,
-    tKeyHeader: 'wizard.dateOfBirth',
-  },
-  {
     component: WizardStepName,
     tKeyDescription: 'wizard.nameStep',
   },
   {
     component: WizardStepGender,
     tKeyHeader: 'wizard.genderStep',
+  },
+  {
+    component: WizardStepDateOfBirth,
+    tKeyHeader: 'wizard.dateOfBirth',
+  },
+  {
+    component: WizardStepCity,
+    tKeyHeader: 'wizard.city',
+  },
+  {
+    component: WizardStepAgency,
+    tKeyHeader: 'wizard.agency',
+  },
+  {
+    component: WizardStepSocial,
+    tKeyHeader: 'wizard.connect',
   },
 ]

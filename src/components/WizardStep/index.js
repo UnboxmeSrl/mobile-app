@@ -13,17 +13,19 @@ export const WizardStep = ({ steps, stepIndex, navigateToNextStep }) => {
   const tKeyDescription = prop('tKeyDescription', step)
 
   return (
-    <StepContent>
+    <Wrapper>
       <Header>
         {tKeyHeader ? <Title tKey={tKeyHeader} /> : null}
         {tKeyDescription ? <Description tKey={tKeyDescription} /> : null}
       </Header>
       <Component navigateToNextStep={navigateToNextStep} />
-    </StepContent>
+    </Wrapper>
   )
 }
 
-const StepContent = styled(KeyboardAvoidingView)``
+const Wrapper = styled(KeyboardAvoidingView)`
+  flex: 1;
+`
 const Header = styled.View`
   margin-bottom: 24px;
   margin-top: 8px;
@@ -33,4 +35,8 @@ const Description = styled(BodyText)`
 `
 const Title = styled(H2)`
   text-align: center;
+`
+export const StepContent = styled.View`
+  flex: 1;
+  justify-content: space-between;
 `

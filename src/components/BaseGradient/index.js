@@ -10,8 +10,7 @@ const Base = styled(LinearGradient)`
   width: 100%
   position: absolute
   height:
-    ${(props) =>
-      prop('height', props) || propOr(0, 'screenHeight', props) * 0.12}px
+    ${(props) => prop('height', props) || propOr(0, 'screenHeight', props) * 0.12}px
 `
 const TopGradient = styled(Base)`
   top: 0;

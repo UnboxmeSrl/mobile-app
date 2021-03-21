@@ -60,6 +60,7 @@ const RegularStyled = styled(ThemedText)`
 const TinyStyled = styled(CaptionStyled)`
   font-family: ${FONTS.medium};
   font-size: 12px;
+  letter-spacing: 0.5px;
   line-height: 16px;
 `
 
