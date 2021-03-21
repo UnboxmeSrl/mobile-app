@@ -74,6 +74,7 @@ export default {
       name: 'Name',
       nickname: 'Nickname',
       surname: 'Surname',
+      yourTiktok: 'Your tik tok account username',
     },
     privacyPolicy: 'Privacy Policy',
     settings: 'Settings',
@@ -102,6 +103,12 @@ export default {
     },
     submit: 'Submit',
     termsOfUse: 'Terms of Use',
+    tiktok: {
+      andSendMessage: 'And send us a message to prove you are the account owner ',
+      enter: 'Enter you tik tok account username',
+      sendMessage: 'Send a message',
+      title: 'Connect Tik Tok account',
+    },
     wizard: {
       agency: 'Your agency',
       city: 'Your city',

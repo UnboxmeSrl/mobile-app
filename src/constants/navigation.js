@@ -11,6 +11,7 @@ export const MODAL_NAMES = {
   SignInEmail: 'SignInEmail',
   SignUpEmail: 'SignUpEmail',
   SignUpPhone: 'SignUpPhone',
+  Tiktok: 'Tiktok',
   WebView: 'WebView',
 }
 export const SCREEN_NAMES = {

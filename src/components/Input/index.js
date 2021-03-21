@@ -34,7 +34,7 @@ export const Input = ({
     [getReturnKeyType, name]
   )
   const onFieldSubmit = useCallback(() => {
-    handleSubmitEditing(name)
+    handleSubmitEditing && handleSubmitEditing(name)
   }, [handleSubmitEditing, name])
   // const label = t(`labelsForFields.${name}`)
 
@@ -48,17 +48,17 @@ export const Input = ({
           name={name}
           render={({ onChange, onBlur, value, ref }) => (
             <TextInput
-              onBlur={onBlur}
-              onChangeText={onChange}
-              ref={ref}
-              value={value}
               {...rest}
               editable={!disabled}
               numberOfLines={1}
+              onBlur={onBlur}
+              onChangeText={onChange}
               onSubmitEditing={onFieldSubmit}
               placeholder={placeholder}
               placeholderTextColor={COLORS.black03}
+              ref={ref}
               returnKeyType={returnKeyType}
+              value={value}
             />
           )}
           rules={rules}

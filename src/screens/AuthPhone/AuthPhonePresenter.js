@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
+import { Form } from '@components/Form'
 import { Input } from '@components/Input'
 import { ModalContainer } from '@components/ModalContainer'
 import { TextButton } from '@components/TextButton'

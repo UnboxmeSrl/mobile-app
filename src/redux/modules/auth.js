@@ -17,6 +17,7 @@ export const _city = 'city'
 export const _dobTs = 'dobTs'
 export const _hasAgency = 'hasAgency'
 export const _agencyName = 'agencyName'
+export const _tiktokUsername = 'tiktokUsername'
 
 const initialState = {
   [_initialized]: false,
@@ -54,5 +55,6 @@ export const selectCity = createSelector(selectState, prop(_city))
 export const selectHasAgency = createSelector(selectState, prop(_hasAgency))
 export const selectAgencyName = createSelector(selectState, prop(_agencyName))
 export const selectIsAuthInitialized = createSelector(selectState, prop(_initialized))
+export const selectTiktokUsername = createSelector(selectState, prop(_tiktokUsername))
 
 export default slice

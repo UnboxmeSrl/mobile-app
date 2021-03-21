@@ -1,4 +1,5 @@
 export const COLORS = {
+  achromaticBlack: '#231B2E',
   black: '#231b2e',
   black03: 'rgba(35, 27, 46, 0.4)',
   blackRaw: '#000000',

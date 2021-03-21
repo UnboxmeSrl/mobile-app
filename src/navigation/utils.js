@@ -21,9 +21,8 @@ export const gestureResponseDistance = {
   vertical: SWIPE_VERTICAL_OFFSET,
 }
 
-const Overlay = styled(Animated.View)`
+const Overlay = styled.View`
   background-color: ${COLORS.black03};
-  flex: 1;
 `
 
 export const cardOverlay = ({ style }) => <Overlay style={style} />

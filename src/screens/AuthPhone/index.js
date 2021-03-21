@@ -73,7 +73,6 @@ export const AuthPhoneModal = () => {
   }, [confirm])
 
   const onSubmit = confirm ? verifyPhoneCode : sendVerificationCode
-  console.log(confirm)
   const onPress = handleSubmit(onSubmit)
   const showCodeInput = confirm && confirm.confirm
   const tKey = showCodeInput ? 'auth.verifyCode' : 'auth.sendVerificationCode'

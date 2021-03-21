@@ -7,6 +7,10 @@ import { WizardStepSocial } from '@components/WizardStepSocial'
 
 export const STEPS = [
   {
+    component: WizardStepSocial,
+    tKeyHeader: 'wizard.connect',
+  },
+  {
     component: WizardStepName,
     tKeyDescription: 'wizard.nameStep',
   },
@@ -25,9 +29,5 @@ export const STEPS = [
   {
     component: WizardStepAgency,
     tKeyHeader: 'wizard.agency',
-  },
-  {
-    component: WizardStepSocial,
-    tKeyHeader: 'wizard.connect',
   },
 ]
