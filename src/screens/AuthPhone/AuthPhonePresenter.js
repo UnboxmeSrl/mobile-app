@@ -21,7 +21,7 @@ export const AuthPhonePresenter = ({
   resendDisabled,
   timer,
 }) => (
-  <ModalContainer tKey={'auth.withPhone'}>
+  <ModalContainer contentBased tKey={'auth.withPhone'}>
     <Content>
       <Input
         autoCompleteType="tel"

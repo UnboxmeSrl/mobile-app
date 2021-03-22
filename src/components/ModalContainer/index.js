@@ -33,7 +33,9 @@ const Wrapper = styled(KeyboardAvoidingView)`
 const FullSizeModalOffset = styled.View`
   height: ${screenHeight / 16}px;
 `
-const ContentBasedOffset = styled.View``
+const ContentBasedOffset = styled.View`
+  flex: 1;
+`
 const HandlerWrapper = styled.View`
   align-items: center;
   height: 6px;

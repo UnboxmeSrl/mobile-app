@@ -9,7 +9,7 @@ import { PasswordInput } from '@components/PasswordInput'
 import { EMAIL_RULES_LOGIN, PASSWORD_RULES } from '@const/validators'
 
 export const SignInEmailPresenter = ({ onPress, control, errors, loading }) => (
-  <ModalContainer tKey={'signIn.withEmail'}>
+  <ModalContainer contentBased tKey={'signIn.withEmail'}>
     <Content>
       <Form>
         <Input
