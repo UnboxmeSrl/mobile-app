@@ -8,10 +8,12 @@ target 'unboxme' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  use_flipper!({ 'Flipper' => '0.74.0' })
+#   use_flipper!({ 'Flipper' => '0.74.0' })
   pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'PanModal', '~> 1.2.7'
+  pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
+
 
   post_install do |installer|
     flipper_post_install(installer)

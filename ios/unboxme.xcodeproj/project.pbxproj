@@ -12,16 +12,16 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		265EFE51EE3A4208B37346A2 /* FuturaNewLight-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A815DD5BA3C409C8EB1E938 /* FuturaNewLight-Reg.ttf */; };
 		5DA70149670148ADB1C3215E /* FuturaNewMedium-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3092163EF7A43CFA32B91AB /* FuturaNewMedium-Reg.ttf */; };
+		640C6D32BDF799294DD1426A /* libPods-unboxme.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5EE83469DE2A3175C362BC /* libPods-unboxme.a */; };
 		79A7E38B3A0C451BA1B53204 /* AbrilFatface-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17ED3768D9EA441690FD48D4 /* AbrilFatface-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A6FD944827A9F91503A4824C /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9698B4E95B1195A5B15124C /* libPods-OneSignalNotificationServiceExtension.a */; };
 		B8B3FAC9F5F2449B944FB037 /* FuturaNewDemi-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 041D84639DFF459EAC6FB0DE /* FuturaNewDemi-Reg.ttf */; };
-		C9C382CFF5405E56938E241A /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5250EB77331F628CE9668C79 /* libPods-OneSignalNotificationServiceExtension.a */; };
 		CE32358C25BB3359009A3838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE32358B25BB3359009A3838 /* GoogleService-Info.plist */; };
 		CE59628725BDD2E900FF187D /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		CE90C3DB25B8BF0A00C7DCC9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90C3DA25B8BF0A00C7DCC9 /* File.swift */; };
 		CEFA82C225C35D580042609F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA82C125C35D580042609F /* NotificationService.swift */; };
 		CEFA82C625C35D580042609F /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CEFA82BF25C35D580042609F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EFAAB9B91183D01F752994B4 /* libPods-unboxme.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5853DC6044F23953DB9A40D /* libPods-unboxme.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		17ED3768D9EA441690FD48D4 /* AbrilFatface-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AbrilFatface-Regular.ttf"; path = "../src/assets/fonts/AbrilFatface-Regular.ttf"; sourceTree = "<group>"; };
 		30F9C86E2164EC4F357E38BF /* Pods-unboxme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.release.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.release.xcconfig"; sourceTree = "<group>"; };
 		3A815DD5BA3C409C8EB1E938 /* FuturaNewLight-Reg.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FuturaNewLight-Reg.ttf"; path = "../src/assets/fonts/FuturaNewLight-Reg.ttf"; sourceTree = "<group>"; };
-		5250EB77331F628CE9668C79 /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A5EE83469DE2A3175C362BC /* libPods-unboxme.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unboxme.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		818BC55E66128F87914AA33D /* Pods-unboxme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.debug.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = unboxme/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95E6004902B30150CE4D7480 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -76,9 +76,9 @@
 		CEFA82C325C35D580042609F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFA82CF25C35E210042609F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		D3092163EF7A43CFA32B91AB /* FuturaNewMedium-Reg.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FuturaNewMedium-Reg.ttf"; path = "../src/assets/fonts/FuturaNewMedium-Reg.ttf"; sourceTree = "<group>"; };
-		D5853DC6044F23953DB9A40D /* libPods-unboxme.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unboxme.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F9698B4E95B1195A5B15124C /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFAAB9B91183D01F752994B4 /* libPods-unboxme.a in Frameworks */,
+				640C6D32BDF799294DD1426A /* libPods-unboxme.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9C382CFF5405E56938E241A /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
+				A6FD944827A9F91503A4824C /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +141,8 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				5250EB77331F628CE9668C79 /* libPods-OneSignalNotificationServiceExtension.a */,
-				D5853DC6044F23953DB9A40D /* libPods-unboxme.a */,
+				F9698B4E95B1195A5B15124C /* libPods-OneSignalNotificationServiceExtension.a */,
+				6A5EE83469DE2A3175C362BC /* libPods-unboxme.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -240,7 +240,6 @@
 				B7646597F752FB779DE7E458 /* [CP] Copy Pods Resources */,
 				DF01C1002A9074E976F11214 /* [CP-User] [RNFB] Core Configuration */,
 				2518A82EF32C204FE72DB7D4 /* [CP-User] [RNFB] Crashlytics Configuration */,
-				43C24153C1B30C14E5664248 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -363,24 +362,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
-		};
-		43C24153C1B30C14E5664248 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		B7646597F752FB779DE7E458 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

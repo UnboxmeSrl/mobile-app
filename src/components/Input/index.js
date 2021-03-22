@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useMemo } from 'react'
 import { Controller } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import TextInputMask from 'react-native-text-input-mask'
 import styled from 'styled-components/native'
 
 import { FormContext } from '@components/Form/context'
@@ -19,6 +20,7 @@ export const Input = ({
   defaultValue = '',
   RightIcon,
   disabled,
+  mask,
   ...rest
 }) => {
   const { getReturnKeyType, handleSubmitEditing } = useContext(FormContext)
@@ -38,6 +40,16 @@ export const Input = ({
   }, [handleSubmitEditing, name])
   // const label = t(`labelsForFields.${name}`)
 
+  const props = {
+    ...rest,
+    editable: !disabled,
+    numberOfLines: 1,
+    onSubmitEditing: onFieldSubmit,
+    placeholder,
+    placeholderTextColor: COLORS.black03,
+    returnKeyType,
+  }
+
   return (
     <InputWrapper disabled={disabled}>
       {/* <Label>{label}</Label> */}
@@ -46,21 +58,22 @@ export const Input = ({
           control={control}
           defaultValue={defaultValue}
           name={name}
-          render={({ onChange, onBlur, value, ref }) => (
-            <TextInput
-              {...rest}
-              editable={!disabled}
-              numberOfLines={1}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              onSubmitEditing={onFieldSubmit}
-              placeholder={placeholder}
-              placeholderTextColor={COLORS.black03}
-              ref={ref}
-              returnKeyType={returnKeyType}
-              value={value}
-            />
-          )}
+          render={({ onChange, onBlur, value, ref }) =>
+            mask ? (
+              <TextInputMask
+                {...props}
+                mask={mask}
+                onBlur={onBlur}
+                onChangeText={(formatted, extracted) => {
+                  onChange(extracted)
+                }}
+                ref={ref}
+                value={value}
+              />
+            ) : (
+              <TextInput {...props} onBlur={onBlur} ref={ref} />
+            )
+          }
           rules={rules}
         />
         {RightIcon}

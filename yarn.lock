@@ -7563,6 +7563,11 @@ react-native-tab-view@^2.15.2:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.16.0.tgz#cae72c7084394bd328fac5fefb86cd966df37a86"
   integrity sha512-ac2DmT7+l13wzIFqtbfXn4wwfgtPoKzWjjZyrK1t+T8sdemuUvD4zIt+UImg03fu3s3VD8Wh/fBrIdcqQyZJWg==
 
+react-native-text-input-mask@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-text-input-mask/-/react-native-text-input-mask-2.0.1.tgz#d28602d2e6f2e5f0d860cc8a0bdc09d3180d861c"
+  integrity sha512-9n7JehpaJ1xf185RKdeHYRFAT6zv3vdf1gW3OYZ1kNSXthUVoOQw/MORC/ycYPhWCCdzdWQAp4Jx6JCZxLnwyw==
+
 react-native-toast-message@^1.4.8:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-1.4.9.tgz#47f33ac312fe2aee5dbdd4ae14745fa0d354102e"

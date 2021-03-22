@@ -51,10 +51,7 @@ export const Form = ({ children }) => {
       const inputPosition = getInputPosition(name)
       const nextFocusableInput = nth(inputPosition + 1, inputs)
 
-      console.log(inputPosition, nextFocusableInput)
-
       if (nextFocusableInput) {
-        console.log('focus')
         nextFocusableInput.focus()
       }
     },
