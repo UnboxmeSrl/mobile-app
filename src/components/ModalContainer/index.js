@@ -1,5 +1,5 @@
-import React from 'react'
-import { KeyboardAvoidingView, TextInput } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Keyboard, KeyboardAvoidingView } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import styled from 'styled-components/native'

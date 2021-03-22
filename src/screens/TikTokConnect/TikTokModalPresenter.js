@@ -30,7 +30,7 @@ export const TikTokModalPresenter = ({ onPress, control, errors, loading }) => (
   </ModalContainer>
 )
 
-const Content = styled(KeyboardAvoidingView)`
+const Content = styled.View`
   padding-bottom: 20px;
   padding-horizontal: 20px;
   padding-top: 20px;

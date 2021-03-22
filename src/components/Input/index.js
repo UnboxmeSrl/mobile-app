@@ -71,7 +71,7 @@ export const Input = ({
                 value={value}
               />
             ) : (
-              <TextInput {...props} onBlur={onBlur} ref={ref} />
+              <TextInput {...props} ref={ref} />
             )
           }
           rules={rules}
