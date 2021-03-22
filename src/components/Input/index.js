@@ -58,9 +58,9 @@ export const Input = ({
           control={control}
           defaultValue={defaultValue}
           name={name}
-          render={({ onChange, onBlur, value, ref }) =>
+          render={({ onChange, onBlur, ref, value }) =>
             mask ? (
-              <TextInputMask
+              <MaskedInput
                 {...props}
                 mask={mask}
                 onBlur={onBlur}
@@ -71,7 +71,7 @@ export const Input = ({
                 value={value}
               />
             ) : (
-              <TextInput {...props} ref={ref} />
+              <TextInput value={value} {...props} onChangeText={onChange} ref={ref} />
             )
           }
           rules={rules}
@@ -111,4 +111,10 @@ const ErrorText = styled(TinyText)`
   color: ${COLORS.error};
   margin-top: 6px;
   text-align: right;
+`
+const MaskedInput = styled(TextInputMask)`
+  flex: 1;
+  font-family: ${FONTS.light};
+  height: ${INPUT_HEIGHT}px;
+  padding-horizontal: 20px;
 `

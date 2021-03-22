@@ -58,6 +58,7 @@ export default {
     loginTitle: 'Login',
     logout: 'Logout',
     next: 'Next',
+    onValidation: 'On validation: {{username}}',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
     onboardingTitle: 'Onboarding',

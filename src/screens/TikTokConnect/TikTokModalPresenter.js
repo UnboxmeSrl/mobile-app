@@ -19,6 +19,7 @@ export const TikTokModalPresenter = ({ onPress, control, errors, loading }) => (
           autoCapitalize="none"
           control={control}
           errors={errors}
+          mask={'@[A][-----------------------------------------------------]'}
           name={_tiktokUsername}
           placeholderKey="yourTiktok"
           rules={REQUIRED_RULE}
