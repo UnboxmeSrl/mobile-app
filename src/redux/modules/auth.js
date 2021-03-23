@@ -18,6 +18,8 @@ export const _dobTs = 'dobTs'
 export const _hasAgency = 'hasAgency'
 export const _agencyName = 'agencyName'
 export const _tiktokUsername = 'tiktokUsername'
+export const _instagramUsername = 'username'
+export const _instagram = 'instagram'
 
 const initialState = {
   [_initialized]: false,
@@ -56,5 +58,10 @@ export const selectHasAgency = createSelector(selectState, prop(_hasAgency))
 export const selectAgencyName = createSelector(selectState, prop(_agencyName))
 export const selectIsAuthInitialized = createSelector(selectState, prop(_initialized))
 export const selectTiktokUsername = createSelector(selectState, prop(_tiktokUsername))
+export const selectInstagramData = createSelector(selectState, prop(_instagram))
+export const selectInstagramUsername = createSelector(
+  selectInstagramData,
+  prop(_instagramUsername)
+)
 
 export default slice

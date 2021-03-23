@@ -24,6 +24,7 @@ export default {
     },
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
+    connected: 'Connected:  {{username}}',
     errors: {
       alreadyRegistered: 'Email is already registered',
       isNotValid: 'Value is not valid',

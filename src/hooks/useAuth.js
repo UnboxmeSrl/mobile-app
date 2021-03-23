@@ -18,6 +18,7 @@ export const useAuth = () => {
 
   const onAuthStateChanged = useCallback(
     (user) => {
+      console.log('onAuthStateChanged', user)
       if (user) {
         setAuthData(user.toJSON())
       } else {
@@ -35,6 +36,7 @@ export const useAuth = () => {
         .doc(uid)
         .onSnapshot((documentSnapshot) => {
           const data = documentSnapshot?.data()
+          console.log('listener', data)
           setAuthData(data)
         })
       return () => subscriber()

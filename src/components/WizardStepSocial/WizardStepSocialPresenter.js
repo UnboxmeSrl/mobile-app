@@ -12,14 +12,17 @@ export const WizardStepSocialPresenter = ({
 }) => {
   return (
     <StepContent>
-      <Button
-        leftIconName={'logo-tiktok'}
-        onPress={navigateTikTokModal}
-        tKey={tiktokUsername ? 'onValidation' : 'connectTikTok'}
-        tOptions={{ username: `@${tiktokUsername}` }}
-      />
-      {/* <Instagram tKey={'connectInstagram'} /> */}
+      <ButtonWrapper>
+        <Button
+          leftIconName={'logo-tiktok'}
+          onPress={navigateTikTokModal}
+          tKey={tiktokUsername ? 'onValidation' : 'connectTikTok'}
+          tOptions={{ username: `@${tiktokUsername}` }}
+        />
+        <Instagram />
+      </ButtonWrapper>
       <Button onPress={onPress} tKey={'next'} />
     </StepContent>
   )
 }
+const ButtonWrapper = styled.View``

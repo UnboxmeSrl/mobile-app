@@ -22,7 +22,7 @@ export const TikTokModal = () => {
   const onSubmit = async (values) => {
     dispatch(updateMe(values))
     goBack()
-    Linking.openURL('https://vm.tiktok.com/ZSJYbPV6c/')
+    Linking.openURL('https://vm.tiktok.com/ZSJY3DjKU')
   }
 
   useEffect(() => {
