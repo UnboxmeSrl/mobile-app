@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { KeyboardAvoidingView } from 'react-native'
+import { Keyboard } from 'react-native'
 import { nth, path } from 'ramda'
 import styled from 'styled-components/native/dist/styled-components.native.esm'
 
@@ -12,8 +12,6 @@ export const getInputs = (children) =>
     const name = path(['props', 'name'], child)
     const ref = path(['props', 'control', 'fieldsRef', 'current', name, 'ref'], child)
     const input = { name, ...ref }
-
-    console.log(child)
 
     return partialInputs.concat(input)
   }, [])
@@ -52,6 +50,7 @@ export const Form = ({ children }) => {
       const nextFocusableInput = nth(inputPosition + 1, inputs)
 
       if (nextFocusableInput) {
+        console.log('focus')
         nextFocusableInput.focus()
       }
     },

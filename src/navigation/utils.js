@@ -10,19 +10,20 @@ import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
 
-import { IS_IOS } from '../constants/common'
+import { IS_IOS, screenHeight } from '../constants/common'
 
 const IS_ANDROID = !IS_IOS
 
 const DEFAULT_VERTICAL_OFFSET = 135
-const SWIPE_VERTICAL_OFFSET = IS_IOS ? DEFAULT_VERTICAL_OFFSET : 500 // TODO
+const SWIPE_VERTICAL_OFFSET = IS_IOS ? DEFAULT_VERTICAL_OFFSET : screenHeight * 0.8 // TODO
 
 export const gestureResponseDistance = {
   vertical: SWIPE_VERTICAL_OFFSET,
 }
 
-const Overlay = styled.View`
+const Overlay = styled(Animated.View)`
   background-color: ${COLORS.black03};
+  flex: 1;
 `
 
 export const cardOverlay = ({ style }) => <Overlay style={style} />

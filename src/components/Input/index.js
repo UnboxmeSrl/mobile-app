@@ -42,6 +42,7 @@ export const Input = ({
 
   const props = {
     ...rest,
+    blurOnSubmit: false,
     editable: !disabled,
     numberOfLines: 1,
     onSubmitEditing: onFieldSubmit,

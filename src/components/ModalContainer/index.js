@@ -49,7 +49,7 @@ const Handler = styled.View`
   width: 40px;
 `
 
-const Content = styled.View`
+const Content = styled.ScrollView`
   background-color: white;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
