@@ -3,6 +3,7 @@ import { useNavigation } from 'react-navigation-hooks'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
 import { reset } from '@services'
+import { onAuthSuccess } from '@services/auth'
 
 import { SignInPresenter } from './SignInPresenter'
 
@@ -17,7 +18,7 @@ export const SignInScreen = () => {
     navigate(MODAL_NAMES.AuthPhone)
   }
   const onSuccess = useCallback(() => {
-    reset(MAIN_NAVIGATOR)
+    onAuthSuccess()
   }, [])
 
   const props = {

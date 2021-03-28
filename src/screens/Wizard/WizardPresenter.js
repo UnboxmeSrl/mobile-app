@@ -1,9 +1,7 @@
 import React from 'react'
-import { STEPS } from '@screens/Wizard/constants'
 import styled from 'styled-components/native'
 
 import { BackArrow } from '@components/BackArrow'
-import { Button } from '@components/Button'
 import { Content } from '@components/Content'
 import { ProgressBar } from '@components/ProgressBar'
 import { WizardStep } from '@components/WizardStep'
@@ -13,10 +11,11 @@ export const WizardPresenter = ({
   navigateToPrevStep,
   stepIndex,
   steps,
+  hiddenArrow,
 }) => (
   <Wrapper>
     <Header>
-      <BackArrow noBack onPress={navigateToPrevStep} />
+      <BackArrow hidden={hiddenArrow} noBack onPress={navigateToPrevStep} />
       <ProgressBar currentStepIndex={stepIndex} stepsLength={steps.length} />
     </Header>
     <WizardStep

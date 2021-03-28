@@ -19,12 +19,6 @@ module.exports = {
   root: true,
   rules: {
     'better-styled-components/sort-declarations-alphabetically': 2,
-    'react-hooks/exhaustive-deps': [
-      'error',
-      {
-        enableDangerousAutofixThisMayCauseInfiniteLoops: true,
-      },
-    ],
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-sort-props': 2,
     'simple-import-sort/exports': 'error',

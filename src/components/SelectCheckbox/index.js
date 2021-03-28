@@ -13,7 +13,9 @@ export const SelectCheckbox = ({ tKeyLabel, isSelected, isAnySelected, onPress }
         name={isSelected ? 'checkmark-circle' : 'checkmark-circle-outline'}
         size={24}
       />
-      {isSelected ? <Subtitle tKey={tKeyLabel} /> : <BodyText tKey={tKeyLabel} />}
+      <Wrapper>
+        {isSelected ? <Subtitle tKey={tKeyLabel} /> : <BodyText tKey={tKeyLabel} />}
+      </Wrapper>
     </Item>
   )
 }
@@ -24,7 +26,11 @@ const Icon = styled(Ionicons)`
 
 const Item = styled.TouchableOpacity`
   flex-direction: row;
-  height: 24px;
   margin-bottom: 16px;
+  min-height: 24px;
   width: 100%;
+`
+const Wrapper = styled.View`
+  flex: 1;
+  top: -2px;
 `

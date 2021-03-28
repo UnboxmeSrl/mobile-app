@@ -1,10 +1,15 @@
 import { Alert } from 'react-native'
 import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 import { isEmpty } from 'ramda'
 
+import { USERS_COLLECTION } from '@const/firebase'
+import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
+import { _isVerified, _tiktokUsername, _verificationStatus } from '@redux/modules/auth'
 import i18n from '@services/i18n'
 
 import { logger } from './logger'
+import { navigate, replace, reset } from './navigation'
 import { showToastError, showToastSuccess } from './toast'
 
 export const checkIfEmailIsAvailable = async (email) => {
@@ -57,5 +62,22 @@ export const sendPhoneVerificationCode = async (phone) => {
       showToastError(error?.message)
     }
     logger.error('sendPhoneVerificationCode', { error })
+  }
+}
+
+export const onAuthSuccess = async (user) => {
+  try {
+    const uid = auth().currentUser.uid
+    const data = await firestore().collection(USERS_COLLECTION).doc(uid).get()
+    const isVerified = data.get(_isVerified)
+    const verificationStatus = data.get(_verificationStatus)
+
+    if (isVerified) {
+      reset(MAIN_NAVIGATOR)
+    } else {
+      navigate(SCREEN_NAMES.Wizard, { [_verificationStatus]: verificationStatus })
+    }
+  } catch (error) {
+    logger.error('onAuthSuccess', { error })
   }
 }

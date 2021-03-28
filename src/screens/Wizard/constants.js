@@ -3,13 +3,11 @@ import { WizardStepCity } from '@components/WizardStepCity'
 import { WizardStepDateOfBirth } from '@components/WizardStepDateOfBirth'
 import { WizardStepGender } from '@components/WizardStepGender'
 import { WizardStepName } from '@components/WizardStepName'
+import { WizardStepReview } from '@components/WizardStepReview'
 import { WizardStepSocial } from '@components/WizardStepSocial'
+import { WizardStepExperience } from '@components/WizardStepYourExperience'
 
 export const STEPS = [
-  {
-    component: WizardStepSocial,
-    tKeyHeader: 'wizard.connect',
-  },
   {
     component: WizardStepName,
     tKeyDescription: 'wizard.nameStep',
@@ -29,5 +27,16 @@ export const STEPS = [
   {
     component: WizardStepAgency,
     tKeyHeader: 'wizard.agency',
+  },
+  {
+    component: WizardStepExperience,
+    tKeyHeader: 'experience.title',
+  },
+  {
+    component: WizardStepSocial,
+    tKeyHeader: 'wizard.connect',
+  },
+  {
+    component: WizardStepReview,
   },
 ]

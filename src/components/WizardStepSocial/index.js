@@ -3,12 +3,13 @@ import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 
 import { MODAL_NAMES } from '@const/navigation'
-import { selectTiktokUsername } from '@redux/modules/auth'
+import { selectInstagramUsername, selectTiktokUsername } from '@redux/modules/auth'
 
 import { WizardStepSocialPresenter } from './WizardStepSocialPresenter'
 
 export const WizardStepSocial = ({ navigateToNextStep }) => {
   const tiktokUsername = useSelector(selectTiktokUsername)
+  const instagramUsername = useSelector(selectInstagramUsername)
 
   const { navigate } = useNavigation()
   const onPress = () => {
@@ -20,6 +21,7 @@ export const WizardStepSocial = ({ navigateToNextStep }) => {
   }
 
   const props = {
+    disabled: !(tiktokUsername || instagramUsername),
     navigateTikTokModal,
     onPress,
     tiktokUsername,

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { reset } from '@services'
-import { signInWithEmail } from '@services/auth'
+import { onAuthSuccess, signInWithEmail } from '@services/auth'
 
 import { SignInEmailPresenter } from './SignInEmailPresenter'
 
@@ -19,7 +19,7 @@ export const SignInEmailModal = () => {
         const user = await signInWithEmail(email, password)
         setLoading(false)
         if (user) {
-          reset(MAIN_NAVIGATOR)
+          onAuthSuccess()
         }
       } catch (e) {
         setLoading(false)

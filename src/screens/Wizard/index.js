@@ -1,15 +1,22 @@
-import React, { useCallback, useState } from 'react'
-import { useNavigation } from 'react-navigation-hooks'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
+import { useSelector } from 'react-redux'
 import { STEPS } from '@screens/Wizard/constants'
 import { dec, inc } from 'ramda'
 
 import { STACK_NAMES } from '@const/navigation'
+import {
+  _verificationStatus,
+  selectInstagramUsername,
+  selectTiktokUsername,
+} from '@redux/modules/auth'
 
 import { WizardPresenter } from './WizardPresenter'
 
 export const WizardScreen = () => {
   const [stepIndex, setStepIndex] = useState(1)
   const { navigate, goBack } = useNavigation()
+  const verificationStatus = useNavigationParam(_verificationStatus)
 
   const onFinish = useCallback(() => {
     navigate(STACK_NAMES.BottomStack)
@@ -29,8 +36,16 @@ export const WizardScreen = () => {
       setStepIndex((prevIndex) => Math.max(1, dec(prevIndex)))
     }
   }
+  const hiddenArrow = stepIndex === 1 && true
+
+  useEffect(() => {
+    if (verificationStatus) {
+      setStepIndex(STEPS.length)
+    }
+  }, [])
 
   const props = {
+    hiddenArrow,
     navigateToNextStep,
     navigateToPrevStep,
     stepIndex,

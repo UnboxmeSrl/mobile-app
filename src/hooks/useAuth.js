@@ -10,6 +10,7 @@ import authModule, {
   selectIsAuthInitialized,
   selectUid,
 } from '@redux/modules/auth'
+import { onAuthSuccess } from '@services/auth'
 
 export const useAuth = () => {
   const setAuthData = useAction(authModule.actions.setData)
@@ -30,13 +31,16 @@ export const useAuth = () => {
   )
 
   useEffect(() => {
+    onAuthSuccess()
+  }, [isInitialized])
+
+  useEffect(() => {
     if (uid) {
       const subscriber = firestore()
         .collection(USERS_COLLECTION)
         .doc(uid)
         .onSnapshot((documentSnapshot) => {
           const data = documentSnapshot?.data()
-          console.log('listener', data)
           setAuthData(data)
         })
       return () => subscriber()

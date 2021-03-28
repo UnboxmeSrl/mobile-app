@@ -103,6 +103,9 @@ export const Text = (props) => {
 export const ButtonText = (props) => {
   return <BaseText Component={ButtonStyled} {...props} />
 }
+export const BigLight = (props) => {
+  return <BaseText Component={BigLightStyled} {...props} />
+}
 
 export const SectionTitle = styled(H1)`
   fontsize: 20px;

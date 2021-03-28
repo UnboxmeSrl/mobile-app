@@ -42,6 +42,7 @@ export const Input = ({
 
   const props = {
     ...rest,
+    autoFocus: false,
     blurOnSubmit: false,
     editable: !disabled,
     numberOfLines: 1,
@@ -98,6 +99,7 @@ const InputContent = styled.View`
   padding-right: 10px;
 `
 const TextInput = styled.TextInput`
+  color: ${COLORS.achromaticBlack};
   flex: 1;
   font-family: ${FONTS.light};
   height: ${INPUT_HEIGHT}px;

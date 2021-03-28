@@ -33,6 +33,15 @@ export default {
       isTooShort: 'Your password is too short',
       passwordsDontMatch: "Your passwords don't match",
     },
+    experience: {
+      experienced: 'I have experience with video blogging and unboxing products ',
+      limited:
+        'I have no or limited experience but I would be up in learning how to do video blogging ',
+      title: 'Your experience\n' + 'with unboxing\n' + '& storytelling',
+      zero:
+        "I never did video blogging and I wouldn't be able to make an unboxing while explaining product properties",
+    },
+    followUs: 'Follow us on Instagram',
     gender: {
       female: 'Female',
       male: 'Male',
@@ -79,6 +88,11 @@ export default {
       yourTiktok: 'Your tik tok account username',
     },
     privacyPolicy: 'Privacy Policy',
+    registerOrLogin:
+      'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
+    review: {
+      inReview: 'We are reviewing your account. In the meanwhile follow us on Instagram.',
+    },
     settings: 'Settings',
     signIn: {
       getPersonalized:
@@ -111,6 +125,7 @@ export default {
       sendMessage: 'Send a message',
       title: 'Connect Tik Tok account',
     },
+    wantUseAll: 'Want to use all the functionality?',
     wizard: {
       agency: 'Your agency',
       city: 'Your city',

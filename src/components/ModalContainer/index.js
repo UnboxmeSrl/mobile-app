@@ -12,8 +12,8 @@ export const ModalContainer = ({ children, contentBased, tKey }) => {
   const { bottom } = useSafeAreaInsets()
 
   return (
-    <Wrapper behavior={IS_IOS ? 'padding' : 'height'}>
-      {contentBased ? <ContentBasedOffset /> : <FullSizeModalOffset />}
+    <Wrapper behavior={IS_IOS ? 'padding' : 'padding'}>
+      {contentBased && IS_IOS ? <ContentBasedOffset /> : <FullSizeModalOffset />}
       <HandlerWrapper>
         <Handler />
       </HandlerWrapper>

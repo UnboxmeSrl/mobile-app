@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { PASSWORD_RULES } from '@const/validators'
 import { reset } from '@services'
-import { registerEmailAccount } from '@services/auth'
+import { onAuthSuccess, registerEmailAccount } from '@services/auth'
 
 import { SignInEmailPresenter } from './SignInEmailPresenter'
 
@@ -19,7 +19,7 @@ export const SignUpEmailModal = () => {
         const { email, password } = data
         await registerEmailAccount(email, password)
         setLoading(false)
-        reset(MAIN_NAVIGATOR)
+        onAuthSuccess()
       } catch (e) {
         setLoading(false)
       }

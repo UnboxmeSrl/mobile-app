@@ -9,6 +9,7 @@ export const WizardStepSocialPresenter = ({
   onPress,
   navigateTikTokModal,
   tiktokUsername,
+  disabled,
 }) => {
   return (
     <StepContent>
@@ -21,7 +22,7 @@ export const WizardStepSocialPresenter = ({
         />
         <Instagram />
       </ButtonWrapper>
-      <Button onPress={onPress} tKey={'next'} />
+      <Button disabled={disabled} onPress={onPress} tKey={'next'} />
     </StepContent>
   )
 }

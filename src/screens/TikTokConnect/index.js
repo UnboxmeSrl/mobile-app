@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   _tiktokUsername,
+  _verificationStatus,
   selectAgencyName,
   selectTiktokUsername,
   updateMe,
@@ -20,7 +21,7 @@ export const TikTokModal = () => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    dispatch(updateMe(values))
+    dispatch(updateMe({ ...values, [_verificationStatus]: 'TODO' }))
     goBack()
     Linking.openURL('https://vm.tiktok.com/ZSJY3DjKU')
   }

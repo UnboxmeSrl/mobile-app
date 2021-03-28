@@ -22,7 +22,7 @@ const InputDateAndroid = ({
   onChange,
   value,
 }) => {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   const { t } = useTranslation()
   const placeholder = t(placeholderKey, '')
   const errorKey = errors[name]?.message
@@ -89,6 +89,7 @@ const InputContent = styled.View`
   padding-right: 10px;
 `
 const TextInput = styled.TextInput`
+  color: ${COLORS.achromaticBlack};
   flex: 1;
   font-family: ${FONTS.light};
   height: ${INPUT_HEIGHT}px;

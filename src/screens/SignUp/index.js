@@ -6,6 +6,7 @@ import { GoogleLogin } from '@components/Auth/GoogleLogin'
 import { IS_IOS } from '@const/common'
 import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
 import { reset } from '@services'
+import { onAuthSuccess } from '@services/auth'
 
 import { SignUpScreenPresenter } from './SignUpScreenPresenter'
 const MainButton = IS_IOS ? AppleLogin : GoogleLogin
@@ -23,7 +24,7 @@ export const SignUpScreen = () => {
   }, [navigate])
 
   const onSuccess = useCallback(() => {
-    reset(MAIN_NAVIGATOR)
+    onAuthSuccess()
   }, [])
 
   const props = {

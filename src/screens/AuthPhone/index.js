@@ -7,7 +7,7 @@ import { MAIN_NAVIGATOR } from '@const/navigation'
 import { CODE_RULES } from '@const/validators'
 import { selectUid } from '@redux/modules/auth'
 import { reset } from '@services'
-import { sendPhoneVerificationCode } from '@services/auth'
+import { onAuthSuccess, sendPhoneVerificationCode } from '@services/auth'
 
 import { AuthPhonePresenter } from './AuthPhonePresenter'
 
@@ -23,7 +23,6 @@ export const AuthPhoneModal = () => {
     async ({ phone }) => {
       setLoading(true)
       const confirmation = await sendPhoneVerificationCode(phone)
-      console.log({ confirmation: confirmation.confirm })
       setConfirm(confirmation)
       setLoading(false)
     },
@@ -36,7 +35,7 @@ export const AuthPhoneModal = () => {
         setLoading(true)
         await confirm.confirm(code)
         setLoading(false)
-        reset(MAIN_NAVIGATOR)
+        onAuthSuccess()
       } catch (error) {
         Toast.show({
           text1: 'Error',

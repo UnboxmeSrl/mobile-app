@@ -20,6 +20,9 @@ export const _agencyName = 'agencyName'
 export const _tiktokUsername = 'tiktokUsername'
 export const _instagramUsername = 'username'
 export const _instagram = 'instagram'
+export const _isVerified = 'isVerified'
+export const _verificationStatus = 'verificationStatus'
+export const _experienceType = 'experienceType'
 
 const initialState = {
   [_initialized]: false,
@@ -48,6 +51,7 @@ const {
 } = createReduxModule({ initialState, name: AUTH_NAMESPACE })
 
 export const selectUid = createSelector(selectState, prop(_uid))
+export const selectIsVerified = createSelector(selectState, prop(_isVerified))
 export const selectIsAuthenticated = createSelector(selectUid, Boolean)
 export const selectFullName = createSelector(selectState, prop(_fullName))
 export const selectGender = createSelector(selectState, prop(_gender))
@@ -59,6 +63,7 @@ export const selectAgencyName = createSelector(selectState, prop(_agencyName))
 export const selectIsAuthInitialized = createSelector(selectState, prop(_initialized))
 export const selectTiktokUsername = createSelector(selectState, prop(_tiktokUsername))
 export const selectInstagramData = createSelector(selectState, prop(_instagram))
+export const selectExperienceType = createSelector(selectState, prop(_experienceType))
 export const selectInstagramUsername = createSelector(
   selectInstagramData,
   prop(_instagramUsername)

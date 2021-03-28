@@ -11,6 +11,7 @@ import { COLORS } from '@const'
 import { useAction } from '@hooks/common'
 import authModule, {
   _instagram,
+  _verificationStatus,
   selectInstagramUsername,
   updateMe,
 } from '@redux/modules/auth'
@@ -23,7 +24,6 @@ export const Instagram = ({ onSuccess, setLoading, loading }) => {
   const updateMeAction = useAction(updateMe)
 
   const instagramUsername = useSelector(selectInstagramUsername)
-  console.log(instagramUsername)
 
   const exchangeForLongToken = async ({ access_token, user_id }) => {
     const res = await axios.get(
@@ -33,7 +33,10 @@ export const Instagram = ({ onSuccess, setLoading, loading }) => {
       `https://graph.instagram.com/${user_id}?fields=account_type,id,username&access_token=${access_token}`
     )
     if (res?.data && user.data) {
-      updateMeAction({ [_instagram]: { ...res.data, ...user.data } })
+      updateMeAction({
+        [_instagram]: { ...res.data, ...user.data },
+        [_verificationStatus]: 'TODO',
+      })
     } else {
       showToastError('Something went wrong')
     }
@@ -44,7 +47,7 @@ export const Instagram = ({ onSuccess, setLoading, loading }) => {
     },
     [exchangeForLongToken]
   )
-  const onPress = useCallback(() => {
+  const onPress = useCallback(async () => {
     if (instagramUsername) {
       Alert.alert('Are you sure you want disconnect Instagram account?', '', [
         {
@@ -61,6 +64,7 @@ export const Instagram = ({ onSuccess, setLoading, loading }) => {
         },
       ])
     } else {
+      await CookieManager.clearAll(true)
       ref.current?.show()
     }
   }, [instagramUsername, updateMeAction])

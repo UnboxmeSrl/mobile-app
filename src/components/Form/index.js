@@ -47,11 +47,15 @@ export const Form = ({ children }) => {
   const handleSubmitEditing = useCallback(
     (name) => {
       const inputPosition = getInputPosition(name)
+      const isLastInput = inputPosition === inputs.length - 1
       const nextFocusableInput = nth(inputPosition + 1, inputs)
 
       if (nextFocusableInput) {
         console.log('focus')
         nextFocusableInput.focus()
+      }
+      if (isLastInput) {
+        Keyboard.dismiss()
       }
     },
     [getInputPosition, inputs]

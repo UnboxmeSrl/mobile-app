@@ -7,17 +7,28 @@ import { BUTTON_HEIGHT } from '@components/Button/constants'
 import { ButtonText, Subtitle } from '@components/Text'
 import { COLORS } from '@const'
 
-export const Button = ({ children, tKey, tOptions, loading, leftIconName, ...rest }) => {
+export const Button = ({
+  children,
+  tKey,
+  tOptions,
+  loading,
+  leftIconName,
+  rightIconName,
+  light,
+  disabled,
+  ...rest
+}) => {
+  const color = light ? COLORS.achromaticBlack : COLORS.white
   return (
-    <ThemedButton disabled={loading} loading={loading} {...rest}>
-      {leftIconName ? (
-        <LeftIcon color={COLORS.white} name={leftIconName} size={18} />
-      ) : null}
-      {tKey ? (
-        <ButtonText color={COLORS.white} tKey={tKey} tOptions={tOptions} />
-      ) : (
-        children
-      )}
+    <ThemedButton
+      bgColor={light ? COLORS.veryLight : COLORS.primary}
+      disabled={loading || disabled}
+      loading={loading}
+      {...rest}
+    >
+      {leftIconName ? <LeftIcon color={color} name={leftIconName} size={18} /> : null}
+      {tKey ? <ButtonText color={color} tKey={tKey} tOptions={tOptions} /> : children}
+      {rightIconName ? <RightIcon color={color} name={rightIconName} size={18} /> : null}
       {loading ? <Loader /> : null}
     </ThemedButton>
   )
@@ -25,7 +36,8 @@ export const Button = ({ children, tKey, tOptions, loading, leftIconName, ...res
 
 const ThemedButton = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${propOr(COLORS.primary, 'bgColor')};
+  background-color: ${({ disabled, bgColor }) =>
+    disabled ? COLORS.lightGrey : bgColor || COLORS.primary};
   border-radius: 16px;
   flex-direction: row;
   height: 48px;
@@ -41,4 +53,8 @@ const Loader = styled.ActivityIndicator`
 const LeftIcon = styled(Ionicons)`
   left: 20px;
   position: absolute;
+`
+const RightIcon = styled(Ionicons)`
+  position: absolute;
+  right: 20px;
 `
