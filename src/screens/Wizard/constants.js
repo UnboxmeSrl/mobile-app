@@ -1,5 +1,6 @@
 import { WizardStepAgency } from '@components/WizardStepAgency'
 import { WizardStepCity } from '@components/WizardStepCity'
+import { WizardStepCode } from '@components/WizardStepCode'
 import { WizardStepDateOfBirth } from '@components/WizardStepDateOfBirth'
 import { WizardStepGender } from '@components/WizardStepGender'
 import { WizardStepName } from '@components/WizardStepName'
@@ -31,6 +32,11 @@ export const STEPS = [
   {
     component: WizardStepExperience,
     tKeyHeader: 'experience.title',
+  },
+  {
+    component: WizardStepCode,
+    tKeyDescription: 'code.description',
+    tKeyHeader: 'code.title',
   },
   {
     component: WizardStepSocial,

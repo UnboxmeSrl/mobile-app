@@ -23,6 +23,7 @@ export const _instagram = 'instagram'
 export const _isVerified = 'isVerified'
 export const _verificationStatus = 'verificationStatus'
 export const _experienceType = 'experienceType'
+export const _wizardCode = 'wizardCode'
 
 const initialState = {
   [_initialized]: false,
@@ -64,6 +65,7 @@ export const selectIsAuthInitialized = createSelector(selectState, prop(_initial
 export const selectTiktokUsername = createSelector(selectState, prop(_tiktokUsername))
 export const selectInstagramData = createSelector(selectState, prop(_instagram))
 export const selectExperienceType = createSelector(selectState, prop(_experienceType))
+export const selectWizardCode = createSelector(selectState, prop(_wizardCode))
 export const selectInstagramUsername = createSelector(
   selectInstagramData,
   prop(_instagramUsername)

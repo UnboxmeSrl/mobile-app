@@ -25,6 +25,11 @@ export default {
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
+    code: {
+      title: 'Code from friend',
+      description: 'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
+      continueWithout: 'Continue without code'
+    },
     errors: {
       alreadyRegistered: 'Email is already registered',
       isNotValid: 'Value is not valid',
