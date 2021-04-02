@@ -6,23 +6,13 @@ import { Content } from '@components/Content'
 import { ProgressBar } from '@components/ProgressBar'
 import { WizardStep } from '@components/WizardStep'
 
-export const WizardPresenter = ({
-  navigateToNextStep,
-  navigateToPrevStep,
-  stepIndex,
-  steps,
-  hiddenArrow,
-}) => (
+export const QuestionnairePresenter = ({ navigateToNextStep, navigateToPrevStep, stepIndex, steps, hiddenArrow }) => (
   <Wrapper>
     <Header>
       <BackArrow hidden={hiddenArrow} noBack onPress={navigateToPrevStep} />
       <ProgressBar currentStepIndex={stepIndex} stepsLength={steps.length} />
     </Header>
-    <WizardStep
-      navigateToNextStep={navigateToNextStep}
-      stepIndex={stepIndex}
-      steps={steps}
-    />
+    <WizardStep navigateToNextStep={navigateToNextStep} stepIndex={stepIndex} steps={steps} />
   </Wrapper>
 )
 

@@ -5,6 +5,7 @@ import { isEmpty } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
+import { VERIFIED_USER } from '@const/verification'
 import { _isVerified, _tiktokUsername, _verificationStatus } from '@redux/modules/auth'
 import i18n from '@services/i18n'
 
@@ -38,14 +39,9 @@ export const signInWithEmail = async (email, password) => {
     const user = await auth().signInWithEmailAndPassword(email, password)
     return user
   } catch (error) {
-    Alert.alert(
-      i18n.t('auth.whoops'),
-      i18n.t('auth.wrongCombination'),
-      [{ text: 'OK' }],
-      {
-        cancelable: false,
-      }
-    )
+    Alert.alert(i18n.t('auth.whoops'), i18n.t('auth.wrongCombination'), [{ text: 'OK' }], {
+      cancelable: false,
+    })
     logger.error('signInWithEmail', { error })
   }
 }
@@ -65,17 +61,18 @@ export const sendPhoneVerificationCode = async (phone) => {
   }
 }
 
-export const onAuthSuccess = async (user) => {
+export const onAuthSuccess = async () => {
   try {
-    const uid = auth().currentUser.uid
-    const data = await firestore().collection(USERS_COLLECTION).doc(uid).get()
-    const isVerified = data.get(_isVerified)
-    const verificationStatus = data.get(_verificationStatus)
+    const uid = auth().currentUser?.uid
+    if (uid) {
+      const data = await firestore().collection(USERS_COLLECTION).doc(uid).get()
+      const verificationStatus = data.get(_verificationStatus)
 
-    if (isVerified) {
-      reset(MAIN_NAVIGATOR)
-    } else {
-      navigate(SCREEN_NAMES.Wizard, { [_verificationStatus]: verificationStatus })
+      if (verificationStatus === VERIFIED_USER) {
+        reset(MAIN_NAVIGATOR)
+      } else {
+        navigate(SCREEN_NAMES.Wizard, { [_verificationStatus]: verificationStatus })
+      }
     }
   } catch (error) {
     logger.error('onAuthSuccess', { error })
