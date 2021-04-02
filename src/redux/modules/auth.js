@@ -1,9 +1,10 @@
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
-import { prop, propOr } from 'ramda'
+import { equals, isNil, not, pipe, prop, propOr } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
+import { IN_REVIEW_USER, REJECTED_USER, VERIFIED_USER } from '@const/verification'
 import { createReduxModule } from '@redux/createModule'
 
 export const AUTH_NAMESPACE = 'auth'
@@ -20,7 +21,6 @@ export const _agencyName = 'agencyName'
 export const _tiktokUsername = 'tiktokUsername'
 export const _instagramUsername = 'username'
 export const _instagram = 'instagram'
-export const _isVerified = 'isVerified'
 export const _verificationStatus = 'verificationStatus'
 export const _experienceType = 'experienceType'
 export const _wizardCode = 'wizardCode'
@@ -31,20 +31,17 @@ const initialState = {
 
 const ref = firestore().collection(USERS_COLLECTION)
 
-export const updateMe = createAsyncThunk(
-  `${AUTH_NAMESPACE}/updateMe`,
-  async (payload) => {
-    const user = auth().currentUser
-    const uid = user?.uid
-    const doc = await ref.doc(uid).get()
+export const updateMe = createAsyncThunk(`${AUTH_NAMESPACE}/updateMe`, async (payload) => {
+  const user = auth().currentUser
+  const uid = user?.uid
+  const doc = await ref.doc(uid).get()
 
-    if (doc.exists) {
-      return await ref.doc(uid).update({ ...payload, uid })
-    } else {
-      return await ref.doc(uid).set({ uid, ...payload })
-    }
+  if (doc.exists) {
+    return await ref.doc(uid).update({ ...payload, uid })
+  } else {
+    return await ref.doc(uid).set({ uid, ...payload })
   }
-)
+})
 
 const {
   slice,
@@ -52,7 +49,6 @@ const {
 } = createReduxModule({ initialState, name: AUTH_NAMESPACE })
 
 export const selectUid = createSelector(selectState, prop(_uid))
-export const selectIsVerified = createSelector(selectState, prop(_isVerified))
 export const selectIsAuthenticated = createSelector(selectUid, Boolean)
 export const selectFullName = createSelector(selectState, prop(_fullName))
 export const selectGender = createSelector(selectState, prop(_gender))
@@ -66,9 +62,10 @@ export const selectTiktokUsername = createSelector(selectState, prop(_tiktokUser
 export const selectInstagramData = createSelector(selectState, prop(_instagram))
 export const selectExperienceType = createSelector(selectState, prop(_experienceType))
 export const selectWizardCode = createSelector(selectState, prop(_wizardCode))
-export const selectInstagramUsername = createSelector(
-  selectInstagramData,
-  prop(_instagramUsername)
-)
+export const selectVerificationStatus = createSelector(selectState, prop(_verificationStatus))
+export const selectIsVerified = createSelector(selectVerificationStatus, equals(VERIFIED_USER))
+export const selectIsRejected = createSelector(selectVerificationStatus, equals(REJECTED_USER))
+export const selectIsInReview = createSelector(selectVerificationStatus, equals(IN_REVIEW_USER))
+export const selectInstagramUsername = createSelector(selectInstagramData, prop(_instagramUsername))
 
 export default slice

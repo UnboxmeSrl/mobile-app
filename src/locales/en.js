@@ -14,22 +14,23 @@ export default {
       whoops: 'Whooops',
       withPhone: 'Continue with Phone number',
       wrongCode: 'Verification code is invalid or expired',
-      wrongCombination:
-        'The email and password combination is not correct. Please try again.',
+      wrongCombination: 'The email and password combination is not correct. Please try again.',
     },
     awards: {
       specialAwards: 'Special Awards',
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
     },
+    code: {
+      continueWithout: 'Continue without code',
+      description:
+        'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
+      title: 'Code from friend',
+    },
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
-    code: {
-      title: 'Code from friend',
-      description: 'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
-      continueWithout: 'Continue without code'
-    },
+    continue: 'Continue',
     errors: {
       alreadyRegistered: 'Email is already registered',
       isNotValid: 'Value is not valid',
@@ -40,11 +41,9 @@ export default {
     },
     experience: {
       experienced: 'I have experience with video blogging and unboxing products ',
-      limited:
-        'I have no or limited experience but I would be up in learning how to do video blogging ',
+      limited: 'I have no or limited experience but I would be up in learning how to do video blogging ',
       title: 'Your experience\n' + 'with unboxing\n' + '& storytelling',
-      zero:
-        "I never did video blogging and I wouldn't be able to make an unboxing while explaining product properties",
+      zero: "I never did video blogging and I wouldn't be able to make an unboxing while explaining product properties",
     },
     followUs: 'Follow us on Instagram',
     gender: {
@@ -97,12 +96,14 @@ export default {
       'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
     review: {
       inReview: 'We are reviewing your account. In the meanwhile follow us on Instagram.',
+      policy: 'Acceptation policy',
+      rejected:
+        'Sorry we believe your account is not yet fitting with our standards (read more on our acceptation policy)',
+      verified: 'You are accepted! Congratulations your account has been accepted into Unboxme!',
     },
     settings: 'Settings',
     signIn: {
-      getPersonalized:
-        'Get personalized boxes prepared for\n' +
-        'the needs of your skin, hair and your body',
+      getPersonalized: 'Get personalized boxes prepared for\n' + 'the needs of your skin, hair and your body',
       orLogIn: 'or log in with email or phone number',
       withEmail: 'Sign in with email',
       withPhone: 'Sign in with phone number',
@@ -117,8 +118,7 @@ export default {
       orLogIn: 'or log in with email or phone number',
       orSignUp: 'or sign up with email or phone number',
       signUpWith: 'Continue with {{name}}',
-      tellEveryone:
-        'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
+      tellEveryone: 'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
       withEmail: 'Sign up with email',
       withPhone: 'Sign up with phone number',
     },
@@ -137,8 +137,7 @@ export default {
       connect: 'Connect your\n' + 'social networks',
       dateOfBirth: 'Date of birth',
       genderStep: 'Gender',
-      nameStep:
-        'We use your data to personalize your experience and boxes. We never share it.',
+      nameStep: 'We use your data to personalize your experience and boxes. We never share it.',
     },
   },
 }

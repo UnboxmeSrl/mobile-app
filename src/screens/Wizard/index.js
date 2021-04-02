@@ -5,11 +5,7 @@ import { STEPS } from '@screens/Wizard/constants'
 import { dec, inc } from 'ramda'
 
 import { STACK_NAMES } from '@const/navigation'
-import {
-  _verificationStatus,
-  selectInstagramUsername,
-  selectTiktokUsername,
-} from '@redux/modules/auth'
+import { _verificationStatus } from '@redux/modules/auth'
 
 import { WizardPresenter } from './WizardPresenter'
 

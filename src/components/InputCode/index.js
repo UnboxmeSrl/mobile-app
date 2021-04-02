@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import { Controller } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text } from 'react-native'
-import {
-  CodeField,
-  Cursor,
-  useBlurOnFulfill,
-  useClearByFocusCell,
-} from 'react-native-confirmation-code-field'
+import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field'
 import styled from 'styled-components/native'
 
 import InputDateAndroid from '@components/InputDate/index'
@@ -41,12 +36,11 @@ export const InputCode = ({ control, name, errors, rules, value }) => {
                 {...props}
                 cellCount={CELL_COUNT}
                 onChangeText={onChange}
+                onSubmitEditing={() => {
+                  ref.current.blur()
+                }}
                 renderCell={({ index, symbol, isFocused }) => (
-                  <Cell
-                    isFocused={isFocused}
-                    key={index}
-                    onLayout={getCellOnLayoutHandler(index)}
-                  >
+                  <Cell isFocused={isFocused} key={index} onLayout={getCellOnLayoutHandler(index)}>
                     <H2>{symbol}</H2>
                   </Cell>
                 )}

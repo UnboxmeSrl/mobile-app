@@ -4,6 +4,7 @@ import { Linking } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { IN_REVIEW_USER } from '@const/verification'
 import {
   _tiktokUsername,
   _verificationStatus,
@@ -21,7 +22,7 @@ export const TikTokModal = () => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    dispatch(updateMe({ ...values, [_verificationStatus]: 'TODO' }))
+    dispatch(updateMe({ ...values, [_verificationStatus]: IN_REVIEW_USER }))
     goBack()
     Linking.openURL('https://vm.tiktok.com/ZSJY3DjKU')
   }

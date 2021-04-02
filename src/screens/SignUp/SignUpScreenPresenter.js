@@ -19,6 +19,7 @@ export const SignUpScreenPresenter = ({
   loading,
   setLoading,
   MainButton,
+  onSkip,
 }) => (
   <Background resizeMode={'cover'} source={IMAGES.signUp}>
     <ContentStyled>
@@ -39,7 +40,7 @@ export const SignUpScreenPresenter = ({
           tKey={'login.alreadyHaveAccount'}
         />
       </Buttons>
-      <Button loadingloading={loading} onPress={onSuccess} tKey={'login.skip'} />
+      <Button loadingloading={loading} onPress={onSkip} tKey={'login.skip'} />
       <PoliciesPart />
     </ContentStyled>
   </Background>

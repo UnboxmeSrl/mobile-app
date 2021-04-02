@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import { Button } from '@components/Button'
 import { COLORS } from '@const'
+import { IN_REVIEW_USER } from '@const/verification'
 import { useAction } from '@hooks/common'
 import authModule, {
   _instagram,
@@ -35,7 +36,7 @@ export const Instagram = ({ onSuccess, setLoading, loading }) => {
     if (res?.data && user.data) {
       updateMeAction({
         [_instagram]: { ...res.data, ...user.data },
-        [_verificationStatus]: 'TODO',
+        [_verificationStatus]: IN_REVIEW_USER,
       })
     } else {
       showToastError('Something went wrong')

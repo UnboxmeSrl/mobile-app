@@ -4,7 +4,7 @@ import { useNavigation } from 'react-navigation-hooks'
 import { AppleLogin } from '@components/Auth/AppleLogin'
 import { GoogleLogin } from '@components/Auth/GoogleLogin'
 import { IS_IOS } from '@const/common'
-import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
+import { MAIN_NAVIGATOR, SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
 import { reset } from '@services'
 import { onAuthSuccess } from '@services/auth'
 
@@ -27,11 +27,16 @@ export const SignUpScreen = () => {
     onAuthSuccess()
   }, [])
 
+  const onSkip = useCallback(() => {
+    navigate(STACK_NAMES.BottomStack)
+  }, [])
+
   const props = {
     MainButton,
     loading,
     navigateToSignIn,
     navigateToSignUp,
+    onSkip,
     onSuccess,
     setLoading,
   }

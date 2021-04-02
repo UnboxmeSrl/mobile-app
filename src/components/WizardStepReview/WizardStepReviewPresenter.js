@@ -1,32 +1,37 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
-import { KeyboardAvoidingView } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
-import { Input } from '@components/Input'
-import { Select } from '@components/Select'
-import { BigLight } from '@components/Text'
+import { BigLight, Subtitle } from '@components/Text'
 import { StepContent } from '@components/WizardStep'
-import { COLORS, GENDER_OPTIONS } from '@const'
-import { PHONE_RULES, REQUIRED_RULE } from '@const/validators'
+import { COLORS } from '@const'
 
-export const WizardStepReviewPresenter = ({ openInstagram }) => {
+export const WizardStepReviewPresenter = ({ openInstagram, tKey, isRejected, navigateToHome, isVerified }) => {
   return (
     <StepContent>
       <Wrapper>
-        <Text tKey={'review.inReview'} />
+        <Text tKey={tKey} />
       </Wrapper>
-      <Button
-        light
-        onPress={openInstagram}
-        rightIconName={'logo-instagram'}
-        tKey={'followUs'}
-      />
+      {isRejected && (
+        <Policy>
+          <Subtitle tKey={'review.policy'} />
+          <Ionicons color={COLORS.black} name={'chevron-forward-outline'} size={22} />
+        </Policy>
+      )}
+      <Button light onPress={openInstagram} rightIconName={'logo-instagram'} tKey={'followUs'} />
+      {isVerified && <Button onPress={navigateToHome} tKey={'continue'} />}
     </StepContent>
   )
 }
 
+const Policy = styled.TouchableOpacity`
+  align-items: center;
+  flex-direction: row;
+  height: 40px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`
 const Wrapper = styled.View`
   flex: 1;
   justify-content: center;
