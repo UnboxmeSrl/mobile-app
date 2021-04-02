@@ -1,47 +1,45 @@
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigation } from 'react-navigation-hooks'
+import auth from '@react-native-firebase/auth'
 
-import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
-import { reset } from '@services'
+import { showToastError, showToastSuccess } from '@services'
 import { onAuthSuccess, signInWithEmail } from '@services/auth'
 
-import { SignInEmailPresenter } from './SignInEmailPresenter'
+import { ForgotPasswordPresenter } from './ForgotPasswordPresenter'
 
-export const SignInEmailModal = () => {
+export const ForgotPasswordModal = () => {
   const [loading, setLoading] = useState(false)
   const { control, handleSubmit, errors } = useForm()
-  const { navigate } = useNavigation()
-
+  const { t } = useTranslation()
+  const { goBack } = useNavigation()
   const onSubmit = useCallback(
     async (data) => {
       try {
         setLoading(true)
-        const { email, password } = data
-        const user = await signInWithEmail(email, password)
+        const { email } = data
+        await auth().sendPasswordResetEmail(email)
         setLoading(false)
-        if (user) {
-          onAuthSuccess()
-        }
+        goBack()
+        showToastSuccess(t('signIn.forgotSent'))
       } catch (e) {
+        showToastError(e)
         setLoading(false)
       }
     },
     [setLoading]
   )
 
-  const navigateToForgot = () => navigate(MODAL_NAMES.ForgotPassword)
-
-  const onPress = handleSubmit(onSubmit, (error) => console.log(error))
+  const onPress = handleSubmit(onSubmit)
 
   const props = {
     control,
     errors,
     handleSubmit,
     loading,
-    navigateToForgot,
     onPress,
   }
 
-  return <SignInEmailPresenter {...props} />
+  return <ForgotPasswordPresenter {...props} />
 }

@@ -8,6 +8,7 @@ export const STACK_NAMES = {
 export const MODAL_NAMES = {
   AuthPhone: 'AuthPhone',
   FillQuestionnaire: 'FillQuestionnaire',
+  ForgotPassword: 'ForgotPassword',
   Login: 'Login',
   QuestionnaireThankYou: 'QuestionnaireThankYou',
   SignInEmail: 'SignInEmail',

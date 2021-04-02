@@ -6,7 +6,7 @@ import { PASSWORD_RULES } from '@const/validators'
 import { reset } from '@services'
 import { onAuthSuccess, registerEmailAccount } from '@services/auth'
 
-import { SignInEmailPresenter } from './SignInEmailPresenter'
+import { SignUpEmailPresenter } from './SignUpEmailPresenter'
 
 export const SignUpEmailModal = () => {
   const [loading, setLoading] = useState(false)
@@ -43,5 +43,5 @@ export const SignUpEmailModal = () => {
     onPress,
   }
 
-  return <SignInEmailPresenter {...props} />
+  return <SignUpEmailPresenter {...props} />
 }

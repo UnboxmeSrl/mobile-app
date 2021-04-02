@@ -66,6 +66,7 @@ export default {
     login: {
       alreadyHaveAccount: 'Already have an account?',
       continueWith: 'Continue with {{name}}',
+      forgotPassword: 'Forgot your password?',
       otherOptions: 'Other sign up options',
       skip: 'Skip',
     },
@@ -100,8 +101,8 @@ export default {
       doYouHaveSkincare: 'Do you have\n' + 'a skincare routine?',
       dry: 'Dry',
       fill: 'Fill questionnaire',
-      kindOfSkin: 'Which kind of skin do you have?',
       getTheBox: 'Get the box',
+      kindOfSkin: 'Which kind of skin do you have?',
       normal: 'Normal',
       nowWeCanOffer: 'Now we can only offer you personalized boxes',
       oily: 'Oily',
@@ -115,6 +116,7 @@ export default {
     },
     registerOrLogin:
       'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
+    resetPassword: 'Reset password',
     review: {
       inReview: 'We are reviewing your account. In the meanwhile follow us on Instagram.',
       policy: 'Acceptation policy',
@@ -124,8 +126,11 @@ export default {
     },
     settings: 'Settings',
     signIn: {
+      forgot: 'Forgot password',
+      forgotSent: 'Recovery email was sent',
       getPersonalized: 'Get personalized boxes prepared for\n' + 'the needs of your skin, hair and your body',
       orLogIn: 'or log in with email or phone number',
+      pleaseEnter: 'Please enter the email address you signed up with.',
       withEmail: 'Sign in with email',
       withPhone: 'Sign in with phone number',
     },

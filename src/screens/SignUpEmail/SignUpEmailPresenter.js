@@ -6,12 +6,10 @@ import { Form } from '@components/Form'
 import { Input } from '@components/Input'
 import { ModalContainer } from '@components/ModalContainer'
 import { PasswordInput } from '@components/PasswordInput'
-import { TextButton } from '@components/TextButton'
-import { COLORS } from '@const'
-import { EMAIL_RULES_LOGIN, PASSWORD_RULES } from '@const/validators'
+import { EMAIL_RULES, PASSWORD_RULES } from '@const/validators'
 
-export const SignInEmailPresenter = ({ onPress, control, errors, loading, navigateToForgot }) => (
-  <ModalContainer contentBased tKey={'signIn.withEmail'}>
+export const SignUpEmailPresenter = ({ onPress, control, errors, confirmPasswordRules, loading }) => (
+  <ModalContainer tKey={'signUp.withEmail'}>
     <Content>
       <Form>
         <Input
@@ -23,7 +21,7 @@ export const SignInEmailPresenter = ({ onPress, control, errors, loading, naviga
           keyboardType="email-address"
           name="email"
           placeholderKey="signUp.enterEmail"
-          rules={EMAIL_RULES_LOGIN}
+          rules={EMAIL_RULES}
           textContentType="emailAddress"
         />
         <PasswordInput
@@ -34,10 +32,15 @@ export const SignInEmailPresenter = ({ onPress, control, errors, loading, naviga
           rules={PASSWORD_RULES}
           textContentType="newPassword"
         />
+        <PasswordInput
+          control={control}
+          errors={errors}
+          name={'confirmPassword'}
+          placeholderKey={'signUp.confirmPassword'}
+          rules={confirmPasswordRules}
+        />
       </Form>
       <SubmitButton loading={loading} onPress={onPress} tKey={'submit'} />
-
-      <TextButton color={COLORS.dark} onPress={navigateToForgot} tKey={'login.forgotPassword'} />
     </Content>
   </ModalContainer>
 )
@@ -48,7 +51,5 @@ const Content = styled.ScrollView`
   padding-top: 20px;
 `
 const SubmitButton = styled(Button)`
-  align-self: flex-end;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 8px;
 `

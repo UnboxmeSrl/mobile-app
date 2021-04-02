@@ -1,5 +1,6 @@
 import { AuthPhoneModal } from '@screens/AuthPhone'
 import { FillQuestionnaireModal } from '@screens/FillQuestionnaire'
+import { ForgotPasswordModal } from '@screens/ForgotPassword'
 import { LoginScreen } from '@screens/Login'
 import { QuestionnaireThankYouModal } from '@screens/QuestionnaireThankYou'
 import { SignInEmailModal } from '@screens/SignInEmail'
@@ -35,5 +36,8 @@ export const MODALS = {
   },
   [MODAL_NAMES.QuestionnaireThankYou]: {
     screen: QuestionnaireThankYouModal,
+  },
+  [MODAL_NAMES.ForgotPassword]: {
+    screen: ForgotPasswordModal,
   },
 }

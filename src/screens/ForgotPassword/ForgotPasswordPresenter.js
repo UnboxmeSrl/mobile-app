@@ -6,18 +6,14 @@ import { Form } from '@components/Form'
 import { Input } from '@components/Input'
 import { ModalContainer } from '@components/ModalContainer'
 import { PasswordInput } from '@components/PasswordInput'
-import { EMAIL_RULES, PASSWORD_RULES } from '@const/validators'
+import { BodyText, Caption, Text } from '@components/Text'
+import { EMAIL_RULES_LOGIN, PASSWORD_RULES } from '@const/validators'
 
-export const SignInEmailPresenter = ({
-  onPress,
-  control,
-  errors,
-  confirmPasswordRules,
-  loading,
-}) => (
-  <ModalContainer tKey={'signUp.withEmail'}>
+export const ForgotPasswordPresenter = ({ onPress, control, errors, loading }) => (
+  <ModalContainer contentBased tKey={'signIn.forgot'}>
     <Content>
       <Form>
+        <TextStyled tKey={'signIn.pleaseEnter'} />
         <Input
           autoCapitalize="none"
           autoCompleteType="email"
@@ -27,26 +23,11 @@ export const SignInEmailPresenter = ({
           keyboardType="email-address"
           name="email"
           placeholderKey="signUp.enterEmail"
-          rules={EMAIL_RULES}
+          rules={EMAIL_RULES_LOGIN}
           textContentType="emailAddress"
         />
-        <PasswordInput
-          control={control}
-          errors={errors}
-          name="password"
-          placeholderKey={'signUp.enterPassword'}
-          rules={PASSWORD_RULES}
-          textContentType="newPassword"
-        />
-        <PasswordInput
-          control={control}
-          errors={errors}
-          name={'confirmPassword'}
-          placeholderKey={'signUp.confirmPassword'}
-          rules={confirmPasswordRules}
-        />
       </Form>
-      <SubmitButton loading={loading} onPress={onPress} tKey={'submit'} />
+      <SubmitButton loading={loading} onPress={onPress} tKey={'resetPassword'} />
     </Content>
   </ModalContainer>
 )
@@ -57,5 +38,10 @@ const Content = styled.ScrollView`
   padding-top: 20px;
 `
 const SubmitButton = styled(Button)`
-  margin-top: 8px;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  margin-top: 20px;
+`
+const TextStyled = styled(BodyText)`
+  margin-bottom: 8px;
 `
