@@ -24,6 +24,11 @@ export const _instagram = 'instagram'
 export const _verificationStatus = 'verificationStatus'
 export const _experienceType = 'experienceType'
 export const _wizardCode = 'wizardCode'
+export const _questionnaire = 'questionnaire'
+export const _skinType = 'skinType'
+export const _skincareRoutine = 'skincareRoutine'
+export const _creams = 'creams'
+export const _brands = 'brands'
 
 const initialState = {
   [_initialized]: false,
@@ -31,6 +36,7 @@ const initialState = {
 
 const ref = firestore().collection(USERS_COLLECTION)
 
+export const updateQuestionnaire = (field, value) => updateMe({ [`${_questionnaire}.${field}`]: value })
 export const updateMe = createAsyncThunk(`${AUTH_NAMESPACE}/updateMe`, async (payload) => {
   const user = auth().currentUser
   const uid = user?.uid
@@ -67,5 +73,10 @@ export const selectIsVerified = createSelector(selectVerificationStatus, equals(
 export const selectIsRejected = createSelector(selectVerificationStatus, equals(REJECTED_USER))
 export const selectIsInReview = createSelector(selectVerificationStatus, equals(IN_REVIEW_USER))
 export const selectInstagramUsername = createSelector(selectInstagramData, prop(_instagramUsername))
+export const selectQuestionnaire = createSelector(selectState, prop(_questionnaire))
+export const selectSkinType = createSelector(selectQuestionnaire, prop(_skinType))
+export const selectSkincareRoutine = createSelector(selectQuestionnaire, prop(_skincareRoutine))
+export const selectCreams = createSelector(selectQuestionnaire, prop(_creams))
+export const selectBrands = createSelector(selectQuestionnaire, prop(_brands))
 
 export default slice

@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
-import { useSelector } from 'react-redux'
-import { STEPS } from '@screens/Wizard/constants'
 import { dec, inc } from 'ramda'
 
 import { STACK_NAMES } from '@const/navigation'
 import { _verificationStatus } from '@redux/modules/auth'
 
+import { STEPS } from './constants'
 import { QuestionnairePresenter } from './QuestionnairePresenter'
 
 export const QuestionnaireScreen = () => {

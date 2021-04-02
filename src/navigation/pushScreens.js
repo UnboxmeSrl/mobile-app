@@ -1,5 +1,6 @@
 import { OnboardingScreen } from '@screens/Onboarding'
 import { OtherSingUpOptionsScreen } from '@screens/OtherSignUpOptions'
+import { QuestionnaireScreen } from '@screens/Questionnaire'
 import { SignInScreen } from '@screens/SignIn'
 import { SignUpScreen } from '@screens/SignUp'
 import { WizardScreen } from '@screens/Wizard'
@@ -21,5 +22,8 @@ export default {
   },
   [SCREEN_NAMES.Wizard]: {
     screen: WizardScreen,
+  },
+  [SCREEN_NAMES.Questionnaire]: {
+    screen: QuestionnaireScreen,
   },
 }

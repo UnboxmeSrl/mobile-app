@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { GoogleSignin } from '@react-native-community/google-signin'
 import auth from '@react-native-firebase/auth'
 
-import { SCREEN_NAMES } from '@const/navigation'
+import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
 import authModule, { _initialized, selectIsAuthenticated } from '@redux/modules/auth'
 import { persistor } from '@redux/store'
@@ -20,6 +20,7 @@ export const SettingsScreen = () => {
   const { navigate } = useNavigation()
   const navigateToWizard = () => navigate(SCREEN_NAMES.Wizard)
   const navigateToLogin = () => navigate(SCREEN_NAMES.SignUp)
+  const navigateToQuestionnaire = () => navigate(MODAL_NAMES.FillQuestionnaire)
   const navigateToOnboarding = useAuthenticatedAction(navigateToWizard)
 
   const onPress = useCallback(async () => {
@@ -39,6 +40,7 @@ export const SettingsScreen = () => {
     isAuthenticated,
     navigateToLogin,
     navigateToOnboarding,
+    navigateToQuestionnaire,
     onPress,
   }
   return <SettingsScreenPresenter {...props} />

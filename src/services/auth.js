@@ -69,7 +69,7 @@ export const onAuthSuccess = async () => {
       const verificationStatus = data.get(_verificationStatus)
 
       if (verificationStatus === VERIFIED_USER) {
-        reset(MAIN_NAVIGATOR)
+        navigate(SCREEN_NAMES.Settings)
       } else {
         navigate(SCREEN_NAMES.Wizard, { [_verificationStatus]: verificationStatus })
       }

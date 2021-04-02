@@ -1,48 +1,23 @@
-import { WizardStepAgency } from '@components/WizardStepAgency'
-import { WizardStepCity } from '@components/WizardStepCity'
-import { WizardStepCode } from '@components/WizardStepCode'
-import { WizardStepDateOfBirth } from '@components/WizardStepDateOfBirth'
-import { WizardStepGender } from '@components/WizardStepGender'
-import { WizardStepName } from '@components/WizardStepName'
-import { WizardStepReview } from '@components/WizardStepReview'
-import { WizardStepSocial } from '@components/WizardStepSocial'
-import { WizardStepExperience } from '@components/WizardStepYourExperience'
+import { QuestionnaireStepBrands } from '@components/QuestionnaireStepBrands'
+import { QuestionnaireStepCreams } from '@components/QuestionnaireStepCreams'
+import { QuestionnaireStepSkin } from '@components/QuestionnaireStepSkin'
+import { QuestionnaireStepSkincare } from '@components/QuestionnaireStepSkincare'
 
 export const STEPS = [
   {
-    component: WizardStepName,
-    tKeyDescription: 'wizard.nameStep',
+    component: QuestionnaireStepSkin,
+    tKeyHeader: 'questionnaire.kindOfSkin',
   },
   {
-    component: WizardStepGender,
-    tKeyHeader: 'wizard.genderStep',
+    component: QuestionnaireStepSkincare,
+    tKeyHeader: 'questionnaire.doYouHaveSkincare',
   },
   {
-    component: WizardStepDateOfBirth,
-    tKeyHeader: 'wizard.dateOfBirth',
+    component: QuestionnaireStepCreams,
+    tKeyHeader: 'questionnaire.typeCreams',
   },
   {
-    component: WizardStepCity,
-    tKeyHeader: 'wizard.city',
-  },
-  {
-    component: WizardStepAgency,
-    tKeyHeader: 'wizard.agency',
-  },
-  {
-    component: WizardStepExperience,
-    tKeyHeader: 'experience.title',
-  },
-  {
-    component: WizardStepCode,
-    tKeyDescription: 'code.description',
-    tKeyHeader: 'code.title',
-  },
-  {
-    component: WizardStepSocial,
-    tKeyHeader: 'wizard.connect',
-  },
-  {
-    component: WizardStepReview,
+    component: QuestionnaireStepBrands,
+    tKeyHeader: 'questionnaire.selectBrands',
   },
 ]

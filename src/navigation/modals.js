@@ -1,4 +1,5 @@
 import { AuthPhoneModal } from '@screens/AuthPhone'
+import { FillQuestionnaireModal } from '@screens/FillQuestionnaire'
 import { LoginScreen } from '@screens/Login'
 import { SignInEmailModal } from '@screens/SignInEmail'
 import { SignUpEmailModal } from '@screens/SignUpEmail'
@@ -27,5 +28,8 @@ export const MODALS = {
   },
   [MODAL_NAMES.Tiktok]: {
     screen: TikTokModal,
+  },
+  [MODAL_NAMES.FillQuestionnaire]: {
+    screen: FillQuestionnaireModal,
   },
 }

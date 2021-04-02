@@ -72,6 +72,7 @@ export default {
     loginTitle: 'Login',
     logout: 'Logout',
     next: 'Next',
+    no: 'No',
     onValidation: 'On validation: {{username}}',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
@@ -89,9 +90,26 @@ export default {
       name: 'Name',
       nickname: 'Nickname',
       surname: 'Surname',
+      yourCreams: 'Your creams',
       yourTiktok: 'Your tik tok account username',
     },
     privacyPolicy: 'Privacy Policy',
+    questionnaire: {
+      acne: 'Acne',
+      aging: 'Aging',
+      doYouHaveSkincare: 'Do you have\n' + 'a skincare routine?',
+      dry: 'Dry',
+      fill: 'Fill questionnaire',
+      kindOfSkin: 'Which kind of skin do you have?',
+      normal: 'Normal',
+      oily: 'Oily',
+      pleaseFill: 'Please fill it out so that we can select only the products that suit you and your type of skin.',
+      seemsNotFilled: "It seems you haven't filled out your personal information yet!",
+      selectBrands: 'Select your\n' + 'favourite brands',
+      sensitive: 'Sensitive',
+      title: 'Questionnaire',
+      typeCreams: 'Type down the creams you are using:',
+    },
     registerOrLogin:
       'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
     review: {
@@ -139,5 +157,6 @@ export default {
       genderStep: 'Gender',
       nameStep: 'We use your data to personalize your experience and boxes. We never share it.',
     },
+    yes: 'Yes',
   },
 }

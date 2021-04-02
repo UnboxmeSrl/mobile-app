@@ -7,6 +7,7 @@ export const STACK_NAMES = {
 }
 export const MODAL_NAMES = {
   AuthPhone: 'AuthPhone',
+  FillQuestionnaire: 'FillQuestionnaire',
   Login: 'Login',
   SignInEmail: 'SignInEmail',
   SignUpEmail: 'SignUpEmail',
@@ -19,6 +20,7 @@ export const SCREEN_NAMES = {
   Home: 'Home',
   Onboarding: 'Onboarding',
   OtherSignUp: 'OtherSignUp',
+  Questionnaire: 'Questionnaire',
   Settings: 'Settings',
   SignIn: 'SignIn',
   SignUp: 'SignUp',

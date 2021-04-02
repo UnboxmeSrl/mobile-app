@@ -8,12 +8,12 @@ import { H3 } from '@components/Text'
 import { COLORS } from '@const'
 import { IS_IOS, screenHeight } from '@const/common'
 
-export const ModalContainer = ({ children, contentBased, tKey }) => {
+export const ModalContainer = ({ children, contentBased, tKey, forceSmall }) => {
   const { bottom } = useSafeAreaInsets()
 
   return (
-    <Wrapper behavior={IS_IOS ? 'padding' : 'padding'}>
-      {contentBased && IS_IOS ? <ContentBasedOffset /> : <FullSizeModalOffset />}
+    <Wrapper behavior={'padding'}>
+      {contentBased && (IS_IOS || forceSmall) ? <ContentBasedOffset /> : <FullSizeModalOffset />}
       <HandlerWrapper>
         <Handler />
       </HandlerWrapper>
