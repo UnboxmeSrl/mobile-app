@@ -49,7 +49,11 @@ const Handler = styled.View`
   width: 40px;
 `
 
-const Content = styled.ScrollView`
+const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flex: 1,
+  },
+})`
   background-color: white;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;

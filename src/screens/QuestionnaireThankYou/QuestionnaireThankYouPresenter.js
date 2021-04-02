@@ -5,14 +5,14 @@ import { Button } from '@components/Button'
 import { ModalContainer } from '@components/ModalContainer'
 import { BodyText, Subtitle } from '@components/Text'
 
-export const FillQuestionnairePresenter = ({ navigateToQuestionnaire }) => (
+export const QuestionnaireThankYouPresenter = ({ onPress }) => (
   <ModalContainer contentBased forceSmall tKey={'questionnaire.title'}>
     <Content>
       <Row>
-        <Subtitle tKey={'questionnaire.seemsNotFilled'} />
-        <Body tKey={'questionnaire.pleaseFill'} />
+        <Subtitle tKey={'questionnaire.thankYou'} />
+        <Body tKey={'questionnaire.nowWeCanOffer'} />
       </Row>
-      <SubmitButton onPress={navigateToQuestionnaire} tKey={'questionnaire.fill'} />
+      <SubmitButton onPress={onPress} tKey={'questionnaire.getTheBox'} />
     </Content>
   </ModalContainer>
 )

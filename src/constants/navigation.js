@@ -9,6 +9,7 @@ export const MODAL_NAMES = {
   AuthPhone: 'AuthPhone',
   FillQuestionnaire: 'FillQuestionnaire',
   Login: 'Login',
+  QuestionnaireThankYou: 'QuestionnaireThankYou',
   SignInEmail: 'SignInEmail',
   SignUpEmail: 'SignUpEmail',
   SignUpPhone: 'SignUpPhone',
