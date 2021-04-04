@@ -1,0 +1,31 @@
+import React from 'react'
+import styled from 'styled-components/native'
+
+import { BackArrow } from '@components/BackArrow'
+import { ModalContainer } from '@components/ModalContainer'
+import { WizardStep } from '@components/WizardStep'
+import { screenWidth } from '@const/common'
+
+import { IMAGES } from '../../assets/images'
+
+export const BoxPresenter = ({ navigateToNextStep, navigateToPrevStep, stepIndex, steps, hiddenArrow }) => (
+  <ModalContainer noPaddingTop>
+    <Content>
+      <Header>
+        {/* <BackArrow hidden={hiddenArrow} noBack onPress={navigateToPrevStep} /> */}
+        {/* <ProgressBar currentStepIndex={stepIndex} stepsLength={steps.length} /> */}
+      </Header>
+      <WizardStep navigateToNextStep={navigateToNextStep} stepIndex={stepIndex} steps={steps} />
+    </Content>
+  </ModalContainer>
+)
+
+const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+const Content = styled.View`
+  flex: 1;
+  padding-bottom: 20px;
+  padding-horizontal: 20px;
+`

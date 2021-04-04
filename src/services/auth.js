@@ -5,7 +5,7 @@ import { isEmpty } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
-import { VERIFIED_USER } from '@const/verification'
+import { APPROVED_USER } from '@const/verification'
 import { _isVerified, _tiktokUsername, _verificationStatus } from '@redux/modules/auth'
 import i18n from '@services/i18n'
 
@@ -68,7 +68,7 @@ export const onAuthSuccess = async () => {
       const data = await firestore().collection(USERS_COLLECTION).doc(uid).get()
       const verificationStatus = data.get(_verificationStatus)
 
-      if (verificationStatus === VERIFIED_USER) {
+      if (verificationStatus === APPROVED_USER) {
         navigate(SCREEN_NAMES.Settings)
       } else {
         navigate(SCREEN_NAMES.Wizard, { [_verificationStatus]: verificationStatus })

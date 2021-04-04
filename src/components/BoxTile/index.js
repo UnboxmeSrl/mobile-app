@@ -1,15 +1,22 @@
 import React from 'react'
 import { Image } from 'react-native'
+import { useNavigation } from 'react-navigation-hooks'
 import styled from 'styled-components/native'
 
 import { BodyText, H3, Subtitle, TinyText } from '@components/Text'
 import { COLORS } from '@const'
+import { MODAL_NAMES } from '@const/navigation'
 
 import { IMAGES } from '../../assets/images'
 
 export const BoxTile = () => {
+  const { navigate } = useNavigation()
   return (
-    <Wrapper>
+    <Wrapper
+      onPress={() => {
+        navigate(MODAL_NAMES.Box)
+      }}
+    >
       <Content>
         <Title>October box</Title>
         <Row>
@@ -30,8 +37,13 @@ export const BoxTile = () => {
   )
 }
 export const BoxTile2 = () => {
+  const { navigate } = useNavigation()
   return (
-    <Wrapper>
+    <Wrapper
+      onPress={() => {
+        navigate(MODAL_NAMES.Box)
+      }}
+    >
       <Content>
         <Title>Special box</Title>
         <Row>
@@ -40,9 +52,7 @@ export const BoxTile2 = () => {
         </Row>
         <Row>
           <Label>Brands: </Label>
-          <Values>
-            Sephora, Caudalie, Elemis, very long names of different brand into 2 lines
-          </Values>
+          <Values>Sephora, Caudalie, Elemis, very long names of different brand into 2 lines</Values>
         </Row>
         <Row>
           <Label>Available boxes: </Label>

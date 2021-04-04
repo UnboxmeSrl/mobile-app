@@ -8,7 +8,7 @@ import { H3 } from '@components/Text'
 import { COLORS } from '@const'
 import { IS_IOS, screenHeight } from '@const/common'
 
-export const ModalContainer = ({ children, contentBased, tKey, forceSmall }) => {
+export const ModalContainer = ({ children, contentBased, tKey, forceSmall, noPaddingTop }) => {
   const { bottom } = useSafeAreaInsets()
 
   return (
@@ -17,7 +17,7 @@ export const ModalContainer = ({ children, contentBased, tKey, forceSmall }) => 
       <HandlerWrapper>
         <Handler />
       </HandlerWrapper>
-      <Content bottomInset={bottom}>
+      <Content bottomInset={bottom} noPaddingTop={noPaddingTop}>
         {tKey ? <Title tKey={tKey} /> : null}
         {children}
       </Content>
@@ -58,7 +58,7 @@ const Content = styled.ScrollView.attrs({
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   padding-bottom: ${({ bottomInset }) => bottomInset + 10}px;
-  padding-top: 32px;
+  padding-top: ${({ noPaddingTop }) => (noPaddingTop ? 0 : 32)}px;
 `
 const Title = styled(H3)`
   padding-horizontal: 20px;

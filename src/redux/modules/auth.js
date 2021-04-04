@@ -4,7 +4,7 @@ import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 import { equals, isNil, not, pipe, prop, propOr } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
-import { IN_REVIEW_USER, REJECTED_USER, VERIFIED_USER } from '@const/verification'
+import { APPROVED_USER, IN_REVIEW_USER, REJECTED_USER } from '@const/verification'
 import { createReduxModule } from '@redux/createModule'
 
 export const AUTH_NAMESPACE = 'auth'
@@ -69,7 +69,7 @@ export const selectInstagramData = createSelector(selectState, prop(_instagram))
 export const selectExperienceType = createSelector(selectState, prop(_experienceType))
 export const selectWizardCode = createSelector(selectState, prop(_wizardCode))
 export const selectVerificationStatus = createSelector(selectState, prop(_verificationStatus))
-export const selectIsVerified = createSelector(selectVerificationStatus, equals(VERIFIED_USER))
+export const selectIsVerified = createSelector(selectVerificationStatus, equals(APPROVED_USER))
 export const selectIsRejected = createSelector(selectVerificationStatus, equals(REJECTED_USER))
 export const selectIsInReview = createSelector(selectVerificationStatus, equals(IN_REVIEW_USER))
 export const selectInstagramUsername = createSelector(selectInstagramData, prop(_instagramUsername))

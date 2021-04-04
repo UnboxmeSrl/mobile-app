@@ -1,4 +1,5 @@
 import { AuthPhoneModal } from '@screens/AuthPhone'
+import { BoxModal } from '@screens/Box'
 import { FillQuestionnaireModal } from '@screens/FillQuestionnaire'
 import { ForgotPasswordModal } from '@screens/ForgotPassword'
 import { LoginScreen } from '@screens/Login'
@@ -39,5 +40,8 @@ export const MODALS = {
   },
   [MODAL_NAMES.ForgotPassword]: {
     screen: ForgotPasswordModal,
+  },
+  [MODAL_NAMES.Box]: {
+    screen: BoxModal,
   },
 }
