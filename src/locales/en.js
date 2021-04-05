@@ -21,6 +21,7 @@ export default {
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
     },
+    brands: 'Brands',
     code: {
       continueWithout: 'Continue without code',
       description:
@@ -45,6 +46,7 @@ export default {
       title: 'Your experience\n' + 'with unboxing\n' + '& storytelling',
       zero: "I never did video blogging and I wouldn't be able to make an unboxing while explaining product properties",
     },
+    extraProduct: 'Extra choice products',
     followUs: 'Follow us on Instagram',
     gender: {
       female: 'Female',
@@ -72,6 +74,7 @@ export default {
     },
     loginTitle: 'Login',
     logout: 'Logout',
+    productCategories: 'Product categories',
     next: 'Next',
     no: 'No',
     onValidation: 'On validation: {{username}}',

@@ -15,6 +15,8 @@ export const IMAGES = {
   normal: require('./images/normal.png'),
   oily: require('./images/oily.png'),
   onboarding: require('./images/onboarding.jpg'),
+  product1: require('./images/product-1.png'),
+  product2: require('./images/product-2.png'),
   sephora: require('./images/sephora.png'),
   sephoraB: require('./images/sephora-b.png'),
   signUp: require('./images/login.jpg'),
