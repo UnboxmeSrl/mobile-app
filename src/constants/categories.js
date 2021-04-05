@@ -27,7 +27,7 @@ export const PRODUCT_1 = {
 }
 export const PRODUCT_2 = {
   image: IMAGES.product2,
-  value: 'product1',
+  value: 'product2',
 }
 export const PRODUCT_3 = {
   image: IMAGES.product1,

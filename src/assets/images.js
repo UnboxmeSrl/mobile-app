@@ -8,6 +8,7 @@ export const IMAGES = {
   dior: require('./images/dior.png'),
   diorB: require('./images/dior-b.png'),
   dry: require('./images/dry.png'),
+  instagram: require('./images/instagram.png'),
   lancome: require('./images/lancome.png'),
   lancomeB: require('./images/lancome-b.png'),
   loreal: require('./images/loreal.png'),
@@ -20,4 +21,6 @@ export const IMAGES = {
   sephora: require('./images/sephora.png'),
   sephoraB: require('./images/sephora-b.png'),
   signUp: require('./images/login.jpg'),
+  swipeUp: require('./images/swipe-up.png'),
+  tiktok: require('./images/tiktok.png'),
 }

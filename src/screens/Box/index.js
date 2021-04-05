@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { Alert } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { dec, inc } from 'ramda'
 
 import { MODAL_NAMES, STACK_NAMES } from '@const/navigation'
 import { _verificationStatus } from '@redux/modules/auth'
+import i18n from '@services/i18n'
 
 import { BoxPresenter } from './BoxPresenter'
 import { STEPS } from './constants'
@@ -14,8 +16,14 @@ export const BoxModal = () => {
   const verificationStatus = useNavigationParam(_verificationStatus)
 
   const onFinish = useCallback(() => {
-    navigate(STACK_NAMES.BottomStack)
-    navigate(MODAL_NAMES.QuestionnaireThankYou)
+    Alert.alert(
+      i18n.t('underApproval'),
+      i18n.t('inFewHours'),
+      [{ onPress: () => navigate(STACK_NAMES.BottomStack), text: 'OK' }],
+      {
+        cancelable: false,
+      }
+    )
   }, [navigate])
 
   const navigateToNextStep = () => {

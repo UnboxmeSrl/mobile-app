@@ -14,10 +14,13 @@ export const WizardStep = ({ steps, stepIndex, navigateToNextStep }) => {
 
   return (
     <Wrapper>
-      <Header>
-        {tKeyHeader ? <Title tKey={tKeyHeader} /> : null}
-        {tKeyDescription ? <Description tKey={tKeyDescription} /> : null}
-      </Header>
+      {tKeyHeader ||
+        (tKeyDescription && (
+          <Header>
+            {tKeyHeader ? <Title tKey={tKeyHeader} /> : null}
+            {tKeyDescription ? <Description tKey={tKeyDescription} /> : null}
+          </Header>
+        ))}
       <Component navigateToNextStep={navigateToNextStep} />
     </Wrapper>
   )

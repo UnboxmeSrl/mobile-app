@@ -16,7 +16,7 @@ import { EXTRA_PRODUCTS, PRODUCT_CATEGORIES } from '@const/categories'
 export const BoxStepBrandsPresenter = ({ onPress }) => {
   return (
     <Step>
-      <Sections>
+      <Sections showsVerticalScrollIndicator={false}>
         <Section>
           <Title tKey={'brands'} />
           <List Component={TileBrand} data={BRANDS_OPTIONS} vertical />

@@ -18,5 +18,6 @@ const Button = styled.TouchableOpacity`
   border-radius: ${BUTTON_SIZE}px;
   height: ${BUTTON_SIZE}px;
   justify-content: center;
+  left: -${BUTTON_SIZE / 4}px;
   width: ${BUTTON_SIZE}px;
 `

@@ -22,6 +22,7 @@ export default {
       weeklyInMilan: 'Weekly in Milan',
     },
     brands: 'Brands',
+    callToActions: 'Call to actions',
     code: {
       continueWithout: 'Continue without code',
       description:
@@ -54,12 +55,28 @@ export default {
       nonBinary: 'Non-Binary',
       preferNotToSay: 'Prefer not to say',
     },
+    getThisBox: 'Get this box',
     home: {
       boxesAvailable: 'boxes available this month',
     },
     homepage: 'Homepage',
+    howItWorks: {
+      appAndApproval: 'Application and approval',
+      appAndApprovalDesc:
+        'Apply for the Unboxing \n' +
+        'After you have been accepted for the unboxing, you will receive a personilzed box at your home ',
+      getFeedback: 'Get feedback and win more!',
+      getFeedbackDesc: 'We will write you a feedback with Extra products to get in the next boxes!',
+      publish: 'Publish!',
+      publishDesc: 'Now that the videos have been approved, publish them respecting tags and given swipeup links! ',
+      title: 'How it works?',
+      unboxing: 'Unboxing & video upload',
+      unboxingDesc:
+        'Follow the Brief while doing the Unboxing, tag the pages you are required to tag and before publishing upload your videos in the app. Do that before the deadline! ',
+    },
     iWorkAgency: 'I work with Agency',
     imFreelancer: 'I am as freelancer',
+    inFewHours: 'In few hours you will receive a response',
     labelsForFields: {
       confirmPassword: 'Password',
       email: 'Email',
@@ -74,7 +91,6 @@ export default {
     },
     loginTitle: 'Login',
     logout: 'Logout',
-    productCategories: 'Product categories',
     next: 'Next',
     no: 'No',
     onValidation: 'On validation: {{username}}',
@@ -97,7 +113,9 @@ export default {
       yourCreams: 'Your creams',
       yourTiktok: 'Your tik tok account username',
     },
+    underApproval: 'Your request is now under approval!',
     privacyPolicy: 'Privacy Policy',
+    productCategories: 'Product categories',
     questionnaire: {
       acne: 'Acne',
       aging: 'Aging',
@@ -119,6 +137,7 @@ export default {
     },
     registerOrLogin:
       'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
+    requiredMedia: 'Required media',
     resetPassword: 'Reset password',
     review: {
       inReview: 'We are reviewing your account. In the meanwhile follow us on Instagram.',
