@@ -1,98 +1,110 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 
-import { BodyText, H3, Subtitle, TinyText } from '@components/Text'
+import { H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
 import { MODAL_NAMES } from '@const/navigation'
+import { selectBrandsByIds } from '@redux/modules/brands'
+import { selectCategoriesById } from '@redux/modules/categories'
 
-import { IMAGES } from '../../assets/images'
-
-export const BoxTile = () => {
+export const BoxTile = ({ box }) => {
   const { navigate } = useNavigation()
+  const { name, id, left, imageUrl, categories, brands } = box
+  const categoriesData = useSelector(selectCategoriesById(categories))
+  const brandsData = useSelector(selectBrandsByIds(brands))
+
   return (
     <Wrapper
+      key={id}
       onPress={() => {
-        navigate(MODAL_NAMES.Box)
+        navigate({ params: { boxId: id }, routeName: MODAL_NAMES.Box })
       }}
     >
-      <Content>
-        <Title>October box</Title>
+      <Top>
+        <Title translations={name} />
+        <Label tKey={'home.availableBoxes'} />
+        <Values>{left}</Values>
+      </Top>
+      <Bottom>
+        <ItemsImage source={{ url: imageUrl }} />
         <Row>
-          <Label>Brands: </Label>
-          <Values>Este Lauder, Loreal, Kiels, Avene, etc.</Values>
+          <Label tKey={'home.topic'} />
+          {categoriesData.map((category) => (
+            <Value key={category.id} translations={category.name} />
+          ))}
         </Row>
-        <Row>
-          <Label>Brands: </Label>
-          <Values>Este Lauder, Loreal, Kiels, Avene, etc.</Values>
-        </Row>
-        <Row>
-          <Label>Available boxes: </Label>
-          <Values>29</Values>
-        </Row>
-      </Content>
-      <ItemsImage source={IMAGES.boxItems} />
+        <Brands horizontal>
+          {brandsData.map((brand) => (
+            <BrandImageWrapper key={brand.id}>
+              <BrandImage source={{ url: brand.imageDarkUrl }} />
+            </BrandImageWrapper>
+          ))}
+        </Brands>
+      </Bottom>
     </Wrapper>
   )
 }
-export const BoxTile2 = () => {
-  const { navigate } = useNavigation()
-  return (
-    <Wrapper
-      onPress={() => {
-        navigate(MODAL_NAMES.Box)
-      }}
-    >
-      <Content>
-        <Title>Special box</Title>
-        <Row>
-          <Label>Brands: </Label>
-          <Values>Este Lauder, Loreal, Kiels, Avene, etc.</Values>
-        </Row>
-        <Row>
-          <Label>Brands: </Label>
-          <Values>Sephora, Caudalie, Elemis, very long names of different brand into 2 lines</Values>
-        </Row>
-        <Row>
-          <Label>Available boxes: </Label>
-          <Values>120</Values>
-        </Row>
-      </Content>
-      <ItemsImage source={IMAGES.boxItems2} />
-    </Wrapper>
-  )
-}
+
 const Wrapper = styled.TouchableOpacity`
-  height: 210px;
+  border-color: ${COLORS.tertiary};
+  border-radius: 20px;
+  border-width: 3px;
+  flex-direction: column;
   justify-content: flex-end;
-  margin-top: 32px;
+  margin-top: 20px;
 `
 const Row = styled.View`
   flex-direction: row;
   margin-top: 4px;
 `
-const Content = styled.View`
-  background-color: ${COLORS.tertiary};
+const Top = styled.View`
   border-radius: 20px;
   justify-content: center;
-  min-height: 152px;
+
+  padding: 18px 24px;
+`
+const Bottom = styled.View`
+  background-color: ${COLORS.tertiary};
+  border-radius: 16px;
+  justify-content: center;
+  min-height: 102px;
   padding: 24px;
   width: 100%;
 `
 const Label = styled(TinyText)`
   color: ${COLORS.primaryDark};
+  margin-right: 4px;
 `
-const Values = styled(TinyText).attrs({ numberOfLines: 2 })`
+const Values = styled(TinyText).attrs({ numberOfLines: 1 })`
   flex: 1;
+  color: ${COLORS.achromaticBlack};
+`
+const Value = styled(TinyText)`
+  margin-right: 2px;
 `
 const Title = styled(H3)`
   margin-bottom: 8px;
 `
+const Brands = styled.ScrollView`
+  margin-top: 10px;
+`
+const BrandImageWrapper = styled.View`
+  background-color: ${COLORS.veryLight};
+  border-radius: 10px;
+  height: 30px;
+  margin-right: 8px;
+  width: 55px;
+`
+const BrandImage = styled.Image`
+  flex: 1;
+`
 const ItemsImage = styled(Image)`
+  bottom: 70px;
   height: 112px;
   position: absolute;
   right: 0;
-  top: 0;
   width: 160px;
 `

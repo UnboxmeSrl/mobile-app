@@ -13,21 +13,21 @@ import { StepContent } from '@components/WizardStep'
 import { BRANDS_OPTIONS } from '@const/brands'
 import { EXTRA_PRODUCTS, PRODUCT_CATEGORIES } from '@const/categories'
 
-export const BoxStepBrandsPresenter = ({ onPress }) => {
+export const BoxStepBrandsPresenter = ({ onPress, brandsData, products, categoriesData }) => {
   return (
     <Step>
       <Sections showsVerticalScrollIndicator={false}>
         <Section>
           <Title tKey={'brands'} />
-          <List Component={TileBrand} data={BRANDS_OPTIONS} vertical />
+          <List Component={TileBrand} data={brandsData} vertical />
         </Section>
         <Section>
           <Title tKey={'productCategories'} />
-          <List Component={TileCategory} data={PRODUCT_CATEGORIES} vertical />
+          <List Component={TileCategory} data={categoriesData} vertical />
         </Section>
         <Section>
           <Title tKey={'extraProduct'} />
-          <List Component={TileExtraProduct} data={EXTRA_PRODUCTS} vertical />
+          <List Component={TileExtraProduct} data={products} vertical />
         </Section>
       </Sections>
       <Bottom>

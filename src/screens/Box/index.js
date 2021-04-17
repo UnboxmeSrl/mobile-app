@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
+import { useSelector } from 'react-redux'
 import { dec, inc } from 'ramda'
 
 import { MODAL_NAMES, STACK_NAMES } from '@const/navigation'
 import { _verificationStatus } from '@redux/modules/auth'
+import { selectBoxById } from '@redux/modules/boxes'
 import i18n from '@services/i18n'
 
 import { BoxPresenter } from './BoxPresenter'

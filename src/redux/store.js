@@ -1,22 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from 'redux-persist'
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
 
 import { AUTH_NAMESPACE } from '@redux/modules/auth'
+import boxes from '@redux/modules/boxes'
 
 import rootReducer from './rootReducer'
 
 const persistConfig = {
-  blacklist: [AUTH_NAMESPACE],
+  blacklist: [AUTH_NAMESPACE, 'boxes', 'products'],
   key: 'root',
   storage: AsyncStorage,
 }

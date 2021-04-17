@@ -4,10 +4,10 @@ import styled from 'styled-components/native'
 import { BodyText } from '@components/Text'
 import { COLORS } from '@const'
 
-export const TileCategory = ({ tKey }) => {
+export const TileCategory = ({ name }) => {
   return (
     <Wrapper>
-      <Text tKey={tKey} />
+      <Text translations={name} />
     </Wrapper>
   )
 }

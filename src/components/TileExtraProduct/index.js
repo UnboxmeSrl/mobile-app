@@ -4,11 +4,11 @@ import styled from 'styled-components/native'
 import { COLORS } from '@const'
 
 const WIDTH = 150
-export const TileExtraProduct = ({ image }) => {
+export const TileExtraProduct = ({ imageUrl }) => {
   return (
     <Wrapper>
       <BackgroundColor />
-      <ImageStyled resizeMode={'contain'} source={image} />
+      <ImageStyled resizeMode={'contain'} source={{ url: imageUrl }} />
     </Wrapper>
   )
 }

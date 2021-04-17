@@ -5,9 +5,6 @@ import { ActiveStep } from '@components/ActiveStep'
 import { BackArrow } from '@components/BackArrow'
 import { ModalContainer } from '@components/ModalContainer'
 import { WizardStep } from '@components/WizardStep'
-import { screenWidth } from '@const/common'
-
-import { IMAGES } from '../../assets/images'
 
 export const BoxPresenter = ({ navigateToNextStep, navigateToPrevStep, stepIndex, steps, hiddenArrow }) => (
   <ModalContainer noPaddingTop>
@@ -24,6 +21,7 @@ export const BoxPresenter = ({ navigateToNextStep, navigateToPrevStep, stepIndex
 const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 8px;
 `
 const Content = styled.View`
   flex: 1;

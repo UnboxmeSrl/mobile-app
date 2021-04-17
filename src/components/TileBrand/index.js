@@ -3,10 +3,10 @@ import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
 
-export const TileBrand = ({ image }) => {
+export const TileBrand = ({ imageDarkUrl }) => {
   return (
     <Wrapper>
-      <ImageStyled source={image} />
+      <ImageStyled source={{ url: imageDarkUrl }} />
     </Wrapper>
   )
 }

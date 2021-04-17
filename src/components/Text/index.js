@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { propOr } from 'ramda'
+import { prop, propOr } from 'ramda'
 import styled from 'styled-components/native'
 
 import { COLORS, FONTS } from '@const'
@@ -64,12 +64,13 @@ const TinyStyled = styled(CaptionStyled)`
   line-height: 16px;
 `
 
-const BaseText = ({ tKey, tDefaultValue, tOptions, Component, children, ...rest }) => {
-  const { t } = useTranslation()
-
-  return (
-    <Component {...rest}>{tKey ? t(tKey, tDefaultValue, tOptions) : children}</Component>
-  )
+const BaseText = ({ tKey, translations, tDefaultValue, tOptions, Component, children, ...rest }) => {
+  const { t, i18n } = useTranslation()
+  const lang = i18n.language
+  if (translations) {
+    return <Component {...rest}>{prop(lang, translations)}</Component>
+  }
+  return <Component {...rest}>{tKey ? t(tKey, tDefaultValue, tOptions) : children}</Component>
 }
 
 export const H1 = (props) => {

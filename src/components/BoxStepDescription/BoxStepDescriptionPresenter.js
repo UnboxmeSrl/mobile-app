@@ -1,6 +1,4 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
-import { KeyboardAvoidingView } from 'react-native'
 import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
@@ -8,21 +6,16 @@ import { BodyText, H3, Subtitle } from '@components/Text'
 import { StepContent } from '@components/WizardStep'
 import { COLORS } from '@const'
 
-import { IMAGES } from '../../assets/images'
-
-export const BoxStepDescriptionPresenter = ({ onPress }) => {
+export const BoxStepDescriptionPresenter = ({ onPress, box }) => {
   return (
     <Step>
       <ImageWrapper>
-        <Image resizeMode={'contain'} source={IMAGES.boxItems} />
+        <Image resizeMode={'contain'} source={{ url: box.imageUrl }} />
       </ImageWrapper>
       <Bottom>
-        <Title>October box</Title>
-        <Body>
-          The October box is gonna be about the cure of your skin. Do you have a skin routine? This box is gonna help
-          you start your personal skin building
-        </Body>
-        <Selected>8 products selected</Selected>
+        <Title translations={box.name} />
+        <Body translations={box.description} />
+        <Selected tKey={'productsSelected'} tOptions={{ count: box.productsCount }} />
         <Button onPress={onPress} tKey={'next'} />
       </Bottom>
     </Step>

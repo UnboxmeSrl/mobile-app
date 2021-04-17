@@ -1,7 +1,7 @@
 {
   "name": "unboxme",
-  "version": "1.0.3",
-  "buildNumber": 132,
+  "version": "1.0.4",
+  "buildNumber": 133,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -41,6 +41,7 @@
     "i18next": "^19.8.7",
     "lottie-ios": "3.1.8",
     "lottie-react-native": "^3.5.0",
+    "normalizr": "^3.6.1",
     "patch-package": "^6.4.0",
     "postinstall-postinstall": "^2.1.0",
     "ramda": "^0.27.1",

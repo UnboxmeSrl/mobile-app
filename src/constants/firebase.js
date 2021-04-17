@@ -1,1 +1,5 @@
 export const USERS_COLLECTION = 'users'
+export const BOXES_COLLECTION = 'boxes'
+export const CATEGORIES_COLLECTION = 'categories'
+export const BRANDS_COLLECTION = 'brands'
+export const PRODUCTS_COLLECTION = 'products'

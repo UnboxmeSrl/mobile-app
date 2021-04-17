@@ -22,6 +22,7 @@ export default {
       weeklyInMilan: 'Weekly in Milan',
     },
     brands: 'Brands',
+    brandsColon: 'Brands:',
     callToActions: 'Call to actions',
     code: {
       continueWithout: 'Continue without code',
@@ -33,6 +34,7 @@ export default {
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
     continue: 'Continue',
+    productsSelected: '{{count}} products selected',
     errors: {
       alreadyRegistered: 'Email is already registered',
       isNotValid: 'Value is not valid',
@@ -57,7 +59,9 @@ export default {
     },
     getThisBox: 'Get this box',
     home: {
+      availableBoxes: 'Available boxes:',
       boxesAvailable: 'boxes available this month',
+      topic: 'Topic:',
     },
     homepage: 'Homepage',
     howItWorks: {
@@ -113,7 +117,6 @@ export default {
       yourCreams: 'Your creams',
       yourTiktok: 'Your tik tok account username',
     },
-    underApproval: 'Your request is now under approval!',
     privacyPolicy: 'Privacy Policy',
     productCategories: 'Product categories',
     questionnaire: {
@@ -178,6 +181,7 @@ export default {
       sendMessage: 'Send a message',
       title: 'Connect Tik Tok account',
     },
+    underApproval: 'Your request is now under approval!',
     wantUseAll: 'Want to use all the functionality?',
     wizard: {
       agency: 'Your agency',
