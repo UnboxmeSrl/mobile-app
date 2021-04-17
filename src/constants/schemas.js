@@ -28,6 +28,7 @@ const getProcessStrategy = (fields) => (value) => {
 
 export const CATEGORY_SCHEMA = new schema.Entity('categories', {})
 export const BRAND_SCHEMA = new schema.Entity('brands', {})
+export const USER_SCHEMA = new schema.Entity('users', {})
 export const PRODUCT_SCHEMA = new schema.Entity(
   'products',
   {
@@ -49,5 +50,17 @@ export const BOX_SCHEMA = new schema.Entity(
   {
     idAttribute: prop('id'),
     processStrategy: getProcessStrategy(['categories', 'brands', 'extraProducts']),
+  }
+)
+
+export const ORDER_SCHEMA = new schema.Entity(
+  'orders',
+  {
+    box: BOX_SCHEMA,
+    user: USER_SCHEMA,
+  },
+  {
+    idAttribute: prop('id'),
+    processStrategy: getProcessStrategy(['box', 'user']),
   }
 )

@@ -8,6 +8,7 @@ import auth from '@react-native-firebase/auth'
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
 import authModule, { _initialized, selectIsAuthenticated } from '@redux/modules/auth'
+import { createOrder } from '@redux/modules/orders'
 import { persistor } from '@redux/store'
 import { logger, showToastSuccess } from '@services'
 
@@ -37,6 +38,7 @@ export const SettingsScreen = () => {
   }, [resetAuth])
 
   const props = {
+    createOrderAction,
     isAuthenticated,
     navigateToLogin,
     navigateToOnboarding,

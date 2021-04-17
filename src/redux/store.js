@@ -8,7 +8,7 @@ import boxes from '@redux/modules/boxes'
 import rootReducer from './rootReducer'
 
 const persistConfig = {
-  blacklist: [AUTH_NAMESPACE, 'boxes', 'products'],
+  blacklist: [AUTH_NAMESPACE, 'boxes', 'products', 'orders'],
   key: 'root',
   storage: AsyncStorage,
 }

@@ -34,7 +34,6 @@ export default {
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
     continue: 'Continue',
-    productsSelected: '{{count}} products selected',
     errors: {
       alreadyRegistered: 'Email is already registered',
       isNotValid: 'Value is not valid',
@@ -60,6 +59,7 @@ export default {
     getThisBox: 'Get this box',
     home: {
       availableBoxes: 'Available boxes:',
+      boxStatus: 'Box status:',
       boxesAvailable: 'boxes available this month',
       topic: 'Topic:',
     },
@@ -79,6 +79,7 @@ export default {
         'Follow the Brief while doing the Unboxing, tag the pages you are required to tag and before publishing upload your videos in the app. Do that before the deadline! ',
     },
     iWorkAgency: 'I work with Agency',
+    productsSelected: '{{count}} products selected',
     imFreelancer: 'I am as freelancer',
     inFewHours: 'In few hours you will receive a response',
     labelsForFields: {

@@ -9,13 +9,14 @@ import { COLORS } from '@const'
 import { MODAL_NAMES } from '@const/navigation'
 import { selectBrandsByIds } from '@redux/modules/brands'
 import { selectCategoriesById } from '@redux/modules/categories'
+import { selectOrderByBoxId } from '@redux/modules/orders'
 
 export const BoxTile = ({ box }) => {
   const { navigate } = useNavigation()
   const { name, id, left, imageUrl, categories, brands } = box
   const categoriesData = useSelector(selectCategoriesById(categories))
   const brandsData = useSelector(selectBrandsByIds(brands))
-
+  const order = useSelector(selectOrderByBoxId(id))
   return (
     <Wrapper
       key={id}
@@ -25,8 +26,8 @@ export const BoxTile = ({ box }) => {
     >
       <Top>
         <Title translations={name} />
-        <Label tKey={'home.availableBoxes'} />
-        <Values>{left}</Values>
+        <Label tKey={order ? 'home.boxStatus' : 'home.availableBoxes'} />
+        <Values>{order ? order.status : left}</Values>
       </Top>
       <Bottom>
         <ItemsImage source={{ url: imageUrl }} />
