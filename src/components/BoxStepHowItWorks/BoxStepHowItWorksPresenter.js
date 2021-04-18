@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
+import { BoxInReview } from '@components/BoxInReview'
 import { Button } from '@components/Button'
 import { BodyText, ButtonText, H3 } from '@components/Text'
 import { StepContent } from '@components/WizardStep'
 import { COLORS } from '@const'
 
-export const BoxStepHowItWorksPresenter = ({ onPress }) => {
+export const BoxStepHowItWorksPresenter = ({ onPress, order, inReview }) => {
   return (
     <Step>
       <Title tKey={'howItWorks.title'} />
@@ -36,9 +37,7 @@ export const BoxStepHowItWorksPresenter = ({ onPress }) => {
           <Description tKey={'howItWorks.getFeedbackDesc'} />
         </Section>
       </Sections>
-      <Bottom>
-        <Button onPress={onPress} tKey={'next'} />
-      </Bottom>
+      <Bottom>{inReview ? <BoxInReview /> : order ? null : <Button onPress={onPress} tKey={'next'} />}</Bottom>
     </Step>
   )
 }

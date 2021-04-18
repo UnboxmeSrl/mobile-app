@@ -21,6 +21,15 @@ export default {
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
     },
+    box: {
+      brandsAndCategories: 'Brands & Categories',
+      chooseExtra: 'Choose products',
+      getThisBox: 'Get this box',
+      howItWorks: 'How it works',
+      requiredMedia: 'Required Media & Call to actions',
+      underApprovalDescription:
+        'Your request is now under approval.\nIn few hours you will receive a response and notification. ',
+    },
     brands: 'Brands',
     brandsColon: 'Brands:',
     callToActions: 'Call to actions',
@@ -30,6 +39,7 @@ export default {
         'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
       title: 'Code from friend',
     },
+    contactUs: 'Contact us',
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
@@ -79,7 +89,6 @@ export default {
         'Follow the Brief while doing the Unboxing, tag the pages you are required to tag and before publishing upload your videos in the app. Do that before the deadline! ',
     },
     iWorkAgency: 'I work with Agency',
-    productsSelected: '{{count}} products selected',
     imFreelancer: 'I am as freelancer',
     inFewHours: 'In few hours you will receive a response',
     labelsForFields: {
@@ -120,6 +129,7 @@ export default {
     },
     privacyPolicy: 'Privacy Policy',
     productCategories: 'Product categories',
+    productsSelected: '{{count}} products selected',
     questionnaire: {
       acne: 'Acne',
       aging: 'Aging',

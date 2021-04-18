@@ -1,8 +1,7 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
-import { KeyboardAvoidingView } from 'react-native'
 import styled from 'styled-components/native'
 
+import { BoxInReview } from '@components/BoxInReview'
 import { Button } from '@components/Button'
 import { List } from '@components/List'
 import { H3 } from '@components/Text'
@@ -10,10 +9,8 @@ import { TileBrand } from '@components/TileBrand'
 import { TileCategory } from '@components/TileCategory'
 import { TileExtraProduct } from '@components/TileExtraProduct'
 import { StepContent } from '@components/WizardStep'
-import { BRANDS_OPTIONS } from '@const/brands'
-import { EXTRA_PRODUCTS, PRODUCT_CATEGORIES } from '@const/categories'
 
-export const BoxStepBrandsPresenter = ({ onPress, brandsData, products, categoriesData }) => {
+export const BoxStepBrandsPresenter = ({ onPress, brandsData, products, categoriesData, inReview, order }) => {
   return (
     <Step>
       <Sections showsVerticalScrollIndicator={false}>
@@ -30,9 +27,7 @@ export const BoxStepBrandsPresenter = ({ onPress, brandsData, products, categori
           <List Component={TileExtraProduct} data={products} vertical />
         </Section>
       </Sections>
-      <Bottom>
-        <Button onPress={onPress} tKey={'next'} />
-      </Bottom>
+      <Bottom>{inReview ? <BoxInReview /> : order ? null : <Button onPress={onPress} tKey={'next'} />}</Bottom>
     </Step>
   )
 }

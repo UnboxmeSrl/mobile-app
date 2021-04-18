@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import Toast from 'react-native-toast-message'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import { GoogleSignin } from '@react-native-community/google-signin'
@@ -8,7 +7,6 @@ import auth from '@react-native-firebase/auth'
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
 import authModule, { _initialized, selectIsAuthenticated } from '@redux/modules/auth'
-import { createOrder } from '@redux/modules/orders'
 import { persistor } from '@redux/store'
 import { logger, showToastSuccess } from '@services'
 
@@ -38,7 +36,6 @@ export const SettingsScreen = () => {
   }, [resetAuth])
 
   const props = {
-    createOrderAction,
     isAuthenticated,
     navigateToLogin,
     navigateToOnboarding,

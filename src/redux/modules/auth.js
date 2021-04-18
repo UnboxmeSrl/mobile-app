@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
-import { equals, isNil, not, pipe, prop, propOr } from 'ramda'
+import { equals, isEmpty, isNil, not, pipe, prop, propOr } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import { APPROVED_USER, IN_REVIEW_USER, REJECTED_USER } from '@const/verification'
@@ -78,5 +78,7 @@ export const selectSkinType = createSelector(selectQuestionnaire, prop(_skinType
 export const selectSkincareRoutine = createSelector(selectQuestionnaire, prop(_skincareRoutine))
 export const selectCreams = createSelector(selectQuestionnaire, prop(_creams))
 export const selectBrands = createSelector(selectQuestionnaire, prop(_brands))
+// TODO: replace
+export const selectHasQuestionnaire = createSelector(selectBrands, pipe(isNil, not))
 
 export default slice

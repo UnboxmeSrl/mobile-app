@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Image } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 
+import { Button } from '@components/Button'
 import { H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
 import { MODAL_NAMES } from '@const/navigation'
+import { ORDER_APPROVED, ORDER_REJECTED } from '@const/order'
+import { selectHasQuestionnaire } from '@redux/modules/auth'
 import { selectBrandsByIds } from '@redux/modules/brands'
 import { selectCategoriesById } from '@redux/modules/categories'
 import { selectOrderByBoxId } from '@redux/modules/orders'
@@ -17,6 +20,27 @@ export const BoxTile = ({ box }) => {
   const categoriesData = useSelector(selectCategoriesById(categories))
   const brandsData = useSelector(selectBrandsByIds(brands))
   const order = useSelector(selectOrderByBoxId(id))
+  const navigateToQuestionnaire = () => navigate(MODAL_NAMES.FillQuestionnaire)
+  const hasQuestionnaire = useSelector(selectHasQuestionnaire)
+  const approved = order?.status === ORDER_APPROVED
+  const rejected = order?.status === ORDER_REJECTED
+  const buttonOnPress = useCallback(() => {
+    if (approved) {
+      const fn = hasQuestionnaire ? () => null : navigateToQuestionnaire
+      fn()
+    } else {
+      // TODO
+    }
+  }, [approved, hasQuestionnaire])
+
+  const buttonTKey = useMemo(() => {
+    if (approved) {
+      return hasQuestionnaire ? 'box.chooseExtra' : 'questionnaire.fill'
+    } else {
+      return 'contactUs'
+    }
+  }, [hasQuestionnaire, rejected, approved])
+
   return (
     <Wrapper
       key={id}
@@ -31,24 +55,34 @@ export const BoxTile = ({ box }) => {
       </Top>
       <Bottom>
         <ItemsImage source={{ url: imageUrl }} />
-        <Row>
-          <Label tKey={'home.topic'} />
-          {categoriesData.map((category) => (
-            <Value key={category.id} translations={category.name} />
-          ))}
-        </Row>
-        <Brands horizontal>
-          {brandsData.map((brand) => (
-            <BrandImageWrapper key={brand.id}>
-              <BrandImage source={{ url: brand.imageDarkUrl }} />
-            </BrandImageWrapper>
-          ))}
-        </Brands>
+        {rejected || approved ? (
+          <StyledButton onPress={buttonOnPress} tKey={buttonTKey} />
+        ) : (
+          <>
+            <Row>
+              <Label tKey={'home.topic'} />
+              {categoriesData.map((category) => (
+                <Value key={category.id} translations={category.name} />
+              ))}
+            </Row>
+            <Brands horizontal>
+              {brandsData.map((brand) => (
+                <BrandImageWrapper key={brand.id}>
+                  <BrandImage source={{ url: brand.imageDarkUrl }} />
+                </BrandImageWrapper>
+              ))}
+            </Brands>
+          </>
+        )}
       </Bottom>
     </Wrapper>
   )
 }
 
+const StyledButton = styled(Button)`
+  margin-bottom: 0;
+  width: 50%;
+`
 const Wrapper = styled.TouchableOpacity`
   border-color: ${COLORS.tertiary};
   border-radius: 20px;

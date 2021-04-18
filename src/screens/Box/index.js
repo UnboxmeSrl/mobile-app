@@ -7,7 +7,7 @@ import { dec, inc } from 'ramda'
 
 import { STACK_NAMES } from '@const/navigation'
 import { ORDER_IN_REVIEW } from '@const/order'
-import { useAction } from '@hooks/common'
+import { useAction, useAuthenticatedAction } from '@hooks/common'
 import { _verificationStatus, selectUid } from '@redux/modules/auth'
 import { getBoxReference } from '@redux/modules/boxes'
 import { createOrder, selectOrderByBoxId } from '@redux/modules/orders'
@@ -24,14 +24,13 @@ export const BoxModal = () => {
   const createOrderAction = useAction(createOrder)
   const boxId = useNavigationParam('boxId')
   const order = useSelector(selectOrderByBoxId(boxId))
-  console.log({ order })
 
   const onFinish = useCallback(() => {
     if (!order) {
       createOrderAction({
         box: getBoxReference(boxId),
         status: ORDER_IN_REVIEW,
-        user: getUserReference(auth().currentUser.uid),
+        user: getUserReference(auth().currentUser?.uid),
       })
       Alert.alert(
         i18n.t('underApproval'),
@@ -44,18 +43,28 @@ export const BoxModal = () => {
     }
   }, [navigate, order])
 
+  const onFinishCreate = useAuthenticatedAction(onFinish)
+
   const navigateToNextStep = () => {
     if (stepIndex === STEPS.length) {
-      onFinish()
+      onFinishCreate()
     } else {
       setStepIndex((prevIndex) => Math.min(STEPS.length, inc(prevIndex)))
     }
   }
   const navigateToPrevStep = () => {
+    if (order) {
+      setStepIndex(1)
+    }
     if (stepIndex === 1) {
       goBack()
     } else {
       setStepIndex((prevIndex) => Math.max(1, dec(prevIndex)))
+    }
+  }
+  const navigateToStep = (step) => {
+    if (step >= 1 && step <= STEPS.length) {
+      setStepIndex(step)
     }
   }
   const hiddenArrow = stepIndex === 1
@@ -70,6 +79,8 @@ export const BoxModal = () => {
     hiddenArrow,
     navigateToNextStep,
     navigateToPrevStep,
+    navigateToStep,
+    order,
     stepIndex,
     steps: STEPS,
   }

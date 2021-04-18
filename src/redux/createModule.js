@@ -2,9 +2,11 @@ import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { normalize } from 'normalizr'
-import { head, isEmpty, mapObjIndexed, pick, pickBy, pipe, prop, values } from 'ramda'
+import { head, isEmpty, pick, pickBy, pipe, prop, values } from 'ramda'
+import { PURGE } from 'redux-persist'
 
-import { BOXES_COLLECTION, USERS_COLLECTION } from '@const/firebase'
+import { USERS_COLLECTION } from '@const/firebase'
+import logger from '@services/logger'
 
 export const createReduxModule = ({ name, initialState = {} }) => {
   return {
@@ -26,33 +28,50 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   const ref = firestore().collection(collection)
   const collectionAdapter = createEntityAdapter()
   const initialState = collectionAdapter.getInitialState()
-  const refQuery = limitToOwner
-    ? ref.where('user', '==', firestore().collection(USERS_COLLECTION).doc(auth().currentUser.uid))
-    : ref
   const getDocumentReference = (id) => ref.doc(id)
+  const whereQuery = limitToOwner
+    ? ref.where('user', '==', firestore().collection(USERS_COLLECTION).doc(auth().currentUser?.uid))
+    : ref
 
-  const fetchAll = createAsyncThunk(`${collection}/fetch`, async (payload) => {
-    const snapshot = await refQuery.get()
-    const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    const normalized = normalize(data, [schema])
-    return normalized.entities
+  const fetchAll = createAsyncThunk(`${collection}/fetch`, async (payload, { rejectWithValue }) => {
+    try {
+      const snapshot = await whereQuery.get()
+      const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      const normalized = normalize(data, [schema])
+      return normalized.entities
+    } catch (error) {
+      logger.error(`fetchAll - ${collection}`, { error })
+      return rejectWithValue(error)
+    }
   })
-  const fetchById = createAsyncThunk(`${collection}/fetchById`, async (id) => {
-    const snapshot = await refQuery.doc(id).get()
-    const data = { ...snapshot.data(), id: snapshot.id }
-    const normalized = normalize(data, schema)
+  const fetchById = createAsyncThunk(`${collection}/fetchById`, async (id, { rejectWithValue }) => {
+    try {
+      const snapshot = await whereQuery.doc(id).get()
+      const data = { ...snapshot.data(), id: snapshot.id }
+      const normalized = normalize(data, schema)
 
-    return normalized.entities
+      return normalized.entities
+    } catch (error) {
+      logger.error(`fetchById - ${collection}`, { error })
+
+      return rejectWithValue(error)
+    }
   })
 
-  const createOne = createAsyncThunk(`${collection}/createOne`, async (payload) => {
-    const id = ref.doc().id
-    const doc = ref.doc(id)
-    await doc.set({ id, ...payload })
-    const data = await doc.get()
-    const normalized = normalize(data.data(), schema)
+  const createOne = createAsyncThunk(`${collection}/createOne`, async (payload, { rejectWithValue }) => {
+    try {
+      const id = ref.doc().id
+      const doc = ref.doc(id)
+      await doc.set({ id, ...payload })
+      const data = await doc.get()
+      const normalized = normalize(data.data(), schema)
 
-    return normalized.entities
+      return normalized.entities
+    } catch (error) {
+      logger.error(`createOne - ${collection}`, { error })
+
+      return rejectWithValue(error)
+    }
   })
 
   const adapterSelectors = collectionAdapter.getSelectors(prop(collection))
@@ -67,6 +86,14 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
         head
       )
     )
+
+  const reducerBuilder = (builder, action) => {
+    builder.addCase(action.fulfilled, (state, action) => {
+      if (!isEmpty(action.payload)) {
+        collectionAdapter.upsertMany(state, action.payload[collection])
+      }
+    })
+  }
 
   return {
     actions: {
@@ -84,15 +111,10 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     },
     slice: createSlice({
       extraReducers: (builder) => {
-        builder.addCase(fetchAll.fulfilled, (state, action) => {
-          collectionAdapter.upsertMany(state, action.payload[collection])
-        })
-        builder.addCase(fetchById.fulfilled, (state, action) => {
-          collectionAdapter.upsertMany(state, action.payload[collection])
-        })
-        builder.addCase(createOne.fulfilled, (state, action) => {
-          collectionAdapter.upsertMany(state, action.payload[collection])
-        })
+        reducerBuilder(builder, fetchAll)
+        reducerBuilder(builder, fetchById)
+        reducerBuilder(builder, createOne)
+        builder.addCase('persist/PURGE', (state, action) => initialState)
       },
       initialState,
       name: collection,

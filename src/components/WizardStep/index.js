@@ -6,7 +6,7 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { BodyText, H2 } from '@components/Text'
 
-export const WizardStep = ({ steps, stepIndex, navigateToNextStep }) => {
+export const WizardStep = ({ steps, stepIndex, navigateToNextStep, navigateToStep }) => {
   const step = nth(stepIndex - 1, steps)
   const Component = prop('component', step)
   const tKeyHeader = prop('tKeyHeader', step)
@@ -20,7 +20,7 @@ export const WizardStep = ({ steps, stepIndex, navigateToNextStep }) => {
           {tKeyDescription ? <Description tKey={tKeyDescription} /> : null}
         </Header>
       )}
-      <Component navigateToNextStep={navigateToNextStep} />
+      <Component navigateToNextStep={navigateToNextStep} navigateToStep={navigateToStep} />
     </Wrapper>
   )
 }

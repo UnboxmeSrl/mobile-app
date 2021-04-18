@@ -1,5 +1,4 @@
 import React from 'react'
-import { Animated } from 'react-native'
 import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
@@ -7,7 +6,7 @@ import { COLORS } from '@const'
 export const ActiveStepPresenter = ({ currentStepIndex, steps }) => (
   <Wrapper>
     {steps.map((item, index) => (
-      <Dot active={currentStepIndex === index + 1} />
+      <Dot active={currentStepIndex === index + 1} key={index} />
     ))}
   </Wrapper>
 )

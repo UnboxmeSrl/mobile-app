@@ -6,14 +6,28 @@ import { BackArrow } from '@components/BackArrow'
 import { ModalContainer } from '@components/ModalContainer'
 import { WizardStep } from '@components/WizardStep'
 
-export const BoxPresenter = ({ navigateToNextStep, navigateToPrevStep, stepIndex, steps, hiddenArrow }) => (
+export const BoxPresenter = ({
+  navigateToNextStep,
+  navigateToPrevStep,
+  stepIndex,
+  steps,
+  hiddenArrow,
+  order,
+  navigateToStep,
+}) => (
   <ModalContainer noPaddingTop>
     <Content>
       <Header>
         <BackArrow hidden={hiddenArrow} noBack onPress={navigateToPrevStep} />
-        <ActiveStep currentStepIndex={stepIndex} steps={steps} />
+        {order ? null : <ActiveStep currentStepIndex={stepIndex} steps={steps} />}
       </Header>
-      <WizardStep navigateToNextStep={navigateToNextStep} stepIndex={stepIndex} steps={steps} />
+      <WizardStep
+        navigateToNextStep={navigateToNextStep}
+        navigateToStep={navigateToStep}
+        order={order}
+        stepIndex={stepIndex}
+        steps={steps}
+      />
     </Content>
   </ModalContainer>
 )
@@ -25,6 +39,5 @@ const Header = styled.View`
 `
 const Content = styled.View`
   flex: 1;
-  padding-bottom: 20px;
   padding-horizontal: 20px;
 `

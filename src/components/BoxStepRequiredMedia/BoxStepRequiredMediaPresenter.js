@@ -2,6 +2,7 @@ import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
+import { BoxInReview } from '@components/BoxInReview'
 import { Button } from '@components/Button'
 import { Caption, H3 } from '@components/Text'
 import { StepContent } from '@components/WizardStep'
@@ -9,7 +10,7 @@ import { COLORS } from '@const'
 
 import { IMAGES } from '../../assets/images'
 
-export const BoxStepRequiredMediaPresenter = ({ onPress }) => {
+export const BoxStepRequiredMediaPresenter = ({ onPress, order, inReview }) => {
   return (
     <Step>
       <Sections showsVerticalScrollIndicator={false}>
@@ -46,7 +47,7 @@ export const BoxStepRequiredMediaPresenter = ({ onPress }) => {
         </Section>
       </Sections>
       <Bottom>
-        <Button onPress={onPress} tKey={'getThisBox'} />
+        {inReview ? <BoxInReview /> : order ? null : <Button onPress={onPress} tKey={'box.getThisBox'} />}
       </Bottom>
     </Step>
   )
