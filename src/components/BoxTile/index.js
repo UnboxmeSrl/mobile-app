@@ -7,7 +7,7 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
-import { MODAL_NAMES } from '@const/navigation'
+import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { ORDER_APPROVED, ORDER_REJECTED } from '@const/order'
 import { selectHasQuestionnaire } from '@redux/modules/auth'
 import { selectBrandsByIds } from '@redux/modules/brands'
@@ -21,12 +21,13 @@ export const BoxTile = ({ box }) => {
   const brandsData = useSelector(selectBrandsByIds(brands))
   const order = useSelector(selectOrderByBoxId(id))
   const navigateToQuestionnaire = () => navigate(MODAL_NAMES.FillQuestionnaire)
+  const navigateToProductSelection = () => navigate({ params: { boxId: id }, routeName: SCREEN_NAMES.ProductSelection })
   const hasQuestionnaire = useSelector(selectHasQuestionnaire)
   const approved = order?.status === ORDER_APPROVED
   const rejected = order?.status === ORDER_REJECTED
   const buttonOnPress = useCallback(() => {
     if (approved) {
-      const fn = hasQuestionnaire ? () => null : navigateToQuestionnaire
+      const fn = hasQuestionnaire ? navigateToProductSelection : navigateToQuestionnaire
       fn()
     } else {
       // TODO

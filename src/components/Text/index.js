@@ -64,13 +64,23 @@ const TinyStyled = styled(CaptionStyled)`
   line-height: 16px;
 `
 
-const BaseText = ({ tKey, translations, tDefaultValue, tOptions, Component, children, ...rest }) => {
+const BaseText = ({ tKey, translations, tDefaultValue, tOptions, Component, children, postfix, ...rest }) => {
   const { t, i18n } = useTranslation()
   const lang = i18n.language
   if (translations) {
-    return <Component {...rest}>{prop(lang, translations)}</Component>
+    return (
+      <Component {...rest}>
+        {prop(lang, translations)}
+        {postfix}
+      </Component>
+    )
   }
-  return <Component {...rest}>{tKey ? t(tKey, tDefaultValue, tOptions) : children}</Component>
+  return (
+    <Component {...rest}>
+      {tKey ? t(tKey, tDefaultValue, tOptions) : children}
+      {postfix}
+    </Component>
+  )
 }
 
 export const H1 = (props) => {

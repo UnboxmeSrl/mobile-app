@@ -74,6 +74,20 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     }
   })
 
+  const updateOne = createAsyncThunk(`${collection}/updateOne`, async ({ id, ...payload }, { rejectWithValue }) => {
+    try {
+      const doc = ref.doc(id)
+      await doc.update(payload)
+      const data = await doc.get()
+      const normalized = normalize(data.data(), schema)
+      return normalized.entities
+    } catch (error) {
+      logger.error(`updateOne - ${collection}`, { error })
+
+      return rejectWithValue(error)
+    }
+  })
+
   const adapterSelectors = collectionAdapter.getSelectors(prop(collection))
   const selectByIds = (ids) => createSelector(adapterSelectors.selectEntities, pipe(pick(ids), values))
   const selectById = (id) => createSelector(adapterSelectors.selectEntities, pipe(pick([id]), values, head))
@@ -100,6 +114,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       createOne,
       fetchAll,
       fetchById,
+      updateOne,
     },
     getDocumentReference,
     selectors: {
@@ -114,6 +129,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
         reducerBuilder(builder, fetchAll)
         reducerBuilder(builder, fetchById)
         reducerBuilder(builder, createOne)
+        reducerBuilder(builder, updateOne)
         builder.addCase('persist/PURGE', (state, action) => initialState)
       },
       initialState,

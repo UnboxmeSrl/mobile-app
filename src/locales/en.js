@@ -1,7 +1,9 @@
 export default {
   translation: {
+    Confirm: 'Confirm',
     Error: 'Error',
     Success: 'Success',
+    addresses: { addNewTitle: 'Add new address', title: 'Addresses' },
     and: ' and ',
     auth: {
       bySigning: 'By signing up, you agree to UnboxMe’s',
@@ -16,6 +18,7 @@ export default {
       wrongCode: 'Verification code is invalid or expired',
       wrongCombination: 'The email and password combination is not correct. Please try again.',
     },
+    availableProducts: 'Available products',
     awards: {
       specialAwards: 'Special Awards',
       title: 'Awards',
@@ -33,16 +36,17 @@ export default {
     brands: 'Brands',
     brandsColon: 'Brands:',
     callToActions: 'Call to actions',
+    chooseThisProduct: 'Choose this product!',
     code: {
       continueWithout: 'Continue without code',
       description:
         'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
       title: 'Code from friend',
     },
-    contactUs: 'Contact us',
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
+    contactUs: 'Contact us',
     continue: 'Continue',
     errors: {
       alreadyRegistered: 'Email is already registered',
@@ -129,6 +133,11 @@ export default {
     },
     privacyPolicy: 'Privacy Policy',
     productCategories: 'Product categories',
+    productFor: 'Product for',
+    productSelection: {
+      asGift: 'You can choose one of these products as a gift!',
+      title: 'Product selection page',
+    },
     productsSelected: '{{count}} products selected',
     questionnaire: {
       acne: 'Acne',
@@ -160,6 +169,8 @@ export default {
         'Sorry we believe your account is not yet fitting with our standards (read more on our acceptation policy)',
       verified: 'You are accepted! Congratulations your account has been accepted into Unboxme!',
     },
+    seeDetails: 'See details',
+    selected: 'Selected',
     settings: 'Settings',
     signIn: {
       forgot: 'Forgot password',

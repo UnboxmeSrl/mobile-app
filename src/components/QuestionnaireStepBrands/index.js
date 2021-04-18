@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { _brands, selectBrands, updateQuestionnaire } from '@redux/modules/auth'
+import { selectAllBrands, selectBrandOptions } from '@redux/modules/brands'
 
 import { QuestionnaireStepBrandsPresenter } from './QuestionnaireStepBrandsPresenter'
 
@@ -10,6 +11,7 @@ const field = _brands
 
 export const QuestionnaireStepBrands = ({ navigateToNextStep }) => {
   const { control, handleSubmit, errors, watch, reset } = useForm()
+  const brandValues = useSelector(selectBrandOptions)
   const defaultValue = useSelector(selectBrands)
   const dispatch = useDispatch()
 
@@ -25,6 +27,7 @@ export const QuestionnaireStepBrands = ({ navigateToNextStep }) => {
   }, [defaultValue, reset])
 
   const props = {
+    brandValues,
     control,
     defaultValue,
     errors,

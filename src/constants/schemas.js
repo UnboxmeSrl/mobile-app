@@ -57,10 +57,11 @@ export const ORDER_SCHEMA = new schema.Entity(
   'orders',
   {
     box: BOX_SCHEMA,
+    extraProduct: PRODUCT_SCHEMA,
     user: USER_SCHEMA,
   },
   {
     idAttribute: prop('id'),
-    processStrategy: getProcessStrategy(['box', 'user']),
+    processStrategy: getProcessStrategy(['box', 'user', 'extraProduct']),
   }
 )

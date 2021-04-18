@@ -19,10 +19,13 @@ export const MODAL_NAMES = {
   WebView: 'WebView',
 }
 export const SCREEN_NAMES = {
+  AddNewAddress: 'AddNewAddress',
+  Addresses: 'Addresses',
   Awards: 'Awards',
   Home: 'Home',
   Onboarding: 'Onboarding',
   OtherSignUp: 'OtherSignUp',
+  ProductSelection: 'ProductSelection',
   Questionnaire: 'Questionnaire',
   Settings: 'Settings',
   SignIn: 'SignIn',

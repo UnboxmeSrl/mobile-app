@@ -5,10 +5,10 @@ import { createFirebaseReduxModule } from '@redux/createModule'
 const {
   actions: { fetchAll: fetchCategories },
   slice,
-  selectors: { selectAll, selectByIds: selectCategoriesById },
+  selectors: { selectAll, selectByIds: selectCategoriesById, selectById: selectCategoryById },
 } = createFirebaseReduxModule({ collection: CATEGORIES_COLLECTION, schema: CATEGORY_SCHEMA })
 
 export const selectAllCategories = selectAll
 
 export default slice
-export { fetchCategories, selectCategoriesById }
+export { fetchCategories, selectCategoriesById, selectCategoryById }
