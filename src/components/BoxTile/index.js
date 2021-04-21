@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { Image } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
@@ -41,7 +42,7 @@ export const BoxTile = ({ box }) => {
       return 'contactUs'
     }
   }, [hasQuestionnaire, rejected, approved])
-
+  console.log(imageUrl)
   return (
     <Wrapper
       key={id}
@@ -55,7 +56,7 @@ export const BoxTile = ({ box }) => {
         <Values>{order ? order.status : left}</Values>
       </Top>
       <Bottom>
-        <ItemsImage source={{ url: imageUrl }} />
+        <ItemsImage resizeMode={'contain'} source={{ uri: imageUrl }} />
         {rejected || approved ? (
           <StyledButton onPress={buttonOnPress} tKey={buttonTKey} />
         ) : (
@@ -69,7 +70,7 @@ export const BoxTile = ({ box }) => {
             <Brands horizontal>
               {brandsData.map((brand) => (
                 <BrandImageWrapper key={brand.id}>
-                  <BrandImage source={{ url: brand.imageDarkUrl }} />
+                  <BrandImage source={{ uri: brand.imageDarkUrl }} />
                 </BrandImageWrapper>
               ))}
             </Brands>
@@ -134,10 +135,10 @@ const BrandImageWrapper = styled.View`
   margin-right: 8px;
   width: 55px;
 `
-const BrandImage = styled.Image`
+const BrandImage = styled(FastImage)`
   flex: 1;
 `
-const ItemsImage = styled(Image)`
+const ItemsImage = styled(FastImage)`
   bottom: 70px;
   height: 112px;
   position: absolute;

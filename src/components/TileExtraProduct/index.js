@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
@@ -8,7 +9,7 @@ export const TileExtraProduct = ({ imageUrl }) => {
   return (
     <Wrapper>
       <BackgroundColor />
-      <ImageStyled resizeMode={'contain'} source={{ url: imageUrl }} />
+      <ImageStyled resizeMode={'contain'} source={{ uri: imageUrl }} />
     </Wrapper>
   )
 }
@@ -28,7 +29,7 @@ const Wrapper = styled.View`
   width: ${WIDTH}px;
 `
 
-const ImageStyled = styled.Image`
+const ImageStyled = styled(FastImage)`
   height: 150px;
   width: 100%;
 `

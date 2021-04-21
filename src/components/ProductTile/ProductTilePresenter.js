@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
@@ -12,7 +13,7 @@ export const ProductTilePresenter = ({ box, key, imageUrl, name, brand, category
     <Wrapper onPress={onPress}>
       <Row>
         <ColumnLeft>
-          <Image source={{ url: imageUrl }} />
+          <Image source={{ uri: imageUrl }} />
         </ColumnLeft>
         <ColumnRight>
           <Title translations={name} />
@@ -68,7 +69,7 @@ const ColumnRight = styled.View`
   justify-content: center;
   padding: 16px 0px 0px 16px;
 `
-const Image = styled.Image`
+const Image = styled(FastImage)`
   flex: 1;
 `
 

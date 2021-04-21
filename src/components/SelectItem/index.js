@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import styled from 'styled-components/native'
 
 import { ButtonText } from '@components/Text'
@@ -26,6 +27,6 @@ const Item = styled.TouchableOpacity`
   margin-bottom: 16px;
   width: 100%;
 `
-const ImageStyled = styled.Image`
+const ImageStyled = styled(FastImage)`
   flex: 1;
 `

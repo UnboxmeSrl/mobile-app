@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
@@ -23,7 +24,7 @@ export const BoxStepDescriptionPresenter = ({
   return (
     <Step>
       <ImageWrapper>
-        <Image resizeMode={'contain'} source={{ url: box.imageUrl }} />
+        <Image resizeMode={'contain'} source={{ uri: box.imageUrl }} />
       </ImageWrapper>
       <Bottom>
         <Title translations={box.name} />
@@ -51,7 +52,7 @@ export const BoxStepDescriptionPresenter = ({
   )
 }
 
-const Wrapper = styled.View`
+const Wrapper = styled.ScrollView`
   margin-bottom: 20px;
 `
 const Pressable = styled.TouchableOpacity`
@@ -80,7 +81,7 @@ const ImageWrapper = styled.View`
   height: 250px;
   width: 90%;
 `
-const Image = styled.Image`
+const Image = styled(FastImage)`
   flex: 1;
   width: 100%;
 `

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
 import { KeyboardAvoidingView } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
@@ -41,7 +42,7 @@ const SelectStyled = styled(Select)`
   flex-wrap: wrap;
   justify-content: space-between;
 `
-const Image = styled.Image`
+const Image = styled(FastImage)`
   flex: 1;
   margin-bottom: 24px;
 `

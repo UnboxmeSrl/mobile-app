@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
@@ -83,7 +84,7 @@ const Tile = styled.View`
 const OrText = styled(Caption)`
   margin: 0 16px;
 `
-const Image = styled.Image`
+const Image = styled(FastImage)`
   height: 48px;
   margin-bottom: 12px;
   width: 48px;

@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import styled from 'styled-components/native'
 
 import { COLORS } from '@const'
@@ -6,7 +7,7 @@ import { COLORS } from '@const'
 export const TileBrand = ({ imageDarkUrl }) => {
   return (
     <Wrapper>
-      <ImageStyled source={{ url: imageDarkUrl }} />
+      <ImageStyled source={{ uri: imageDarkUrl }} />
     </Wrapper>
   )
 }
@@ -19,7 +20,7 @@ const Wrapper = styled.View`
   width: 140px;
 `
 
-const ImageStyled = styled.Image`
+const ImageStyled = styled(FastImage)`
   height: 84px;
   width: 140px;
 `
