@@ -27,30 +27,10 @@ export const AddNewAddressPresenter = ({
   errors,
 }) => (
   <RouteContainer tKey={'addresses.addNewTitle'} withArrow>
-    <Wrapper behavior={'height'} keyboardVerticalOffset={20}>
+    <Wrapper behavior={IS_IOS ? 'padding' : 'height'} keyboardVerticalOffset={20}>
       <MapWrapper>
         <Map markerCoordinate={markerCoordinate} region={region} title={address.formatted_address} />
       </MapWrapper>
-      <InputWrapper>
-        <GooglePlacesAutocomplete
-          fetchDetails={true}
-          numberOfLines={2}
-          onFail={(error) => logger.error(error)}
-          onPress={(data, details = null) => {
-            console.log('press')
-            setAddress(details)
-          }}
-          placeholder="Search for your address"
-          query={{
-            // language of the results
-            components: 'country:pl',
-            key: 'AIzaSyCP1Xek2gd3Rb-JKG0wQjhtqBkXx3eYGfk',
-            language: 'pl',
-            predefinedPlaces: [{ location: appLocation }],
-            types: 'address',
-          }}
-        />
-      </InputWrapper>
       <StyledForm>
         <StyledInput
           autoCapitalize="none"
@@ -71,6 +51,26 @@ export const AddNewAddressPresenter = ({
         />
         <StyledButton onPress={onPress} tKey={'Confirm'} />
       </StyledForm>
+      <InputWrapper>
+        <GooglePlacesAutocomplete
+          fetchDetails={true}
+          numberOfLines={2}
+          onFail={(error) => logger.error(error)}
+          onPress={(data, details = null) => {
+            console.log('press')
+            setAddress(details)
+          }}
+          placeholder="Search for your address"
+          query={{
+            // language of the results
+            components: 'country:pl',
+            key: 'AIzaSyCP1Xek2gd3Rb-JKG0wQjhtqBkXx3eYGfk',
+            language: 'pl',
+            predefinedPlaces: [{ location: appLocation }],
+            types: 'address',
+          }}
+        />
+      </InputWrapper>
     </Wrapper>
   </RouteContainer>
 )

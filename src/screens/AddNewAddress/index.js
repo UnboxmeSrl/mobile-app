@@ -45,19 +45,6 @@ export const AddNewAddress = () => {
     }
   }, [address])
 
-  useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', 'show')
-    Keyboard.addListener('keyboardDidHide', 'hide')
-    console.log('add listener')
-    // cleanup function
-    return () => {
-      Keyboard.removeListener('keyboardDidShow', 'show')
-      Keyboard.removeListener('keyboardDidHide', 'hide')
-    }
-  }, [])
-
-  console.log(keyboardStatus)
-
   const props = { address, appLocation, control, errors, keyboardStatus, markerCoordinate, onPress, region, setAddress }
 
   return <AddNewAddressPresenter {...props} />
