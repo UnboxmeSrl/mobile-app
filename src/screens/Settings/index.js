@@ -20,6 +20,7 @@ export const SettingsScreen = () => {
   const navigateToWizard = () => navigate(SCREEN_NAMES.Wizard)
   const navigateToLogin = () => navigate(SCREEN_NAMES.SignUp)
   const navigateToQuestionnaire = () => navigate(MODAL_NAMES.FillQuestionnaire)
+  const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
   const navigateToOnboarding = useAuthenticatedAction(navigateToWizard)
 
   const onPress = useCallback(async () => {
@@ -37,6 +38,7 @@ export const SettingsScreen = () => {
 
   const props = {
     isAuthenticated,
+    navigateToAddresses,
     navigateToLogin,
     navigateToOnboarding,
     navigateToQuestionnaire,

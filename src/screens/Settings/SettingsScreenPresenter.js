@@ -11,9 +11,11 @@ export const SettingsScreenPresenter = ({
   navigateToOnboarding,
   navigateToLogin,
   navigateToQuestionnaire,
+  navigateToAddresses,
 }) => (
   <Container tKey={'settings'} withPadding>
     <Button onPress={navigateToOnboarding} tKey={'onboardingTitle'} />
+    <Button onPress={navigateToAddresses} tKey={'addresses.title'} />
     {isAuthenticated ? <Button onPress={navigateToQuestionnaire} tKey={'questionnaire.title'} /> : null}
     {isAuthenticated ? <Button onPress={onPress} tKey={'logout'} /> : <LoginGuest />}
   </Container>

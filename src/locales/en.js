@@ -3,6 +3,7 @@ export default {
     Confirm: 'Confirm',
     Error: 'Error',
     Success: 'Success',
+    addAddress: 'ADD ADDRESS',
     addresses: { addNewTitle: 'Add new address', title: 'Addresses' },
     and: ' and ',
     auth: {

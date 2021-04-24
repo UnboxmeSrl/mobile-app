@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Keyboard } from 'react-native'
+import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import auth from '@react-native-firebase/auth'
 
+import { SCREEN_NAMES } from '@const/navigation'
 import { useAction } from '@hooks/common'
 import { useFetchLocation } from '@hooks/useFetchLocation'
 import { createAddress } from '@redux/modules/addresses'
@@ -16,6 +18,7 @@ import { AddNewAddressPresenter } from './AddNewAddressPresenter'
 
 export const AddNewAddress = () => {
   const [address, setAddress] = useState('')
+  const { navigate } = useNavigation()
   const [keyboardStatus, setKeyboardStatus] = useState(undefined)
   const { control, handleSubmit, errors, setValue } = useForm()
   const appLocation = useSelector(selectLocation)
@@ -24,6 +27,7 @@ export const AddNewAddress = () => {
 
   const onSubmit = async (payload) => {
     createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) })
+    navigate(SCREEN_NAMES.Addresses)
   }
   const onPress = handleSubmit(onSubmit)
 

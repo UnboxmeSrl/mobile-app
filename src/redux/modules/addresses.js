@@ -3,13 +3,13 @@ import { ADDRESS_SCHEMA } from '@const/schemas'
 import { createFirebaseReduxModule } from '@redux/createModule'
 
 const {
-  actions: { fetchAll: fetchAddresses, createOne: createAddress },
+  actions: { fetchAll: fetchAddresses, createOne: createAddress, removeById: removeAddressById },
   slice,
   selectors: { selectState, selectAll },
 } = createFirebaseReduxModule({ collection: ADDRESSES_COLLECTION, limitToOwner: true, schema: ADDRESS_SCHEMA })
 
 export const selectAddresses = selectState
-export const selectAllBoxes = selectAll
+export const selectAllAddresses = selectAll
 
 export default slice
-export { createAddress, fetchAddresses }
+export { createAddress, fetchAddresses, removeAddressById }

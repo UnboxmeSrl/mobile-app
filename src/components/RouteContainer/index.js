@@ -7,12 +7,13 @@ import { H3, Subtitle } from '@components/Text'
 
 const HEADER_HEIGHT = 48
 
-export const RouteContainer = ({ tKey, children, withArrow, withPadding, style }) => (
+export const RouteContainer = ({ tKey, children, withArrow, withPadding, style, RightButton }) => (
   <StyledComponent>
     {tKey && (
       <Header>
         {withArrow ? <Back /> : null}
         <HeaderTitle tKey={tKey} />
+        {RightButton ? <RightButton /> : null}
       </Header>
     )}
     <Content style={style} withPadding={withPadding}>

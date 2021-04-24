@@ -87,6 +87,19 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     }
   })
 
+  const removeById = createAsyncThunk(`${collection}/removeOne`, async ({ id }, { rejectWithValue }) => {
+    try {
+      const doc = ref.doc(id)
+      await doc.delete()
+      console.log(id)
+      return id
+    } catch (error) {
+      logger.error(`removeOne - ${collection}`, { error })
+
+      return rejectWithValue(error)
+    }
+  })
+
   const adapterSelectors = collectionAdapter.getSelectors(prop(collection))
   const selectByIds = (ids) => createSelector(adapterSelectors.selectEntities, pipe(pick(ids), values))
   const selectById = (id) => createSelector(adapterSelectors.selectEntities, pipe(pick([id]), values, head))
@@ -113,6 +126,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       createOne,
       fetchAll,
       fetchById,
+      removeById,
       updateOne,
     },
     getDocumentReference,
@@ -129,6 +143,11 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
         reducerBuilder(builder, fetchById)
         reducerBuilder(builder, createOne)
         reducerBuilder(builder, updateOne)
+        builder.addCase(removeById.fulfilled, (state, action) => {
+          if (!isEmpty(action.payload)) {
+            collectionAdapter.removeOne(state, action.payload)
+          }
+        })
         builder.addCase('persist/PURGE', (state, action) => initialState)
       },
       initialState,
