@@ -27,7 +27,7 @@ export const ModalContainer = ({ children, contentBased, tKey, forceSmall, noPad
 }
 
 const Wrapper = styled(KeyboardAvoidingView)`
-  height: ${screenHeight}px;
+  flex: 1;
   justify-content: flex-end;
 `
 const FullSizeModalOffset = styled.View`
@@ -57,7 +57,6 @@ const Content = styled.ScrollView.attrs({
   background-color: white;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  padding-bottom: ${({ bottomInset }) => bottomInset + 10}px;
   padding-top: ${({ noPaddingTop }) => (noPaddingTop ? 0 : 32)}px;
 `
 const Title = styled(H3)`

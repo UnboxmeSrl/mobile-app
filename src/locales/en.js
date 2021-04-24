@@ -95,7 +95,9 @@ export default {
     iWorkAgency: 'I work with Agency',
     imFreelancer: 'I am as freelancer',
     inFewHours: 'In few hours you will receive a response',
-    labelsForFields: {
+    labels: {
+      address: 'Address',
+      comments: 'Comments',
       confirmPassword: 'Password',
       email: 'Email',
       password: 'Password',
@@ -122,8 +124,10 @@ export default {
       title: 'Other sign up options',
     },
     placeholders: {
+      address: 'Write your address manually',
       agency: 'Your agency',
       city: 'Your city',
+      comments: 'Your comments',
       dateOfBirth: 'Date of birth',
       name: 'Name',
       nickname: 'Nickname',

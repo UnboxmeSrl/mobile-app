@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useAction } from '@hooks/common'
+import { fetchAddresses } from '@redux/modules/addresses'
 import { selectIsAuthenticated } from '@redux/modules/auth'
 import { fetchBoxes } from '@redux/modules/boxes'
 import { fetchBrands } from '@redux/modules/brands'
@@ -17,6 +18,7 @@ export const useFetchData = () => {
   const getProducts = useAction(fetchProducts)
   const getBrands = useAction(fetchBrands)
   const getOrders = useAction(fetchOrders)
+  const getAddresses = useAction(fetchAddresses)
 
   useEffect(() => {
     getBoxes()
@@ -25,6 +27,7 @@ export const useFetchData = () => {
     getBrands()
     if (isAuthenticated) {
       getOrders()
+      getAddresses()
     }
   }, [isAuthenticated])
 }

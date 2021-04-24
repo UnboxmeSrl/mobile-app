@@ -3,7 +3,6 @@ import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { normalize } from 'normalizr'
 import { head, isEmpty, pick, pickBy, pipe, prop, values } from 'ramda'
-import { PURGE } from 'redux-persist'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import logger from '@services/logger'

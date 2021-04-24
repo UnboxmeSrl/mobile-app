@@ -358,10 +358,31 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - Google-Maps-iOS-Utils (2.1.0):
+    - Google-Maps-iOS-Utils/Clustering (= 2.1.0)
+    - Google-Maps-iOS-Utils/Geometry (= 2.1.0)
+    - Google-Maps-iOS-Utils/Heatmap (= 2.1.0)
+    - Google-Maps-iOS-Utils/QuadTree (= 2.1.0)
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Clustering (2.1.0):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Geometry (2.1.0):
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Heatmap (2.1.0):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/QuadTree (2.1.0):
+    - GoogleMaps
   - GoogleDataTransport (8.3.0):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30907.0)
     - PromisesObjC (~> 1.2)
+  - GoogleMaps (3.5.0):
+    - GoogleMaps/Maps (= 3.5.0)
+  - GoogleMaps/Base (3.5.0)
+  - GoogleMaps/Maps (3.5.0):
+    - GoogleMaps/Base
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -419,6 +440,15 @@ PODS:
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
   - leveldb-library (1.22.1)
+  - libwebp (1.2.0):
+    - libwebp/demux (= 1.2.0)
+    - libwebp/mux (= 1.2.0)
+    - libwebp/webp (= 1.2.0)
+  - libwebp/demux (1.2.0):
+    - libwebp/webp
+  - libwebp/mux (1.2.0):
+    - libwebp/demux
+  - libwebp/webp (1.2.0)
   - lottie-ios (3.1.8)
   - lottie-react-native (3.5.0):
     - lottie-ios (~> 3.1.8)
@@ -620,6 +650,12 @@ PODS:
     - React
   - react-native-get-random-values (1.6.0):
     - React-Core
+  - react-native-google-maps (0.28.0):
+    - Google-Maps-iOS-Utils (= 2.1.0)
+    - GoogleMaps (= 3.5.0)
+    - React-Core
+  - react-native-maps (0.28.0):
+    - React-Core
   - react-native-netinfo (6.0.0):
     - React-Core
   - react-native-onesignal (4.0.5):
@@ -704,6 +740,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (8.0.6):
     - React-Core
+  - RNFastImage (8.3.4):
+    - React-Core
+    - SDWebImage (~> 5.8)
+    - SDWebImageWebPCoder (~> 0.6.1)
   - RNFBApp (11.1.2):
     - Firebase/CoreOnly (= 7.8.1)
     - React-Core
@@ -756,6 +796,12 @@ PODS:
     - React
   - RNVectorIcons (8.0.0):
     - React-Core
+  - SDWebImage (5.11.0):
+    - SDWebImage/Core (= 5.11.0)
+  - SDWebImage/Core (5.11.0)
+  - SDWebImageWebPCoder (0.6.1):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.7)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -784,6 +830,8 @@ DEPENDENCIES:
   - "react-native-cookies (from `../node_modules/@react-native-community/cookies`)"
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
+  - react-native-google-maps (from `../node_modules/react-native-maps`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -805,6 +853,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNFastImage (from `../node_modules/react-native-fast-image`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
@@ -847,7 +896,9 @@ SPEC REPOS:
     - FirebaseMessaging
     - FirebasePerformance
     - FirebaseRemoteConfig
+    - Google-Maps-iOS-Utils
     - GoogleDataTransport
+    - GoogleMaps
     - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
@@ -855,11 +906,14 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
+    - libwebp
     - nanopb
     - OneSignal
     - PanModal
     - PromisesObjC
     - Protobuf
+    - SDWebImage
+    - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -904,6 +958,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
+  react-native-google-maps:
+    :path: "../node_modules/react-native-maps"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-onesignal:
@@ -946,6 +1004,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/datetimepicker"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNFastImage:
+    :path: "../node_modules/react-native-fast-image"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -1010,7 +1070,9 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: 0d7a7e45c23bfaa1f299c768b3c357ae3a5bc9d5
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleDataTransport: b006084b73915a42c28a3466961a4edda3065da6
+  GoogleMaps: 32ca02de09de357a10ac773f2c70f1986751392d
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
@@ -1018,6 +1080,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  libwebp: e90b9c01d99205d03b6bb8f2c8c415e5a4ef66f0
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -1039,6 +1102,8 @@ SPEC CHECKSUMS:
   react-native-cookies: ce50e42ace7cf0dd47769260ca5bbe8eee607e4e
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
   react-native-get-random-values: f0fc24a5887a3341589515a86282a574407b59e4
+  react-native-google-maps: 46dea4aa4acb7300beff508f64d9f8c84e9fb106
+  react-native-maps: 2d405b4e8cee0282e4c02bac434d81450dfea877
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-onesignal: e071e143c92345aaccddaa7d9f49ef22952994e8
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
@@ -1060,6 +1125,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNDateTimePicker: f7e5a5e88ad9081367b884e924358f4629e029d4
   RNDeviceInfo: a91ad51aaf8dc7079f56614045cf6f0a923237bb
+  RNFastImage: d4870d58f5936111c56218dbd7fcfc18e65b58ff
   RNFBApp: bb830cc7f7598e46437b833adc841df345e19e2f
   RNFBAuth: d011f1b1a066a8bceba63c42369de9c5ce68de5e
   RNFBCrashlytics: 47278b69b418d41e71f3b64673eaded59d4dee63
@@ -1077,8 +1143,10 @@ SPEC CHECKSUMS:
   RNScreens: 92ab26929065db7cbbf8a8413b00ac56db9f6032
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: f67a1abce2ec73e62fe4606e8110e95a832bc859
+  SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
+  SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 645080c22ee9b1496d30dd26d1b11879ca54947c
+PODFILE CHECKSUM: 84518a417472f2b33af17e9fb917a64e2f0e205e
 
 COCOAPODS: 1.10.1

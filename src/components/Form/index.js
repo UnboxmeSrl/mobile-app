@@ -16,7 +16,7 @@ export const getInputs = (children) =>
     return partialInputs.concat(input)
   }, [])
 
-export const Form = ({ children }) => {
+export const Form = ({ children, style }) => {
   const [inputs, setInputs] = useState([])
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export const Form = ({ children }) => {
         handleSubmitEditing,
       }}
     >
-      <Wrapper>{children}</Wrapper>
+      <Wrapper style={style}>{children}</Wrapper>
     </FormContext.Provider>
   )
 }

@@ -40,5 +40,4 @@ const Title = styled(H2)`
 `
 export const StepContent = styled.View`
   flex: 1;
-  justify-content: space-between;
 `

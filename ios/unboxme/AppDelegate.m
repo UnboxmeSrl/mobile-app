@@ -9,6 +9,7 @@
 #import "RNSplashScreen.h"
 @import Firebase;
 @import UIKit;
+#import <GoogleMaps/GoogleMaps.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -58,6 +59,8 @@ static void InitializeFlipper(UIApplication *application) {
   // Firebase
   [FIRApp configure];
   [RNSplashScreen show];
+  [GMSServices provideAPIKey:@"AIzaSyCP1Xek2gd3Rb-JKG0wQjhtqBkXx3eYGfk"];
+
   
   return YES;
 }

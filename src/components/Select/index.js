@@ -40,10 +40,10 @@ export const Select = ({ options, onChange, defaultValue, Component = SelectItem
 
   return (
     <Wrapper style={style}>
-      {options.map(({ tKeyLabel, value, image, imageActive }) => (
+      {options.map(({ tKeyLabel, value, imageUrl, imageDarkUrl }) => (
         <Component
-          image={image}
-          imageActive={imageActive}
+          imageDarkUrl={imageDarkUrl}
+          imageUrl={imageUrl}
           isAnySelected={isAnySelected}
           isSelected={isSelected(value)}
           key={value}

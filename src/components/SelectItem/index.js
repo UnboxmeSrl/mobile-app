@@ -5,11 +5,11 @@ import styled from 'styled-components/native'
 import { ButtonText } from '@components/Text'
 import { COLORS } from '@const'
 
-export const SelectItem = ({ tKeyLabel, isSelected, isAnySelected, onPress, style, image, imageActive }) => {
+export const SelectItem = ({ tKeyLabel, isSelected, isAnySelected, onPress, style, imageUrl, imageDarkUrl }) => {
   return (
     <Item isAnySelected={isAnySelected} isSelected={isSelected} onPress={onPress} style={style}>
-      {image ? (
-        <ImageStyled source={isSelected ? imageActive : image} />
+      {imageUrl ? (
+        <ImageStyled source={{ uri: isSelected ? imageUrl : imageDarkUrl }} />
       ) : (
         <ButtonText color={isSelected ? COLORS.white : COLORS.black} tKey={tKeyLabel} />
       )}
@@ -29,4 +29,5 @@ const Item = styled.TouchableOpacity`
 `
 const ImageStyled = styled(FastImage)`
   flex: 1;
+  height: 50px;
 `

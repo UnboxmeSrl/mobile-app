@@ -58,7 +58,7 @@ export const InputCode = ({ control, name, errors, rules, value }) => {
 
 const InputWrapper = styled.View`
   height: ${WRAPPER_HEIGHT}px;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
 const InputContent = styled.View`

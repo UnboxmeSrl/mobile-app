@@ -5,7 +5,7 @@ import TextInputMask from 'react-native-text-input-mask'
 import styled from 'styled-components/native'
 
 import { FormContext } from '@components/Form/context'
-import { TinyText } from '@components/Text'
+import { Subtitle, TinyText } from '@components/Text'
 import { COLORS, FONTS } from '@const'
 
 const WRAPPER_HEIGHT = 54
@@ -21,6 +21,8 @@ export const Input = ({
   RightIcon,
   disabled,
   mask,
+  labelKey,
+  style,
   ...rest
 }) => {
   const { getReturnKeyType, handleSubmitEditing } = useContext(FormContext)
@@ -38,7 +40,6 @@ export const Input = ({
   const onFieldSubmit = useCallback(() => {
     handleSubmitEditing && handleSubmitEditing(name)
   }, [handleSubmitEditing, name])
-  // const label = t(`labelsForFields.${name}`)
 
   const props = {
     ...rest,
@@ -53,8 +54,8 @@ export const Input = ({
   }
 
   return (
-    <InputWrapper disabled={disabled}>
-      {/* <Label>{label}</Label> */}
+    <InputWrapper disabled={disabled} style={style}>
+      {labelKey ? <Label tKey={labelKey} /> : null}
       <InputContent>
         <Controller
           control={control}
@@ -105,8 +106,8 @@ const TextInput = styled.TextInput`
   height: ${INPUT_HEIGHT}px;
   padding-horizontal: 20px;
 `
-const Label = styled(TinyText)`
-  color: ${COLORS.dark};
+const Label = styled(Subtitle)`
+  color: ${COLORS.achromaticBlack};
   margin-bottom: 2px;
   margin-left: 4px;
 `

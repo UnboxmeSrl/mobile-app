@@ -65,3 +65,14 @@ export const ORDER_SCHEMA = new schema.Entity(
     processStrategy: getProcessStrategy(['box', 'user', 'extraProduct']),
   }
 )
+
+export const ADDRESS_SCHEMA = new schema.Entity(
+  'addresses',
+  {
+    user: USER_SCHEMA,
+  },
+  {
+    idAttribute: prop('id'),
+    processStrategy: getProcessStrategy(['user']),
+  }
+)

@@ -27,34 +27,33 @@ export const BoxStepDescriptionPresenter = ({
         <Image resizeMode={'contain'} source={{ uri: box.imageUrl }} />
       </ImageWrapper>
       <Bottom>
-        <Title translations={box.name} />
-        <Body translations={box.description} />
-        <Selected tKey={'productsSelected'} tOptions={{ count: box.productsCount }} />
-        {order ? (
-          <Wrapper>
-            <Pressable onPress={navigateToBrands}>
-              <BodyText tKey={'box.brandsAndCategories'} />
-              <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={30} />
-            </Pressable>
-            <Pressable onPress={navigateToHowItWorks}>
-              <BodyText tKey={'box.howItWorks'} />
-              <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={30} />
-            </Pressable>
-            <Pressable onPress={navigateToRequiredMedia}>
-              <BodyText tKey={'box.requiredMedia'} />
-              <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={30} />
-            </Pressable>
-          </Wrapper>
-        ) : null}
-        {inReview ? <BoxInReview /> : <Button onPress={onPress} tKey={tKey} />}
+        <Row>
+          <Title translations={box.name} />
+          <Body translations={box.description} />
+          <Selected tKey={'productsSelected'} tOptions={{ count: box.productsCount }} />
+          {order ? (
+            <>
+              <Pressable onPress={navigateToBrands}>
+                <BodyText tKey={'box.brandsAndCategories'} />
+                <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={30} />
+              </Pressable>
+              <Pressable onPress={navigateToHowItWorks}>
+                <BodyText tKey={'box.howItWorks'} />
+                <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={30} />
+              </Pressable>
+              <Pressable onPress={navigateToRequiredMedia}>
+                <BodyText tKey={'box.requiredMedia'} />
+                <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={30} />
+              </Pressable>
+            </>
+          ) : null}
+        </Row>
+        <ButtonRow>{inReview ? <BoxInReview /> : <StyledButton onPress={onPress} tKey={tKey} />}</ButtonRow>
       </Bottom>
     </Step>
   )
 }
-
-const Wrapper = styled.ScrollView`
-  margin-bottom: 20px;
-`
+const StyledButton = styled(Button)``
 const Pressable = styled.TouchableOpacity`
   align-items: center;
   flex-direction: row;
@@ -74,27 +73,20 @@ const Body = styled(BodyText)`
   margin-bottom: 16px;
 `
 const Bottom = styled.View`
-  margin-bottom: 16px;
+  flex: 0.75;
+  justify-content: space-between;
 `
 const Step = styled(StepContent)``
 const ImageWrapper = styled.View`
-  height: 250px;
+  flex: 0.25;
   width: 90%;
 `
 const Image = styled(FastImage)`
   flex: 1;
   width: 100%;
 `
-const InReview = styled.View`
-  background-color: ${COLORS.tertiary};
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-  bottom: -${prop('bottomInset')}px;
-  left: -20px;
-  padding: 20px 40px 60px 40px;
-  width: ${screenWidth}px;
-`
-const ReviewText = styled(Caption)`
-  color: ${COLORS.primaryDark};
-  text-align: center;
+const Row = styled.View``
+const ButtonRow = styled(Row)`
+  height: 130px;
+  justify-content: flex-end;
 `

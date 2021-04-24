@@ -36,9 +36,7 @@ const Sections = styled.ScrollView``
 const Section = styled.View`
   margin-bottom: 40px;
 `
-const Bottom = styled.View`
-  margin-bottom: 16px;
-`
+const Bottom = styled.View``
 const Step = styled(StepContent)``
 const Title = styled(H3)`
   margin-bottom: 16px;
