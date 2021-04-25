@@ -26,6 +26,7 @@ export const BoxTile = ({ box }) => {
   const hasQuestionnaire = useSelector(selectHasQuestionnaire)
   const approved = order?.status === ORDER_APPROVED
   const rejected = order?.status === ORDER_REJECTED
+
   const buttonOnPress = useCallback(() => {
     if (approved) {
       const fn = hasQuestionnaire ? navigateToProductSelection : navigateToQuestionnaire
@@ -42,7 +43,6 @@ export const BoxTile = ({ box }) => {
       return 'contactUs'
     }
   }, [hasQuestionnaire, rejected, approved])
-  console.log(imageUrl)
   return (
     <Wrapper
       key={id}

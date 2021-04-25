@@ -15,7 +15,7 @@ export const Map = ({ initialRegion = INITIAL_REGION, region, markerCoordinate, 
 
   useEffect(() => {
     if (markerRef && markerCoordinate) {
-      markerRef?.current?.showCallout()
+      // markerRef?.current?.showCallout()
     }
   }, [markerRef, markerCoordinate])
   console.log(markerCoordinate)

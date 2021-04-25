@@ -53,19 +53,6 @@ export const BOX_SCHEMA = new schema.Entity(
   }
 )
 
-export const ORDER_SCHEMA = new schema.Entity(
-  'orders',
-  {
-    box: BOX_SCHEMA,
-    extraProduct: PRODUCT_SCHEMA,
-    user: USER_SCHEMA,
-  },
-  {
-    idAttribute: prop('id'),
-    processStrategy: getProcessStrategy(['box', 'user', 'extraProduct']),
-  }
-)
-
 export const ADDRESS_SCHEMA = new schema.Entity(
   'addresses',
   {
@@ -74,5 +61,19 @@ export const ADDRESS_SCHEMA = new schema.Entity(
   {
     idAttribute: prop('id'),
     processStrategy: getProcessStrategy(['user']),
+  }
+)
+
+export const ORDER_SCHEMA = new schema.Entity(
+  'orders',
+  {
+    address: ADDRESS_SCHEMA,
+    box: BOX_SCHEMA,
+    extraProduct: PRODUCT_SCHEMA,
+    user: USER_SCHEMA,
+  },
+  {
+    idAttribute: prop('id'),
+    processStrategy: getProcessStrategy(['box', 'user', 'extraProduct', 'address']),
   }
 )

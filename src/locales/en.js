@@ -4,7 +4,7 @@ export default {
     Error: 'Error',
     Success: 'Success',
     addAddress: 'ADD ADDRESS',
-    addresses: { addNewTitle: 'Add new address', title: 'Addresses' },
+    addresses: { addNewTitle: 'Add new address', pleaseChoose: 'Please choose the address:', title: 'Addresses' },
     and: ' and ',
     auth: {
       bySigning: 'By signing up, you agree to UnboxMe’s',
@@ -26,6 +26,8 @@ export default {
       weeklyInMilan: 'Weekly in Milan',
     },
     box: {
+      afterAddress:
+        'The ordering of the box was successful. Wait for it. \nIf you have any questions, please contact us.',
       brandsAndCategories: 'Brands & Categories',
       chooseExtra: 'Choose products',
       getThisBox: 'Get this box',
@@ -44,6 +46,7 @@ export default {
         'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
       title: 'Code from friend',
     },
+    congratulations: 'Congratulations',
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',

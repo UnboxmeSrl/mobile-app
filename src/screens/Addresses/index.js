@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { Alert, TouchableOpacity } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import CookieManager from '@react-native-community/cookies'
 import styled from 'styled-components/native'
@@ -18,15 +18,25 @@ import { AddressesPresenter } from './AddressesPresenter'
 
 export const AddressesScreen = () => {
   const addresses = useSelector(selectAllAddresses)
+  const [selected, setSelected] = useState(null)
+  const withSelection = useNavigationParam('withSelection')
+  const onConfirm = useNavigationParam('onConfirm')
+
   const removeAddress = useAction(removeAddressById)
   const { navigate } = useNavigation()
   const navigateToAdd = () => navigate(SCREEN_NAMES.AddNewAddress)
   const RightButton = () => (
     <Button onPress={navigateToAdd} style={{ position: 'absolute', right: 20 }}>
-      <Ionicons color={COLORS.primary} name={'add-circle-outline'} size={12} style={{ marginRight: 4 }} />
-      <TinyText color={COLORS.primary} tKey={'addAddress'} />
+      <Ionicons color={COLORS.primaryDark} name={'add-circle-outline'} size={12} style={{ marginRight: 4 }} />
+      <TinyText color={COLORS.primaryDark} tKey={'addAddress'} />
     </Button>
   )
+
+  const onAddressConfirm = useCallback(() => {
+    if (selected) {
+      onConfirm(selected)
+    }
+  }, [selected])
   const onRemove = (id) => {
     Alert.alert('Are you sure you want remove address?', '', [
       {
@@ -42,7 +52,7 @@ export const AddressesScreen = () => {
       },
     ])
   }
-  const props = { RightButton, addresses, onRemove }
+  const props = { RightButton, addresses, onAddressConfirm, onConfirm, onRemove, selected, setSelected, withSelection }
 
   return <AddressesPresenter {...props} />
 }
