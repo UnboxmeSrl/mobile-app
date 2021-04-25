@@ -4,6 +4,7 @@ import { Keyboard } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import auth from '@react-native-firebase/auth'
+import { head, pathOr, pipe, values } from 'ramda'
 
 import { SCREEN_NAMES } from '@const/navigation'
 import { useAction } from '@hooks/common'
@@ -28,12 +29,15 @@ export const AddNewAddress = () => {
   const location = address?.geometry?.location
 
   const onSubmit = (payload) => {
-    createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) })
-    if (onConfirm) {
-      onConfirm()
-    } else {
-      goBack()
-    }
+    // console.log({ onConfirm })
+    createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) }).then((data) => {
+      const address = pipe(pathOr({}, ['payload', 'addresses']), values, head)(data)
+      if (onConfirm) {
+        onConfirm(address)
+      } else {
+        goBack()
+      }
+    })
   }
   const onPress = handleSubmit(onSubmit)
 
