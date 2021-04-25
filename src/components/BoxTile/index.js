@@ -43,9 +43,10 @@ export const BoxTile = ({ box }) => {
       return 'contactUs'
     }
   }, [hasQuestionnaire, rejected, approved])
+  console.log({ left, order })
   return (
     <Wrapper
-      key={id}
+      key={`${id}`}
       onPress={() => {
         navigate({ params: { boxId: id }, routeName: MODAL_NAMES.Box })
       }}
@@ -116,7 +117,7 @@ const Label = styled(TinyText)`
   margin-right: 4px;
 `
 const Values = styled(TinyText).attrs({ numberOfLines: 1 })`
-  flex: 1;
+  height: 24px;
   color: ${COLORS.achromaticBlack};
 `
 const Value = styled(TinyText)`

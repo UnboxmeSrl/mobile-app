@@ -1,8 +1,8 @@
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { normalize } from 'normalizr'
-import { head, isEmpty, pick, pickBy, pipe, prop, values } from 'ramda'
+import { head, isEmpty, isNil, pick, pickBy, pipe, prop, values } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import logger from '@services/logger'
@@ -100,6 +100,11 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     }
   })
 
+  const setDataFirestore = createAction(`${collection}/setData/firestore`, (data) => {
+    const normalized = normalize(data, [schema])
+    return { payload: normalized.entities }
+  })
+
   const adapterSelectors = collectionAdapter.getSelectors(prop(collection))
   const selectByIds = (ids) => createSelector(adapterSelectors.selectEntities, pipe(pick(ids), values))
   const selectById = (id) => createSelector(adapterSelectors.selectEntities, pipe(pick([id]), values, head))
@@ -127,6 +132,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       fetchAll,
       fetchById,
       removeById,
+      setDataFirestore,
       updateOne,
     },
     getDocumentReference,
@@ -143,6 +149,11 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
         reducerBuilder(builder, fetchById)
         reducerBuilder(builder, createOne)
         reducerBuilder(builder, updateOne)
+        builder.addCase(setDataFirestore, (state, action) => {
+          if (!isEmpty(action.payload[collection]) && !isNil(action.payload[collection])) {
+            collectionAdapter.upsertMany(state, action.payload[collection])
+          }
+        })
         builder.addCase(removeById.fulfilled, (state, action) => {
           if (!isEmpty(action.payload)) {
             collectionAdapter.removeOne(state, action.payload)
