@@ -63,9 +63,9 @@ export const AddNewAddressPresenter = ({
           placeholder="Search for your address"
           query={{
             // language of the results
-            components: 'country:pl',
+            components: 'country:it',
             key: 'AIzaSyCP1Xek2gd3Rb-JKG0wQjhtqBkXx3eYGfk',
-            language: 'pl',
+            language: 'it',
             predefinedPlaces: [{ location: appLocation }],
             types: 'address',
           }}

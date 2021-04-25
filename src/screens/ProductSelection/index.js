@@ -49,7 +49,7 @@ export const ProductSelectionScreen = () => {
             routeName: SCREEN_NAMES.Addresses,
           })
         } else {
-          navigate({ routeName: SCREEN_NAMES.AddNewAddress })
+          navigate({ params: { onConfirm: onAddressSelectConfirm }, routeName: SCREEN_NAMES.AddNewAddress })
         }
       })
     }

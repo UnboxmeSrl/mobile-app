@@ -16,7 +16,7 @@ export const CongratulationsPresenter = ({ navigateToQuestionnaire, box }) => (
         <Title tKey={'congratulations'} />
         <Body tKey={'box.afterAddress'} />
       </Row>
-      <SubmitButton onPress={navigateToQuestionnaire} tKey={'questionnaire.fill'} />
+      <SubmitButton onPress={() => null} tKey={'contactUs'} />
     </Content>
   </ModalContainer>
 )

@@ -20,15 +20,20 @@ export const AddNewAddress = () => {
   const [address, setAddress] = useState('')
   const { goBack } = useNavigation()
   const [keyboardStatus, setKeyboardStatus] = useState(undefined)
+  const onConfirm = useNavigationParam('onConfirm')
 
   const { control, handleSubmit, errors, setValue } = useForm()
   const appLocation = useSelector(selectLocation)
   const createAddressAction = useAction(createAddress)
   const location = address?.geometry?.location
 
-  const onSubmit = async (payload) => {
+  const onSubmit = (payload) => {
     createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) })
-    goBack()
+    if (onConfirm) {
+      onConfirm()
+    } else {
+      goBack()
+    }
   }
   const onPress = handleSubmit(onSubmit)
 
