@@ -28,13 +28,17 @@ export default {
     box: {
       afterAddress:
         'The ordering of the box was successful. Wait for it. \nIf you have any questions, please contact us.',
+      arrived: 'The box has arrived at your Home',
       brandsAndCategories: 'Brands & Categories',
       chooseExtra: 'Choose products',
       getThisBox: 'Get this box',
       howItWorks: 'How it works',
+      instructions: 'Instructions',
+      readInstructions: 'Read the instructions',
       requiredMedia: 'Required Media & Call to actions',
       underApprovalDescription:
         'Your request is now under approval.\nIn few hours you will receive a response and notification. ',
+      uploadContent:'Upload content',
     },
     brands: 'Brands',
     brandsColon: 'Brands:',

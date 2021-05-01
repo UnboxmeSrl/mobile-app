@@ -8,12 +8,12 @@ import { selectProductById } from '@redux/modules/products'
 
 import { ProductTilePresenter } from './ProductTilePresenter'
 
-export const ProductTile = ({ product, selected, onPress }) => {
+export const ProductTile = ({ product, selected, onPress, bottomComponent, description }) => {
   const { navigate } = useNavigation()
   const data = useSelector(selectProductById(product))
   const category = useSelector(selectCategoryById(data.category))
   const brand = useSelector(selectBrandById(data.brand))
-  const props = { ...data, brand, category, onPress, selected }
+  const props = { ...data, bottomComponent, brand, category, description, onPress, selected }
 
   return <ProductTilePresenter {...props} />
 }

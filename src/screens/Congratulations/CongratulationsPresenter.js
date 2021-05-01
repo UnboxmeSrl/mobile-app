@@ -6,7 +6,7 @@ import { Button } from '@components/Button'
 import { ModalContainer } from '@components/ModalContainer'
 import { BodyText, H3, Subtitle } from '@components/Text'
 
-export const CongratulationsPresenter = ({ navigateToQuestionnaire, box }) => (
+export const CongratulationsPresenter = ({ box, description, button, onButtonPress }) => (
   <ModalContainer contentBased forceSmall>
     <Content>
       <ImageWrapper>
@@ -14,9 +14,9 @@ export const CongratulationsPresenter = ({ navigateToQuestionnaire, box }) => (
       </ImageWrapper>
       <Row>
         <Title tKey={'congratulations'} />
-        <Body tKey={'box.afterAddress'} />
+        <Body tKey={description || 'box.afterAddress'} />
       </Row>
-      <SubmitButton onPress={() => null} tKey={'contactUs'} />
+      <SubmitButton onPress={onButtonPress} tKey={button || 'contactUs'} />
     </Content>
   </ModalContainer>
 )

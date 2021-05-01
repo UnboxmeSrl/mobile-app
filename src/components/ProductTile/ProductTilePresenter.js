@@ -4,11 +4,22 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
 import { LabelValue } from '@components/LabelValue'
-import { Subtitle, TinyText } from '@components/Text'
+import { BodyText, Subtitle, TinyText } from '@components/Text'
 import { TextButton } from '@components/TextButton'
 import { COLORS } from '@const'
 
-export const ProductTilePresenter = ({ box, key, imageUrl, name, brand, category, selected, onPress }) => {
+export const ProductTilePresenter = ({
+  box,
+  key,
+  imageUrl,
+  name,
+  brand,
+  category,
+  selected,
+  onPress,
+  bottomComponent,
+  description,
+}) => {
   return (
     <Wrapper onPress={onPress}>
       <Row>
@@ -18,13 +29,19 @@ export const ProductTilePresenter = ({ box, key, imageUrl, name, brand, category
         <ColumnRight>
           <Title translations={name} />
           <LabelValue labelTKey={'Brand'} translations={brand.name} />
-          <LabelValue labelTKey={'productFor'} translations={category.name} />
-          <LabelValue labelTKey={'availableProducts'} value={20} />
+          {description ? (
+            <TinyText>{description}</TinyText>
+          ) : (
+            <>
+              <LabelValue labelTKey={'productFor'} translations={category.name} />
+              <LabelValue labelTKey={'availableProducts'} value={20} />
+            </>
+          )}
         </ColumnRight>
       </Row>
       <Bottom selected={selected}>
         {selected ? <Ionicons color={COLORS.white} name={'checkbox-outline'} size={18} /> : null}
-        <Choose selected={selected} tKey={selected ? 'selected' : 'chooseThisProduct'} />
+        {bottomComponent || <Choose selected={selected} tKey={selected ? 'selected' : 'chooseThisProduct'} />}
         {/* <TextButtonStyled color={COLORS.achromaticBlack} tKey={'seeDetails'} /> */}
       </Bottom>
     </Wrapper>

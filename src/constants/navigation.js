@@ -1,3 +1,5 @@
+import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
+
 import { COLORS } from '@const'
 
 export const MAIN_NAVIGATOR = 'mainNavigator'
@@ -23,6 +25,9 @@ export const SCREEN_NAMES = {
   AddNewAddress: 'AddNewAddress',
   Addresses: 'Addresses',
   Awards: 'Awards',
+  BoxBrief: 'BoxBrief',
+  BoxBrief2: 'BoxBrief2',
+  BoxContentUploadScreen: 'BoxContentUploadScreen',
   Home: 'Home',
   Onboarding: 'Onboarding',
   OtherSignUp: 'OtherSignUp',

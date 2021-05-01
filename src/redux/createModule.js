@@ -61,7 +61,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     try {
       const id = ref.doc().id
       const doc = ref.doc(id)
-      await doc.set({ id, ...payload })
+      await doc.set({ id, ...payload, createdAt: firestore.FieldValue.serverTimestamp() })
       const data = await doc.get()
       const normalized = normalize(data.data(), schema)
 
@@ -76,7 +76,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   const updateOne = createAsyncThunk(`${collection}/updateOne`, async ({ id, ...payload }, { rejectWithValue }) => {
     try {
       const doc = ref.doc(id)
-      await doc.update(payload)
+      await doc.update({ ...payload, updatedAt: firestore.FieldValue.serverTimestamp() })
       const data = await doc.get()
       const normalized = normalize(data.data(), schema)
       return normalized.entities

@@ -9,7 +9,7 @@ import { Button } from '@components/Button'
 import { H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
-import { ORDER_APPROVED, ORDER_REJECTED } from '@const/order'
+import { ORDER_APPROVED, ORDER_DELIVERED, ORDER_REJECTED } from '@const/order'
 import { selectHasQuestionnaire } from '@redux/modules/auth'
 import { selectBrandsByIds } from '@redux/modules/brands'
 import { selectCategoriesById } from '@redux/modules/categories'
@@ -26,24 +26,37 @@ export const BoxTile = ({ box }) => {
   const hasQuestionnaire = useSelector(selectHasQuestionnaire)
   const approved = order?.status === ORDER_APPROVED
   const rejected = order?.status === ORDER_REJECTED
+  const delivered = order?.status === ORDER_DELIVERED
 
   const buttonOnPress = useCallback(() => {
     if (approved) {
       const fn = hasQuestionnaire ? navigateToProductSelection : navigateToQuestionnaire
       fn()
+    } else if (delivered) {
+      const onPress = () =>
+        navigate({
+          params: { boxId: id },
+          routeName: SCREEN_NAMES.BoxBrief,
+        })
+      navigate({
+        params: { boxId: id, button: 'box.readInstructions', description: 'box.arrived', onPress },
+        routeName: MODAL_NAMES.Congratulations,
+      })
     } else {
       // TODO
     }
-  }, [approved, hasQuestionnaire])
+  }, [delivered, approved, hasQuestionnaire, id, navigateToProductSelection, navigateToQuestionnaire, navigate])
 
   const buttonTKey = useMemo(() => {
     if (approved) {
       return hasQuestionnaire ? 'box.chooseExtra' : 'questionnaire.fill'
+    } else if (delivered) {
+      return 'box.instructions'
     } else {
       return 'contactUs'
     }
-  }, [hasQuestionnaire, rejected, approved])
-  console.log({ left, order })
+  }, [hasQuestionnaire, rejected, approved, delivered])
+
   return (
     <Wrapper
       key={`${id}`}
@@ -58,7 +71,7 @@ export const BoxTile = ({ box }) => {
       </Top>
       <Bottom>
         <ItemsImage resizeMode={'contain'} source={{ uri: imageUrl }} />
-        {rejected || approved ? (
+        {rejected || approved || delivered ? (
           <StyledButton onPress={buttonOnPress} tKey={buttonTKey} />
         ) : (
           <>

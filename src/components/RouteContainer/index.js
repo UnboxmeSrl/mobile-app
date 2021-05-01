@@ -9,10 +9,10 @@ const HEADER_HEIGHT = 48
 
 export const RouteContainer = ({ tKey, children, withArrow, withPadding, style, RightButton }) => (
   <StyledComponent>
-    {tKey && (
+    {withArrow && (
       <Header>
         {withArrow ? <Back /> : null}
-        <HeaderTitle tKey={tKey} />
+        {tKey && <HeaderTitle tKey={tKey} />}
         {RightButton ? <RightButton /> : null}
       </Header>
     )}

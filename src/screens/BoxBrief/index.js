@@ -5,26 +5,24 @@ import { useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '@const/navigation'
 import { selectBoxById } from '@redux/modules/boxes'
 
-import { CongratulationsPresenter } from './CongratulationsPresenter'
+import { BoxBriefPresenter } from './BoxBrief'
 
-export const CongratulationsModal = () => {
+export const BoxBriefScreen = () => {
   const { navigate } = useNavigation()
   const boxId = useNavigationParam('boxId')
-  const button = useNavigationParam('button')
-  const description = useNavigationParam('description')
-  const onPress = useNavigationParam('onPress')
   const box = useSelector(selectBoxById(boxId))
 
-  const onButtonPress = () => {
-    onPress && onPress()
+  const onPress = () => {
+    navigate({
+      params: { boxId },
+      routeName: SCREEN_NAMES.BoxBrief2,
+    })
   }
 
   const props = {
     box,
-    button,
-    description,
-    onButtonPress,
+    onPress,
   }
 
-  return <CongratulationsPresenter {...props} />
+  return <BoxBriefPresenter {...props} />
 }
