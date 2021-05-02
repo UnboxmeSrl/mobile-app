@@ -10,19 +10,21 @@ import * as lasturi from 'ramda'
 
 import { WIDTH_ANIMATION_DURATION } from '@components/ProgressBar'
 import { screenWidth } from '@const/common'
+import { CONTENT_STORAGE_BUCKET, contentRef, getContentPath } from '@const/firebase'
 import { selectBoxById } from '@redux/modules/boxes'
 import { selectOrderByBoxId } from '@redux/modules/orders'
-import { showToastError } from '@services'
+import { logger, showToastError } from '@services'
 
 import { UploadPlaceholderPresenter } from './UploadPlaceholderPresenter'
 
-const reference = firebase.app().storage('gs://unboxme-firebase-content')
-
 const SIZE = (screenWidth - 80) / 2
 
-export const UploadPlaceholder = () => {
+export const UploadPlaceholder = ({ fromStorage, item }) => {
   const [task, setTask] = useState(null)
   const [file, setFile] = useState(null)
+  const [removed, setRemoved] = useState(false)
+  const [publicUrl, setPublicUrl] = useState(null)
+  const [isCompleted, setIsCompleted] = useState(false)
   const boxId = useNavigationParam('boxId')
   const box = useSelector(selectBoxById(boxId))
   const order = useSelector(selectOrderByBoxId(boxId))
@@ -47,16 +49,31 @@ export const UploadPlaceholder = () => {
   const onPress = () => {
     launchImageLibrary({ mediaType: 'video' }, async ({ uri, fileName }) => {
       if (uri) {
-        setFile(uri)
         const name = fileName || last(uri.split('/'))
-        const ref = reference.ref(`${box.name.en}/${order.id}/${name}`)
+        setFile({ name, uri })
+        const ref = contentRef.ref(getContentPath(box, order, name))
         setTask(ref.putFile(uri))
       } else {
         // showToastError('Something went wrong')
       }
     })
   }
-  const onRemove = () => {}
+  const onRemove = async () => {
+    if (fromStorage) {
+      const ref = contentRef.ref(item.fullPath)
+      await ref.delete()
+      setRemoved(true)
+    } else if (isCompleted) {
+      const ref = contentRef.ref(getContentPath(box, order, file.name))
+      await ref.delete()
+    } else {
+      task?.abort()
+    }
+    setTask(null)
+    setFile(null)
+    setIsCompleted(null)
+    setProgress(0)
+  }
 
   useEffect(() => {
     if (task) {
@@ -65,13 +82,30 @@ export const UploadPlaceholder = () => {
         setProgress(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes)
       })
 
-      task.then(() => {
-        console.log('Image uploaded to the bucket!')
-      })
+      task
+        .then(() => {
+          logger.info('Image uploaded to the bucket!')
+          setIsCompleted(true)
+        })
+        .catch((e) => {
+          logger.error(e)
+        })
     }
   }, [task])
-  const props = { height, isComplete: progress === 1, onPress, progress, thumb: file }
-  console.log(progress)
+
+  const getDownloadUrl = async () => {
+    setPublicUrl(await item.getDownloadURL())
+  }
+  useEffect(() => {
+    if (fromStorage) {
+      console.log({ fromStorage })
+      getDownloadUrl()
+    }
+  }, [fromStorage])
+  if (removed) {
+    return null
+  }
+  const props = { file, fromStorage, height, isCompleted, item, onPress, onRemove, progress, publicUrl }
 
   return <UploadPlaceholderPresenter {...props} />
 }

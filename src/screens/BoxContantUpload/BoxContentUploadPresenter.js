@@ -10,10 +10,15 @@ import { COLORS } from '@const'
 import { screenWidth } from '@const/common'
 
 const SIZE = (screenWidth - 80) / 2
-export const BoxContentUploadPresenter = ({ box, onPress, products }) => (
+export const BoxContentUploadPresenter = ({ box, onPress, products, items }) => (
   <RouteContainer tKey={'box.uploadContent'} withArrow>
     <Content>
       <Placeholders>
+        {items.map((item) => (
+          <UploadPlaceholder fromStorage item={item} key={item.fullPath} />
+        ))}
+        <UploadPlaceholder />
+        <UploadPlaceholder />
         <UploadPlaceholder />
         <UploadPlaceholder />
         <UploadPlaceholder />
@@ -24,7 +29,7 @@ export const BoxContentUploadPresenter = ({ box, onPress, products }) => (
   </RouteContainer>
 )
 
-const Content = styled.View`
+const Content = styled.ScrollView`
   flex: 1;
   padding: 0 20px;
 `

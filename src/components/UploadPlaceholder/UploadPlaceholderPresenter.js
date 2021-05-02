@@ -10,14 +10,31 @@ import { COLORS } from '@const'
 import { screenWidth } from '@const/common'
 
 const SIZE = (screenWidth - 80) / 2
-export const UploadPlaceholderPresenter = ({ onPress, thumb, isComplete, progress, height }) => {
+export const UploadPlaceholderPresenter = ({
+  onPress,
+  file,
+  isCompleted,
+  progress,
+  height,
+  onRemove,
+  publicUrl,
+  fromStorage,
+}) => {
   return (
-    <Placeholder disabled={isComplete} onPress={onPress}>
-      {thumb && <StyledPlayer isComplete={isComplete} muted resizeMode={'cover'} source={{ uri: thumb }} />}
-      {!thumb && <Ionicons color={COLORS.white} name={'add-outline'} size={SIZE / 2} />}
-      {isComplete && <Overlay />}
-      {isComplete && <Ionicons color={COLORS.white} name={'checkmark-outline'} size={SIZE / 2} />}
-      {thumb && !isComplete && <Progress style={{ height }} />}
+    <Placeholder disabled={isCompleted} onPress={onPress}>
+      {file && <StyledPlayer isCompleted={isCompleted} muted resizeMode={'cover'} source={{ uri: file?.uri }} />}
+      {publicUrl && (
+        <StyledPlayer isCompleted={isCompleted || fromStorage} muted resizeMode={'cover'} source={{ uri: publicUrl }} />
+      )}
+      {!file && !fromStorage && <Ionicons color={COLORS.white} name={'add-outline'} size={SIZE / 2} />}
+      {isCompleted && <Overlay />}
+      {isCompleted && <Ionicons color={COLORS.white} name={'checkmark-outline'} size={SIZE / 2} />}
+      {(isCompleted || fromStorage) && (
+        <TrashWrapper onPress={onRemove}>
+          <Ionicons color={COLORS.white} name={'trash-outline'} size={20} />
+        </TrashWrapper>
+      )}
+      {file && !isCompleted && <Progress style={{ height }} />}
     </Placeholder>
   )
 }
@@ -38,6 +55,17 @@ const Overlay = styled.View`
   position: absolute;
   width: ${SIZE}px;
 `
+const TrashWrapper = styled.TouchableOpacity`
+  align-items: center;
+  background-color: ${COLORS.primary};
+  border-radius: 8px;
+  height: 30px;
+  justify-content: center;
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  width: 30px;
+`
 const Placeholder = styled.TouchableOpacity`
   align-items: center;
   background-color: ${COLORS.tertiary};
@@ -51,7 +79,7 @@ const Placeholder = styled.TouchableOpacity`
 const StyledPlayer = styled(Video)`
   border-radius: 20px;
   height: ${SIZE}px;
-  opacity: ${({ isComplete }) => (isComplete ? 0.8 : 0.3)};
+  opacity: ${({ isCompleted }) => (isCompleted ? 0.8 : 0.3)};
   position: absolute;
   width: ${SIZE}px;
 `
