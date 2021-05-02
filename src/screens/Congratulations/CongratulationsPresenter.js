@@ -6,14 +6,14 @@ import { Button } from '@components/Button'
 import { ModalContainer } from '@components/ModalContainer'
 import { BodyText, H3, Subtitle } from '@components/Text'
 
-export const CongratulationsPresenter = ({ box, description, button, onButtonPress }) => (
+export const CongratulationsPresenter = ({ title, box, description, button, onButtonPress }) => (
   <ModalContainer contentBased forceSmall>
     <Content>
       <ImageWrapper>
         <Image resizeMode={'contain'} source={{ uri: box.imageUrl }} />
       </ImageWrapper>
       <Row>
-        <Title tKey={'congratulations'} />
+        <Title tKey={title || 'congratulations'} />
         <Body tKey={description || 'box.afterAddress'} />
       </Row>
       <SubmitButton onPress={onButtonPress} tKey={button || 'contactUs'} />

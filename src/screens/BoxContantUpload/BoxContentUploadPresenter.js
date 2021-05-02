@@ -5,13 +5,14 @@ import styled from 'styled-components/native'
 
 import { Button } from '@components/Button'
 import { RouteContainer } from '@components/RouteContainer'
+import { BodyText } from '@components/Text'
 import { UploadPlaceholder } from '@components/UploadPlaceholder'
 import { COLORS } from '@const'
 import { screenWidth } from '@const/common'
 
 const SIZE = (screenWidth - 80) / 2
 export const BoxContentUploadPresenter = ({ box, onPress, products, items }) => (
-  <RouteContainer tKey={'box.uploadContent'} withArrow>
+  <RouteContainer tKey={'box.uploadContent'} withArrow withPadding>
     <Content>
       <Placeholders>
         {items.map((item) => (
@@ -21,23 +22,25 @@ export const BoxContentUploadPresenter = ({ box, onPress, products, items }) => 
         <UploadPlaceholder />
         <UploadPlaceholder />
         <UploadPlaceholder />
-        <UploadPlaceholder />
-        <UploadPlaceholder />
       </Placeholders>
     </Content>
-    {/* <SubmitButton onPress={onPress} tKey={'next'} /> */}
+    <Text>You will receive a notification when your video is approved together with ideal publication time. </Text>
+    <SubmitButton onPress={onPress} tKey={'next'} />
   </RouteContainer>
 )
 
 const Content = styled.ScrollView`
   flex: 1;
-  padding: 0 20px;
 `
 const Placeholders = styled.View`
   align-items: flex-start;
   flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
+`
+const Text = styled(BodyText)`
+  margin-bottom: 12px;
+  text-align: center;
 `
 const Placeholder = styled.TouchableOpacity`
   align-items: center;
@@ -49,9 +52,6 @@ const Placeholder = styled.TouchableOpacity`
   width: ${SIZE}px;
 `
 const SubmitButton = styled(Button)`
-  bottom: 0;
-  left: 20px;
   margin-top: 8px;
-  position: absolute;
   width: ${screenWidth - 40}px;
 `

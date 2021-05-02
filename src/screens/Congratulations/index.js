@@ -13,6 +13,7 @@ export const CongratulationsModal = () => {
   const button = useNavigationParam('button')
   const description = useNavigationParam('description')
   const onPress = useNavigationParam('onPress')
+  const title = useNavigationParam('title')
   const box = useSelector(selectBoxById(boxId))
 
   const onButtonPress = () => {
@@ -24,6 +25,7 @@ export const CongratulationsModal = () => {
     button,
     description,
     onButtonPress,
+    title,
   }
 
   return <CongratulationsPresenter {...props} />

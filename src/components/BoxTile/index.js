@@ -9,7 +9,7 @@ import { Button } from '@components/Button'
 import { H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
-import { ORDER_APPROVED, ORDER_DELIVERED, ORDER_REJECTED } from '@const/order'
+import { ORDER_APPROVED, ORDER_CONTENT_IN_REVIEW, ORDER_DELIVERED, ORDER_REJECTED } from '@const/order'
 import { selectHasQuestionnaire } from '@redux/modules/auth'
 import { selectBrandsByIds } from '@redux/modules/brands'
 import { selectCategoriesById } from '@redux/modules/categories'
@@ -27,6 +27,7 @@ export const BoxTile = ({ box }) => {
   const approved = order?.status === ORDER_APPROVED
   const rejected = order?.status === ORDER_REJECTED
   const delivered = order?.status === ORDER_DELIVERED
+  const contentReview = order?.status === ORDER_CONTENT_IN_REVIEW
 
   const buttonOnPress = useCallback(() => {
     if (approved) {
@@ -42,20 +43,36 @@ export const BoxTile = ({ box }) => {
         params: { boxId: id, button: 'box.readInstructions', description: 'box.arrived', onPress },
         routeName: MODAL_NAMES.Congratulations,
       })
+    } else if (contentReview) {
+      navigate({
+        params: { boxId: id },
+        routeName: SCREEN_NAMES.BoxBrief,
+      })
     } else {
       // TODO
     }
-  }, [delivered, approved, hasQuestionnaire, id, navigateToProductSelection, navigateToQuestionnaire, navigate])
+  }, [
+    delivered,
+    approved,
+    hasQuestionnaire,
+    id,
+    navigateToProductSelection,
+    navigateToQuestionnaire,
+    navigate,
+    contentReview,
+  ])
 
   const buttonTKey = useMemo(() => {
     if (approved) {
       return hasQuestionnaire ? 'box.chooseExtra' : 'questionnaire.fill'
     } else if (delivered) {
       return 'box.instructions'
+    } else if (contentReview) {
+      return 'box.checkBrief'
     } else {
       return 'contactUs'
     }
-  }, [hasQuestionnaire, rejected, approved, delivered])
+  }, [hasQuestionnaire, rejected, approved, delivered, contentReview])
 
   return (
     <Wrapper
@@ -71,7 +88,7 @@ export const BoxTile = ({ box }) => {
       </Top>
       <Bottom>
         <ItemsImage resizeMode={'contain'} source={{ uri: imageUrl }} />
-        {rejected || approved || delivered ? (
+        {rejected || approved || delivered || contentReview ? (
           <StyledButton onPress={buttonOnPress} tKey={buttonTKey} />
         ) : (
           <>

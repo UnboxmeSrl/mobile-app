@@ -4,7 +4,7 @@ import { mergeAll, prop } from 'ramda'
 // replace firebase object with id
 const applyReferenceId = (fields, value) =>
   mergeAll(
-    fields.map((field) => {
+    [...fields, 'createdAt', 'updatedAt'].map((field) => {
       const data = value[field]
       if (data) {
         const normalizedData = Array.isArray(data)
