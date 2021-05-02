@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Animated, Easing } from 'react-native'
+import { Animated, Easing, Platform } from 'react-native'
 import { createThumbnail } from 'react-native-create-thumbnail'
+import RNFS from 'react-native-fs'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import storage, { firebase } from '@react-native-firebase/storage'
 import { last } from 'ramda'
 import * as lasturi from 'ramda'
+import RNFetchBlob from 'rn-fetch-blob'
 
 import { WIDTH_ANIMATION_DURATION } from '@components/ProgressBar'
 import { screenWidth } from '@const/common'
@@ -14,9 +16,23 @@ import { CONTENT_STORAGE_BUCKET, contentRef, getContentPath } from '@const/fireb
 import { selectBoxById } from '@redux/modules/boxes'
 import { selectOrderByBoxId } from '@redux/modules/orders'
 import { logger, showToastError } from '@services'
+import { hasReadAndroidPermission } from '@services/permissions'
 
 import { UploadPlaceholderPresenter } from './UploadPlaceholderPresenter'
+// ...
+export async function getPathForFirebaseStorage(uri) {
+  // The reason we have this function is that on android if the file comes from google photos we can't access it directly
+  if (Platform.OS === 'ios') {
+    return uri
+  }
 
+  if (!uri.includes('content://com.google')) {
+    return uri
+  }
+
+  const stat = await RNFetchBlob.fs.stat(uri)
+  return stat.path
+}
 const SIZE = (screenWidth - 80) / 2
 
 export const UploadPlaceholder = ({ fromStorage, item }) => {
@@ -46,13 +62,15 @@ export const UploadPlaceholder = ({ fromStorage, item }) => {
     outputRange: [SIZE, '0'],
   })
 
-  const onPress = () => {
-    launchImageLibrary({ mediaType: 'video' }, async ({ uri, fileName }) => {
+  const onPress = async () => {
+    await hasReadAndroidPermission()
+    launchImageLibrary({ mediaType: 'video' }, async ({ uri, fileName, ...rest }) => {
       if (uri) {
         const name = fileName || last(uri.split('/'))
-        setFile({ name, uri })
+        const uriFinal = await getPathForFirebaseStorage(uri)
+        setFile({ name, uri: uriFinal })
         const ref = contentRef.ref(getContentPath(box, order, name))
-        setTask(ref.putFile(uri))
+        setTask(ref.putFile(uriFinal))
       } else {
         // showToastError('Something went wrong')
       }
