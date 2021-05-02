@@ -30,14 +30,16 @@ export const AddNewAddress = () => {
 
   const onSubmit = (payload) => {
     // console.log({ onConfirm })
-    createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) }).then((data) => {
-      const address = pipe(pathOr({}, ['payload', 'addresses']), values, head)(data)
-      if (onConfirm) {
-        onConfirm(address)
-      } else {
-        goBack()
-      }
-    })
+    createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) })
+      .then((data) => {
+        const address = pipe(pathOr({}, ['payload', 'addresses']), values, head)(data)
+        if (onConfirm) {
+          onConfirm(address)
+        } else {
+          goBack()
+        }
+      })
+      .catch((e) => console.log(e))
   }
   const onPress = handleSubmit(onSubmit)
 

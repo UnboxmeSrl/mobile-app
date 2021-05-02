@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Keyboard } from 'react-native'
-import { nth, path } from 'ramda'
+import { has, nth, path } from 'ramda'
 import styled from 'styled-components/native/dist/styled-components.native.esm'
 
 import { IS_IOS } from '@const/common'
@@ -18,9 +18,8 @@ export const getInputs = (children) =>
 
 export const Form = ({ children, style }) => {
   const [inputs, setInputs] = useState([])
-
   useEffect(() => {
-    setInputs(getInputs(children))
+    setInputs(getInputs(children).filter(has('focus')))
   }, [children])
 
   const getInputPosition = useCallback(
@@ -51,8 +50,7 @@ export const Form = ({ children, style }) => {
       const nextFocusableInput = nth(inputPosition + 1, inputs)
 
       if (nextFocusableInput) {
-        console.log('focus')
-        nextFocusableInput.focus()
+        nextFocusableInput?.focus && nextFocusableInput?.focus()
       }
       if (isLastInput) {
         Keyboard.dismiss()
