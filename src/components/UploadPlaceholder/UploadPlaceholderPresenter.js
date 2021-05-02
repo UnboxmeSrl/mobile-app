@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated } from 'react-native'
+import { ActivityIndicator, Animated } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Video from 'react-native-video'
 import { prop } from 'ramda'
@@ -24,7 +24,15 @@ export const UploadPlaceholderPresenter = ({
     <Placeholder disabled={isCompleted} onPress={onPress}>
       {file && <StyledPlayer isCompleted={isCompleted} muted resizeMode={'cover'} source={{ uri: file?.uri }} />}
       {publicUrl && (
-        <StyledPlayer isCompleted={isCompleted || fromStorage} muted resizeMode={'cover'} source={{ uri: publicUrl }} />
+        <>
+          <Loader />
+          <StyledPlayer
+            isCompleted={isCompleted || fromStorage}
+            muted
+            resizeMode={'cover'}
+            source={{ uri: publicUrl }}
+          />
+        </>
       )}
       {!file && !fromStorage && <Ionicons color={COLORS.white} name={'add-outline'} size={SIZE / 2} />}
       {isCompleted && <Overlay />}
@@ -38,6 +46,8 @@ export const UploadPlaceholderPresenter = ({
     </Placeholder>
   )
 }
+
+const Loader = styled.ActivityIndicator``
 const Progress = styled(Animated.View)`
   background-color: white;
   border-top-left-radius: 20px;

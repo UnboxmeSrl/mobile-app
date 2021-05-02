@@ -1,6 +1,7 @@
 import { AuthPhoneModal } from '@screens/AuthPhone'
 import { BoxModal } from '@screens/Box'
 import { CongratulationsModal } from '@screens/Congratulations'
+import { ContentApprovedScreen } from '@screens/ContentApproved'
 import { FillQuestionnaireModal } from '@screens/FillQuestionnaire'
 import { ForgotPasswordModal } from '@screens/ForgotPassword'
 import { LoginScreen } from '@screens/Login'

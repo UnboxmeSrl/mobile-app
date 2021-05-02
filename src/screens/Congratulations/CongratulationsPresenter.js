@@ -6,7 +6,7 @@ import { Button } from '@components/Button'
 import { ModalContainer } from '@components/ModalContainer'
 import { BodyText, H3, Subtitle } from '@components/Text'
 
-export const CongratulationsPresenter = ({ title, box, description, button, onButtonPress }) => (
+export const CongratulationsPresenter = ({ title, box, description, button, onButtonPress, noButton }) => (
   <ModalContainer contentBased forceSmall>
     <Content>
       <ImageWrapper>
@@ -16,7 +16,7 @@ export const CongratulationsPresenter = ({ title, box, description, button, onBu
         <Title tKey={title || 'congratulations'} />
         <Body tKey={description || 'box.afterAddress'} />
       </Row>
-      <SubmitButton onPress={onButtonPress} tKey={button || 'contactUs'} />
+      {!noButton && <SubmitButton onPress={onButtonPress} tKey={button || 'contactUs'} />}
     </Content>
   </ModalContainer>
 )

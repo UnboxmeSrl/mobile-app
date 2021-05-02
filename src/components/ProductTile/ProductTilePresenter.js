@@ -1,6 +1,7 @@
 import React from 'react'
 import FastImage from 'react-native-fast-image'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { is } from 'ramda'
 import styled from 'styled-components/native'
 
 import { LabelValue } from '@components/LabelValue'
@@ -19,20 +20,26 @@ export const ProductTilePresenter = ({
   onPress,
   bottomComponent,
   description,
+  style,
+  disabled,
 }) => {
   return (
-    <Wrapper onPress={onPress}>
+    <Wrapper disabled={disabled} onPress={onPress} style={style}>
       <Row>
         <ColumnLeft>
           <Image source={{ uri: imageUrl }} />
         </ColumnLeft>
         <ColumnRight>
           <Title translations={name} />
-          <LabelValue labelTKey={'Brand'} translations={brand.name} />
           {description ? (
-            <TinyText>{description}</TinyText>
+            is(String, description) ? (
+              <TinyText>{description}</TinyText>
+            ) : (
+              description
+            )
           ) : (
             <>
+              <LabelValue labelTKey={'Brand'} translations={brand.name} />
               <LabelValue labelTKey={'productFor'} translations={category.name} />
               <LabelValue labelTKey={'availableProducts'} value={20} />
             </>

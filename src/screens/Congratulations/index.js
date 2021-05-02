@@ -10,6 +10,7 @@ import { CongratulationsPresenter } from './CongratulationsPresenter'
 export const CongratulationsModal = () => {
   const { navigate } = useNavigation()
   const boxId = useNavigationParam('boxId')
+  const noButton = useNavigationParam('noButton')
   const button = useNavigationParam('button')
   const description = useNavigationParam('description')
   const onPress = useNavigationParam('onPress')
@@ -24,6 +25,7 @@ export const CongratulationsModal = () => {
     box,
     button,
     description,
+    noButton,
     onButtonPress,
     title,
   }

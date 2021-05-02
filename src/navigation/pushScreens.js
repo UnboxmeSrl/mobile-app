@@ -3,6 +3,7 @@ import { AddressesScreen } from '@screens/Addresses'
 import { BoxBriefScreen } from '@screens/BoxBrief'
 import { BoxBrief2Screen } from '@screens/BoxBrief2'
 import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
+import { ContentApprovedScreen } from '@screens/ContentApproved'
 import { OnboardingScreen } from '@screens/Onboarding'
 import { OtherSingUpOptionsScreen } from '@screens/OtherSignUpOptions'
 import { ProductSelectionScreen } from '@screens/ProductSelection'
@@ -49,5 +50,8 @@ export default {
   },
   [SCREEN_NAMES.BoxContentUploadScreen]: {
     screen: BoxContentUploadScreen,
+  },
+  [SCREEN_NAMES.ContentApproved]: {
+    screen: ContentApprovedScreen,
   },
 }

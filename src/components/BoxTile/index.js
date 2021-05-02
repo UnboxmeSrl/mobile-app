@@ -9,7 +9,14 @@ import { Button } from '@components/Button'
 import { H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
-import { ORDER_APPROVED, ORDER_CONTENT_IN_REVIEW, ORDER_DELIVERED, ORDER_REJECTED } from '@const/order'
+import {
+  ORDER_APPROVED,
+  ORDER_CONTENT_APPROVED,
+  ORDER_CONTENT_IN_REVIEW,
+  ORDER_CONTENT_REJECTED,
+  ORDER_DELIVERED,
+  ORDER_REJECTED,
+} from '@const/order'
 import { selectHasQuestionnaire } from '@redux/modules/auth'
 import { selectBrandsByIds } from '@redux/modules/brands'
 import { selectCategoriesById } from '@redux/modules/categories'
@@ -28,6 +35,10 @@ export const BoxTile = ({ box }) => {
   const rejected = order?.status === ORDER_REJECTED
   const delivered = order?.status === ORDER_DELIVERED
   const contentReview = order?.status === ORDER_CONTENT_IN_REVIEW
+  const contentRejected = order?.status === ORDER_CONTENT_REJECTED
+  const contentApproved = order?.status === ORDER_CONTENT_APPROVED
+
+  console.log(contentRejected)
 
   const buttonOnPress = useCallback(() => {
     if (approved) {
@@ -48,6 +59,22 @@ export const BoxTile = ({ box }) => {
         params: { boxId: id },
         routeName: SCREEN_NAMES.BoxBrief,
       })
+    } else if (contentRejected) {
+      navigate({
+        params: {
+          boxId: id,
+          description: 'box.rejectReason',
+          title: 'box.rejected',
+        },
+        routeName: MODAL_NAMES.Congratulations,
+      })
+    } else if (contentApproved) {
+      navigate({
+        params: {
+          boxId: id,
+        },
+        routeName: SCREEN_NAMES.ContentApproved,
+      })
     } else {
       // TODO
     }
@@ -60,6 +87,8 @@ export const BoxTile = ({ box }) => {
     navigateToQuestionnaire,
     navigate,
     contentReview,
+    contentRejected,
+    contentApproved,
   ])
 
   const buttonTKey = useMemo(() => {
@@ -69,10 +98,14 @@ export const BoxTile = ({ box }) => {
       return 'box.instructions'
     } else if (contentReview) {
       return 'box.checkBrief'
+    } else if (contentRejected) {
+      return 'box.checkReason'
+    } else if (contentApproved) {
+      return 'box.whatsNext'
     } else {
       return 'contactUs'
     }
-  }, [hasQuestionnaire, rejected, approved, delivered, contentReview])
+  }, [hasQuestionnaire, rejected, approved, delivered, contentReview, contentRejected, contentApproved])
 
   return (
     <Wrapper
@@ -88,7 +121,7 @@ export const BoxTile = ({ box }) => {
       </Top>
       <Bottom>
         <ItemsImage resizeMode={'contain'} source={{ uri: imageUrl }} />
-        {rejected || approved || delivered || contentReview ? (
+        {rejected || approved || delivered || contentReview || contentRejected || contentApproved ? (
           <StyledButton onPress={buttonOnPress} tKey={buttonTKey} />
         ) : (
           <>
