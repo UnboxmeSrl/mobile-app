@@ -12,7 +12,7 @@ export const HomeScreenPresenter = ({ boxes }) => (
     <Content>
       <LoginGuest />
       <TextWrapper>
-        <H3 color={COLORS.primary}>2 </H3>
+        <H3 color={COLORS.primary}>{boxes.length} </H3>
         <H3 tKey={'home.boxesAvailable'} />
       </TextWrapper>
       {boxes.map((box) => (

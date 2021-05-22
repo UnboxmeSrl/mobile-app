@@ -8,13 +8,10 @@ import { selectBoxById } from '@redux/modules/boxes'
 import { YourRatingPresenter } from './YourRating'
 
 export const YourRatingModal = () => {
-  const { navigate } = useNavigation()
+  const { goBack } = useNavigation()
 
   const onPress = () => {
-    // navigate({
-    //   params: { boxId },
-    //   routeName: SCREEN_NAMES.BoxBrief2,
-    // })
+    goBack()
   }
 
   const props = {

@@ -5,6 +5,7 @@ import { Rating } from '@components/Map/Dots'
 import { ModalContainer } from '@components/ModalContainer'
 import { ButtonText, H1, H2, H3, TinyText } from '@components/Text'
 import { COLORS } from '@const'
+import { screenWidth } from '@const/common'
 
 import { Button } from '../../components/Button'
 
@@ -38,7 +39,7 @@ export const YourRatingPresenter = ({ onPress }) => (
           You earned <FinalScore>+60exp</FinalScore>
         </Label>
       </Tile>
-      <Button onPress={onPress} tKey={'great'} />
+      <SubmitButton onPress={onPress} tKey={'great'} />
     </Content>
   </ModalContainer>
 )
@@ -47,7 +48,11 @@ const Row = styled.View`
   flex-direction: row;
   justify-content: center;
 `
-const Content = styled.ScrollView`
+const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flex: 1,
+  },
+})`
   padding: 16px 20px;
 `
 const Score = styled(H2)`
@@ -75,4 +80,10 @@ const Tile = styled.View`
   justify-content: center;
   margin: 16px 0;
   padding: 16px;
+`
+const SubmitButton = styled(Button)`
+  bottom: 0;
+
+  margin-top: 8px;
+  position: absolute;
 `
