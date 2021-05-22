@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { AwardsScreen } from '@screens/Awards'
 import { HomeScreen } from '@screens/Home'
-import { SettingsScreen } from '@screens/Settings'
+import { ProfileScreen } from '@screens/Profile'
 
 import { TabBarComponent, TabBarIcon } from '@components/TabBarIcon'
 import { COLORS } from '@const'
@@ -12,27 +12,21 @@ export default createBottomTabNavigator(
   {
     [SCREEN_NAMES.Home]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => (
-          <TabBarIcon activeIcon={'home'} focused={focused} icon={'home-outline'} />
-        ),
+        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'home'} focused={focused} icon={'home-outline'} />,
       },
       screen: HomeScreen,
     },
     [SCREEN_NAMES.Awards]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => (
-          <TabBarIcon activeIcon={'trophy'} focused={focused} icon={'trophy-outline'} />
-        ),
+        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'trophy'} focused={focused} icon={'trophy-outline'} />,
       },
       screen: AwardsScreen,
     },
-    [SCREEN_NAMES.Settings]: {
+    [SCREEN_NAMES.Profile]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => (
-          <TabBarIcon activeIcon={'person'} focused={focused} icon={'person-outline'} />
-        ),
+        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'person'} focused={focused} icon={'person-outline'} />,
       },
-      screen: SettingsScreen,
+      screen: ProfileScreen,
     },
   },
   {

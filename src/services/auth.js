@@ -69,7 +69,7 @@ export const onAuthSuccess = async () => {
       const verificationStatus = data.get(_verificationStatus)
 
       if (verificationStatus === APPROVED_USER) {
-        navigate(SCREEN_NAMES.Settings)
+        navigate(SCREEN_NAMES.Profile)
       } else {
         navigate(SCREEN_NAMES.Wizard, { [_verificationStatus]: verificationStatus })
       }

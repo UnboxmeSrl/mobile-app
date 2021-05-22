@@ -9,34 +9,24 @@ import { screenWidth } from '@const/common'
 
 import { Button } from '../../components/Button'
 
-export const YourRatingPresenter = ({ onPress }) => (
+export const YourRatingPresenter = ({ onPress, order, score }) => (
   <ModalContainer noPaddingTop>
     <Content>
       <Row>
-        <Score>4.5</Score>
+        <Score>{score}</Score>
         <DimmedScore> / 5</DimmedScore>
       </Row>
-      <H3>Feedback on your Unboxing</H3>
-      <Point>
-        <Label>Narration</Label>
-        <Rating rating={4} />
-      </Point>
-      <Point>
-        <Label>Tags & Links</Label>
-        <Rating rating={5} />
-      </Point>
-      <Point>
-        <Label>Authenticity</Label>
-        <Rating rating={4} />
-      </Point>
-      <Point>
-        <Label>Publishing time</Label>
-        <Rating rating={5} />
-      </Point>
+      <Title>Feedback on your Unboxing</Title>
+      {order.feedback.map(({ labelKey, value }) => (
+        <Point key={labelKey}>
+          <Label tKey={labelKey} />
+          <Rating rating={value} />
+        </Point>
+      ))}
       <Tile>
         <Feedback>You collected maximum rate from this Unboxing</Feedback>
         <Label>
-          You earned <FinalScore>+60exp</FinalScore>
+          You earned <FinalScore>+{order.points}exp</FinalScore>
         </Label>
       </Tile>
       <SubmitButton onPress={onPress} tKey={'great'} />
@@ -54,6 +44,10 @@ const Content = styled.ScrollView.attrs({
   },
 })`
   padding: 16px 20px;
+`
+const Title = styled(H3)`
+  margin-bottom: 24px;
+  margin-top: 12px;
 `
 const Score = styled(H2)`
   color: ${COLORS.primaryDark};

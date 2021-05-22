@@ -32,6 +32,7 @@ export default {
       brandsAndCategories: 'Brands & Categories',
       checkBrief: 'Check brief',
       checkContent: 'We will try to check everything and get back to you with an answer as soon as possible.',
+      checkFeedback: 'Check feedback',
       checkReason: 'Check reason',
       chooseExtra: 'Choose products',
       copyLink: 'Copy personal link',
@@ -156,6 +157,7 @@ export default {
     },
     privacyPolicy: 'Privacy Policy',
     productCategories: 'Product categories',
+    great: 'Great',
     productFor: 'Product for',
     productSelection: {
       asGift: 'You can choose one of these products as a gift!',
@@ -194,7 +196,9 @@ export default {
     },
     seeDetails: 'See details',
     selected: 'Selected',
+    narration: 'Narration',
     settings: 'Settings',
+    authenticity: 'Authenticity',
     signIn: {
       forgot: 'Forgot password',
       forgotSent: 'Recovery email was sent',
@@ -204,6 +208,7 @@ export default {
       withEmail: 'Sign in with email',
       withPhone: 'Sign in with phone number',
     },
+    publishingTime: 'Publishing time',
     signUp: {
       confirmPassword: 'Confirm your password',
       createAccount:
@@ -219,6 +224,7 @@ export default {
       withPhone: 'Sign up with phone number',
     },
     submit: 'Submit',
+    tags: 'Tags & Links',
     termsOfUse: 'Terms of Use',
     tiktok: {
       andSendMessage: 'And send us a message to prove you are the account owner ',

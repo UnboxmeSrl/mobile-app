@@ -15,7 +15,9 @@ import {
   ORDER_CONTENT_IN_REVIEW,
   ORDER_CONTENT_REJECTED,
   ORDER_DELIVERED,
+  ORDER_RATING_ASSIGNED,
   ORDER_REJECTED,
+  ORDER_WITH_RATING,
 } from '@const/order'
 import { selectHasQuestionnaire } from '@redux/modules/auth'
 import { selectBrandsByIds } from '@redux/modules/brands'
@@ -37,8 +39,9 @@ export const BoxTile = ({ box }) => {
   const contentReview = order?.status === ORDER_CONTENT_IN_REVIEW
   const contentRejected = order?.status === ORDER_CONTENT_REJECTED
   const contentApproved = order?.status === ORDER_CONTENT_APPROVED
+  const withRating = order?.status === ORDER_WITH_RATING
 
-  console.log(contentRejected)
+  console.log(withRating)
 
   const buttonOnPress = useCallback(() => {
     if (approved) {
@@ -75,8 +78,13 @@ export const BoxTile = ({ box }) => {
         },
         routeName: SCREEN_NAMES.ContentApproved,
       })
-    } else {
-      // TODO
+    } else if (withRating) {
+      navigate({
+        params: {
+          boxId: id,
+        },
+        routeName: MODAL_NAMES.YourRating,
+      })
     }
   }, [
     delivered,
@@ -89,6 +97,7 @@ export const BoxTile = ({ box }) => {
     contentReview,
     contentRejected,
     contentApproved,
+    withRating,
   ])
 
   const buttonTKey = useMemo(() => {
@@ -102,10 +111,12 @@ export const BoxTile = ({ box }) => {
       return 'box.checkReason'
     } else if (contentApproved) {
       return 'box.whatsNext'
+    } else if (withRating) {
+      return 'box.checkFeedback'
     } else {
       return 'contactUs'
     }
-  }, [hasQuestionnaire, rejected, approved, delivered, contentReview, contentRejected, contentApproved])
+  }, [hasQuestionnaire, rejected, approved, delivered, contentReview, contentRejected, contentApproved, withRating])
 
   return (
     <Wrapper
@@ -121,7 +132,7 @@ export const BoxTile = ({ box }) => {
       </Top>
       <Bottom>
         <ItemsImage resizeMode={'contain'} source={{ uri: imageUrl }} />
-        {rejected || approved || delivered || contentReview || contentRejected || contentApproved ? (
+        {rejected || approved || delivered || contentReview || contentRejected || contentApproved || withRating ? (
           <StyledButton onPress={buttonOnPress} tKey={buttonTKey} />
         ) : (
           <>
