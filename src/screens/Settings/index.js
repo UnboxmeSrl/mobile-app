@@ -20,6 +20,7 @@ export const SettingsScreen = () => {
   const navigateToWizard = () => navigate(SCREEN_NAMES.Wizard)
   const navigateToLogin = () => navigate(SCREEN_NAMES.SignUp)
   const navigateToQuestionnaire = () => navigate(MODAL_NAMES.FillQuestionnaire)
+  const navigateToYourRating = () => navigate(MODAL_NAMES.YourRating)
   const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
   const navigateToOnboarding = useAuthenticatedAction(navigateToWizard)
 
@@ -42,6 +43,7 @@ export const SettingsScreen = () => {
     navigateToLogin,
     navigateToOnboarding,
     navigateToQuestionnaire,
+    navigateToYourRating,
     onPress,
   }
   return <SettingsScreenPresenter {...props} />

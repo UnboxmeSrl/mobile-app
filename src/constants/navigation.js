@@ -20,6 +20,7 @@ export const MODAL_NAMES = {
   SignUpPhone: 'SignUpPhone',
   Tiktok: 'Tiktok',
   WebView: 'WebView',
+  YourRating: 'YourRating',
 }
 export const SCREEN_NAMES = {
   AddNewAddress: 'AddNewAddress',

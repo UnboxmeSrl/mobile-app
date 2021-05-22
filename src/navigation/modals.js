@@ -10,6 +10,7 @@ import { SignInEmailModal } from '@screens/SignInEmail'
 import { SignUpEmailModal } from '@screens/SignUpEmail'
 import { TikTokModal } from '@screens/TikTokConnect'
 import { WebViewModal } from '@screens/WebView'
+import { YourRatingModal } from '@screens/YourRating'
 import { MODAL_NAMES } from 'src/constants/navigation'
 
 export const MODALS = {
@@ -48,5 +49,8 @@ export const MODALS = {
   },
   [MODAL_NAMES.Congratulations]: {
     screen: CongratulationsModal,
+  },
+  [MODAL_NAMES.YourRating]: {
+    screen: YourRatingModal,
   },
 }
