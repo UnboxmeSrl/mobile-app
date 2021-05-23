@@ -53,7 +53,7 @@ export const ProfileScreen = () => {
     navigate(MODAL_NAMES.Tiktok)
   }
 
-  const onPress = useCallback(async () => {
+  const handleLogout = useCallback(async () => {
     try {
       await persistor.purge()
       resetAuth({ [_initialized]: true })
@@ -72,6 +72,7 @@ export const ProfileScreen = () => {
     creams,
     disabledSocial: !(tiktokUsername || instagramUsername),
     fullName,
+    handleLogout,
     hasQuestionnaire,
     isAuthenticated,
     navigateTikTokModal,
@@ -80,7 +81,6 @@ export const ProfileScreen = () => {
     navigateToOnboarding,
     navigateToQuestionnaire,
     navigateToYourRating,
-    onPress,
     skinType,
     skincareRoutine,
     tiktokUsername,

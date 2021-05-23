@@ -26,6 +26,7 @@ export const ProfileScreenPresenter = ({
   skincareRoutine,
   creams,
   brands,
+  handleLogout,
 }) => (
   <Container tKey={'profile'}>
     {isAuthenticated ? (
@@ -101,7 +102,7 @@ export const ProfileScreenPresenter = ({
     {/* <Button onPress={navigateToAddresses} tKey={'addresses.title'} /> */}
     {/* <Button onPress={navigateToYourRating} tKey={'Your Rating'} /> */}
     {/* {isAuthenticated ? <Button onPress={navigateToQuestionnaire} tKey={'questionnaire.title'} /> : null} */}
-    {/* {isAuthenticated ? <Button onPress={onPress} tKey={'logout'} /> : <LoginGuest />} */}
+    {/* {isAuthenticated && <Button onPress={handleLogout} tKey={'logout'} />} */}
   </Container>
 )
 
