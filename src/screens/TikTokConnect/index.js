@@ -22,7 +22,11 @@ export const TikTokModal = () => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    dispatch(updateMe({ ...values, [_verificationStatus]: IN_REVIEW_USER }))
+    if (tiktokUsername) {
+      dispatch(updateMe({ ...values }))
+    } else {
+      dispatch(updateMe({ ...values, [_verificationStatus]: IN_REVIEW_USER }))
+    }
     goBack()
     Linking.openURL('https://vm.tiktok.com/ZSJY3DjKU')
   }

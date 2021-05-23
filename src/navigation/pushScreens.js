@@ -3,11 +3,13 @@ import { AddressesScreen } from '@screens/Addresses'
 import { BoxBriefScreen } from '@screens/BoxBrief'
 import { BoxBrief2Screen } from '@screens/BoxBrief2'
 import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
+import { CodeFromFriend } from '@screens/CodeFromFriend'
 import { ContentApprovedScreen } from '@screens/ContentApproved'
 import { OnboardingScreen } from '@screens/Onboarding'
 import { OtherSingUpOptionsScreen } from '@screens/OtherSignUpOptions'
 import { ProductSelectionScreen } from '@screens/ProductSelection'
 import { QuestionnaireScreen } from '@screens/Questionnaire'
+import { SettingsScreen } from '@screens/Settings'
 import { SignInScreen } from '@screens/SignIn'
 import { SignUpScreen } from '@screens/SignUp'
 import { WizardScreen } from '@screens/Wizard'
@@ -53,5 +55,11 @@ export default {
   },
   [SCREEN_NAMES.ContentApproved]: {
     screen: ContentApprovedScreen,
+  },
+  [SCREEN_NAMES.AddCode]: {
+    screen: CodeFromFriend,
+  },
+  [SCREEN_NAMES.Settings]: {
+    screen: SettingsScreen,
   },
 }

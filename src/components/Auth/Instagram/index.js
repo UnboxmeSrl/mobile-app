@@ -10,17 +10,12 @@ import { Button } from '@components/Button'
 import { COLORS } from '@const'
 import { IN_REVIEW_USER } from '@const/verification'
 import { useAction } from '@hooks/common'
-import authModule, {
-  _instagram,
-  _verificationStatus,
-  selectInstagramUsername,
-  updateMe,
-} from '@redux/modules/auth'
+import authModule, { _instagram, _verificationStatus, selectInstagramUsername, updateMe } from '@redux/modules/auth'
 import { logger, showToastError } from '@services'
 import i18n from '@services/i18n'
 
 const secret = '24c77bc3a620ced73dbb001c1d6f195b'
-export const Instagram = ({ onSuccess, setLoading, loading }) => {
+export const Instagram = ({ onSuccess, setLoading, loading, bgColor, light }) => {
   const ref = useRef()
   const updateMeAction = useAction(updateMe)
 
@@ -73,8 +68,9 @@ export const Instagram = ({ onSuccess, setLoading, loading }) => {
   return (
     <>
       <Button
-        bgColor={COLORS.primary}
+        bgColor={bgColor || COLORS.primary}
         leftIconName={'logo-instagram'}
+        light={light}
         loading={loading}
         onPress={onPress}
         tKey={instagramUsername ? 'connected' : 'connectInstagram'}

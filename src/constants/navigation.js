@@ -13,6 +13,7 @@ export const MODAL_NAMES = {
   Congratulations: 'Congratulations',
   FillQuestionnaire: 'FillQuestionnaire',
   ForgotPassword: 'ForgotPassword',
+  InviteFriends: 'InviteFriends',
   Login: 'Login',
   QuestionnaireThankYou: 'QuestionnaireThankYou',
   SignInEmail: 'SignInEmail',
@@ -23,6 +24,7 @@ export const MODAL_NAMES = {
   YourRating: 'YourRating',
 }
 export const SCREEN_NAMES = {
+  AddCode: 'AddCode',
   AddNewAddress: 'AddNewAddress',
   Addresses: 'Addresses',
   Awards: 'Awards',
@@ -36,6 +38,7 @@ export const SCREEN_NAMES = {
   ProductSelection: 'ProductSelection',
   Profile: 'Profile',
   Questionnaire: 'Questionnaire',
+  Settings: 'Settings',
   SignIn: 'SignIn',
   SignUp: 'SignUp',
   Wizard: 'Wizard',

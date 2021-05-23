@@ -26,7 +26,8 @@ export const ProfileScreenPresenter = ({
   skincareRoutine,
   creams,
   brands,
-  handleLogout,
+  navigateToInvite,
+  navigateToSettings,
 }) => (
   <Container tKey={'profile'}>
     {isAuthenticated ? (
@@ -38,7 +39,10 @@ export const ProfileScreenPresenter = ({
           </Column>
           <Column>
             <SmallButton Icon={EditIcon} />
-            <SmallButton Icon={() => <Ionicons color={COLORS.achromaticBlack} name={'settings-outline'} size={24} />} />
+            <SmallButton
+              Icon={() => <Ionicons color={COLORS.achromaticBlack} name={'settings-outline'} size={24} />}
+              onPress={navigateToSettings}
+            />
           </Column>
         </Header>
         <Center>
@@ -54,7 +58,7 @@ export const ProfileScreenPresenter = ({
           tKey={tiktokUsername ? 'onValidation' : 'connectTikTok'}
           tOptions={{ username: `@${tiktokUsername}` }}
         />
-        <Instagram />
+        <Instagram bgColor={COLORS.tertiary} light />
         <Tile onPress={navigateToQuestionnaire}>
           <>
             <Row style={{ marginBottom: 12 }}>
@@ -87,7 +91,7 @@ export const ProfileScreenPresenter = ({
             )}
           </>
         </Tile>
-        <Tile>
+        <Tile onPress={navigateToInvite}>
           <Row style={{ marginBottom: 12 }}>
             <ButtonText>Invite a friend</ButtonText>
             <AddPersonIcon />
@@ -102,7 +106,6 @@ export const ProfileScreenPresenter = ({
     {/* <Button onPress={navigateToAddresses} tKey={'addresses.title'} /> */}
     {/* <Button onPress={navigateToYourRating} tKey={'Your Rating'} /> */}
     {/* {isAuthenticated ? <Button onPress={navigateToQuestionnaire} tKey={'questionnaire.title'} /> : null} */}
-    {/* {isAuthenticated && <Button onPress={handleLogout} tKey={'logout'} />} */}
   </Container>
 )
 

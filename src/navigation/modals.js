@@ -4,6 +4,7 @@ import { CongratulationsModal } from '@screens/Congratulations'
 import { ContentApprovedScreen } from '@screens/ContentApproved'
 import { FillQuestionnaireModal } from '@screens/FillQuestionnaire'
 import { ForgotPasswordModal } from '@screens/ForgotPassword'
+import { InviteFriend } from '@screens/InviteFriend'
 import { LoginScreen } from '@screens/Login'
 import { QuestionnaireThankYouModal } from '@screens/QuestionnaireThankYou'
 import { SignInEmailModal } from '@screens/SignInEmail'
@@ -52,5 +53,8 @@ export const MODALS = {
   },
   [MODAL_NAMES.YourRating]: {
     screen: YourRatingModal,
+  },
+  [MODAL_NAMES.InviteFriends]: {
+    screen: InviteFriend,
   },
 }

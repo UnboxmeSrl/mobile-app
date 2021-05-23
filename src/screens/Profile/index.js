@@ -27,7 +27,6 @@ import { ProfileScreenPresenter } from './ProfileScreenPresenter'
 
 export const ProfileScreen = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
-  const resetAuth = useAction(authModule.actions.reset)
 
   const { navigate } = useNavigation()
   const navigateToWizard = () => navigate(SCREEN_NAMES.Wizard)
@@ -35,6 +34,8 @@ export const ProfileScreen = () => {
   const navigateToQuestionnaire = () => navigate(SCREEN_NAMES.Questionnaire)
   const navigateToYourRating = () => navigate(MODAL_NAMES.YourRating)
   const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
+  const navigateToInvite = () => navigate(MODAL_NAMES.InviteFriends)
+  const navigateToSettings = () => navigate(SCREEN_NAMES.Settings)
   const hasQuestionnaire = useSelector(selectHasQuestionnaire)
   const skinType = useSelector(selectSkinType)
   const skincareRoutine = useSelector(selectSkincareRoutine)
@@ -52,19 +53,6 @@ export const ProfileScreen = () => {
   const navigateTikTokModal = () => {
     navigate(MODAL_NAMES.Tiktok)
   }
-
-  const handleLogout = useCallback(async () => {
-    try {
-      await persistor.purge()
-      resetAuth({ [_initialized]: true })
-      await auth().signOut()
-      await GoogleSignin.signOut()
-      showToastSuccess("You've been logged out")
-      logger.info('Logout succeded')
-    } catch (error) {
-      logger.error('Logout error', { error })
-    }
-  }, [resetAuth])
   console.log(skincareRoutine)
   const props = {
     brands,
@@ -72,14 +60,15 @@ export const ProfileScreen = () => {
     creams,
     disabledSocial: !(tiktokUsername || instagramUsername),
     fullName,
-    handleLogout,
     hasQuestionnaire,
     isAuthenticated,
     navigateTikTokModal,
     navigateToAddresses,
+    navigateToInvite,
     navigateToLogin,
     navigateToOnboarding,
     navigateToQuestionnaire,
+    navigateToSettings,
     navigateToYourRating,
     skinType,
     skincareRoutine,

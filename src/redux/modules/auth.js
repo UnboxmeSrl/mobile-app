@@ -29,6 +29,7 @@ export const _skinType = 'skinType'
 export const _skincareRoutine = 'skincareRoutine'
 export const _creams = 'creams'
 export const _brands = 'brands'
+export const _generatedReferralCode = 'generatedReferralCode'
 
 const initialState = {
   [_initialized]: false,

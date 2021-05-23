@@ -67,6 +67,7 @@ export default {
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
     contactUs: 'Contact us',
+    authenticity: 'Authenticity',
     continue: 'Continue',
     errors: {
       alreadyRegistered: 'Email is already registered',
@@ -91,6 +92,7 @@ export default {
       preferNotToSay: 'Prefer not to say',
     },
     getThisBox: 'Get this box',
+    great: 'Great',
     home: {
       availableBoxes: 'Available boxes:',
       boxStatus: 'Box status:',
@@ -115,6 +117,12 @@ export default {
     iWorkAgency: 'I work with Agency',
     imFreelancer: 'I am as freelancer',
     inFewHours: 'In few hours you will receive a response',
+    inviteFriend: {
+      copyCode: 'Copy the code',
+      enterCode: 'Enter the code',
+      haveACode: 'I have a code',
+      title: 'Invite a friend in Unboxme!',
+    },
     labels: {
       address: 'Address',
       comments: 'Comments',
@@ -131,6 +139,7 @@ export default {
     },
     loginTitle: 'Login',
     logout: 'Logout',
+    narration: 'Narration',
     next: 'Next',
     no: 'No',
     onValidation: 'On validation: {{username}}',
@@ -157,13 +166,13 @@ export default {
     },
     privacyPolicy: 'Privacy Policy',
     productCategories: 'Product categories',
-    great: 'Great',
     productFor: 'Product for',
     productSelection: {
       asGift: 'You can choose one of these products as a gift!',
       title: 'Product selection page',
     },
     productsSelected: '{{count}} products selected',
+    publishingTime: 'Publishing time',
     questionnaire: {
       acne: 'Acne',
       aging: 'Aging',
@@ -196,9 +205,7 @@ export default {
     },
     seeDetails: 'See details',
     selected: 'Selected',
-    narration: 'Narration',
     settings: 'Settings',
-    authenticity: 'Authenticity',
     signIn: {
       forgot: 'Forgot password',
       forgotSent: 'Recovery email was sent',
@@ -208,7 +215,6 @@ export default {
       withEmail: 'Sign in with email',
       withPhone: 'Sign in with phone number',
     },
-    publishingTime: 'Publishing time',
     signUp: {
       confirmPassword: 'Confirm your password',
       createAccount:
