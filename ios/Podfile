@@ -15,12 +15,7 @@ target 'unboxme' do
   pod 'PanModal', '~> 1.2.7'
   pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
 
-
   post_install do |installer|
     flipper_post_install(installer)
   end
-end
-
-target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignal', '>= 3.0', '< 4.0'
 end
