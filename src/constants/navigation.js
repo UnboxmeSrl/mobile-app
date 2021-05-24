@@ -32,6 +32,7 @@ export const SCREEN_NAMES = {
   BoxBrief2: 'BoxBrief2',
   BoxContentUploadScreen: 'BoxContentUploadScreen',
   ContentApproved: 'ContentApproved',
+  EditProfile: 'EditProfile',
   Home: 'Home',
   Onboarding: 'Onboarding',
   OtherSignUp: 'OtherSignUp',

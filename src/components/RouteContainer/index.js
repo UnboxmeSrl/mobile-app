@@ -13,7 +13,11 @@ export const RouteContainer = ({ tKey, children, withArrow, withPadding, style, 
       <Header>
         {withArrow ? <Back /> : null}
         {tKey && <HeaderTitle tKey={tKey} />}
-        {RightButton ? <RightButton /> : null}
+        {RightButton ? (
+          <RightWrapper>
+            <RightButton />
+          </RightWrapper>
+        ) : null}
       </Header>
     )}
     <Content style={style} withPadding={withPadding}>
@@ -38,6 +42,12 @@ const HeaderTitle = styled(H3)`
 const Back = styled(BackArrow)`
   left: 8px;
   position: absolute;
+`
+const RightWrapper = styled.View`
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 20px;
 `
 const Content = styled.View`
   flex: 1;

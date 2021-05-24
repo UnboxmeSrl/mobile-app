@@ -26,7 +26,7 @@ export const AddressesScreen = () => {
   const { navigate } = useNavigation()
   const navigateToAdd = () => navigate(SCREEN_NAMES.AddNewAddress)
   const RightButton = () => (
-    <Button onPress={navigateToAdd} style={{ position: 'absolute', right: 20 }}>
+    <Button onPress={navigateToAdd}>
       <Ionicons color={COLORS.primaryDark} name={'add-circle-outline'} size={12} style={{ marginRight: 4 }} />
       <TinyText color={COLORS.primaryDark} tKey={'addAddress'} />
     </Button>

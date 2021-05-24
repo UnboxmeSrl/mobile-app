@@ -15,11 +15,13 @@ import { COLORS } from '@const'
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
 
-export const SettingsPresenter = ({ isAuthenticated, handleLogout }) => (
-  <RouteContainer tKey={'settings'} withArrow>
-    <Content>{isAuthenticated && <Button onPress={handleLogout} tKey={'logout'} />}</Content>
+export const SettingsPresenter = ({ RightButton, navigateToAddresses }) => (
+  <RouteContainer RightButton={RightButton} tKey={'settings'} withArrow>
+    <Content>
+      <Button onPress={navigateToAddresses} tKey={'addresses.title'} />
+    </Content>
   </RouteContainer>
 )
 const Content = styled.ScrollView`
-  padding: 0 20px;
+  padding: 20px 20px;
 `

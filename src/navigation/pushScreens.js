@@ -5,6 +5,7 @@ import { BoxBrief2Screen } from '@screens/BoxBrief2'
 import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
 import { CodeFromFriend } from '@screens/CodeFromFriend'
 import { ContentApprovedScreen } from '@screens/ContentApproved'
+import { EditProfileScreen } from '@screens/EditProfile'
 import { OnboardingScreen } from '@screens/Onboarding'
 import { OtherSingUpOptionsScreen } from '@screens/OtherSignUpOptions'
 import { ProductSelectionScreen } from '@screens/ProductSelection'
@@ -61,5 +62,8 @@ export default {
   },
   [SCREEN_NAMES.Settings]: {
     screen: SettingsScreen,
+  },
+  [SCREEN_NAMES.EditProfile]: {
+    screen: EditProfileScreen,
   },
 }

@@ -52,6 +52,7 @@ export default {
       uploadContent: 'Upload content',
       whatsNext: `What's next`,
     },
+    authenticity: 'Authenticity',
     brands: 'Brands',
     brandsColon: 'Brands:',
     callToActions: 'Call to actions',
@@ -67,7 +68,6 @@ export default {
     connectTikTok: 'Connect your Tik Tok account',
     connected: 'Connected:  {{username}}',
     contactUs: 'Contact us',
-    authenticity: 'Authenticity',
     continue: 'Continue',
     errors: {
       alreadyRegistered: 'Email is already registered',
@@ -206,6 +206,9 @@ export default {
     seeDetails: 'See details',
     selected: 'Selected',
     settings: 'Settings',
+    profile: {
+      editProfile: 'Edit Profile'
+    },
     signIn: {
       forgot: 'Forgot password',
       forgotSent: 'Recovery email was sent',

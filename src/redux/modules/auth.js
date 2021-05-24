@@ -1,7 +1,8 @@
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
-import { equals, isEmpty, isNil, not, pipe, prop, propOr } from 'ramda'
+import { format } from 'date-fns'
+import { __, equals, isEmpty, isNil, not, pipe, prop, propOr } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import { APPROVED_USER, IN_REVIEW_USER, REJECTED_USER } from '@const/verification'
@@ -30,6 +31,7 @@ export const _skincareRoutine = 'skincareRoutine'
 export const _creams = 'creams'
 export const _brands = 'brands'
 export const _generatedReferralCode = 'generatedReferralCode'
+export const _image = 'image'
 
 const initialState = {
   [_initialized]: false,
@@ -63,6 +65,7 @@ export const selectUsername = createSelector(selectState, prop(_username))
 export const selectDobTs = createSelector(selectState, propOr(+new Date(), _dobTs))
 export const selectCity = createSelector(selectState, prop(_city))
 export const selectHasAgency = createSelector(selectState, prop(_hasAgency))
+export const selectImage = createSelector(selectState, prop(_image))
 export const selectAgencyName = createSelector(selectState, prop(_agencyName))
 export const selectIsAuthInitialized = createSelector(selectState, prop(_initialized))
 export const selectTiktokUsername = createSelector(selectState, prop(_tiktokUsername))

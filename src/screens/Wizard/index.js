@@ -13,12 +13,20 @@ export const WizardScreen = () => {
   const [stepIndex, setStepIndex] = useState(1)
   const { navigate, goBack } = useNavigation()
   const verificationStatus = useNavigationParam(_verificationStatus)
+  const navigationStep = useNavigationParam('step')
+
+  useEffect(() => {
+    setStepIndex(navigationStep)
+  }, [setStepIndex, navigationStep])
 
   const onFinish = useCallback(() => {
     navigate(STACK_NAMES.BottomStack)
   }, [navigate])
 
   const navigateToNextStep = () => {
+    if (navigationStep) {
+      return goBack()
+    }
     if (stepIndex === STEPS.length) {
       onFinish()
     } else {
@@ -26,13 +34,16 @@ export const WizardScreen = () => {
     }
   }
   const navigateToPrevStep = () => {
+    if (navigationStep) {
+      return goBack()
+    }
     if (stepIndex === 1) {
       goBack()
     } else {
       setStepIndex((prevIndex) => Math.max(1, dec(prevIndex)))
     }
   }
-  const hiddenArrow = stepIndex === 1 && true
+  const hiddenArrow = stepIndex === 1 && !navigationStep && true
 
   useEffect(() => {
     if (verificationStatus) {
@@ -44,6 +55,7 @@ export const WizardScreen = () => {
     hiddenArrow,
     navigateToNextStep,
     navigateToPrevStep,
+    navigationStep,
     stepIndex,
     steps: STEPS,
   }

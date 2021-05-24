@@ -28,6 +28,8 @@ export const ProfileScreenPresenter = ({
   brands,
   navigateToInvite,
   navigateToSettings,
+  navigateToEditProfile,
+  source,
 }) => (
   <Container tKey={'profile'}>
     {isAuthenticated ? (
@@ -38,7 +40,7 @@ export const ProfileScreenPresenter = ({
             <Points> 30</Points>
           </Column>
           <Column>
-            <SmallButton Icon={EditIcon} />
+            <SmallButton Icon={EditIcon} onPress={navigateToEditProfile} />
             <SmallButton
               Icon={() => <Ionicons color={COLORS.achromaticBlack} name={'settings-outline'} size={24} />}
               onPress={navigateToSettings}
@@ -46,7 +48,7 @@ export const ProfileScreenPresenter = ({
           </Column>
         </Header>
         <Center>
-          <Avatar />
+          <Avatar source={source} />
           <H3>{fullName}</H3>
           <Caption>{city}</Caption>
         </Center>

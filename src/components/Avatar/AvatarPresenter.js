@@ -3,9 +3,9 @@ import styled from 'styled-components/native'
 
 const BUTTON_SIZE = 48
 
-export const AvatarPresenter = ({ onPress, style, placeholder }) => (
+export const AvatarPresenter = ({ onPress, style, placeholder, source }) => (
   <Button onPress={onPress} style={style}>
-    <Image source={placeholder} />
+    <Image source={source || placeholder} />
   </Button>
 )
 

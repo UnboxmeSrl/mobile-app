@@ -10,5 +10,6 @@ export const ADDRESSES_COLLECTION = 'addresses'
 
 export const CONTENT_STORAGE_BUCKET = 'gs://unboxme-firebase-content'
 export const getContentPath = (box, order, name) => `${box.name.en}/${order.id}/${name}`
+export const getUserPublicPath = (userId, name) => `${userId}/${name}`
 export const getContentDir = (box, order) => `${box.name.en}/${order.id}`
 export const contentRef = firebase.app().storage(CONTENT_STORAGE_BUCKET)

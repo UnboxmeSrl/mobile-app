@@ -13,6 +13,7 @@ import authModule, {
   selectCreams,
   selectFullName,
   selectHasQuestionnaire,
+  selectImage,
   selectInstagramUsername,
   selectIsAuthenticated,
   selectSkincareRoutine,
@@ -20,8 +21,6 @@ import authModule, {
   selectTiktokUsername,
   selectUsername,
 } from '@redux/modules/auth'
-import { persistor } from '@redux/store'
-import { logger, showToastSuccess } from '@services'
 
 import { ProfileScreenPresenter } from './ProfileScreenPresenter'
 
@@ -36,6 +35,7 @@ export const ProfileScreen = () => {
   const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
   const navigateToInvite = () => navigate(MODAL_NAMES.InviteFriends)
   const navigateToSettings = () => navigate(SCREEN_NAMES.Settings)
+  const navigateToEditProfile = () => navigate(SCREEN_NAMES.EditProfile)
   const hasQuestionnaire = useSelector(selectHasQuestionnaire)
   const skinType = useSelector(selectSkinType)
   const skincareRoutine = useSelector(selectSkincareRoutine)
@@ -49,11 +49,11 @@ export const ProfileScreen = () => {
 
   const tiktokUsername = useSelector(selectTiktokUsername)
   const instagramUsername = useSelector(selectInstagramUsername)
-
+  const image = useSelector(selectImage)
+  const source = image ? { uri: image } : null
   const navigateTikTokModal = () => {
     navigate(MODAL_NAMES.Tiktok)
   }
-  console.log(skincareRoutine)
   const props = {
     brands,
     city,
@@ -64,6 +64,7 @@ export const ProfileScreen = () => {
     isAuthenticated,
     navigateTikTokModal,
     navigateToAddresses,
+    navigateToEditProfile,
     navigateToInvite,
     navigateToLogin,
     navigateToOnboarding,
@@ -72,6 +73,7 @@ export const ProfileScreen = () => {
     navigateToYourRating,
     skinType,
     skincareRoutine,
+    source,
     tiktokUsername,
     username,
   }
