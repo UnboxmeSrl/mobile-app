@@ -12,14 +12,17 @@ export const WizardStep = ({ steps, stepIndex, navigateToNextStep, navigateToSte
   const tKeyHeader = prop('tKeyHeader', step)
   const tKeyDescription = prop('tKeyDescription', step)
 
+  if (!Component) {
+    return null
+  }
   return (
     <Wrapper>
-      {(tKeyHeader || tKeyDescription) && (
+      {tKeyHeader || tKeyDescription ? (
         <Header>
           {tKeyHeader ? <Title tKey={tKeyHeader} /> : null}
           {tKeyDescription ? <Description tKey={tKeyDescription} /> : null}
         </Header>
-      )}
+      ) : null}
       <Component navigateToNextStep={navigateToNextStep} navigateToStep={navigateToStep} />
     </Wrapper>
   )

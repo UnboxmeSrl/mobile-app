@@ -17,7 +17,7 @@ export const WizardPresenter = ({
   <Wrapper>
     <Header>
       <BackArrow hidden={hiddenArrow} noBack onPress={navigateToPrevStep} />
-      {!navigationStep && <ProgressBar currentStepIndex={stepIndex} stepsLength={steps.length} />}
+      {!navigationStep ? <ProgressBar currentStepIndex={stepIndex} stepsLength={steps.length} /> : null}
     </Header>
     <WizardStep navigateToNextStep={navigateToNextStep} stepIndex={stepIndex} steps={steps} />
   </Wrapper>

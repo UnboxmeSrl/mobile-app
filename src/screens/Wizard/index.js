@@ -16,8 +16,10 @@ export const WizardScreen = () => {
   const navigationStep = useNavigationParam('step')
 
   useEffect(() => {
-    setStepIndex(navigationStep)
-  }, [setStepIndex, navigationStep])
+    if (navigationStep) {
+      setStepIndex(navigationStep)
+    }
+  }, [navigationStep])
 
   const onFinish = useCallback(() => {
     navigate(STACK_NAMES.BottomStack)
