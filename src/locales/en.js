@@ -19,9 +19,11 @@ export default {
       wrongCode: 'Verification code is invalid or expired',
       wrongCombination: 'The email and password combination is not correct. Please try again.',
     },
+    authenticity: 'Authenticity',
     availableProducts: 'Available products',
     awards: {
-      specialAwards: 'Special Awards',
+      coupon: 'Coupon {{label}}',
+      specialAwards: 'Special awards',
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
     },
@@ -52,7 +54,6 @@ export default {
       uploadContent: 'Upload content',
       whatsNext: `What's next`,
     },
-    authenticity: 'Authenticity',
     brands: 'Brands',
     brandsColon: 'Brands:',
     callToActions: 'Call to actions',
@@ -172,6 +173,9 @@ export default {
       title: 'Product selection page',
     },
     productsSelected: '{{count}} products selected',
+    profile: {
+      editProfile: 'Edit Profile',
+    },
     publishingTime: 'Publishing time',
     questionnaire: {
       acne: 'Acne',
@@ -206,9 +210,7 @@ export default {
     seeDetails: 'See details',
     selected: 'Selected',
     settings: 'Settings',
-    profile: {
-      editProfile: 'Edit Profile'
-    },
+    showAll: 'Show all',
     signIn: {
       forgot: 'Forgot password',
       forgotSent: 'Recovery email was sent',

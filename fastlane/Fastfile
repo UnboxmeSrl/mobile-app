@@ -28,11 +28,11 @@ end
 platform :iOS do
   desc "Push a new beta build to TestFlight"
   lane :build_and_upload do
-    match(type: "development", app_identifier: ["com.unboxme.app", "com.unboxme.app.OneSignalNotificationServiceExtension"])
+    match(type: "development", app_identifier: ["com.unboxme.app"])
     build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: true, export_method: "app-store")
     changelog_data = handle_changelog
-    upload_to_testflight(skip_waiting_for_build_processing: true, changelog: changelog_data)
-    firebase_app_distribution(app: ENV["FIREBASE_IOS_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data)
+    upload_to_testflight(skip_waiting_for_build_processing: true)
+#     firebase_app_distribution(app: ENV["FIREBASE_IOS_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data)
     notify_slack
   end
 end

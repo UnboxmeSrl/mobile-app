@@ -1,10 +1,10 @@
 import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { AwardsScreen } from '@screens/Awards'
 import { HomeScreen } from '@screens/Home'
+import { PrizesScreen } from '@screens/Prizes'
 import { ProfileScreen } from '@screens/Profile'
 
-import { TabBarComponent, TabBarIcon } from '@components/TabBarIcon'
+import { TabBarIcon } from '@components/TabBarIcon'
 import { COLORS } from '@const'
 import { SCREEN_NAMES } from '@const/navigation'
 
@@ -16,11 +16,17 @@ export default createBottomTabNavigator(
       },
       screen: HomeScreen,
     },
-    [SCREEN_NAMES.Awards]: {
+    [SCREEN_NAMES.Coupons]: {
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'pricetag'} focused={focused} icon={'pricetag-outline'} />,
+      },
+      screen: PrizesScreen,
+    },
+    [SCREEN_NAMES.Prizes]: {
       navigationOptions: {
         tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'trophy'} focused={focused} icon={'trophy-outline'} />,
       },
-      screen: AwardsScreen,
+      screen: PrizesScreen,
     },
     [SCREEN_NAMES.Profile]: {
       navigationOptions: {

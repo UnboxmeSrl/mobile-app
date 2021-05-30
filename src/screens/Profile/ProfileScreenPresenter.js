@@ -7,6 +7,7 @@ import { Avatar } from '@components/Avatar'
 import { Button } from '@components/Button'
 import { IconButton } from '@components/IconButton'
 import { LoginGuest } from '@components/LoginGuest'
+import { Points } from '@components/Points'
 import { RouteContainer } from '@components/RouteContainer'
 import { BodyText, ButtonText, Caption, H3, Subtitle, TinyText } from '@components/Text'
 import { COLORS } from '@const'
@@ -35,10 +36,7 @@ export const ProfileScreenPresenter = ({
     {isAuthenticated ? (
       <>
         <Header>
-          <Column>
-            <Ionicons color={COLORS.achromaticBlack} name={'trophy-outline'} size={24} />
-            <Points> 30</Points>
-          </Column>
+          <Points />
           <Column>
             <SmallButton Icon={EditIcon} onPress={navigateToEditProfile} />
             <SmallButton
@@ -127,11 +125,6 @@ const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin: 8px 20px;
-`
-const Points = styled(ButtonText)`
-  font-size: 24px;
-  line-height: 24px;
-  margin-top: 2px;
 `
 const SmallButton = styled(IconButton)`
   margin-left: 4px;

@@ -4,14 +4,14 @@ import styled from 'styled-components/native'
 
 const defaultOptionKeyExtractor = prop('value')
 
-export const List = ({ data, horizontal, keyExtractor = defaultOptionKeyExtractor, Component }) => {
+export const List = ({ data, horizontal = true, keyExtractor = defaultOptionKeyExtractor, Component, ...rest }) => {
   const renderItem = useCallback(({ item }) => <Component {...item} />, [Component])
-
   const props = {
     data,
-    horizontal: true,
+    horizontal,
     keyExtractor,
     renderItem,
+    ...rest,
   }
   return <ListPresenter {...props} />
 }
