@@ -20,7 +20,7 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'pricetag'} focused={focused} icon={'pricetag-outline'} />,
       },
-      screen: PrizesScreen,
+      screen: () => null,
     },
     [SCREEN_NAMES.Prizes]: {
       navigationOptions: {

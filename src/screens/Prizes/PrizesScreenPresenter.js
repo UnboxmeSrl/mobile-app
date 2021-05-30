@@ -8,7 +8,7 @@ import { Points } from '@components/Points'
 import { RouteContainer } from '@components/RouteContainer'
 import { SectionHeader } from '@components/SectionHeader'
 
-const awards = [
+export const AWARDS = [
   {
     image:
       'https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
@@ -32,14 +32,14 @@ const awards = [
   },
 ]
 
-export const PrizesScreenPresenter = ({}) => (
+export const PrizesScreenPresenter = ({ navigateToSpecialAwards }) => (
   <RouteContainer>
     <Header>
       <Points />
     </Header>
     <Categories />
-    <SectionHeader tKey={'awards.specialAwards'} />
-    <List Component={AwardTile} contentContainerStyle={{ marginTop: 20, paddingLeft: 20 }} data={awards} horizontal />
+    <SectionHeader onPress={navigateToSpecialAwards} tKey={'awards.specialAwards'} />
+    <List Component={AwardTile} contentContainerStyle={{ marginTop: 20, paddingLeft: 20 }} data={AWARDS} horizontal />
   </RouteContainer>
 )
 

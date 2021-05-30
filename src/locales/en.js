@@ -22,6 +22,8 @@ export default {
     authenticity: 'Authenticity',
     availableProducts: 'Available products',
     awards: {
+      availableTimeslots: 'Available timeslots',
+      checkSlots: 'Check available timeslots',
       coupon: 'Coupon {{label}}',
       specialAwards: 'Special awards',
       title: 'Awards',
@@ -146,6 +148,7 @@ export default {
     onValidation: 'On validation: {{username}}',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
+    book: 'Book',
     onboardingTitle: 'Onboarding',
     otherSignInOptions: {
       title: 'Other sign in options',

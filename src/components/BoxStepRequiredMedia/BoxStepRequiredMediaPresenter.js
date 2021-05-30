@@ -11,6 +11,21 @@ import { COLORS } from '@const'
 
 import { IMAGES } from '../../assets/images'
 
+export const RequiredActions = () => (
+  <Section>
+    <Row>
+      <Tile>
+        <Image source={IMAGES.instagram} />
+        <Caption>Instagram story</Caption>
+      </Tile>
+      <OrText />
+      <Tile>
+        <Image source={IMAGES.tiktok} />
+        <Caption>Tik Tok video</Caption>
+      </Tile>
+    </Row>
+  </Section>
+)
 export const BoxStepRequiredMediaPresenter = ({ onPress, order, inReview }) => {
   return (
     <Step>
@@ -66,6 +81,7 @@ const Title = styled(H3)`
 const Row = styled.View`
   align-items: center;
   flex-direction: row;
+  margin-top: 8px;
 `
 const CallRow = styled(Row)`
   justify-content: space-around;

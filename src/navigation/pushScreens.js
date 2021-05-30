@@ -1,5 +1,7 @@
 import { AddNewAddress } from '@screens/AddNewAddress'
 import { AddressesScreen } from '@screens/Addresses'
+import { AwardScreen } from '@screens/AwardScreen'
+import { AwardScreenPresenter } from '@screens/AwardScreen/AwardScreenPresenter'
 import { BoxBriefScreen } from '@screens/BoxBrief'
 import { BoxBrief2Screen } from '@screens/BoxBrief2'
 import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
@@ -65,5 +67,8 @@ export default {
   },
   [SCREEN_NAMES.EditProfile]: {
     screen: EditProfileScreen,
+  },
+  [SCREEN_NAMES.AwardScreen]: {
+    screen: AwardScreen,
   },
 }

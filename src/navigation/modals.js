@@ -9,7 +9,9 @@ import { LoginScreen } from '@screens/Login'
 import { QuestionnaireThankYouModal } from '@screens/QuestionnaireThankYou'
 import { SignInEmailModal } from '@screens/SignInEmail'
 import { SignUpEmailModal } from '@screens/SignUpEmail'
+import { SpecialAwardsModal } from '@screens/SpecialAwardsModal'
 import { TikTokModal } from '@screens/TikTokConnect'
+import { TimeslotsModal } from '@screens/Timeslots'
 import { WebViewModal } from '@screens/WebView'
 import { YourRatingModal } from '@screens/YourRating'
 import { MODAL_NAMES } from 'src/constants/navigation'
@@ -56,5 +58,11 @@ export const MODALS = {
   },
   [MODAL_NAMES.InviteFriends]: {
     screen: InviteFriend,
+  },
+  [MODAL_NAMES.SpecialAwards]: {
+    screen: SpecialAwardsModal,
+  },
+  [MODAL_NAMES.Timeslots]: {
+    screen: TimeslotsModal,
   },
 }

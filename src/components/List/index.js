@@ -18,4 +18,5 @@ export const List = ({ data, horizontal = true, keyExtractor = defaultOptionKeyE
 
 const ListPresenter = styled.FlatList.attrs({
   showsHorizontalScrollIndicator: false,
+  showsVerticalScrollIndicator: false,
 })``
