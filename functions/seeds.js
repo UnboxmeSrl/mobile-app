@@ -5,6 +5,45 @@ const BOXES_COLLECTION = "boxes";
 const CATEGORIES_COLLECTION = "categories";
 const BRANDS_COLLECTION = "brands";
 const PRODUCTS_COLLECTION = "products";
+const AWARDS_CATEGORIES_COLLECTION = "awardCategories";
+const AWARDS_COLLECTION = "awards";
+
+const AWARD_CATEGORY_SPA = "spa"
+const AWARD_CATEGORY_VACATION = "vacation"
+const AWARD_CATEGORY_COSMETIC = "cosmetic"
+
+const getAwardCategoryKey = (categoryKey) => db.doc(`${AWARDS_CATEGORIES_COLLECTION}/${categoryKey}`);
+
+const AWARD_CATEGORIES_SEEDS = [{
+  key: AWARD_CATEGORY_SPA,
+  data: {
+    value: AWARD_CATEGORY_SPA,
+    name: {
+      en: AWARD_CATEGORY_SPA,
+    },
+  },
+},
+  {
+    key: AWARD_CATEGORY_VACATION,
+    data: {
+      value: AWARD_CATEGORY_VACATION,
+      name: {
+        en: AWARD_CATEGORY_VACATION,
+      },
+    },
+  },
+  {
+    key: AWARD_CATEGORY_COSMETIC,
+    data: {
+      value: AWARD_CATEGORY_COSMETIC,
+      name: {
+        en: AWARD_CATEGORY_COSMETIC,
+      },
+    },
+  },
+];
+
+
 
 const CATEGORY_SKIN = "skin";
 const CATEGORY_NAILS = "nails";
@@ -131,6 +170,62 @@ const PRODUCTS_SEED = [{
   },
 }];
 
+
+const AWARD_1 = "award1";
+const AWARD_2 = "award2";
+const AWARD_3 = "award3";
+
+const TIMESLOTS = [['X', 'X', 'X', 'X', 'X', 'V', 'V'], ['V', 'V', 'X', 'V', 'X', 'V', 'V'], ['V', 'V', 'V', 'V', 'X', 'X', 'X']]
+
+const AWARDS_SEED = [{
+  key: AWARD_1,
+  data: {
+    value: AWARD_1,
+    name: {en: "SPA Weekend"},
+    points: 130,
+    category: getAwardCategoryKey(AWARD_CATEGORY_SPA),
+    description: {
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    imageUrl: STORAGE.file("award1-a.jpg").publicUrl(),
+    images: [STORAGE.file("award1-a.jpg").publicUrl(), STORAGE.file("award1-b.jpg").publicUrl()],
+    available: true,
+    timeslots: TIMESLOTS
+  },
+},
+  {
+    key: AWARD_2,
+    data: {
+      value: AWARD_2,
+      points: 200,
+      name: {en: "Cosmetic gift"},
+      category: getAwardCategoryKey(AWARD_CATEGORY_COSMETIC),
+      description: {
+        en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      imageUrl: STORAGE.file("award1-a.jpg").publicUrl(),
+      images: [STORAGE.file("award1-a.jpg").publicUrl(), STORAGE.file("award1-b.jpg").publicUrl()],
+      available: true,
+      timeslots: TIMESLOTS
+    },
+  },
+  {
+    key: AWARD_3,
+    data: {
+      value: AWARD_3,
+      points: 300,
+      name: {en: "Vacation gift"},
+      category: getAwardCategoryKey(AWARD_CATEGORY_VACATION),
+      description: {
+        en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      imageUrl: STORAGE.file("vac1-a.png").publicUrl(),
+      images: [STORAGE.file("vac1-a.png").publicUrl(), STORAGE.file("vac1-b.jpg").publicUrl()],
+      available: true,
+      timeslots: TIMESLOTS
+    },
+  },];
+
 const BOX_1 = {
   data: {
     name: {en: "Seed box 1"},
@@ -175,4 +270,12 @@ exports.SEED_DATA = [{
   collection: BOXES_COLLECTION,
   data: [BOX_1, BOX_2],
 },
+  {
+    collection: AWARDS_CATEGORIES_COLLECTION,
+    data: [AWARD_CATEGORY_SPA, AWARD_CATEGORY_COSMETIC, AWARD_CATEGORY_VACATION],
+  },
+  {
+    collection: AWARDS_COLLECTION,
+    data: AWARDS_SEED,
+  }
 ];
