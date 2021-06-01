@@ -77,3 +77,22 @@ export const ORDER_SCHEMA = new schema.Entity(
     processStrategy: getProcessStrategy(['box', 'user', 'extraProduct', 'address']),
   }
 )
+
+export const AWARD_CATEGORY_SCHEMA = new schema.Entity(
+  'awardCategories',
+  {},
+  {
+    idAttribute: prop('id'),
+  }
+)
+
+export const AWARD_SCHEMA = new schema.Entity(
+  'awards',
+  {
+    category: AWARD_CATEGORY_SCHEMA,
+  },
+  {
+    idAttribute: prop('id'),
+    processStrategy: getProcessStrategy(['category']),
+  }
+)

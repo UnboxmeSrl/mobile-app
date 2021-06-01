@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { AWARDS } from '@screens/Prizes/PrizesScreenPresenter'
+import { prop } from 'ramda'
 import styled from 'styled-components/native'
 
 import { AwardTile } from '@components/AwardTile'
@@ -24,7 +25,7 @@ import { screenWidth } from '@const/common'
 
 const Image = styled(FastImage)`
   border-radius: 16px;
-  height: 224px;
+  height: 164px;
   margin-right: 12px;
   width: ${screenWidth / 1.5}px;
 `
@@ -40,23 +41,23 @@ const CheckSlotsButton = styled.TouchableOpacity`
   justify-content: space-between;
 `
 
-const ImageItem = ({ image }) => <Image source={{ uri: image }} />
+const ImageItem = ({ item = '' }) => {
+  return <Image key={item} source={{ uri: item }} />
+}
 
-export const AwardScreenPresenter = ({ navigateToSlots, label = 'Special award name 1' }) => (
-  <RouteContainer RightButton={() => <Points points={100} />} tKey={label} withArrow>
+export const AwardScreenPresenter = ({ navigateToSlots, name, points, images, description }) => (
+  <RouteContainer RightButton={() => <Points points={points} />} translations={name} withArrow>
     <List
       Component={ImageItem}
-      contentContainerStyle={{ flex: 0, marginTop: 20, paddingLeft: 20 }}
-      data={AWARDS}
+      contentContainerStyle={{ flex: 1, height: 164, marginTop: 20, paddingLeft: 20 }}
+      data={images}
       horizontal
+      keyExtractor={prop('item')}
     />
     <Content>
       <Section>
         <Subtitle>Description</Subtitle>
-        <BodyText>
-          Spend unforgettable moments at the QC terme. You get a free entrance with access to: SPA, SAUNA, SKIN
-          TREATMENT and LOUNG AREA To use it any day you want in the opening hours
-        </BodyText>
+        <BodyText translations={description} />
       </Section>
       <Section>
         <CheckSlotsButton onPress={navigateToSlots}>

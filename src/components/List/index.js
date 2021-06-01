@@ -5,7 +5,16 @@ import styled from 'styled-components/native'
 const defaultOptionKeyExtractor = prop('value')
 
 export const List = ({ data, horizontal = true, keyExtractor = defaultOptionKeyExtractor, Component, ...rest }) => {
-  const renderItem = useCallback(({ item }) => <Component {...item} />, [Component])
+  const renderItem = useCallback(
+    ({ item }) => {
+      const props = {
+        item: item,
+        ...item,
+      }
+      return <Component {...props} />
+    },
+    [Component]
+  )
   const props = {
     data,
     horizontal,

@@ -32,14 +32,14 @@ export const AWARDS = [
   },
 ]
 
-export const PrizesScreenPresenter = ({ navigateToSpecialAwards }) => (
+export const PrizesScreenPresenter = ({ navigateToSpecialAwards, awards }) => (
   <RouteContainer>
     <Header>
       <Points />
     </Header>
     <Categories />
     <SectionHeader onPress={navigateToSpecialAwards} tKey={'awards.specialAwards'} />
-    <List Component={AwardTile} contentContainerStyle={{ marginTop: 20, paddingLeft: 20 }} data={AWARDS} horizontal />
+    <List Component={AwardTile} contentContainerStyle={{ marginTop: 20, paddingLeft: 20 }} data={awards} horizontal />
   </RouteContainer>
 )
 

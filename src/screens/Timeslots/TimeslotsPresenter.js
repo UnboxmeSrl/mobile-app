@@ -1,11 +1,12 @@
 import React from 'react'
+import { defaultTo, keys, pipe, values } from 'ramda'
 import styled from 'styled-components/native'
 
 import { ModalContainer } from '@components/ModalContainer'
 import { BodyText, ButtonText, H3 } from '@components/Text'
 import { COLORS } from '@const'
 
-export const TimeslotsPresenter = ({ title }) => (
+export const TimeslotsPresenter = ({ title, timeslots = {} }) => (
   <ModalContainer contentBased forceSmall>
     <Content>
       <Row>
@@ -14,59 +15,41 @@ export const TimeslotsPresenter = ({ title }) => (
       <Table>
         <TableHours>
           <TableRow>
-            <BodyText>8am - 1pm</BodyText>
+            <BodyText> </BodyText>
           </TableRow>
-          <TableRow>
-            <BodyText>8am - 1pm</BodyText>
-          </TableRow>
-          <TableRow>
-            <BodyText>1am - 5pm</BodyText>
-          </TableRow>
-          <TableRow>
-            <BodyText>5pm - 9pm</BodyText>
-          </TableRow>
+          {pipe(
+            defaultTo([]),
+            keys
+          )(timeslots).map((key) => (
+            <TableRow key={key}>
+              <BodyText>{key}</BodyText>
+            </TableRow>
+          ))}
         </TableHours>
         <TableData>
           <TableRow>
-            {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item) => (
-              <TableItem>
+            {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item, index) => (
+              <TableItem key={index}>
                 <ButtonText>{item}</ButtonText>
               </TableItem>
             ))}
           </TableRow>
-          <TableRow>
-            {['X', 'X', 'X', 'X', 'X', 'V', 'V'].map((item) => (
-              <TableItem>
-                {item === 'V' ? (
-                  <ButtonText style={{ color: COLORS.success }}>{item}</ButtonText>
-                ) : (
-                  <BodyText>{item}</BodyText>
-                )}
-              </TableItem>
-            ))}
-          </TableRow>
-          <TableRow>
-            {['V', 'V', 'V', 'V', 'V', 'V', 'V'].map((item) => (
-              <TableItem>
-                {item === 'V' ? (
-                  <ButtonText style={{ color: COLORS.success }}>{item}</ButtonText>
-                ) : (
-                  <BodyText>{item}</BodyText>
-                )}
-              </TableItem>
-            ))}
-          </TableRow>
-          <TableRow>
-            {['X', 'X', 'X', 'X', 'X', 'X', 'X'].map((item) => (
-              <TableItem>
-                {item === 'V' ? (
-                  <ButtonText style={{ color: COLORS.success }}>{item}</ButtonText>
-                ) : (
-                  <BodyText>{item}</BodyText>
-                )}
-              </TableItem>
-            ))}
-          </TableRow>
+          {pipe(
+            defaultTo([]),
+            values
+          )(timeslots).map((value, index) => (
+            <TableRow key={index}>
+              {value.map((item, index) => (
+                <TableItem key={index}>
+                  {item === 'V' ? (
+                    <ButtonText style={{ color: COLORS.success }}>{item}</ButtonText>
+                  ) : (
+                    <BodyText>{item}</BodyText>
+                  )}
+                </TableItem>
+              ))}
+            </TableRow>
+          ))}
         </TableData>
       </Table>
     </Content>
@@ -102,7 +85,7 @@ const TableRow = styled.View`
 `
 const TableItem = styled.View`
   align-items: center;
+  flex: 1;
   height: 40px;
   justify-content: center;
-  width: 40px;
 `

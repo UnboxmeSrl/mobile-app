@@ -11,19 +11,20 @@ import { COLORS } from '@const'
 import { screenWidth } from '@const/common'
 import { SCREEN_NAMES } from '@const/navigation'
 
-export const AwardTile = ({ label, image, onPress, points }) => {
+export const AwardTile = ({ name, imageUrl, onPress, points, value, id, ...rest }) => {
   const { navigate } = useNavigation()
   const navigateToAward = () => {
-    navigate(SCREEN_NAMES.AwardScreen)
+    navigate({ params: { awardId: id }, routeName: SCREEN_NAMES.AwardScreen })
   }
+
   return (
-    <BackgroundImage onPress={onPress} source={{ uri: image }}>
+    <BackgroundImage source={{ uri: imageUrl }}>
       <PointsWrapper>
         <Points>{points}</Points>
         <Ionicons color={COLORS.achromaticBlack} name={'trophy'} size={14} />
       </PointsWrapper>
       <StyledButton light>
-        <BoldTextLink onPress={navigateToAward} tKey={'awards.coupon'} tOptions={{ label }} />
+        <BoldTextLink onPress={navigateToAward} tKey={'awards.coupon'} translations={name} />
       </StyledButton>
     </BackgroundImage>
   )

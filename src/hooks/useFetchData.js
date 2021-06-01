@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 import { useAction } from '@hooks/common'
 import { fetchAddresses } from '@redux/modules/addresses'
 import { selectIsAuthenticated } from '@redux/modules/auth'
+import { fetchAwardCategories } from '@redux/modules/awardCategories'
+import { fetchAwards } from '@redux/modules/awards'
 import { fetchBoxes } from '@redux/modules/boxes'
 import { fetchBrands } from '@redux/modules/brands'
 import { fetchCategories } from '@redux/modules/categories'
@@ -19,15 +21,19 @@ export const useFetchData = () => {
   const getBrands = useAction(fetchBrands)
   const getOrders = useAction(fetchOrders)
   const getAddresses = useAction(fetchAddresses)
+  const getAwardCategories = useAction(fetchAwardCategories)
+  const getAwards = useAction(fetchAwards)
 
   useEffect(() => {
     getBoxes()
     getCategories()
     getProducts()
     getBrands()
+    getAwardCategories()
+    getAwards()
     if (isAuthenticated) {
       getOrders()
       getAddresses()
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, getAwardCategories, getAwards])
 }

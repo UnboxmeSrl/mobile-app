@@ -1,18 +1,16 @@
 import React, { useCallback, useState } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 
 import { CategoryPresenter } from '@components/Categories/CategoryPresenter'
 import { List } from '@components/List'
+import { selectIsAuthenticated } from '@redux/modules/auth'
+import { selectAwardCategories } from '@redux/modules/awardCategories'
 
 export const Categories = () => {
   const [selected, setSelected] = useState('all')
-  const categories = [
-    { label: 'All categories', value: 'all' },
-    { label: 'Cosmetic boxes', value: 'cosmeticBoxes' },
-    { label: 'SPA', value: 'spa' },
-    { label: 'Vacation', value: 'vacation' },
-    { label: 'Adventure', value: 'adventure' },
-  ]
+  const categoriesFromApi = useSelector(selectAwardCategories)
+  const categories = [{ name: { en: 'All categories' }, value: 'all' }, ...categoriesFromApi]
   const onPress = useCallback((id) => setSelected(id), [setSelected])
   const Component = useCallback(
     (props) => (
