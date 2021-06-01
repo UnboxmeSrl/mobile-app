@@ -1,0 +1,13 @@
+diff --git a/node_modules/@react-native-firebase/functions/lib/index.js b/node_modules/@react-native-firebase/functions/lib/index.js
+index ecd6eb5..f89d09b 100644
+--- a/node_modules/@react-native-firebase/functions/lib/index.js
++++ b/node_modules/@react-native-firebase/functions/lib/index.js
+@@ -55,7 +55,7 @@ const statics = {
+ class FirebaseFunctionsModule extends FirebaseModule {
+   constructor(...args) {
+     super(...args);
+-    this._customUrlOrRegion = this._customUrlOrRegion || 'us-central1';
++    this._customUrlOrRegion = this._customUrlOrRegion || 'europe-west1';
+     this._useFunctionsEmulatorOrigin = null;
+   }
+ 
