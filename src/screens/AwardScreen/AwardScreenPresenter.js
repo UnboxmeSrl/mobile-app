@@ -45,7 +45,7 @@ const ImageItem = ({ item = '' }) => {
   return <Image key={item} source={{ uri: item }} />
 }
 
-export const AwardScreenPresenter = ({ navigateToSlots, name, points, images, description }) => (
+export const AwardScreenPresenter = ({ disabled, onSubmit, navigateToSlots, name, points, images, description }) => (
   <RouteContainer RightButton={() => <Points points={points} />} translations={name} withArrow>
     <List
       Component={ImageItem}
@@ -69,7 +69,7 @@ export const AwardScreenPresenter = ({ navigateToSlots, name, points, images, de
         <Subtitle>What you will need to do</Subtitle>
         <RequiredActions />
       </Section>
-      <Button tKey={'book'} />
+      <Button disabled onPress={onSubmit} tKey={disabled ? 'booked' : 'book'} />
     </Content>
   </RouteContainer>
 )

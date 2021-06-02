@@ -73,7 +73,7 @@ const TableHours = styled.View`
   padding-top: 8px;
 `
 const TableData = styled.ScrollView`
-  flex: 0.7;
+  flex: 0.8;
 `
 const Table = styled.View`
   flex-direction: row;

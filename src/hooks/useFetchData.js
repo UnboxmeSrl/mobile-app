@@ -6,6 +6,7 @@ import { fetchAddresses } from '@redux/modules/addresses'
 import { selectIsAuthenticated } from '@redux/modules/auth'
 import { fetchAwardCategories } from '@redux/modules/awardCategories'
 import { fetchAwards } from '@redux/modules/awards'
+import { fetchBookings } from '@redux/modules/bookings'
 import { fetchBoxes } from '@redux/modules/boxes'
 import { fetchBrands } from '@redux/modules/brands'
 import { fetchCategories } from '@redux/modules/categories'
@@ -23,6 +24,7 @@ export const useFetchData = () => {
   const getAddresses = useAction(fetchAddresses)
   const getAwardCategories = useAction(fetchAwardCategories)
   const getAwards = useAction(fetchAwards)
+  const getBookings = useAction(fetchBookings)
 
   useEffect(() => {
     getBoxes()
@@ -34,6 +36,7 @@ export const useFetchData = () => {
     if (isAuthenticated) {
       getOrders()
       getAddresses()
+      getBookings()
     }
-  }, [isAuthenticated, getAwardCategories, getAwards])
+  }, [isAuthenticated, getAwardCategories, getAwards, getBookings])
 }

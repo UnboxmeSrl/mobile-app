@@ -2,7 +2,7 @@ import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAction, createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { normalize } from 'normalizr'
-import { head, isEmpty, isNil, pick, pickBy, pipe, prop, values } from 'ramda'
+import { defaultTo, head, isEmpty, isNil, pick, pickBy, pipe, prop, values } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import logger from '@services/logger'
@@ -108,11 +108,20 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   const adapterSelectors = collectionAdapter.getSelectors(prop(collection))
   const selectByIds = (ids) => createSelector(adapterSelectors.selectEntities, pipe(pick(ids), values))
   const selectById = (id) => createSelector(adapterSelectors.selectEntities, pipe(pick([id]), values, head))
-  const selectByFieldId = ({ field, value }) =>
+  const selectAllByFieldId = ({ field, value, any }) =>
     createSelector(
       adapterSelectors.selectEntities,
       pipe(
-        pickBy((val) => val[field] === value),
+        pickBy((val) => (any ? true : val[field] === value)),
+        values,
+        defaultTo([])
+      )
+    )
+  const selectByFieldId = ({ field, value, any }) =>
+    createSelector(
+      adapterSelectors.selectEntities,
+      pipe(
+        pickBy((val) => (any ? true : val[field] === value)),
         values,
         head
       )
@@ -138,6 +147,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     getDocumentReference,
     selectors: {
       ...adapterSelectors,
+      selectAllByFieldId,
       selectByFieldId,
       selectById,
       selectByIds,

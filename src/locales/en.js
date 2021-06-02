@@ -28,6 +28,7 @@ export default {
       specialAwards: 'Special awards',
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
+      yourBookings: 'Your bookings',
     },
     box: {
       afterAddress:
@@ -60,12 +61,14 @@ export default {
     brandsColon: 'Brands:',
     callToActions: 'Call to actions',
     chooseThisProduct: 'Choose this product!',
+    book: 'Book',
     code: {
       continueWithout: 'Continue without code',
       description:
         'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
       title: 'Code from friend',
     },
+    booked: 'Booked',
     congratulations: 'Congratulations',
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',
@@ -148,7 +151,6 @@ export default {
     onValidation: 'On validation: {{username}}',
     onboarding:
       'Unboxme is a community of influencers that allows them to collaborate them with multiple pharma and beauty brands in once',
-    book: 'Book',
     onboardingTitle: 'Onboarding',
     otherSignInOptions: {
       title: 'Other sign in options',

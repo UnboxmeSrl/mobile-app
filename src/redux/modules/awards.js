@@ -6,10 +6,12 @@ const {
   getDocumentReference: getAwardReference,
   actions: { fetchAll: fetchAwards },
   slice,
-  selectors: { selectState, selectAll, selectById: selectAwardById },
+  selectors: { selectState, selectAll, selectById: selectAwardById, selectAllByFieldId },
 } = createFirebaseReduxModule({ collection: AWARDS_COLLECTION, schema: AWARD_SCHEMA })
 
 export const selectAwards = selectAll
+export const selectAwardsByCategory = (category) =>
+  selectAllByFieldId({ any: category === 'all', field: 'category', value: category })
 
 export default slice
-export { fetchAwards, selectAwardById }
+export { fetchAwards, getAwardReference, selectAwardById }

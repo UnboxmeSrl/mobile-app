@@ -1,18 +1,22 @@
 import { schema } from 'normalizr'
 import { mergeAll, prop } from 'ramda'
 
+const TIMESTAMPS_FIELDS = ['createdAt', 'updatedAt', 'expiredAt']
+
 // replace firebase object with id
 const applyReferenceId = (fields, value) =>
   mergeAll(
-    [...fields, 'createdAt', 'updatedAt'].map((field) => {
+    [...fields, ...TIMESTAMPS_FIELDS].map((field) => {
       const data = value[field]
-      if (data) {
+      if (data && !TIMESTAMPS_FIELDS.includes(field)) {
         const normalizedData = Array.isArray(data)
           ? data.map((doc) => ({
               id: doc.id,
             }))
           : { id: data.id }
         return { [field]: normalizedData }
+      } else if (TIMESTAMPS_FIELDS.includes(field)) {
+        return { [field]: data?._seconds }
       } else {
         return { [field]: null }
       }
@@ -94,5 +98,17 @@ export const AWARD_SCHEMA = new schema.Entity(
   {
     idAttribute: prop('id'),
     processStrategy: getProcessStrategy(['category']),
+  }
+)
+
+export const BOOKING_SCHEMA = new schema.Entity(
+  'bookings',
+  {
+    award: AWARD_SCHEMA,
+    user: USER_SCHEMA,
+  },
+  {
+    idAttribute: prop('id'),
+    processStrategy: getProcessStrategy(['award', 'user']),
   }
 )

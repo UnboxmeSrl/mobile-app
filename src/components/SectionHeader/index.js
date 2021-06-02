@@ -8,7 +8,7 @@ import { COLORS } from '@const'
 export const SectionHeader = ({ tKey, onPress }) => (
   <Wrapper>
     <Title tKey={tKey} />
-    <TextButton color={COLORS.dark} onPress={onPress} tKey={'showAll'} />
+    {onPress ? <TextButton color={COLORS.dark} onPress={onPress} tKey={'showAll'} /> : null}
   </Wrapper>
 )
 

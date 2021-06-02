@@ -6,6 +6,7 @@ import app from '@redux/modules/app'
 import auth from '@redux/modules/auth'
 import awardCategories from '@redux/modules/awardCategories'
 import awards from '@redux/modules/awards'
+import bookings from '@redux/modules/bookings'
 import boxes from '@redux/modules/boxes'
 import brands from '@redux/modules/brands'
 import categories from '@redux/modules/categories'
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   auth: auth.reducer,
   awardCategories: awardCategories.reducer,
   awards: awards.reducer,
+  bookings: bookings.reducer,
   boxes: boxes.reducer,
   brands: brands.reducer,
   categories: categories.reducer,
