@@ -10,6 +10,6 @@ import { SpecialAwardsPresenter } from './SpecialAwardsPresenter'
 export const SpecialAwardsModal = () => {
   const category = useSelector(selectAwardCategory)
   const awards = useSelector(selectAwardsByCategory(category))
-
+  console.log({ awards })
   return <SpecialAwardsPresenter awards={awards} />
 }

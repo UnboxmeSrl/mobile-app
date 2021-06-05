@@ -23,8 +23,8 @@ export const AwardTile = ({ name, imageUrl, onPress, points, value, id, ...rest 
         <Points>{points}</Points>
         <Ionicons color={COLORS.achromaticBlack} name={'trophy'} size={14} />
       </PointsWrapper>
-      <StyledButton light>
-        <BoldTextLink onPress={navigateToAward} tKey={'awards.coupon'} translations={name} />
+      <StyledButton light onPress={navigateToAward}>
+        <BoldTextLink tKey={'awards.coupon'} translations={name} />
       </StyledButton>
     </BackgroundImage>
   )

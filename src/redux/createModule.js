@@ -5,7 +5,7 @@ import { normalize } from 'normalizr'
 import { defaultTo, head, isEmpty, isNil, pick, pickBy, pipe, prop, values } from 'ramda'
 
 import { USERS_COLLECTION } from '@const/firebase'
-import logger from '@services/logger'
+import { logger } from '@services/logger'
 
 export const createReduxModule = ({ name, initialState = {} }) => {
   return {
@@ -40,7 +40,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       return normalized.entities
     } catch (error) {
       logger.error(`fetchAll - ${collection}`, { error })
-      return rejectWithValue(error)
+      throw error
     }
   })
   const fetchById = createAsyncThunk(`${collection}/fetchById`, async (id, { rejectWithValue }) => {
@@ -53,7 +53,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     } catch (error) {
       logger.error(`fetchById - ${collection}`, { error })
 
-      return rejectWithValue(error)
+      throw error
     }
   })
 
@@ -64,12 +64,10 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       await doc.set({ id, ...payload, createdAt: firestore.FieldValue.serverTimestamp() })
       const data = await doc.get()
       const normalized = normalize(data.data(), schema)
-
       return normalized.entities
     } catch (error) {
       logger.error(`createOne - ${collection}`, { error })
-
-      return rejectWithValue(error)
+      throw error
     }
   })
 
@@ -82,8 +80,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       return normalized.entities
     } catch (error) {
       logger.error(`updateOne - ${collection}`, { error })
-
-      return rejectWithValue(error)
+      throw error
     }
   })
 
@@ -96,7 +93,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
     } catch (error) {
       logger.error(`removeOne - ${collection}`, { error })
 
-      return rejectWithValue(error)
+      throw error
     }
   })
 

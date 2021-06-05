@@ -30,50 +30,43 @@ export const BookingTile = ({ ...data }) => {
         <TinyText>Available till: 10.06.2021</TinyText>
         <TinyText color={COLORS.primaryDark}>X days left</TinyText>
       </Row>
+      <Line />
+      <BottomButton>
+        <TinyText>Coupon generated</TinyText>
+      </BottomButton>
     </Wrapper>
   )
 }
 
+const Line = styled.View`
+  background-color: white;
+  height: 4px;
+  margin-top: 8px;
+  width: 100%;
+`
 const Wrapper = styled.View`
   background-color: ${COLORS.veryLight};
   border-radius: 16px;
-  flex: 1;
-  height: 130px;
-  padding: 12px;
+  height: 170px;
+  margin-right: 12px;
+  padding-top: 12px;
   width: ${screenWidth / 1.5}px;
 `
 const Image = styled(FastImage)`
-  border-radius: 10px
+  border-radius: 10px;
   height: 72px;
-  width: 72px;
   margin-right: 16px;
+  width: 72px;
 `
 const Row = styled.View`
   flex-direction: row;
+  padding: 0 12px;
 `
 const Column = styled.View`
   justify-content: center;
 `
-const StyledButton = styled(Button)`
-  height: 32px;
-  width: 90%;
-`
-export const BoldTextLink = styled(ButtonText)`
-  font-size: 14px;
-  text-align: center;
-`
-
-export const PointsWrapper = styled.View`
+export const BottomButton = styled.TouchableOpacity`
   align-items: center;
-  background-color: white;
-  border-radius: 12px;
-  flex-direction: row;
+  flex: 1;
   justify-content: center;
-  padding: 4px 8px;
-  position: absolute;
-  right: 12px;
-  top: 12px;
-`
-const Points = styled(BoldTextLink)`
-  margin-right: 4px;
 `

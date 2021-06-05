@@ -19,6 +19,7 @@ export const AwardScreen = () => {
   const awardId = useNavigationParam('awardId')
   const award = useSelector(selectAwardById(awardId))
   const booking = useSelector(selectBookingByAwardId(awardId))
+  console.log(booking)
   const { navigate, goBack } = useNavigation()
   const navigateToSlots = () => navigate({ params: { awardId }, routeName: MODAL_NAMES.Timeslots })
   const createBookingAction = useAction(createBooking)
@@ -31,16 +32,26 @@ export const AwardScreen = () => {
       },
       {
         onPress: () => {
-          createBookingAction({
+          const response = createBookingAction({
             award: getAwardReference(awardId),
             user: getUserReference(auth().currentUser?.uid),
-          }).then(() => goBack())
+          })
+          response.then((data) => {
+            console.log('then')
+            console.log(data)
+          })
+          response.catch((e) => {
+            console.log('error')
+            console.log(e)
+          })
+          console.log({ response })
         },
         text: 'Yes',
       },
     ])
   }
-  const props = { disabled: Boolean(booking), navigateToSlots, onSubmit, ...award }
+  console.log(booking)
+  const props = { disabled: booking, navigateToSlots, onSubmit, ...award }
 
   return <AwardScreenPresenter {...props} />
 }

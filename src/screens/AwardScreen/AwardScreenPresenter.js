@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { AWARDS } from '@screens/Prizes/PrizesScreenPresenter'
-import { prop } from 'ramda'
+import { identical, prop } from 'ramda'
 import styled from 'styled-components/native'
 
 import { AwardTile } from '@components/AwardTile'
@@ -52,7 +52,7 @@ export const AwardScreenPresenter = ({ disabled, onSubmit, navigateToSlots, name
       contentContainerStyle={{ flex: 1, height: 164, marginTop: 20, paddingLeft: 20 }}
       data={images}
       horizontal
-      keyExtractor={prop('item')}
+      keyExtractor={(item) => item}
     />
     <Content>
       <Section>
@@ -69,7 +69,7 @@ export const AwardScreenPresenter = ({ disabled, onSubmit, navigateToSlots, name
         <Subtitle>What you will need to do</Subtitle>
         <RequiredActions />
       </Section>
-      <Button disabled onPress={onSubmit} tKey={disabled ? 'booked' : 'book'} />
+      <Button disabled={disabled} onPress={onSubmit} tKey={disabled ? 'booked' : 'book'} />
     </Content>
   </RouteContainer>
 )

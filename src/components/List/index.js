@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
 
-const defaultOptionKeyExtractor = prop('value')
+const defaultOptionKeyExtractor = ({ value, id }) => value || id
 
 export const List = ({ data, horizontal = true, keyExtractor = defaultOptionKeyExtractor, Component, ...rest }) => {
   const renderItem = useCallback(

@@ -1,9 +1,41 @@
-rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-      match /{document=**} {
-        allow read, write: if true;
-      }
+    match /users/{userId} {
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null;
     }
+    match /orders/{orderId} {
+      allow read, update, delete: if request.auth != null && isOwner(resource.data.user, request.auth.uid);
+      allow create: if request.auth != null;
+    }
+    match /addresses/{addressId} {
+      allow read, update, delete: if request.auth != null && isOwner(resource.data.user, request.auth.uid);
+      allow create: if request.auth != null;
+    }
+    match /bookings/{bookingId} {
+      allow read, update, delete: if request.auth != null && isOwner(resource.data.user, request.auth.uid);
+      allow create: if request.auth != null;
+    }
+    match /boxes/{doc} {
+     allow read: if true;
+ 		}
+    match /awards/{doc} {
+     allow read: if true;
+ 		}
+    match /awardsCategories/{doc} {
+     allow read: if true;
+ 		}
+    match /brands/{doc} {
+     allow read: if true;
+ 		}
+    match /categories/{doc} {
+     allow read: if true;
+ 		}
+    match /products/{doc} {
+     allow read: if true;
+ 		}
+  }
+  function isOwner(owner, userId) {
+   return path('/databases/(default)/documents/users/' + userId) == owner;
+	}
 }
