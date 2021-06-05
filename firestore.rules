@@ -13,8 +13,11 @@ service cloud.firestore {
       allow create: if request.auth != null;
     }
     match /bookings/{bookingId} {
-      allow read, update, delete: if request.auth != null && isOwner(resource.data.user, request.auth.uid);
+      allow read, create, update, delete: if request.auth != null && isOwner(resource.data.user, request.auth.uid);
       allow create: if request.auth != null;
+    }
+    match /transactions/{transactionId} {
+      allow read: if request.auth != null && isOwner(resource.data.user, request.auth.uid);
     }
     match /boxes/{doc} {
      allow read: if true;
@@ -22,7 +25,7 @@ service cloud.firestore {
     match /awards/{doc} {
      allow read: if true;
  		}
-    match /awardsCategories/{doc} {
+    match /awardCategories/{doc} {
      allow read: if true;
  		}
     match /brands/{doc} {
@@ -36,6 +39,10 @@ service cloud.firestore {
  		}
   }
   function isOwner(owner, userId) {
-   return path('/databases/(default)/documents/users/' + userId) == owner;
+  	return path('/databases/(default)/documents/users/' + userId) == owner;
 	}
+  function isVerifiedUser(userId) {
+    return true;
+//  	return debug(get(/databases/$(database)/documents/users/$(userId)).data.status) == 'approved';
+  }
 }

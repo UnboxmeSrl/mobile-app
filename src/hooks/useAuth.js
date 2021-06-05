@@ -5,11 +5,7 @@ import firestore from '@react-native-firebase/firestore'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import { useAction } from '@hooks/common'
-import authModule, {
-  _initialized,
-  selectIsAuthInitialized,
-  selectUid,
-} from '@redux/modules/auth'
+import authModule, { _initialized, selectIsAuthInitialized, selectUid } from '@redux/modules/auth'
 import { onAuthSuccess } from '@services/auth'
 
 export const useAuth = () => {
@@ -21,6 +17,7 @@ export const useAuth = () => {
     (user) => {
       console.log('onAuthStateChanged', user)
       if (user) {
+        console.log(auth().currentUser.getIdTokenResult(true))
         setAuthData(user.toJSON())
       } else {
         setAuthData({})

@@ -10,6 +10,7 @@ export const ADDRESSES_COLLECTION = 'addresses'
 export const AWARD_CATEGORIES_COLLECTION = 'awardCategories'
 export const AWARDS_COLLECTION = 'awards'
 export const BOOKINGS_COLLECTION = 'bookings'
+export const TRANSACTIONS_COLLECTION = 'transactions'
 
 export const CONTENT_STORAGE_BUCKET = 'gs://unboxme-firebase-content'
 export const getContentPath = (box, order, name) => `${box.name.en}/${order.id}/${name}`

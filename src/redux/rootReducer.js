@@ -12,6 +12,7 @@ import brands from '@redux/modules/brands'
 import categories from '@redux/modules/categories'
 import orders from '@redux/modules/orders'
 import products from '@redux/modules/products'
+import transactions from '@redux/modules/transactions'
 
 const rootReducer = combineReducers({
   addresses: addresses.reducer,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   network,
   orders: orders.reducer,
   products: products.reducer,
+  transactions: transactions.reducer,
 })
 
 export default rootReducer

@@ -12,6 +12,7 @@ import { fetchBrands } from '@redux/modules/brands'
 import { fetchCategories } from '@redux/modules/categories'
 import { fetchOrders } from '@redux/modules/orders'
 import { fetchProducts } from '@redux/modules/products'
+import { fetchTransactions } from '@redux/modules/transactions'
 
 export const useFetchData = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
@@ -25,6 +26,7 @@ export const useFetchData = () => {
   const getAwardCategories = useAction(fetchAwardCategories)
   const getAwards = useAction(fetchAwards)
   const getBookings = useAction(fetchBookings)
+  const getTransactions = useAction(fetchTransactions)
 
   useEffect(() => {
     getBoxes()
@@ -37,6 +39,16 @@ export const useFetchData = () => {
       getOrders()
       getAddresses()
       getBookings()
+      getTransactions()
     }
-  }, [isAuthenticated, getAwardCategories, getAwards, getBookings])
+  }, [
+    isAuthenticated,
+    getAwardCategories,
+    getAwards,
+    getBookings,
+    getOrders,
+    getAddresses,
+    getBookings,
+    getTransactions,
+  ])
 }

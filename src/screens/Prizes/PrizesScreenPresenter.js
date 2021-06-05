@@ -22,7 +22,7 @@ export const PrizesScreenPresenter = ({ bookings, navigateToSpecialAwards, award
       data={awards}
       horizontal
     />
-    <SectionHeader tKey={'awards.yourBookings'} />
+    {bookings.length ? <SectionHeader tKey={'awards.yourBookings'} /> : null}
     <List
       Component={BookingTile}
       contentContainerStyle={{ marginBottom: 20, marginTop: 8, paddingLeft: 20 }}

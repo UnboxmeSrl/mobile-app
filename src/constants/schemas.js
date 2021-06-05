@@ -112,3 +112,16 @@ export const BOOKING_SCHEMA = new schema.Entity(
     processStrategy: getProcessStrategy(['award', 'user']),
   }
 )
+
+export const TRANSACTION_SCHEMA = new schema.Entity(
+  'transactions',
+  {
+    booking: BOOKING_SCHEMA,
+    order: ORDER_SCHEMA,
+    user: USER_SCHEMA,
+  },
+  {
+    idAttribute: prop('id'),
+    processStrategy: getProcessStrategy(['booking', 'order', 'user']),
+  }
+)

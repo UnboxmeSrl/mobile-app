@@ -3,22 +3,24 @@ import { useSelector } from 'react-redux'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 
-import { ORDERS_COLLECTION, USERS_COLLECTION } from '@const/firebase'
+import { TRANSACTIONS_COLLECTION, USERS_COLLECTION } from '@const/firebase'
 import { useAction } from '@hooks/common'
 import { selectIsAuthenticated } from '@redux/modules/auth'
-import { setDataFirestore } from '@redux/modules/orders'
+import { setDataFirestore } from '@redux/modules/transactions'
 
-export const useListenToOrderChanges = () => {
+export const useListenToTransactionChanges = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const setData = useAction(setDataFirestore)
 
   useEffect(() => {
     if (isAuthenticated) {
       const subscriber = firestore()
-        .collection(ORDERS_COLLECTION)
+        .collection(TRANSACTIONS_COLLECTION)
         .where('user', '==', firestore().collection(USERS_COLLECTION).doc(auth().currentUser?.uid))
         .onSnapshot((snapshot) => {
-          const data = snapshot?.docs.map((doc) => doc.data())
+          const data = snapshot?.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id }
+          })
           setData(data)
           // console.log('documentSnapshot: ', snapshot.docs.data())
         })

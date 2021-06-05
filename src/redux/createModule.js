@@ -28,14 +28,13 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   const collectionAdapter = createEntityAdapter()
   const initialState = collectionAdapter.getInitialState()
   const getDocumentReference = (id) => ref.doc(id)
-  const whereQuery = limitToOwner
-    ? ref.where('user', '==', firestore().collection(USERS_COLLECTION).doc(auth().currentUser?.uid))
-    : ref
+  const whereQuery = (uid) =>
+    limitToOwner ? ref.where('user', '==', firestore().collection(USERS_COLLECTION).doc(uid)) : ref
 
   const fetchAll = createAsyncThunk(`${collection}/fetch`, async (payload, { rejectWithValue }) => {
     try {
-      const snapshot = await whereQuery.get()
-      const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      const snapshot = await whereQuery(auth().currentUser?.uid).get()
+      const data = snapshot?.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       const normalized = normalize(data, [schema])
       return normalized.entities
     } catch (error) {
@@ -45,7 +44,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   })
   const fetchById = createAsyncThunk(`${collection}/fetchById`, async (id, { rejectWithValue }) => {
     try {
-      const snapshot = await whereQuery.doc(id).get()
+      const snapshot = await whereQuery(auth().currentUser?.uid).doc(id).get()
       const data = { ...snapshot.data(), id: snapshot.id }
       const normalized = normalize(data, schema)
 
