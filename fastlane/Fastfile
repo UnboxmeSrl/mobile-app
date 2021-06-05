@@ -37,7 +37,7 @@ platform :iOS do
   end
 end
 
-platform :Android do
+platform :android do
   lane :build do
     gradle(
       project_dir: './android',
@@ -51,10 +51,10 @@ platform :Android do
     )
   end
   lane :build_and_upload do
-    build
+#     build
     changelog_data = handle_changelog
-    upload_to_play_store(track: 'internal', skip_upload_apk: true, release_status: 'draft')
-    firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data)
+#     upload_to_play_store(track: 'internal', skip_upload_apk: true, release_status: 'draft')
+    firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data, android_artifact_path: "android/app/build/outputs/apk/release/app-release.apk")
     notify_slack
   end
 end

@@ -58,14 +58,14 @@ Push a new beta build to TestFlight
 ----
 
 ## Android
-### Android build
+### android build
 ```
-fastlane Android build
+fastlane android build
 ```
 
-### Android build_and_upload
+### android build_and_upload
 ```
-fastlane Android build_and_upload
+fastlane android build_and_upload
 ```
 
 

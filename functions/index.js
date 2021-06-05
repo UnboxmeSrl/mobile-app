@@ -45,7 +45,7 @@ exports.onBookingUpdate = functions.region(REGION).firestore
   .onCreate(async (snap) => {
     const data = snap.data();
     const award = (await data.award.get()).data()
-    await admin.firestore().collection('transactions').add({ booking: snap.ref, user: data.user, points: -award?.points, createdAt: admin.firestore.FieldValue.serverTimestamp() });
+    await admin.firestore().collection('transactions').add({ booking: snap.ref, user: data.user, points: -award.points, createdAt: admin.firestore.FieldValue.serverTimestamp() });
     return snap
   });
 
