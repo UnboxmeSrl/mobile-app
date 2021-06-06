@@ -5,9 +5,9 @@ import { Categories } from '@components/Categories'
 import { List } from '@components/List'
 import { ModalContainer } from '@components/ModalContainer'
 
-export const SpecialAwardsPresenter = ({ awards }) => (
-  <ModalContainer tKey={'awards.specialAwards'}>
-    <Categories />
+export const SpecialAwardsPresenter = ({ awards, categoriesIds, category, onPress, title }) => (
+  <ModalContainer tKey={title || 'awards.specialAwards'}>
+    <Categories categoriesIds={categoriesIds} category={category} onPress={onPress} />
     <List
       Component={AwardTileFull}
       contentContainerStyle={{

@@ -23,7 +23,7 @@ import { TextButton } from '@components/TextButton'
 import { COLORS } from '@const'
 import { screenWidth } from '@const/common'
 
-const Image = styled(FastImage)`
+const Image = styled.Image`
   border-radius: 16px;
   height: 164px;
   margin-right: 12px;
@@ -45,11 +45,21 @@ const ImageItem = ({ item = '' }) => {
   return <Image key={item} source={{ uri: item }} />
 }
 
-export const AwardScreenPresenter = ({ disabled, onSubmit, navigateToSlots, name, points, images, description }) => (
-  <RouteContainer RightButton={() => <Points points={points} />} translations={name} withArrow>
+export const AwardScreenPresenter = ({
+  disabled,
+  onSubmit,
+  navigateToSlots,
+  name,
+  images,
+  description,
+  price,
+  value,
+  isPrize,
+}) => (
+  <RouteContainer RightButton={() => <Points isPrize={isPrize} value={price} />} translations={name} withArrow>
     <List
       Component={ImageItem}
-      contentContainerStyle={{ flex: 1, height: 164, marginTop: 20, paddingLeft: 20 }}
+      contentContainerStyle={{ height: 164, marginTop: 20, paddingLeft: 20 }}
       data={images}
       horizontal
       keyExtractor={(item) => item}

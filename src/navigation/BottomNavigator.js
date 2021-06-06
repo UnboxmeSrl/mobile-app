@@ -1,5 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { CouponsScreen } from '@screens/Coupons'
 import { HomeScreen } from '@screens/Home'
 import { PrizesScreen } from '@screens/Prizes'
 import { ProfileScreen } from '@screens/Profile'
@@ -20,7 +21,7 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'pricetag'} focused={focused} icon={'pricetag-outline'} />,
       },
-      screen: () => null,
+      screen: CouponsScreen,
     },
     [SCREEN_NAMES.Prizes]: {
       navigationOptions: {

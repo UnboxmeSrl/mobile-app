@@ -26,10 +26,13 @@ export default {
       checkSlots: 'Check available timeslots',
       coupon: 'Coupon {{label}}',
       specialAwards: 'Special awards',
+      specialCoupons: 'Special coupons',
       title: 'Awards',
       weeklyInMilan: 'Weekly in Milan',
       yourBookings: 'Your bookings',
     },
+    book: 'Book',
+    booked: 'Booked',
     box: {
       afterAddress:
         'The ordering of the box was successful. Wait for it. \nIf you have any questions, please contact us.',
@@ -61,14 +64,12 @@ export default {
     brandsColon: 'Brands:',
     callToActions: 'Call to actions',
     chooseThisProduct: 'Choose this product!',
-    book: 'Book',
     code: {
       continueWithout: 'Continue without code',
       description:
         'If you came at the invitation of another user and they gave you their promo code, then enter it here!',
       title: 'Code from friend',
     },
-    booked: 'Booked',
     congratulations: 'Congratulations',
     connectInstagram: 'Connect your instagram account',
     connectTikTok: 'Connect your Tik Tok account',

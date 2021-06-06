@@ -8,20 +8,22 @@ import styled from 'styled-components/native'
 import { Button } from '@components/Button'
 import { BodyText, ButtonText } from '@components/Text'
 import { COLORS } from '@const'
+import { AWARD_TYPE_PRIZE } from '@const/award'
 import { screenWidth } from '@const/common'
 import { SCREEN_NAMES } from '@const/navigation'
 
-export const AwardTileFull = ({ imageUrl, onPress, points, name, id }) => {
+export const AwardTileFull = ({ imageUrl, onPress, points, stars, type, name, id }) => {
   const { navigate } = useNavigation()
+  const isPrize = type === AWARD_TYPE_PRIZE
 
   const navigateToAward = () => {
-    navigate({ params: { awardId: id }, routeName: SCREEN_NAMES.AwardScreen })
+    navigate({ params: { awardId: id, type }, routeName: SCREEN_NAMES.AwardScreen })
   }
   return (
     <BackgroundImage onPress={onPress} source={{ uri: imageUrl }}>
       <PointsWrapper>
-        <Points>{points}</Points>
-        <Ionicons color={COLORS.achromaticBlack} name={'trophy'} size={14} />
+        <Points>{isPrize ? points : stars}</Points>
+        <Ionicons color={COLORS.achromaticBlack} name={isPrize ? 'trophy' : 'star'} size={14} />
       </PointsWrapper>
       <StyledButton light onPress={navigateToAward}>
         <BoldTextLink tKey={'awards.coupon'} translations={name} />

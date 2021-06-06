@@ -17,7 +17,6 @@ export const useAuth = () => {
     (user) => {
       console.log('onAuthStateChanged', user)
       if (user) {
-        console.log(auth().currentUser.getIdTokenResult(true))
         setAuthData(user.toJSON())
       } else {
         setAuthData({})

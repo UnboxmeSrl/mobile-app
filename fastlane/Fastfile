@@ -44,17 +44,12 @@ platform :android do
       task: 'bundle',
       build_type: 'Release'
     )
-    gradle(
-      project_dir: './android',
-      task: 'assemble',
-      build_type: 'Release'
-    )
   end
   lane :build_and_upload do
-#     build
+    build
     changelog_data = handle_changelog
 #     upload_to_play_store(track: 'internal', skip_upload_apk: true, release_status: 'draft')
-    firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data, android_artifact_path: "android/app/build/outputs/apk/release/app-release.apk")
+    firebase_app_distribution(app: ENV["FIREBASE_ANDROID_ID"], firebase_cli_token: ENV["FIREBASE_TOKEN"], release_notes: changelog_data, android_artifact_path: "android/app/build/outputs/bundle/release/app-release.aab")
     notify_slack
   end
 end

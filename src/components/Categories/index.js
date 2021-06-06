@@ -4,19 +4,13 @@ import styled from 'styled-components/native'
 
 import { CategoryPresenter } from '@components/Categories/CategoryPresenter'
 import { List } from '@components/List'
-import { useAction } from '@hooks/common'
-import { _awardCategory, selectAwardCategory, setAppData } from '@redux/modules/app'
-import { selectIsAuthenticated } from '@redux/modules/auth'
-import { selectAwardCategories, selectAwardsByCategory } from '@redux/modules/awardCategories'
-import { selectOrderByBoxId } from '@redux/modules/orders'
+import { _awardCategory, selectAwarselectAwardCategorydCategory } from '@redux/modules/app'
+import { selectCategoriesByIds } from '@redux/modules/awardCategories'
 
-export const Categories = () => {
-  const setCategory = useAction(setAppData)
-  const categoriesFromApi = useSelector(selectAwardCategories)
-  const category = useSelector(selectAwardCategory)
+export const Categories = ({ categoriesIds, onPress, category }) => {
+  const categoriesFromApi = useSelector(selectCategoriesByIds(categoriesIds))
   const categories = [{ name: { en: 'All categories' }, value: 'all' }, ...categoriesFromApi]
 
-  const onPress = useCallback((id) => setCategory({ [_awardCategory]: id }), [setCategory])
   const Component = useCallback(
     (props) => (
       <CategoryPresenter onPress={() => onPress(props.value)} selected={category === props.value} {...props} />

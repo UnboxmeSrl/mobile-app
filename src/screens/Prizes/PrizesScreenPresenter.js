@@ -9,13 +9,22 @@ import { Points } from '@components/Points'
 import { RouteContainer } from '@components/RouteContainer'
 import { SectionHeader } from '@components/SectionHeader'
 
-export const PrizesScreenPresenter = ({ bookings, navigateToSpecialAwards, awards }) => (
+export const PrizesScreenPresenter = ({
+  bookings,
+  navigateToSpecialAwards,
+  awards,
+  onPress,
+  categoriesIds,
+  category,
+  title,
+  isPrize,
+}) => (
   <RouteContainer>
     <Header>
-      <Points />
+      <Points isPrize={isPrize} />
     </Header>
-    <Categories />
-    <SectionHeader onPress={navigateToSpecialAwards} tKey={'awards.specialAwards'} />
+    <Categories categoriesIds={categoriesIds} category={category} onPress={onPress} />
+    <SectionHeader onPress={navigateToSpecialAwards} tKey={title || 'awards.specialAwards'} />
     <List
       Component={AwardTile}
       contentContainerStyle={{ marginBottom: 20, marginTop: 8, paddingLeft: 20 }}

@@ -5,13 +5,14 @@ import { useSelector } from 'react-redux'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 
+import { AWARD_TYPE_PRIZE } from '@const/award'
 import { MODAL_NAMES } from '@const/navigation'
 import { ORDER_IN_REVIEW } from '@const/order'
-import { useAction } from '@hooks/common'
+import { useAction, useAuthenticatedAction } from '@hooks/common'
 import { getAwardReference, selectAwardById } from '@redux/modules/awards'
 import { createBooking, selectBookingByAwardId } from '@redux/modules/bookings'
 import { getBoxReference } from '@redux/modules/boxes'
-import { selectSumOfPoints } from '@redux/modules/transactions'
+import { selectSumOfPoints, selectSumOfStars } from '@redux/modules/transactions'
 import { getUserReference } from '@redux/modules/users'
 
 import { AwardScreenPresenter } from './AwardScreenPresenter'
@@ -20,13 +21,19 @@ export const AwardScreen = () => {
   const awardId = useNavigationParam('awardId')
   const award = useSelector(selectAwardById(awardId))
   const booking = useSelector(selectBookingByAwardId(awardId))
-  const { navigate, goBack } = useNavigation()
+  const { navigate } = useNavigation()
   const points = useSelector(selectSumOfPoints)
+  const stars = useSelector(selectSumOfStars)
   const navigateToSlots = () => navigate({ params: { awardId }, routeName: MODAL_NAMES.Timeslots })
   const createBookingAction = useAction(createBooking)
-  const onSubmit = () => {
-    if (points < award.points) {
-      Alert.alert('Error', `You don't have enough points to book.`, [
+  const isPrize = award.type === AWARD_TYPE_PRIZE
+  const nameOfCurrency = isPrize ? 'points' : 'stars'
+  const price = isPrize ? award.points : award.stars
+
+  const onSubmit = useAuthenticatedAction(() => {
+    const rejected = isPrize ? points < price : stars < price
+    if (rejected) {
+      Alert.alert('Error', `You don't have enough ${nameOfCurrency} to book.`, [
         {
           onPress: () => null,
           style: 'cancel',
@@ -34,7 +41,7 @@ export const AwardScreen = () => {
         },
       ])
     } else {
-      Alert.alert('Confirmation', `${award.points} exp will be deducted from your account.`, [
+      Alert.alert('Confirmation', `${price} exp will be deducted from your account.`, [
         {
           onPress: () => null,
           style: 'cancel',
@@ -42,28 +49,19 @@ export const AwardScreen = () => {
         },
         {
           onPress: () => {
-            console.log(auth().currentUser?.uid)
-            const response = createBookingAction({
+            createBookingAction({
               award: getAwardReference(awardId),
+              awardType: award.type,
               user: getUserReference(auth().currentUser?.uid),
             })
-            response.then((data) => {
-              console.log('then')
-              console.log(data)
-            })
-            response.catch((e) => {
-              console.log('error')
-              console.log(e)
-            })
-            console.log({ response })
           },
           text: 'Yes',
         },
       ])
     }
-  }
-  console.log(booking)
-  const props = { disabled: booking, navigateToSlots, onSubmit, ...award }
+  })
+
+  const props = { disabled: booking, nameOfCurrency, navigateToSlots, onSubmit, price, ...award, isPrize }
 
   return <AwardScreenPresenter {...props} />
 }

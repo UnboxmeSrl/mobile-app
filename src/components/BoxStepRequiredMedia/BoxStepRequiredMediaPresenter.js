@@ -98,7 +98,7 @@ const Tile = styled.View`
 const OrText = styled(Caption)`
   margin: 0 16px;
 `
-const Image = styled(FastImage)`
+const Image = styled.Image`
   height: 48px;
   margin-bottom: 12px;
   width: 48px;

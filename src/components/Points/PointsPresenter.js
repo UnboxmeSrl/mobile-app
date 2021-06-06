@@ -5,10 +5,10 @@ import styled from 'styled-components/native'
 import { ButtonText } from '@components/Text'
 import { COLORS } from '@const'
 
-export const PointsPresenter = ({ points }) => (
+export const PointsPresenter = ({ count, isPrize }) => (
   <Wrapper>
-    <Ionicons color={COLORS.achromaticBlack} name={'trophy-outline'} size={24} />
-    <Points> {points}</Points>
+    <Ionicons color={COLORS.achromaticBlack} name={isPrize ? 'trophy-outline' : 'star-outline'} size={24} />
+    <Points> {count}</Points>
   </Wrapper>
 )
 

@@ -11,6 +11,10 @@ const AWARDS_COLLECTION = "awards";
 const AWARD_CATEGORY_SPA = "spa";
 const AWARD_CATEGORY_VACATION = "vacation";
 const AWARD_CATEGORY_COSMETIC = "cosmetic";
+const AWARD_CATEGORY_RESTAURANTS = "restaurants";
+
+const AWARD_TYPE_COUPON = "coupon";
+const AWARD_TYPE_PRIZE = "prize";
 
 const getAwardCategoryKey = (categoryKey) => db.doc(`${AWARDS_CATEGORIES_COLLECTION}/${categoryKey}`);
 
@@ -41,8 +45,16 @@ const AWARD_CATEGORIES_SEEDS = [{
     },
   },
 },
+{
+  key: AWARD_CATEGORY_RESTAURANTS,
+  data: {
+    value: AWARD_CATEGORY_RESTAURANTS,
+    name: {
+      en: AWARD_CATEGORY_RESTAURANTS,
+    },
+  },
+},
 ];
-
 
 const CATEGORY_SKIN = "skin";
 const CATEGORY_NAILS = "nails";
@@ -148,7 +160,7 @@ const PRODUCTS_SEED = [{
     preDescription: {en: "Anti-aging, resurfacing and brightening face serum with 10% pure vitamin C, salicylic acid and hyaluronic acid"},
     description: {
       en: "A unique anti-aging, antioxidant renovating face serum with 10% pure vitamin C (L-ascorbic acid) to reduce imperfections and brighten skin. It helps target skin aging and improves skin quality. As a result, wrinkles look visibly reduced and skin texture and tone are more even and refined, revealing sensitive skin’s full radiance. It combines concentrated 10% pure vitamin C, salicylic acid and neurosensine in a serum at a physiological pH for optimal effectiveness, while also being suitable for sensitive skin.\n" +
-          "\n" +
+        "\n" +
         "The fresh, rich and fast-absorbing water-gel texture leaves skin soft and hydrated to the touch.",
     },
     imageUrl: STORAGE.file("product-1.png").publicUrl(),
@@ -169,19 +181,27 @@ const PRODUCTS_SEED = [{
   },
 }];
 
-
 const AWARD_1 = "award1";
 const AWARD_2 = "award2";
 const AWARD_3 = "award3";
+const AWARD_4 = "award4";
+const AWARD_5 = "award5";
+const AWARD_6 = "award6";
 
-const TIMESLOTS = {"8am - 1pm": ["X", "X", "X", "X", "X", "V", "V"], "1pm - 5pm": ["V", "V", "X", "V", "X", "V", "V"], "5pm -9pm": ["V", "V", "V", "V", "X", "X", "X"]};
+const TIMESLOTS = {
+  "8am - 1pm": ["X", "X", "X", "X", "X", "V", "V"],
+  "1pm - 5pm": ["V", "V", "X", "V", "X", "V", "V"],
+  "5pm -9pm": ["V", "V", "V", "V", "X", "X", "X"],
+};
 
 const AWARDS_SEED = [{
   key: AWARD_1,
   data: {
     value: AWARD_1,
+    id: AWARD_1,
     name: {en: "SPA Weekend"},
     points: 130,
+    type: AWARD_TYPE_PRIZE,
     category: getAwardCategoryKey(AWARD_CATEGORY_SPA),
     description: {
       en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -190,13 +210,15 @@ const AWARDS_SEED = [{
     images: [STORAGE.file("award1-a.jpg").publicUrl(), STORAGE.file("award1-b.jpg").publicUrl()],
     available: true,
     timeslots: TIMESLOTS,
+    address: "Via Solferino, 12, Milano",
   },
 },
 {
   key: AWARD_2,
   data: {
     value: AWARD_2,
-    points: 200,
+    points: 130,
+    type: AWARD_TYPE_PRIZE,
     name: {en: "Cosmetic gift"},
     category: getAwardCategoryKey(AWARD_CATEGORY_COSMETIC),
     description: {
@@ -206,15 +228,72 @@ const AWARDS_SEED = [{
     images: [STORAGE.file("award1-a.jpg").publicUrl(), STORAGE.file("award1-b.jpg").publicUrl()],
     available: true,
     timeslots: TIMESLOTS,
+    address: "Via Solferino, 12, Milano",
   },
 },
 {
   key: AWARD_3,
   data: {
     value: AWARD_3,
-    points: 300,
+    points: 130,
+    type: AWARD_TYPE_PRIZE,
     name: {en: "Vacation gift"},
     category: getAwardCategoryKey(AWARD_CATEGORY_VACATION),
+    description: {
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    imageUrl: STORAGE.file("vac1-a.png").publicUrl(),
+    images: [STORAGE.file("vac1-a.png").publicUrl(), STORAGE.file("vac1-b.jpg").publicUrl()],
+    available: true,
+    timeslots: TIMESLOTS,
+    address: "Via Solferino, 12, Milano",
+  },
+},
+{
+  key: AWARD_4,
+  data: {
+    value: AWARD_4,
+    id: AWARD_4,
+    name: {en: "Restaurant 1"},
+    stars: 1,
+    type: AWARD_TYPE_COUPON,
+    category: getAwardCategoryKey(AWARD_CATEGORY_RESTAURANTS),
+    description: {
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    imageUrl: STORAGE.file("restaurant1.jpg").publicUrl(),
+    images: [STORAGE.file("restaurant1.jpg").publicUrl(), STORAGE.file("restaurant1a.jpg").publicUrl()],
+    available: true,
+    timeslots: TIMESLOTS,
+    address: "Via Solferino, 12, Milano",
+  },
+},
+{
+  key: AWARD_5,
+  data: {
+    value: AWARD_5,
+    stars: 2,
+    type: AWARD_TYPE_COUPON,
+    name: {en: "Restaurant 2"},
+    category: getAwardCategoryKey(AWARD_CATEGORY_RESTAURANTS),
+    description: {
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    imageUrl: STORAGE.file("restaurant2.jpg").publicUrl(),
+    images: [STORAGE.file("restaurant2.jpg").publicUrl(), STORAGE.file("restaurant2a.jpg").publicUrl()],
+    available: true,
+    timeslots: TIMESLOTS,
+    address: "Via Solferino, 33, Milano",
+  },
+},
+{
+  key: AWARD_6,
+  data: {
+    value: AWARD_6,
+    stars: 1,
+    type: AWARD_TYPE_COUPON,
+    name: {en: "Cosmetic coupon"},
+    category: getAwardCategoryKey(AWARD_CATEGORY_COSMETIC),
     description: {
       en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
@@ -254,7 +333,6 @@ const BOX_2 = {
     visible: true,
   },
 };
-
 
 exports.SEED_DATA = [{
   collection: BRANDS_COLLECTION,

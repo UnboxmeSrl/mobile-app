@@ -6,6 +6,7 @@ import { TRANSACTION_SCHEMA } from '@const/schemas'
 import { createFirebaseReduxModule } from '@redux/createModule'
 
 const _points = 'points'
+const _stars = 'stars'
 
 const {
   actions: { fetchAll: fetchTransactions, setDataFirestore },
@@ -15,6 +16,7 @@ const {
 
 export const selectAllOrders = selectAll
 export const selectSumOfPoints = createSelector(selectAllOrders, pipe(map(propOr(0, _points)), sum))
+export const selectSumOfStars = createSelector(selectAllOrders, pipe(map(propOr(0, _stars)), sum))
 
 export default slice
 export { fetchTransactions, setDataFirestore }

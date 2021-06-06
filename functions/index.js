@@ -5,6 +5,8 @@ admin.initializeApp()
 
 const REGION = 'europe-west1'
 const SEEDS = require('./seeds')
+const AWARD_TYPE_COUPON = "coupon";
+const AWARD_TYPE_PRIZE = "prize";
 
 exports.logger = functions.region(REGION).https.onCall((data, context) => {
   const { message, payload, level } = data
@@ -33,27 +35,33 @@ exports.onOrderUpdate = functions.region(REGION).firestore
   .onUpdate(async (change, context) => {
     const data = change.after.data()
     const prevData = change.before.data()
+    let points = data.points
+
+    if (!points) {
+      const config = await admin.remoteConfig().getTemplate()
+      points = ramda.pathOr(100, ['parameters', 'maxUserStars', 'defaultValue', 'value'], config)
+    }
     if (prevData.status !== 'withRating' && data.status === 'withRating') {
-      // TODO: move default amount of points
-      admin.firestore().collection('transactions').add({
+      await admin.firestore().collection('transactions').add({
         order: change.after.ref,
         user: data.user,
-        points: data.points || 100,
+        points,
         createdAt: admin.firestore.FieldValue.serverTimestamp()
       })
     }
     return change
   })
 
-exports.onBookingUpdate = functions.region(REGION).firestore
+exports.onBookingCreate = functions.region(REGION).firestore
   .document('bookings/{bookingId}')
   .onCreate(async (snap) => {
     const data = snap.data()
     const award = (await data.award.get()).data()
     await admin.firestore().collection('transactions').add({
-      source: snap.ref,
+      booking: snap.ref,
       user: data.user,
-      points: -award.points,
+      points: -ramda.propOr(0, 'points', award),
+      stars: -ramda.propOr(0, 'stars', award),
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     })
     return snap
@@ -71,11 +79,11 @@ exports.onTransactionWrite = functions.region(REGION).firestore
   })
 
 exports.onCreateUser = functions.region(REGION).auth.user().onCreate(async (user) => {
-  await admin.firestore().collection('users').doc(user.uid).set({})
+  await admin.firestore().collection('users').doc(user.uid).set({ stars: 1, points: 0 })
   return user
 })
 
-exports.everyMinute = functions.region(REGION).pubsub.schedule('every 60 minutes').onRun(async (context) => {
+exports.everyDay = functions.region(REGION).pubsub.schedule('every 1 days').onRun(async (context) => {
   const config = await admin.remoteConfig().getTemplate()
   const maxUserStars = ramda.path(['parameters', 'maxUserStars', 'defaultValue', 'value'], config)
   const users = await admin.firestore().collection('users').where('stars', '<', parseInt(maxUserStars)).get()
