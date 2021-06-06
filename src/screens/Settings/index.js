@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { Alert } from 'react-native'
+import { getBuildNumber, getVersion } from 'react-native-device-info'
 import Share from 'react-native-share'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from 'react-navigation-hooks'
@@ -17,6 +18,9 @@ import { useAction } from '@hooks/common'
 import authModule, { _initialized, _instagram, selectIsAuthenticated, selectWizardCode } from '@redux/modules/auth'
 import { persistor } from '@redux/store'
 import { logger, reset, showToastSuccess } from '@services'
+
+const version = getVersion()
+const buildNumber = getBuildNumber()
 
 const LogoutIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'log-out-outline'} size={24} />
 
@@ -57,7 +61,7 @@ export const SettingsScreen = () => {
     ])
   }, [resetAuth, logout])
   const RightButton = useCallback(() => <IconButton Icon={LogoutIcon} onPress={handleLogout} />, [handleLogout])
-
-  const props = { RightButton, handleLogout, isAuthenticated, navigateToAddresses }
+  const versionName = `${version} (${buildNumber})`
+  const props = { RightButton, handleLogout, isAuthenticated, navigateToAddresses, versionName }
   return <SettingsPresenter {...props} />
 }

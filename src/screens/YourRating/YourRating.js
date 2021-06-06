@@ -13,11 +13,11 @@ export const YourRatingPresenter = ({ onPress, order, score }) => (
   <ModalContainer noPaddingTop>
     <Content>
       <Row>
-        <Score>{score}</Score>
+        <Score>{score || 0}</Score>
         <DimmedScore> / 5</DimmedScore>
       </Row>
       <Title>Feedback on your Unboxing</Title>
-      {order.feedback.map(({ labelKey, value }) => (
+      {order?.feedback?.map(({ labelKey, value }) => (
         <Point key={labelKey}>
           <Label tKey={labelKey} />
           <Rating rating={value} />
@@ -26,7 +26,7 @@ export const YourRatingPresenter = ({ onPress, order, score }) => (
       <Tile>
         <Feedback>You collected maximum rate from this Unboxing</Feedback>
         <Label>
-          You earned <FinalScore>+{order.points}exp</FinalScore>
+          You earned <FinalScore>+{order.points || 0}exp</FinalScore>
         </Label>
       </Tile>
       <SubmitButton onPress={onPress} tKey={'great'} />
