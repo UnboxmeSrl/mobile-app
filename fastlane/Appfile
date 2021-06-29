@@ -1,0 +1,5 @@
+app_identifier("com.unboxme.app")
+package_name("com.unboxme.app")
+apple_id("kontakt@marcinwalendowski.pl")
+itc_team_id("122573070")
+team_id("84KM93C3TE")

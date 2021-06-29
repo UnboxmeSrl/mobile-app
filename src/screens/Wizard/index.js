@@ -1,0 +1,65 @@
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
+import { useSelector } from 'react-redux'
+import { STEPS } from '@screens/Wizard/constants'
+import { dec, inc } from 'ramda'
+
+import { STACK_NAMES } from '@const/navigation'
+import { _verificationStatus } from '@redux/modules/auth'
+
+import { WizardPresenter } from './WizardPresenter'
+
+export const WizardScreen = () => {
+  const [stepIndex, setStepIndex] = useState(1)
+  const { navigate, goBack } = useNavigation()
+  const verificationStatus = useNavigationParam(_verificationStatus)
+  const navigationStep = useNavigationParam('step')
+
+  useEffect(() => {
+    if (navigationStep) {
+      setStepIndex(navigationStep)
+    }
+  }, [navigationStep])
+
+  const onFinish = useCallback(() => {
+    navigate(STACK_NAMES.BottomStack)
+  }, [navigate])
+
+  const navigateToNextStep = () => {
+    if (navigationStep) {
+      return goBack()
+    }
+    if (stepIndex === STEPS.length) {
+      onFinish()
+    } else {
+      setStepIndex((prevIndex) => Math.min(STEPS.length, inc(prevIndex)))
+    }
+  }
+  const navigateToPrevStep = () => {
+    if (navigationStep) {
+      return goBack()
+    }
+    if (stepIndex === 1) {
+      goBack()
+    } else {
+      setStepIndex((prevIndex) => Math.max(1, dec(prevIndex)))
+    }
+  }
+  const hiddenArrow = stepIndex === 1 && !navigationStep && true
+
+  useEffect(() => {
+    if (verificationStatus) {
+      setStepIndex(STEPS.length)
+    }
+  }, [])
+
+  const props = {
+    hiddenArrow,
+    navigateToNextStep,
+    navigateToPrevStep,
+    navigationStep,
+    stepIndex,
+    steps: STEPS,
+  }
+  return <WizardPresenter {...props} />
+}
