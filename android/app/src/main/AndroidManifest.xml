@@ -14,7 +14,7 @@
     android:theme="@style/AppTheme"
     android:requestLegacyExternalStorage="true"
 
-  >
+    android:dataExtractionRules="@xml/data_extraction_rules">
     <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="AIzaSyCGLIvbT9nmmZeilNmY54K8GMXN7y-HREI"/>
@@ -23,8 +23,8 @@
 
     <activity
       android:name=".SplashActivity"
-      android:label="@string/app_name"
-      android:theme="@style/SplashTheme">
+      android:theme="@style/SplashTheme"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -34,12 +34,11 @@
       android:name=".MainActivity"
       android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
       android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"
-      android:label="@string/app_name"
       android:launchMode="singleTask"
-      >
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.BROWSABLE" />
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
@@ -48,8 +47,7 @@
 
     <activity android:name="com.facebook.FacebookActivity"
       android:configChanges=
-        "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-      android:label="@string/app_name" />
+        "keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
     <activity
       android:name="com.facebook.CustomTabActivity"
       android:exported="true">

@@ -9,13 +9,15 @@ import { TabBarIcon } from '@components/TabBarIcon'
 import { COLORS } from '@const'
 import { SCREEN_NAMES } from '@const/navigation'
 
+import HomeStack from './HomeStack'
+
 export default createBottomTabNavigator(
   {
     [SCREEN_NAMES.Home]: {
       navigationOptions: {
         tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'home'} focused={focused} icon={'home-outline'} />,
       },
-      screen: HomeScreen,
+      screen: HomeStack,
     },
     [SCREEN_NAMES.Coupons]: {
       navigationOptions: {

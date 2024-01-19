@@ -39,22 +39,21 @@ const ProgressLine = styled.View`
 const Text = styled(Caption)`
   text-align: right;
   width: 30px;
-  color: ${COLORS.basePrimary100}
   }
 `
 
-export const ProgressBarPresenter = ({ width, currentStepIndex, stepsLength }) => (
-  <Wrapper>
-    <ProgressWrapper>
-      <ProgressLine as={Animated.View} style={{ width }} />
-    </ProgressWrapper>
-    <Text>
-      {currentStepIndex}/{stepsLength}
-    </Text>
-  </Wrapper>
-)
+// export const ProgressBarPresenter = ({ width, currentStepIndex, stepsLength }) => (
+//   <Wrapper>
+//     <ProgressWrapper>
+//       <ProgressLine as={Animated.View} style={{ width }} />
+//     </ProgressWrapper>
+//     <Text>
+//       {currentStepIndex}/{stepsLength}
+//     </Text>
+//   </Wrapper>
+// )
 
-const Wrapper = styled.View`
-  align-items: center;
-  flex-direction: row;
-`
+// const Wrapper = styled.View`
+//   align-items: center;
+//   flex-direction: row;
+// `

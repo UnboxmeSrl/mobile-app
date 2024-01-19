@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+      google()
     }
     dependencies {
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.9, 0.99.99]'
@@ -10,18 +11,15 @@ buildscript {
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.google.firebase.crashlytics'
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
 
 project.ext.vectoricons = [
     iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
 ]
-
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 
@@ -241,18 +239,17 @@ dependencies {
   implementation fileTree(dir: "libs", include: ["*.jar"])
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"  // From node_modules
-
   implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
   implementation 'com.android.support:multidex:1.0.3'
-
-
   implementation platform('com.google.firebase:firebase-bom:26.5.0')
-
   implementation 'com.google.firebase:firebase-analytics'
-
   implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
   implementation 'com.facebook.android:facebook-login:[8.1)'
   implementation 'com.google.firebase:firebase-crashlytics'
+  implementation project(':react-native-vector-icons')
+  implementation 'androidx.core:core-ktx:1.5.0'
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+
 
 
   debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

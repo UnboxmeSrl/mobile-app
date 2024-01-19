@@ -1,0 +1,41 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/AbrilFatface-Regular.ttf",
+      "sha1": "270f83ffce77240393c6bca8f0018c1c94862608"
+    },
+    {
+      "path": "src/assets/fonts/FuturaNewDemi-Reg.ttf",
+      "sha1": "29121d40f3af769c2c24f94feb1018bec690a87b"
+    },
+    {
+      "path": "src/assets/fonts/FuturaNewLight-Reg.ttf",
+      "sha1": "e6622fbfe7f8d5a91b45e4ca11ef0f0f67c3c8ed"
+    },
+    {
+      "path": "src/assets/fonts/FuturaNewMedium-Reg.ttf",
+      "sha1": "05d7603ebe9dbdba5cbb9ec75528e0dec7f23184"
+    },
+    {
+      "path": "src/assets/fonts/Quicksand-Bold.ttf",
+      "sha1": "07ca4486c80653a7f3abc18145c2f251d5c9989b"
+    },
+    {
+      "path": "src/assets/fonts/Quicksand-Light.ttf",
+      "sha1": "0d6fe8746125375ffd3ea4de6ecf062643a65c52"
+    },
+    {
+      "path": "src/assets/fonts/Quicksand-Medium.ttf",
+      "sha1": "9cbdd6785519aa2d85ee58cb5101ea9dbff8652f"
+    },
+    {
+      "path": "src/assets/fonts/Quicksand-Regular.ttf",
+      "sha1": "ba6e4d47926d643a8a4b509b193b3a87c3ea385d"
+    },
+    {
+      "path": "src/assets/fonts/Quicksand-SemiBold.ttf",
+      "sha1": "1f5c9cf95379bef6cee5f2a7deb393b157c91f4e"
+    }
+  ]
+}
