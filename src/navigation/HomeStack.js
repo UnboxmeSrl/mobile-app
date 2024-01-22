@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { SCREEN_NAMES } from '../constants/navigation'
 import CitiesScreen from '../screens/Cities/CitiesScreen'
 import RestaurantsScreen from '../screens/Restaurants/RestaurantsScreen'
+import RestaurantDetails from '../screens/RestaurantDetails'
 
 // const Home = createStackNavigator()
 
@@ -24,9 +25,13 @@ import RestaurantsScreen from '../screens/Restaurants/RestaurantsScreen'
 const HomeStack = createStackNavigator(
   {
     [SCREEN_NAMES.Cities]: CitiesScreen,
+    [SCREEN_NAMES.Restaurants]: RestaurantsScreen,
+    [SCREEN_NAMES.RestaurantDetails]: RestaurantDetails,
+
   },
   {
-    initialRouteName: [SCREEN_NAMES.Cities],
+    initialRouteName: SCREEN_NAMES.Cities,
+    headerMode: 'none',
   }
 )
 export default createAppContainer(HomeStack)

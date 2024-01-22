@@ -28,4 +28,10 @@ export const IMAGES = {
   signUp: require('./images/login.jpg'),
   swipeUp: require('./images/swipe-up.png'),
   tiktok: require('./images/tiktok.png'),
+  location: require('./images/location.png'),
+  ratingStar: require('./images/ratingStar.png'),
+  back: require('./images/back.png'),
+  tiktokNew: require('./images/tiktokNew.png'),
+  insta: require('./images/insta.png'),
+  internet: require('./images/internet.png'),
 }
