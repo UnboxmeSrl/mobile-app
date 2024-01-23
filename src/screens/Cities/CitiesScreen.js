@@ -1,18 +1,17 @@
 import React from 'react'
-import { FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 import { IMAGES } from '../../assets/images'
 import LocationsTile from '../../components/LocationsTile/LocationsTile'
-import { RouteContainer } from '../../components/RouteContainer/index'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import useCities from './hooks/useCities'
 
 const CitiesScreen = () => {
-  const { locationData, handleOnCityBtnPress } = useCities()
+  const { locationData } = useCities()
   return (
     <View style={styles.mainContainer}>
       <FlatList
@@ -28,7 +27,7 @@ const CitiesScreen = () => {
         }
         data={locationData}
         renderItem={({ item }) => {
-          return <LocationsTile btnPress={handleOnCityBtnPress} item={item} />
+          return <LocationsTile item={item} />
         }}
       />
     </View>
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
     width: scale(119.5),
   },
   mainContainer: {
+    backgroundColor: COLORS.white,
     flex: 1,
     marginTop: getStatusBarHeight(),
   },

@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { navigate } from '@services'
-
-import { IMAGES } from '../../../assets/images'
-import { SCREEN_NAMES } from '../../../constants/navigation'
 import { getCities } from '../../../services/LocationsService'
 
 const useCities = () => {
@@ -14,14 +10,12 @@ const useCities = () => {
     console.log(res)
     setLocationData(res)
   }
-  const handleOnCityBtnPress = async () => {
-    navigate(SCREEN_NAMES.Restaurants)
-  }
+
   useEffect(() => {
     getCitiesData()
   }, [])
+
   return {
-    handleOnCityBtnPress,
     locationData,
   }
 }

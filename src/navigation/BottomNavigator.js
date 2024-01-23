@@ -1,7 +1,7 @@
 import React from 'react'
+import { StyleSheet, View } from 'react-native'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { CouponsScreen } from '@screens/Coupons'
-import { HomeScreen } from '@screens/Home'
 import { PrizesScreen } from '@screens/Prizes'
 import { ProfileScreen } from '@screens/Profile'
 
@@ -9,31 +9,57 @@ import { TabBarIcon } from '@components/TabBarIcon'
 import { COLORS } from '@const'
 import { SCREEN_NAMES } from '@const/navigation'
 
+import { IMAGES } from '../assets/images'
+
 import HomeStack from './HomeStack'
 
 export default createBottomTabNavigator(
   {
     [SCREEN_NAMES.Home]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'home'} focused={focused} icon={'home-outline'} />,
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
+              <TabBarIcon focused={focused} icon={IMAGES.home} />
+            </View>
+          )
+        },
       },
       screen: HomeStack,
     },
     [SCREEN_NAMES.Coupons]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'pricetag'} focused={focused} icon={'pricetag-outline'} />,
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
+              <TabBarIcon focused={focused} icon={IMAGES.calender} />
+            </View>
+          )
+        },
       },
       screen: CouponsScreen,
     },
     [SCREEN_NAMES.Prizes]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'trophy'} focused={focused} icon={'trophy-outline'} />,
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
+              <TabBarIcon focused={focused} icon={IMAGES.bell} />
+            </View>
+          )
+        },
       },
       screen: PrizesScreen,
     },
     [SCREEN_NAMES.Profile]: {
       navigationOptions: {
-        tabBarIcon: ({ focused }) => <TabBarIcon activeIcon={'person'} focused={focused} icon={'person-outline'} />,
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
+              <TabBarIcon focused={focused} icon={IMAGES.user} />
+            </View>
+          )
+        },
       },
       screen: ProfileScreen,
     },
@@ -43,11 +69,12 @@ export default createBottomTabNavigator(
     // tabBarComponent: (props) => (
     //   <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
     // ),
+
     tabBarOptions: {
-      activeTintColor: COLORS.secondary,
-      inactiveTintColor: COLORS.veryLight04,
+      activeTintColor: COLORS.lightTaupe,
+      inactiveTintColor: COLORS.white,
       style: {
-        backgroundColor: COLORS.black,
+        backgroundColor: COLORS.white,
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
         borderTopWidth: 0,
@@ -56,3 +83,21 @@ export default createBottomTabNavigator(
     },
   }
 )
+
+const styles = StyleSheet.create({
+  activeTabStyle: {
+    alignItems: 'center',
+    borderTopColor: COLORS.lightTaupe,
+    borderTopWidth: 3,
+    flex: 1,
+    justifyContent: 'center',
+    width: 73,
+  },
+  inActiveTabStyle: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 15,
+    width: 73,
+  },
+})

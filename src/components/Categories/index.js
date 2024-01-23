@@ -1,20 +1,27 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 
 import { CategoryPresenter } from '@components/Categories/CategoryPresenter'
 import { List } from '@components/List'
-import { _awardCategory, selectAwarselectAwardCategorydCategory } from '@redux/modules/app'
 import { selectCategoriesByIds } from '@redux/modules/awardCategories'
 
-export const Categories = ({ categoriesIds, onPress, category }) => {
+export const Categories = ({ categoriesIds, onPress, category, customCategories }) => {
   const categoriesFromApi = useSelector(selectCategoriesByIds(categoriesIds))
-  const categories = [{ name: { en: 'All categories' }, value: 'all' }, ...categoriesFromApi]
+  // const categories = customCategories ?? [...categoriesFromApi]
+  const categories = customCategories ?? [...categoriesFromApi]
 
   const Component = useCallback(
-    (props) => (
-      <CategoryPresenter onPress={() => onPress(props.value)} selected={category === props.value} {...props} />
-    ),
+    (props) => {
+      console.log(props)
+      return (
+        <CategoryPresenter
+          onPress={() => onPress(props.id ?? props.value)}
+          selected={category === props.id ?? props.value}
+          {...props}
+        />
+      )
+    },
     [category, onPress]
   )
   return (

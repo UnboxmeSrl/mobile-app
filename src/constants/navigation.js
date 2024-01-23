@@ -1,5 +1,3 @@
-import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
-
 import { COLORS } from '@const'
 
 export const MAIN_NAVIGATOR = 'mainNavigator'
@@ -33,19 +31,19 @@ export const SCREEN_NAMES = {
   BoxBrief: 'BoxBrief',
   BoxBrief2: 'BoxBrief2',
   BoxContentUploadScreen: 'BoxContentUploadScreen',
+  Cities: 'Cities',
   ContentApproved: 'ContentApproved',
   Coupons: 'Coupons',
   EditProfile: 'EditProfile',
   Home: 'Home',
-  Cities: 'Cities',
   Onboarding: 'Onboarding',
   OtherSignUp: 'OtherSignUp',
   Prizes: 'Prizes',
   ProductSelection: 'ProductSelection',
   Profile: 'Profile',
   Questionnaire: 'Questionnaire',
-  Restaurants: 'Restaurants',
   RestaurantDetails: 'RestaurantDetails',
+  Restaurants: 'Restaurants',
   Settings: 'Settings',
   SignIn: 'SignIn',
   SignUp: 'SignUp',

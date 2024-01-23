@@ -2,10 +2,19 @@ import React from 'react'
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 
+import { navigate } from '@services'
+
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
+import { SCREEN_NAMES } from '../../constants/navigation'
 
-const LocationsTile = ({ item, btnPress }) => {
+const LocationsTile = ({ item }) => {
+  const handleBtnPress = () => {
+    navigate({
+      params: { cityData: item },
+      routeName: SCREEN_NAMES.Restaurants,
+    })
+  }
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -14,7 +23,7 @@ const LocationsTile = ({ item, btnPress }) => {
         source={{ uri: item?.City?.url }}
         style={styles.imageContainerStyle}
       >
-        <TouchableOpacity onPress={btnPress} style={styles.btnContainer}>
+        <TouchableOpacity onPress={handleBtnPress} style={styles.btnContainer}>
           <Text style={styles.btnText}>{`${item?.CityName}`}</Text>
         </TouchableOpacity>
       </ImageBackground>

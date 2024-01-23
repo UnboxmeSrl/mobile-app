@@ -4,10 +4,10 @@ import styled from 'styled-components/native'
 import { ButtonText } from '@components/Text'
 import { COLORS } from '@const'
 
-export const CategoryPresenter = ({ name, selected, onPress }) => {
+export const CategoryPresenter = ({ CategoryName, selected, onPress }) => {
   return (
     <Wrapper onPress={onPress} selected={selected}>
-      <Text selected={selected} translations={name} />
+      <Text selected={selected}>{CategoryName}</Text>
     </Wrapper>
   )
 }

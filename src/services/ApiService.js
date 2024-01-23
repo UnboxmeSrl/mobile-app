@@ -19,7 +19,8 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
     }
-    const response = await axios.post(url, data, options)
-    return response
+    console.log(url, data)
+    const response = await axios.post(url, data)
+    return response?.data
   },
 }
