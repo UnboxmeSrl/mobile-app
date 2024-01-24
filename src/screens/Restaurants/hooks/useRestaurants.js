@@ -3,7 +3,9 @@ import { useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 
 import { selectAwardPrizeCategory } from '@redux/modules/app'
+import { navigate } from '@services'
 
+import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getCategories, getRestaurants } from '../../../services/LocationsService'
 
@@ -12,7 +14,7 @@ const useRestaurants = () => {
   const category = useSelector(selectAwardPrizeCategory)
   const cityData = useNavigationParam('cityData')
   const [restaurantsData, setRestaurantsData] = useState()
-  const [filter, setFilter] = useState(1)
+  const [filter, setFilter] = useState(0)
   const [categories, setCategories] = useState([])
 
   const getRestaurantsData = async () => {
@@ -27,7 +29,13 @@ const useRestaurants = () => {
 
   const getCategoriesData = async () => {
     const res = await getCategories()
-    setCategories(res)
+    const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...res]
+
+    setCategories(addAllCategory)
+  }
+
+  const handleLocationPress = () => {
+    navigate(SCREEN_NAMES.Cities)
   }
 
   const onCategoryChange = (CategoryId) => {
@@ -49,6 +57,7 @@ const useRestaurants = () => {
     category,
     cityData,
     filter,
+    handleLocationPress,
     onCategoryChange,
     restaurantsData,
     setFilter,

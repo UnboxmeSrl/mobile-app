@@ -22,11 +22,12 @@ const RestaurantsScreen = () => {
     category,
     restaurantsData,
     onCategoryChange,
+    handleLocationPress,
   } = useRestaurants()
 
   return (
     <View style={styles.mainContainer}>
-      <TouchableOpacity style={styles.selectedLocation}>
+      <TouchableOpacity onPress={handleLocationPress} style={styles.selectedLocation}>
         <Image resizeMode="contain" source={IMAGES.location} style={styles.locationIcon} />
         <Text style={styles.locationFont}>{cityData?.CityName}</Text>
       </TouchableOpacity>
