@@ -21,7 +21,8 @@ export const WizardStepSocial = ({ navigateToNextStep }) => {
   }
 
   const props = {
-    disabled: !(tiktokUsername || instagramUsername),
+    // disabled: !(tiktokUsername || instagramUsername),
+    disabled: false,
     navigateTikTokModal,
     onPress,
     tiktokUsername,

@@ -9,4 +9,8 @@ export const Api = {
     GET_SERVICE_CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/serviceCategories`,
     RESTAURANTS: `${BASE_URL}/api:WVfdccpj/restaurant`,
   },
+  PROFILE: {
+    GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
+    USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/signup`,
+  },
 }

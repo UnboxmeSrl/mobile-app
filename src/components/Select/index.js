@@ -5,6 +5,7 @@ import styled from 'styled-components/native'
 import { SelectItem } from '@components/SelectItem'
 
 export const Select = ({ options, onChange, defaultValue, Component = SelectItem, style, multi }) => {
+  console.log('options', options)
   const [selected, setSelected] = useState(defaultValue || (multi ? [] : null))
 
   useEffect(() => {
@@ -40,16 +41,16 @@ export const Select = ({ options, onChange, defaultValue, Component = SelectItem
 
   return (
     <Wrapper style={style}>
-      {options.map(({ tKeyLabel, value, imageUrl, imageDarkUrl }) => (
+      {options.map(({ Sex, id, imageUrl, imageDarkUrl, tKeyLabel, value }) => (
         <Component
           imageDarkUrl={imageDarkUrl}
           imageUrl={imageUrl}
           isAnySelected={isAnySelected}
-          isSelected={isSelected(value)}
-          key={value}
-          onPress={() => onPress(value)}
-          tKeyLabel={tKeyLabel}
-          value={value}
+          isSelected={isSelected(value ?? id)}
+          key={value ?? id}
+          onPress={() => onPress(value ?? id)}
+          tKeyLabel={tKeyLabel ?? Sex}
+          value={value ?? id}
         />
       ))}
     </Wrapper>

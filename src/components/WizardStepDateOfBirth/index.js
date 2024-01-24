@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { _dobTs, selectDobTs, updateMe } from '@redux/modules/auth'
 
+import { setAuthData } from '../../redux/slices/authSlice'
+
 import { WizardStepDateOfBirthPresenter } from './WizardStepDateOfBirthPresenter'
 
 export const WizardStepDateOfBirth = ({ navigateToNextStep }) => {
@@ -18,9 +20,9 @@ export const WizardStepDateOfBirth = ({ navigateToNextStep }) => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    const timestamp = +values[_dobTs]
-    dispatch(updateMe({ [_dobTs]: timestamp }))
-
+    // const timestamp = +values[_dobTs]
+    // dispatch(updateMe({ [_dobTs]: timestamp }))
+    dispatch(setAuthData({ ...values }))
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)

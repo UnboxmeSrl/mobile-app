@@ -13,6 +13,8 @@ import {
   updateMe,
 } from '@redux/modules/auth'
 
+import { setAuthData } from '../../redux/slices/authSlice'
+
 import { TikTokModalPresenter } from './TikTokModalPresenter'
 
 export const TikTokModal = () => {
@@ -24,6 +26,7 @@ export const TikTokModal = () => {
   const onSubmit = async (values) => {
     if (tiktokUsername) {
       dispatch(updateMe({ ...values }))
+      dispatch(setAuthData({ ...values }))
     } else {
       dispatch(updateMe({ ...values, [_verificationStatus]: IN_REVIEW_USER }))
     }

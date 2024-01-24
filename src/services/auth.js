@@ -67,7 +67,7 @@ export const onAuthSuccess = async () => {
     if (uid) {
       const data = await firestore().collection(USERS_COLLECTION).doc(uid).get()
       const verificationStatus = data.get(_verificationStatus)
-
+      console.log('verificationStatus', verificationStatus)
       if (verificationStatus === APPROVED_USER) {
         navigate(SCREEN_NAMES.Profile)
       } else {

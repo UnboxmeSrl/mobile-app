@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { selectCity, updateMe } from '@redux/modules/auth'
 
+import { setAuthData } from '../../redux/slices/authSlice'
+
 import { WizardStepCityPresenter } from './WizardStepCityPresenter'
 
 export const WizardStepCity = ({ navigateToNextStep }) => {
@@ -12,7 +14,9 @@ export const WizardStepCity = ({ navigateToNextStep }) => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    dispatch(updateMe(values))
+    // dispatch(updateMe(values))
+    dispatch(setAuthData({ ...values }))
+
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)

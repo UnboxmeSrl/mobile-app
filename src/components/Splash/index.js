@@ -29,6 +29,7 @@ export const Splash = () => {
 
   useEffect(() => {
     if (show && authInitialized) {
+      console.log('show authentication', show, authInitialized)
       if (!isAuthenticated) {
         navigate(SCREEN_NAMES.Onboarding)
       }

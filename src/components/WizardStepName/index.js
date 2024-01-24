@@ -3,13 +3,9 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { WizardStepNamePresenter } from '@components/WizardStepName/WizardStepNamePresenter'
-import {
-  _fullName,
-  _username,
-  selectFullName,
-  selectUsername,
-  updateMe,
-} from '@redux/modules/auth'
+import { _fullName, _username, selectFullName, selectUsername, updateMe } from '@redux/modules/auth'
+
+import { setAuthData } from '../../redux/slices/authSlice'
 
 export const WizardStepName = ({ navigateToNextStep }) => {
   const fullName = useSelector(selectFullName)
@@ -18,7 +14,8 @@ export const WizardStepName = ({ navigateToNextStep }) => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    dispatch(updateMe(values))
+    // dispatch(updateMe(values))
+    dispatch(setAuthData({ ...values }))
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)

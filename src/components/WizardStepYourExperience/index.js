@@ -2,13 +2,9 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  _agencyName,
-  _experienceType,
-  _hasAgency,
-  selectExperienceType,
-  updateMe,
-} from '@redux/modules/auth'
+import { _agencyName, _experienceType, _hasAgency, selectExperienceType, updateMe } from '@redux/modules/auth'
+
+import { setAuthData } from '../../redux/slices/authSlice'
 
 import { WizardStepExperiencePresenter } from './WizardStepExperiencePresenter'
 
@@ -18,7 +14,8 @@ export const WizardStepExperience = ({ navigateToNextStep }) => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
-    dispatch(updateMe(values))
+    // dispatch(updateMe(values))
+    dispatch(setAuthData({ ...values }))
     navigateToNextStep()
   }
   const onPress = handleSubmit(onSubmit)

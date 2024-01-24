@@ -10,22 +10,17 @@ import { StepContent } from '@components/WizardStep'
 import { COLORS, GENDER_OPTIONS } from '@const'
 import { PHONE_RULES, REQUIRED_RULE } from '@const/validators'
 
-export const WizardStepGenderPresenter = ({
-  control,
-  errors,
-  onPress,
-  isSelected,
-  defaultValue,
-}) => {
+export const WizardStepGenderPresenter = ({ control, errors, onPress, genderList, isSelected, defaultValue }) => {
   return (
     <StepContent>
       <Controller
         control={control}
         defaultValue={defaultValue}
         name={'gender'}
-        render={({ onChange, value }) => (
-          <Select defaultValue={value} onChange={onChange} options={GENDER_OPTIONS} />
-        )}
+        render={({ onChange, value }) => {
+          console.log('onChange', onChange, value)
+          return <Select defaultValue={value} onChange={onChange} options={genderList} />
+        }}
       />
       <Button disabled={!isSelected} onPress={onPress} tKey={'next'} />
     </StepContent>

@@ -19,7 +19,7 @@ export const WizardStepReviewPresenter = ({ openInstagram, tKey, isRejected, nav
           <Ionicons color={COLORS.black} name={'chevron-forward-outline'} size={22} />
         </Policy>
       )}
-      <Button light onPress={openInstagram} rightIconName={'logo-instagram'} tKey={'followUs'} />
+      <Button light onPress={navigateToHome} rightIconName={'logo-instagram'} tKey={'followUs'} />
       {isVerified && <Button onPress={navigateToHome} tKey={'continue'} />}
     </StepContent>
   )

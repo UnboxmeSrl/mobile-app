@@ -22,7 +22,8 @@ export const WizardStepCode = ({ navigateToNextStep }) => {
   const onSubmit = async (values) => {
     const code = values[_wizardCode]
     if (code) {
-      dispatch(updateMe(values))
+      // dispatch(updateMe(values))
+      dispatch(setAuthData({ ...values }))
     }
     navigateToNextStep()
   }

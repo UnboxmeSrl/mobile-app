@@ -14,10 +14,13 @@ import orders from '@redux/modules/orders'
 import products from '@redux/modules/products'
 import transactions from '@redux/modules/transactions'
 
+import authSlice from './slices/authSlice'
+
 const rootReducer = combineReducers({
   addresses: addresses.reducer,
   app: app.reducer,
   auth: auth.reducer,
+  authSlice: authSlice,
   awardCategories: awardCategories.reducer,
   awards: awards.reducer,
   bookings: bookings.reducer,
