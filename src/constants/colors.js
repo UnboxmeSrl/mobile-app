@@ -8,8 +8,10 @@ export const COLORS = {
   error: '#A20A0A',
   facebook: '#4665A8',
   google: '#4285F4',
+  gray: '#808080',
   grey: '#BDBBC0',
   greyFont: '#6A686D',
+  lightBrown: '#ECDCD0',
   lightGrey: '#E9E8EA',
   lightGrey: '#D9D9D9',
   lightPink: '#FDF8F6',
@@ -24,5 +26,5 @@ export const COLORS = {
   veryLight04: 'rgba(250,246, 245, 0.4)',
   white: '#FFFFFF',
   whiteShadedTransparent: '#DADADA',
-  gray: "#808080",
+  yankeesBlue: '#1E293B',
 }

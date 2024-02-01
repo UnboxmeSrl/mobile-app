@@ -19,6 +19,9 @@ import { WizardScreen } from '@screens/Wizard'
 
 import { SCREEN_NAMES } from '@const/navigation'
 
+import BookingDetailsScreen from '../screens/BookingDetails/BookingDetailsScreen'
+import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
+
 export default {
   [SCREEN_NAMES.Onboarding]: {
     screen: OnboardingScreen,
@@ -70,5 +73,11 @@ export default {
   },
   [SCREEN_NAMES.AwardScreen]: {
     screen: AwardScreen,
+  },
+  [SCREEN_NAMES.ServiceDetails]: {
+    screen: ServiceDetails,
+  },
+  [SCREEN_NAMES.BookingDetails]: {
+    screen: BookingDetailsScreen,
   },
 }

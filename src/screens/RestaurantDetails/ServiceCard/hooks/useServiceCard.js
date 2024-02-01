@@ -8,7 +8,7 @@ const useServiceCard = () => {
       params: {
         restaurantDetails: item,
       },
-      routeName: SCREEN_NAMES.RestaurantDetails,
+      routeName: SCREEN_NAMES.ServiceDetails,
     })
   }
 
