@@ -28,6 +28,20 @@ const useBookingDetails = () => {
     setEndDate(newEndDate)
   }
 
+  const isDateAvailable = (date) => {
+    // Replace this with your logic to check if the date is available for booking
+    // For example, you can check against a list of booked dates or availability data
+    return true // Return true for available, false for unavailable
+  }
+
+  const handleBackPress = () => {
+    navigate(SCREEN_NAMES.ServiceDetails)
+  }
+
+  const handleConfirmBtnPress = () => {
+    navigate(SCREEN_NAMES.BookingOnApprovalScreen)
+  }
+
   useEffect(() => {
     const myDate = new Date(selectedDate)
     const month = myDate.toLocaleString('default', { month: 'long' })
@@ -42,20 +56,11 @@ const useBookingDetails = () => {
     setCurrentMonth(month)
   }, [startDate])
 
-  const isDateAvailable = (date) => {
-    // Replace this with your logic to check if the date is available for booking
-    // For example, you can check against a list of booked dates or availability data
-    return true // Return true for available, false for unavailable
-  }
-
-  const handleBackPress = () => {
-    navigate(SCREEN_NAMES.Restaurants)
-  }
-
   return {
     currentMonth,
     endDate,
     handleBackPress,
+    handleConfirmBtnPress,
     isDateAvailable,
     selectedDate,
     setSelectedDate,

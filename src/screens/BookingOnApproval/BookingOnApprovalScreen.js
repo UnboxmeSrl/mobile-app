@@ -1,0 +1,351 @@
+import React from 'react'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+
+import { IMAGES } from '../../assets/images'
+import { COLORS } from '../../constants/colors'
+import { FONTS } from '../../constants/fonts'
+
+import { useBookingOnApproval } from './hooks'
+
+const BookingOnApprovalScreen = () => {
+  const { approvalStage, handleBackPress, handleGoToSchedulePress } = useBookingOnApproval()
+  const approvalIcon =
+    approvalStage === 'pending'
+      ? IMAGES.approvalPending
+      : approvalStage === 'success'
+      ? IMAGES.approvalSuccess
+      : IMAGES.approvalReject
+
+  return (
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.mainContainer}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={handleBackPress}>
+            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.pendingIconTextContainer}>
+        <View>
+          <Image resizeMode="cover" source={approvalIcon} style={styles.approvalIcon} />
+        </View>
+        <View style={styles.pendingTextContainer}>
+          <Text style={styles.pendingText}>
+            Your booking is on
+            {` ${approvalStage === 'pending' ? `approval` : approvalStage === 'success' ? `approved` : `rejected`}`}
+          </Text>
+        </View>
+      </View>
+      <View
+        style={[
+          styles.onApprovalItemsMainContainer,
+          approvalStage === 'pending'
+            ? { backgroundColor: COLORS.cornSilk, borderColor: COLORS.americanYellow }
+            : approvalStage === 'success'
+            ? { backgroundColor: COLORS.honeyDewGreen, borderColor: COLORS.mayGreen }
+            : { backgroundColor: COLORS.seaShellRed, borderColor: COLORS.follyRed },
+        ]}
+      >
+        <View style={styles.restaurantDetailsMainRow}>
+          <View style={styles.restaurantImageContainer}>
+            <Image resizeMode="cover" source={IMAGES.testImage} style={styles.testImage} />
+          </View>
+          <View style={styles.restaurantNameContainer}>
+            <Text style={styles.restaurantNameText}>Full Combo Lunch</Text>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.ratingUsersText}>240</Text>
+              <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+            </View>
+          </View>
+          <View
+            style={[
+              styles.onApprovalTextContainer,
+              approvalStage === 'pending'
+                ? { backgroundColor: COLORS.americanYellow }
+                : approvalStage === 'success'
+                ? { backgroundColor: COLORS.mayGreen }
+                : { backgroundColor: COLORS.tartOrange },
+            ]}
+          >
+            <Text style={styles.onApprovalText}>{`${
+              approvalStage === 'pending'
+                ? `On Approval`
+                : approvalStage === 'success'
+                ? `Verified`
+                : `Content Rejected`
+            }`}</Text>
+          </View>
+        </View>
+
+        <View style={styles.nameLocationMainRow}>
+          <View style={styles.locationImageContainer}>
+            <Image resizeMode="cover" source={IMAGES.testImage2} style={styles.locationImage} />
+          </View>
+          <View style={styles.locationNameContainer}>
+            <Text style={styles.locationNameText}>Pizzami Bali</Text>
+            <View>
+              <Text style={styles.locationText}>Chengduu Street 34, Bali</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.selectedDateMainContainer}>
+          <View style={styles.selectedDateContainer}>
+            <Text style={styles.selectedDateNumberText}>19</Text>
+            <Text style={styles.selectedDateMonthText}>Jan</Text>
+          </View>
+          <View style={styles.timeContainer}>
+            <Text style={styles.selectedDateTitleText}>Selected Date</Text>
+            <Text style={styles.selectedDateWithTimeText}>Tuesday, 04:30pm</Text>
+          </View>
+        </View>
+
+        {approvalStage === 'pending' && (
+          <View style={styles.lastDescriptionContainer}>
+            <Text style={styles.descriptionText}>
+              The owner has received your request and we are waiting for confirmation. Write in Chat fo questions.
+            </Text>
+          </View>
+        )}
+      </View>
+      <TouchableOpacity style={styles.howItWorksContainer}>
+        <Text style={styles.socialMediaTitleText}>Check brief </Text>
+        <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
+      </TouchableOpacity>
+
+      <View style={styles.goToScheduleBtnMainContainer}>
+        <TouchableOpacity onPress={handleGoToSchedulePress} style={styles.goToScheduleBtnContainer}>
+          <Text style={styles.goToScheduleBtnText}>Go to schedule </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  )
+}
+
+export default BookingOnApprovalScreen
+
+const styles = StyleSheet.create({
+  approvalIcon: {
+    height: moderateScale(40),
+    width: moderateScale(40),
+  },
+  backIcon: {
+    height: verticalScale(30),
+    tintColor: COLORS.achromaticBlack,
+    width: scale(30),
+  },
+  descriptionText: {
+    color: COLORS.philippineGold,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+  },
+  goToScheduleBtnContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.lightBrown,
+    borderRadius: moderateScale(16),
+    height: verticalScale(40),
+    justifyContent: 'center',
+    width: '100%',
+  },
+  goToScheduleBtnMainContainer: {
+    borderBottomWidth: 0,
+    borderColor: COLORS.whiteShadedTransparent,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
+    marginTop: verticalScale(14),
+    padding: moderateScale(24),
+    width: '100%',
+  },
+  goToScheduleBtnText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(18),
+    fontWeight: '600',
+  },
+  headerContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginLeft: scale(20),
+    marginVertical: verticalScale(20),
+  },
+  howItWorksContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    height: verticalScale(56),
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(15),
+  },
+  lastDescriptionContainer: {
+    alignSelf: 'center',
+    marginTop: verticalScale(19),
+    width: '95%',
+  },
+  locationImage: {
+    borderRadius: moderateScale(67),
+    height: moderateScale(67),
+    width: moderateScale(67),
+  },
+  locationImageContainer: {
+    marginLeft: scale(13),
+  },
+  locationNameContainer: {
+    marginLeft: scale(15),
+  },
+  locationNameText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(14),
+  },
+  locationText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(12),
+    textDecorationLine: 'underline',
+  },
+  mainContainer: {
+    backgroundColor: COLORS.white,
+    flex: 1,
+    marginTop: getStatusBarHeight(),
+  },
+  nameLocationMainRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: verticalScale(23),
+  },
+  onApprovalItemsMainContainer: {
+    alignSelf: 'center',
+    backgroundColor: COLORS.cornSilk,
+    borderColor: COLORS.americanYellow,
+    borderRadius: moderateScale(10),
+    borderWidth: 1,
+    marginTop: verticalScale(32),
+    paddingBottom: verticalScale(10),
+    width: '95%',
+  },
+  onApprovalText: {
+    color: COLORS.white,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(12),
+  },
+  onApprovalTextContainer: {
+    alignItems: 'center',
+    borderBottomLeftRadius: moderateScale(10),
+    borderTopLeftRadius: moderateScale(10),
+    height: verticalScale(28),
+    justifyContent: 'center',
+    width: scale(85),
+  },
+  pendingIconTextContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pendingText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(22),
+    textAlign: 'center',
+  },
+  pendingTextContainer: {
+    marginTop: verticalScale(5),
+    width: '60%',
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    marginTop: verticalScale(9),
+  },
+  ratingIconImage: {
+    height: moderateScale(16),
+    marginLeft: scale(5),
+    tintColor: COLORS.primary,
+    width: moderateScale(16),
+  },
+  ratingUsersText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(16),
+  },
+  restaurantDetailsMainRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: verticalScale(16),
+  },
+  restaurantImageContainer: {
+    marginLeft: scale(13),
+  },
+  restaurantNameContainer: {
+    width: '40%',
+  },
+  restaurantNameText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+  },
+  rightIcon: {
+    height: moderateScale(25),
+    marginTop: verticalScale(10),
+    tintColor: COLORS.black,
+    transform: [{ rotate: '180deg' }],
+    width: moderateScale(25),
+  },
+  selectedDateContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.lightBrown,
+    borderRadius: moderateScale(10),
+    justifyContent: 'center',
+    width: '20%',
+  },
+  selectedDateMainContainer: {
+    alignSelf: 'center',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.whiteShadedTransparent,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
+    flexDirection: 'row',
+    height: verticalScale(60),
+    marginTop: verticalScale(23),
+    width: '95%',
+  },
+  selectedDateMonthText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+    textAlign: 'center',
+  },
+  selectedDateNumberText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+    textAlign: 'center',
+  },
+  selectedDateTitleText: {
+    color: COLORS.graniteGray,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+  },
+  selectedDateWithTimeText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(9),
+  },
+  socialMediaTitleText: {
+    color: COLORS.achromaticBlack,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
+  },
+  testImage: {
+    borderRadius: moderateScale(10),
+    height: moderateScale(67),
+    width: moderateScale(67),
+  },
+  timeContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingLeft: scale(10),
+    width: '60%',
+  },
+})

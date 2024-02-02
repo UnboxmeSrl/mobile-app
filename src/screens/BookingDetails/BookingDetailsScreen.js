@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import CalendarStrip from 'react-native-calendar-strip'
+import { moderateScale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import DateTimePicker from '@react-native-community/datetimepicker'
 
@@ -21,6 +22,7 @@ const BookingDetailsScreen = () => {
     showNextWeek,
     handleBackPress,
     setSelectedDate,
+    handleConfirmBtnPress,
   } = useBookingDetails()
 
   //   const renderDate = (date) => {
@@ -37,7 +39,7 @@ const BookingDetailsScreen = () => {
   //   }
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
         <View style={styles.headerAndDateContainer}>
           <View style={styles.headerContainer}>
@@ -119,13 +121,13 @@ const BookingDetailsScreen = () => {
           </View>
 
           <View style={styles.selectedDateMainContainer}>
-            <View style={styles.SelectedDateContainer}>
-              <Text>19</Text>
-              <Text>Jan</Text>
+            <View style={styles.selectedDateContainer}>
+              <Text style={styles.selectedDateNumberText}>19</Text>
+              <Text style={styles.selectedDateMonthText}>Jan</Text>
             </View>
             <View style={styles.timeContainer}>
-              <Text>Date 1</Text>
-              <Text>Tuesday, 04:30pm</Text>
+              <Text style={styles.selectedDateTitleText}>Date 1</Text>
+              <Text style={styles.selectedDateWithTimeText}>Tuesday, 04:30pm</Text>
             </View>
             <TouchableOpacity style={styles.removeBtnContainer}>
               <Text style={styles.removeBtnText}>Remove</Text>
@@ -134,7 +136,7 @@ const BookingDetailsScreen = () => {
         </View>
       </View>
       <View style={styles.bookBtnMainContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.bookBtnContainer}>
+        <TouchableOpacity onPress={handleConfirmBtnPress} style={styles.bookBtnContainer}>
           <Text style={styles.bookBtnText}>Confirm</Text>
         </TouchableOpacity>
       </View>
@@ -145,13 +147,6 @@ const BookingDetailsScreen = () => {
 export default BookingDetailsScreen
 
 const styles = StyleSheet.create({
-  SelectedDateContainer: {
-    alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
-    borderRadius: 10,
-    justifyContent: 'center',
-    width: '20%',
-  },
   availableHoursContainer: {
     marginHorizontal: 16,
     marginTop: 16,
@@ -255,17 +250,24 @@ const styles = StyleSheet.create({
     tintColor: COLORS.achromaticBlack,
     width: 20,
   },
-  removeBtnContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '20%'
-  },
   previousNextIconsContainer: {
     flexDirection: 'row',
   },
+  removeBtnContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '20%',
+  },
   removeBtnText: {
     color: COLORS.primary,
-    fontFamily: FONTS.quicksandBold
+    fontFamily: FONTS.quicksandBold,
+  },
+  selectedDateContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.lightBrown,
+    borderRadius: 10,
+    justifyContent: 'center',
+    width: '20%',
   },
   selectedDateMainContainer: {
     borderColor: COLORS.whiteShadedTransparent,
@@ -275,11 +277,28 @@ const styles = StyleSheet.create({
     height: 72,
     width: '100%',
   },
-  timeContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingLeft: 10,
-    width: '60%'
+  selectedDateMonthText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+    textAlign: 'center',
+  },
+  selectedDateNumberText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+    textAlign: 'center',
+  },
+  selectedDateTitleText: {
+    color: COLORS.graniteGray,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+  },
+  selectedDateWithTimeText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(9),
   },
   selectedMonthName: {
     color: COLORS.achromaticBlack,
@@ -313,5 +332,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
   },
-  timeCircleIcon: { height: 12.33, tintColor: COLORS.achromaticBlack, width: 12.33 },
+  timeCircleIcon: {
+    height: 12.33,
+    tintColor: COLORS.achromaticBlack,
+    width: 12.33,
+  },
+  timeContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingLeft: 10,
+    width: '60%',
+  },
 })

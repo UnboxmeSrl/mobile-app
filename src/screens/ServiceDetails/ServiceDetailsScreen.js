@@ -104,10 +104,10 @@ const ServiceDetails = () => {
             </View>
           </ScrollView>
 
-          <View style={styles.howItWorksContainer}>
+          <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.bookBtnMainContainer}>
           <TouchableOpacity onPress={handleBookPress} style={styles.bookBtnContainer}>

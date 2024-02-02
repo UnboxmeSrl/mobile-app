@@ -12,6 +12,7 @@ import { SCREEN_NAMES } from '@const/navigation'
 import { IMAGES } from '../assets/images'
 
 import HomeStack from './HomeStack'
+import ScheduleStack from './ScheduleStack'
 
 export default createBottomTabNavigator(
   {
@@ -27,7 +28,7 @@ export default createBottomTabNavigator(
       },
       screen: HomeStack,
     },
-    [SCREEN_NAMES.Coupons]: {
+    [SCREEN_NAMES.Schedule]: {
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
           return (
@@ -37,7 +38,7 @@ export default createBottomTabNavigator(
           )
         },
       },
-      screen: CouponsScreen,
+      screen: ScheduleStack,
     },
     [SCREEN_NAMES.Prizes]: {
       navigationOptions: {

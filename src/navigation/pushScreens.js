@@ -20,7 +20,9 @@ import { WizardScreen } from '@screens/Wizard'
 import { SCREEN_NAMES } from '@const/navigation'
 
 import BookingDetailsScreen from '../screens/BookingDetails/BookingDetailsScreen'
+import BookingOnApprovalScreen from '../screens/BookingOnApproval/BookingOnApprovalScreen'
 import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
+import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -79,5 +81,11 @@ export default {
   },
   [SCREEN_NAMES.BookingDetails]: {
     screen: BookingDetailsScreen,
+  },
+  [SCREEN_NAMES.BookingOnApprovalScreen]: {
+    screen: BookingOnApprovalScreen,
+  },
+  [SCREEN_NAMES.YourScheduleDetailsScreen]: {
+    screen: YourScheduleDetailsScreen,
   },
 }
