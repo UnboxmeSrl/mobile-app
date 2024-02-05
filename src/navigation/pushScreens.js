@@ -21,6 +21,7 @@ import { SCREEN_NAMES } from '@const/navigation'
 
 import BookingDetailsScreen from '../screens/BookingDetails/BookingDetailsScreen'
 import BookingOnApprovalScreen from '../screens/BookingOnApproval/BookingOnApprovalScreen'
+import ContentScreen from '../screens/Content/ContentScreen'
 import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
 import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
 
@@ -87,5 +88,8 @@ export default {
   },
   [SCREEN_NAMES.YourScheduleDetailsScreen]: {
     screen: YourScheduleDetailsScreen,
+  },
+  [SCREEN_NAMES.ContentScreen]: {
+    screen: ContentScreen,
   },
 }

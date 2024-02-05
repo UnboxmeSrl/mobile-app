@@ -44,6 +44,7 @@ export const SCREEN_NAMES = {
   ProductSelection: 'ProductSelection',
   Profile: 'Profile',
   Questionnaire: 'Questionnaire',
+  ContentScreen: 'ContentScreen',
   RestaurantDetails: 'RestaurantDetails',
   Restaurants: 'Restaurants',
   Schedule: 'Schedule',
