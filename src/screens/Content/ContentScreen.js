@@ -10,7 +10,7 @@ import { FONTS } from '../../constants/fonts'
 import { useContent } from './hooks'
 
 const ContentScreen = () => {
-  const { selectedApp, setSelectedApp, handleBackPress } = useContent()
+  const { selectedApp, setSelectedApp, handleBackPress, handleNextPress } = useContent()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -49,8 +49,8 @@ const ContentScreen = () => {
           style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
         >
           <View style={styles.socialMediaMainDetailsContainer}>
-            <View style={styles.socialMediaImageContainer}>
-              <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.testImage} />
+            <View style={styles.tiktokImageContainer}>
+              <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.tiktokImage} />
             </View>
             <View style={styles.socialMediaNameContainer}>
               <Text style={styles.socialMediaNameText}>Full Tik Tok</Text>
@@ -69,7 +69,7 @@ const ContentScreen = () => {
       </View>
 
       <View style={styles.nextBtnMainContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.nextBtnContainer}>
+        <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
           <Text style={styles.nextBtnText}>Next </Text>
         </TouchableOpacity>
       </View>
@@ -197,5 +197,18 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(10),
     height: moderateScale(31.52),
     width: moderateScale(32.5),
+  },
+  tiktokImage: {
+    borderRadius: moderateScale(10),
+    height: moderateScale(67),
+    width: moderateScale(67),
+  },
+  tiktokImageContainer: {
+    alignItems: 'center',
+    borderRadius: moderateScale(20),
+    height: verticalScale(67),
+    justifyContent: 'center',
+    marginLeft: scale(13),
+    width: scale(68),
   },
 })

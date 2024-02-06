@@ -11,7 +11,11 @@ const useContent = () => {
     navigate(SCREEN_NAMES.Schedule)
   }
 
-  return { handleBackPress, selectedApp, setSelectedApp }
+  const handleNextPress = () => {
+    navigate(SCREEN_NAMES.ContentBriefScreen)
+  }
+
+  return { handleBackPress, handleNextPress, selectedApp, setSelectedApp }
 }
 
 export default useContent
