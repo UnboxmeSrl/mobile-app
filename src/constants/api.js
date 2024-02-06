@@ -11,6 +11,10 @@ export const Api = {
   },
   PROFILE: {
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
+    USER_LOGIN: `${BASE_URL}/api:bwh6Xc5O/user_login`,
     USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/signup`,
+  },
+  RESTAURANTS: {
+    GET_TIME_FRAMES: `${BASE_URL}/api:bwh6Xc5O/get_timeframes_turbo`,
   },
 }

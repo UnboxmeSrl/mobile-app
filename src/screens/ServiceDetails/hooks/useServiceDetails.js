@@ -10,7 +10,9 @@ import { getServiceCategories, getServices } from '../../../services/LocationsSe
 
 const useServiceDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
+  const serviceDetails = useNavigationParam('serviceDetails')
   const restaurantDetails = useNavigationParam('restaurantDetails')
+
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
@@ -18,7 +20,7 @@ const useServiceDetails = () => {
   const getServicesData = async () => {
     const prepData = {
       category_id: filter,
-      restaurant_id: restaurantDetails?.id,
+      restaurant_id: serviceDetails?.id,
     }
     const res = await getServices(prepData)
     console.log('res', res)
@@ -44,11 +46,17 @@ const useServiceDetails = () => {
   }
 
   const handleBackPress = () => {
-    navigate(SCREEN_NAMES.Restaurants)
+    navigate(SCREEN_NAMES.RestaurantDetails)
   }
 
   const handleBookPress = () => {
-    navigate(SCREEN_NAMES.BookingDetails)
+    navigate({
+      params: {
+        restaurantDetails: restaurantDetails,
+        serviceDetails: serviceDetails,
+      },
+      routeName: SCREEN_NAMES.BookingDetails,
+    })
   }
 
   useEffect(() => {
@@ -65,8 +73,8 @@ const useServiceDetails = () => {
     handleBackPress,
     handleBookPress,
     onCategoryChange,
-    restaurantDetails,
     serviceCategories,
+    serviceDetails,
     services,
   }
 }

@@ -3,10 +3,11 @@ import { navigate } from '@services'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 
 const useServiceCard = () => {
-  const handleCardPress = (item) => {
+  const handleCardPress = (item, restaurantDetails) => {
     navigate({
       params: {
-        restaurantDetails: item,
+        restaurantDetails: restaurantDetails,
+        serviceDetails: item,
       },
       routeName: SCREEN_NAMES.ServiceDetails,
     })

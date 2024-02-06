@@ -13,11 +13,13 @@ const useRestaurants = () => {
   const categoriesIds = useSelector(selectCategoryById)
   const category = useSelector(selectAwardPrizeCategory)
   const cityData = useNavigationParam('cityData')
+  const [isLoading, setIsLoading] = useState(false)
   const [restaurantsData, setRestaurantsData] = useState()
   const [filter, setFilter] = useState(0)
   const [categories, setCategories] = useState([])
 
   const getRestaurantsData = async () => {
+    setIsLoading(true)
     const prepData = {
       category_venue_id: filter,
       city_id: cityData?.id,
@@ -25,13 +27,15 @@ const useRestaurants = () => {
     const res = await getRestaurants(prepData)
     console.log('res', res)
     setRestaurantsData(res)
+    setIsLoading(false)
   }
 
   const getCategoriesData = async () => {
+    setIsLoading(true)
     const res = await getCategories()
     const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...res]
-
     setCategories(addAllCategory)
+    setIsLoading(false)
   }
 
   const handleLocationPress = () => {
@@ -58,6 +62,7 @@ const useRestaurants = () => {
     cityData,
     filter,
     handleLocationPress,
+    isLoading,
     onCategoryChange,
     restaurantsData,
     setFilter,

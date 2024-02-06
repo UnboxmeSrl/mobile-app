@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -14,6 +14,7 @@ import { RestaurantCard } from './RestaurantCard'
 
 const RestaurantsScreen = () => {
   const {
+    isLoading,
     cityData,
     categories,
     filter,
@@ -31,23 +32,36 @@ const RestaurantsScreen = () => {
         <Image resizeMode="contain" source={IMAGES.location} style={styles.locationIcon} />
         <Text style={styles.locationFont}>{cityData?.CityName}</Text>
       </TouchableOpacity>
-      <Categories
-        categoriesIds={categoriesIds}
-        category={filter}
-        customCategories={categories}
-        onPress={onCategoryChange}
-      />
-      <View style={styles.restaurantsFlatlistContainer}>
-        <FlatList
-          contentContainerStyle={styles.listMain}
-          data={restaurantsData}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            return <RestaurantCard index={index} item={item} />
-          }}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={COLORS.primary} size={20} />
+        </View>
+      ) : (
+        <>
+          <Categories
+            categoriesIds={categoriesIds}
+            category={filter}
+            customCategories={categories}
+            onPress={onCategoryChange}
+          />
+          <View style={styles.restaurantsFlatlistContainer}>
+            <FlatList
+              ListEmptyComponent={
+                <View style={styles.listEmptyContainer}>
+                  <Text style={styles.listEmptyText}>No data found.</Text>
+                </View>
+              }
+              contentContainerStyle={styles.listMain}
+              data={restaurantsData}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item, index }) => {
+                return <RestaurantCard index={index} item={item} />
+              }}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+        </>
+      )}
     </View>
   )
 }
@@ -61,9 +75,24 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     width: '100%',
   },
+  listEmptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '60%',
+  },
+  listEmptyText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(16),
+  },
   listItem: {
     height: 226,
     marginBottom: 20,
+  },
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
   locationFont: {
     fontFamily: FONTS.quicksandBold,

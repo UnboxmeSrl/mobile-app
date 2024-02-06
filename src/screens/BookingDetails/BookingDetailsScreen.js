@@ -13,7 +13,13 @@ import { useBookingDetails } from './hooks'
 
 const BookingDetailsScreen = () => {
   const {
+    datesBlacklistFunc,
+    currentWeekDay,
+    currentDate,
+    selectedTimeFame,
+    setSelectedTimeFame,
     startDate,
+    weekDayWiseTimeSlots,
     endDate,
     selectedDate,
     currentMonth,
@@ -23,6 +29,7 @@ const BookingDetailsScreen = () => {
     handleBackPress,
     setSelectedDate,
     handleConfirmBtnPress,
+    handleRemoveBtnPress,
   } = useBookingDetails()
 
   //   const renderDate = (date) => {
@@ -75,14 +82,15 @@ const BookingDetailsScreen = () => {
               calendarHeaderStyle={{ color: 'black' }}
               dateNameStyle={{ color: COLORS.primary, fontFamily: FONTS.quicksand, fontSize: 12 }}
               dateNumberStyle={{ color: COLORS.yankeesBlue, fontFamily: FONTS.quicksand, fontSize: 16 }}
+              datesBlacklist={datesBlacklistFunc}
               endDate={endDate}
               highlightDateContainerStyle={styles.highlightedDateContainer}
               highlightDateNameStyle={{ color: COLORS.primary, fontFamily: FONTS.quicksand, fontSize: 12 }}
               highlightDateNumberStyle={{ color: COLORS.primary, fontFamily: FONTS.quicksand, fontSize: 16 }}
               iconLeft={IMAGES.back}
               iconRight={IMAGES.back}
-              onDateSelected={(date) => setSelectedDate(date)}
               //   renderDate={renderDate}
+              onDateSelected={(date) => setSelectedDate(date)}
               selectedDate={selectedDate}
               showMonth={false}
               showYear={false}
@@ -97,13 +105,22 @@ const BookingDetailsScreen = () => {
           </View>
 
           <FlatList
-            data={[1, 2, 3, 4]}
+            ListEmptyComponent={
+              <View style={styles.listEmptyContainer}>
+                <Text style={styles.listEmptyText}>Not available on this day.</Text>
+              </View>
+            }
+            data={weekDayWiseTimeSlots}
             numColumns={2}
             renderItem={({ item, index }) => {
+              const isSelected = item?.id === selectedTimeFame?.id
               return (
-                <TouchableOpacity style={styles.hoursContainer}>
+                <TouchableOpacity
+                  onPress={() => setSelectedTimeFame(item)}
+                  style={[styles.hoursContainer, isSelected && styles.selectedTimeFrameStyle]}
+                >
                   <Image resizeMode="cover" source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
-                  <Text>12.00 - 16.00</Text>
+                  <Text>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
                 </TouchableOpacity>
               )
             }}
@@ -120,23 +137,36 @@ const BookingDetailsScreen = () => {
             />
           </View>
 
-          <View style={styles.selectedDateMainContainer}>
-            <View style={styles.selectedDateContainer}>
-              <Text style={styles.selectedDateNumberText}>19</Text>
-              <Text style={styles.selectedDateMonthText}>Jan</Text>
+          {selectedTimeFame?.id && (
+            <View style={styles.selectedDateMainContainer}>
+              <View style={styles.selectedDateContainer}>
+                <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
+                <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
+              </View>
+              <View style={styles.timeContainer}>
+                <Text style={styles.selectedDateTitleText}>Date 1</Text>
+                <Text
+                  style={styles.selectedDateWithTimeText}
+                >{`${currentWeekDay}, ${selectedTimeFame?.Start}.${selectedTimeFame?.Minute_Start} - ${selectedTimeFame?.End}.${selectedTimeFame?.Minute_End}`}</Text>
+              </View>
+              <TouchableOpacity onPress={handleRemoveBtnPress} style={styles.removeBtnContainer}>
+                <Text style={styles.removeBtnText}>Remove</Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.timeContainer}>
-              <Text style={styles.selectedDateTitleText}>Date 1</Text>
-              <Text style={styles.selectedDateWithTimeText}>Tuesday, 04:30pm</Text>
-            </View>
-            <TouchableOpacity style={styles.removeBtnContainer}>
-              <Text style={styles.removeBtnText}>Remove</Text>
-            </TouchableOpacity>
-          </View>
+          )}
         </View>
       </View>
       <View style={styles.bookBtnMainContainer}>
-        <TouchableOpacity onPress={handleConfirmBtnPress} style={styles.bookBtnContainer}>
+        <TouchableOpacity
+          disabled={!selectedTimeFame?.id}
+          onPress={handleConfirmBtnPress}
+          style={[
+            styles.bookBtnContainer,
+            selectedTimeFame?.id && {
+              backgroundColor: COLORS.lightBrown,
+            },
+          ]}
+        >
           <Text style={styles.bookBtnText}>Confirm</Text>
         </TouchableOpacity>
       </View>
@@ -229,10 +259,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 40,
     justifyContent: 'space-evenly',
-    marginBottom: 20,
     marginRight: 20,
     marginTop: 16,
     width: '45%',
+  },
+  listEmptyContainer: {
+    alignItems: 'center',
+    height: 40,
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  listEmptyText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(16),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -305,6 +345,10 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksand,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  selectedTimeFrameStyle: {
+    borderColor: COLORS.primary,
+    borderWidth: moderateScale(2),
   },
   sendMessageTextContainer: {
     borderColor: COLORS.whiteShadedTransparent,

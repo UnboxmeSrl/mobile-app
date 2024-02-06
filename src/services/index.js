@@ -1,6 +1,7 @@
 export * from './logger'
 export * from './navigation'
 export * from './ProfileService'
+export * from './RestaurantService'
 export * from './routing'
 export * from './toast'
 export * from './withTheme'

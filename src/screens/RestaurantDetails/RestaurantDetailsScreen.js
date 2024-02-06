@@ -92,7 +92,7 @@ const RestaurantDetails = () => {
           <FlatList
             data={services}
             renderItem={({ item, index }) => {
-              return <ServiceCard index={index} item={item} />
+              return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
             }}
           />
         </View>

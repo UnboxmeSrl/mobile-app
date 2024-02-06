@@ -21,3 +21,13 @@ export const userSignUp = async (data) => {
     console.log(error)
   }
 }
+
+export const userLogin = async (data) => {
+  try {
+    const url = Api.PROFILE.USER_LOGIN
+    const response = await Fetch.post(url, data)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

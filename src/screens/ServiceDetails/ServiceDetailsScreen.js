@@ -1,6 +1,7 @@
 import React from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
+import { verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 import { IMAGES } from '../../assets/images'
@@ -14,20 +15,18 @@ const ServiceDetails = () => {
   const {
     services,
     categoriesIds,
-    restaurantDetails,
+    serviceDetails,
     filter,
     serviceCategories,
     onCategoryChange,
     handleBackPress,
     handleBookPress,
   } = useServiceDetails()
-  console.log('Restaurant Details', JSON.stringify(restaurantDetails))
+  console.log('Restaurant Details', JSON.stringify(serviceDetails))
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
-        {/* ✅ Uncomment this code when you integrate the api ✅ */}
-
-        {/* <View>
+        <View>
           <CustomCarousel
             Component={({ item, index }) => {
               return (
@@ -38,18 +37,18 @@ const ServiceDetails = () => {
                 />
               )
             }}
-            data={restaurantDetails?.GalleryRestaurant}
+            data={[serviceDetails?.Offer_Cover]}
           />
           <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
           </TouchableOpacity>
-        </View> */}
+        </View>
 
-        <View style={styles.restaurantDetailsContainer}>
+        <View style={styles.serviceDetailsContainer}>
+          <Text style={styles.restaurantNameText}>{serviceDetails?.Offer_Name}</Text>
+
           {/* ✅ Uncomment this code when you integrate the api ✅ */}
-          {/* <Text style={styles.restaurantNameText}>{restaurantDetails?.Name}</Text> */}
-
-          <View style={styles.amenitiesContainer}>
+          {/* <View style={styles.amenitiesContainer}>
             <View style={styles.amenityContainer}>
               <Text style={styles.amenityTitle}>2 X Drinks</Text>
               <Image source={IMAGES.drinks} style={styles.amenityIcon} />
@@ -58,17 +57,17 @@ const ServiceDetails = () => {
               <Text style={styles.amenityTitle}>4 X Meals</Text>
               <Image source={IMAGES.meals} style={styles.amenityIcon} />
             </View>
-          </View>
+          </View> */}
 
           <View style={styles.socialMediaContentTitleContainer}>
             <Text style={styles.socialMediaTitleText}>Social Media Content</Text>
           </View>
 
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
-            <View style={styles.tiktokMainContainer}>
-              <View style={styles.tiktokIconNameContainer}>
-                <Image source={IMAGES.tiktok} style={styles.tiktokIconImage} />
-                <Text style={styles.tiktokTitleText}>Tik tok</Text>
+          {serviceDetails?.Story ? (
+            <View style={styles.storyMainContainer}>
+              <View style={styles.storyIconNameContainer}>
+                <Image source={IMAGES.instagramStory} style={styles.storyIconImage} />
+                <Text style={styles.storyTitleText}>3 x Instagram stories</Text>
 
                 <View style={styles.ratingContainer}>
                   <Text style={styles.ratingUsersText}>240</Text>
@@ -81,28 +80,47 @@ const ServiceDetails = () => {
                 </View>
               </View>
             </View>
+          ) : (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
+              <View style={styles.tiktokMainContainer}>
+                <View style={styles.tiktokIconNameContainer}>
+                  <Image source={IMAGES.tiktok} style={styles.tiktokIconImage} />
+                  <Text style={styles.tiktokTitleText}>Tik tok</Text>
 
-            <View style={styles.orContainer}>
-              <Text style={styles.orText}>Or</Text>
-            </View>
-
-            <View style={styles.reelsMainContainer}>
-              <View style={styles.reelIconNameContainer}>
-                <Image source={IMAGES.reel} style={styles.reelIconImage} />
-                <Text style={styles.reelTitleText}>Reel</Text>
-
-                <View style={styles.ratingContainer}>
-                  <Text style={styles.ratingUsersText}>240</Text>
-                  <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                  <View style={styles.ratingContainer}>
+                    <Text style={styles.ratingUsersText}>240</Text>
+                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                  </View>
+                </View>
+                <View>
+                  <View style={styles.infoContainer}>
+                    <Text style={styles.infoTextTitle}>i</Text>
+                  </View>
                 </View>
               </View>
-              <View>
-                <View style={styles.infoContainer}>
-                  <Text style={styles.infoTextTitle}>i</Text>
+
+              <View style={styles.orContainer}>
+                <Text style={styles.orText}>Or</Text>
+              </View>
+
+              <View style={styles.reelsMainContainer}>
+                <View style={styles.reelIconNameContainer}>
+                  <Image source={IMAGES.reel} style={styles.reelIconImage} />
+                  <Text style={styles.reelTitleText}>Reel</Text>
+
+                  <View style={styles.ratingContainer}>
+                    <Text style={styles.ratingUsersText}>240</Text>
+                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                  </View>
+                </View>
+                <View>
+                  <View style={styles.infoContainer}>
+                    <Text style={styles.infoTextTitle}>i</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          </ScrollView>
+            </ScrollView>
+          )}
 
           <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
@@ -294,9 +312,6 @@ const styles = StyleSheet.create({
     width: '100%',
     width: 163.5,
   },
-  restaurantDetailsContainer: {
-    paddingHorizontal: 15,
-  },
   restaurantNameText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
@@ -310,6 +325,9 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '180deg' }],
     width: 25,
   },
+  serviceDetailsContainer: {
+    paddingHorizontal: 15,
+  },
   socialMediaContentTitleContainer: {
     marginTop: 24,
   },
@@ -319,6 +337,35 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
   },
+  storyIconImage: {
+    height: 29.09,
+    width: 32,
+  },
+  storyIconNameContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '80%',
+  },
+  storyMainContainer: {
+    alignSelf: 'center',
+    backgroundColor: COLORS.lightPink,
+    borderRadius: 10,
+    flexDirection: 'row',
+    height: 105,
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginTop: verticalScale(15),
+    width: '100%',
+    width: 163.5,
+  },
+  storyTitleText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: 12,
+    marginTop: 9,
+    textAlign: 'center',
+  },
+
   tiktokIconImage: {
     height: 29.09,
     width: 32,

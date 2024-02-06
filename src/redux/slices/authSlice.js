@@ -4,6 +4,7 @@ import { sliceNames } from '../../constants'
 
 const initialState = {
   authData: {},
+  loginData: {},
 }
 
 const AuthSlice = createSlice({
@@ -18,9 +19,12 @@ const AuthSlice = createSlice({
       }
       console.log('Settled Auth Data', state.authData)
     },
+    setLoginData: (state, actions) => {
+      state.loginData = actions?.payload
+    },
   },
 })
 
-export const { setAuthData } = AuthSlice.actions
+export const { setAuthData, setLoginData } = AuthSlice.actions
 
 export default AuthSlice.reducer

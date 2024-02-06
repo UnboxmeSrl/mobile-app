@@ -7,10 +7,10 @@ import { FONTS } from '../../../constants/fonts'
 
 import { useServiceCard } from './hooks'
 
-const ServiceCard = ({ item, index }) => {
+const ServiceCard = ({ item, index, restaurantDetails }) => {
   const { handleCardPress } = useServiceCard()
   return (
-    <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
+    <TouchableOpacity onPress={() => handleCardPress(item, restaurantDetails)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
         <View style={styles.mainContainer}>
           <View style={styles.ratingsContainer}>

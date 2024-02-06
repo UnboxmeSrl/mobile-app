@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -11,25 +11,31 @@ import { FONTS } from '../../constants/fonts'
 import useCities from './hooks/useCities'
 
 const CitiesScreen = () => {
-  const { locationData } = useCities()
+  const { isLoading, locationData } = useCities()
   return (
     <View style={styles.mainContainer}>
-      <FlatList
-        ListHeaderComponent={
-          <>
-            <View style={styles.logoContainer}>
-              <Image resizeMode="contain" source={IMAGES.claris} style={styles.logoImage} />
-            </View>
-            <View style={styles.chooseLocationTitleContainer}>
-              <Text style={styles.chooseLocationTitleText}>Choose location</Text>
-            </View>
-          </>
-        }
-        data={locationData}
-        renderItem={({ item }) => {
-          return <LocationsTile item={item} />
-        }}
-      />
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={COLORS.primary} size={20} />
+        </View>
+      ) : (
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <View style={styles.logoContainer}>
+                <Image resizeMode="contain" source={IMAGES.claris} style={styles.logoImage} />
+              </View>
+              <View style={styles.chooseLocationTitleContainer}>
+                <Text style={styles.chooseLocationTitleText}>Choose location</Text>
+              </View>
+            </>
+          }
+          data={locationData}
+          renderItem={({ item }) => {
+            return <LocationsTile item={item} />
+          }}
+        />
+      )}
     </View>
   )
 }
@@ -44,6 +50,11 @@ const styles = StyleSheet.create({
   chooseLocationTitleText: {
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(20),
+  },
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
   logoContainer: {
     alignItems: 'center',
