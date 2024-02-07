@@ -15,6 +15,7 @@ import products from '@redux/modules/products'
 import transactions from '@redux/modules/transactions'
 
 import authSlice from './slices/authSlice'
+import restaurantSlice from './slices/restaurantSlice'
 
 const rootReducer = combineReducers({
   addresses: addresses.reducer,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   network,
   orders: orders.reducer,
   products: products.reducer,
+  restaurantSlice: restaurantSlice,
   transactions: transactions.reducer,
 })
 

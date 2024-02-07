@@ -9,7 +9,8 @@ import { onAuthSuccess, signInWithEmail } from '@services/auth'
 
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { setLoginData } from '../../redux/slices/authSlice'
-import { userLogin } from '../../services'
+import { setBookings } from '../../redux/slices/restaurantSlice'
+import { getBookings, userLogin } from '../../services'
 
 import { SignInEmailPresenter } from './SignInEmailPresenter'
 
@@ -34,6 +35,9 @@ export const SignInEmailModal = () => {
         // }
         if (res?.id) {
           dispatch(setLoginData(res))
+          const params = `/${res?.id}`
+          const res = await getBookings(params)
+          dispatch(setBookings(res))
           navigate(SCREEN_NAMES.Cities)
         } else {
         }

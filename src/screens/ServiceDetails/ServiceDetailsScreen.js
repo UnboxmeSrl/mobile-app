@@ -177,7 +177,9 @@ const styles = StyleSheet.create({
     width: 30,
   },
   backIconContainer: {
+    height: 50,
     position: 'absolute',
+    width: 50,
   },
   bookBtnContainer: {
     alignItems: 'center',

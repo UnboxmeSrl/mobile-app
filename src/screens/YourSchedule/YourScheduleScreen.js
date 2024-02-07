@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -10,7 +11,7 @@ import { FONTS } from '../../constants/fonts'
 import { useYourSchedule } from './hooks'
 
 const YourScheduleScreen = () => {
-  const { selectedTab, setSelectedTab, handleCardPress } = useYourSchedule()
+  const { bookings, selectedTab, setSelectedTab, handleCardPress } = useYourSchedule()
   return (
     <ScrollView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -39,44 +40,107 @@ const YourScheduleScreen = () => {
       </View>
 
       <FlatList
-        data={[0, 1, 2]}
+        data={bookings}
         renderItem={({ item, index }) => {
+          const myDate = new Date(item?.BookingDay)
+          const month = myDate.toLocaleString('default', { month: 'long' })
+          const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+          const timeFrame = item?._timeframes_turbo
+          const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
           return (
-            <TouchableOpacity onPress={handleCardPress} style={styles.cardContainer}>
-              <View style={styles.approvalStatusContainer}>
-                <Image resizeMode="cover" source={IMAGES.check} style={styles.approvalIcon} />
-                <Text style={styles.approvalStatusText}>Accepted</Text>
+            <TouchableOpacity onPress={() => handleCardPress(item, approvalStatus)} style={styles.cardContainer}>
+              <View
+                style={[
+                  styles.approvalStatusContainer,
+                  approvalStatus === 'Pending'
+                    ? { backgroundColor: COLORS.cornSilk }
+                    : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
+                ]}
+              >
+                <Image
+                  resizeMode="cover"
+                  source={item?.Approved ? IMAGES.check : item?.Rejectedstatus ? IMAGES.info : IMAGES.pendingClock}
+                  style={[
+                    styles.approvalIcon,
+                    approvalStatus === 'Pending'
+                      ? { tintColor: COLORS.americanYellow }
+                      : approvalStatus === 'Rejected' && { tintColor: COLORS.error },
+                  ]}
+                />
+                <Text
+                  style={[
+                    styles.approvalStatusText,
+                    approvalStatus === 'Pending'
+                      ? { color: COLORS.americanYellow }
+                      : approvalStatus === 'Rejected' && { color: COLORS.error },
+                  ]}
+                >
+                  {approvalStatus}
+                </Text>
               </View>
 
               <View style={styles.nameLocationMainRow}>
                 <View>
                   <View style={styles.locationImageContainer}>
-                    <Image resizeMode="cover" source={IMAGES.testImage2} style={styles.locationImage} />
+                    <FastImage
+                      resizeMode="cover"
+                      source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
+                      style={styles.locationImage}
+                    />
                   </View>
-                  <View style={styles.dateContainer}>
-                    <Text style={styles.selectedDateMonthText}>July</Text>
-                    <Text style={styles.selectedDateNumberText}>19</Text>
-                    <Text style={styles.selectedDateDayText}>WED</Text>
+                  <View
+                    style={[
+                      styles.dateContainer,
+                      approvalStatus === 'Pending'
+                        ? { backgroundColor: COLORS.cornSilk }
+                        : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
+                    ]}
+                  >
+                    <Text style={styles.selectedDateMonthText}>{month}</Text>
+                    <Text style={styles.selectedDateNumberText}>{myDate?.getDate()}</Text>
+                    <Text style={styles.selectedDateDayText}>{weekDay?.slice(0, 3)}</Text>
                   </View>
                 </View>
-                <View>
+                <View style={{ width: '100%' }}>
                   <View style={styles.locationNameContainer}>
-                    <Text style={styles.locationNameText}>Blue Beauty Salon SuperBali</Text>
+                    <Text style={styles.locationNameText}>{item?._restaurant_turbo?.Name}</Text>
                   </View>
                   <View style={styles.serviceRequestedContainer}>
                     <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
-                    <Text style={styles.serviceRequestedText}>Airtouch</Text>
+                    <Text style={styles.serviceRequestedText}>{item?._offers_turbo?.Offer_Name}</Text>
                   </View>
                   <View style={styles.timeReelsContainer}>
                     <View style={styles.timeContainer}>
                       <Text style={styles.timeTitleText}>Time</Text>
-                      <Text style={styles.timeText}>5:00 pm</Text>
+                      <Text
+                        style={styles.timeText}
+                      >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
                     </View>
 
-                    <View style={styles.reelsContainer}>
-                      <Text style={styles.reelsTitleText}>Reels</Text>
-                      <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
-                    </View>
+                    {item?._offers_turbo?.Story ? (
+                      <View style={styles.storyContainer}>
+                        <Text style={styles.storyText}>Story</Text>
+                        <View style={styles.storyIconContainer}>
+                          <Image resizeMode="cover" source={IMAGES.instagramStory} style={styles.storyIcon} />
+                        </View>
+                      </View>
+                    ) : (
+                      <View style={styles.reelsContainer}>
+                        <Text style={styles.reelsTitleText}>{`${
+                          item?.reel === '1' ? 'Reels' : item?.reel === '2' ? 'Tiktok' : 'Tiktok/ Reels'
+                        }`}</Text>
+                        {item?.reel === '1' ? (
+                          <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
+                        ) : item?.reel === '2' ? (
+                          <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
+                        ) : (
+                          <View style={styles.tiktokReelsIconsContainer}>
+                            <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
+                            <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
+                          </View>
+                        )}
+                      </View>
+                    )}
                   </View>
                 </View>
               </View>
@@ -181,12 +245,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   reelIcon: {
-    height: moderateScale(30),
-    width: moderateScale(30),
+    height: moderateScale(20),
+    width: moderateScale(20),
   },
   reelsContainer: {
-    marginLeft: scale(15),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: scale(35),
     marginTop: verticalScale(19),
+    width: '50%',
   },
   reelsTitleText: {
     color: COLORS.gray,
@@ -246,8 +313,28 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginTop: verticalScale(5),
+    width: '70%',
   },
   serviceRequestedTitleText: {
+    color: COLORS.gray,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(12),
+  },
+  storyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: scale(35),
+    marginTop: verticalScale(19),
+    width: '50%',
+  },
+  storyIcon: {
+    height: moderateScale(20),
+    width: moderateScale(20),
+  },
+  storyIconContainer: {
+    marginTop: verticalScale(5),
+  },
+  storyText: {
     color: COLORS.gray,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
@@ -261,13 +348,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: scale(162),
   },
+  tiktokReelsIconsContainer: {
+    flexDirection: 'row',
+    marginTop: verticalScale(5),
+  },
   timeContainer: {
     marginLeft: scale(15),
     marginTop: verticalScale(19),
+    width: '35%',
   },
   timeReelsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '80%',
   },
   timeText: {
     color: COLORS.black,

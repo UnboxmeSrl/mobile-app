@@ -24,8 +24,8 @@ const ContentScreen = () => {
         </View>
 
         <TouchableOpacity
-          onPress={() => setSelectedApp(0)}
-          style={[styles.cardContainer, selectedApp === 0 && { borderColor: COLORS.black, borderWidth: 1 }]}
+          onPress={() => setSelectedApp(1)}
+          style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
         >
           <View style={styles.socialMediaMainDetailsContainer}>
             <View style={styles.socialMediaImageContainer}>
@@ -45,8 +45,8 @@ const ContentScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => setSelectedApp(1)}
-          style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
+          onPress={() => setSelectedApp(2)}
+          style={[styles.cardContainer, selectedApp === 2 && { borderColor: COLORS.black, borderWidth: 1 }]}
         >
           <View style={styles.socialMediaMainDetailsContainer}>
             <View style={styles.tiktokImageContainer}>

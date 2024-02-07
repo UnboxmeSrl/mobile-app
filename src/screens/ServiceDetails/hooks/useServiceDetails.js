@@ -9,9 +9,10 @@ import { selectCategoryById } from '../../../redux/modules/categories'
 import { getServiceCategories, getServices } from '../../../services/LocationsService'
 
 const useServiceDetails = () => {
+  const loginData = useSelector((state) => state.authSlice.loginData)
   const categoriesIds = useSelector(selectCategoryById)
-  const serviceDetails = useNavigationParam('serviceDetails')
-  const restaurantDetails = useNavigationParam('restaurantDetails')
+  const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
+  const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
 
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
@@ -50,13 +51,11 @@ const useServiceDetails = () => {
   }
 
   const handleBookPress = () => {
-    navigate({
-      params: {
-        restaurantDetails: restaurantDetails,
-        serviceDetails: serviceDetails,
-      },
-      routeName: SCREEN_NAMES.BookingDetails,
-    })
+    if (loginData?.id) {
+      navigate(SCREEN_NAMES.BookingDetails)
+    } else {
+      navigate(SCREEN_NAMES.SignIn)
+    }
   }
 
   useEffect(() => {

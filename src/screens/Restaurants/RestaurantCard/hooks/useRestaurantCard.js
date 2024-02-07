@@ -1,15 +1,16 @@
+import { useDispatch } from 'react-redux'
+
 import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { setRestaurantDetails } from '../../../../redux/slices/restaurantSlice'
 
 const useRestaurantCard = () => {
+  const dispatch = useDispatch()
+
   const handleCardPress = (item) => {
-    navigate({
-      params: {
-        restaurantDetails: item,
-      },
-      routeName: SCREEN_NAMES.RestaurantDetails,
-    })
+    dispatch(setRestaurantDetails(item))
+    navigate(SCREEN_NAMES.RestaurantDetails)
   }
 
   return {

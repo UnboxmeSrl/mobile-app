@@ -10,7 +10,17 @@ import { FONTS } from '../../constants/fonts'
 import { useNewCoupon } from './hooks'
 
 const NewCouponScreen = () => {
-  const { handleBackPress, handleGoToContentPress } = useNewCoupon()
+  const {
+    timeFrame,
+    isReel,
+    bookingDate,
+    month,
+    bookingDetails,
+    loginData,
+    handleBackPress,
+    handleGoToContentPress,
+  } = useNewCoupon()
+
   return (
     <ScrollView alwaysBounceVertical={false} showsVerticalScrollIndicator={false} style={styles.mainContainer}>
       <View>
@@ -28,10 +38,10 @@ const NewCouponScreen = () => {
         <View style={styles.userDetailsContainer}>
           <Image source={IMAGES.testImage} style={styles.userImage} />
           <View style={styles.userFullNameContainer}>
-            <Text style={styles.fullNameText}>Alexandro Medugno</Text>
+            <Text style={styles.fullNameText}>{loginData?.name}</Text>
           </View>
           <View style={{}}>
-            <Text style={styles.userNameText}>@Medugno</Text>
+            <Text style={styles.userNameText}>{`@${loginData?.name}`}</Text>
           </View>
         </View>
         <View style={styles.leftCutter} />
@@ -52,26 +62,28 @@ const NewCouponScreen = () => {
         <View style={styles.dateTimeContainer}>
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Date</Text>
-            <Text style={styles.timeText}>24 January 2024</Text>
+            <Text style={styles.timeText}>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Time</Text>
-            <Text style={styles.timeText}>13 PM - 16 PM </Text>
+            <Text style={styles.timeText}>
+              {`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}{' '}
+            </Text>
           </View>
         </View>
 
         <View style={styles.tiktokContainer}>
           <Text style={styles.tiktokTitleText}>Content Type</Text>
           <View style={styles.tiktokIconTextContainer}>
-            <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.tiktokIcon} />
-            <Text style={styles.tiktokDescription}>Full Tik Tok</Text>
+            <Image resizeMode="cover" source={isReel ? IMAGES.reel : IMAGES.tiktok} style={styles.tiktokIcon} />
+            <Text style={styles.tiktokDescription}>{`Full ${isReel ? 'Reel' : 'Tik Tok'}`}</Text>
           </View>
         </View>
 
         <View style={styles.placeContainer}>
           <Text style={styles.tiktokTitleText}>Place</Text>
           <TouchableOpacity style={styles.howItWorksContainer}>
-            <Text style={styles.socialMediaTitleText}>Super Blue Salon </Text>
+            <Text style={styles.socialMediaTitleText}>{`${bookingDetails?._restaurant_turbo?.Name}`} </Text>
             <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
 

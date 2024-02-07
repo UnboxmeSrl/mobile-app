@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -10,7 +11,16 @@ import { FONTS } from '../../constants/fonts'
 import { useBookingOnApproval } from './hooks'
 
 const BookingOnApprovalScreen = () => {
-  const { approvalStage, handleBackPress, handleGoToSchedulePress } = useBookingOnApproval()
+  const {
+    bookingDetails,
+    approvalStage,
+    currentDate,
+    currentMonth,
+    currentWeekDay,
+    timeFrame,
+    handleBackPress,
+    handleGoToSchedulePress,
+  } = useBookingOnApproval()
   const approvalIcon =
     approvalStage === 'pending'
       ? IMAGES.approvalPending
@@ -50,10 +60,14 @@ const BookingOnApprovalScreen = () => {
       >
         <View style={styles.restaurantDetailsMainRow}>
           <View style={styles.restaurantImageContainer}>
-            <Image resizeMode="cover" source={IMAGES.testImage} style={styles.testImage} />
+            <FastImage
+              resizeMode="cover"
+              source={{ priority: FastImage.priority.high, uri: bookingDetails?._offers_turbo?.Offer_Cover?.url }}
+              style={styles.serviceImage}
+            />
           </View>
           <View style={styles.restaurantNameContainer}>
-            <Text style={styles.restaurantNameText}>Full Combo Lunch</Text>
+            <Text style={styles.restaurantNameText}>{bookingDetails?._offers_turbo?.Offer_Name}</Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.ratingUsersText}>240</Text>
               <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -81,24 +95,30 @@ const BookingOnApprovalScreen = () => {
 
         <View style={styles.nameLocationMainRow}>
           <View style={styles.locationImageContainer}>
-            <Image resizeMode="cover" source={IMAGES.testImage2} style={styles.locationImage} />
+            <FastImage
+              resizeMode="cover"
+              source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
+              style={styles.locationImage}
+            />
           </View>
           <View style={styles.locationNameContainer}>
-            <Text style={styles.locationNameText}>Pizzami Bali</Text>
-            <View>
-              <Text style={styles.locationText}>Chengduu Street 34, Bali</Text>
+            <Text style={styles.locationNameText}>{bookingDetails?._restaurant_turbo?.Name}</Text>
+            <View style={styles.locationContainer}>
+              <Text style={styles.locationText}>{bookingDetails?._restaurant_turbo?.Adress}</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.selectedDateMainContainer}>
           <View style={styles.selectedDateContainer}>
-            <Text style={styles.selectedDateNumberText}>19</Text>
-            <Text style={styles.selectedDateMonthText}>Jan</Text>
+            <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
+            <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
           </View>
           <View style={styles.timeContainer}>
             <Text style={styles.selectedDateTitleText}>Selected Date</Text>
-            <Text style={styles.selectedDateWithTimeText}>Tuesday, 04:30pm</Text>
+            <Text
+              style={styles.selectedDateWithTimeText}
+            >{`${currentWeekDay}, ${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
           </View>
         </View>
 
@@ -182,6 +202,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: verticalScale(19),
     width: '95%',
+  },
+  locationContainer: {
+    width: '80%',
   },
   locationImage: {
     borderRadius: moderateScale(67),
@@ -331,16 +354,16 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     marginTop: verticalScale(9),
   },
+  serviceImage: {
+    borderRadius: moderateScale(10),
+    height: moderateScale(67),
+    width: moderateScale(67),
+  },
   socialMediaTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginTop: verticalScale(10),
-  },
-  testImage: {
-    borderRadius: moderateScale(10),
-    height: moderateScale(67),
-    width: moderateScale(67),
   },
   timeContainer: {
     alignItems: 'flex-start',

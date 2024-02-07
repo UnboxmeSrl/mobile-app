@@ -10,7 +10,7 @@ import { FONTS } from '../../constants/fonts'
 import { useContentBrief } from './hooks'
 
 const ContentBriefScreen = () => {
-  const { handleBackPress, handleOpenCouponPress } = useContentBrief()
+  const { isReel, bookingDetails, handleBackPress, handleOpenCouponPress } = useContentBrief()
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -41,7 +41,7 @@ const ContentBriefScreen = () => {
           renderItem={({ item, index }) => {
             return (
               <View style={styles.tagContainer}>
-                <Text style={styles.tagText}>@D&G.Salon</Text>
+                <Text style={styles.tagText}>{bookingDetails?._restaurant_turbo?.Tags}</Text>
                 <TouchableOpacity>
                   <Image resizeMode="cover" source={IMAGES.copy} style={styles.copyIcon} />
                 </TouchableOpacity>
@@ -71,10 +71,10 @@ const ContentBriefScreen = () => {
 
         <View style={styles.socialMediaMainDetailsContainer}>
           <View style={styles.socialMediaImageContainer}>
-            <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.testImage} />
+            <Image resizeMode="cover" source={isReel ? IMAGES.reel : IMAGES.tiktok} style={styles.testImage} />
           </View>
           <View style={styles.socialMediaNameContainer}>
-            <Text style={styles.socialMediaNameText}>Full Tik Tok</Text>
+            <Text style={styles.socialMediaNameText}>{`Full ${isReel ? 'Reel' : 'Tik Tok'}`}</Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.ratingUsersText}>240</Text>
               <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -83,7 +83,9 @@ const ContentBriefScreen = () => {
         </View>
         <View style={styles.socialMediaDescriptionContainer}>
           <Text style={styles.socialMediaDescriptionText}>
-            A TikTok video fully dedicated to your experience at the Restaurant
+            {isReel
+              ? `A  Reel fully dedicated to  your experience at the Restaurant`
+              : `A TikTok video fully dedicated to your experience at the Restaurant`}
           </Text>
         </View>
         <TouchableOpacity style={styles.queryContainer}>
@@ -254,6 +256,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: '8%',
     marginTop: verticalScale(8),
+    width: '30%',
   },
   tagText: {
     color: COLORS.black,

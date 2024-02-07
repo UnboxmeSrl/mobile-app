@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -10,7 +11,15 @@ import { FONTS } from '../../constants/fonts'
 import { useYourScheduleDetails } from './hooks'
 
 const YourScheduleDetailsScreen = () => {
-  const { approvalStage, handleBackPress } = useYourScheduleDetails()
+  const {
+    currentDate,
+    currentMonth,
+    currentWeekDay,
+    timeFrame,
+    bookingDetails,
+    approvalStage,
+    handleBackPress,
+  } = useYourScheduleDetails()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -19,17 +28,21 @@ const YourScheduleDetailsScreen = () => {
             <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.dateSelectTitleText}>Full Combo Lunch</Text>
+            <Text style={styles.headerTitleText}>Booking</Text>
           </View>
         </View>
 
         <View style={styles.onApprovalItemsMainContainer}>
           <View style={styles.restaurantDetailsMainRow}>
             <View style={styles.restaurantImageContainer}>
-              <Image resizeMode="cover" source={IMAGES.testImage} style={styles.testImage} />
+              <FastImage
+                resizeMode="cover"
+                source={{ priority: FastImage.priority.high, uri: bookingDetails?._offers_turbo?.Offer_Cover?.url }}
+                style={styles.serviceImage}
+              />
             </View>
             <View style={styles.restaurantNameContainer}>
-              <Text style={styles.restaurantNameText}>Simple Lunch</Text>
+              <Text style={styles.restaurantNameText}>{bookingDetails?._offers_turbo?.Offer_Name}</Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
                 <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -39,7 +52,7 @@ const YourScheduleDetailsScreen = () => {
               style={[
                 styles.onApprovalTextContainer,
                 approvalStage === 'pending'
-                  ? { backgroundColor: COLORS.americanYellow }
+                  ? { backgroundColor: COLORS.americanYellow, width: scale(90) }
                   : approvalStage === 'success'
                   ? { backgroundColor: COLORS.mayGreen }
                   : { backgroundColor: COLORS.tartOrange },
@@ -68,24 +81,30 @@ const YourScheduleDetailsScreen = () => {
 
           <View style={styles.nameLocationMainRow}>
             <View style={styles.locationImageContainer}>
-              <Image resizeMode="cover" source={IMAGES.testImage2} style={styles.locationImage} />
+              <FastImage
+                resizeMode="cover"
+                source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
+                style={styles.locationImage}
+              />
             </View>
             <View style={styles.locationNameContainer}>
-              <Text style={styles.locationNameText}>Pizzami Bali</Text>
-              <View>
-                <Text style={styles.locationText}>Chengduu Street 34, Bali</Text>
+              <Text style={styles.locationNameText}>{bookingDetails?._restaurant_turbo?.Name}</Text>
+              <View style={styles.locationTextContainer}>
+                <Text style={styles.locationText}>{bookingDetails?._restaurant_turbo?.Adress}</Text>
               </View>
             </View>
           </View>
 
           <View style={styles.selectedDateMainContainer}>
             <View style={styles.selectedDateContainer}>
-              <Text style={styles.selectedDateNumberText}>19</Text>
-              <Text style={styles.selectedDateMonthText}>Jan</Text>
+              <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
+              <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
             </View>
             <View style={styles.timeContainer}>
               <Text style={styles.selectedDateTitleText}>Selected Date</Text>
-              <Text style={styles.selectedDateWithTimeText}>Tuesday, 04:30pm</Text>
+              <Text
+                style={styles.selectedDateWithTimeText}
+              >{`${currentWeekDay}, ${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
             </View>
             <TouchableOpacity style={styles.removeBtnContainer}>
               <Text style={styles.removeBtnText}>Remove</Text>
@@ -190,14 +209,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     width: '15%',
   },
-  openCouponBtnContainer: {
-    alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
-    borderRadius: moderateScale(16),
-    height: verticalScale(40),
-    justifyContent: 'center',
-    width: '100%',
-  },
   contentBriefContainer: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -205,36 +216,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(15),
   },
-  openCouponBtnMainContainer: {
-    borderBottomWidth: 0,
-    borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: moderateScale(10),
-    borderWidth: moderateScale(1),
-    marginTop: verticalScale(14),
-    padding: moderateScale(24),
-    width: '100%',
-  },
   contentDetailsContainer: {
     marginLeft: scale(15),
     marginTop: verticalScale(24),
   },
-  openCouponBtnText: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(18),
-    fontWeight: '600'
+  locationTextContainer: {
+    width: '90%'
   },
   contentDetailsText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(17.77),
     marginTop: verticalScale(10),
-  },
-  dateSelectTitleText: {
-    color: COLORS.achromaticBlack,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(20),
-    fontWeight: 'bold',
   },
   deadlineTimeContainer: {
     marginRight: scale(15),
@@ -248,7 +241,13 @@ const styles = StyleSheet.create({
   headerTitleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '85%',
+    width: '70%',
+  },
+  headerTitleText: {
+    color: COLORS.achromaticBlack,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(20),
+    fontWeight: 'bold',
   },
   howItWorksContainer: {
     alignItems: 'center',
@@ -273,9 +272,6 @@ const styles = StyleSheet.create({
   },
   locationImageContainer: {
     marginLeft: scale(13),
-  },
-  redirectsContainer: {
-    paddingHorizontal: scale(10)
   },
   locationNameContainer: {
     marginLeft: scale(15),
@@ -320,6 +316,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: scale(62),
   },
+  openCouponBtnContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.lightBrown,
+    borderRadius: moderateScale(16),
+    height: verticalScale(40),
+    justifyContent: 'center',
+    width: '100%',
+  },
+  openCouponBtnMainContainer: {
+    borderBottomWidth: 0,
+    borderColor: COLORS.whiteShadedTransparent,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
+    marginTop: verticalScale(14),
+    padding: moderateScale(24),
+    width: '100%',
+  },
+  openCouponBtnText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(18),
+    fontWeight: '600',
+  },
   ratingContainer: {
     flexDirection: 'row',
     marginTop: verticalScale(9),
@@ -334,6 +353,9 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
+  },
+  redirectsContainer: {
+    paddingHorizontal: scale(10),
   },
   removeBtnContainer: {
     alignItems: 'center',
@@ -408,16 +430,16 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     marginTop: verticalScale(9),
   },
+  serviceImage: {
+    borderRadius: moderateScale(10),
+    height: moderateScale(67),
+    width: moderateScale(67),
+  },
   socialMediaTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginTop: verticalScale(10),
-  },
-  testImage: {
-    borderRadius: moderateScale(10),
-    height: moderateScale(67),
-    width: moderateScale(67),
   },
   tiktokContainer: {
     marginLeft: scale(15),

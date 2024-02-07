@@ -10,7 +10,7 @@ import { getServiceCategories, getServices } from '../../../services/LocationsSe
 
 const useRestaurantDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
-  const restaurantDetails = useNavigationParam('restaurantDetails')
+  const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
