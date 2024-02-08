@@ -17,7 +17,7 @@ export const IMAGES = {
   diorB: require('./images/dior-b.png'),
   drinks: require('./images/drinks.png'),
   dry: require('./images/dry.png'),
-  home: require('./images/Home.png'),
+  home: require('./images/home.png'),
   info: require('./images/info.png'),
   insta: require('./images/insta.png'),
   instagram: require('./images/instagram.png'),
