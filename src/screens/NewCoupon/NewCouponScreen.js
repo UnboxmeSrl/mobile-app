@@ -11,6 +11,8 @@ import { useNewCoupon } from './hooks'
 
 const NewCouponScreen = () => {
   const {
+    actionName,
+    icon,
     timeFrame,
     isReel,
     bookingDate,
@@ -48,16 +50,20 @@ const NewCouponScreen = () => {
         <View style={styles.rightCutter} />
         <View style={styles.divider} />
 
-        <View style={styles.amenitiesContainer}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.amenitiesContainer}>
           <View style={styles.amenityContainer}>
-            <Text style={styles.amenityTitle}>2 X Drinks</Text>
+            <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
             <Image source={IMAGES.drinks} style={styles.amenityIcon} />
           </View>
           <View style={styles.amenityContainer}>
-            <Text style={styles.amenityTitle}>4 X Meals</Text>
+            <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
             <Image source={IMAGES.meals} style={styles.amenityIcon} />
           </View>
-        </View>
+          <View style={styles.amenityContainer}>
+            <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Extra_People} X Meals`}</Text>
+            <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
+          </View>
+        </ScrollView>
 
         <View style={styles.dateTimeContainer}>
           <View style={styles.timeContainer}>
@@ -75,8 +81,8 @@ const NewCouponScreen = () => {
         <View style={styles.tiktokContainer}>
           <Text style={styles.tiktokTitleText}>Content Type</Text>
           <View style={styles.tiktokIconTextContainer}>
-            <Image resizeMode="cover" source={isReel ? IMAGES.reel : IMAGES.tiktok} style={styles.tiktokIcon} />
-            <Text style={styles.tiktokDescription}>{`Full ${isReel ? 'Reel' : 'Tik Tok'}`}</Text>
+            <Image resizeMode="cover" source={icon} style={styles.contentTypeImage} />
+            <Text style={styles.tiktokDescription}>{actionName}</Text>
           </View>
         </View>
 
@@ -112,8 +118,6 @@ export default NewCouponScreen
 
 const styles = StyleSheet.create({
   amenitiesContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
     marginTop: verticalScale(10),
   },
   amenityContainer: {
@@ -150,6 +154,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  contentTypeImage: {
+    height: moderateScale(50),
+    width: moderateScale(50),
+  },
   dateTimeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -164,6 +172,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: verticalScale(16),
     width: '80%',
+  },
+  extraPersonIcon: {
+    height: moderateScale(13.23),
+    marginLeft: scale(15),
+    width: moderateScale(20.25),
   },
   fullNameText: {
     color: COLORS.black,

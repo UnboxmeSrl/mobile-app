@@ -760,12 +760,12 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNFBApp (11.4.1):
+  - RNFBApp (11.5.0):
     - Firebase/CoreOnly (= 7.11.0)
     - React-Core
-  - RNFBAuth (11.4.1):
+  - RNFBAuth (8.3.3):
     - Firebase/Auth (= 7.11.0)
-    - React-Core
+    - React
     - RNFBApp
   - RNFBCrashlytics (11.4.1):
     - Firebase/Crashlytics (= 7.11.0)
@@ -1174,8 +1174,8 @@ SPEC CHECKSUMS:
   RNDateTimePicker: 7658208086d86d09e1627b5c34ba0cf237c60140
   RNDeviceInfo: 8d3a29207835f972bce883723882980143270d55
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
-  RNFBApp: 996860ad6832996faba79ef3f6ec2d3ea5870dd9
-  RNFBAuth: 3726f7f9bc9e9efb80cd1f5b2e65c4b04dc53760
+  RNFBApp: 9c90f9d576861947ba75fe0830567c570bcbcf6d
+  RNFBAuth: 39957b5820e4a7db1948771dff59f98bbac061ab
   RNFBCrashlytics: 59d9ecfaacddbe10819d9071ee3b9921b79b8c6b
   RNFBFirestore: 7fa546e352aad031a78b934a67435e55b32cba49
   RNFBFunctions: 4838dd472870e5941908eabc48d1711dacdda558

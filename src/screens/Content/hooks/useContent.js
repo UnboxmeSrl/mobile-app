@@ -7,12 +7,14 @@ import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
-import { getBookings, updateBookingContent } from '../../../services'
+import { getBookings, updateAction, updateActionDiary } from '../../../services'
 
 const useContent = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
   const [selectedApp, setSelectedApp] = useState(1)
   const bookingDetails = useNavigationParam('bookingDetails')
+  const actionName = useNavigationParam('actionName')
+
   const dispatch = useDispatch()
 
   const handleBackPress = () => {
@@ -20,32 +22,53 @@ const useContent = () => {
   }
 
   const handleNextPress = async () => {
-    /* Here, 
+    if (actionName === 'Diary Instagram') {
+      /* Here, 
             reel=1 for reel
             reel=2 for tiktok 
     */
-    const params = `/${bookingDetails?.id}`
-    const prepData = {
-      reel: selectedApp,
-    }
-    const res = await updateBookingContent(params, prepData)
-    console.log('result', res)
-    if (res?.id) {
-      const params = `/${loginData?.id}`
-      const bookingRes = await getBookings(params)
-      dispatch(setBookings(bookingRes))
-      navigate({
-        params: {
-          bookingDetails: res,
-        },
-        routeName: SCREEN_NAMES.ContentBriefScreen,
-      })
+      const params = `/${bookingDetails?.id}`
+      const prepData = {
+        reel: selectedApp,
+      }
+      const res = await updateActionDiary(params, prepData)
+      console.log('update Diary Result: ', res)
+      if (res?.id) {
+        const params = `/${loginData?.id}`
+        const bookingRes = await getBookings(params)
+        dispatch(setBookings(bookingRes))
+        navigate({
+          params: {
+            bookingDetails: res,
+          },
+          routeName: SCREEN_NAMES.ContentBriefScreen,
+        })
+      } else {
+        Alert.alert('Something went wrong')
+      }
     } else {
-      Alert.alert('Something went wrong')
+      const params = `/${bookingDetails?.id}`
+      const actionId = bookingDetails?._offers_turbo?.actions?.[selectedApp - 1]?.actions_turbo_id
+      const prepData = { actions_turbo_id: actionId, bookingsturbo_id: bookingDetails?.id }
+      const res = await updateAction(params, prepData)
+      console.log('Update Action Result', res)
+      if (res?.id) {
+        const params = `/${loginData?.id}`
+        const bookingRes = await getBookings(params)
+        dispatch(setBookings(bookingRes))
+        navigate({
+          params: {
+            bookingDetails: res,
+          },
+          routeName: SCREEN_NAMES.ContentBriefScreen,
+        })
+      } else {
+        Alert.alert('Something went wrong')
+      }
     }
   }
 
-  return { handleBackPress, handleNextPress, selectedApp, setSelectedApp }
+  return { actionName, handleBackPress, handleNextPress, selectedApp, setSelectedApp }
 }
 
 export default useContent

@@ -18,6 +18,7 @@ export const Api = {
     ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
     GET_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/get_bookings`,
     GET_TIME_FRAMES: `${BASE_URL}/api:bwh6Xc5O/get_timeframes_turbo`,
-    UPDATE_CONTENT: `${BASE_URL}/api:bwh6Xc5O/update_content`,
+    UPDATE_ACTION: `${BASE_URL}/api:bwh6Xc5O/update_booking`,
+    UPDATE_ACTION_DIARY: `${BASE_URL}/api:bwh6Xc5O/update_content`,
   },
 }

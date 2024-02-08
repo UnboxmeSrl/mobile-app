@@ -12,6 +12,8 @@ import { useYourScheduleDetails } from './hooks'
 
 const YourScheduleDetailsScreen = () => {
   const {
+    actionName,
+    icon,
     currentDate,
     currentMonth,
     currentWeekDay,
@@ -19,6 +21,7 @@ const YourScheduleDetailsScreen = () => {
     bookingDetails,
     approvalStage,
     handleBackPress,
+    handleOpenCouponPress,
   } = useYourScheduleDetails()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -70,12 +73,16 @@ const YourScheduleDetailsScreen = () => {
 
           <View style={styles.amenitiesContainer}>
             <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>2 X Drinks</Text>
+              <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
               <Image source={IMAGES.drinks} style={styles.amenityIcon} />
             </View>
             <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>4 X Meals</Text>
+              <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
               <Image source={IMAGES.meals} style={styles.amenityIcon} />
+            </View>
+            <View style={styles.amenityContainer}>
+              <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Extra_People} X Meals`}</Text>
+              <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
             </View>
           </View>
 
@@ -122,8 +129,8 @@ const YourScheduleDetailsScreen = () => {
           <View style={styles.tiktokContainer}>
             <Text style={styles.tiktokTitleText}>Content Type</Text>
             <View style={styles.tiktokIconTextContainer}>
-              <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.tiktokIcon} />
-              <Text style={styles.tiktokDesctiption}>Full Tik Tok</Text>
+              <Image resizeMode="cover" source={icon} style={styles.tiktokIcon} />
+              <Text style={styles.tiktokDesctiption}>{`Full ${actionName}`}</Text>
             </View>
           </View>
           <View style={styles.deadlineTimeContainer}>
@@ -153,7 +160,7 @@ const YourScheduleDetailsScreen = () => {
         </View>
 
         <View style={styles.openCouponBtnMainContainer}>
-          <TouchableOpacity onPress={() => {}} style={styles.openCouponBtnContainer}>
+          <TouchableOpacity onPress={handleOpenCouponPress} style={styles.openCouponBtnContainer}>
             <Text style={styles.openCouponBtnText}>Open Coupon </Text>
           </TouchableOpacity>
         </View>
@@ -220,9 +227,6 @@ const styles = StyleSheet.create({
     marginLeft: scale(15),
     marginTop: verticalScale(24),
   },
-  locationTextContainer: {
-    width: '90%'
-  },
   contentDetailsText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
@@ -232,6 +236,11 @@ const styles = StyleSheet.create({
   deadlineTimeContainer: {
     marginRight: scale(15),
     width: '40%',
+  },
+  extraPersonIcon: {
+    height: moderateScale(13.23),
+    marginLeft: scale(15),
+    width: moderateScale(20.25),
   },
   headerContainer: {
     alignItems: 'center',
@@ -286,6 +295,9 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
     textDecorationLine: 'underline',
+  },
+  locationTextContainer: {
+    width: '90%',
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -451,6 +463,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
     marginLeft: scale(10),
     marginTop: verticalScale(5),
+    width: '50%',
   },
   tiktokIcon: {
     height: moderateScale(49),

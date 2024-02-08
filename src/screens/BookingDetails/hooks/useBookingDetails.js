@@ -59,7 +59,7 @@ const useBookingDetails = () => {
     }-${
       currentBookingDateTime.getDate() < 10 ? `0${currentBookingDateTime.getDate()}` : currentBookingDateTime.getDate()
     }`
-
+    console.log(' conditionCheck', serviceDetails?.actions?.length, serviceDetails?.actions?.[0]?.actions_turbo_id)
     const prepData = {
       ApprovalStatus: false,
       Approved: serviceDetails?.Story,
@@ -79,7 +79,7 @@ const useBookingDetails = () => {
       Submitbutton_: 'false',
       Title: '',
       action_status_turbo_id: 0,
-      actions_turbo_id: 0,
+      actions_turbo_id: serviceDetails?.actions?.length === 1 ? serviceDetails?.actions?.[0]?.actions_turbo_id : 0,
       booking_status_id: 0,
       deal_scheme_id: 0,
       events_id: 0,

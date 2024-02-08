@@ -47,8 +47,34 @@ const YourScheduleScreen = () => {
           const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
           const timeFrame = item?._timeframes_turbo
           const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
+
+          const actionName = item?._actions_turbo?.Action_Name ?? 0
+          let icon = ''
+          if (actionName) {
+            switch (actionName) {
+              case 'Reel':
+                icon = IMAGES.reel
+                break
+              case 'TikTok':
+                icon = IMAGES.tiktok
+                break
+              case 'Story':
+                icon = IMAGES.instagramStory
+                break
+              case 'Maps & Story':
+                icon = IMAGES.googleMaps
+                break
+              case 'Diary Instagram':
+                icon = IMAGES.diary
+                break
+            }
+          }
+
           return (
-            <TouchableOpacity onPress={() => handleCardPress(item, approvalStatus)} style={styles.cardContainer}>
+            <TouchableOpacity
+              onPress={() => handleCardPress(item, approvalStatus, actionName)}
+              style={styles.cardContainer}
+            >
               <View
                 style={[
                   styles.approvalStatusContainer,
@@ -117,28 +143,20 @@ const YourScheduleScreen = () => {
                       >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
                     </View>
 
-                    {item?._offers_turbo?.Story ? (
+                    {actionName ? (
                       <View style={styles.storyContainer}>
-                        <Text style={styles.storyText}>Story</Text>
+                        <Text style={styles.storyText}>{actionName}</Text>
                         <View style={styles.storyIconContainer}>
-                          <Image resizeMode="cover" source={IMAGES.instagramStory} style={styles.storyIcon} />
+                          <Image resizeMode="cover" source={icon} style={styles.storyIcon} />
                         </View>
                       </View>
                     ) : (
                       <View style={styles.reelsContainer}>
-                        <Text style={styles.reelsTitleText}>{`${
-                          item?.reel === '1' ? 'Reels' : item?.reel === '2' ? 'Tiktok' : 'Tiktok/ Reels'
-                        }`}</Text>
-                        {item?.reel === '1' ? (
-                          <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
-                        ) : item?.reel === '2' ? (
+                        <Text style={styles.reelsTitleText}>{`Tiktok/ Reels`}</Text>
+                        <View style={styles.tiktokReelsIconsContainer}>
                           <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
-                        ) : (
-                          <View style={styles.tiktokReelsIconsContainer}>
-                            <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
-                            <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
-                          </View>
-                        )}
+                          <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
+                        </View>
                       </View>
                     )}
                   </View>
@@ -253,7 +271,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: scale(35),
     marginTop: verticalScale(19),
-    width: '50%',
+    width: '40%',
   },
   reelsTitleText: {
     color: COLORS.gray,
@@ -325,7 +343,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: scale(35),
     marginTop: verticalScale(19),
-    width: '50%',
+    width: '40%',
   },
   storyIcon: {
     height: moderateScale(20),
@@ -355,7 +373,7 @@ const styles = StyleSheet.create({
   timeContainer: {
     marginLeft: scale(15),
     marginTop: verticalScale(19),
-    width: '35%',
+    width: '40%',
   },
   timeReelsContainer: {
     flexDirection: 'row',

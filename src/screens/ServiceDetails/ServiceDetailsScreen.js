@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
-import { verticalScale } from 'react-native-size-matters'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 import { IMAGES } from '../../assets/images'
@@ -22,7 +22,7 @@ const ServiceDetails = () => {
     handleBackPress,
     handleBookPress,
   } = useServiceDetails()
-  console.log('Restaurant Details', JSON.stringify(serviceDetails))
+  console.log('Service Details', JSON.stringify(serviceDetails))
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
@@ -47,80 +47,122 @@ const ServiceDetails = () => {
         <View style={styles.serviceDetailsContainer}>
           <Text style={styles.restaurantNameText}>{serviceDetails?.Offer_Name}</Text>
 
-          {/* ✅ Uncomment this code when you integrate the api ✅ */}
-          {/* <View style={styles.amenitiesContainer}>
-            <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>2 X Drinks</Text>
-              <Image source={IMAGES.drinks} style={styles.amenityIcon} />
-            </View>
-            <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>4 X Meals</Text>
-              <Image source={IMAGES.meals} style={styles.amenityIcon} />
-            </View>
-          </View> */}
-
           <View style={styles.socialMediaContentTitleContainer}>
             <Text style={styles.socialMediaTitleText}>Social Media Content</Text>
           </View>
+          <FlatList
+            data={serviceDetails?.actions}
+            renderItem={({ item, index }) => {
+              const actionName = item?._actions_turbo?.Action_Name
+              const diaryItems = ['TikTok Diary', 'Instagram Diary']
+              let icon = ''
+              switch (actionName) {
+                case 'Reel':
+                  icon = IMAGES.reel
+                  break
+                case 'TikTok':
+                  icon = IMAGES.tiktok
+                  break
+                case 'Story':
+                  icon = IMAGES.instagramStory
+                  break
+                case 'Maps & Story':
+                  icon = IMAGES.googleMaps
+                  break
+                case 'Diary Instagram':
+                  icon = IMAGES.diary
+                  break
+              }
+              return (
+                <>
+                  {actionName === 'Diary Instagram' ? (
+                    diaryItems.map((diaryItem) => (
+                      <View showsVerticalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
+                        <View style={styles.socialItemMainContainer}>
+                          <View style={styles.tiktokMainContainer}>
+                            <View style={styles.tiktokIconNameContainer}>
+                              <Image source={icon} style={styles.tiktokIconImage} />
+                              <Text style={styles.tiktokTitleText}>{diaryItem}</Text>
 
-          {serviceDetails?.Story ? (
-            <View style={styles.storyMainContainer}>
-              <View style={styles.storyIconNameContainer}>
-                <Image source={IMAGES.instagramStory} style={styles.storyIconImage} />
-                <Text style={styles.storyTitleText}>3 x Instagram stories</Text>
+                              <View style={styles.ratingContainer}>
+                                <Text style={styles.ratingUsersText}>240</Text>
+                                <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                              </View>
+                            </View>
+                            <View>
+                              <View style={styles.infoContainer}>
+                                <Text style={styles.infoTextTitle}>i</Text>
+                              </View>
+                            </View>
+                          </View>
 
-                <View style={styles.ratingContainer}>
-                  <Text style={styles.ratingUsersText}>240</Text>
-                  <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-                </View>
-              </View>
-              <View>
-                <View style={styles.infoContainer}>
-                  <Text style={styles.infoTextTitle}>i</Text>
-                </View>
-              </View>
-            </View>
-          ) : (
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
-              <View style={styles.tiktokMainContainer}>
-                <View style={styles.tiktokIconNameContainer}>
-                  <Image source={IMAGES.tiktok} style={styles.tiktokIconImage} />
-                  <Text style={styles.tiktokTitleText}>Tik tok</Text>
+                          <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            style={styles.amenitiesContainer}
+                          >
+                            <View style={styles.amenityContainer}>
+                              <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+                              <Image source={IMAGES.drinks} style={styles.amenityIcon} />
+                            </View>
+                            <View style={styles.amenityContainer}>
+                              <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
+                              <Image source={IMAGES.meals} style={styles.amenityIcon} />
+                            </View>
+                            <View style={styles.amenityContainer}>
+                              <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Extra_People} X Meals`}</Text>
+                              <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
+                            </View>
+                          </ScrollView>
+                        </View>
+                      </View>
+                    ))
+                  ) : (
+                    <View showsVerticalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
+                      <View style={styles.socialItemMainContainer}>
+                        <View style={styles.tiktokMainContainer}>
+                          <View style={styles.tiktokIconNameContainer}>
+                            <Image source={icon} style={styles.tiktokIconImage} />
+                            <Text style={styles.tiktokTitleText}>{item?._actions_turbo?.Action_Name}</Text>
 
-                  <View style={styles.ratingContainer}>
-                    <Text style={styles.ratingUsersText}>240</Text>
-                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-                  </View>
-                </View>
-                <View>
-                  <View style={styles.infoContainer}>
-                    <Text style={styles.infoTextTitle}>i</Text>
-                  </View>
-                </View>
-              </View>
+                            <View style={styles.ratingContainer}>
+                              <Text style={styles.ratingUsersText}>240</Text>
+                              <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                            </View>
+                          </View>
+                          <View>
+                            <View style={styles.infoContainer}>
+                              <Text style={styles.infoTextTitle}>i</Text>
+                            </View>
+                          </View>
+                        </View>
 
-              <View style={styles.orContainer}>
-                <Text style={styles.orText}>Or</Text>
-              </View>
-
-              <View style={styles.reelsMainContainer}>
-                <View style={styles.reelIconNameContainer}>
-                  <Image source={IMAGES.reel} style={styles.reelIconImage} />
-                  <Text style={styles.reelTitleText}>Reel</Text>
-
-                  <View style={styles.ratingContainer}>
-                    <Text style={styles.ratingUsersText}>240</Text>
-                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-                  </View>
-                </View>
-                <View>
-                  <View style={styles.infoContainer}>
-                    <Text style={styles.infoTextTitle}>i</Text>
-                  </View>
-                </View>
-              </View>
-            </ScrollView>
-          )}
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.amenitiesContainer}>
+                          <View style={styles.amenityContainer}>
+                            <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+                            <Image source={IMAGES.drinks} style={styles.amenityIcon} />
+                          </View>
+                          <View style={styles.amenityContainer}>
+                            <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
+                            <Image source={IMAGES.meals} style={styles.amenityIcon} />
+                          </View>
+                          <View style={styles.amenityContainer}>
+                            <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Extra_People} X Meals`}</Text>
+                            <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
+                          </View>
+                        </ScrollView>
+                      </View>
+                    </View>
+                  )}
+                  {serviceDetails?.actions?.length > 1 && index === 0 && (
+                    <View style={styles.orContainer}>
+                      <Text style={styles.orText}>Or</Text>
+                    </View>
+                  )}
+                </>
+              )
+            }}
+          />
 
           <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
@@ -141,106 +183,111 @@ const styles = StyleSheet.create({
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
-    fontSize: 14,
-    marginTop: 8,
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(8),
   },
   amenitiesContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: verticalScale(10),
   },
   amenityContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightPink,
-    borderRadius: 10,
+    backgroundColor: COLORS.lightBrown,
+    borderRadius: moderateScale(10),
     flexDirection: 'row',
-    height: 48,
+    height: verticalScale(35),
     justifyContent: 'center',
-    marginLeft: 10,
-    width: 144,
+    marginLeft: scale(10),
+    width: scale(120),
   },
   amenityIcon: {
-    height: 23,
-    marginLeft: 15,
-    width: 23,
+    height: moderateScale(23),
+    marginLeft: scale(15),
+    width: moderateScale(23),
   },
   amenityTitle: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksand,
-    fontSize: 14,
+    fontSize: moderateScale(14),
   },
   backIcon: {
-    height: 30,
+    height: moderateScale(30),
     left: 20,
     position: 'absolute',
     top: 20,
-    width: 30,
+    width: moderateScale(30),
   },
   backIconContainer: {
-    height: 50,
+    height: verticalScale(50),
     position: 'absolute',
-    width: 50,
+    width: scale(50),
   },
   bookBtnContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.lightBrown,
-    borderRadius: 16,
-    height: 44,
+    borderRadius: moderateScale(16),
+    height: verticalScale(44),
     justifyContent: 'center',
     width: '100%',
   },
   bookBtnMainContainer: {
     borderBottomWidth: 0,
     borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: 10,
-    borderWidth: 1,
-    marginTop: 14,
-    padding: 24,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
+    marginTop: verticalScale(14),
+    padding: moderateScale(24),
     width: '100%',
   },
   bookBtnText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: '600',
   },
   chooseServiceContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 40,
-    marginTop: 8,
+    height: verticalScale(40),
+    marginTop: verticalScale(8),
+  },
+  extraPersonIcon: {
+    height: moderateScale(13.23),
+    marginLeft: scale(15),
+    width: moderateScale(20.25),
   },
   howItWorksContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 56,
+    height: verticalScale(50),
     justifyContent: 'space-between',
-    marginTop: 125,
+    marginTop: verticalScale(50),
   },
   imageStyle: {
-    height: 200,
+    height: verticalScale(170),
     width: '100%',
   },
   infoContainer: {
     alignItems: 'center',
     borderColor: COLORS.primary,
-    borderRadius: 5,
+    borderRadius: moderateScale(5),
     borderWidth: 2,
-    height: 22,
+    height: moderateScale(22),
     justifyContent: 'center',
-    marginTop: 10,
-    width: 22,
+    marginTop: verticalScale(10),
+    width: moderateScale(22),
   },
   infoText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 14,
-    marginTop: 3,
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(3),
   },
   infoTextTitle: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -250,48 +297,50 @@ const styles = StyleSheet.create({
   mainSocialMediaContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 16,
+    marginTop: verticalScale(14),
+    width: '100%',
   },
   orContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 16,
+    marginRight: scale(20),
+    marginTop: verticalScale(10),
   },
   orText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksand,
-    fontSize: 14,
+    fontSize: moderateScale(14),
   },
   previewText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 16,
-    marginTop: 10,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
   },
   previewTextContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 56,
-    marginTop: 8,
+    height: verticalScale(50),
+    marginTop: verticalScale(7),
   },
   ratingContainer: {
     flexDirection: 'row',
-    marginTop: 9,
+    marginTop: verticalScale(9),
   },
   ratingIconImage: {
-    height: 16,
-    marginLeft: 5,
+    height: moderateScale(16),
+    marginLeft: scale(5),
     tintColor: COLORS.primary,
-    width: 16,
+    width: moderateScale(16),
   },
   ratingUsersText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   reelIconImage: {
-    height: 29.09,
-    width: 32,
+    height: moderateScale(29.09),
+    width: moderateScale(32),
   },
   reelIconNameContainer: {
     alignItems: 'center',
@@ -301,47 +350,56 @@ const styles = StyleSheet.create({
   reelTitleText: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
-    marginTop: 9,
+    fontSize: moderateScale(12),
+    marginTop: verticalScale(9),
   },
   reelsMainContainer: {
     backgroundColor: COLORS.lightPink,
-    borderRadius: 10,
+    borderRadius: moderateScale(10),
     flexDirection: 'row',
-    height: 105,
+    height: verticalScale(105),
     justifyContent: 'center',
-    marginLeft: 10,
+    marginLeft: scale(10),
     width: '100%',
-    width: 163.5,
+    width: scale(163.5),
   },
   restaurantNameText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 20,
-    marginTop: 10,
+    fontSize: moderateScale(20),
+    marginTop: verticalScale(10),
   },
   rightIcon: {
-    height: 25,
-    marginTop: 10,
+    height: moderateScale(25),
+    marginTop: verticalScale(10),
     tintColor: COLORS.black,
     transform: [{ rotate: '180deg' }],
-    width: 25,
+    width: moderateScale(25),
   },
   serviceDetailsContainer: {
-    paddingHorizontal: 15,
+    paddingHorizontal: scale(15),
+  },
+  socialItemMainContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.lightPink,
+    borderRadius: moderateScale(10),
+    flex: 1,
+    justifyContent: 'center',
+    paddingBottom: verticalScale(10),
+    width: scale(325),
   },
   socialMediaContentTitleContainer: {
-    marginTop: 24,
+    marginTop: verticalScale(24),
   },
   socialMediaTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 16,
-    marginTop: 10,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
   },
   storyIconImage: {
-    height: 29.09,
-    width: 32,
+    height: moderateScale(29.09),
+    width: moderateScale(32),
   },
   storyIconNameContainer: {
     alignItems: 'center',
@@ -351,26 +409,26 @@ const styles = StyleSheet.create({
   storyMainContainer: {
     alignSelf: 'center',
     backgroundColor: COLORS.lightPink,
-    borderRadius: 10,
+    borderRadius: moderateScale(10),
     flexDirection: 'row',
-    height: 105,
+    height: verticalScale(105),
     justifyContent: 'center',
-    marginLeft: 10,
+    marginLeft: scale(10),
     marginTop: verticalScale(15),
     width: '100%',
-    width: 163.5,
+    width: scale(163.5),
   },
   storyTitleText: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
-    marginTop: 9,
+    fontSize: moderateScale(12),
+    marginTop: verticalScale(9),
     textAlign: 'center',
   },
 
   tiktokIconImage: {
-    height: 29.09,
-    width: 32,
+    height: moderateScale(29.09),
+    width: moderateScale(32),
   },
   tiktokIconNameContainer: {
     alignItems: 'center',
@@ -379,19 +437,18 @@ const styles = StyleSheet.create({
   },
   tiktokMainContainer: {
     backgroundColor: COLORS.lightPink,
-    borderRadius: 10,
+    borderRadius: moderateScale(10),
+    flex: 1,
     flexDirection: 'row',
-    height: 105,
     justifyContent: 'center',
-    marginLeft: 10,
-    width: '100%',
-    width: 163.5,
+    marginTop: verticalScale(10),
+    width: scale(325),
   },
   tiktokTitleText: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
-    marginTop: 9,
+    fontSize: moderateScale(12),
+    marginTop: verticalScale(9),
   },
 })
 

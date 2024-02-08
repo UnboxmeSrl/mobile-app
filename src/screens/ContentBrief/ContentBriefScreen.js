@@ -10,7 +10,7 @@ import { FONTS } from '../../constants/fonts'
 import { useContentBrief } from './hooks'
 
 const ContentBriefScreen = () => {
-  const { isReel, bookingDetails, handleBackPress, handleOpenCouponPress } = useContentBrief()
+  const { isReel, icon, actionName, bookingDetails, handleBackPress, handleOpenCouponPress } = useContentBrief()
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -71,10 +71,10 @@ const ContentBriefScreen = () => {
 
         <View style={styles.socialMediaMainDetailsContainer}>
           <View style={styles.socialMediaImageContainer}>
-            <Image resizeMode="cover" source={isReel ? IMAGES.reel : IMAGES.tiktok} style={styles.testImage} />
+            <Image resizeMode="cover" source={icon} style={styles.testImage} />
           </View>
           <View style={styles.socialMediaNameContainer}>
-            <Text style={styles.socialMediaNameText}>{`Full ${isReel ? 'Reel' : 'Tik Tok'}`}</Text>
+            <Text style={styles.socialMediaNameText}>{actionName}</Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.ratingUsersText}>240</Text>
               <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -82,11 +82,7 @@ const ContentBriefScreen = () => {
           </View>
         </View>
         <View style={styles.socialMediaDescriptionContainer}>
-          <Text style={styles.socialMediaDescriptionText}>
-            {isReel
-              ? `A  Reel fully dedicated to  your experience at the Restaurant`
-              : `A TikTok video fully dedicated to your experience at the Restaurant`}
-          </Text>
+          <Text style={styles.socialMediaDescriptionText}>{bookingDetails?._actions_turbo?.Descrizione} </Text>
         </View>
         <TouchableOpacity style={styles.queryContainer}>
           <Image source={IMAGES.aeroplane} style={styles.queryIcon} />

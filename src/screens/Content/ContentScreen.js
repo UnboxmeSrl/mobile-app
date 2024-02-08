@@ -10,7 +10,7 @@ import { FONTS } from '../../constants/fonts'
 import { useContent } from './hooks'
 
 const ContentScreen = () => {
-  const { selectedApp, setSelectedApp, handleBackPress, handleNextPress } = useContent()
+  const { actionName, selectedApp, setSelectedApp, handleBackPress, handleNextPress } = useContent()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -29,10 +29,16 @@ const ContentScreen = () => {
         >
           <View style={styles.socialMediaMainDetailsContainer}>
             <View style={styles.socialMediaImageContainer}>
-              <Image resizeMode="cover" source={IMAGES.reel} style={styles.testImage} />
+              <Image
+                resizeMode="cover"
+                source={actionName === 'Diary Instagram' ? IMAGES.diary : IMAGES.reel}
+                style={styles.testImage}
+              />
             </View>
             <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>Full Reel</Text>
+              <Text style={styles.socialMediaNameText}>{`${
+                actionName === 'Diary Instagram' ? 'Instagram Diary' : 'Full Reel'
+              }`}</Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
                 <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -50,10 +56,16 @@ const ContentScreen = () => {
         >
           <View style={styles.socialMediaMainDetailsContainer}>
             <View style={styles.tiktokImageContainer}>
-              <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.tiktokImage} />
+              <Image
+                resizeMode="cover"
+                source={actionName === 'Diary Instagram' ? IMAGES.diary : IMAGES.tiktok}
+                style={styles.tiktokImage}
+              />
             </View>
             <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>Full Tik Tok</Text>
+              <Text style={styles.socialMediaNameText}>{`${
+                actionName === 'Diary Instagram' ? 'Tiktok Diary' : 'Full Tik Tok'
+              }`}</Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
                 <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />

@@ -34,10 +34,11 @@ export const SignInEmailModal = () => {
         //   onAuthSuccess()
         // }
         if (res?.id) {
+          console.log('res', res)
           dispatch(setLoginData(res))
           const params = `/${res?.id}`
-          const res = await getBookings(params)
-          dispatch(setBookings(res))
+          const bookingRes = await getBookings(params)
+          dispatch(setBookings(bookingRes))
           navigate(SCREEN_NAMES.Cities)
         } else {
         }

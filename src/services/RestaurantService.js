@@ -32,9 +32,19 @@ export const getBookings = async (params) => {
   }
 }
 
-export const updateBookingContent = async (params, data) => {
+export const updateActionDiary = async (params, data) => {
   try {
-    const url = Api.RESTAURANTS.UPDATE_CONTENT + params
+    const url = Api.RESTAURANTS.UPDATE_ACTION_DIARY + params
+    const response = await Fetch.put(url, data)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updateAction = async (params, data) => {
+  try {
+    const url = Api.RESTAURANTS.UPDATE_ACTION + params
     const response = await Fetch.put(url, data)
     return response
   } catch (error) {

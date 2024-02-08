@@ -13,10 +13,17 @@ const useYourSchedule = () => {
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
   const dispatch = useDispatch()
 
-  const handleCardPress = (item, approvalStatus) => {
-    // navigate(SCREEN_NAMES.YourScheduleDetailsScreen)
+  const handleCardPress = (item, approvalStatus, actionName) => {
     if (approvalStatus === 'Pending') {
-      if (item?.reel) {
+      if (actionName === 'Diary Instagram' && item?.reel === '') {
+        navigate({
+          params: {
+            actionName: actionName,
+            bookingDetails: item,
+          },
+          routeName: SCREEN_NAMES.ContentScreen,
+        })
+      } else if (actionName) {
         navigate({
           params: {
             bookingDetails: item,
@@ -26,6 +33,7 @@ const useYourSchedule = () => {
       } else {
         navigate({
           params: {
+            actionName: actionName,
             bookingDetails: item,
           },
           routeName: SCREEN_NAMES.ContentScreen,
