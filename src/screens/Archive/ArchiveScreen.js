@@ -54,7 +54,9 @@ const ArchiveScreen = () => {
                     <View style={styles.divider} />
                     <View style={styles.serviceRequestedContainer}>
                       <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
-                      <Text style={styles.serviceRequestedText}>{item?._offers_turbo?.Offer_Name}</Text>
+                      <Text style={styles.serviceRequestedText} numberOfLines={1} ellipsizeMode="tail">
+                        {item?._offers_turbo?.Offer_Name}
+                      </Text>
                     </View>
                   </View>
                   <View style={styles.rightIconContainer}>
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginTop: verticalScale(5),
-    width: '70%',
+    width: '80%',
   },
   serviceRequestedTitleText: {
     color: COLORS.gray,
