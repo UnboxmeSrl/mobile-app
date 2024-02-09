@@ -58,4 +58,5 @@ export const IMAGES = {
   tiktokWithoutBg: require('./images/tiktok-withoutbg.png'),
   timeCircle: require('./images/time-circle.png'),
   user: require('./images/user.png'),
+  threeDots: require('./images/three-dots.png'),
 }

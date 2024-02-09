@@ -11,6 +11,7 @@ const useYourSchedule = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
   const [selectedTab, setSelectedTab] = useState(1)
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
+  const [contentApprovalStatus, setContentApprovalStatus] = useState('Missed Deadline')
   const dispatch = useDispatch()
 
   const handleCardPress = (item, approvalStatus, actionName) => {
@@ -65,7 +66,7 @@ const useYourSchedule = () => {
     }
   }, [])
 
-  return { bookings, handleCardPress, handleArchivePress, selectedTab, setSelectedTab }
+  return { contentApprovalStatus, bookings, handleCardPress, handleArchivePress, selectedTab, setSelectedTab }
 }
 
 export default useYourSchedule
