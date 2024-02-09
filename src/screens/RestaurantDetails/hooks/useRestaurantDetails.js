@@ -11,6 +11,7 @@ import { getServiceCategories, getServices } from '../../../services/LocationsSe
 const useRestaurantDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
+  const cityData = useNavigationParam('cityData')
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
@@ -44,7 +45,16 @@ const useRestaurantDetails = () => {
   }
 
   const handleBackPress = () => {
-    navigate(SCREEN_NAMES.Restaurants)
+    if (cityData?.id) {
+      navigate({
+        params: {
+          cityData: cityData,
+        },
+        routeName: SCREEN_NAMES.Restaurants,
+      })
+    } else {
+      navigate(SCREEN_NAMES.Restaurants)
+    }
   }
 
   useEffect(() => {

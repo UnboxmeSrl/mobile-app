@@ -51,3 +51,23 @@ export const updateAction = async (params, data) => {
     console.log(error)
   }
 }
+
+export const cancelBooking = async (params) => {
+  try {
+    const url = Api.RESTAURANTS.CANCEL_BOOKING + params
+    const response = await Fetch.put(url, '')
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getAllCanceledBookings = async (params) => {
+  try {
+    const url = Api.RESTAURANTS.GET_ALL_CANCELED_BOOKINGS + params
+    const response = await Fetch.get(url)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

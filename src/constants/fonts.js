@@ -7,5 +7,8 @@ export const FONTS = {
   quicksandBold: 'Quicksand-Bold',
   quicksandLight: 'Quicksand-Light',
   quicksandMedium: 'Quicksand-Medium',
+  josefinSans: 'JosefinSans-Regular',
+  josefinSansBold: 'JosefinSans-Bold',
+  josefinSansSemiBold: 'JosefinSans-SemiBold',
   system: 'System',
 }

@@ -24,6 +24,9 @@
 		E056D57B2B5A98D300F5212F /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E056D5762B5A98CE00F5212F /* Quicksand-SemiBold.ttf */; };
 		E056D57C2B5A98D300F5212F /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E056D5772B5A98D000F5212F /* Quicksand-Bold.ttf */; };
 		E056D57D2B5A98D300F5212F /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E056D5782B5A98D100F5212F /* Quicksand-Light.ttf */; };
+		9EF15315EBCC40849F9E8E72 /* JosefinSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9ECDBC17F8F340E283F1A6CD /* JosefinSans-Bold.ttf */; };
+		83FD4E22D9D543209AF23329 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7141457BC541468796BCE789 /* JosefinSans-Regular.ttf */; };
+		BBBA335D8A4C47F38F59740F /* JosefinSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7474195421B94B1DAC71D87A /* JosefinSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49812,6 +49815,9 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F7684B92A3B6414887873B29 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
+		9ECDBC17F8F340E283F1A6CD /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; name = "JosefinSans-Bold.ttf"; path = "../src/assets/fonts/JosefinSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7141457BC541468796BCE789 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; name = "JosefinSans-Regular.ttf"; path = "../src/assets/fonts/JosefinSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7474195421B94B1DAC71D87A /* JosefinSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "JosefinSans-SemiBold.ttf"; path = "../src/assets/fonts/JosefinSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77440,6 +77446,9 @@
 				D313FFC4709647128D916951 /* Quicksand-Medium.ttf */,
 				D975E9AE2D264FA08356B085 /* Quicksand-Regular.ttf */,
 				81400E2AA94C4E62A2A74F14 /* Quicksand-SemiBold.ttf */,
+				9ECDBC17F8F340E283F1A6CD /* JosefinSans-Bold.ttf */,
+				7141457BC541468796BCE789 /* JosefinSans-Regular.ttf */,
+				7474195421B94B1DAC71D87A /* JosefinSans-SemiBold.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -142970,6 +142979,9 @@
 				B8B3FAC9F5F2449B944FB037 /* FuturaNewDemi-Reg.ttf in Resources */,
 				265EFE51EE3A4208B37346A2 /* FuturaNewLight-Reg.ttf in Resources */,
 				5DA70149670148ADB1C3215E /* FuturaNewMedium-Reg.ttf in Resources */,
+				9EF15315EBCC40849F9E8E72 /* JosefinSans-Bold.ttf in Resources */,
+				83FD4E22D9D543209AF23329 /* JosefinSans-Regular.ttf in Resources */,
+				BBBA335D8A4C47F38F59740F /* JosefinSans-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

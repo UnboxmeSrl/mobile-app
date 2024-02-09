@@ -10,6 +10,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import { useServiceDetails } from './hooks'
+import { checkActionName } from '../../utils'
 
 const ServiceDetails = () => {
   const {
@@ -55,24 +56,7 @@ const ServiceDetails = () => {
             renderItem={({ item, index }) => {
               const actionName = item?._actions_turbo?.Action_Name
               const diaryItems = ['TikTok Diary', 'Instagram Diary']
-              let icon = ''
-              switch (actionName) {
-                case 'Reel':
-                  icon = IMAGES.reel
-                  break
-                case 'TikTok':
-                  icon = IMAGES.tiktok
-                  break
-                case 'Story':
-                  icon = IMAGES.instagramStory
-                  break
-                case 'Maps & Story':
-                  icon = IMAGES.googleMaps
-                  break
-                case 'Diary Instagram':
-                  icon = IMAGES.diary
-                  break
-              }
+              const icon = checkActionName(actionName);
               return (
                 <>
                   {actionName === 'Diary Instagram' ? (

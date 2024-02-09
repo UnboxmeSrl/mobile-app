@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -10,7 +10,7 @@ import { FONTS } from '../../constants/fonts'
 import { useContent } from './hooks'
 
 const ContentScreen = () => {
-  const { actionName, selectedApp, setSelectedApp, handleBackPress, handleNextPress } = useContent()
+  const { isLoading, actionName, selectedApp, setSelectedApp, handleBackPress, handleNextPress } = useContent()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -81,9 +81,15 @@ const ContentScreen = () => {
       </View>
 
       <View style={styles.nextBtnMainContainer}>
-        <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
-          <Text style={styles.nextBtnText}>Next </Text>
-        </TouchableOpacity>
+        {isLoading ? (
+          <View style={styles.nextBtnContainer}>
+            <ActivityIndicator color={COLORS.primary} size={30} />
+          </View>
+        ) : (
+          <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
+            <Text style={styles.nextBtnText}>Next </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   )

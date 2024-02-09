@@ -25,8 +25,15 @@ export default {
   },
 
   put: async (url, data) => {
-    console.log(url, data)
-    const response = await axios.put(url, data)
+    let response
+    if (data === '') {
+      console.log(url)
+      response = await axios.put(url)
+    } else {
+      console.log(url, data)
+      response = await axios.put(url, data)
+    }
+
     return response?.data
   },
 }

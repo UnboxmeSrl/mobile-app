@@ -18,6 +18,18 @@
       "sha1": "05d7603ebe9dbdba5cbb9ec75528e0dec7f23184"
     },
     {
+      "path": "src/assets/fonts/JosefinSans-Bold.ttf",
+      "sha1": "57aae89112d94e577486ffa80b64e6f68efad405"
+    },
+    {
+      "path": "src/assets/fonts/JosefinSans-Regular.ttf",
+      "sha1": "6536e6e113fbc08c6b53ca4ce261015c462c8718"
+    },
+    {
+      "path": "src/assets/fonts/JosefinSans-SemiBold.ttf",
+      "sha1": "776fb7e3dd894383df9468a3b8c16cdc8654d439"
+    },
+    {
       "path": "src/assets/fonts/Quicksand-Bold.ttf",
       "sha1": "07ca4486c80653a7f3abc18145c2f251d5c9989b"
     },

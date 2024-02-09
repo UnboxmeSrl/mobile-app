@@ -21,6 +21,8 @@ const NewCouponScreen = () => {
     loginData,
     handleBackPress,
     handleGoToContentPress,
+    handleContentBriefPress,
+    handleRestaurantRedirect,
   } = useNewCoupon()
 
   return (
@@ -88,12 +90,15 @@ const NewCouponScreen = () => {
 
         <View style={styles.placeContainer}>
           <Text style={styles.tiktokTitleText}>Place</Text>
-          <TouchableOpacity style={styles.howItWorksContainer}>
+          <TouchableOpacity
+            style={styles.restaurantRedirectContainer}
+            onPress={() => handleRestaurantRedirect(bookingDetails?._restaurant_turbo)}
+          >
             <Text style={styles.socialMediaTitleText}>{`${bookingDetails?._restaurant_turbo?.Name}`} </Text>
             <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.contentBriefContainer}>
+          <TouchableOpacity style={styles.contentBriefContainer} onPress={handleContentBriefPress}>
             <Text style={styles.socialMediaTitleText}>Content brief </Text>
             <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
@@ -223,7 +228,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
     fontWeight: 'bold',
   },
-  howItWorksContainer: {
+  restaurantRedirectContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -246,7 +251,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: COLORS.white,
     borderRadius: moderateScale(5),
-    elevation: 20,
     marginHorizontal: '5%',
     paddingBottom: verticalScale(20),
     shadowColor: '#171717',

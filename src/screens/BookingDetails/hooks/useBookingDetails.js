@@ -18,6 +18,7 @@ const useBookingDetails = () => {
   const [timeFrameData, setTimeFrameData] = useState([])
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([])
   const [selectedTimeFame, setSelectedTimeFame] = useState()
+  const [isLoading, setIsLoading] = useState(false)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
 
@@ -50,16 +51,23 @@ const useBookingDetails = () => {
   }
 
   const handleConfirmBtnPress = async () => {
+    setIsLoading(true)
     const currentBookingDateTime = new Date(selectedDate)
     const bookingTimeStamp = currentBookingDateTime.valueOf()
     const formattedDate = `${currentBookingDateTime.getFullYear()}-${
-      currentBookingDateTime.getMonth() < 10
-        ? `0${currentBookingDateTime.getMonth()}`
-        : currentBookingDateTime.getMonth()
+      currentBookingDateTime.getMonth() + 1 < 10
+        ? `0${currentBookingDateTime.getMonth() + 1}`
+        : currentBookingDateTime.getMonth() + 1
     }-${
       currentBookingDateTime.getDate() < 10 ? `0${currentBookingDateTime.getDate()}` : currentBookingDateTime.getDate()
     }`
-    console.log(' conditionCheck', serviceDetails?.actions?.length, serviceDetails?.actions?.[0]?.actions_turbo_id)
+    console.log(
+      ' conditionCheck',
+      currentBookingDateTime,
+      formattedDate,
+      serviceDetails?.actions?.length,
+      serviceDetails?.actions?.[0]?.actions_turbo_id
+    )
     const prepData = {
       ApprovalStatus: false,
       Approved: serviceDetails?.Story,
@@ -101,6 +109,7 @@ const useBookingDetails = () => {
     } else {
       Alert.alert('something went wrong')
     }
+    setIsLoading(false)
   }
 
   const handleRemoveBtnPress = () => {
@@ -169,6 +178,7 @@ const useBookingDetails = () => {
     handleBackPress,
     handleConfirmBtnPress,
     handleRemoveBtnPress,
+    isLoading,
     isDateAvailable,
     selectedDate,
     selectedTimeFame,

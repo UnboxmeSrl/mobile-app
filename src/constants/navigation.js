@@ -24,6 +24,7 @@ export const MODAL_NAMES = {
   YourRating: 'YourRating',
 }
 export const SCREEN_NAMES = {
+  ArchiveScreen: 'ArchiveScreen',
   AddCode: 'AddCode',
   AddNewAddress: 'AddNewAddress',
   Addresses: 'Addresses',

@@ -9,18 +9,19 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import { useYourSchedule } from './hooks'
+import { checkActionName } from '../../utils'
 
 const YourScheduleScreen = () => {
-  const { bookings, selectedTab, setSelectedTab, handleCardPress } = useYourSchedule()
+  const { bookings, selectedTab, setSelectedTab, handleCardPress, handleArchivePress } = useYourSchedule()
   return (
     <ScrollView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.yourScheduleTextContainer}>
           <Text style={styles.dateSelectTitleText}>Your Schedule</Text>
         </View>
-        <View>
+        <TouchableOpacity onPress={handleArchivePress}>
           <Image resizeMode="contain" source={IMAGES.swap} style={styles.calenderIcon} />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.selectionTabContainer}>
@@ -49,26 +50,7 @@ const YourScheduleScreen = () => {
           const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
 
           const actionName = item?._actions_turbo?.Action_Name ?? 0
-          let icon = ''
-          if (actionName) {
-            switch (actionName) {
-              case 'Reel':
-                icon = IMAGES.reel
-                break
-              case 'TikTok':
-                icon = IMAGES.tiktok
-                break
-              case 'Story':
-                icon = IMAGES.instagramStory
-                break
-              case 'Maps & Story':
-                icon = IMAGES.googleMaps
-                break
-              case 'Diary Instagram':
-                icon = IMAGES.diary
-                break
-            }
-          }
+          const icon = checkActionName(actionName)
 
           return (
             <TouchableOpacity
@@ -127,7 +109,7 @@ const YourScheduleScreen = () => {
                     <Text style={styles.selectedDateDayText}>{weekDay?.slice(0, 3)}</Text>
                   </View>
                 </View>
-                <View style={{ width: '100%' }}>
+                <View style={styles.locationTimeMainContainer}>
                   <View style={styles.locationNameContainer}>
                     <Text style={styles.locationNameText}>{item?._restaurant_turbo?.Name}</Text>
                   </View>
@@ -173,6 +155,9 @@ const YourScheduleScreen = () => {
 export default YourScheduleScreen
 
 const styles = StyleSheet.create({
+  locationTimeMainContainer: {
+    width: '100%',
+  },
   approvalIcon: {
     height: moderateScale(6.8),
     tintColor: COLORS.mayGreen,
@@ -373,12 +358,12 @@ const styles = StyleSheet.create({
   timeContainer: {
     marginLeft: scale(15),
     marginTop: verticalScale(19),
-    width: '40%',
+    width: '45%',
   },
   timeReelsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '80%',
+    width: '70%',
   },
   timeText: {
     color: COLORS.black,

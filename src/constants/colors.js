@@ -38,4 +38,5 @@ export const COLORS = {
   white: '#FFFFFF',
   whiteShadedTransparent: '#DADADA',
   yankeesBlue: '#1E293B',
+  gainsboro: '#DBDBDB',
 }

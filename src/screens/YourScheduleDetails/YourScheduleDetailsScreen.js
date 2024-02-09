@@ -9,6 +9,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import { useYourScheduleDetails } from './hooks'
+import { CustomModal } from '../../components'
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -20,8 +21,13 @@ const YourScheduleDetailsScreen = () => {
     timeFrame,
     bookingDetails,
     approvalStage,
+    isAlertVisible,
+    isDeleting,
+    handleAlertVisible,
     handleBackPress,
     handleOpenCouponPress,
+    handleContentBriefPress,
+    handlePositiveBtnPress,
   } = useYourScheduleDetails()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -71,20 +77,22 @@ const YourScheduleDetailsScreen = () => {
             </View>
           </View>
 
-          <View style={styles.amenitiesContainer}>
-            <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-              <Image source={IMAGES.drinks} style={styles.amenityIcon} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.amenitiesContainer}>
+              <View style={styles.amenityContainer}>
+                <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                <Image source={IMAGES.drinks} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityContainer}>
+                <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                <Image source={IMAGES.meals} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityContainer}>
+                <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Extra_People} X Meals`}</Text>
+                <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
+              </View>
             </View>
-            <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-              <Image source={IMAGES.meals} style={styles.amenityIcon} />
-            </View>
-            <View style={styles.amenityContainer}>
-              <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Extra_People} X Meals`}</Text>
-              <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
-            </View>
-          </View>
+          </ScrollView>
 
           <View style={styles.nameLocationMainRow}>
             <View style={styles.locationImageContainer}>
@@ -113,8 +121,8 @@ const YourScheduleDetailsScreen = () => {
                 style={styles.selectedDateWithTimeText}
               >{`${currentWeekDay}, ${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
             </View>
-            <TouchableOpacity style={styles.removeBtnContainer}>
-              <Text style={styles.removeBtnText}>Remove</Text>
+            <TouchableOpacity style={styles.removeBtnContainer} onPress={handleAlertVisible}>
+              <Text style={styles.removeBtnText}>Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -137,7 +145,9 @@ const YourScheduleDetailsScreen = () => {
             <Text style={styles.timeTitleText}>Deadline</Text>
             <View style={styles.infoContainer}>
               <Image resizeMode="contain" source={IMAGES.info} style={styles.infoIcon} />
-              <Text style={styles.timeText}>5 days after booking</Text>
+              <Text
+                style={styles.timeText}
+              >{`${bookingDetails?._actions_turbo?.Days_deadline} days after booking`}</Text>
             </View>
           </View>
         </View>
@@ -148,7 +158,7 @@ const YourScheduleDetailsScreen = () => {
           </View>
         </View>
         <View style={styles.redirectsContainer}>
-          <TouchableOpacity style={styles.contentBriefContainer}>
+          <TouchableOpacity style={styles.contentBriefContainer} onPress={handleContentBriefPress}>
             <Text style={styles.socialMediaTitleText}>Content Brief & Tags</Text>
             <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
@@ -165,6 +175,14 @@ const YourScheduleDetailsScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <CustomModal
+        visible={isAlertVisible}
+        title={'Cancel booking'}
+        description={'Do you really want to cancel the booking?'}
+        handlePositiveBtnPress={handlePositiveBtnPress}
+        handleNegativeBtnPress={handleAlertVisible}
+        isLoading={isDeleting}
+      />
     </ScrollView>
   )
 }

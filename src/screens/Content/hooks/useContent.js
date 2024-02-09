@@ -14,6 +14,7 @@ const useContent = () => {
   const [selectedApp, setSelectedApp] = useState(1)
   const bookingDetails = useNavigationParam('bookingDetails')
   const actionName = useNavigationParam('actionName')
+  const [isLoading, setIsLoading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -22,6 +23,7 @@ const useContent = () => {
   }
 
   const handleNextPress = async () => {
+    setIsLoading(true)
     if (actionName === 'Diary Instagram') {
       /* Here, 
             reel=1 for reel
@@ -66,9 +68,10 @@ const useContent = () => {
         Alert.alert('Something went wrong')
       }
     }
+    setIsLoading(false)
   }
 
-  return { actionName, handleBackPress, handleNextPress, selectedApp, setSelectedApp }
+  return { isLoading, actionName, handleBackPress, handleNextPress, selectedApp, setSelectedApp }
 }
 
 export default useContent

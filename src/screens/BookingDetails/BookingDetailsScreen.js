@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import CalendarStrip from 'react-native-calendar-strip'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -23,6 +33,7 @@ const BookingDetailsScreen = () => {
     endDate,
     selectedDate,
     currentMonth,
+    isLoading,
     isDateAvailable,
     showPreviousWeek,
     showNextWeek,
@@ -157,18 +168,24 @@ const BookingDetailsScreen = () => {
         </View>
       </View>
       <View style={styles.bookBtnMainContainer}>
-        <TouchableOpacity
-          disabled={!selectedTimeFame?.id}
-          onPress={handleConfirmBtnPress}
-          style={[
-            styles.bookBtnContainer,
-            selectedTimeFame?.id && {
-              backgroundColor: COLORS.lightBrown,
-            },
-          ]}
-        >
-          <Text style={styles.bookBtnText}>Confirm</Text>
-        </TouchableOpacity>
+        {isLoading ? (
+          <View style={styles.bookBtnContainer}>
+            <ActivityIndicator color={COLORS.primary} size={30} />
+          </View>
+        ) : (
+          <TouchableOpacity
+            disabled={!selectedTimeFame?.id}
+            onPress={handleConfirmBtnPress}
+            style={[
+              styles.bookBtnContainer,
+              selectedTimeFame?.id && {
+                backgroundColor: COLORS.lightBrown,
+              },
+            ]}
+          >
+            <Text style={styles.bookBtnText}>Confirm</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   )

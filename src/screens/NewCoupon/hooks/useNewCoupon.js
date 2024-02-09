@@ -1,43 +1,47 @@
 import { useNavigationParam } from 'react-navigation-hooks'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { navigate } from '@services'
 
-import { IMAGES } from '../../../assets/images'
 import { SCREEN_NAMES } from '../../../constants/navigation'
+import { checkActionName } from '../../../utils'
+import { setRestaurantDetails } from '../../../redux/slices/restaurantSlice'
 
 const useNewCoupon = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
   const bookingDetails = useNavigationParam('bookingDetails')
+  const dispatch = useDispatch()
   const isReel = bookingDetails?.reel === '1'
   const bookingDate = new Date(bookingDetails?.BookingDay)
   const month = bookingDate.toLocaleString('default', { month: 'long' })
   const timeFrame = bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo
 
   const actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
-  let icon = ''
-  if (actionName) {
-    switch (actionName) {
-      case 'Reel':
-        icon = IMAGES.reel
-        break
-      case 'TikTok':
-        icon = IMAGES.tiktok
-        break
-      case 'Story':
-        icon = IMAGES.instagramStory
-        break
-      case 'Maps & Story':
-        icon = IMAGES.googleMaps
-        break
-      case 'Diary Instagram':
-        icon = IMAGES.diary
-        break
-    }
-  }
+  const icon = checkActionName(actionName)
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.YourScheduleScreen)
+  }
+
+  const handleContentBriefPress = () => {
+    navigate({
+      params: {
+        bookingDetails: bookingDetails,
+      },
+      routeName: SCREEN_NAMES.ContentBriefScreen,
+    })
+  }
+
+  const handleRestaurantRedirect = (item) => {
+    dispatch(setRestaurantDetails(item))
+    const cityData = item?._cities
+
+    navigate({
+      params: {
+        cityData: cityData,
+      },
+      routeName: SCREEN_NAMES.RestaurantDetails,
+    })
   }
 
   const handleGoToContentPress = () => {
@@ -50,6 +54,8 @@ const useNewCoupon = () => {
     bookingDetails,
     handleBackPress,
     handleGoToContentPress,
+    handleContentBriefPress,
+    handleRestaurantRedirect,
     icon,
     isReel,
     loginData,

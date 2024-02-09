@@ -55,13 +55,17 @@ const useYourSchedule = () => {
     dispatch(setBookings(res))
   }
 
+  const handleArchivePress = () => {
+    navigate(SCREEN_NAMES.ArchiveScreen)
+  }
+
   useEffect(() => {
     if (loginData?.id) {
       getBookingsData()
     }
   }, [])
 
-  return { bookings, handleCardPress, selectedTab, setSelectedTab }
+  return { bookings, handleCardPress, handleArchivePress, selectedTab, setSelectedTab }
 }
 
 export default useYourSchedule
