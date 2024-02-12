@@ -25,6 +25,7 @@ export const COLORS = {
   links: '#000699',
   mayGreen: '#379435',
   philippineGold: '#AC7303',
+  philippineGray: '#8D8B8F',
   primary: '#764837',
   primaryDark: '#1B1B1B',
   platinum: '#E6E8E9',
@@ -44,4 +45,6 @@ export const COLORS = {
   azureishWhite: '#D8E3F2',
   redViolet: '#C21CA1',
   paleRose: '#FFE8F8',
+  byzantine: '#C837AB',
+  hanBlue: '#3771C8',
 }

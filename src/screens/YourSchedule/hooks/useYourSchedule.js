@@ -6,12 +6,15 @@ import { navigate } from '@services'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
 import { getBookings } from '../../../services'
+import { useNavigationParam } from 'react-navigation-hooks'
 
 const useYourSchedule = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
-  const [selectedTab, setSelectedTab] = useState(1)
+  const selectedTabFromRoute = useNavigationParam('selectedTab')
+  const [selectedTab, setSelectedTab] = useState(selectedTabFromRoute ?? 1)
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
   const [contentApprovalStatus, setContentApprovalStatus] = useState('Missed Deadline')
+
   const dispatch = useDispatch()
 
   const handleCardPress = (item, approvalStatus, actionName) => {
@@ -60,13 +63,25 @@ const useYourSchedule = () => {
     navigate(SCREEN_NAMES.ArchiveScreen)
   }
 
+  const handleContentCardPress = () => {
+    navigate(SCREEN_NAMES.PublishContentScreen)
+  }
+
   useEffect(() => {
     if (loginData?.id) {
       getBookingsData()
     }
   }, [])
 
-  return { contentApprovalStatus, bookings, handleCardPress, handleArchivePress, selectedTab, setSelectedTab }
+  return {
+    contentApprovalStatus,
+    bookings,
+    handleCardPress,
+    handleContentCardPress,
+    handleArchivePress,
+    selectedTab,
+    setSelectedTab,
+  }
 }
 
 export default useYourSchedule

@@ -26,6 +26,7 @@ import ContentBriefScreen from '../screens/ContentBrief/ContentBriefScreen'
 import { NewCouponScreen } from '../screens/NewCoupon'
 import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
 import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
+import { PublishContentScreen } from '../screens/PublishContent'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -99,5 +100,8 @@ export default {
   },
   [SCREEN_NAMES.NewCouponScreen]: {
     screen: NewCouponScreen,
+  },
+  [SCREEN_NAMES.PublishContentScreen]: {
+    screen: PublishContentScreen,
   },
 }

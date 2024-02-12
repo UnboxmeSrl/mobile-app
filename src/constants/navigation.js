@@ -45,6 +45,7 @@ export const SCREEN_NAMES = {
   OtherSignUp: 'OtherSignUp',
   Prizes: 'Prizes',
   ProductSelection: 'ProductSelection',
+  PublishContentScreen: 'PublishContentScreen',
   Profile: 'Profile',
   Questionnaire: 'Questionnaire',
   NewCouponScreen: 'NewCouponScreen',

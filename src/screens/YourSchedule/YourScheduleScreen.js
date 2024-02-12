@@ -10,6 +10,7 @@ import { FONTS } from '../../constants/fonts'
 
 import { useYourSchedule } from './hooks'
 import { checkActionName } from '../../utils'
+import { ContentStatusModal } from '../../components'
 
 const YourScheduleScreen = () => {
   const {
@@ -18,6 +19,7 @@ const YourScheduleScreen = () => {
     selectedTab,
     setSelectedTab,
     handleCardPress,
+    handleContentCardPress,
     handleArchivePress,
   } = useYourSchedule()
   return (
@@ -162,7 +164,7 @@ const YourScheduleScreen = () => {
           data={[1, 2, 3]}
           renderItem={({ item, index }) => {
             return (
-              <View style={contentStyles.cardContainer}>
+              <TouchableOpacity style={contentStyles.cardContainer} onPress={handleContentCardPress}>
                 <View style={contentStyles.cardContentContainer}>
                   <View style={contentStyles.ratingSocialMediaMainContainer}>
                     <View style={contentStyles.ratingSocialMediaContainer}>
@@ -219,7 +221,7 @@ const YourScheduleScreen = () => {
                           </Text>
                         </View>
                         <View style={contentStyles.threeDotsContainer}>
-                          <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.infoIcon} />
+                          <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.threeDotsIcon} />
                         </View>
                       </View>
                       <View style={contentStyles.infoContainer}>
@@ -257,11 +259,12 @@ const YourScheduleScreen = () => {
                     </View>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )
           }}
         />
       )}
+      <ContentStatusModal />
     </ScrollView>
   )
 }
@@ -672,6 +675,10 @@ const contentStyles = StyleSheet.create({
     width: '5%',
     marginLeft: scale(10),
     justifyContent: 'center',
+  },
+  threeDotsIcon: {
+    height: moderateScale(12),
+    width: moderateScale(12),
   },
   locationMainRow: {
     flexDirection: 'row',
