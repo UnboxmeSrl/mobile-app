@@ -71,3 +71,13 @@ export const getAllCanceledBookings = async (params) => {
     console.log(error)
   }
 }
+
+export const getDiaryActions = async () => {
+  try {
+    const url = Api.RESTAURANTS.GET_DIARY_ACTIONS
+    const response = await Fetch.get(url)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

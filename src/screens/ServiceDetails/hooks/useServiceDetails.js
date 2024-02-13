@@ -7,6 +7,7 @@ import { navigate } from '@services'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getServiceCategories, getServices } from '../../../services/LocationsService'
+import { getDiaryActions } from '../../../services'
 
 const useServiceDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -16,6 +17,7 @@ const useServiceDetails = () => {
 
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
+  const [diaryItems, setDiaryItems] = useState([])
   const [filter, setFilter] = useState(0)
 
   const getServicesData = async () => {
@@ -41,6 +43,11 @@ const useServiceDetails = () => {
     setServiceCategories(addAllCategory)
   }
 
+  const getDiaryActionsData = async () => {
+    const res = await getDiaryActions()
+    setDiaryItems(res)
+  }
+
   const onCategoryChange = (serviceCategoryId) => {
     console.log('Category change', serviceCategoryId)
     setFilter(serviceCategoryId)
@@ -60,6 +67,7 @@ const useServiceDetails = () => {
 
   useEffect(() => {
     getServiceCategoriesData()
+    getDiaryActionsData()
   }, [])
 
   useEffect(() => {
@@ -67,6 +75,7 @@ const useServiceDetails = () => {
   }, [filter])
 
   return {
+    diaryItems,
     categoriesIds,
     filter,
     handleBackPress,

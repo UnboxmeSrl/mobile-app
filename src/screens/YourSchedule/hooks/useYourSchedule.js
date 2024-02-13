@@ -19,7 +19,7 @@ const useYourSchedule = () => {
 
   const handleCardPress = (item, approvalStatus, actionName) => {
     if (approvalStatus === 'Pending') {
-      if (actionName === 'Diary Instagram' && item?.reel === '') {
+      if (actionName === 'Diary Instagram' && item?.diary_action_turbo_id === 0) {
         navigate({
           params: {
             actionName: actionName,

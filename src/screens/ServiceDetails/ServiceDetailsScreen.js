@@ -14,6 +14,7 @@ import { checkActionName } from '../../utils'
 
 const ServiceDetails = () => {
   const {
+    diaryItems,
     services,
     categoriesIds,
     serviceDetails,
@@ -23,6 +24,7 @@ const ServiceDetails = () => {
     handleBackPress,
     handleBookPress,
   } = useServiceDetails()
+
   console.log('Service Details', JSON.stringify(serviceDetails))
   return (
     <View style={styles.mainContainer}>
@@ -55,8 +57,8 @@ const ServiceDetails = () => {
             data={serviceDetails?.actions}
             renderItem={({ item, index }) => {
               const actionName = item?._actions_turbo?.Action_Name
-              const diaryItems = ['TikTok Diary', 'Instagram Diary']
-              const icon = checkActionName(actionName);
+              // const diaryItems = ['TikTok Diary', 'Instagram Diary']
+              const icon = checkActionName(actionName)
               return (
                 <>
                   {actionName === 'Diary Instagram' ? (
@@ -66,7 +68,7 @@ const ServiceDetails = () => {
                           <View style={styles.tiktokMainContainer}>
                             <View style={styles.tiktokIconNameContainer}>
                               <Image source={icon} style={styles.tiktokIconImage} />
-                              <Text style={styles.tiktokTitleText}>{diaryItem}</Text>
+                              <Text style={styles.tiktokTitleText}>{diaryItem?.action}</Text>
 
                               <View style={styles.ratingContainer}>
                                 <Text style={styles.ratingUsersText}>240</Text>

@@ -12,9 +12,12 @@ const useContentBrief = () => {
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.YourScheduleScreen)
   }
+  let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
 
-  const actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
-  const icon = checkActionName(actionName);
+  if (bookingDetails?.diary_action_turbo_id) {
+    actionName = bookingDetails?._diary_action_turbo?.action
+  }
+  const icon = checkActionName(actionName)
 
   const handleOpenCouponPress = () => {
     navigate({

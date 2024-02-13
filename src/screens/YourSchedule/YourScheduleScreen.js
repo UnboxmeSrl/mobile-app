@@ -59,7 +59,10 @@ const YourScheduleScreen = () => {
             const timeFrame = item?._timeframes_turbo
             const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
 
-            const actionName = item?._actions_turbo?.Action_Name ?? 0
+            let actionName = item?._actions_turbo?.Action_Name ?? 0
+            if (item?.diary_action_turbo_id) {
+              actionName = item?._diary_action_turbo?.action
+            }
             const icon = checkActionName(actionName)
 
             return (
@@ -264,7 +267,7 @@ const YourScheduleScreen = () => {
           }}
         />
       )}
-      <ContentStatusModal />
+      {/* <ContentStatusModal /> */}
     </ScrollView>
   )
 }

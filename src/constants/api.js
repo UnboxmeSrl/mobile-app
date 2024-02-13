@@ -22,5 +22,6 @@ export const Api = {
     UPDATE_ACTION_DIARY: `${BASE_URL}/api:bwh6Xc5O/update_content`,
     CANCEL_BOOKING: `${BASE_URL}/api:bwh6Xc5O/cancel_booking`,
     GET_ALL_CANCELED_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/canceled_booking`,
+    GET_DIARY_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/diary_action_turbo`,
   },
 }

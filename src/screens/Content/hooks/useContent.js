@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,7 +7,7 @@ import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
-import { getBookings, updateAction, updateActionDiary } from '../../../services'
+import { getBookings, getDiaryActions, updateAction, updateActionDiary } from '../../../services'
 
 const useContent = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -15,8 +15,17 @@ const useContent = () => {
   const bookingDetails = useNavigationParam('bookingDetails')
   const actionName = useNavigationParam('actionName')
   const [isLoading, setIsLoading] = useState(false)
+  const [diaryItems, setDiaryItems] = useState([])
+  const [isDataFetching, setIsDataFetching] = useState(false)
 
   const dispatch = useDispatch()
+
+  const getDiaryActionsData = async () => {
+    setIsDataFetching(true)
+    const res = await getDiaryActions()
+    setDiaryItems(res)
+    setIsDataFetching(false)
+  }
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.Schedule)
@@ -31,7 +40,7 @@ const useContent = () => {
     */
       const params = `/${bookingDetails?.id}`
       const prepData = {
-        reel: selectedApp,
+        diary_action_turbo_id: diaryItems?.[selectedApp]?.id,
       }
       const res = await updateActionDiary(params, prepData)
       console.log('update Diary Result: ', res)
@@ -71,7 +80,20 @@ const useContent = () => {
     setIsLoading(false)
   }
 
-  return { isLoading, actionName, handleBackPress, handleNextPress, selectedApp, setSelectedApp }
+  useEffect(() => {
+    getDiaryActionsData()
+  }, [])
+
+  return {
+    isLoading,
+    isDataFetching,
+    diaryItems,
+    actionName,
+    handleBackPress,
+    handleNextPress,
+    selectedApp,
+    setSelectedApp,
+  }
 }
 
 export default useContent

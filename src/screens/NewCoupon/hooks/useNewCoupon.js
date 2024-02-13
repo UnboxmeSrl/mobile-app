@@ -16,7 +16,11 @@ const useNewCoupon = () => {
   const month = bookingDate.toLocaleString('default', { month: 'long' })
   const timeFrame = bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo
 
-  const actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
+  let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
+
+  if (bookingDetails?.diary_action_turbo_id) {
+    actionName = bookingDetails?._diary_action_turbo?.action
+  }
   const icon = checkActionName(actionName)
 
   const handleBackPress = () => {

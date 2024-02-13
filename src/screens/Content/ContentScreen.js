@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -10,7 +10,16 @@ import { FONTS } from '../../constants/fonts'
 import { useContent } from './hooks'
 
 const ContentScreen = () => {
-  const { isLoading, actionName, selectedApp, setSelectedApp, handleBackPress, handleNextPress } = useContent()
+  const {
+    isLoading,
+    isDataFetching,
+    diaryItems,
+    actionName,
+    selectedApp,
+    setSelectedApp,
+    handleBackPress,
+    handleNextPress,
+  } = useContent()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -23,72 +32,99 @@ const ContentScreen = () => {
           </View>
         </View>
 
-        <TouchableOpacity
-          onPress={() => setSelectedApp(1)}
-          style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
-        >
-          <View style={styles.socialMediaMainDetailsContainer}>
-            <View style={styles.socialMediaImageContainer}>
-              <Image
-                resizeMode="cover"
-                source={actionName === 'Diary Instagram' ? IMAGES.diary : IMAGES.reel}
-                style={styles.testImage}
-              />
-            </View>
-            <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>{`${
-                actionName === 'Diary Instagram' ? 'Instagram Diary' : 'Full Reel'
-              }`}</Text>
-              <View style={styles.ratingContainer}>
-                <Text style={styles.ratingUsersText}>240</Text>
-                <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-              </View>
-            </View>
+        {isDataFetching ? (
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator color={COLORS.primary} size={20} />
           </View>
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>A Reel fully dedicated to your experience at the Restaurant</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => setSelectedApp(2)}
-          style={[styles.cardContainer, selectedApp === 2 && { borderColor: COLORS.black, borderWidth: 1 }]}
-        >
-          <View style={styles.socialMediaMainDetailsContainer}>
-            <View style={styles.tiktokImageContainer}>
-              <Image
-                resizeMode="cover"
-                source={actionName === 'Diary Instagram' ? IMAGES.diary : IMAGES.tiktok}
-                style={styles.tiktokImage}
-              />
-            </View>
-            <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>{`${
-                actionName === 'Diary Instagram' ? 'Tiktok Diary' : 'Full Tik Tok'
-              }`}</Text>
-              <View style={styles.ratingContainer}>
-                <Text style={styles.ratingUsersText}>240</Text>
-                <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-              </View>
-            </View>
-          </View>
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>
-              A TikTok video fully dedicated to your experience at the Restaurant
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.nextBtnMainContainer}>
-        {isLoading ? (
-          <View style={styles.nextBtnContainer}>
-            <ActivityIndicator color={COLORS.primary} size={30} />
-          </View>
+        ) : actionName === 'Diary Instagram' ? (
+          <FlatList
+            data={diaryItems}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => setSelectedApp(index)}
+                  style={[styles.cardContainer, selectedApp === index && { borderColor: COLORS.black, borderWidth: 1 }]}
+                >
+                  <View style={styles.socialMediaMainDetailsContainer}>
+                    <View style={styles.socialMediaImageContainer}>
+                      <Image resizeMode="cover" source={IMAGES.diary} style={styles.testImage} />
+                    </View>
+                    <View style={styles.socialMediaNameContainer}>
+                      <Text style={styles.socialMediaNameText}>{`${item?.action}`}</Text>
+                      <View style={styles.ratingContainer}>
+                        <Text style={styles.ratingUsersText}>240</Text>
+                        <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                      </View>
+                    </View>
+                  </View>
+                  <View style={styles.descriptionContainer}>
+                    <Text style={styles.descriptionText}>
+                      {`A ${item?.action} fully dedicated to your experience at the Restaurant`}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            }}
+          />
         ) : (
-          <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
-            <Text style={styles.nextBtnText}>Next </Text>
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity
+              onPress={() => setSelectedApp(1)}
+              style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
+            >
+              <View style={styles.socialMediaMainDetailsContainer}>
+                <View style={styles.socialMediaImageContainer}>
+                  <Image resizeMode="cover" source={IMAGES.reel} style={styles.testImage} />
+                </View>
+                <View style={styles.socialMediaNameContainer}>
+                  <Text style={styles.socialMediaNameText}>{`${'Full Reel'}`}</Text>
+                  <View style={styles.ratingContainer}>
+                    <Text style={styles.ratingUsersText}>240</Text>
+                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                  </View>
+                </View>
+              </View>
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.descriptionText}>A Reel fully dedicated to your experience at the Restaurant</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setSelectedApp(2)}
+              style={[styles.cardContainer, selectedApp === 2 && { borderColor: COLORS.black, borderWidth: 1 }]}
+            >
+              <View style={styles.socialMediaMainDetailsContainer}>
+                <View style={styles.tiktokImageContainer}>
+                  <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.tiktokImage} />
+                </View>
+                <View style={styles.socialMediaNameContainer}>
+                  <Text style={styles.socialMediaNameText}>{`${'Full Tik Tok'}`}</Text>
+                  <View style={styles.ratingContainer}>
+                    <Text style={styles.ratingUsersText}>240</Text>
+                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                  </View>
+                </View>
+              </View>
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.descriptionText}>
+                  A TikTok video fully dedicated to your experience at the Restaurant
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </>
+        )}
+
+        {!isDataFetching && (
+          <View style={styles.nextBtnMainContainer}>
+            {isLoading ? (
+              <View style={styles.nextBtnContainer}>
+                <ActivityIndicator color={COLORS.primary} size={30} />
+              </View>
+            ) : (
+              <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
+                <Text style={styles.nextBtnText}>Next </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         )}
       </View>
     </ScrollView>
@@ -145,6 +181,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '85%',
+  },
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: '75%',
   },
   mainContainer: {
     backgroundColor: COLORS.white,
