@@ -62,7 +62,7 @@ const NewCouponScreen = () => {
             <Image source={IMAGES.meals} style={styles.amenityIcon} />
           </View>
           <View style={styles.amenityContainer}>
-            <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Extra_People} X Meals`}</Text>
+            <Text style={styles.amenityTitle}>{` ${bookingDetails?._actions_turbo?.Extra_People} X Persons`}</Text>
             <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
           </View>
         </ScrollView>

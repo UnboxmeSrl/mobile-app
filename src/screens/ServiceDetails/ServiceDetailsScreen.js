@@ -96,7 +96,9 @@ const ServiceDetails = () => {
                               <Image source={IMAGES.meals} style={styles.amenityIcon} />
                             </View>
                             <View style={styles.amenityContainer}>
-                              <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Extra_People} X Meals`}</Text>
+                              <Text
+                                style={styles.amenityTitle}
+                              >{` ${item?._actions_turbo?.Extra_People} X Persons`}</Text>
                               <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
                             </View>
                           </ScrollView>
@@ -133,7 +135,9 @@ const ServiceDetails = () => {
                             <Image source={IMAGES.meals} style={styles.amenityIcon} />
                           </View>
                           <View style={styles.amenityContainer}>
-                            <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Extra_People} X Meals`}</Text>
+                            <Text
+                              style={styles.amenityTitle}
+                            >{` ${item?._actions_turbo?.Extra_People} X Persons`}</Text>
                             <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
                           </View>
                         </ScrollView>
