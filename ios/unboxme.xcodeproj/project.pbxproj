@@ -141265,7 +141265,6 @@
 		E0BBF2352B56B68900DBB7CD /* abseil */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = abseil;
 			path = libabseil.a;
 			remoteRef = E0BBF2342B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141273,7 +141272,6 @@
 		E0BBF2372B56B68900DBB7CD /* AppAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = AppAuth;
 			path = libAppAuth.a;
 			remoteRef = E0BBF2362B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141281,7 +141279,6 @@
 		E0BBF2392B56B68900DBB7CD /* BoringSSL-GRPC */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "BoringSSL-GRPC";
 			path = "libBoringSSL-GRPC.a";
 			remoteRef = E0BBF2382B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141289,7 +141286,6 @@
 		E0BBF23B2B56B68900DBB7CD /* DoubleConversion */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = DoubleConversion;
 			path = libDoubleConversion.a;
 			remoteRef = E0BBF23A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141297,7 +141293,6 @@
 		E0BBF23D2B56B68900DBB7CD /* FBReactNativeSpec */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBReactNativeSpec;
 			path = libFBReactNativeSpec.a;
 			remoteRef = E0BBF23C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141305,7 +141300,6 @@
 		E0BBF23F2B56B68900DBB7CD /* FBSDKCoreKit */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBSDKCoreKit;
 			path = libFBSDKCoreKit.a;
 			remoteRef = E0BBF23E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141313,7 +141307,6 @@
 		E0BBF2412B56B68900DBB7CD /* FBSDKLoginKit */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBSDKLoginKit;
 			path = libFBSDKLoginKit.a;
 			remoteRef = E0BBF2402B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141321,7 +141314,6 @@
 		E0BBF2432B56B68900DBB7CD /* FBSDKShareKit */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBSDKShareKit;
 			path = libFBSDKShareKit.a;
 			remoteRef = E0BBF2422B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141329,7 +141321,6 @@
 		E0BBF2452B56B68900DBB7CD /* FirebaseABTesting */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseABTesting;
 			path = libFirebaseABTesting.a;
 			remoteRef = E0BBF2442B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141337,7 +141328,6 @@
 		E0BBF2472B56B68900DBB7CD /* FirebaseAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseAuth;
 			path = libFirebaseAuth.a;
 			remoteRef = E0BBF2462B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141345,7 +141335,6 @@
 		E0BBF2492B56B68900DBB7CD /* FirebaseCore */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseCore;
 			path = libFirebaseCore.a;
 			remoteRef = E0BBF2482B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141353,7 +141342,6 @@
 		E0BBF24B2B56B68900DBB7CD /* FirebaseCoreDiagnostics */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseCoreDiagnostics;
 			path = libFirebaseCoreDiagnostics.a;
 			remoteRef = E0BBF24A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141361,7 +141349,6 @@
 		E0BBF24D2B56B68900DBB7CD /* FirebaseCrashlytics */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseCrashlytics;
 			path = libFirebaseCrashlytics.a;
 			remoteRef = E0BBF24C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141369,7 +141356,6 @@
 		E0BBF24F2B56B68900DBB7CD /* FirebaseFirestore */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseFirestore;
 			path = libFirebaseFirestore.a;
 			remoteRef = E0BBF24E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141377,7 +141363,6 @@
 		E0BBF2512B56B68900DBB7CD /* FirebaseFunctions */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseFunctions;
 			path = libFirebaseFunctions.a;
 			remoteRef = E0BBF2502B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141385,7 +141370,6 @@
 		E0BBF2532B56B68900DBB7CD /* FirebaseInAppMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseInAppMessaging;
 			path = libFirebaseInAppMessaging.a;
 			remoteRef = E0BBF2522B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141393,7 +141377,6 @@
 		E0BBF2552B56B68900DBB7CD /* FirebaseInAppMessaging-InAppMessagingDisplayResources */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = "FirebaseInAppMessaging-InAppMessagingDisplayResources";
 			path = InAppMessagingDisplayResources.bundle;
 			remoteRef = E0BBF2542B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141401,7 +141384,6 @@
 		E0BBF2572B56B68900DBB7CD /* FirebaseInstallations */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseInstallations;
 			path = libFirebaseInstallations.a;
 			remoteRef = E0BBF2562B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141409,7 +141391,6 @@
 		E0BBF2592B56B68900DBB7CD /* FirebaseInstanceID */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseInstanceID;
 			path = libFirebaseInstanceID.a;
 			remoteRef = E0BBF2582B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141417,7 +141398,6 @@
 		E0BBF25B2B56B68900DBB7CD /* FirebaseMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseMessaging;
 			path = libFirebaseMessaging.a;
 			remoteRef = E0BBF25A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141425,7 +141405,6 @@
 		E0BBF25D2B56B68900DBB7CD /* FirebasePerformance */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebasePerformance;
 			path = libFirebasePerformance.a;
 			remoteRef = E0BBF25C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141433,7 +141412,6 @@
 		E0BBF25F2B56B68900DBB7CD /* FirebaseRemoteConfig */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseRemoteConfig;
 			path = libFirebaseRemoteConfig.a;
 			remoteRef = E0BBF25E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141441,7 +141419,6 @@
 		E0BBF2612B56B68900DBB7CD /* FirebaseStorage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseStorage;
 			path = libFirebaseStorage.a;
 			remoteRef = E0BBF2602B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141449,7 +141426,6 @@
 		E0BBF2632B56B68900DBB7CD /* Folly */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = Folly;
 			path = libFolly.a;
 			remoteRef = E0BBF2622B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141457,7 +141433,6 @@
 		E0BBF2652B56B68900DBB7CD /* glog */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = glog;
 			path = libglog.a;
 			remoteRef = E0BBF2642B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141465,7 +141440,6 @@
 		E0BBF2672B56B68900DBB7CD /* Google-Maps-iOS-Utils */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "Google-Maps-iOS-Utils";
 			path = "libGoogle-Maps-iOS-Utils.a";
 			remoteRef = E0BBF2662B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141473,7 +141447,6 @@
 		E0BBF2692B56B68900DBB7CD /* GoogleDataTransport */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GoogleDataTransport;
 			path = libGoogleDataTransport.a;
 			remoteRef = E0BBF2682B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141481,7 +141454,6 @@
 		E0BBF26B2B56B68900DBB7CD /* GoogleUtilities */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GoogleUtilities;
 			path = libGoogleUtilities.a;
 			remoteRef = E0BBF26A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141489,7 +141461,6 @@
 		E0BBF26D2B56B68900DBB7CD /* gRPC-C++ */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "gRPC-C++";
 			path = "libgRPC-C++.a";
 			remoteRef = E0BBF26C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141497,7 +141468,6 @@
 		E0BBF26F2B56B68900DBB7CD /* gRPC-C++-gRPCCertificates-Cpp */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = "gRPC-C++-gRPCCertificates-Cpp";
 			path = "gRPCCertificates-Cpp.bundle";
 			remoteRef = E0BBF26E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141505,7 +141475,6 @@
 		E0BBF2712B56B68900DBB7CD /* gRPC-Core */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "gRPC-Core";
 			path = "libgRPC-Core.a";
 			remoteRef = E0BBF2702B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141513,7 +141482,6 @@
 		E0BBF2732B56B68900DBB7CD /* GTMAppAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GTMAppAuth;
 			path = libGTMAppAuth.a;
 			remoteRef = E0BBF2722B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141521,7 +141489,6 @@
 		E0BBF2752B56B68900DBB7CD /* GTMSessionFetcher */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GTMSessionFetcher;
 			path = libGTMSessionFetcher.a;
 			remoteRef = E0BBF2742B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141529,7 +141496,6 @@
 		E0BBF2772B56B68900DBB7CD /* leveldb-library */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "leveldb-library";
 			path = "libleveldb-library.a";
 			remoteRef = E0BBF2762B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141537,7 +141503,6 @@
 		E0BBF2792B56B68900DBB7CD /* libwebp */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = libwebp;
 			path = liblibwebp.a;
 			remoteRef = E0BBF2782B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141545,7 +141510,6 @@
 		E0BBF27B2B56B68900DBB7CD /* lottie-ios */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "lottie-ios";
 			path = "liblottie-ios.a";
 			remoteRef = E0BBF27A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141553,7 +141517,6 @@
 		E0BBF27D2B56B68900DBB7CD /* lottie-react-native */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "lottie-react-native";
 			path = "liblottie-react-native.a";
 			remoteRef = E0BBF27C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141561,7 +141524,6 @@
 		E0BBF27F2B56B68900DBB7CD /* nanopb */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = nanopb;
 			path = libnanopb.a;
 			remoteRef = E0BBF27E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141569,7 +141531,6 @@
 		E0BBF2812B56B68900DBB7CD /* PanModal */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = PanModal;
 			path = libPanModal.a;
 			remoteRef = E0BBF2802B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141577,7 +141538,6 @@
 		E0BBF2832B56B68900DBB7CD /* Pods-unboxme */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "Pods-unboxme";
 			path = "libPods-unboxme.a";
 			remoteRef = E0BBF2822B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141585,7 +141545,6 @@
 		E0BBF2852B56B68900DBB7CD /* PromisesObjC */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = PromisesObjC;
 			path = libPromisesObjC.a;
 			remoteRef = E0BBF2842B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141593,7 +141552,6 @@
 		E0BBF2872B56B68900DBB7CD /* Protobuf */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = Protobuf;
 			path = libProtobuf.a;
 			remoteRef = E0BBF2862B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141601,7 +141559,6 @@
 		E0BBF2892B56B68900DBB7CD /* RCTTypeSafety */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RCTTypeSafety;
 			path = libRCTTypeSafety.a;
 			remoteRef = E0BBF2882B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141609,7 +141566,6 @@
 		E0BBF28B2B56B68900DBB7CD /* React-Core */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-Core";
 			path = "libReact-Core.a";
 			remoteRef = E0BBF28A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141617,7 +141573,6 @@
 		E0BBF28D2B56B68900DBB7CD /* React-Core-AccessibilityResources */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = "React-Core-AccessibilityResources";
 			path = AccessibilityResources.bundle;
 			remoteRef = E0BBF28C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141625,7 +141580,6 @@
 		E0BBF28F2B56B68900DBB7CD /* React-CoreModules */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-CoreModules";
 			path = "libReact-CoreModules.a";
 			remoteRef = E0BBF28E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141633,7 +141587,6 @@
 		E0BBF2912B56B68900DBB7CD /* React-cxxreact */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-cxxreact";
 			path = "libReact-cxxreact.a";
 			remoteRef = E0BBF2902B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141641,7 +141594,6 @@
 		E0BBF2932B56B68900DBB7CD /* React-jsi */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-jsi";
 			path = "libReact-jsi.a";
 			remoteRef = E0BBF2922B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141649,7 +141601,6 @@
 		E0BBF2952B56B68900DBB7CD /* React-jsiexecutor */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-jsiexecutor";
 			path = "libReact-jsiexecutor.a";
 			remoteRef = E0BBF2942B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141657,7 +141608,6 @@
 		E0BBF2972B56B68900DBB7CD /* React-jsinspector */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-jsinspector";
 			path = "libReact-jsinspector.a";
 			remoteRef = E0BBF2962B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141665,7 +141615,6 @@
 		E0BBF2992B56B68900DBB7CD /* react-native-config */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-config";
 			path = "libreact-native-config.a";
 			remoteRef = E0BBF2982B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141673,7 +141622,6 @@
 		E0BBF29B2B56B68900DBB7CD /* react-native-cookies */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-cookies";
 			path = "libreact-native-cookies.a";
 			remoteRef = E0BBF29A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141681,7 +141629,6 @@
 		E0BBF29D2B56B68900DBB7CD /* react-native-create-thumbnail */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-create-thumbnail";
 			path = "libreact-native-create-thumbnail.a";
 			remoteRef = E0BBF29C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141689,7 +141636,6 @@
 		E0BBF29F2B56B68900DBB7CD /* react-native-fbsdk */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-fbsdk";
 			path = "libreact-native-fbsdk.a";
 			remoteRef = E0BBF29E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141697,7 +141643,6 @@
 		E0BBF2A12B56B68900DBB7CD /* react-native-get-random-values */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-get-random-values";
 			path = "libreact-native-get-random-values.a";
 			remoteRef = E0BBF2A02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141705,7 +141650,6 @@
 		E0BBF2A32B56B68900DBB7CD /* react-native-google-maps */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-google-maps";
 			path = "libreact-native-google-maps.a";
 			remoteRef = E0BBF2A22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141713,7 +141657,6 @@
 		E0BBF2A52B56B68900DBB7CD /* react-native-image-picker */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-image-picker";
 			path = "libreact-native-image-picker.a";
 			remoteRef = E0BBF2A42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141721,7 +141664,6 @@
 		E0BBF2A72B56B68900DBB7CD /* react-native-maps */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-maps";
 			path = "libreact-native-maps.a";
 			remoteRef = E0BBF2A62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141729,7 +141671,6 @@
 		E0BBF2A92B56B68900DBB7CD /* react-native-netinfo */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-netinfo";
 			path = "libreact-native-netinfo.a";
 			remoteRef = E0BBF2A82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141737,7 +141678,6 @@
 		E0BBF2AB2B56B68900DBB7CD /* react-native-safe-area-context */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-safe-area-context";
 			path = "libreact-native-safe-area-context.a";
 			remoteRef = E0BBF2AA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141745,7 +141685,6 @@
 		E0BBF2AD2B56B68900DBB7CD /* react-native-splash-screen */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-splash-screen";
 			path = "libreact-native-splash-screen.a";
 			remoteRef = E0BBF2AC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141753,7 +141692,6 @@
 		E0BBF2AF2B56B68900DBB7CD /* react-native-text-input-mask */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-text-input-mask";
 			path = "libreact-native-text-input-mask.a";
 			remoteRef = E0BBF2AE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141761,7 +141699,6 @@
 		E0BBF2B12B56B68900DBB7CD /* react-native-video */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-video";
 			path = "libreact-native-video.a";
 			remoteRef = E0BBF2B02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141769,7 +141706,6 @@
 		E0BBF2B32B56B68900DBB7CD /* react-native-webview */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-webview";
 			path = "libreact-native-webview.a";
 			remoteRef = E0BBF2B22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141777,7 +141713,6 @@
 		E0BBF2B52B56B68900DBB7CD /* React-RCTAnimation */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTAnimation";
 			path = "libReact-RCTAnimation.a";
 			remoteRef = E0BBF2B42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141785,7 +141720,6 @@
 		E0BBF2B72B56B68900DBB7CD /* React-RCTBlob */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTBlob";
 			path = "libReact-RCTBlob.a";
 			remoteRef = E0BBF2B62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141793,7 +141727,6 @@
 		E0BBF2B92B56B68900DBB7CD /* React-RCTImage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTImage";
 			path = "libReact-RCTImage.a";
 			remoteRef = E0BBF2B82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141801,7 +141734,6 @@
 		E0BBF2BB2B56B68900DBB7CD /* React-RCTLinking */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTLinking";
 			path = "libReact-RCTLinking.a";
 			remoteRef = E0BBF2BA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141809,7 +141741,6 @@
 		E0BBF2BD2B56B68900DBB7CD /* React-RCTNetwork */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTNetwork";
 			path = "libReact-RCTNetwork.a";
 			remoteRef = E0BBF2BC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141817,7 +141748,6 @@
 		E0BBF2BF2B56B68900DBB7CD /* React-RCTSettings */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTSettings";
 			path = "libReact-RCTSettings.a";
 			remoteRef = E0BBF2BE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141825,7 +141755,6 @@
 		E0BBF2C12B56B68900DBB7CD /* React-RCTText */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTText";
 			path = "libReact-RCTText.a";
 			remoteRef = E0BBF2C02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141833,7 +141762,6 @@
 		E0BBF2C32B56B68900DBB7CD /* React-RCTVibration */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTVibration";
 			path = "libReact-RCTVibration.a";
 			remoteRef = E0BBF2C22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141841,7 +141769,6 @@
 		E0BBF2C52B56B68900DBB7CD /* ReactCommon */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = ReactCommon;
 			path = libReactCommon.a;
 			remoteRef = E0BBF2C42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141849,7 +141776,6 @@
 		E0BBF2C72B56B68900DBB7CD /* rn-fetch-blob */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "rn-fetch-blob";
 			path = "librn-fetch-blob.a";
 			remoteRef = E0BBF2C62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141857,7 +141783,6 @@
 		E0BBF2C92B56B68900DBB7CD /* RNAppleAuthentication */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNAppleAuthentication;
 			path = libRNAppleAuthentication.a;
 			remoteRef = E0BBF2C82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141865,7 +141790,6 @@
 		E0BBF2CB2B56B68900DBB7CD /* RNCAsyncStorage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNCAsyncStorage;
 			path = libRNCAsyncStorage.a;
 			remoteRef = E0BBF2CA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141873,7 +141797,6 @@
 		E0BBF2CD2B56B68900DBB7CD /* RNCClipboard */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNCClipboard;
 			path = libRNCClipboard.a;
 			remoteRef = E0BBF2CC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141881,7 +141804,6 @@
 		E0BBF2CF2B56B68900DBB7CD /* RNCMaskedView */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNCMaskedView;
 			path = libRNCMaskedView.a;
 			remoteRef = E0BBF2CE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141889,7 +141811,6 @@
 		E0BBF2D12B56B68900DBB7CD /* RNDateTimePicker */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNDateTimePicker;
 			path = libRNDateTimePicker.a;
 			remoteRef = E0BBF2D02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141897,7 +141818,6 @@
 		E0BBF2D32B56B68900DBB7CD /* RNDeviceInfo */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNDeviceInfo;
 			path = libRNDeviceInfo.a;
 			remoteRef = E0BBF2D22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141905,7 +141825,6 @@
 		E0BBF2D52B56B68900DBB7CD /* RNFastImage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFastImage;
 			path = libRNFastImage.a;
 			remoteRef = E0BBF2D42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141913,7 +141832,6 @@
 		E0BBF2D72B56B68900DBB7CD /* RNFBApp */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBApp;
 			path = libRNFBApp.a;
 			remoteRef = E0BBF2D62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141921,7 +141839,6 @@
 		E0BBF2D92B56B68900DBB7CD /* RNFBAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBAuth;
 			path = libRNFBAuth.a;
 			remoteRef = E0BBF2D82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141929,7 +141846,6 @@
 		E0BBF2DB2B56B68900DBB7CD /* RNFBCrashlytics */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBCrashlytics;
 			path = libRNFBCrashlytics.a;
 			remoteRef = E0BBF2DA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141937,7 +141853,6 @@
 		E0BBF2DD2B56B68900DBB7CD /* RNFBFirestore */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBFirestore;
 			path = libRNFBFirestore.a;
 			remoteRef = E0BBF2DC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141945,7 +141860,6 @@
 		E0BBF2DF2B56B68900DBB7CD /* RNFBFunctions */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBFunctions;
 			path = libRNFBFunctions.a;
 			remoteRef = E0BBF2DE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141953,7 +141867,6 @@
 		E0BBF2E12B56B68900DBB7CD /* RNFBInAppMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBInAppMessaging;
 			path = libRNFBInAppMessaging.a;
 			remoteRef = E0BBF2E02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141961,7 +141874,6 @@
 		E0BBF2E32B56B68900DBB7CD /* RNFBMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBMessaging;
 			path = libRNFBMessaging.a;
 			remoteRef = E0BBF2E22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141969,7 +141881,6 @@
 		E0BBF2E52B56B68900DBB7CD /* RNFBPerf */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBPerf;
 			path = libRNFBPerf.a;
 			remoteRef = E0BBF2E42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141977,7 +141888,6 @@
 		E0BBF2E72B56B68900DBB7CD /* RNFBRemoteConfig */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBRemoteConfig;
 			path = libRNFBRemoteConfig.a;
 			remoteRef = E0BBF2E62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141985,7 +141895,6 @@
 		E0BBF2E92B56B68900DBB7CD /* RNFBStorage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBStorage;
 			path = libRNFBStorage.a;
 			remoteRef = E0BBF2E82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -141993,7 +141902,6 @@
 		E0BBF2EB2B56B68900DBB7CD /* RNFS */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFS;
 			path = libRNFS.a;
 			remoteRef = E0BBF2EA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142001,7 +141909,6 @@
 		E0BBF2ED2B56B68900DBB7CD /* RNGestureHandler */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNGestureHandler;
 			path = libRNGestureHandler.a;
 			remoteRef = E0BBF2EC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142009,7 +141916,6 @@
 		E0BBF2EF2B56B68900DBB7CD /* RNGoogleSignin */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNGoogleSignin;
 			path = libRNGoogleSignin.a;
 			remoteRef = E0BBF2EE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142017,7 +141923,6 @@
 		E0BBF2F12B56B68900DBB7CD /* RNInputMask */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNInputMask;
 			path = libRNInputMask.a;
 			remoteRef = E0BBF2F02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142025,7 +141930,6 @@
 		E0BBF2F32B56B68900DBB7CD /* RNLocalize */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNLocalize;
 			path = libRNLocalize.a;
 			remoteRef = E0BBF2F22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142033,7 +141937,6 @@
 		E0BBF2F52B56B68900DBB7CD /* RNReanimated */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNReanimated;
 			path = libRNReanimated.a;
 			remoteRef = E0BBF2F42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142041,7 +141944,6 @@
 		E0BBF2F72B56B68900DBB7CD /* RNScreens */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNScreens;
 			path = libRNScreens.a;
 			remoteRef = E0BBF2F62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142049,7 +141951,6 @@
 		E0BBF2F92B56B68900DBB7CD /* RNShare */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNShare;
 			path = libRNShare.a;
 			remoteRef = E0BBF2F82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142057,7 +141958,6 @@
 		E0BBF2FB2B56B68900DBB7CD /* RNSVG */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNSVG;
 			path = libRNSVG.a;
 			remoteRef = E0BBF2FA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142065,7 +141965,6 @@
 		E0BBF2FD2B56B68900DBB7CD /* RNVectorIcons */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNVectorIcons;
 			path = libRNVectorIcons.a;
 			remoteRef = E0BBF2FC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142073,7 +141972,6 @@
 		E0BBF2FF2B56B68900DBB7CD /* SDWebImage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = SDWebImage;
 			path = libSDWebImage.a;
 			remoteRef = E0BBF2FE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142081,7 +141979,6 @@
 		E0BBF3032B56B68900DBB7CD /* SDWebImageWebPCoder */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = SDWebImageWebPCoder;
 			path = libSDWebImageWebPCoder.a;
 			remoteRef = E0BBF3022B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142089,7 +141986,6 @@
 		E0BBF3052B56B68900DBB7CD /* Yoga */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = Yoga;
 			path = libYoga.a;
 			remoteRef = E0BBF3042B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142104,7 +142000,6 @@
 		E0CD09D22B56B7990004F443 /* abseil */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = abseil;
 			path = libabseil.a;
 			remoteRef = E0CD09D12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142112,7 +142007,6 @@
 		E0CD09D42B56B7990004F443 /* AppAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = AppAuth;
 			path = libAppAuth.a;
 			remoteRef = E0CD09D32B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142120,7 +142014,6 @@
 		E0CD09D62B56B7990004F443 /* BoringSSL-GRPC */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "BoringSSL-GRPC";
 			path = "libBoringSSL-GRPC.a";
 			remoteRef = E0CD09D52B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142128,7 +142021,6 @@
 		E0CD09D82B56B7990004F443 /* DoubleConversion */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = DoubleConversion;
 			path = libDoubleConversion.a;
 			remoteRef = E0CD09D72B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142136,7 +142028,6 @@
 		E0CD09DA2B56B7990004F443 /* FBReactNativeSpec */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBReactNativeSpec;
 			path = libFBReactNativeSpec.a;
 			remoteRef = E0CD09D92B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142144,7 +142035,6 @@
 		E0CD09DC2B56B7990004F443 /* FBSDKCoreKit */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBSDKCoreKit;
 			path = libFBSDKCoreKit.a;
 			remoteRef = E0CD09DB2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142152,7 +142042,6 @@
 		E0CD09DE2B56B7990004F443 /* FBSDKLoginKit */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBSDKLoginKit;
 			path = libFBSDKLoginKit.a;
 			remoteRef = E0CD09DD2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142160,7 +142049,6 @@
 		E0CD09E02B56B7990004F443 /* FBSDKShareKit */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FBSDKShareKit;
 			path = libFBSDKShareKit.a;
 			remoteRef = E0CD09DF2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142168,7 +142056,6 @@
 		E0CD09E22B56B7990004F443 /* FirebaseABTesting */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseABTesting;
 			path = libFirebaseABTesting.a;
 			remoteRef = E0CD09E12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142176,7 +142063,6 @@
 		E0CD09E42B56B7990004F443 /* FirebaseAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseAuth;
 			path = libFirebaseAuth.a;
 			remoteRef = E0CD09E32B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142184,7 +142070,6 @@
 		E0CD09E62B56B7990004F443 /* FirebaseCore */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseCore;
 			path = libFirebaseCore.a;
 			remoteRef = E0CD09E52B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142192,7 +142077,6 @@
 		E0CD09E82B56B7990004F443 /* FirebaseCoreDiagnostics */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseCoreDiagnostics;
 			path = libFirebaseCoreDiagnostics.a;
 			remoteRef = E0CD09E72B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142200,7 +142084,6 @@
 		E0CD09EA2B56B7990004F443 /* FirebaseCrashlytics */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseCrashlytics;
 			path = libFirebaseCrashlytics.a;
 			remoteRef = E0CD09E92B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142208,7 +142091,6 @@
 		E0CD09EC2B56B7990004F443 /* FirebaseFirestore */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseFirestore;
 			path = libFirebaseFirestore.a;
 			remoteRef = E0CD09EB2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142216,7 +142098,6 @@
 		E0CD09EE2B56B7990004F443 /* FirebaseFunctions */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseFunctions;
 			path = libFirebaseFunctions.a;
 			remoteRef = E0CD09ED2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142224,7 +142105,6 @@
 		E0CD09F02B56B7990004F443 /* FirebaseInAppMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseInAppMessaging;
 			path = libFirebaseInAppMessaging.a;
 			remoteRef = E0CD09EF2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142232,7 +142112,6 @@
 		E0CD09F22B56B7990004F443 /* FirebaseInAppMessaging-InAppMessagingDisplayResources */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = "FirebaseInAppMessaging-InAppMessagingDisplayResources";
 			path = InAppMessagingDisplayResources.bundle;
 			remoteRef = E0CD09F12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142240,7 +142119,6 @@
 		E0CD09F42B56B7990004F443 /* FirebaseInstallations */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseInstallations;
 			path = libFirebaseInstallations.a;
 			remoteRef = E0CD09F32B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142248,7 +142126,6 @@
 		E0CD09F62B56B7990004F443 /* FirebaseInstanceID */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseInstanceID;
 			path = libFirebaseInstanceID.a;
 			remoteRef = E0CD09F52B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142256,7 +142133,6 @@
 		E0CD09F82B56B7990004F443 /* FirebaseMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseMessaging;
 			path = libFirebaseMessaging.a;
 			remoteRef = E0CD09F72B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142264,7 +142140,6 @@
 		E0CD09FA2B56B7990004F443 /* FirebasePerformance */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebasePerformance;
 			path = libFirebasePerformance.a;
 			remoteRef = E0CD09F92B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142272,7 +142147,6 @@
 		E0CD09FC2B56B7990004F443 /* FirebaseRemoteConfig */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseRemoteConfig;
 			path = libFirebaseRemoteConfig.a;
 			remoteRef = E0CD09FB2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142280,7 +142154,6 @@
 		E0CD09FE2B56B7990004F443 /* FirebaseStorage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = FirebaseStorage;
 			path = libFirebaseStorage.a;
 			remoteRef = E0CD09FD2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142288,7 +142161,6 @@
 		E0CD0A002B56B7990004F443 /* Folly */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = Folly;
 			path = libFolly.a;
 			remoteRef = E0CD09FF2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142296,7 +142168,6 @@
 		E0CD0A022B56B7990004F443 /* glog */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = glog;
 			path = libglog.a;
 			remoteRef = E0CD0A012B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142304,7 +142175,6 @@
 		E0CD0A042B56B7990004F443 /* Google-Maps-iOS-Utils */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "Google-Maps-iOS-Utils";
 			path = "libGoogle-Maps-iOS-Utils.a";
 			remoteRef = E0CD0A032B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142312,7 +142182,6 @@
 		E0CD0A062B56B7990004F443 /* GoogleDataTransport */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GoogleDataTransport;
 			path = libGoogleDataTransport.a;
 			remoteRef = E0CD0A052B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142320,7 +142189,6 @@
 		E0CD0A082B56B7990004F443 /* GoogleUtilities */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GoogleUtilities;
 			path = libGoogleUtilities.a;
 			remoteRef = E0CD0A072B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142328,7 +142196,6 @@
 		E0CD0A0A2B56B7990004F443 /* gRPC-C++ */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "gRPC-C++";
 			path = "libgRPC-C++.a";
 			remoteRef = E0CD0A092B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142336,7 +142203,6 @@
 		E0CD0A0C2B56B7990004F443 /* gRPC-C++-gRPCCertificates-Cpp */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = "gRPC-C++-gRPCCertificates-Cpp";
 			path = "gRPCCertificates-Cpp.bundle";
 			remoteRef = E0CD0A0B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142344,7 +142210,6 @@
 		E0CD0A0E2B56B7990004F443 /* gRPC-Core */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "gRPC-Core";
 			path = "libgRPC-Core.a";
 			remoteRef = E0CD0A0D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142352,7 +142217,6 @@
 		E0CD0A102B56B7990004F443 /* GTMAppAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GTMAppAuth;
 			path = libGTMAppAuth.a;
 			remoteRef = E0CD0A0F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142360,7 +142224,6 @@
 		E0CD0A122B56B7990004F443 /* GTMSessionFetcher */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = GTMSessionFetcher;
 			path = libGTMSessionFetcher.a;
 			remoteRef = E0CD0A112B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142368,7 +142231,6 @@
 		E0CD0A142B56B7990004F443 /* leveldb-library */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "leveldb-library";
 			path = "libleveldb-library.a";
 			remoteRef = E0CD0A132B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142376,7 +142238,6 @@
 		E0CD0A162B56B7990004F443 /* libwebp */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = libwebp;
 			path = liblibwebp.a;
 			remoteRef = E0CD0A152B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142384,7 +142245,6 @@
 		E0CD0A182B56B7990004F443 /* lottie-ios */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "lottie-ios";
 			path = "liblottie-ios.a";
 			remoteRef = E0CD0A172B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142392,7 +142252,6 @@
 		E0CD0A1A2B56B7990004F443 /* lottie-react-native */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "lottie-react-native";
 			path = "liblottie-react-native.a";
 			remoteRef = E0CD0A192B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142400,7 +142259,6 @@
 		E0CD0A1C2B56B7990004F443 /* nanopb */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = nanopb;
 			path = libnanopb.a;
 			remoteRef = E0CD0A1B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142408,7 +142266,6 @@
 		E0CD0A1E2B56B7990004F443 /* PanModal */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = PanModal;
 			path = libPanModal.a;
 			remoteRef = E0CD0A1D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142416,7 +142273,6 @@
 		E0CD0A202B56B7990004F443 /* Pods-unboxme */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "Pods-unboxme";
 			path = "libPods-unboxme.a";
 			remoteRef = E0CD0A1F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142424,7 +142280,6 @@
 		E0CD0A222B56B7990004F443 /* PromisesObjC */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = PromisesObjC;
 			path = libPromisesObjC.a;
 			remoteRef = E0CD0A212B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142432,7 +142287,6 @@
 		E0CD0A242B56B7990004F443 /* Protobuf */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = Protobuf;
 			path = libProtobuf.a;
 			remoteRef = E0CD0A232B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142440,7 +142294,6 @@
 		E0CD0A262B56B7990004F443 /* RCTTypeSafety */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RCTTypeSafety;
 			path = libRCTTypeSafety.a;
 			remoteRef = E0CD0A252B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142448,7 +142301,6 @@
 		E0CD0A282B56B7990004F443 /* React-Core */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-Core";
 			path = "libReact-Core.a";
 			remoteRef = E0CD0A272B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142456,7 +142308,6 @@
 		E0CD0A2A2B56B7990004F443 /* React-Core-AccessibilityResources */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = "React-Core-AccessibilityResources";
 			path = AccessibilityResources.bundle;
 			remoteRef = E0CD0A292B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142464,7 +142315,6 @@
 		E0CD0A2C2B56B7990004F443 /* React-CoreModules */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-CoreModules";
 			path = "libReact-CoreModules.a";
 			remoteRef = E0CD0A2B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142472,7 +142322,6 @@
 		E0CD0A2E2B56B7990004F443 /* React-cxxreact */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-cxxreact";
 			path = "libReact-cxxreact.a";
 			remoteRef = E0CD0A2D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142480,7 +142329,6 @@
 		E0CD0A302B56B7990004F443 /* React-jsi */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-jsi";
 			path = "libReact-jsi.a";
 			remoteRef = E0CD0A2F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142488,7 +142336,6 @@
 		E0CD0A322B56B7990004F443 /* React-jsiexecutor */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-jsiexecutor";
 			path = "libReact-jsiexecutor.a";
 			remoteRef = E0CD0A312B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142496,7 +142343,6 @@
 		E0CD0A342B56B7990004F443 /* React-jsinspector */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-jsinspector";
 			path = "libReact-jsinspector.a";
 			remoteRef = E0CD0A332B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142504,7 +142350,6 @@
 		E0CD0A362B56B7990004F443 /* react-native-config */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-config";
 			path = "libreact-native-config.a";
 			remoteRef = E0CD0A352B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142512,7 +142357,6 @@
 		E0CD0A382B56B7990004F443 /* react-native-cookies */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-cookies";
 			path = "libreact-native-cookies.a";
 			remoteRef = E0CD0A372B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142520,7 +142364,6 @@
 		E0CD0A3A2B56B7990004F443 /* react-native-create-thumbnail */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-create-thumbnail";
 			path = "libreact-native-create-thumbnail.a";
 			remoteRef = E0CD0A392B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142528,7 +142371,6 @@
 		E0CD0A3C2B56B7990004F443 /* react-native-fbsdk */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-fbsdk";
 			path = "libreact-native-fbsdk.a";
 			remoteRef = E0CD0A3B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142536,7 +142378,6 @@
 		E0CD0A3E2B56B7990004F443 /* react-native-get-random-values */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-get-random-values";
 			path = "libreact-native-get-random-values.a";
 			remoteRef = E0CD0A3D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142544,7 +142385,6 @@
 		E0CD0A402B56B7990004F443 /* react-native-google-maps */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-google-maps";
 			path = "libreact-native-google-maps.a";
 			remoteRef = E0CD0A3F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142552,7 +142392,6 @@
 		E0CD0A422B56B7990004F443 /* react-native-image-picker */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-image-picker";
 			path = "libreact-native-image-picker.a";
 			remoteRef = E0CD0A412B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142560,7 +142399,6 @@
 		E0CD0A442B56B7990004F443 /* react-native-maps */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-maps";
 			path = "libreact-native-maps.a";
 			remoteRef = E0CD0A432B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142568,7 +142406,6 @@
 		E0CD0A462B56B7990004F443 /* react-native-netinfo */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-netinfo";
 			path = "libreact-native-netinfo.a";
 			remoteRef = E0CD0A452B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142576,7 +142413,6 @@
 		E0CD0A482B56B7990004F443 /* react-native-safe-area-context */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-safe-area-context";
 			path = "libreact-native-safe-area-context.a";
 			remoteRef = E0CD0A472B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142584,7 +142420,6 @@
 		E0CD0A4A2B56B7990004F443 /* react-native-splash-screen */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-splash-screen";
 			path = "libreact-native-splash-screen.a";
 			remoteRef = E0CD0A492B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142592,7 +142427,6 @@
 		E0CD0A4C2B56B7990004F443 /* react-native-text-input-mask */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-text-input-mask";
 			path = "libreact-native-text-input-mask.a";
 			remoteRef = E0CD0A4B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142600,7 +142434,6 @@
 		E0CD0A4E2B56B7990004F443 /* react-native-video */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-video";
 			path = "libreact-native-video.a";
 			remoteRef = E0CD0A4D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142608,7 +142441,6 @@
 		E0CD0A502B56B7990004F443 /* react-native-webview */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "react-native-webview";
 			path = "libreact-native-webview.a";
 			remoteRef = E0CD0A4F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142616,7 +142448,6 @@
 		E0CD0A522B56B7990004F443 /* React-RCTAnimation */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTAnimation";
 			path = "libReact-RCTAnimation.a";
 			remoteRef = E0CD0A512B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142624,7 +142455,6 @@
 		E0CD0A542B56B7990004F443 /* React-RCTBlob */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTBlob";
 			path = "libReact-RCTBlob.a";
 			remoteRef = E0CD0A532B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142632,7 +142462,6 @@
 		E0CD0A562B56B7990004F443 /* React-RCTImage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTImage";
 			path = "libReact-RCTImage.a";
 			remoteRef = E0CD0A552B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142640,7 +142469,6 @@
 		E0CD0A582B56B7990004F443 /* React-RCTLinking */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTLinking";
 			path = "libReact-RCTLinking.a";
 			remoteRef = E0CD0A572B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142648,7 +142476,6 @@
 		E0CD0A5A2B56B7990004F443 /* React-RCTNetwork */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTNetwork";
 			path = "libReact-RCTNetwork.a";
 			remoteRef = E0CD0A592B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142656,7 +142483,6 @@
 		E0CD0A5C2B56B7990004F443 /* React-RCTSettings */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTSettings";
 			path = "libReact-RCTSettings.a";
 			remoteRef = E0CD0A5B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142664,7 +142490,6 @@
 		E0CD0A5E2B56B7990004F443 /* React-RCTText */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTText";
 			path = "libReact-RCTText.a";
 			remoteRef = E0CD0A5D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142672,7 +142497,6 @@
 		E0CD0A602B56B7990004F443 /* React-RCTVibration */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "React-RCTVibration";
 			path = "libReact-RCTVibration.a";
 			remoteRef = E0CD0A5F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142680,7 +142504,6 @@
 		E0CD0A622B56B7990004F443 /* ReactCommon */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = ReactCommon;
 			path = libReactCommon.a;
 			remoteRef = E0CD0A612B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142688,7 +142511,6 @@
 		E0CD0A642B56B7990004F443 /* rn-fetch-blob */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "rn-fetch-blob";
 			path = "librn-fetch-blob.a";
 			remoteRef = E0CD0A632B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142696,7 +142518,6 @@
 		E0CD0A662B56B7990004F443 /* RNAppleAuthentication */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNAppleAuthentication;
 			path = libRNAppleAuthentication.a;
 			remoteRef = E0CD0A652B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142704,7 +142525,6 @@
 		E0CD0A682B56B7990004F443 /* RNCAsyncStorage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNCAsyncStorage;
 			path = libRNCAsyncStorage.a;
 			remoteRef = E0CD0A672B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142712,7 +142532,6 @@
 		E0CD0A6A2B56B7990004F443 /* RNCClipboard */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNCClipboard;
 			path = libRNCClipboard.a;
 			remoteRef = E0CD0A692B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142720,7 +142539,6 @@
 		E0CD0A6C2B56B7990004F443 /* RNCMaskedView */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNCMaskedView;
 			path = libRNCMaskedView.a;
 			remoteRef = E0CD0A6B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142728,7 +142546,6 @@
 		E0CD0A6E2B56B7990004F443 /* RNDateTimePicker */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNDateTimePicker;
 			path = libRNDateTimePicker.a;
 			remoteRef = E0CD0A6D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142736,7 +142553,6 @@
 		E0CD0A702B56B7990004F443 /* RNDeviceInfo */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNDeviceInfo;
 			path = libRNDeviceInfo.a;
 			remoteRef = E0CD0A6F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142744,7 +142560,6 @@
 		E0CD0A722B56B7990004F443 /* RNFastImage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFastImage;
 			path = libRNFastImage.a;
 			remoteRef = E0CD0A712B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142752,7 +142567,6 @@
 		E0CD0A742B56B7990004F443 /* RNFBApp */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBApp;
 			path = libRNFBApp.a;
 			remoteRef = E0CD0A732B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142760,7 +142574,6 @@
 		E0CD0A762B56B7990004F443 /* RNFBAuth */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBAuth;
 			path = libRNFBAuth.a;
 			remoteRef = E0CD0A752B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142768,7 +142581,6 @@
 		E0CD0A782B56B7990004F443 /* RNFBCrashlytics */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBCrashlytics;
 			path = libRNFBCrashlytics.a;
 			remoteRef = E0CD0A772B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142776,7 +142588,6 @@
 		E0CD0A7A2B56B7990004F443 /* RNFBFirestore */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBFirestore;
 			path = libRNFBFirestore.a;
 			remoteRef = E0CD0A792B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142784,7 +142595,6 @@
 		E0CD0A7C2B56B7990004F443 /* RNFBFunctions */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBFunctions;
 			path = libRNFBFunctions.a;
 			remoteRef = E0CD0A7B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142792,7 +142602,6 @@
 		E0CD0A7E2B56B7990004F443 /* RNFBInAppMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBInAppMessaging;
 			path = libRNFBInAppMessaging.a;
 			remoteRef = E0CD0A7D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142800,7 +142609,6 @@
 		E0CD0A802B56B7990004F443 /* RNFBMessaging */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBMessaging;
 			path = libRNFBMessaging.a;
 			remoteRef = E0CD0A7F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142808,7 +142616,6 @@
 		E0CD0A822B56B7990004F443 /* RNFBPerf */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBPerf;
 			path = libRNFBPerf.a;
 			remoteRef = E0CD0A812B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142816,7 +142623,6 @@
 		E0CD0A842B56B7990004F443 /* RNFBRemoteConfig */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBRemoteConfig;
 			path = libRNFBRemoteConfig.a;
 			remoteRef = E0CD0A832B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142824,7 +142630,6 @@
 		E0CD0A862B56B7990004F443 /* RNFBStorage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFBStorage;
 			path = libRNFBStorage.a;
 			remoteRef = E0CD0A852B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142832,7 +142637,6 @@
 		E0CD0A882B56B7990004F443 /* RNFS */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNFS;
 			path = libRNFS.a;
 			remoteRef = E0CD0A872B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142840,7 +142644,6 @@
 		E0CD0A8A2B56B7990004F443 /* RNGestureHandler */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNGestureHandler;
 			path = libRNGestureHandler.a;
 			remoteRef = E0CD0A892B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142848,7 +142651,6 @@
 		E0CD0A8C2B56B7990004F443 /* RNGoogleSignin */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNGoogleSignin;
 			path = libRNGoogleSignin.a;
 			remoteRef = E0CD0A8B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142856,7 +142658,6 @@
 		E0CD0A8E2B56B7990004F443 /* RNInputMask */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNInputMask;
 			path = libRNInputMask.a;
 			remoteRef = E0CD0A8D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142864,7 +142665,6 @@
 		E0CD0A902B56B7990004F443 /* RNLocalize */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNLocalize;
 			path = libRNLocalize.a;
 			remoteRef = E0CD0A8F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142872,7 +142672,6 @@
 		E0CD0A922B56B7990004F443 /* RNReanimated */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNReanimated;
 			path = libRNReanimated.a;
 			remoteRef = E0CD0A912B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142880,7 +142679,6 @@
 		E0CD0A942B56B7990004F443 /* RNScreens */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNScreens;
 			path = libRNScreens.a;
 			remoteRef = E0CD0A932B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142888,7 +142686,6 @@
 		E0CD0A962B56B7990004F443 /* RNShare */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNShare;
 			path = libRNShare.a;
 			remoteRef = E0CD0A952B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142896,7 +142693,6 @@
 		E0CD0A982B56B7990004F443 /* RNSVG */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNSVG;
 			path = libRNSVG.a;
 			remoteRef = E0CD0A972B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142904,7 +142700,6 @@
 		E0CD0A9A2B56B7990004F443 /* RNVectorIcons */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = RNVectorIcons;
 			path = libRNVectorIcons.a;
 			remoteRef = E0CD0A992B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142912,7 +142707,6 @@
 		E0CD0A9C2B56B7990004F443 /* SDWebImage */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = SDWebImage;
 			path = libSDWebImage.a;
 			remoteRef = E0CD0A9B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142920,7 +142714,6 @@
 		E0CD0AA02B56B7990004F443 /* SDWebImageWebPCoder */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = SDWebImageWebPCoder;
 			path = libSDWebImageWebPCoder.a;
 			remoteRef = E0CD0A9F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -142928,7 +142721,6 @@
 		E0CD0AA22B56B7990004F443 /* Yoga */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = Yoga;
 			path = libYoga.a;
 			remoteRef = E0CD0AA12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -143219,6 +143011,7 @@
 				DEVELOPMENT_TEAM = 84KM93C3TE;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = unboxme/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Claris;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
@@ -143249,6 +143042,7 @@
 				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 84KM93C3TE;
 				INFOPLIST_FILE = unboxme/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Claris;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (

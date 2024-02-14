@@ -175,7 +175,7 @@ android {
   }
 
   defaultConfig {
-    applicationId "com.unboxme.app"
+    applicationId "com.claris.app"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode getMyVersionCode()
