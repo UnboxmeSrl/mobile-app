@@ -16,9 +16,29 @@ import { COLORS, FONTS } from '../../constants'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import FastImage from 'react-native-fast-image'
+import { ContentStatusModal } from '../../components'
 
 const PublishContentScreen = () => {
-  const { approvalStage, handleBackPress } = usePublishContent()
+  const {
+    link,
+    setLink,
+    approvalStage,
+    contentDetails,
+    updatedContentDetails,
+    actionName,
+    icon,
+    bookingDate,
+    month,
+    timeFrame,
+    isLoading,
+    isSendToReview,
+    isContentStatusModalVisible,
+    handleContentModalOpenClose,
+    handleSendToReviewBtnPress,
+    handlePositiveBtnPress,
+    handleEditPress,
+    handleBackPress,
+  } = usePublishContent()
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -33,27 +53,28 @@ const PublishContentScreen = () => {
 
         <View style={styles.onApprovalItemsMainContainer}>
           <View style={styles.socialMediaDetailsMainRow}>
-            <View style={styles.editIconContainer}>
-              <Image source={IMAGES.edit} style={styles.editIcon} />
-            </View>
+            {actionName !== 'Story' && (
+              <TouchableOpacity style={styles.editIconContainer} onPress={handleEditPress}>
+                <Image source={IMAGES.edit} style={styles.editIcon} />
+              </TouchableOpacity>
+            )}
             <View style={styles.socialMediaImageContainer}>
-              <FastImage resizeMode="contain" source={IMAGES.tiktok} style={styles.socialMediaImage} />
+              <FastImage resizeMode="contain" source={icon} style={styles.socialMediaImage} />
             </View>
             <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>
-                {/* {bookingDetails?._offers_turbo?.Offer_Name} */}
-                Full Tik tok
-              </Text>
+              <Text style={styles.socialMediaNameText}>{` ${
+                actionName === 'Story' ? `3 X ${actionName}` : `Full ${actionName}`
+              }`}</Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
                 <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
               </View>
               <View style={styles.infoContainer}>
                 <Image resizeMode="contain" source={IMAGES.info} style={styles.infoIcon} />
-                <Text style={styles.deadLineText}>5 Days left</Text>
+                <Text style={styles.deadLineText}>{`${contentDetails?._actions_turbo?.Days_deadline} Days left`}</Text>
               </View>
             </View>
-            <View
+            {/* <View
               style={[
                 styles.onApprovalTextContainer,
                 approvalStage === 'Pending'
@@ -77,28 +98,34 @@ const PublishContentScreen = () => {
                     : approvalStage === 'Missed Deadline' && { color: COLORS.redViolet },
                 ]}
               >{`${approvalStage}`}</Text>
-            </View>
+            </View> */}
           </View>
 
-          <View style={styles.linkUploadDescriptionContainer}>
-            <Text style={styles.linkUploadDescriptionText}>Enter the link to your content and sent to review</Text>
-            <View style={styles.linkUploadTextInputMainContainer}>
-              <View style={styles.linkUploadIconContainer}>
-                <Image source={IMAGES.link} style={styles.linkUploadIcon} resizeMode="contain" />
+          {actionName !== 'Story' && (
+            <>
+              <View style={styles.linkUploadDescriptionContainer}>
+                <Text style={styles.linkUploadDescriptionText}>Enter the link to your content and sent to review</Text>
+                <View style={styles.linkUploadTextInputMainContainer}>
+                  <View style={styles.linkUploadIconContainer}>
+                    <Image source={IMAGES.link} style={styles.linkUploadIcon} resizeMode="contain" />
+                  </View>
+                  <View style={styles.linkUploadTextInputContainer}>
+                    <TextInput
+                      placeholder="Paste content link here"
+                      placeholderTextColor={COLORS.primary}
+                      style={styles.linkUploadTextInput}
+                      value={link}
+                      onChangeText={(val) => setLink(val)}
+                    />
+                  </View>
+                </View>
               </View>
-              <View style={styles.linkUploadTextInputContainer}>
-                <TextInput
-                  placeholder="Paste content link here"
-                  placeholderTextColor={COLORS.primary}
-                  style={styles.linkUploadTextInput}
-                />
-              </View>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.readContentBriefContainer} onPress={() => {}}>
-            <Text style={styles.contentBriefTitleText}>Read Content Brief & Tags</Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
-          </TouchableOpacity>
+              <TouchableOpacity style={styles.readContentBriefContainer} onPress={() => {}}>
+                <Text style={styles.contentBriefTitleText}>Read Content Brief & Tags</Text>
+                <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+              </TouchableOpacity>
+            </>
+          )}
         </View>
         <View>
           <View style={styles.bookingDetailsTitleContainer}>
@@ -110,46 +137,32 @@ const PublishContentScreen = () => {
           <View style={styles.locationImageContainer}>
             <FastImage
               resizeMode="cover"
-              source={IMAGES.testImage}
-              // source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
+              source={{ priority: FastImage.priority.high, uri: contentDetails?._restaurant_turbo?.Cover?.url }}
               style={styles.locationImage}
             />
           </View>
           <View style={styles.locationNameContainer}>
-            <Text style={styles.locationNameText}>
-              Pizzami Bali
-              {/* {bookingDetails?._restaurant_turbo?.Name} */}
-            </Text>
+            <Text style={styles.locationNameText}>{contentDetails?._restaurant_turbo?.Name}</Text>
             <View style={styles.locationTextContainer}>
-              <Text style={styles.locationText}>
-                Chengduu Street 34, Bali
-                {/* {bookingDetails?._restaurant_turbo?.Adress} */}
-              </Text>
+              <Text style={styles.locationText}>{contentDetails?._restaurant_turbo?.Adress}</Text>
             </View>
           </View>
         </View>
         <View style={styles.serviceBoxContainer}>
           <View style={styles.serviceContainer}>
             <Text style={styles.serviceTitleText}>Service</Text>
-            <Text style={styles.serviceNameText}>
-              Air touch
-              {/* {`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`} */}
-            </Text>
+            <Text style={styles.serviceNameText}>{contentDetails?._offers_turbo?.Offer_Name}</Text>
           </View>
         </View>
         <View style={styles.dateTimeContainer}>
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Date</Text>
-            <Text style={styles.timeText}>
-              24 January 2024
-              {/* {`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`} */}
-            </Text>
+            <Text style={styles.timeText}>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Time</Text>
             <Text style={styles.timeText}>
-              13 PM - 16 PM
-              {/* {`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}{' '} */}
+              {`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}{' '}
             </Text>
           </View>
         </View>
@@ -172,10 +185,25 @@ const PublishContentScreen = () => {
         </View>
       </View>
       <View style={styles.sendToReviewBtnMainContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.sendToReviewBtnContainer}>
-          <Text style={styles.sendToReviewBtnText}>Send to review</Text>
-        </TouchableOpacity>
+        {isSendToReview ? (
+          <View style={styles.sendToReviewBtnContainer}>
+            <ActivityIndicator color={COLORS.primary} size={30} />
+          </View>
+        ) : (
+          <TouchableOpacity onPress={handleSendToReviewBtnPress} style={styles.sendToReviewBtnContainer}>
+            <Text style={styles.sendToReviewBtnText}>Send to review</Text>
+          </TouchableOpacity>
+        )}
       </View>
+      {isContentStatusModalVisible && (
+        <ContentStatusModal
+          visible={isContentStatusModalVisible}
+          isLoading={isLoading}
+          contentDetails={updatedContentDetails}
+          handleNegativeBtnPress={handleContentModalOpenClose}
+          handlePositiveBtnPress={handlePositiveBtnPress}
+        />
+      )}
     </ScrollView>
   )
 }
@@ -351,7 +379,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
   },
   locationTextContainer: {
-    width: '95%',
+    width: '80%',
   },
   nameLocationMainRow: {
     alignItems: 'center',
@@ -400,13 +428,13 @@ const styles = StyleSheet.create({
   },
   socialMediaDetailsMainRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     marginTop: verticalScale(16),
   },
   socialMediaImageContainer: {
     marginLeft: scale(13),
   },
   socialMediaNameContainer: {
+    marginLeft: scale(15),
     width: '40%',
   },
   socialMediaNameText: {

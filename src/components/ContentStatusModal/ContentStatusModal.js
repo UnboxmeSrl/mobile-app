@@ -5,30 +5,30 @@ import { FONTS } from '../../constants/fonts'
 import React from 'react'
 import { IMAGES } from '../../assets/images'
 import FastImage from 'react-native-fast-image'
+import { checkActionName, checkContentStatus } from '../../utils'
 
-const ContentStatusModal = ({
-  visible,
-  title,
-  description,
-  isLoading,
-  handleNegativeBtnPress,
-  handlePositiveBtnPress,
-}) => {
-  const approvalStage = 'Approved'
+const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegativeBtnPress, handlePositiveBtnPress }) => {
+  const approvalStage = contentDetails?._content_status_turbo?.name
+  let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0
+  if (contentDetails?.diary_action_turbo_id) {
+    actionName = contentDetails?._diary_action_turbo?.action
+  }
+  const icon = checkActionName(actionName)
+  const { title, description, statusIcon } = checkContentStatus(approvalStage)
   return (
     <Modal animationType="slide" onRequestClose={handleNegativeBtnPress} transparent visible={visible}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <TouchableOpacity style={styles.closeIconContainer}>
+          <TouchableOpacity style={styles.closeIconContainer} onPress={handleNegativeBtnPress}>
             <Image source={IMAGES.close} style={styles.closeIcon} />
           </TouchableOpacity>
 
           <View style={styles.statusIconTextContainer}>
             <View>
-              <Image resizeMode="cover" source={IMAGES.approvalSuccess} style={styles.approvalIcon} />
+              <Image resizeMode="cover" source={statusIcon} style={styles.approvalIcon} />
             </View>
             <View style={styles.statusTextContainer}>
-              <Text style={styles.statusText}>Your content has been approved!</Text>
+              <Text style={styles.statusText}>{title}</Text>
             </View>
           </View>
           <View style={styles.ratingContainer}>
@@ -53,12 +53,13 @@ const ContentStatusModal = ({
           >
             <View style={styles.socialMediaDetailsMainRow}>
               <View style={styles.socialMediaImageContainer}>
-                <FastImage resizeMode="contain" source={IMAGES.tiktok} style={styles.socialMediaImage} />
+                <FastImage resizeMode="contain" source={icon} style={styles.socialMediaImage} />
               </View>
               <View style={styles.socialMediaNameContainer}>
                 <Text style={styles.socialMediaNameText}>
-                  {/* {bookingDetails?._offers_turbo?.Offer_Name} */}
-                  Full Tik tok
+                  {` ${
+                    contentDetails?._actions_turbo?.Action_Name === 'Story' ? `3 X ${actionName}` : `Full ${actionName}`
+                  }`}
                 </Text>
               </View>
               <View
@@ -87,28 +88,23 @@ const ContentStatusModal = ({
                 >{`${approvalStage}`}</Text>
               </View>
             </View>
-            <View style={styles.nameLocationMainRow}>
-              <View style={styles.locationImageContainer}>
-                <FastImage
-                  resizeMode="cover"
-                  source={IMAGES.testImage}
-                  // source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
-                  style={styles.locationImage}
-                />
-              </View>
-              <View style={styles.locationNameContainer}>
-                <Text style={styles.locationNameText}>
-                  Pizzami Bali
-                  {/* {bookingDetails?._restaurant_turbo?.Name} */}
-                </Text>
-                <View style={styles.locationTextContainer}>
-                  <Text style={styles.locationText}>
-                    Chengduu Street 34, Bali
-                    {/* {bookingDetails?._restaurant_turbo?.Adress} */}
-                  </Text>
+            {approvalStage === 'Approved' && (
+              <View style={styles.nameLocationMainRow}>
+                <View style={styles.locationImageContainer}>
+                  <FastImage
+                    resizeMode="cover"
+                    source={{ priority: FastImage.priority.high, uri: contentDetails?._restaurant_turbo?.Cover?.url }}
+                    style={styles.locationImage}
+                  />
+                </View>
+                <View style={styles.locationNameContainer}>
+                  <Text style={styles.locationNameText}>{contentDetails?._restaurant_turbo?.Name}</Text>
+                  <View style={styles.locationTextContainer}>
+                    <Text style={styles.locationText}>{contentDetails?._restaurant_turbo?.Adress}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
+            )}
             <View style={styles.boxDescriptionContainer}>
               <Text
                 style={[
@@ -121,7 +117,9 @@ const ContentStatusModal = ({
                     ? { color: COLORS.celticBlue }
                     : approvalStage === 'Missed Deadline' && { color: COLORS.redViolet },
                 ]}
-              >{`Congratulations your content created at Pizzami has been approved!`}</Text>
+              >
+                {description}
+              </Text>
             </View>
           </View>
           <TouchableOpacity style={styles.queryContainer}>
@@ -130,9 +128,15 @@ const ContentStatusModal = ({
           </TouchableOpacity>
 
           <View style={styles.okayBtnMainContainer}>
-            <TouchableOpacity onPress={() => {}} style={styles.okayBtnContainer}>
-              <Text style={styles.okayBtnText}>Send to review</Text>
-            </TouchableOpacity>
+            {isLoading ? (
+              <View style={styles.okayBtnContainer}>
+                <ActivityIndicator color={COLORS.primary} size={30} />
+              </View>
+            ) : (
+              <TouchableOpacity onPress={handlePositiveBtnPress} style={styles.okayBtnContainer}>
+                <Text style={styles.okayBtnText}>Okay</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>
@@ -262,11 +266,13 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
+    width: '80%',
   },
   locationText: {
     color: COLORS.gray,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
+    width: '40%',
   },
   locationTextContainer: {
     width: '95%',

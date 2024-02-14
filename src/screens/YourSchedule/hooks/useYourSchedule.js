@@ -5,15 +5,18 @@ import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
-import { getBookings } from '../../../services'
+import { getBookingForContentList, getBookings } from '../../../services'
 import { useNavigationParam } from 'react-navigation-hooks'
+import { setContentList } from '../../../redux/slices'
 
 const useYourSchedule = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
   const selectedTabFromRoute = useNavigationParam('selectedTab')
   const [selectedTab, setSelectedTab] = useState(selectedTabFromRoute ?? 1)
+  const [updatedContentDetails, setUpdatedContentDetails] = useState()
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
-  const [contentApprovalStatus, setContentApprovalStatus] = useState('Missed Deadline')
+  const contentList = useSelector((state) => state.contentSlice.contentList)
+  const [isContentStatusModalVisible, setIsContentStatusModalVisible] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -59,23 +62,54 @@ const useYourSchedule = () => {
     dispatch(setBookings(res))
   }
 
+  const getBookingForContentListData = async () => {
+    const params = `/${loginData?.id}`
+    const res = await getBookingForContentList(params)
+    dispatch(setContentList(res))
+  }
+
   const handleArchivePress = () => {
     navigate(SCREEN_NAMES.ArchiveScreen)
   }
 
-  const handleContentCardPress = () => {
-    navigate(SCREEN_NAMES.PublishContentScreen)
+  const handleContentModalOpenClose = () => {
+    setIsContentStatusModalVisible(!isContentStatusModalVisible)
   }
+
+  const handleContentCardPress = (item) => {
+    if (item?.content_status_turbo_id > 0) {
+      setUpdatedContentDetails(item)
+      handleContentModalOpenClose()
+    } else {
+      navigate({
+        params: {
+          contentDetails: item,
+        },
+        routeName: SCREEN_NAMES.PublishContentScreen,
+      })
+    }
+  }
+
+  useEffect(() => {
+    console.log('object created', isContentStatusModalVisible, updatedContentDetails)
+    if (isContentStatusModalVisible === false && updatedContentDetails?.id) {
+      handleContentModalOpenClose()
+    }
+  }, [updatedContentDetails])
 
   useEffect(() => {
     if (loginData?.id) {
       getBookingsData()
+      getBookingForContentListData()
     }
   }, [])
 
   return {
-    contentApprovalStatus,
     bookings,
+    contentList,
+    updatedContentDetails,
+    isContentStatusModalVisible,
+    handleContentModalOpenClose,
     handleCardPress,
     handleContentCardPress,
     handleArchivePress,

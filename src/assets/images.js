@@ -1,10 +1,12 @@
 export const IMAGES = {
   acne: require('./images/acne.png'),
   aging: require('./images/aging.png'),
+  approvalSuccess: require('./images/approval-success.png'),
   approvalPending: require('./images/approval-pending.png'),
   approvalReject: require('./images/approval-reject.png'),
+  approvalMissed: require('./images/approval-missed.png'),
+  approvalUnderReview: require('./images/approval-under-review.png'),
   aeroplane: require('./images/aeroplane.png'),
-  approvalSuccess: require('./images/approval-success.png'),
   back: require('./images/back.png'),
   bell: require('./images/bell.png'),
   boxItems: require('./images/boxItems.png'),

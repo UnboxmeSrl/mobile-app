@@ -14,10 +14,13 @@ import { ContentStatusModal } from '../../components'
 
 const YourScheduleScreen = () => {
   const {
-    contentApprovalStatus,
     bookings,
+    contentList,
     selectedTab,
     setSelectedTab,
+    updatedContentDetails,
+    isContentStatusModalVisible,
+    handleContentModalOpenClose,
     handleCardPress,
     handleContentCardPress,
     handleArchivePress,
@@ -164,10 +167,19 @@ const YourScheduleScreen = () => {
       )}
       {selectedTab === 2 && (
         <FlatList
-          data={[1, 2, 3]}
+          data={contentList}
           renderItem={({ item, index }) => {
+            let actionName = item?._actions_turbo?.Action_Name ?? 0
+            if (item?.diary_action_turbo_id) {
+              actionName = item?._diary_action_turbo?.action
+            }
+            const icon = checkActionName(actionName)
+            let contentApprovalStatus = item?.content_status_turbo_id
+            if (item?.content_status_turbo_id) {
+              contentApprovalStatus = item?._content_status_turbo?.name
+            }
             return (
-              <TouchableOpacity style={contentStyles.cardContainer} onPress={handleContentCardPress}>
+              <TouchableOpacity style={contentStyles.cardContainer} onPress={() => handleContentCardPress(item)}>
                 <View style={contentStyles.cardContentContainer}>
                   <View style={contentStyles.ratingSocialMediaMainContainer}>
                     <View style={contentStyles.ratingSocialMediaContainer}>
@@ -177,8 +189,8 @@ const YourScheduleScreen = () => {
                       </View>
                     </View>
                     <View style={contentStyles.socialMediaIconNameContainer}>
-                      <Image resizeMode="cover" source={IMAGES.instagramStory} style={contentStyles.socialMediaIcon} />
-                      <Text style={contentStyles.socialMediaNameText}>{`Post`}</Text>
+                      <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} />
+                      <Text style={contentStyles.socialMediaNameText}>{`${item?._actions_turbo?.Action_Name}`}</Text>
                     </View>
                   </View>
 
@@ -187,49 +199,54 @@ const YourScheduleScreen = () => {
                       <View style={contentStyles.deadLineMainRow}>
                         <View
                           style={[
-                            contentStyles.DeadLineTitleTextContainer,
+                            contentStyles.deadLineTitleTextContainer,
                             (contentApprovalStatus === 'Under Review' ||
                               contentApprovalStatus === 'Missed Deadline') && {
                               width: '40%',
                             },
+                            item?.content_status_turbo_id === 0 && { width: '80%' },
                           ]}
                         >
                           <Text style={contentStyles.deadLineTitleText}>Deadline:</Text>
                         </View>
-                        <View
-                          style={[
-                            contentStyles.contentApprovalStatusContainer,
-                            contentApprovalStatus === 'Pending'
-                              ? { backgroundColor: COLORS.cornSilk }
-                              : contentApprovalStatus === 'Rejected'
-                              ? { backgroundColor: COLORS.seaShellRed }
-                              : contentApprovalStatus === 'Under Review'
-                              ? { backgroundColor: COLORS.azureishWhite }
-                              : contentApprovalStatus === 'Missed Deadline' && { backgroundColor: COLORS.paleRose },
-                          ]}
-                        >
-                          <Text
+                        {item?.content_status_turbo_id > 0 && (
+                          <View
                             style={[
-                              contentStyles.contentApprovalStatusText,
-                              contentApprovalStatus === 'Pending'
-                                ? { color: COLORS.americanYellow }
+                              contentStyles.contentApprovalStatusContainer,
+                              contentApprovalStatus === 'To Publish'
+                                ? { backgroundColor: COLORS.cornSilk }
                                 : contentApprovalStatus === 'Rejected'
-                                ? { color: COLORS.error }
+                                ? { backgroundColor: COLORS.seaShellRed }
                                 : contentApprovalStatus === 'Under Review'
-                                ? { color: COLORS.celticBlue }
-                                : contentApprovalStatus === 'Missed Deadline' && { color: COLORS.redViolet },
+                                ? { backgroundColor: COLORS.azureishWhite }
+                                : contentApprovalStatus === 'Missed Deadline' && { backgroundColor: COLORS.paleRose },
                             ]}
                           >
-                            {contentApprovalStatus}
-                          </Text>
-                        </View>
-                        <View style={contentStyles.threeDotsContainer}>
+                            <Text
+                              style={[
+                                contentStyles.contentApprovalStatusText,
+                                contentApprovalStatus === 'To Publish'
+                                  ? { color: COLORS.americanYellow }
+                                  : contentApprovalStatus === 'Rejected'
+                                  ? { color: COLORS.error }
+                                  : contentApprovalStatus === 'Under Review'
+                                  ? { color: COLORS.celticBlue }
+                                  : contentApprovalStatus === 'Missed Deadline' && { color: COLORS.redViolet },
+                              ]}
+                            >
+                              {contentApprovalStatus}
+                            </Text>
+                          </View>
+                        )}
+                        <View style={[contentStyles.threeDotsContainer]}>
                           <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.threeDotsIcon} />
                         </View>
                       </View>
                       <View style={contentStyles.infoContainer}>
                         <Image resizeMode="contain" source={IMAGES.info} style={contentStyles.infoIcon} />
-                        <Text style={contentStyles.deadLineText}>5 Days left</Text>
+                        <Text
+                          style={contentStyles.deadLineText}
+                        >{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
                       </View>
                     </View>
                     <View style={contentStyles.divider} />
@@ -238,20 +255,17 @@ const YourScheduleScreen = () => {
                         <View style={contentStyles.locationImageContainer}>
                           <FastImage
                             resizeMode="cover"
-                            source={IMAGES.testImage}
-                            // source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
+                            source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
                             style={contentStyles.locationImage}
                           />
                         </View>
                         <View style={contentStyles.locationNameContainer}>
-                          <Text style={contentStyles.locationNameText}>
-                            Pizzami Bali
-                            {/* {bookingDetails?._restaurant_turbo?.Name} */}
+                          <Text style={contentStyles.locationNameText} numberOfLines={1}>
+                            {item?._restaurant_turbo?.Name}
                           </Text>
                           <View style={contentStyles.locationTextContainer}>
-                            <Text style={contentStyles.locationText}>
-                              Chengduu Street 34, Bali
-                              {/* {bookingDetails?._restaurant_turbo?.Adress} */}
+                            <Text style={contentStyles.locationText} numberOfLines={2}>
+                              {item?._restaurant_turbo?.Adress}
                             </Text>
                           </View>
                         </View>
@@ -267,7 +281,15 @@ const YourScheduleScreen = () => {
           }}
         />
       )}
-      {/* <ContentStatusModal /> */}
+      {isContentStatusModalVisible && (
+        <ContentStatusModal
+          visible={isContentStatusModalVisible}
+          isLoading={false}
+          contentDetails={updatedContentDetails}
+          handleNegativeBtnPress={handleContentModalOpenClose}
+          handlePositiveBtnPress={handleContentModalOpenClose}
+        />
+      )}
     </ScrollView>
   )
 }
@@ -572,7 +594,8 @@ const contentStyles = StyleSheet.create({
     marginLeft: scale(13),
   },
   locationNameContainer: {
-    marginLeft: scale(15),
+    marginLeft: scale(10),
+    width: '70%',
   },
   locationNameText: {
     color: COLORS.black,
@@ -585,12 +608,13 @@ const contentStyles = StyleSheet.create({
     fontSize: moderateScale(12),
   },
   locationTextContainer: {
-    width: '95%',
+    width: '100%',
   },
   nameLocationMainRow: {
     alignItems: 'center',
     flexDirection: 'row',
     marginTop: verticalScale(10),
+    width: '80%',
   },
   rightIcon: {
     height: moderateScale(25),
@@ -671,7 +695,7 @@ const contentStyles = StyleSheet.create({
     flexDirection: 'row',
     width: '95%',
   },
-  DeadLineTitleTextContainer: {
+  deadLineTitleTextContainer: {
     width: '58%',
   },
   threeDotsContainer: {

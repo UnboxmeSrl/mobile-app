@@ -8,6 +8,7 @@ import { navigate } from '@services'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
 import { getBookings, getDiaryActions, updateAction, updateActionDiary } from '../../../services'
+import { setContentList } from '../../../redux/slices'
 
 const useContent = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -48,6 +49,9 @@ const useContent = () => {
         const params = `/${loginData?.id}`
         const bookingRes = await getBookings(params)
         dispatch(setBookings(bookingRes))
+        const newParams = `/${loginData?.id}`
+        const contentListRes = await getBookingForContentList(newParams)
+        dispatch(setContentList(contentListRes))
         navigate({
           params: {
             bookingDetails: res,
@@ -67,6 +71,9 @@ const useContent = () => {
         const params = `/${loginData?.id}`
         const bookingRes = await getBookings(params)
         dispatch(setBookings(bookingRes))
+        const newParams = `/${loginData?.id}`
+        const contentListRes = await getBookingForContentList(newParams)
+        dispatch(setContentList(contentListRes))
         navigate({
           params: {
             bookingDetails: res,
