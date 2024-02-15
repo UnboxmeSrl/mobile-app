@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -11,7 +11,7 @@ import { FONTS } from '../../constants/fonts'
 import useCities from './hooks/useCities'
 
 const CitiesScreen = () => {
-  const { isLoading, locationData } = useCities()
+  const { isLoading, locationData, refreshing, onRefresh } = useCities()
   return (
     <View style={styles.mainContainer}>
       {isLoading ? (
@@ -20,6 +20,7 @@ const CitiesScreen = () => {
         </View>
       ) : (
         <FlatList
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListHeaderComponent={
             <>
               <View style={styles.logoContainer}>

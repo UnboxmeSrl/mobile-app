@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigation } from 'react-navigation-hooks'
-import { useDispatch } from 'react-redux'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
 import { reset } from '@services'
@@ -18,6 +18,8 @@ export const SignInEmailModal = () => {
   const [loading, setLoading] = useState(false)
   const { control, handleSubmit, errors } = useForm()
   const { navigate } = useNavigation()
+  const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
+  const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
   const dispatch = useDispatch()
 
   const onSubmit = useCallback(
@@ -39,7 +41,11 @@ export const SignInEmailModal = () => {
           const params = `/${res?.id}`
           const bookingRes = await getBookings(params)
           dispatch(setBookings(bookingRes))
-          navigate(SCREEN_NAMES.Cities)
+          if (serviceDetails?.id && isFromBookRedirected) {
+            navigate(SCREEN_NAMES.ServiceDetails)
+          } else {
+            navigate(SCREEN_NAMES.Cities)
+          }
         } else {
         }
       } catch (e) {

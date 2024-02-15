@@ -61,7 +61,12 @@ const useServiceDetails = () => {
     if (loginData?.id) {
       navigate(SCREEN_NAMES.BookingDetails)
     } else {
-      navigate(SCREEN_NAMES.SignIn)
+      navigate({
+        params: {
+          isFromBookRedirected: true,
+        },
+        routeName: SCREEN_NAMES.SignIn,
+      })
     }
   }
 

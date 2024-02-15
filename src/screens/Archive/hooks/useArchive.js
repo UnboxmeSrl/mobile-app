@@ -9,6 +9,13 @@ const useArchive = () => {
   const canceledBookings = useSelector((state) => state.restaurantSlice.canceledBookings)
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    getAllCanceledBookingsData()
+    setRefreshing(false)
+  }
 
   const getAllCanceledBookingsData = async () => {
     setIsLoading(true)
@@ -30,6 +37,8 @@ const useArchive = () => {
 
   return {
     isLoading,
+    refreshing,
+    onRefresh,
     canceledBookings,
     handleBackPress,
   }

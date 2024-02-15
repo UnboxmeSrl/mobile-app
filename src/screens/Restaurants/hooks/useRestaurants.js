@@ -17,6 +17,14 @@ const useRestaurants = () => {
   const [restaurantsData, setRestaurantsData] = useState()
   const [filter, setFilter] = useState(0)
   const [categories, setCategories] = useState([])
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    getCategoriesData()
+    getRestaurantsData()
+    setRefreshing(false)
+  }
 
   const getRestaurantsData = async () => {
     setIsLoading(true)
@@ -61,6 +69,8 @@ const useRestaurants = () => {
     category,
     cityData,
     filter,
+    refreshing,
+    onRefresh,
     handleLocationPress,
     isLoading,
     onCategoryChange,

@@ -1,13 +1,20 @@
 import React from 'react'
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useYourSchedule } from './hooks'
 import { checkActionName } from '../../utils'
 import { ContentStatusModal } from '../../components'
@@ -21,13 +28,16 @@ const YourScheduleScreen = () => {
     updatedContentDetails,
     isLoading,
     isContentStatusModalVisible,
+    refreshing,
+    onBookingRefresh,
+    onContentRefresh,
     handleContentModalOpenClose,
     handleCardPress,
     handleContentCardPress,
     handleArchivePress,
   } = useYourSchedule()
   return (
-    <ScrollView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.yourScheduleTextContainer}>
           <Text style={styles.dateSelectTitleText}>Your Schedule</Text>
@@ -61,6 +71,7 @@ const YourScheduleScreen = () => {
         (selectedTab === 1 && (
           <FlatList
             data={bookings}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onBookingRefresh} />}
             renderItem={({ item, index }) => {
               const myDate = new Date(item?.BookingDay)
               const month = myDate.toLocaleString('default', { month: 'long' })
@@ -174,6 +185,7 @@ const YourScheduleScreen = () => {
         (selectedTab === 2 && (
           <FlatList
             data={contentList}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onContentRefresh} />}
             renderItem={({ item, index }) => {
               let actionName = item?._actions_turbo?.Action_Name ?? 0
               if (item?.diary_action_turbo_id) {
@@ -299,7 +311,7 @@ const YourScheduleScreen = () => {
           handlePositiveBtnPress={handleContentModalOpenClose}
         />
       )}
-    </ScrollView>
+    </View>
   )
 }
 
@@ -375,7 +387,6 @@ const styles = StyleSheet.create({
   loaderContainer: {
     alignItems: 'center',
     flex: 1,
-    marginTop: '70%',
     justifyContent: 'center',
   },
   locationImage: {

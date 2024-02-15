@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
 import { reset } from '@services'
@@ -10,9 +10,15 @@ import { SignInPresenter } from './SignInPresenter'
 export const SignInScreen = () => {
   const [loading, setLoading] = useState(false)
   const { navigate } = useNavigation()
+  const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
 
   const navigateToEmailModal = () => {
-    navigate(MODAL_NAMES.SignInEmail)
+    navigate({
+      params: {
+        isFromBookRedirected: isFromBookRedirected,
+      },
+      routeName: MODAL_NAMES.SignInEmail,
+    })
   }
   const navigateToPhoneModal = () => {
     navigate(MODAL_NAMES.AuthPhone)

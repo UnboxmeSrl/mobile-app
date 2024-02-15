@@ -1,5 +1,14 @@
 import React from 'react'
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -19,6 +28,8 @@ const RestaurantsScreen = () => {
     categories,
     filter,
     setFilter,
+    refreshing,
+    onRefresh,
     categoriesIds,
     category,
     restaurantsData,
@@ -46,6 +57,7 @@ const RestaurantsScreen = () => {
           />
           <View style={styles.restaurantsFlatlistContainer}>
             <FlatList
+              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
               ListEmptyComponent={
                 <View style={styles.listEmptyContainer}>
                   <Text style={styles.listEmptyText}>No data found.</Text>

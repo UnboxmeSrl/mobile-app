@@ -1,4 +1,13 @@
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import React from 'react'
 import { IMAGES } from '../../assets/images'
 import { useArchive } from './hooks'
@@ -7,7 +16,7 @@ import { COLORS, FONTS } from '../../constants'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 const ArchiveScreen = () => {
-  const { isLoading, canceledBookings, handleBackPress } = useArchive()
+  const { isLoading, refreshing, onRefresh, canceledBookings, handleBackPress } = useArchive()
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -25,6 +34,7 @@ const ArchiveScreen = () => {
       ) : (
         <FlatList
           data={canceledBookings}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListEmptyComponent={
             <View style={styles.emptyComponentContainer}>
               <Text style={styles.emptyComponentText}>No Data Found.</Text>

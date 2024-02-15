@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
-
 import { getCities } from '../../../services/LocationsService'
 
 const useCities = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [locationData, setLocationData] = useState()
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    getCitiesData()
+    setRefreshing(false)
+  }
 
   const getCitiesData = async () => {
     setIsLoading(true)
@@ -21,6 +27,8 @@ const useCities = () => {
   return {
     isLoading,
     locationData,
+    refreshing,
+    onRefresh,
   }
 }
 

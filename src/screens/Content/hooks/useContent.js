@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
-import { getBookings, getDiaryActions, updateAction, updateActionDiary } from '../../../services'
+import {
+  getBookingForContentList,
+  getBookings,
+  getDiaryActions,
+  updateAction,
+  updateActionDiary,
+} from '../../../services'
 import { setContentList } from '../../../redux/slices'
 
 const useContent = () => {

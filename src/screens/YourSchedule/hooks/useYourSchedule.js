@@ -18,8 +18,24 @@ const useYourSchedule = () => {
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
   const contentList = useSelector((state) => state.contentSlice.contentList)
   const [isContentStatusModalVisible, setIsContentStatusModalVisible] = useState(false)
-
+  const [refreshing, setRefreshing] = useState(false)
   const dispatch = useDispatch()
+
+  const onBookingRefresh = () => {
+    setRefreshing(true)
+    if (loginData?.id) {
+      getBookingsData()
+    }
+    setRefreshing(false)
+  }
+
+  const onContentRefresh = () => {
+    setRefreshing(true)
+    if (loginData?.id) {
+      getBookingForContentListData()
+    }
+    setRefreshing(false)
+  }
 
   const handleCardPress = (item, approvalStatus, actionName) => {
     if (approvalStatus === 'Pending') {
@@ -58,15 +74,19 @@ const useYourSchedule = () => {
   }
 
   const getBookingsData = async () => {
+    setIsLoading(true)
     const params = `/${loginData?.id}`
     const res = await getBookings(params)
     dispatch(setBookings(res))
+    setIsLoading(false)
   }
 
   const getBookingForContentListData = async () => {
+    setIsLoading(true)
     const params = `/${loginData?.id}`
     const res = await getBookingForContentList(params)
     dispatch(setContentList(res))
+    setIsLoading(false)
   }
 
   const handleArchivePress = () => {
@@ -98,13 +118,11 @@ const useYourSchedule = () => {
   }, [updatedContentDetails])
 
   useEffect(() => {
-    setIsLoading(true)
     if (loginData?.id) {
       getBookingsData()
       getBookingForContentListData()
     }
-    setIsLoading(false)
-  }, [])
+  }, [selectedTab])
 
   return {
     bookings,
@@ -112,6 +130,9 @@ const useYourSchedule = () => {
     updatedContentDetails,
     isLoading,
     isContentStatusModalVisible,
+    refreshing,
+    onBookingRefresh,
+    onContentRefresh,
     handleContentModalOpenClose,
     handleCardPress,
     handleContentCardPress,
