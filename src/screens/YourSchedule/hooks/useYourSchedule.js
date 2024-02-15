@@ -14,6 +14,7 @@ const useYourSchedule = () => {
   const selectedTabFromRoute = useNavigationParam('selectedTab')
   const [selectedTab, setSelectedTab] = useState(selectedTabFromRoute ?? 1)
   const [updatedContentDetails, setUpdatedContentDetails] = useState()
+  const [isLoading, setIsLoading] = useState(false)
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
   const contentList = useSelector((state) => state.contentSlice.contentList)
   const [isContentStatusModalVisible, setIsContentStatusModalVisible] = useState(false)
@@ -91,23 +92,25 @@ const useYourSchedule = () => {
   }
 
   useEffect(() => {
-    console.log('object created', isContentStatusModalVisible, updatedContentDetails)
     if (isContentStatusModalVisible === false && updatedContentDetails?.id) {
       handleContentModalOpenClose()
     }
   }, [updatedContentDetails])
 
   useEffect(() => {
+    setIsLoading(true)
     if (loginData?.id) {
       getBookingsData()
       getBookingForContentListData()
     }
+    setIsLoading(false)
   }, [])
 
   return {
     bookings,
     contentList,
     updatedContentDetails,
+    isLoading,
     isContentStatusModalVisible,
     handleContentModalOpenClose,
     handleCardPress,

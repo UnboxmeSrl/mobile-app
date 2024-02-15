@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -18,6 +18,7 @@ const BookingOnApprovalScreen = () => {
     currentMonth,
     currentWeekDay,
     timeFrame,
+    isLoading,
     handleBackPress,
     handleGoToSchedulePress,
   } = useBookingOnApproval()
@@ -136,9 +137,15 @@ const BookingOnApprovalScreen = () => {
       </TouchableOpacity>
 
       <View style={styles.goToScheduleBtnMainContainer}>
-        <TouchableOpacity onPress={handleGoToSchedulePress} style={styles.goToScheduleBtnContainer}>
-          <Text style={styles.goToScheduleBtnText}>Go to schedule </Text>
-        </TouchableOpacity>
+        {isLoading ? (
+          <View style={styles.goToScheduleBtnContainer}>
+            <ActivityIndicator color={COLORS.primary} size={30} />
+          </View>
+        ) : (
+          <TouchableOpacity onPress={handleGoToSchedulePress} style={styles.goToScheduleBtnContainer}>
+            <Text style={styles.goToScheduleBtnText}>Go to schedule </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   )

@@ -5,6 +5,7 @@ import { checkActionName } from '../../../utils'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setContentList } from '../../../redux/slices'
+import Toast from 'react-native-toast-message'
 
 const usePublishContent = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -50,6 +51,14 @@ const usePublishContent = () => {
 
   const handleSendToReviewBtnPress = async () => {
     setIsSendToReview(true)
+    if (actionName !== 'Story' && link === '') {
+      Toast.show({
+        type: 'error',
+        text1: 'Please enter the content link.',
+      })
+      setIsSendToReview(false)
+      return
+    }
     const params = `/${contentDetails?.id}`
     const prepData = {
       content_url: link,
@@ -76,6 +85,15 @@ const usePublishContent = () => {
     }
   }
 
+  const handleContentBriefPress = () => {
+    navigate({
+      params: {
+        bookingDetails: contentDetails,
+      },
+      routeName: SCREEN_NAMES.ContentBriefScreen,
+    })
+  }
+
   useEffect(() => {
     if (!isContentStatusModalVisible && updatedContentDetails?.id) {
       handleContentModalOpenClose()
@@ -99,6 +117,7 @@ const usePublishContent = () => {
     handleContentModalOpenClose,
     handleSendToReviewBtnPress,
     handlePositiveBtnPress,
+    handleContentBriefPress,
     handleEditPress,
     handleBackPress,
   }

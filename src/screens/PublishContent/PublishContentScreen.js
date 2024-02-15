@@ -36,6 +36,7 @@ const PublishContentScreen = () => {
     handleContentModalOpenClose,
     handleSendToReviewBtnPress,
     handlePositiveBtnPress,
+    handleContentBriefPress,
     handleEditPress,
     handleBackPress,
   } = usePublishContent()
@@ -120,7 +121,7 @@ const PublishContentScreen = () => {
                   </View>
                 </View>
               </View>
-              <TouchableOpacity style={styles.readContentBriefContainer} onPress={() => {}}>
+              <TouchableOpacity style={styles.readContentBriefContainer} onPress={handleContentBriefPress}>
                 <Text style={styles.contentBriefTitleText}>Read Content Brief & Tags</Text>
                 <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
               </TouchableOpacity>
@@ -173,7 +174,7 @@ const PublishContentScreen = () => {
           </View>
         </View>
         <View style={styles.redirectsContainer}>
-          <TouchableOpacity style={styles.contentBriefContainer} onPress={() => {}}>
+          <TouchableOpacity style={styles.contentBriefContainer} onPress={handleContentBriefPress}>
             <Text style={styles.socialMediaTitleText}>Content Brief & Tags</Text>
             <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>

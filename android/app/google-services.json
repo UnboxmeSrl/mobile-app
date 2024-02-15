@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "759842823698",
+    "project_id": "unboxme-firebase",
+    "storage_bucket": "unboxme-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759842823698:android:6c6f588df85951d6d602cb",
+        "android_client_info": {
+          "package_name": "com.claris.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759842823698-7npkg0bjic5qet6inipvs1mehbctin7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGLIvbT9nmmZeilNmY54K8GMXN7y-HREI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759842823698-7npkg0bjic5qet6inipvs1mehbctin7l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759842823698-9ipo0sf6fsqee2f1n8gh4a6l05u394c8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.unboxme.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759842823698:android:0f442ba143dc90d4d602cb",
+        "android_client_info": {
+          "package_name": "com.unboxme.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759842823698-fbgo5uk0jo5kcaoj44ekghsar912v561.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unboxme.app",
+            "certificate_hash": "8af1ff9a3c82e46e8236383c4deb660ba8303912"
+          }
+        },
+        {
+          "client_id": "759842823698-j0fc128ia32n9icic1e5tlpmkij5dul5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unboxme.app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "759842823698-qho8tdeafkg7ndequslurbjoil9aadca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unboxme.app",
+            "certificate_hash": "a97a45889880e884f894ab1dca1fe96765415b66"
+          }
+        },
+        {
+          "client_id": "759842823698-u5iiaho77crkuie5lco8r9bctvk8mvgn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unboxme.app",
+            "certificate_hash": "3ff9bb73da8c87e71a2d1c6b14226352eddeeb5c"
+          }
+        },
+        {
+          "client_id": "759842823698-7npkg0bjic5qet6inipvs1mehbctin7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGLIvbT9nmmZeilNmY54K8GMXN7y-HREI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759842823698-7npkg0bjic5qet6inipvs1mehbctin7l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759842823698-9ipo0sf6fsqee2f1n8gh4a6l05u394c8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.unboxme.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

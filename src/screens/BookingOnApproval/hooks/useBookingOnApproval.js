@@ -6,7 +6,8 @@ import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings, setRestaurantDetails, setServiceDetails } from '../../../redux/slices/restaurantSlice'
-import { getBookings } from '../../../services'
+import { getBookingForContentList, getBookings } from '../../../services'
+import { setContentList } from '../../../redux/slices'
 
 const useBookingOnApproval = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -14,6 +15,7 @@ const useBookingOnApproval = () => {
   const [currentMonth, setCurrentMonth] = useState('')
   const [currentWeekDay, setCurrentWeekDay] = useState('')
   const [currentDate, setCurrentDate] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const timeFrame = bookingDetails?._timeframes_turbo
   const approvalStageValue = bookingDetails?.Approved
     ? 'success'
@@ -30,10 +32,15 @@ const useBookingOnApproval = () => {
   const handleGoToSchedulePress = async () => {
     // dispatch(setRestaurantDetails({}))
     // dispatch(setServiceDetails({}))
-
+    setIsLoading(true)
     const params = `/${loginData?.id}`
     const res = await getBookings(params)
     dispatch(setBookings(res))
+
+    const newParams = `/${loginData?.id}`
+    const contentListRes = await getBookingForContentList(newParams)
+    dispatch(setContentList(contentListRes))
+    setIsLoading(false)
     navigate(SCREEN_NAMES.Schedule)
   }
 
@@ -49,6 +56,7 @@ const useBookingOnApproval = () => {
   return {
     approvalStage,
     bookingDetails,
+    isLoading,
     currentDate,
     currentMonth,
     currentWeekDay,

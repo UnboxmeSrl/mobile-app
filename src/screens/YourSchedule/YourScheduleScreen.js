@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -19,6 +19,7 @@ const YourScheduleScreen = () => {
     selectedTab,
     setSelectedTab,
     updatedContentDetails,
+    isLoading,
     isContentStatusModalVisible,
     handleContentModalOpenClose,
     handleCardPress,
@@ -52,234 +53,242 @@ const YourScheduleScreen = () => {
         </TouchableOpacity>
       </View>
 
-      {selectedTab === 1 && (
-        <FlatList
-          data={bookings}
-          renderItem={({ item, index }) => {
-            const myDate = new Date(item?.BookingDay)
-            const month = myDate.toLocaleString('default', { month: 'long' })
-            const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-            const timeFrame = item?._timeframes_turbo
-            const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={COLORS.primary} size={20} />
+        </View>
+      ) : (
+        (selectedTab === 1 && (
+          <FlatList
+            data={bookings}
+            renderItem={({ item, index }) => {
+              const myDate = new Date(item?.BookingDay)
+              const month = myDate.toLocaleString('default', { month: 'long' })
+              const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+              const timeFrame = item?._timeframes_turbo
+              const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
 
-            let actionName = item?._actions_turbo?.Action_Name ?? 0
-            if (item?.diary_action_turbo_id) {
-              actionName = item?._diary_action_turbo?.action
-            }
-            const icon = checkActionName(actionName)
+              let actionName = item?._actions_turbo?.Action_Name ?? 0
+              if (item?.diary_action_turbo_id) {
+                actionName = item?._diary_action_turbo?.action
+              }
+              const icon = checkActionName(actionName)
 
-            return (
-              <TouchableOpacity
-                onPress={() => handleCardPress(item, approvalStatus, actionName)}
-                style={styles.cardContainer}
-              >
-                <View
-                  style={[
-                    styles.approvalStatusContainer,
-                    approvalStatus === 'Pending'
-                      ? { backgroundColor: COLORS.cornSilk }
-                      : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
-                  ]}
+              return (
+                <TouchableOpacity
+                  onPress={() => handleCardPress(item, approvalStatus, actionName)}
+                  style={styles.cardContainer}
                 >
-                  <Image
-                    resizeMode="cover"
-                    source={item?.Approved ? IMAGES.check : item?.Rejectedstatus ? IMAGES.info : IMAGES.pendingClock}
+                  <View
                     style={[
-                      styles.approvalIcon,
+                      styles.approvalStatusContainer,
                       approvalStatus === 'Pending'
-                        ? { tintColor: COLORS.americanYellow }
-                        : approvalStatus === 'Rejected' && { tintColor: COLORS.error },
-                    ]}
-                  />
-                  <Text
-                    style={[
-                      styles.approvalStatusText,
-                      approvalStatus === 'Pending'
-                        ? { color: COLORS.americanYellow }
-                        : approvalStatus === 'Rejected' && { color: COLORS.error },
+                        ? { backgroundColor: COLORS.cornSilk }
+                        : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
                     ]}
                   >
-                    {approvalStatus}
-                  </Text>
-                </View>
-
-                <View style={styles.nameLocationMainRow}>
-                  <View>
-                    <View style={styles.locationImageContainer}>
-                      <FastImage
-                        resizeMode="cover"
-                        source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
-                        style={styles.locationImage}
-                      />
-                    </View>
-                    <View
+                    <Image
+                      resizeMode="cover"
+                      source={item?.Approved ? IMAGES.check : item?.Rejectedstatus ? IMAGES.info : IMAGES.pendingClock}
                       style={[
-                        styles.dateContainer,
+                        styles.approvalIcon,
                         approvalStatus === 'Pending'
-                          ? { backgroundColor: COLORS.cornSilk }
-                          : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
+                          ? { tintColor: COLORS.americanYellow }
+                          : approvalStatus === 'Rejected' && { tintColor: COLORS.error },
+                      ]}
+                    />
+                    <Text
+                      style={[
+                        styles.approvalStatusText,
+                        approvalStatus === 'Pending'
+                          ? { color: COLORS.americanYellow }
+                          : approvalStatus === 'Rejected' && { color: COLORS.error },
                       ]}
                     >
-                      <Text style={styles.selectedDateMonthText}>{month}</Text>
-                      <Text style={styles.selectedDateNumberText}>{myDate?.getDate()}</Text>
-                      <Text style={styles.selectedDateDayText}>{weekDay?.slice(0, 3)}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.locationTimeMainContainer}>
-                    <View style={styles.locationNameContainer}>
-                      <Text style={styles.locationNameText}>{item?._restaurant_turbo?.Name}</Text>
-                    </View>
-                    <View style={styles.serviceRequestedContainer}>
-                      <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
-                      <Text style={styles.serviceRequestedText}>{item?._offers_turbo?.Offer_Name}</Text>
-                    </View>
-                    <View style={styles.timeReelsContainer}>
-                      <View style={styles.timeContainer}>
-                        <Text style={styles.timeTitleText}>Time</Text>
-                        <Text
-                          style={styles.timeText}
-                        >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
-                      </View>
-
-                      {actionName ? (
-                        <View style={styles.storyContainer}>
-                          <Text style={styles.storyText}>{actionName}</Text>
-                          <View style={styles.storyIconContainer}>
-                            <Image resizeMode="cover" source={icon} style={styles.storyIcon} />
-                          </View>
-                        </View>
-                      ) : (
-                        <View style={styles.reelsContainer}>
-                          <Text style={styles.reelsTitleText}>{`Tiktok/ Reels`}</Text>
-                          <View style={styles.tiktokReelsIconsContainer}>
-                            <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
-                            <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
-                          </View>
-                        </View>
-                      )}
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )
-          }}
-        />
-      )}
-      {selectedTab === 2 && (
-        <FlatList
-          data={contentList}
-          renderItem={({ item, index }) => {
-            let actionName = item?._actions_turbo?.Action_Name ?? 0
-            if (item?.diary_action_turbo_id) {
-              actionName = item?._diary_action_turbo?.action
-            }
-            const icon = checkActionName(actionName)
-            let contentApprovalStatus = item?.content_status_turbo_id
-            if (item?.content_status_turbo_id) {
-              contentApprovalStatus = item?._content_status_turbo?.name
-            }
-            return (
-              <TouchableOpacity style={contentStyles.cardContainer} onPress={() => handleContentCardPress(item)}>
-                <View style={contentStyles.cardContentContainer}>
-                  <View style={contentStyles.ratingSocialMediaMainContainer}>
-                    <View style={contentStyles.ratingSocialMediaContainer}>
-                      <View style={contentStyles.ratingContainer}>
-                        <Text style={contentStyles.ratingUsersText}>240</Text>
-                        <Image source={IMAGES.ratingStar} style={contentStyles.ratingIconImage} />
-                      </View>
-                    </View>
-                    <View style={contentStyles.socialMediaIconNameContainer}>
-                      <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} />
-                      <Text style={contentStyles.socialMediaNameText}>{`${item?._actions_turbo?.Action_Name}`}</Text>
-                    </View>
+                      {approvalStatus}
+                    </Text>
                   </View>
 
-                  <View style={contentStyles.deadLineLocationContainer}>
-                    <View style={contentStyles.deadLineContainer}>
-                      <View style={contentStyles.deadLineMainRow}>
-                        <View
-                          style={[
-                            contentStyles.deadLineTitleTextContainer,
-                            (contentApprovalStatus === 'Under Review' ||
-                              contentApprovalStatus === 'Missed Deadline') && {
-                              width: '40%',
-                            },
-                            item?.content_status_turbo_id === 0 && { width: '80%' },
-                          ]}
-                        >
-                          <Text style={contentStyles.deadLineTitleText}>Deadline:</Text>
+                  <View style={styles.nameLocationMainRow}>
+                    <View>
+                      <View style={styles.locationImageContainer}>
+                        <FastImage
+                          resizeMode="cover"
+                          source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
+                          style={styles.locationImage}
+                        />
+                      </View>
+                      <View
+                        style={[
+                          styles.dateContainer,
+                          approvalStatus === 'Pending'
+                            ? { backgroundColor: COLORS.cornSilk }
+                            : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
+                        ]}
+                      >
+                        <Text style={styles.selectedDateMonthText}>{month}</Text>
+                        <Text style={styles.selectedDateNumberText}>{myDate?.getDate()}</Text>
+                        <Text style={styles.selectedDateDayText}>{weekDay?.slice(0, 3)}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.locationTimeMainContainer}>
+                      <View style={styles.locationNameContainer}>
+                        <Text style={styles.locationNameText}>{item?._restaurant_turbo?.Name}</Text>
+                      </View>
+                      <View style={styles.serviceRequestedContainer}>
+                        <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
+                        <Text style={styles.serviceRequestedText}>{item?._offers_turbo?.Offer_Name}</Text>
+                      </View>
+                      <View style={styles.timeReelsContainer}>
+                        <View style={styles.timeContainer}>
+                          <Text style={styles.timeTitleText}>Time</Text>
+                          <Text
+                            style={styles.timeText}
+                          >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
                         </View>
-                        {item?.content_status_turbo_id > 0 && (
-                          <View
-                            style={[
-                              contentStyles.contentApprovalStatusContainer,
-                              contentApprovalStatus === 'To Publish'
-                                ? { backgroundColor: COLORS.cornSilk }
-                                : contentApprovalStatus === 'Rejected'
-                                ? { backgroundColor: COLORS.seaShellRed }
-                                : contentApprovalStatus === 'Under Review'
-                                ? { backgroundColor: COLORS.azureishWhite }
-                                : contentApprovalStatus === 'Missed Deadline' && { backgroundColor: COLORS.paleRose },
-                            ]}
-                          >
-                            <Text
-                              style={[
-                                contentStyles.contentApprovalStatusText,
-                                contentApprovalStatus === 'To Publish'
-                                  ? { color: COLORS.americanYellow }
-                                  : contentApprovalStatus === 'Rejected'
-                                  ? { color: COLORS.error }
-                                  : contentApprovalStatus === 'Under Review'
-                                  ? { color: COLORS.celticBlue }
-                                  : contentApprovalStatus === 'Missed Deadline' && { color: COLORS.redViolet },
-                              ]}
-                            >
-                              {contentApprovalStatus}
-                            </Text>
+
+                        {actionName ? (
+                          <View style={styles.storyContainer}>
+                            <Text style={styles.storyText}>{actionName}</Text>
+                            <View style={styles.storyIconContainer}>
+                              <Image resizeMode="cover" source={icon} style={styles.storyIcon} />
+                            </View>
+                          </View>
+                        ) : (
+                          <View style={styles.reelsContainer}>
+                            <Text style={styles.reelsTitleText}>{`Tiktok/ Reels`}</Text>
+                            <View style={styles.tiktokReelsIconsContainer}>
+                              <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
+                              <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
+                            </View>
                           </View>
                         )}
-                        <View style={[contentStyles.threeDotsContainer]}>
-                          <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.threeDotsIcon} />
-                        </View>
-                      </View>
-                      <View style={contentStyles.infoContainer}>
-                        <Image resizeMode="contain" source={IMAGES.info} style={contentStyles.infoIcon} />
-                        <Text
-                          style={contentStyles.deadLineText}
-                        >{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
-                      </View>
-                    </View>
-                    <View style={contentStyles.divider} />
-                    <View style={contentStyles.locationMainRow}>
-                      <View style={contentStyles.nameLocationMainRow}>
-                        <View style={contentStyles.locationImageContainer}>
-                          <FastImage
-                            resizeMode="cover"
-                            source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
-                            style={contentStyles.locationImage}
-                          />
-                        </View>
-                        <View style={contentStyles.locationNameContainer}>
-                          <Text style={contentStyles.locationNameText} numberOfLines={1}>
-                            {item?._restaurant_turbo?.Name}
-                          </Text>
-                          <View style={contentStyles.locationTextContainer}>
-                            <Text style={contentStyles.locationText} numberOfLines={2}>
-                              {item?._restaurant_turbo?.Adress}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                      <View style={contentStyles.rightIconContainer}>
-                        <Image resizeMode="contain" source={IMAGES.back} style={contentStyles.rightIcon} />
                       </View>
                     </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            )
-          }}
-        />
+                </TouchableOpacity>
+              )
+            }}
+          />
+        )) ||
+        (selectedTab === 2 && (
+          <FlatList
+            data={contentList}
+            renderItem={({ item, index }) => {
+              let actionName = item?._actions_turbo?.Action_Name ?? 0
+              if (item?.diary_action_turbo_id) {
+                actionName = item?._diary_action_turbo?.action
+              }
+              const icon = checkActionName(actionName)
+              let contentApprovalStatus = item?.content_status_turbo_id
+              if (item?.content_status_turbo_id) {
+                contentApprovalStatus = item?._content_status_turbo?.name
+              }
+              return (
+                <TouchableOpacity style={contentStyles.cardContainer} onPress={() => handleContentCardPress(item)}>
+                  <View style={contentStyles.cardContentContainer}>
+                    <View style={contentStyles.ratingSocialMediaMainContainer}>
+                      <View style={contentStyles.ratingSocialMediaContainer}>
+                        <View style={contentStyles.ratingContainer}>
+                          <Text style={contentStyles.ratingUsersText}>240</Text>
+                          <Image source={IMAGES.ratingStar} style={contentStyles.ratingIconImage} />
+                        </View>
+                      </View>
+                      <View style={contentStyles.socialMediaIconNameContainer}>
+                        <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} />
+                        <Text style={contentStyles.socialMediaNameText}>{`${item?._actions_turbo?.Action_Name}`}</Text>
+                      </View>
+                    </View>
+
+                    <View style={contentStyles.deadLineLocationContainer}>
+                      <View style={contentStyles.deadLineContainer}>
+                        <View style={contentStyles.deadLineMainRow}>
+                          <View
+                            style={[
+                              contentStyles.deadLineTitleTextContainer,
+                              (contentApprovalStatus === 'Under Review' ||
+                                contentApprovalStatus === 'Missed Deadline') && {
+                                width: '52%',
+                              },
+                              item?.content_status_turbo_id === 0 && { width: '100%' },
+                            ]}
+                          >
+                            <Text style={contentStyles.deadLineTitleText}>Deadline:</Text>
+                          </View>
+                          {item?.content_status_turbo_id > 0 && (
+                            <View
+                              style={[
+                                contentStyles.contentApprovalStatusContainer,
+                                contentApprovalStatus === 'To Publish'
+                                  ? { backgroundColor: COLORS.cornSilk }
+                                  : contentApprovalStatus === 'Rejected'
+                                  ? { backgroundColor: COLORS.seaShellRed }
+                                  : contentApprovalStatus === 'Under Review'
+                                  ? { backgroundColor: COLORS.azureishWhite }
+                                  : contentApprovalStatus === 'Missed Deadline' && {
+                                      backgroundColor: COLORS.paleRose,
+                                    },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  contentStyles.contentApprovalStatusText,
+                                  contentApprovalStatus === 'To Publish'
+                                    ? { color: COLORS.americanYellow }
+                                    : contentApprovalStatus === 'Rejected'
+                                    ? { color: COLORS.error }
+                                    : contentApprovalStatus === 'Under Review'
+                                    ? { color: COLORS.celticBlue }
+                                    : contentApprovalStatus === 'Missed Deadline' && { color: COLORS.redViolet },
+                                ]}
+                              >
+                                {contentApprovalStatus}
+                              </Text>
+                            </View>
+                          )}
+                          {/* <View style={[contentStyles.threeDotsContainer]}>
+                            <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.threeDotsIcon} />
+                          </View> */}
+                        </View>
+                        <View style={contentStyles.infoContainer}>
+                          <Image resizeMode="contain" source={IMAGES.info} style={contentStyles.infoIcon} />
+                          <Text
+                            style={contentStyles.deadLineText}
+                          >{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
+                        </View>
+                      </View>
+                      <View style={contentStyles.divider} />
+                      <View style={contentStyles.locationMainRow}>
+                        <View style={contentStyles.nameLocationMainRow}>
+                          <View style={contentStyles.locationImageContainer}>
+                            <FastImage
+                              resizeMode="cover"
+                              source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
+                              style={contentStyles.locationImage}
+                            />
+                          </View>
+                          <View style={contentStyles.locationNameContainer}>
+                            <Text style={contentStyles.locationNameText} numberOfLines={1}>
+                              {item?._restaurant_turbo?.Name}
+                            </Text>
+                            <View style={contentStyles.locationTextContainer}>
+                              <Text style={contentStyles.locationText} numberOfLines={2}>
+                                {item?._restaurant_turbo?.Adress}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+                        <View style={contentStyles.rightIconContainer}>
+                          <Image resizeMode="contain" source={IMAGES.back} style={contentStyles.rightIcon} />
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )
+            }}
+          />
+        ))
       )}
       {isContentStatusModalVisible && (
         <ContentStatusModal
@@ -362,6 +371,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: verticalScale(20),
     width: '100%',
+  },
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
+    marginTop: '70%',
+    justifyContent: 'center',
   },
   locationImage: {
     borderRadius: moderateScale(60),
