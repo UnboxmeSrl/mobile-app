@@ -14,7 +14,7 @@ const useServiceDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
-
+  const [isImageLoading, setIsImageLoading] = useState(true)
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
   const [diaryItems, setDiaryItems] = useState([])
@@ -83,6 +83,8 @@ const useServiceDetails = () => {
     diaryItems,
     categoriesIds,
     filter,
+    isImageLoading,
+    setIsImageLoading,
     handleBackPress,
     handleBookPress,
     onCategoryChange,

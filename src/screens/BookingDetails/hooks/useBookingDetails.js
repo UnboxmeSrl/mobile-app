@@ -123,7 +123,7 @@ const useBookingDetails = () => {
     const myDate = new Date(selectedDate)
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
     setCurrentWeekDay(weekDay)
-    const filteredData = res?.filter((t) => t.DayOfWeek === weekDay)
+    const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
     setWeekDayWiseTimeSlots(filteredData)
   }
 
@@ -133,7 +133,7 @@ const useBookingDetails = () => {
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
     console.log('weekDay: ' + weekDay)
     setCurrentWeekDay(weekDay)
-    const filteredData = timeFrameData?.filter((t) => t.DayOfWeek === weekDay)
+    const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
     console.log('filteredData: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)
   }, [selectedDate])
@@ -141,7 +141,7 @@ const useBookingDetails = () => {
   const datesBlacklistFunc = (date) => {
     const myDate = new Date(date)
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-    const filteredData = timeFrameData?.filter((t) => t.DayOfWeek === weekDay)
+    const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
     if (filteredData.length === 0) {
       return true
     } else {

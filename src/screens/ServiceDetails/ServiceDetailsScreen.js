@@ -17,6 +17,8 @@ const ServiceDetails = () => {
     diaryItems,
     services,
     categoriesIds,
+    isImageLoading,
+    setIsImageLoading,
     serviceDetails,
     filter,
     serviceCategories,
@@ -33,11 +35,15 @@ const ServiceDetails = () => {
           <CustomCarousel
             Component={({ item, index }) => {
               return (
-                <FastImage
-                  resizeMode="cover"
-                  source={{ priority: FastImage.priority.high, uri: item?.url }}
-                  style={styles.imageStyle}
-                />
+                <>
+                  {isImageLoading && <View style={styles.imageLoader} />}
+                  <FastImage
+                    resizeMode="cover"
+                    source={{ priority: FastImage.priority.high, uri: item?.url }}
+                    style={styles.imageStyle}
+                    onLoadEnd={() => setIsImageLoading(false)}
+                  />
+                </>
               )
             }}
             data={[serviceDetails?.Offer_Cover]}
@@ -257,6 +263,12 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: verticalScale(170),
     width: '100%',
+  },
+  imageLoader: {
+    position: 'absolute',
+    height: verticalScale(170),
+    width: '100%',
+    backgroundColor: COLORS.lightPink,
   },
   infoContainer: {
     alignItems: 'center',

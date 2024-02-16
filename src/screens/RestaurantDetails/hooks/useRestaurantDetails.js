@@ -15,6 +15,7 @@ const useRestaurantDetails = () => {
   const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
+  const [isImageLoading, setIsImageLoading] = useState(true)
 
   const getServicesData = async () => {
     const prepData = {
@@ -68,6 +69,8 @@ const useRestaurantDetails = () => {
   return {
     categoriesIds,
     filter,
+    isImageLoading,
+    setIsImageLoading,
     handleBackPress,
     onCategoryChange,
     restaurantDetails,

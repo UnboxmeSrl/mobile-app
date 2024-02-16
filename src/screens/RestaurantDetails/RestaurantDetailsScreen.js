@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -8,7 +8,6 @@ import { Categories } from '../../components/Categories'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useRestaurantDetails } from './hooks'
 import { ServiceCard } from './ServiceCard'
 
@@ -18,11 +17,14 @@ const RestaurantDetails = () => {
     categoriesIds,
     restaurantDetails,
     filter,
+    isImageLoading,
+    setIsImageLoading,
     serviceCategories,
     onCategoryChange,
     handleBackPress,
   } = useRestaurantDetails()
   console.log('Restaurant Details', JSON.stringify(restaurantDetails))
+
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
@@ -30,11 +32,15 @@ const RestaurantDetails = () => {
           <CustomCarousel
             Component={({ item, index }) => {
               return (
-                <FastImage
-                  resizeMode="cover"
-                  source={{ priority: FastImage.priority.high, uri: item?.url }}
-                  style={styles.imageStyle}
-                />
+                <>
+                  {isImageLoading && <View style={styles.imageLoader} />}
+                  <FastImage
+                    resizeMode="cover"
+                    source={{ priority: FastImage.priority.high, uri: item?.url }}
+                    style={[styles.imageStyle]}
+                    onLoadEnd={() => setIsImageLoading(false)}
+                  />
+                </>
               )
             }}
             data={restaurantDetails?.GalleryRestaurant}
@@ -102,6 +108,12 @@ const RestaurantDetails = () => {
 }
 
 const styles = StyleSheet.create({
+  imageLoader: {
+    position: 'absolute',
+    height: 200,
+    width: '100%',
+    backgroundColor: COLORS.lightPink,
+  },
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
