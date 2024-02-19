@@ -1,9 +1,7 @@
+import { navigate } from '@services'
 import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useSelector } from 'react-redux'
-
-import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { addRestaurantBooking, getTimeFrames } from '../../../services'
 
@@ -41,8 +39,7 @@ const useBookingDetails = () => {
   }
 
   const isDateAvailable = (date) => {
-    // Replace this with your logic to check if the date is available for booking
-    // For example, you can check against a list of booked dates or availability data
+    // Replace this with logic to check if the date is available for booking
     return true // Return true for available, false for unavailable
   }
 
@@ -123,7 +120,15 @@ const useBookingDetails = () => {
     const myDate = new Date(selectedDate)
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
     setCurrentWeekDay(weekDay)
-    const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    const filteredData = res?.filter((t) => {
+      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
+      if (filteredRes.length > 0) return true
+      else {
+        return false
+      }
+    })
+    console.log('filteredTimeData: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)
   }
 
@@ -133,15 +138,29 @@ const useBookingDetails = () => {
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
     console.log('weekDay: ' + weekDay)
     setCurrentWeekDay(weekDay)
-    const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
-    console.log('filteredData: ' + JSON.stringify(filteredData))
+    const filteredData = timeFrameData?.filter((t) => {
+      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
+      if (filteredRes.length > 0) return true
+      else {
+        return false
+      }
+    })
+    console.log('filteredTimeData: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)
   }, [selectedDate])
 
   const datesBlacklistFunc = (date) => {
     const myDate = new Date(date)
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-    const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    const filteredData = timeFrameData?.filter((t) => {
+      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
+      if (filteredRes.length > 0) return true
+      else {
+        return false
+      }
+    })
+
     if (filteredData.length === 0) {
       return true
     } else {

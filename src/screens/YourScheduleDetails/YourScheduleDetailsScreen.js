@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     height: verticalScale(38),
     justifyContent: 'center',
     marginLeft: scale(10),
-    width: scale(111),
+    width: scale(125),
   },
   amenityIcon: {
     height: verticalScale(23),

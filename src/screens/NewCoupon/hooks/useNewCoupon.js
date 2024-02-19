@@ -1,11 +1,9 @@
+import { navigate } from '@services'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { checkActionName } from '../../../utils'
 import { setRestaurantDetails } from '../../../redux/slices/restaurantSlice'
+import { checkActionName } from '../../../utils'
 
 const useNewCoupon = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)

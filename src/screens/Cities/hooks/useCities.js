@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { getCities } from '../../../services/LocationsService'
+import { useDispatch } from 'react-redux'
+import { setLoginData } from '../../../redux/slices/authSlice'
 
 const useCities = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [locationData, setLocationData] = useState()
   const [refreshing, setRefreshing] = useState(false)
+  const dispatch = useDispatch()
 
   const onRefresh = () => {
     setRefreshing(true)
@@ -21,6 +24,7 @@ const useCities = () => {
   }
 
   useEffect(() => {
+    // dispatch(setLoginData({}))
     getCitiesData()
   }, [])
 

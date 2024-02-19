@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     height: verticalScale(44),
     borderRadius: moderateScale(10),
     borderTopWidth: moderateScale(1),
-    borderTopColor: COLORS.lightGrey,
+    borderTopColor: COLORS.lightGray,
   },
   yesBtnContainer: {
     width: '50%',
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: moderateScale(10),
     borderRightWidth: moderateScale(1),
-    borderRightColor: COLORS.lightGrey,
+    borderRightColor: COLORS.lightGray,
   },
   yesBtnText: {
     fontFamily: FONTS.josefinSans,

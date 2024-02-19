@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -11,14 +11,11 @@ import {
   View,
 } from 'react-native'
 import CalendarStrip from 'react-native-calendar-strip'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-import DateTimePicker from '@react-native-community/datetimepicker'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useBookingDetails } from './hooks'
 
 const BookingDetailsScreen = () => {
@@ -73,7 +70,7 @@ const BookingDetailsScreen = () => {
             </View>
           </View>
           {/* <DateTimePicker display="inline" value={new Date()} /> */}
-          <View style={{ marginBottom: 24 }}>
+          <View style={styles.calendarMainContainer}>
             <View style={styles.dateHeader}>
               <View>
                 <Text style={styles.selectedMonthName}>{currentMonth}</Text>
@@ -90,14 +87,14 @@ const BookingDetailsScreen = () => {
             </View>
 
             <CalendarStrip
-              calendarHeaderStyle={{ color: 'black' }}
-              dateNameStyle={{ color: COLORS.primary, fontFamily: FONTS.quicksand, fontSize: 12 }}
-              dateNumberStyle={{ color: COLORS.yankeesBlue, fontFamily: FONTS.quicksand, fontSize: 16 }}
+              calendarHeaderStyle={styles.calendarHeaderStyle}
+              dateNameStyle={styles.dateNameStyle}
+              dateNumberStyle={styles.dateNumberStyle}
               datesBlacklist={datesBlacklistFunc}
               endDate={endDate}
               highlightDateContainerStyle={styles.highlightedDateContainer}
-              highlightDateNameStyle={{ color: COLORS.primary, fontFamily: FONTS.quicksand, fontSize: 12 }}
-              highlightDateNumberStyle={{ color: COLORS.primary, fontFamily: FONTS.quicksand, fontSize: 16 }}
+              highlightDateNameStyle={styles.highlightDateNameStyle}
+              highlightDateNumberStyle={styles.highlightDateNumberStyle}
               iconLeft={IMAGES.back}
               iconRight={IMAGES.back}
               //   renderDate={renderDate}
@@ -194,63 +191,89 @@ const BookingDetailsScreen = () => {
 export default BookingDetailsScreen
 
 const styles = StyleSheet.create({
+  calendarHeaderStyle: {
+    color: 'black',
+  },
+  highlightDateNumberStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(16),
+  },
+  highlightDateNameStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
+  },
+  dateNumberStyle: {
+    color: COLORS.yankeesBlue,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(16),
+  },
+  dateNameStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
+  },
+  calendarMainContainer: {
+    marginBottom: verticalScale(24),
+  },
   availableHoursContainer: {
-    marginHorizontal: 16,
-    marginTop: 16,
+    marginHorizontal: scale(16),
+    marginTop: verticalScale(10),
   },
   availableHoursTitleContainer: {
-    marginTop: 24,
+    marginTop: verticalScale(16),
   },
   availableHoursTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 16,
-    marginTop: 10,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
   },
   backIcon: {
-    height: 30,
+    height: moderateScale(30),
     tintColor: COLORS.achromaticBlack,
-    width: 30,
+    width: moderateScale(30),
   },
   bookBtnContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 16,
-    height: 44,
+    borderRadius: moderateScale(16),
+    height: verticalScale(44),
     justifyContent: 'center',
     width: '100%',
   },
   bookBtnMainContainer: {
     borderBottomWidth: 0,
     borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: 10,
-    borderWidth: 1,
-    marginTop: 14,
-    padding: 24,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
+    marginTop: verticalScale(14),
+    padding: moderateScale(24),
     width: '100%',
   },
   bookBtnText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: '600',
   },
   calenderIcon: {
-    height: 24,
+    height: moderateScale(24),
     tintColor: COLORS.achromaticBlack,
-    width: 24,
+    width: moderateScale(24),
   },
   dateHeader: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 10,
-    marginVertical: 24,
+    marginHorizontal: scale(10),
+    marginVertical: verticalScale(24),
   },
   dateSelectTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksand,
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: 'bold',
   },
   headerAndDateContainer: {
@@ -260,31 +283,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: 20,
+    marginVertical: verticalScale(20),
   },
   highlightedDateContainer: {
     backgroundColor: COLORS.lightBrown,
     borderColor: COLORS.primary,
-    borderRadius: 8,
-    borderWidth: 1,
+    borderRadius: moderateScale(8),
+    borderWidth: moderateScale(1),
   },
   hoursContainer: {
     alignItems: 'center',
     borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: 10,
-    borderWidth: 1,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
     flexDirection: 'row',
-    height: 40,
+    height: verticalScale(40),
     justifyContent: 'space-evenly',
-    marginRight: 20,
-    marginTop: 16,
+    marginRight: scale(20),
+    marginTop: verticalScale(16),
     width: '45%',
   },
   listEmptyContainer: {
     alignItems: 'center',
-    height: 40,
+    height: verticalScale(40),
     justifyContent: 'center',
-    marginTop: 16,
+    marginTop: verticalScale(16),
   },
   listEmptyText: {
     color: COLORS.primary,
@@ -297,15 +320,15 @@ const styles = StyleSheet.create({
     marginTop: getStatusBarHeight(),
   },
   nextDatesIcon: {
-    height: 20,
+    height: moderateScale(20),
     tintColor: COLORS.achromaticBlack,
     transform: [{ rotate: '180deg' }],
-    width: 20,
+    width: moderateScale(20),
   },
   previousDatesIcon: {
-    height: 20,
+    height: moderateScale(20),
     tintColor: COLORS.achromaticBlack,
-    width: 20,
+    width: moderateScale(20),
   },
   previousNextIconsContainer: {
     flexDirection: 'row',
@@ -322,16 +345,16 @@ const styles = StyleSheet.create({
   selectedDateContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.lightBrown,
-    borderRadius: 10,
+    borderRadius: moderateScale(10),
     justifyContent: 'center',
     width: '20%',
   },
   selectedDateMainContainer: {
     borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: 10,
-    borderWidth: 1,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
     flexDirection: 'row',
-    height: 72,
+    height: verticalScale(72),
     width: '100%',
   },
   selectedDateMonthText: {
@@ -360,7 +383,7 @@ const styles = StyleSheet.create({
   selectedMonthName: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksand,
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   selectedTimeFrameStyle: {
@@ -369,39 +392,39 @@ const styles = StyleSheet.create({
   },
   sendMessageTextContainer: {
     borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: 10,
-    borderWidth: 1,
-    height: 88,
-    marginBottom: 20,
-    marginRight: 20,
-    marginTop: 16,
+    borderRadius: moderateScale(10),
+    borderWidth: moderateScale(1),
+    height: verticalScale(88),
+    marginBottom: verticalScale(20),
+    marginRight: scale(20),
+    marginTop: verticalScale(16),
   },
   sendMessageTextInput: {
     color: COLORS.gray,
     fontFamily: FONTS.quicksand,
-    fontSize: 14,
-    height: 88,
-    marginHorizontal: 20,
-    marginTop: -20,
+    fontSize: moderateScale(14),
+    height: verticalScale(88),
+    marginHorizontal: scale(20),
+    marginTop: verticalScale(-20),
   },
   sendMessageTitleContainer: {
-    marginTop: 24,
+    marginTop: verticalScale(24),
   },
   sendMessageTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 16,
-    marginTop: 10,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
   },
   timeCircleIcon: {
-    height: 12.33,
+    height: moderateScale(12.33),
     tintColor: COLORS.achromaticBlack,
-    width: 12.33,
+    width: moderateScale(12.33),
   },
   timeContainer: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-    paddingLeft: 10,
+    paddingLeft: scale(10),
     width: '60%',
   },
 })

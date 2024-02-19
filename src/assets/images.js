@@ -64,4 +64,5 @@ export const IMAGES = {
   timeCircle: require('./images/time-circle.png'),
   user: require('./images/user.png'),
   threeDots: require('./images/three-dots.png'),
+  reject: require('./images/reject.png'),
 }

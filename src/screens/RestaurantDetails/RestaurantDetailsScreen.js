@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { Categories } from '../../components/Categories'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { useRestaurantDetails } from './hooks'
 import { ServiceCard } from './ServiceCard'
+import { useRestaurantDetails } from './hooks'
 
 const RestaurantDetails = () => {
   const {
@@ -29,24 +29,34 @@ const RestaurantDetails = () => {
     <View style={styles.mainContainer}>
       <ScrollView>
         <View>
-          <CustomCarousel
-            Component={({ item, index }) => {
-              return (
-                <>
-                  {isImageLoading && <View style={styles.imageLoader} />}
-                  <FastImage
-                    resizeMode="cover"
-                    source={{ priority: FastImage.priority.high, uri: item?.url }}
-                    style={[styles.imageStyle]}
-                    onLoadEnd={() => setIsImageLoading(false)}
-                  />
-                </>
-              )
-            }}
-            data={restaurantDetails?.GalleryRestaurant}
-          />
+          {restaurantDetails?.GalleryRestaurant ? (
+            <CustomCarousel
+              Component={({ item, index }) => {
+                return (
+                  <>
+                    {isImageLoading && <View style={styles.imageLoader} />}
+                    <FastImage
+                      resizeMode="cover"
+                      source={{ priority: FastImage.priority.high, uri: item?.url }}
+                      style={[styles.imageStyle]}
+                      onLoadEnd={() => setIsImageLoading(false)}
+                    />
+                  </>
+                )
+              }}
+              data={restaurantDetails?.GalleryRestaurant}
+            />
+          ) : (
+            <View style={styles.emptyImages}>
+              <Text style={styles.emptyImagesText}>Images are not available for this restaurant.</Text>
+            </View>
+          )}
           <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={[styles.backIcon, !restaurantDetails?.GalleryRestaurant && { tintColor: COLORS.black }]}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.restaurantDetailsContainer}>
@@ -71,15 +81,15 @@ const RestaurantDetails = () => {
               <Text style={styles.commonStyleSocialLinkText}>Website</Text>
             </View>
           </View>
-          <View style={{ marginTop: 8 }}>
+          <View style={styles.aboutTitleContainer}>
             <Text style={styles.aboutTitleText}>About</Text>
             <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
           </View>
           {/* <Text style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
-          <View style={styles.howItWorksContainer}>
+          <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.aboutTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
-          </View>
+          </TouchableOpacity>
 
           <View style={styles.previewTextContainer}>
             <Text style={styles.previewText}>Preview available timeframes </Text>
@@ -108,41 +118,56 @@ const RestaurantDetails = () => {
 }
 
 const styles = StyleSheet.create({
+  aboutTitleContainer: {
+    marginTop: verticalScale(8),
+  },
   imageLoader: {
     position: 'absolute',
-    height: 200,
+    height: verticalScale(180),
     width: '100%',
     backgroundColor: COLORS.lightPink,
+  },
+  emptyImages: {
+    height: verticalScale(180),
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.lightPink,
+  },
+  emptyImagesText: {
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
+    color: COLORS.primary,
   },
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
-    fontSize: 14,
-    marginTop: 8,
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(8),
   },
   aboutTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 16,
-    marginTop: 10,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
   },
   backIcon: {
-    height: 30,
-    left: 20,
+    height: verticalScale(30),
+    left: scale(15),
     position: 'absolute',
-    top: 20,
-    width: 30,
+    top: verticalScale(20),
+    width: scale(30),
   },
   backIconContainer: {
-    height: 50,
+    height: moderateScale(50),
     position: 'absolute',
-    width: 50,
+    width: moderateScale(50),
   },
   chooseServiceContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 40,
-    marginTop: 8,
+    height: verticalScale(40),
+    marginTop: verticalScale(8),
   },
   commonSocialLinksContainer: {
     alignItems: 'center',
@@ -150,37 +175,37 @@ const styles = StyleSheet.create({
   commonSocialLinksImageContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.lightPink,
-    borderRadius: 25,
-    height: 50,
+    borderRadius: moderateScale(25),
+    height: moderateScale(50),
     justifyContent: 'center',
-    width: 50,
+    width: moderateScale(50),
   },
   commonStyleForIcon: {
-    height: 20,
-    width: 20,
+    height: moderateScale(20),
+    width: moderateScale(20),
   },
   commonStyleSocialLinkText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: 12,
-    marginTop: 10,
+    fontSize: moderateScale(12),
+    marginTop: verticalScale(10),
   },
   howItWorksContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 56,
+    height: verticalScale(48),
     justifyContent: 'space-between',
-    marginTop: 8,
+    marginTop: verticalScale(8),
   },
   imageStyle: {
-    height: 200,
+    height: verticalScale(180),
     width: '100%',
   },
   infoText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 14,
-    marginTop: 3,
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(3),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -190,35 +215,35 @@ const styles = StyleSheet.create({
   previewText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 16,
-    marginTop: 10,
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(10),
   },
   previewTextContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 56,
-    marginTop: 8,
+    height: verticalScale(48),
+    marginTop: verticalScale(8),
   },
   restaurantDetailsContainer: {
-    paddingHorizontal: 15,
+    paddingHorizontal: scale(15),
   },
   restaurantNameText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 20,
-    marginTop: 10,
+    fontSize: moderateScale(20),
+    marginTop: verticalScale(10),
   },
   rightIcon: {
-    height: 25,
-    marginTop: 10,
+    height: verticalScale(25),
+    marginTop: verticalScale(10),
     tintColor: COLORS.black,
     transform: [{ rotate: '180deg' }],
-    width: 25,
+    width: scale(25),
   },
   socialLinksContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: verticalScale(20),
   },
 })
 

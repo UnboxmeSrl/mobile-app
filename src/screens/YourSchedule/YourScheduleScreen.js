@@ -100,7 +100,9 @@ const YourScheduleScreen = () => {
                   >
                     <Image
                       resizeMode="cover"
-                      source={item?.Approved ? IMAGES.check : item?.Rejectedstatus ? IMAGES.info : IMAGES.pendingClock}
+                      source={
+                        item?.Approved ? IMAGES.check : item?.Rejectedstatus ? IMAGES.reject : IMAGES.pendingClock
+                      }
                       style={[
                         styles.approvalIcon,
                         approvalStatus === 'Pending'
@@ -322,9 +324,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   approvalIcon: {
-    height: moderateScale(6.8),
+    height: moderateScale(8),
     tintColor: COLORS.mayGreen,
-    width: moderateScale(9.33),
+    width: moderateScale(10),
   },
   approvalStatusContainer: {
     alignItems: 'center',

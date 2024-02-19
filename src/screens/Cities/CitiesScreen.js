@@ -2,7 +2,6 @@ import React from 'react'
 import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import LocationsTile from '../../components/LocationsTile/LocationsTile'
 import { COLORS } from '../../constants/colors'

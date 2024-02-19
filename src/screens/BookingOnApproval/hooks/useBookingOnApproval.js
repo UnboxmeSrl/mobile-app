@@ -1,13 +1,11 @@
+import { navigate } from '@services'
 import { useEffect, useState } from 'react'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { setBookings, setRestaurantDetails, setServiceDetails } from '../../../redux/slices/restaurantSlice'
-import { getBookingForContentList, getBookings } from '../../../services'
 import { setContentList } from '../../../redux/slices'
+import { setBookings } from '../../../redux/slices/restaurantSlice'
+import { getBookingForContentList, getBookings } from '../../../services'
 
 const useBookingOnApproval = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)

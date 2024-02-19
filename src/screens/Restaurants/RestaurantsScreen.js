@@ -1,3 +1,4 @@
+import { Categories } from '@components/Categories'
 import React from 'react'
 import {
   ActivityIndicator,
@@ -9,17 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { moderateScale } from 'react-native-size-matters'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
-import { Categories } from '@components/Categories'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
-import { useRestaurants } from './hooks'
 import { RestaurantCard } from './RestaurantCard'
+import { useRestaurants } from './hooks'
 
 const RestaurantsScreen = () => {
   const {
@@ -65,7 +62,7 @@ const RestaurantsScreen = () => {
               }
               contentContainerStyle={styles.listMain}
               data={restaurantsData}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(_, index) => index.toString()}
               renderItem={({ item, index }) => {
                 return <RestaurantCard index={index} item={item} />
               }}
@@ -82,7 +79,7 @@ export default RestaurantsScreen
 
 const styles = StyleSheet.create({
   itemImage: {
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
     height: '100%',
     overflow: 'hidden',
     width: '100%',
@@ -98,8 +95,8 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
   },
   listItem: {
-    height: 226,
-    marginBottom: 20,
+    height: verticalScale(226),
+    marginBottom: verticalScale(20),
   },
   loaderContainer: {
     alignItems: 'center',
@@ -111,9 +108,9 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
   },
   locationIcon: {
-    height: 18,
-    marginRight: 10,
-    width: 18,
+    height: moderateScale(18),
+    marginRight: scale(10),
+    width: moderateScale(18),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -122,17 +119,17 @@ const styles = StyleSheet.create({
   },
   restaurantsFlatlistContainer: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: scale(20),
   },
   selectedLocation: {
     alignItems: 'center',
     alignSelf: 'center',
-    borderColor: COLORS.lightGrey,
-    borderRadius: 8,
-    borderWidth: 2,
+    borderColor: COLORS.lightGray,
+    borderRadius: moderateScale(8),
+    borderWidth: moderateScale(2),
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingHorizontal: 25,
-    paddingVertical: 3,
+    paddingHorizontal: scale(25),
+    paddingVertical: verticalScale(3),
   },
 })

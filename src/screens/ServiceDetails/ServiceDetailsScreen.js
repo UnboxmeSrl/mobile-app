@@ -3,14 +3,12 @@ import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View }
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
-import { useServiceDetails } from './hooks'
 import { checkActionName } from '../../utils'
+import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
   const {
@@ -195,7 +193,7 @@ const styles = StyleSheet.create({
     height: verticalScale(35),
     justifyContent: 'center',
     marginLeft: scale(10),
-    width: scale(120),
+    width: scale(125),
   },
   amenityIcon: {
     height: moderateScale(23),

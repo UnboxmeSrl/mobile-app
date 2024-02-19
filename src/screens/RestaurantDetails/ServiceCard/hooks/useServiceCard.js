@@ -1,7 +1,5 @@
-import { useDispatch } from 'react-redux'
-
 import { navigate } from '@services'
-
+import { useDispatch } from 'react-redux'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { setServiceDetails } from '../../../../redux/slices/restaurantSlice'
 

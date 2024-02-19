@@ -1,12 +1,10 @@
 import React from 'react'
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useNewCoupon } from './hooks'
 
 const NewCouponScreen = () => {
@@ -44,7 +42,7 @@ const NewCouponScreen = () => {
           <View style={styles.userFullNameContainer}>
             <Text style={styles.fullNameText}>{loginData?.name}</Text>
           </View>
-          <View style={{}}>
+          <View>
             <Text style={styles.userNameText}>{`@${loginData?.name}`}</Text>
           </View>
         </View>
@@ -133,7 +131,7 @@ const styles = StyleSheet.create({
     height: verticalScale(38),
     justifyContent: 'center',
     marginLeft: scale(10),
-    width: scale(111),
+    width: scale(125),
   },
   amenityIcon: {
     height: verticalScale(23),
@@ -254,7 +252,12 @@ const styles = StyleSheet.create({
     marginHorizontal: '5%',
     paddingBottom: verticalScale(20),
     shadowColor: '#171717',
-    shadowOffset: { height: 4, shadowOpacity: 0.2, shadowRadius: moderateScale(3), width: -2 },
+    shadowOffset: {
+      height: 4,
+      shadowOpacity: 0.2,
+      shadowRadius: moderateScale(3),
+      width: -2,
+    },
     width: '90%',
   },
   placeContainer: {

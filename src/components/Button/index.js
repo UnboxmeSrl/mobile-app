@@ -36,8 +36,7 @@ export const Button = ({
 
 const ThemedButton = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${({ disabled, bgColor }) =>
-    disabled ? COLORS.lightGrey : bgColor || COLORS.primary};
+  background-color: ${({ disabled, bgColor }) => (disabled ? COLORS.lightGray : bgColor || COLORS.primary)};
   border-radius: 16px;
   flex-direction: row;
   height: 48px;

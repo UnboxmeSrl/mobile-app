@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -8,12 +9,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../assets/images'
-import { useArchive } from './hooks'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS, FONTS } from '../../constants'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { IMAGES } from '../../assets/images'
+import { COLORS, FONTS } from '../../constants'
+import { useArchive } from './hooks'
 
 const ArchiveScreen = () => {
   const { isLoading, refreshing, onRefresh, canceledBookings, handleBackPress } = useArchive()

@@ -19,7 +19,7 @@ export const COLORS = {
   honeyDewGreen: '#EFFCEF',
   lightBrown: '#ECDCD0',
   lightGrey: '#E9E8EA',
-  lightGrey: '#D9D9D9',
+  lightGray: '#D9D9D9',
   lightPink: '#FDF8F6',
   lightTaupe: '#AF8474',
   links: '#000699',

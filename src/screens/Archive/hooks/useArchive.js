@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { SCREEN_NAMES } from '../../../constants/navigation'
-import { getAllCanceledBookings, navigate } from '../../../services'
 import { useDispatch, useSelector } from 'react-redux'
+import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setCanceledBookings } from '../../../redux/slices/restaurantSlice'
+import { getAllCanceledBookings, navigate } from '../../../services'
 
 const useArchive = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)

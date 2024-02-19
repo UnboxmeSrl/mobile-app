@@ -33,7 +33,7 @@ const CustomCarousel = ({ data, Component }) => {
         containerStyle={styles.headerDotContainer}
         dotColor={COLORS.white}
         dotStyle={styles.headerCarouselDotStyle}
-        dotsLength={data.length}
+        dotsLength={data?.length}
         inactiveDotColor={COLORS.veryLight04}
         inactiveDotOpacity={1}
         inactiveDotScale={1}

@@ -6,6 +6,7 @@ import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 
 import { useRestaurantCard } from './hooks'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 
 const RestaurantCard = ({ item, index }) => {
   const { handleCardPress } = useRestaurantCard()
@@ -42,63 +43,63 @@ const styles = StyleSheet.create({
   distanceText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   forModelsContainer: {
     backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 20,
-    marginRight: 5,
-    marginTop: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 7,
+    borderRadius: moderateScale(20),
+    marginRight: scale(5),
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(15),
+    paddingVertical: verticalScale(3),
   },
   forModelsText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   itemImage: {
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
     height: '100%',
     overflow: 'hidden',
     width: '100%',
   },
   listItem: {
-    height: 226,
-    marginBottom: 20,
+    height: verticalScale(200),
+    marginBottom: verticalScale(15),
   },
   mainContainer: {
     flexDirection: 'row-reverse',
     width: '100%',
   },
   nameLocationContainer: {
-    bottom: 20,
-    left: 10,
+    bottom: moderateScale(20),
+    left: moderateScale(10),
     position: 'absolute',
   },
   ratingIcon: {
-    height: 12,
-    marginLeft: 2,
-    width: 12,
+    height: moderateScale(12),
+    marginLeft: scale(2),
+    width: moderateScale(12),
   },
   ratingsContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginRight: 10,
-    marginTop: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 7,
+    marginRight: scale(10),
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(13),
+    paddingVertical: verticalScale(3),
   },
   ratingsText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   restaurantNameText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 15,
+    fontSize: moderateScale(15),
   },
 })

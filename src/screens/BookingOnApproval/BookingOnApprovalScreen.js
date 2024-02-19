@@ -3,11 +3,9 @@ import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacit
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useBookingOnApproval } from './hooks'
 
 const BookingOnApprovalScreen = () => {

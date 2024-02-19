@@ -1,9 +1,7 @@
+import { navigate } from '@services'
 import { useEffect, useState } from 'react'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
-
-import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getServiceCategories, getServices } from '../../../services/LocationsService'
