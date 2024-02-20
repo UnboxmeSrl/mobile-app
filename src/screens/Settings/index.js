@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 import Clipboard from '@react-native-clipboard/clipboard'
 import CookieManager from '@react-native-community/cookies'
 import { GoogleSignin } from '@react-native-community/google-signin'
-import auth from '@react-native-firebase/auth'
 import { SettingsPresenter } from '@screens/Settings/SettingsPresenter'
 
 import { IconButton } from '@components/IconButton'
@@ -35,15 +34,13 @@ export const SettingsScreen = () => {
       reset(MAIN_NAVIGATOR)
 
       await persistor.purge()
-      resetAuth({ [_initialized]: true })
-      await auth().signOut()
       await GoogleSignin.signOut()
       showToastSuccess("You've been logged out")
       logger.info('Logout succeded')
     } catch (error) {
       logger.error('Logout error', { error })
     }
-  }, [resetAuth, reset])
+  }, [, reset])
 
   const handleLogout = useCallback(async () => {
     Alert.alert('Confirmation', 'Are you sure you want to log out?', [
@@ -59,7 +56,7 @@ export const SettingsScreen = () => {
         text: 'Logout',
       },
     ])
-  }, [resetAuth, logout])
+  }, [logout])
   const RightButton = useCallback(() => <IconButton Icon={LogoutIcon} onPress={handleLogout} />, [handleLogout])
   const versionName = `${version} (${buildNumber})`
   const props = { RightButton, handleLogout, isAuthenticated, navigateToAddresses, versionName }

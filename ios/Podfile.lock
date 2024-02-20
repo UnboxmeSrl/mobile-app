@@ -248,9 +248,6 @@ PODS:
     - FBSDKShareKit/Share (= 8.2.0)
   - FBSDKShareKit/Share (8.2.0):
     - FBSDKCoreKit (~> 8.2.0)
-  - Firebase/Auth (7.11.0):
-    - Firebase/CoreOnly
-    - FirebaseAuth (~> 7.11.0)
   - Firebase/CoreOnly (7.11.0):
     - FirebaseCore (= 7.11.0)
   - Firebase/Crashlytics (7.11.0):
@@ -279,11 +276,6 @@ PODS:
     - FirebaseStorage (~> 7.11.0)
   - FirebaseABTesting (7.11.0):
     - FirebaseCore (~> 7.0)
-  - FirebaseAuth (7.11.0):
-    - FirebaseCore (~> 7.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GTMSessionFetcher/Core (~> 1.4)
   - FirebaseCore (7.11.0):
     - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
@@ -763,10 +755,6 @@ PODS:
   - RNFBApp (11.5.0):
     - Firebase/CoreOnly (= 7.11.0)
     - React-Core
-  - RNFBAuth (8.3.3):
-    - Firebase/Auth (= 7.11.0)
-    - React
-    - RNFBApp
   - RNFBCrashlytics (11.4.1):
     - Firebase/Crashlytics (= 7.11.0)
     - React-Core
@@ -882,7 +870,6 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
-  - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBFunctions (from `../node_modules/@react-native-firebase/functions`)"
@@ -914,7 +901,6 @@ SPEC REPOS:
     - FBSDKShareKit
     - Firebase
     - FirebaseABTesting
-    - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
@@ -1046,8 +1032,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fast-image"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
-  RNFBAuth:
-    :path: "../node_modules/@react-native-firebase/auth"
   RNFBCrashlytics:
     :path: "../node_modules/@react-native-firebase/crashlytics"
   RNFBFirestore:
@@ -1100,7 +1084,6 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 0c0d51b3af47075a85ed9bea0e28b2fc70e3594b
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseABTesting: e66f1f80747792630d9b292966de206d5df9853b
-  FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
   FirebaseCore: 907447d8917a4d3eb0cce2829c5a0ad21d90b432
   FirebaseCoreDiagnostics: 68ad972f99206cef818230f3f3179d52ccfb7f8c
   FirebaseCrashlytics: 272b675aa9d1e9bae1f9e1449fcc1f2cf6042806
@@ -1175,7 +1158,6 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 8d3a29207835f972bce883723882980143270d55
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBApp: 9c90f9d576861947ba75fe0830567c570bcbcf6d
-  RNFBAuth: 39957b5820e4a7db1948771dff59f98bbac061ab
   RNFBCrashlytics: 59d9ecfaacddbe10819d9071ee3b9921b79b8c6b
   RNFBFirestore: 7fa546e352aad031a78b934a67435e55b32cba49
   RNFBFunctions: 4838dd472870e5941908eabc48d1711dacdda558
@@ -1200,4 +1182,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7efc73a43f1213bae431a9cacb76a0444024b6c9
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2

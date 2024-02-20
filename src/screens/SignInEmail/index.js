@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
 import { reset } from '@services'
-import { onAuthSuccess, signInWithEmail } from '@services/auth'
 
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { setLoginData } from '../../redux/slices/authSlice'

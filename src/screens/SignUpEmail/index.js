@@ -2,12 +2,8 @@ import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch } from 'react-redux'
-
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { PASSWORD_RULES } from '@const/validators'
-import { reset } from '@services'
-import { onAuthSuccess, registerEmailAccount } from '@services/auth'
-
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { setAuthData } from '../../redux/slices/authSlice'
 

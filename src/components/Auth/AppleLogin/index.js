@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react'
 import { appleAuth } from '@invertase/react-native-apple-authentication'
-import auth from '@react-native-firebase/auth'
-
 import { Button } from '@components/Button'
 import { COLORS } from '@const'
 import { logger } from '@services'
@@ -15,15 +13,13 @@ export const AppleLogin = ({ onSuccess, setLoading, loading }) => {
         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
       })
 
-      const credentialState = await appleAuth.getCredentialStateForUser(
-        appleAuthRequestResponse.user
-      )
+      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user)
 
       if (credentialState === appleAuth.State.AUTHORIZED) {
         const { identityToken, nonce } = appleAuthRequestResponse
-        const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce)
+        // const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce)
 
-        await auth().signInWithCredential(appleCredential)
+        // await auth().signInWithCredential(appleCredential)
         setLoading(false)
         onSuccess && onSuccess()
       } else {

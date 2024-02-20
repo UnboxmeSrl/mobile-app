@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react'
 import { Alert } from 'react-native'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
-import auth from '@react-native-firebase/auth'
-
 import { Button } from '@components/Button'
 import { COLORS } from '@const'
 import { logger, showToastError } from '@services'
@@ -28,9 +26,9 @@ export const FacebookLogin = ({ onSuccess, setLoading, loading }) => {
         return
       }
 
-      const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken)
+      // const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken)
 
-      await auth().signInWithCredential(facebookCredential)
+      // await auth().signInWithCredential(facebookCredential)
       setLoading(false)
       onSuccess && onSuccess()
     } catch (error) {

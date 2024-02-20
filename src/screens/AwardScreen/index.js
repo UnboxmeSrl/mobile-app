@@ -2,9 +2,7 @@ import React from 'react'
 import { Alert } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-
 import { AWARD_TYPE_PRIZE } from '@const/award'
 import { MODAL_NAMES } from '@const/navigation'
 import { ORDER_IN_REVIEW } from '@const/order'
@@ -52,7 +50,7 @@ export const AwardScreen = () => {
             createBookingAction({
               award: getAwardReference(awardId),
               awardType: award.type,
-              user: getUserReference(auth().currentUser?.uid),
+              user: '',
             })
           },
           text: 'Yes',

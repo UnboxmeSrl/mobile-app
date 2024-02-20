@@ -1,12 +1,10 @@
 import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 
 import { USERS_COLLECTION } from '@const/firebase'
 import { useAction } from '@hooks/common'
 import authModule, { _initialized, selectIsAuthInitialized, selectUid } from '@redux/modules/auth'
-import { onAuthSuccess } from '@services/auth'
 
 export const useAuth = () => {
   const setAuthData = useAction(authModule.actions.setData)
@@ -27,10 +25,6 @@ export const useAuth = () => {
   )
 
   useEffect(() => {
-    onAuthSuccess()
-  }, [isInitialized])
-
-  useEffect(() => {
     if (uid) {
       const subscriber = firestore()
         .collection(USERS_COLLECTION)
@@ -44,7 +38,7 @@ export const useAuth = () => {
   }, [setAuthData, uid])
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged)
+    const subscriber = {}
     return subscriber
   }, [onAuthStateChanged])
 }

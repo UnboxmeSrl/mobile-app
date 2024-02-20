@@ -28,19 +28,15 @@ export const Splash = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
 
   useEffect(() => {
-    if (show && authInitialized) {
-      console.log('show authentication', show, authInitialized)
-      if (!isAuthenticated) {
-        navigate(SCREEN_NAMES.Onboarding)
-      }
+    navigate(SCREEN_NAMES.Onboarding)
+
+    setTimeout(() => {
+      SplashScreen.hide()
+      ref?.current?.play(0, 120)
       setTimeout(() => {
-        SplashScreen.hide()
-        ref?.current?.play(0, 120)
-        setTimeout(() => {
-          setFadeOut(true)
-        }, delay)
-      }, 0)
-    }
+        setFadeOut(true)
+      }, delay)
+    }, 0)
   }, [ref, authInitialized, isAuthenticated, show])
 
   useEffect(() => {

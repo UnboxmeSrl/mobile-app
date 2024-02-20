@@ -2,13 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Toast from 'react-native-toast-message'
 import { useSelector } from 'react-redux'
-
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { CODE_RULES } from '@const/validators'
 import { selectUid } from '@redux/modules/auth'
 import { reset } from '@services'
-import { onAuthSuccess, sendPhoneVerificationCode } from '@services/auth'
-
 import { AuthPhonePresenter } from './AuthPhonePresenter'
 
 export const AuthPhoneModal = () => {
@@ -22,8 +19,6 @@ export const AuthPhoneModal = () => {
   const sendVerificationCode = useCallback(
     async ({ phone }) => {
       setLoading(true)
-      const confirmation = await sendPhoneVerificationCode(phone)
-      setConfirm(confirmation)
       setLoading(false)
     },
     [setLoading, setConfirm]
@@ -35,7 +30,6 @@ export const AuthPhoneModal = () => {
         setLoading(true)
         await confirm.confirm(code)
         setLoading(false)
-        onAuthSuccess()
       } catch (error) {
         Toast.show({
           text1: 'Error',

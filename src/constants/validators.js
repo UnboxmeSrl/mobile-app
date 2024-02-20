@@ -1,5 +1,3 @@
-import { checkIfEmailIsAvailable } from '@services/auth'
-
 export const EMAIL_RULES_LOGIN = {
   pattern: {
     message: 'isNotValidEmail',
@@ -12,7 +10,7 @@ export const EMAIL_RULES = {
   validate: {
     // THROTTLE
     asyncValidate: async (value) => {
-      const isAvailable = await checkIfEmailIsAvailable(value)
+      const isAvailable = true
       return isAvailable ? null : 'alreadyRegistered'
     },
   },

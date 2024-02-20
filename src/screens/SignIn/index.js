@@ -3,8 +3,6 @@ import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
 import { reset } from '@services'
-import { onAuthSuccess } from '@services/auth'
-
 import { SignInPresenter } from './SignInPresenter'
 
 export const SignInScreen = () => {

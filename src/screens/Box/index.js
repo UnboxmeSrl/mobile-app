@@ -2,9 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
-import auth from '@react-native-firebase/auth'
 import { dec, inc } from 'ramda'
-
 import { STACK_NAMES } from '@const/navigation'
 import { ORDER_IN_REVIEW } from '@const/order'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
@@ -30,7 +28,7 @@ export const BoxModal = () => {
       createOrderAction({
         box: getBoxReference(boxId),
         status: ORDER_IN_REVIEW,
-        user: getUserReference(auth().currentUser?.uid),
+        user: '',
       })
       Alert.alert(
         i18n.t('underApproval'),

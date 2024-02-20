@@ -2,11 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useNavigation } from 'react-navigation-hooks'
-import auth from '@react-native-firebase/auth'
-
 import { showToastError, showToastSuccess } from '@services'
-import { onAuthSuccess, signInWithEmail } from '@services/auth'
-
 import { ForgotPasswordPresenter } from './ForgotPasswordPresenter'
 
 export const ForgotPasswordModal = () => {
@@ -19,7 +15,6 @@ export const ForgotPasswordModal = () => {
       try {
         setLoading(true)
         const { email } = data
-        await auth().sendPasswordResetEmail(email)
         setLoading(false)
         goBack()
         showToastSuccess(t('signIn.forgotSent'))

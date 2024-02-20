@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { Keyboard } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
-import auth from '@react-native-firebase/auth'
 import { head, pathOr, pipe, values } from 'ramda'
 
 import { SCREEN_NAMES } from '@const/navigation'
@@ -11,7 +10,6 @@ import { useAction } from '@hooks/common'
 import { useFetchLocation } from '@hooks/useFetchLocation'
 import { createAddress } from '@redux/modules/addresses'
 import { selectLocation } from '@redux/modules/app'
-import { updateQuestionnaire } from '@redux/modules/auth'
 import { createOrder } from '@redux/modules/orders'
 import { getUserReference } from '@redux/modules/users'
 
@@ -30,7 +28,7 @@ export const AddNewAddress = () => {
 
   const onSubmit = (payload) => {
     // console.log({ onConfirm })
-    createAddressAction({ ...payload, user: getUserReference(auth().currentUser?.uid) })
+    createAddressAction({ ...payload, user: '' })
       .then((data) => {
         const address = pipe(pathOr({}, ['payload', 'addresses']), values, head)(data)
         if (onConfirm) {

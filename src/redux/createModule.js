@@ -1,4 +1,3 @@
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAction, createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { normalize } from 'normalizr'
@@ -33,7 +32,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
 
   const fetchAll = createAsyncThunk(`${collection}/fetch`, async (payload, { rejectWithValue }) => {
     try {
-      const snapshot = await whereQuery(auth().currentUser?.uid).get()
+      const snapshot = await whereQuery('').get()
       const data = snapshot?.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       const normalized = normalize(data, [schema])
       return normalized.entities
@@ -44,7 +43,7 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   })
   const fetchById = createAsyncThunk(`${collection}/fetchById`, async (id, { rejectWithValue }) => {
     try {
-      const snapshot = await whereQuery(auth().currentUser?.uid).doc(id).get()
+      const snapshot = await whereQuery('').doc(id).get()
       const data = { ...snapshot.data(), id: snapshot.id }
       const normalized = normalize(data, schema)
 

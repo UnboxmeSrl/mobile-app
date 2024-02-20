@@ -1,10 +1,8 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import auth from '@react-native-firebase/auth'
 import { format } from 'date-fns'
 import { __ } from 'ramda'
 import styled from 'styled-components/native'
-
 import { Instagram } from '@components/Auth/Instagram'
 import { Avatar } from '@components/Avatar'
 import { Button } from '@components/Button'
@@ -54,14 +52,14 @@ export const EditProfileScreenPresenter = ({
       <Tile disabled>
         <SmallText>Email</SmallText>
         <RightColumn>
-          <Value>{auth().currentUser.email || 'Add'}</Value>
+          <Value>{'Add'}</Value>
           <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
         </RightColumn>
       </Tile>
       <Tile disabled>
         <SmallText>Phone</SmallText>
         <RightColumn>
-          <Value>{auth().currentUser.phoneNumber || 'Add'}</Value>
+          <Value>{'Add'}</Value>
           <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
         </RightColumn>
       </Tile>

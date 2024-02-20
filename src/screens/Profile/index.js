@@ -2,8 +2,6 @@ import React, { useCallback } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import { GoogleSignin } from '@react-native-community/google-signin'
-import auth from '@react-native-firebase/auth'
-
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
 import authModule, {

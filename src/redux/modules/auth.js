@@ -1,4 +1,3 @@
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 import { format } from 'date-fns'
@@ -41,7 +40,7 @@ const ref = firestore().collection(USERS_COLLECTION)
 
 export const updateQuestionnaire = (field, value) => updateMe({ [`${_questionnaire}.${field}`]: value })
 export const updateMe = createAsyncThunk(`${AUTH_NAMESPACE}/updateMe`, async (payload) => {
-  const user = auth().currentUser
+  const user = ''
   const uid = user?.uid
   const doc = await ref.doc(uid).get()
 

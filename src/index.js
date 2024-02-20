@@ -5,7 +5,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import { Provider } from 'react-redux'
 import 'react-native-gesture-handler'
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { PersistGate } from 'redux-persist/integration/react'
 

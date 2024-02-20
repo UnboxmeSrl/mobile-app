@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-
 import { ORDERS_COLLECTION, USERS_COLLECTION } from '@const/firebase'
 import { useAction } from '@hooks/common'
 import { selectIsAuthenticated } from '@redux/modules/auth'
@@ -16,7 +14,7 @@ export const useListenToOrderChanges = () => {
     if (isAuthenticated) {
       const subscriber = firestore()
         .collection(ORDERS_COLLECTION)
-        .where('user', '==', firestore().collection(USERS_COLLECTION).doc(auth().currentUser?.uid))
+        .where('user', '==', firestore().collection(USERS_COLLECTION).doc(''))
         .onSnapshot((snapshot) => {
           const data = snapshot?.docs.map((doc) => doc.data())
           setData(data)
