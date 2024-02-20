@@ -7,7 +7,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import "RNSplashScreen.h"
-@import Firebase;
 @import UIKit;
 #import <GoogleMaps/GoogleMaps.h>
 
@@ -57,7 +56,6 @@ static void InitializeFlipper(UIApplication *application) {
                              didFinishLaunchingWithOptions:launchOptions];
   
   // Firebase
-  [FIRApp configure];
   [RNSplashScreen show];
   [GMSServices provideAPIKey:@"AIzaSyCP1Xek2gd3Rb-JKG0wQjhtqBkXx3eYGfk"];
 
