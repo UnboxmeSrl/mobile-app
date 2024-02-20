@@ -1,6 +1,4 @@
 import 'react-native-get-random-values'
-import firebase from '@react-native-firebase/app'
-import functions from '@react-native-firebase/functions'
 import { v1 } from 'uuid'
 
 import { appBuildNumber, appVersion, deviceId } from '@const/device'
@@ -16,7 +14,6 @@ export const runningSessionId = v1()
 
 const handleLog = ({ message, data = {}, level }) => {
   const { error: errorObject } = data
-  const user = firebase?.auth()?.currentUser?.toJSON()
   const error = errorObject
     ? {
         code: errorObject?.code,
@@ -37,15 +34,8 @@ const handleLog = ({ message, data = {}, level }) => {
     deviceId,
     error,
     runningSessionId,
-    user,
     ...data,
   }
-
-  functions()
-    .httpsCallable(FUNCTION_NAME)({ level, message, payload })
-    .catch((e) => {
-      console.error(e)
-    })
 }
 
 const info = (message, data) => handleLog({ data, level: INFO, message })

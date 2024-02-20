@@ -3,9 +3,6 @@ import { launchImageLibrary } from 'react-native-image-picker'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import { last } from 'ramda'
-
-import { getPathForFirebaseStorage } from '@components/UploadPlaceholder'
-import { contentRef, getContentPath, getUserPublicPath } from '@const/firebase'
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
 import {
@@ -67,11 +64,11 @@ export const EditProfileScreen = () => {
       if (uri) {
         setUrl(uri)
         const name = fileName || last(uri.split('/'))
-        const uriFinal = await getPathForFirebaseStorage(uri)
-        const ref = contentRef.ref(getUserPublicPath(userId, name))
-        await ref.putFile(uriFinal)
-        const url = await ref.getDownloadURL()
-        updateMeAction({ [_image]: url })
+        // const uriFinal = await getPathForFirebaseStorage(uri)
+        // const ref = contentRef.ref(getUserPublicPath(userId, name))
+        // await ref.putFile(uriFinal)
+        // const url = await ref.getDownloadURL()
+        // updateMeAction({ [_image]: url })
       }
     })
   }

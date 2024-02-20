@@ -51151,110 +51151,110 @@
 		E0BB8B592B56B64900DBB7CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E0BBF2352B56B68900DBB7CD /* abseil */,
-				E0BBF2372B56B68900DBB7CD /* AppAuth */,
-				E0BBF2392B56B68900DBB7CD /* BoringSSL-GRPC */,
-				E0BBF23B2B56B68900DBB7CD /* DoubleConversion */,
-				E0BBF23D2B56B68900DBB7CD /* FBReactNativeSpec */,
-				E0BBF23F2B56B68900DBB7CD /* FBSDKCoreKit */,
-				E0BBF2412B56B68900DBB7CD /* FBSDKLoginKit */,
-				E0BBF2432B56B68900DBB7CD /* FBSDKShareKit */,
-				E0BBF2452B56B68900DBB7CD /* FirebaseABTesting */,
-				E0BBF2472B56B68900DBB7CD /* FirebaseAuth */,
-				E0BBF2492B56B68900DBB7CD /* FirebaseCore */,
-				E0BBF24B2B56B68900DBB7CD /* FirebaseCoreDiagnostics */,
-				E0BBF24D2B56B68900DBB7CD /* FirebaseCrashlytics */,
-				E0BBF24F2B56B68900DBB7CD /* FirebaseFirestore */,
-				E0BBF2512B56B68900DBB7CD /* FirebaseFunctions */,
-				E0BBF2532B56B68900DBB7CD /* FirebaseInAppMessaging */,
-				E0BBF2552B56B68900DBB7CD /* FirebaseInAppMessaging-InAppMessagingDisplayResources */,
-				E0BBF2572B56B68900DBB7CD /* FirebaseInstallations */,
-				E0BBF2592B56B68900DBB7CD /* FirebaseInstanceID */,
-				E0BBF25B2B56B68900DBB7CD /* FirebaseMessaging */,
-				E0BBF25D2B56B68900DBB7CD /* FirebasePerformance */,
-				E0BBF25F2B56B68900DBB7CD /* FirebaseRemoteConfig */,
-				E0BBF2612B56B68900DBB7CD /* FirebaseStorage */,
-				E0BBF2632B56B68900DBB7CD /* Folly */,
-				E0BBF2652B56B68900DBB7CD /* glog */,
-				E0BBF2672B56B68900DBB7CD /* Google-Maps-iOS-Utils */,
-				E0BBF2692B56B68900DBB7CD /* GoogleDataTransport */,
-				E0BBF26B2B56B68900DBB7CD /* GoogleUtilities */,
-				E0BBF26D2B56B68900DBB7CD /* gRPC-C++ */,
-				E0BBF26F2B56B68900DBB7CD /* gRPC-C++-gRPCCertificates-Cpp */,
-				E0BBF2712B56B68900DBB7CD /* gRPC-Core */,
-				E0BBF2732B56B68900DBB7CD /* GTMAppAuth */,
-				E0BBF2752B56B68900DBB7CD /* GTMSessionFetcher */,
-				E0BBF2772B56B68900DBB7CD /* leveldb-library */,
-				E0BBF2792B56B68900DBB7CD /* libwebp */,
-				E0BBF27B2B56B68900DBB7CD /* lottie-ios */,
-				E0BBF27D2B56B68900DBB7CD /* lottie-react-native */,
-				E0BBF27F2B56B68900DBB7CD /* nanopb */,
-				E0BBF2812B56B68900DBB7CD /* PanModal */,
-				E0BBF2832B56B68900DBB7CD /* Pods-unboxme */,
-				E0BBF2852B56B68900DBB7CD /* PromisesObjC */,
-				E0BBF2872B56B68900DBB7CD /* Protobuf */,
-				E0BBF2892B56B68900DBB7CD /* RCTTypeSafety */,
-				E0BBF28B2B56B68900DBB7CD /* React-Core */,
-				E0BBF28D2B56B68900DBB7CD /* React-Core-AccessibilityResources */,
-				E0BBF28F2B56B68900DBB7CD /* React-CoreModules */,
-				E0BBF2912B56B68900DBB7CD /* React-cxxreact */,
-				E0BBF2932B56B68900DBB7CD /* React-jsi */,
-				E0BBF2952B56B68900DBB7CD /* React-jsiexecutor */,
-				E0BBF2972B56B68900DBB7CD /* React-jsinspector */,
-				E0BBF2992B56B68900DBB7CD /* react-native-config */,
-				E0BBF29B2B56B68900DBB7CD /* react-native-cookies */,
-				E0BBF29D2B56B68900DBB7CD /* react-native-create-thumbnail */,
-				E0BBF29F2B56B68900DBB7CD /* react-native-fbsdk */,
-				E0BBF2A12B56B68900DBB7CD /* react-native-get-random-values */,
-				E0BBF2A32B56B68900DBB7CD /* react-native-google-maps */,
-				E0BBF2A52B56B68900DBB7CD /* react-native-image-picker */,
-				E0BBF2A72B56B68900DBB7CD /* react-native-maps */,
-				E0BBF2A92B56B68900DBB7CD /* react-native-netinfo */,
-				E0BBF2AB2B56B68900DBB7CD /* react-native-safe-area-context */,
-				E0BBF2AD2B56B68900DBB7CD /* react-native-splash-screen */,
-				E0BBF2AF2B56B68900DBB7CD /* react-native-text-input-mask */,
-				E0BBF2B12B56B68900DBB7CD /* react-native-video */,
-				E0BBF2B32B56B68900DBB7CD /* react-native-webview */,
-				E0BBF2B52B56B68900DBB7CD /* React-RCTAnimation */,
-				E0BBF2B72B56B68900DBB7CD /* React-RCTBlob */,
-				E0BBF2B92B56B68900DBB7CD /* React-RCTImage */,
-				E0BBF2BB2B56B68900DBB7CD /* React-RCTLinking */,
-				E0BBF2BD2B56B68900DBB7CD /* React-RCTNetwork */,
-				E0BBF2BF2B56B68900DBB7CD /* React-RCTSettings */,
-				E0BBF2C12B56B68900DBB7CD /* React-RCTText */,
-				E0BBF2C32B56B68900DBB7CD /* React-RCTVibration */,
-				E0BBF2C52B56B68900DBB7CD /* ReactCommon */,
-				E0BBF2C72B56B68900DBB7CD /* rn-fetch-blob */,
-				E0BBF2C92B56B68900DBB7CD /* RNAppleAuthentication */,
-				E0BBF2CB2B56B68900DBB7CD /* RNCAsyncStorage */,
-				E0BBF2CD2B56B68900DBB7CD /* RNCClipboard */,
-				E0BBF2CF2B56B68900DBB7CD /* RNCMaskedView */,
-				E0BBF2D12B56B68900DBB7CD /* RNDateTimePicker */,
-				E0BBF2D32B56B68900DBB7CD /* RNDeviceInfo */,
-				E0BBF2D52B56B68900DBB7CD /* RNFastImage */,
-				E0BBF2D72B56B68900DBB7CD /* RNFBApp */,
-				E0BBF2D92B56B68900DBB7CD /* RNFBAuth */,
-				E0BBF2DB2B56B68900DBB7CD /* RNFBCrashlytics */,
-				E0BBF2DD2B56B68900DBB7CD /* RNFBFirestore */,
-				E0BBF2DF2B56B68900DBB7CD /* RNFBFunctions */,
-				E0BBF2E12B56B68900DBB7CD /* RNFBInAppMessaging */,
-				E0BBF2E32B56B68900DBB7CD /* RNFBMessaging */,
-				E0BBF2E52B56B68900DBB7CD /* RNFBPerf */,
-				E0BBF2E72B56B68900DBB7CD /* RNFBRemoteConfig */,
-				E0BBF2E92B56B68900DBB7CD /* RNFBStorage */,
-				E0BBF2EB2B56B68900DBB7CD /* RNFS */,
-				E0BBF2ED2B56B68900DBB7CD /* RNGestureHandler */,
-				E0BBF2EF2B56B68900DBB7CD /* RNGoogleSignin */,
-				E0BBF2F12B56B68900DBB7CD /* RNInputMask */,
-				E0BBF2F32B56B68900DBB7CD /* RNLocalize */,
-				E0BBF2F52B56B68900DBB7CD /* RNReanimated */,
-				E0BBF2F72B56B68900DBB7CD /* RNScreens */,
-				E0BBF2F92B56B68900DBB7CD /* RNShare */,
-				E0BBF2FB2B56B68900DBB7CD /* RNSVG */,
-				E0BBF2FD2B56B68900DBB7CD /* RNVectorIcons */,
-				E0BBF2FF2B56B68900DBB7CD /* SDWebImage */,
-				E0BBF3032B56B68900DBB7CD /* SDWebImageWebPCoder */,
-				E0BBF3052B56B68900DBB7CD /* Yoga */,
+				E0BBF2352B56B68900DBB7CD /* libabseil.a */,
+				E0BBF2372B56B68900DBB7CD /* libAppAuth.a */,
+				E0BBF2392B56B68900DBB7CD /* libBoringSSL-GRPC.a */,
+				E0BBF23B2B56B68900DBB7CD /* libDoubleConversion.a */,
+				E0BBF23D2B56B68900DBB7CD /* libFBReactNativeSpec.a */,
+				E0BBF23F2B56B68900DBB7CD /* libFBSDKCoreKit.a */,
+				E0BBF2412B56B68900DBB7CD /* libFBSDKLoginKit.a */,
+				E0BBF2432B56B68900DBB7CD /* libFBSDKShareKit.a */,
+				E0BBF2452B56B68900DBB7CD /* libFirebaseABTesting.a */,
+				E0BBF2472B56B68900DBB7CD /* libFirebaseAuth.a */,
+				E0BBF2492B56B68900DBB7CD /* libFirebaseCore.a */,
+				E0BBF24B2B56B68900DBB7CD /* libFirebaseCoreDiagnostics.a */,
+				E0BBF24D2B56B68900DBB7CD /* libFirebaseCrashlytics.a */,
+				E0BBF24F2B56B68900DBB7CD /* libFirebaseFirestore.a */,
+				E0BBF2512B56B68900DBB7CD /* libFirebaseFunctions.a */,
+				E0BBF2532B56B68900DBB7CD /* libFirebaseInAppMessaging.a */,
+				E0BBF2552B56B68900DBB7CD /* InAppMessagingDisplayResources.bundle */,
+				E0BBF2572B56B68900DBB7CD /* libFirebaseInstallations.a */,
+				E0BBF2592B56B68900DBB7CD /* libFirebaseInstanceID.a */,
+				E0BBF25B2B56B68900DBB7CD /* libFirebaseMessaging.a */,
+				E0BBF25D2B56B68900DBB7CD /* libFirebasePerformance.a */,
+				E0BBF25F2B56B68900DBB7CD /* libFirebaseRemoteConfig.a */,
+				E0BBF2612B56B68900DBB7CD /* libFirebaseStorage.a */,
+				E0BBF2632B56B68900DBB7CD /* libFolly.a */,
+				E0BBF2652B56B68900DBB7CD /* libglog.a */,
+				E0BBF2672B56B68900DBB7CD /* libGoogle-Maps-iOS-Utils.a */,
+				E0BBF2692B56B68900DBB7CD /* libGoogleDataTransport.a */,
+				E0BBF26B2B56B68900DBB7CD /* libGoogleUtilities.a */,
+				E0BBF26D2B56B68900DBB7CD /* libgRPC-C++.a */,
+				E0BBF26F2B56B68900DBB7CD /* gRPCCertificates-Cpp.bundle */,
+				E0BBF2712B56B68900DBB7CD /* libgRPC-Core.a */,
+				E0BBF2732B56B68900DBB7CD /* libGTMAppAuth.a */,
+				E0BBF2752B56B68900DBB7CD /* libGTMSessionFetcher.a */,
+				E0BBF2772B56B68900DBB7CD /* libleveldb-library.a */,
+				E0BBF2792B56B68900DBB7CD /* liblibwebp.a */,
+				E0BBF27B2B56B68900DBB7CD /* liblottie-ios.a */,
+				E0BBF27D2B56B68900DBB7CD /* liblottie-react-native.a */,
+				E0BBF27F2B56B68900DBB7CD /* libnanopb.a */,
+				E0BBF2812B56B68900DBB7CD /* libPanModal.a */,
+				E0BBF2832B56B68900DBB7CD /* libPods-unboxme.a */,
+				E0BBF2852B56B68900DBB7CD /* libPromisesObjC.a */,
+				E0BBF2872B56B68900DBB7CD /* libProtobuf.a */,
+				E0BBF2892B56B68900DBB7CD /* libRCTTypeSafety.a */,
+				E0BBF28B2B56B68900DBB7CD /* libReact-Core.a */,
+				E0BBF28D2B56B68900DBB7CD /* AccessibilityResources.bundle */,
+				E0BBF28F2B56B68900DBB7CD /* libReact-CoreModules.a */,
+				E0BBF2912B56B68900DBB7CD /* libReact-cxxreact.a */,
+				E0BBF2932B56B68900DBB7CD /* libReact-jsi.a */,
+				E0BBF2952B56B68900DBB7CD /* libReact-jsiexecutor.a */,
+				E0BBF2972B56B68900DBB7CD /* libReact-jsinspector.a */,
+				E0BBF2992B56B68900DBB7CD /* libreact-native-config.a */,
+				E0BBF29B2B56B68900DBB7CD /* libreact-native-cookies.a */,
+				E0BBF29D2B56B68900DBB7CD /* libreact-native-create-thumbnail.a */,
+				E0BBF29F2B56B68900DBB7CD /* libreact-native-fbsdk.a */,
+				E0BBF2A12B56B68900DBB7CD /* libreact-native-get-random-values.a */,
+				E0BBF2A32B56B68900DBB7CD /* libreact-native-google-maps.a */,
+				E0BBF2A52B56B68900DBB7CD /* libreact-native-image-picker.a */,
+				E0BBF2A72B56B68900DBB7CD /* libreact-native-maps.a */,
+				E0BBF2A92B56B68900DBB7CD /* libreact-native-netinfo.a */,
+				E0BBF2AB2B56B68900DBB7CD /* libreact-native-safe-area-context.a */,
+				E0BBF2AD2B56B68900DBB7CD /* libreact-native-splash-screen.a */,
+				E0BBF2AF2B56B68900DBB7CD /* libreact-native-text-input-mask.a */,
+				E0BBF2B12B56B68900DBB7CD /* libreact-native-video.a */,
+				E0BBF2B32B56B68900DBB7CD /* libreact-native-webview.a */,
+				E0BBF2B52B56B68900DBB7CD /* libReact-RCTAnimation.a */,
+				E0BBF2B72B56B68900DBB7CD /* libReact-RCTBlob.a */,
+				E0BBF2B92B56B68900DBB7CD /* libReact-RCTImage.a */,
+				E0BBF2BB2B56B68900DBB7CD /* libReact-RCTLinking.a */,
+				E0BBF2BD2B56B68900DBB7CD /* libReact-RCTNetwork.a */,
+				E0BBF2BF2B56B68900DBB7CD /* libReact-RCTSettings.a */,
+				E0BBF2C12B56B68900DBB7CD /* libReact-RCTText.a */,
+				E0BBF2C32B56B68900DBB7CD /* libReact-RCTVibration.a */,
+				E0BBF2C52B56B68900DBB7CD /* libReactCommon.a */,
+				E0BBF2C72B56B68900DBB7CD /* librn-fetch-blob.a */,
+				E0BBF2C92B56B68900DBB7CD /* libRNAppleAuthentication.a */,
+				E0BBF2CB2B56B68900DBB7CD /* libRNCAsyncStorage.a */,
+				E0BBF2CD2B56B68900DBB7CD /* libRNCClipboard.a */,
+				E0BBF2CF2B56B68900DBB7CD /* libRNCMaskedView.a */,
+				E0BBF2D12B56B68900DBB7CD /* libRNDateTimePicker.a */,
+				E0BBF2D32B56B68900DBB7CD /* libRNDeviceInfo.a */,
+				E0BBF2D52B56B68900DBB7CD /* libRNFastImage.a */,
+				E0BBF2D72B56B68900DBB7CD /* libRNFBApp.a */,
+				E0BBF2D92B56B68900DBB7CD /* libRNFBAuth.a */,
+				E0BBF2DB2B56B68900DBB7CD /* libRNFBCrashlytics.a */,
+				E0BBF2DD2B56B68900DBB7CD /* libRNFBFirestore.a */,
+				E0BBF2DF2B56B68900DBB7CD /* libRNFBFunctions.a */,
+				E0BBF2E12B56B68900DBB7CD /* libRNFBInAppMessaging.a */,
+				E0BBF2E32B56B68900DBB7CD /* libRNFBMessaging.a */,
+				E0BBF2E52B56B68900DBB7CD /* libRNFBPerf.a */,
+				E0BBF2E72B56B68900DBB7CD /* libRNFBRemoteConfig.a */,
+				E0BBF2E92B56B68900DBB7CD /* libRNFBStorage.a */,
+				E0BBF2EB2B56B68900DBB7CD /* libRNFS.a */,
+				E0BBF2ED2B56B68900DBB7CD /* libRNGestureHandler.a */,
+				E0BBF2EF2B56B68900DBB7CD /* libRNGoogleSignin.a */,
+				E0BBF2F12B56B68900DBB7CD /* libRNInputMask.a */,
+				E0BBF2F32B56B68900DBB7CD /* libRNLocalize.a */,
+				E0BBF2F52B56B68900DBB7CD /* libRNReanimated.a */,
+				E0BBF2F72B56B68900DBB7CD /* libRNScreens.a */,
+				E0BBF2F92B56B68900DBB7CD /* libRNShare.a */,
+				E0BBF2FB2B56B68900DBB7CD /* libRNSVG.a */,
+				E0BBF2FD2B56B68900DBB7CD /* libRNVectorIcons.a */,
+				E0BBF2FF2B56B68900DBB7CD /* libSDWebImage.a */,
+				E0BBF3032B56B68900DBB7CD /* libSDWebImageWebPCoder.a */,
+				E0BBF3052B56B68900DBB7CD /* libYoga.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101301,110 +101301,110 @@
 		E0CDA2F52B56B75B0004F443 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E0CD09D22B56B7990004F443 /* abseil */,
-				E0CD09D42B56B7990004F443 /* AppAuth */,
-				E0CD09D62B56B7990004F443 /* BoringSSL-GRPC */,
-				E0CD09D82B56B7990004F443 /* DoubleConversion */,
-				E0CD09DA2B56B7990004F443 /* FBReactNativeSpec */,
-				E0CD09DC2B56B7990004F443 /* FBSDKCoreKit */,
-				E0CD09DE2B56B7990004F443 /* FBSDKLoginKit */,
-				E0CD09E02B56B7990004F443 /* FBSDKShareKit */,
-				E0CD09E22B56B7990004F443 /* FirebaseABTesting */,
-				E0CD09E42B56B7990004F443 /* FirebaseAuth */,
-				E0CD09E62B56B7990004F443 /* FirebaseCore */,
-				E0CD09E82B56B7990004F443 /* FirebaseCoreDiagnostics */,
-				E0CD09EA2B56B7990004F443 /* FirebaseCrashlytics */,
-				E0CD09EC2B56B7990004F443 /* FirebaseFirestore */,
-				E0CD09EE2B56B7990004F443 /* FirebaseFunctions */,
-				E0CD09F02B56B7990004F443 /* FirebaseInAppMessaging */,
-				E0CD09F22B56B7990004F443 /* FirebaseInAppMessaging-InAppMessagingDisplayResources */,
-				E0CD09F42B56B7990004F443 /* FirebaseInstallations */,
-				E0CD09F62B56B7990004F443 /* FirebaseInstanceID */,
-				E0CD09F82B56B7990004F443 /* FirebaseMessaging */,
-				E0CD09FA2B56B7990004F443 /* FirebasePerformance */,
-				E0CD09FC2B56B7990004F443 /* FirebaseRemoteConfig */,
-				E0CD09FE2B56B7990004F443 /* FirebaseStorage */,
-				E0CD0A002B56B7990004F443 /* Folly */,
-				E0CD0A022B56B7990004F443 /* glog */,
-				E0CD0A042B56B7990004F443 /* Google-Maps-iOS-Utils */,
-				E0CD0A062B56B7990004F443 /* GoogleDataTransport */,
-				E0CD0A082B56B7990004F443 /* GoogleUtilities */,
-				E0CD0A0A2B56B7990004F443 /* gRPC-C++ */,
-				E0CD0A0C2B56B7990004F443 /* gRPC-C++-gRPCCertificates-Cpp */,
-				E0CD0A0E2B56B7990004F443 /* gRPC-Core */,
-				E0CD0A102B56B7990004F443 /* GTMAppAuth */,
-				E0CD0A122B56B7990004F443 /* GTMSessionFetcher */,
-				E0CD0A142B56B7990004F443 /* leveldb-library */,
-				E0CD0A162B56B7990004F443 /* libwebp */,
-				E0CD0A182B56B7990004F443 /* lottie-ios */,
-				E0CD0A1A2B56B7990004F443 /* lottie-react-native */,
-				E0CD0A1C2B56B7990004F443 /* nanopb */,
-				E0CD0A1E2B56B7990004F443 /* PanModal */,
-				E0CD0A202B56B7990004F443 /* Pods-unboxme */,
-				E0CD0A222B56B7990004F443 /* PromisesObjC */,
-				E0CD0A242B56B7990004F443 /* Protobuf */,
-				E0CD0A262B56B7990004F443 /* RCTTypeSafety */,
-				E0CD0A282B56B7990004F443 /* React-Core */,
-				E0CD0A2A2B56B7990004F443 /* React-Core-AccessibilityResources */,
-				E0CD0A2C2B56B7990004F443 /* React-CoreModules */,
-				E0CD0A2E2B56B7990004F443 /* React-cxxreact */,
-				E0CD0A302B56B7990004F443 /* React-jsi */,
-				E0CD0A322B56B7990004F443 /* React-jsiexecutor */,
-				E0CD0A342B56B7990004F443 /* React-jsinspector */,
-				E0CD0A362B56B7990004F443 /* react-native-config */,
-				E0CD0A382B56B7990004F443 /* react-native-cookies */,
-				E0CD0A3A2B56B7990004F443 /* react-native-create-thumbnail */,
-				E0CD0A3C2B56B7990004F443 /* react-native-fbsdk */,
-				E0CD0A3E2B56B7990004F443 /* react-native-get-random-values */,
-				E0CD0A402B56B7990004F443 /* react-native-google-maps */,
-				E0CD0A422B56B7990004F443 /* react-native-image-picker */,
-				E0CD0A442B56B7990004F443 /* react-native-maps */,
-				E0CD0A462B56B7990004F443 /* react-native-netinfo */,
-				E0CD0A482B56B7990004F443 /* react-native-safe-area-context */,
-				E0CD0A4A2B56B7990004F443 /* react-native-splash-screen */,
-				E0CD0A4C2B56B7990004F443 /* react-native-text-input-mask */,
-				E0CD0A4E2B56B7990004F443 /* react-native-video */,
-				E0CD0A502B56B7990004F443 /* react-native-webview */,
-				E0CD0A522B56B7990004F443 /* React-RCTAnimation */,
-				E0CD0A542B56B7990004F443 /* React-RCTBlob */,
-				E0CD0A562B56B7990004F443 /* React-RCTImage */,
-				E0CD0A582B56B7990004F443 /* React-RCTLinking */,
-				E0CD0A5A2B56B7990004F443 /* React-RCTNetwork */,
-				E0CD0A5C2B56B7990004F443 /* React-RCTSettings */,
-				E0CD0A5E2B56B7990004F443 /* React-RCTText */,
-				E0CD0A602B56B7990004F443 /* React-RCTVibration */,
-				E0CD0A622B56B7990004F443 /* ReactCommon */,
-				E0CD0A642B56B7990004F443 /* rn-fetch-blob */,
-				E0CD0A662B56B7990004F443 /* RNAppleAuthentication */,
-				E0CD0A682B56B7990004F443 /* RNCAsyncStorage */,
-				E0CD0A6A2B56B7990004F443 /* RNCClipboard */,
-				E0CD0A6C2B56B7990004F443 /* RNCMaskedView */,
-				E0CD0A6E2B56B7990004F443 /* RNDateTimePicker */,
-				E0CD0A702B56B7990004F443 /* RNDeviceInfo */,
-				E0CD0A722B56B7990004F443 /* RNFastImage */,
-				E0CD0A742B56B7990004F443 /* RNFBApp */,
-				E0CD0A762B56B7990004F443 /* RNFBAuth */,
-				E0CD0A782B56B7990004F443 /* RNFBCrashlytics */,
-				E0CD0A7A2B56B7990004F443 /* RNFBFirestore */,
-				E0CD0A7C2B56B7990004F443 /* RNFBFunctions */,
-				E0CD0A7E2B56B7990004F443 /* RNFBInAppMessaging */,
-				E0CD0A802B56B7990004F443 /* RNFBMessaging */,
-				E0CD0A822B56B7990004F443 /* RNFBPerf */,
-				E0CD0A842B56B7990004F443 /* RNFBRemoteConfig */,
-				E0CD0A862B56B7990004F443 /* RNFBStorage */,
-				E0CD0A882B56B7990004F443 /* RNFS */,
-				E0CD0A8A2B56B7990004F443 /* RNGestureHandler */,
-				E0CD0A8C2B56B7990004F443 /* RNGoogleSignin */,
-				E0CD0A8E2B56B7990004F443 /* RNInputMask */,
-				E0CD0A902B56B7990004F443 /* RNLocalize */,
-				E0CD0A922B56B7990004F443 /* RNReanimated */,
-				E0CD0A942B56B7990004F443 /* RNScreens */,
-				E0CD0A962B56B7990004F443 /* RNShare */,
-				E0CD0A982B56B7990004F443 /* RNSVG */,
-				E0CD0A9A2B56B7990004F443 /* RNVectorIcons */,
-				E0CD0A9C2B56B7990004F443 /* SDWebImage */,
-				E0CD0AA02B56B7990004F443 /* SDWebImageWebPCoder */,
-				E0CD0AA22B56B7990004F443 /* Yoga */,
+				E0CD09D22B56B7990004F443 /* libabseil.a */,
+				E0CD09D42B56B7990004F443 /* libAppAuth.a */,
+				E0CD09D62B56B7990004F443 /* libBoringSSL-GRPC.a */,
+				E0CD09D82B56B7990004F443 /* libDoubleConversion.a */,
+				E0CD09DA2B56B7990004F443 /* libFBReactNativeSpec.a */,
+				E0CD09DC2B56B7990004F443 /* libFBSDKCoreKit.a */,
+				E0CD09DE2B56B7990004F443 /* libFBSDKLoginKit.a */,
+				E0CD09E02B56B7990004F443 /* libFBSDKShareKit.a */,
+				E0CD09E22B56B7990004F443 /* libFirebaseABTesting.a */,
+				E0CD09E42B56B7990004F443 /* libFirebaseAuth.a */,
+				E0CD09E62B56B7990004F443 /* libFirebaseCore.a */,
+				E0CD09E82B56B7990004F443 /* libFirebaseCoreDiagnostics.a */,
+				E0CD09EA2B56B7990004F443 /* libFirebaseCrashlytics.a */,
+				E0CD09EC2B56B7990004F443 /* libFirebaseFirestore.a */,
+				E0CD09EE2B56B7990004F443 /* libFirebaseFunctions.a */,
+				E0CD09F02B56B7990004F443 /* libFirebaseInAppMessaging.a */,
+				E0CD09F22B56B7990004F443 /* InAppMessagingDisplayResources.bundle */,
+				E0CD09F42B56B7990004F443 /* libFirebaseInstallations.a */,
+				E0CD09F62B56B7990004F443 /* libFirebaseInstanceID.a */,
+				E0CD09F82B56B7990004F443 /* libFirebaseMessaging.a */,
+				E0CD09FA2B56B7990004F443 /* libFirebasePerformance.a */,
+				E0CD09FC2B56B7990004F443 /* libFirebaseRemoteConfig.a */,
+				E0CD09FE2B56B7990004F443 /* libFirebaseStorage.a */,
+				E0CD0A002B56B7990004F443 /* libFolly.a */,
+				E0CD0A022B56B7990004F443 /* libglog.a */,
+				E0CD0A042B56B7990004F443 /* libGoogle-Maps-iOS-Utils.a */,
+				E0CD0A062B56B7990004F443 /* libGoogleDataTransport.a */,
+				E0CD0A082B56B7990004F443 /* libGoogleUtilities.a */,
+				E0CD0A0A2B56B7990004F443 /* libgRPC-C++.a */,
+				E0CD0A0C2B56B7990004F443 /* gRPCCertificates-Cpp.bundle */,
+				E0CD0A0E2B56B7990004F443 /* libgRPC-Core.a */,
+				E0CD0A102B56B7990004F443 /* libGTMAppAuth.a */,
+				E0CD0A122B56B7990004F443 /* libGTMSessionFetcher.a */,
+				E0CD0A142B56B7990004F443 /* libleveldb-library.a */,
+				E0CD0A162B56B7990004F443 /* liblibwebp.a */,
+				E0CD0A182B56B7990004F443 /* liblottie-ios.a */,
+				E0CD0A1A2B56B7990004F443 /* liblottie-react-native.a */,
+				E0CD0A1C2B56B7990004F443 /* libnanopb.a */,
+				E0CD0A1E2B56B7990004F443 /* libPanModal.a */,
+				E0CD0A202B56B7990004F443 /* libPods-unboxme.a */,
+				E0CD0A222B56B7990004F443 /* libPromisesObjC.a */,
+				E0CD0A242B56B7990004F443 /* libProtobuf.a */,
+				E0CD0A262B56B7990004F443 /* libRCTTypeSafety.a */,
+				E0CD0A282B56B7990004F443 /* libReact-Core.a */,
+				E0CD0A2A2B56B7990004F443 /* AccessibilityResources.bundle */,
+				E0CD0A2C2B56B7990004F443 /* libReact-CoreModules.a */,
+				E0CD0A2E2B56B7990004F443 /* libReact-cxxreact.a */,
+				E0CD0A302B56B7990004F443 /* libReact-jsi.a */,
+				E0CD0A322B56B7990004F443 /* libReact-jsiexecutor.a */,
+				E0CD0A342B56B7990004F443 /* libReact-jsinspector.a */,
+				E0CD0A362B56B7990004F443 /* libreact-native-config.a */,
+				E0CD0A382B56B7990004F443 /* libreact-native-cookies.a */,
+				E0CD0A3A2B56B7990004F443 /* libreact-native-create-thumbnail.a */,
+				E0CD0A3C2B56B7990004F443 /* libreact-native-fbsdk.a */,
+				E0CD0A3E2B56B7990004F443 /* libreact-native-get-random-values.a */,
+				E0CD0A402B56B7990004F443 /* libreact-native-google-maps.a */,
+				E0CD0A422B56B7990004F443 /* libreact-native-image-picker.a */,
+				E0CD0A442B56B7990004F443 /* libreact-native-maps.a */,
+				E0CD0A462B56B7990004F443 /* libreact-native-netinfo.a */,
+				E0CD0A482B56B7990004F443 /* libreact-native-safe-area-context.a */,
+				E0CD0A4A2B56B7990004F443 /* libreact-native-splash-screen.a */,
+				E0CD0A4C2B56B7990004F443 /* libreact-native-text-input-mask.a */,
+				E0CD0A4E2B56B7990004F443 /* libreact-native-video.a */,
+				E0CD0A502B56B7990004F443 /* libreact-native-webview.a */,
+				E0CD0A522B56B7990004F443 /* libReact-RCTAnimation.a */,
+				E0CD0A542B56B7990004F443 /* libReact-RCTBlob.a */,
+				E0CD0A562B56B7990004F443 /* libReact-RCTImage.a */,
+				E0CD0A582B56B7990004F443 /* libReact-RCTLinking.a */,
+				E0CD0A5A2B56B7990004F443 /* libReact-RCTNetwork.a */,
+				E0CD0A5C2B56B7990004F443 /* libReact-RCTSettings.a */,
+				E0CD0A5E2B56B7990004F443 /* libReact-RCTText.a */,
+				E0CD0A602B56B7990004F443 /* libReact-RCTVibration.a */,
+				E0CD0A622B56B7990004F443 /* libReactCommon.a */,
+				E0CD0A642B56B7990004F443 /* librn-fetch-blob.a */,
+				E0CD0A662B56B7990004F443 /* libRNAppleAuthentication.a */,
+				E0CD0A682B56B7990004F443 /* libRNCAsyncStorage.a */,
+				E0CD0A6A2B56B7990004F443 /* libRNCClipboard.a */,
+				E0CD0A6C2B56B7990004F443 /* libRNCMaskedView.a */,
+				E0CD0A6E2B56B7990004F443 /* libRNDateTimePicker.a */,
+				E0CD0A702B56B7990004F443 /* libRNDeviceInfo.a */,
+				E0CD0A722B56B7990004F443 /* libRNFastImage.a */,
+				E0CD0A742B56B7990004F443 /* libRNFBApp.a */,
+				E0CD0A762B56B7990004F443 /* libRNFBAuth.a */,
+				E0CD0A782B56B7990004F443 /* libRNFBCrashlytics.a */,
+				E0CD0A7A2B56B7990004F443 /* libRNFBFirestore.a */,
+				E0CD0A7C2B56B7990004F443 /* libRNFBFunctions.a */,
+				E0CD0A7E2B56B7990004F443 /* libRNFBInAppMessaging.a */,
+				E0CD0A802B56B7990004F443 /* libRNFBMessaging.a */,
+				E0CD0A822B56B7990004F443 /* libRNFBPerf.a */,
+				E0CD0A842B56B7990004F443 /* libRNFBRemoteConfig.a */,
+				E0CD0A862B56B7990004F443 /* libRNFBStorage.a */,
+				E0CD0A882B56B7990004F443 /* libRNFS.a */,
+				E0CD0A8A2B56B7990004F443 /* libRNGestureHandler.a */,
+				E0CD0A8C2B56B7990004F443 /* libRNGoogleSignin.a */,
+				E0CD0A8E2B56B7990004F443 /* libRNInputMask.a */,
+				E0CD0A902B56B7990004F443 /* libRNLocalize.a */,
+				E0CD0A922B56B7990004F443 /* libRNReanimated.a */,
+				E0CD0A942B56B7990004F443 /* libRNScreens.a */,
+				E0CD0A962B56B7990004F443 /* libRNShare.a */,
+				E0CD0A982B56B7990004F443 /* libRNSVG.a */,
+				E0CD0A9A2B56B7990004F443 /* libRNVectorIcons.a */,
+				E0CD0A9C2B56B7990004F443 /* libSDWebImage.a */,
+				E0CD0AA02B56B7990004F443 /* libSDWebImageWebPCoder.a */,
+				E0CD0AA22B56B7990004F443 /* libYoga.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141262,728 +141262,728 @@
 			remoteRef = E0BBF1C02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2352B56B68900DBB7CD /* abseil */ = {
+		E0BBF2352B56B68900DBB7CD /* libabseil.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libabseil.a;
 			remoteRef = E0BBF2342B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2372B56B68900DBB7CD /* AppAuth */ = {
+		E0BBF2372B56B68900DBB7CD /* libAppAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libAppAuth.a;
 			remoteRef = E0BBF2362B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2392B56B68900DBB7CD /* BoringSSL-GRPC */ = {
+		E0BBF2392B56B68900DBB7CD /* libBoringSSL-GRPC.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libBoringSSL-GRPC.a";
 			remoteRef = E0BBF2382B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF23B2B56B68900DBB7CD /* DoubleConversion */ = {
+		E0BBF23B2B56B68900DBB7CD /* libDoubleConversion.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libDoubleConversion.a;
 			remoteRef = E0BBF23A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF23D2B56B68900DBB7CD /* FBReactNativeSpec */ = {
+		E0BBF23D2B56B68900DBB7CD /* libFBReactNativeSpec.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBReactNativeSpec.a;
 			remoteRef = E0BBF23C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF23F2B56B68900DBB7CD /* FBSDKCoreKit */ = {
+		E0BBF23F2B56B68900DBB7CD /* libFBSDKCoreKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBSDKCoreKit.a;
 			remoteRef = E0BBF23E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2412B56B68900DBB7CD /* FBSDKLoginKit */ = {
+		E0BBF2412B56B68900DBB7CD /* libFBSDKLoginKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBSDKLoginKit.a;
 			remoteRef = E0BBF2402B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2432B56B68900DBB7CD /* FBSDKShareKit */ = {
+		E0BBF2432B56B68900DBB7CD /* libFBSDKShareKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBSDKShareKit.a;
 			remoteRef = E0BBF2422B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2452B56B68900DBB7CD /* FirebaseABTesting */ = {
+		E0BBF2452B56B68900DBB7CD /* libFirebaseABTesting.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseABTesting.a;
 			remoteRef = E0BBF2442B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2472B56B68900DBB7CD /* FirebaseAuth */ = {
+		E0BBF2472B56B68900DBB7CD /* libFirebaseAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseAuth.a;
 			remoteRef = E0BBF2462B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2492B56B68900DBB7CD /* FirebaseCore */ = {
+		E0BBF2492B56B68900DBB7CD /* libFirebaseCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseCore.a;
 			remoteRef = E0BBF2482B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF24B2B56B68900DBB7CD /* FirebaseCoreDiagnostics */ = {
+		E0BBF24B2B56B68900DBB7CD /* libFirebaseCoreDiagnostics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseCoreDiagnostics.a;
 			remoteRef = E0BBF24A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF24D2B56B68900DBB7CD /* FirebaseCrashlytics */ = {
+		E0BBF24D2B56B68900DBB7CD /* libFirebaseCrashlytics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseCrashlytics.a;
 			remoteRef = E0BBF24C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF24F2B56B68900DBB7CD /* FirebaseFirestore */ = {
+		E0BBF24F2B56B68900DBB7CD /* libFirebaseFirestore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseFirestore.a;
 			remoteRef = E0BBF24E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2512B56B68900DBB7CD /* FirebaseFunctions */ = {
+		E0BBF2512B56B68900DBB7CD /* libFirebaseFunctions.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseFunctions.a;
 			remoteRef = E0BBF2502B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2532B56B68900DBB7CD /* FirebaseInAppMessaging */ = {
+		E0BBF2532B56B68900DBB7CD /* libFirebaseInAppMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseInAppMessaging.a;
 			remoteRef = E0BBF2522B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2552B56B68900DBB7CD /* FirebaseInAppMessaging-InAppMessagingDisplayResources */ = {
+		E0BBF2552B56B68900DBB7CD /* InAppMessagingDisplayResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = InAppMessagingDisplayResources.bundle;
 			remoteRef = E0BBF2542B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2572B56B68900DBB7CD /* FirebaseInstallations */ = {
+		E0BBF2572B56B68900DBB7CD /* libFirebaseInstallations.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseInstallations.a;
 			remoteRef = E0BBF2562B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2592B56B68900DBB7CD /* FirebaseInstanceID */ = {
+		E0BBF2592B56B68900DBB7CD /* libFirebaseInstanceID.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseInstanceID.a;
 			remoteRef = E0BBF2582B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF25B2B56B68900DBB7CD /* FirebaseMessaging */ = {
+		E0BBF25B2B56B68900DBB7CD /* libFirebaseMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseMessaging.a;
 			remoteRef = E0BBF25A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF25D2B56B68900DBB7CD /* FirebasePerformance */ = {
+		E0BBF25D2B56B68900DBB7CD /* libFirebasePerformance.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebasePerformance.a;
 			remoteRef = E0BBF25C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF25F2B56B68900DBB7CD /* FirebaseRemoteConfig */ = {
+		E0BBF25F2B56B68900DBB7CD /* libFirebaseRemoteConfig.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseRemoteConfig.a;
 			remoteRef = E0BBF25E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2612B56B68900DBB7CD /* FirebaseStorage */ = {
+		E0BBF2612B56B68900DBB7CD /* libFirebaseStorage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseStorage.a;
 			remoteRef = E0BBF2602B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2632B56B68900DBB7CD /* Folly */ = {
+		E0BBF2632B56B68900DBB7CD /* libFolly.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFolly.a;
 			remoteRef = E0BBF2622B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2652B56B68900DBB7CD /* glog */ = {
+		E0BBF2652B56B68900DBB7CD /* libglog.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libglog.a;
 			remoteRef = E0BBF2642B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2672B56B68900DBB7CD /* Google-Maps-iOS-Utils */ = {
+		E0BBF2672B56B68900DBB7CD /* libGoogle-Maps-iOS-Utils.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libGoogle-Maps-iOS-Utils.a";
 			remoteRef = E0BBF2662B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2692B56B68900DBB7CD /* GoogleDataTransport */ = {
+		E0BBF2692B56B68900DBB7CD /* libGoogleDataTransport.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGoogleDataTransport.a;
 			remoteRef = E0BBF2682B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF26B2B56B68900DBB7CD /* GoogleUtilities */ = {
+		E0BBF26B2B56B68900DBB7CD /* libGoogleUtilities.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGoogleUtilities.a;
 			remoteRef = E0BBF26A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF26D2B56B68900DBB7CD /* gRPC-C++ */ = {
+		E0BBF26D2B56B68900DBB7CD /* libgRPC-C++.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libgRPC-C++.a";
 			remoteRef = E0BBF26C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF26F2B56B68900DBB7CD /* gRPC-C++-gRPCCertificates-Cpp */ = {
+		E0BBF26F2B56B68900DBB7CD /* gRPCCertificates-Cpp.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "gRPCCertificates-Cpp.bundle";
 			remoteRef = E0BBF26E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2712B56B68900DBB7CD /* gRPC-Core */ = {
+		E0BBF2712B56B68900DBB7CD /* libgRPC-Core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libgRPC-Core.a";
 			remoteRef = E0BBF2702B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2732B56B68900DBB7CD /* GTMAppAuth */ = {
+		E0BBF2732B56B68900DBB7CD /* libGTMAppAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGTMAppAuth.a;
 			remoteRef = E0BBF2722B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2752B56B68900DBB7CD /* GTMSessionFetcher */ = {
+		E0BBF2752B56B68900DBB7CD /* libGTMSessionFetcher.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGTMSessionFetcher.a;
 			remoteRef = E0BBF2742B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2772B56B68900DBB7CD /* leveldb-library */ = {
+		E0BBF2772B56B68900DBB7CD /* libleveldb-library.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libleveldb-library.a";
 			remoteRef = E0BBF2762B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2792B56B68900DBB7CD /* libwebp */ = {
+		E0BBF2792B56B68900DBB7CD /* liblibwebp.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = liblibwebp.a;
 			remoteRef = E0BBF2782B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF27B2B56B68900DBB7CD /* lottie-ios */ = {
+		E0BBF27B2B56B68900DBB7CD /* liblottie-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "liblottie-ios.a";
 			remoteRef = E0BBF27A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF27D2B56B68900DBB7CD /* lottie-react-native */ = {
+		E0BBF27D2B56B68900DBB7CD /* liblottie-react-native.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "liblottie-react-native.a";
 			remoteRef = E0BBF27C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF27F2B56B68900DBB7CD /* nanopb */ = {
+		E0BBF27F2B56B68900DBB7CD /* libnanopb.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libnanopb.a;
 			remoteRef = E0BBF27E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2812B56B68900DBB7CD /* PanModal */ = {
+		E0BBF2812B56B68900DBB7CD /* libPanModal.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libPanModal.a;
 			remoteRef = E0BBF2802B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2832B56B68900DBB7CD /* Pods-unboxme */ = {
+		E0BBF2832B56B68900DBB7CD /* libPods-unboxme.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libPods-unboxme.a";
 			remoteRef = E0BBF2822B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2852B56B68900DBB7CD /* PromisesObjC */ = {
+		E0BBF2852B56B68900DBB7CD /* libPromisesObjC.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libPromisesObjC.a;
 			remoteRef = E0BBF2842B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2872B56B68900DBB7CD /* Protobuf */ = {
+		E0BBF2872B56B68900DBB7CD /* libProtobuf.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libProtobuf.a;
 			remoteRef = E0BBF2862B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2892B56B68900DBB7CD /* RCTTypeSafety */ = {
+		E0BBF2892B56B68900DBB7CD /* libRCTTypeSafety.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRCTTypeSafety.a;
 			remoteRef = E0BBF2882B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF28B2B56B68900DBB7CD /* React-Core */ = {
+		E0BBF28B2B56B68900DBB7CD /* libReact-Core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-Core.a";
 			remoteRef = E0BBF28A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF28D2B56B68900DBB7CD /* React-Core-AccessibilityResources */ = {
+		E0BBF28D2B56B68900DBB7CD /* AccessibilityResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = AccessibilityResources.bundle;
 			remoteRef = E0BBF28C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF28F2B56B68900DBB7CD /* React-CoreModules */ = {
+		E0BBF28F2B56B68900DBB7CD /* libReact-CoreModules.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-CoreModules.a";
 			remoteRef = E0BBF28E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2912B56B68900DBB7CD /* React-cxxreact */ = {
+		E0BBF2912B56B68900DBB7CD /* libReact-cxxreact.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-cxxreact.a";
 			remoteRef = E0BBF2902B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2932B56B68900DBB7CD /* React-jsi */ = {
+		E0BBF2932B56B68900DBB7CD /* libReact-jsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-jsi.a";
 			remoteRef = E0BBF2922B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2952B56B68900DBB7CD /* React-jsiexecutor */ = {
+		E0BBF2952B56B68900DBB7CD /* libReact-jsiexecutor.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-jsiexecutor.a";
 			remoteRef = E0BBF2942B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2972B56B68900DBB7CD /* React-jsinspector */ = {
+		E0BBF2972B56B68900DBB7CD /* libReact-jsinspector.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-jsinspector.a";
 			remoteRef = E0BBF2962B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2992B56B68900DBB7CD /* react-native-config */ = {
+		E0BBF2992B56B68900DBB7CD /* libreact-native-config.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-config.a";
 			remoteRef = E0BBF2982B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF29B2B56B68900DBB7CD /* react-native-cookies */ = {
+		E0BBF29B2B56B68900DBB7CD /* libreact-native-cookies.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-cookies.a";
 			remoteRef = E0BBF29A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF29D2B56B68900DBB7CD /* react-native-create-thumbnail */ = {
+		E0BBF29D2B56B68900DBB7CD /* libreact-native-create-thumbnail.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-create-thumbnail.a";
 			remoteRef = E0BBF29C2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF29F2B56B68900DBB7CD /* react-native-fbsdk */ = {
+		E0BBF29F2B56B68900DBB7CD /* libreact-native-fbsdk.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-fbsdk.a";
 			remoteRef = E0BBF29E2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2A12B56B68900DBB7CD /* react-native-get-random-values */ = {
+		E0BBF2A12B56B68900DBB7CD /* libreact-native-get-random-values.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-get-random-values.a";
 			remoteRef = E0BBF2A02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2A32B56B68900DBB7CD /* react-native-google-maps */ = {
+		E0BBF2A32B56B68900DBB7CD /* libreact-native-google-maps.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-google-maps.a";
 			remoteRef = E0BBF2A22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2A52B56B68900DBB7CD /* react-native-image-picker */ = {
+		E0BBF2A52B56B68900DBB7CD /* libreact-native-image-picker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-image-picker.a";
 			remoteRef = E0BBF2A42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2A72B56B68900DBB7CD /* react-native-maps */ = {
+		E0BBF2A72B56B68900DBB7CD /* libreact-native-maps.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-maps.a";
 			remoteRef = E0BBF2A62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2A92B56B68900DBB7CD /* react-native-netinfo */ = {
+		E0BBF2A92B56B68900DBB7CD /* libreact-native-netinfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-netinfo.a";
 			remoteRef = E0BBF2A82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2AB2B56B68900DBB7CD /* react-native-safe-area-context */ = {
+		E0BBF2AB2B56B68900DBB7CD /* libreact-native-safe-area-context.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-safe-area-context.a";
 			remoteRef = E0BBF2AA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2AD2B56B68900DBB7CD /* react-native-splash-screen */ = {
+		E0BBF2AD2B56B68900DBB7CD /* libreact-native-splash-screen.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-splash-screen.a";
 			remoteRef = E0BBF2AC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2AF2B56B68900DBB7CD /* react-native-text-input-mask */ = {
+		E0BBF2AF2B56B68900DBB7CD /* libreact-native-text-input-mask.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-text-input-mask.a";
 			remoteRef = E0BBF2AE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2B12B56B68900DBB7CD /* react-native-video */ = {
+		E0BBF2B12B56B68900DBB7CD /* libreact-native-video.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-video.a";
 			remoteRef = E0BBF2B02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2B32B56B68900DBB7CD /* react-native-webview */ = {
+		E0BBF2B32B56B68900DBB7CD /* libreact-native-webview.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-webview.a";
 			remoteRef = E0BBF2B22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2B52B56B68900DBB7CD /* React-RCTAnimation */ = {
+		E0BBF2B52B56B68900DBB7CD /* libReact-RCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTAnimation.a";
 			remoteRef = E0BBF2B42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2B72B56B68900DBB7CD /* React-RCTBlob */ = {
+		E0BBF2B72B56B68900DBB7CD /* libReact-RCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTBlob.a";
 			remoteRef = E0BBF2B62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2B92B56B68900DBB7CD /* React-RCTImage */ = {
+		E0BBF2B92B56B68900DBB7CD /* libReact-RCTImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTImage.a";
 			remoteRef = E0BBF2B82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2BB2B56B68900DBB7CD /* React-RCTLinking */ = {
+		E0BBF2BB2B56B68900DBB7CD /* libReact-RCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTLinking.a";
 			remoteRef = E0BBF2BA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2BD2B56B68900DBB7CD /* React-RCTNetwork */ = {
+		E0BBF2BD2B56B68900DBB7CD /* libReact-RCTNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTNetwork.a";
 			remoteRef = E0BBF2BC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2BF2B56B68900DBB7CD /* React-RCTSettings */ = {
+		E0BBF2BF2B56B68900DBB7CD /* libReact-RCTSettings.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTSettings.a";
 			remoteRef = E0BBF2BE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2C12B56B68900DBB7CD /* React-RCTText */ = {
+		E0BBF2C12B56B68900DBB7CD /* libReact-RCTText.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTText.a";
 			remoteRef = E0BBF2C02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2C32B56B68900DBB7CD /* React-RCTVibration */ = {
+		E0BBF2C32B56B68900DBB7CD /* libReact-RCTVibration.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTVibration.a";
 			remoteRef = E0BBF2C22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2C52B56B68900DBB7CD /* ReactCommon */ = {
+		E0BBF2C52B56B68900DBB7CD /* libReactCommon.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libReactCommon.a;
 			remoteRef = E0BBF2C42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2C72B56B68900DBB7CD /* rn-fetch-blob */ = {
+		E0BBF2C72B56B68900DBB7CD /* librn-fetch-blob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "librn-fetch-blob.a";
 			remoteRef = E0BBF2C62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2C92B56B68900DBB7CD /* RNAppleAuthentication */ = {
+		E0BBF2C92B56B68900DBB7CD /* libRNAppleAuthentication.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNAppleAuthentication.a;
 			remoteRef = E0BBF2C82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2CB2B56B68900DBB7CD /* RNCAsyncStorage */ = {
+		E0BBF2CB2B56B68900DBB7CD /* libRNCAsyncStorage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNCAsyncStorage.a;
 			remoteRef = E0BBF2CA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2CD2B56B68900DBB7CD /* RNCClipboard */ = {
+		E0BBF2CD2B56B68900DBB7CD /* libRNCClipboard.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNCClipboard.a;
 			remoteRef = E0BBF2CC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2CF2B56B68900DBB7CD /* RNCMaskedView */ = {
+		E0BBF2CF2B56B68900DBB7CD /* libRNCMaskedView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNCMaskedView.a;
 			remoteRef = E0BBF2CE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2D12B56B68900DBB7CD /* RNDateTimePicker */ = {
+		E0BBF2D12B56B68900DBB7CD /* libRNDateTimePicker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNDateTimePicker.a;
 			remoteRef = E0BBF2D02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2D32B56B68900DBB7CD /* RNDeviceInfo */ = {
+		E0BBF2D32B56B68900DBB7CD /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNDeviceInfo.a;
 			remoteRef = E0BBF2D22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2D52B56B68900DBB7CD /* RNFastImage */ = {
+		E0BBF2D52B56B68900DBB7CD /* libRNFastImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFastImage.a;
 			remoteRef = E0BBF2D42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2D72B56B68900DBB7CD /* RNFBApp */ = {
+		E0BBF2D72B56B68900DBB7CD /* libRNFBApp.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBApp.a;
 			remoteRef = E0BBF2D62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2D92B56B68900DBB7CD /* RNFBAuth */ = {
+		E0BBF2D92B56B68900DBB7CD /* libRNFBAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBAuth.a;
 			remoteRef = E0BBF2D82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2DB2B56B68900DBB7CD /* RNFBCrashlytics */ = {
+		E0BBF2DB2B56B68900DBB7CD /* libRNFBCrashlytics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBCrashlytics.a;
 			remoteRef = E0BBF2DA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2DD2B56B68900DBB7CD /* RNFBFirestore */ = {
+		E0BBF2DD2B56B68900DBB7CD /* libRNFBFirestore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBFirestore.a;
 			remoteRef = E0BBF2DC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2DF2B56B68900DBB7CD /* RNFBFunctions */ = {
+		E0BBF2DF2B56B68900DBB7CD /* libRNFBFunctions.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBFunctions.a;
 			remoteRef = E0BBF2DE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2E12B56B68900DBB7CD /* RNFBInAppMessaging */ = {
+		E0BBF2E12B56B68900DBB7CD /* libRNFBInAppMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBInAppMessaging.a;
 			remoteRef = E0BBF2E02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2E32B56B68900DBB7CD /* RNFBMessaging */ = {
+		E0BBF2E32B56B68900DBB7CD /* libRNFBMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBMessaging.a;
 			remoteRef = E0BBF2E22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2E52B56B68900DBB7CD /* RNFBPerf */ = {
+		E0BBF2E52B56B68900DBB7CD /* libRNFBPerf.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBPerf.a;
 			remoteRef = E0BBF2E42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2E72B56B68900DBB7CD /* RNFBRemoteConfig */ = {
+		E0BBF2E72B56B68900DBB7CD /* libRNFBRemoteConfig.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBRemoteConfig.a;
 			remoteRef = E0BBF2E62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2E92B56B68900DBB7CD /* RNFBStorage */ = {
+		E0BBF2E92B56B68900DBB7CD /* libRNFBStorage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBStorage.a;
 			remoteRef = E0BBF2E82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2EB2B56B68900DBB7CD /* RNFS */ = {
+		E0BBF2EB2B56B68900DBB7CD /* libRNFS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFS.a;
 			remoteRef = E0BBF2EA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2ED2B56B68900DBB7CD /* RNGestureHandler */ = {
+		E0BBF2ED2B56B68900DBB7CD /* libRNGestureHandler.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNGestureHandler.a;
 			remoteRef = E0BBF2EC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2EF2B56B68900DBB7CD /* RNGoogleSignin */ = {
+		E0BBF2EF2B56B68900DBB7CD /* libRNGoogleSignin.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNGoogleSignin.a;
 			remoteRef = E0BBF2EE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2F12B56B68900DBB7CD /* RNInputMask */ = {
+		E0BBF2F12B56B68900DBB7CD /* libRNInputMask.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNInputMask.a;
 			remoteRef = E0BBF2F02B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2F32B56B68900DBB7CD /* RNLocalize */ = {
+		E0BBF2F32B56B68900DBB7CD /* libRNLocalize.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNLocalize.a;
 			remoteRef = E0BBF2F22B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2F52B56B68900DBB7CD /* RNReanimated */ = {
+		E0BBF2F52B56B68900DBB7CD /* libRNReanimated.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNReanimated.a;
 			remoteRef = E0BBF2F42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2F72B56B68900DBB7CD /* RNScreens */ = {
+		E0BBF2F72B56B68900DBB7CD /* libRNScreens.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNScreens.a;
 			remoteRef = E0BBF2F62B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2F92B56B68900DBB7CD /* RNShare */ = {
+		E0BBF2F92B56B68900DBB7CD /* libRNShare.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNShare.a;
 			remoteRef = E0BBF2F82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2FB2B56B68900DBB7CD /* RNSVG */ = {
+		E0BBF2FB2B56B68900DBB7CD /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNSVG.a;
 			remoteRef = E0BBF2FA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2FD2B56B68900DBB7CD /* RNVectorIcons */ = {
+		E0BBF2FD2B56B68900DBB7CD /* libRNVectorIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = E0BBF2FC2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2FF2B56B68900DBB7CD /* SDWebImage */ = {
+		E0BBF2FF2B56B68900DBB7CD /* libSDWebImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSDWebImage.a;
 			remoteRef = E0BBF2FE2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF3032B56B68900DBB7CD /* SDWebImageWebPCoder */ = {
+		E0BBF3032B56B68900DBB7CD /* libSDWebImageWebPCoder.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSDWebImageWebPCoder.a;
 			remoteRef = E0BBF3022B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF3052B56B68900DBB7CD /* Yoga */ = {
+		E0BBF3052B56B68900DBB7CD /* libYoga.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libYoga.a;
@@ -141997,728 +141997,728 @@
 			remoteRef = E0CD095C2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09D22B56B7990004F443 /* abseil */ = {
+		E0CD09D22B56B7990004F443 /* libabseil.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libabseil.a;
 			remoteRef = E0CD09D12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09D42B56B7990004F443 /* AppAuth */ = {
+		E0CD09D42B56B7990004F443 /* libAppAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libAppAuth.a;
 			remoteRef = E0CD09D32B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09D62B56B7990004F443 /* BoringSSL-GRPC */ = {
+		E0CD09D62B56B7990004F443 /* libBoringSSL-GRPC.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libBoringSSL-GRPC.a";
 			remoteRef = E0CD09D52B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09D82B56B7990004F443 /* DoubleConversion */ = {
+		E0CD09D82B56B7990004F443 /* libDoubleConversion.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libDoubleConversion.a;
 			remoteRef = E0CD09D72B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09DA2B56B7990004F443 /* FBReactNativeSpec */ = {
+		E0CD09DA2B56B7990004F443 /* libFBReactNativeSpec.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBReactNativeSpec.a;
 			remoteRef = E0CD09D92B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09DC2B56B7990004F443 /* FBSDKCoreKit */ = {
+		E0CD09DC2B56B7990004F443 /* libFBSDKCoreKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBSDKCoreKit.a;
 			remoteRef = E0CD09DB2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09DE2B56B7990004F443 /* FBSDKLoginKit */ = {
+		E0CD09DE2B56B7990004F443 /* libFBSDKLoginKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBSDKLoginKit.a;
 			remoteRef = E0CD09DD2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09E02B56B7990004F443 /* FBSDKShareKit */ = {
+		E0CD09E02B56B7990004F443 /* libFBSDKShareKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFBSDKShareKit.a;
 			remoteRef = E0CD09DF2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09E22B56B7990004F443 /* FirebaseABTesting */ = {
+		E0CD09E22B56B7990004F443 /* libFirebaseABTesting.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseABTesting.a;
 			remoteRef = E0CD09E12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09E42B56B7990004F443 /* FirebaseAuth */ = {
+		E0CD09E42B56B7990004F443 /* libFirebaseAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseAuth.a;
 			remoteRef = E0CD09E32B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09E62B56B7990004F443 /* FirebaseCore */ = {
+		E0CD09E62B56B7990004F443 /* libFirebaseCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseCore.a;
 			remoteRef = E0CD09E52B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09E82B56B7990004F443 /* FirebaseCoreDiagnostics */ = {
+		E0CD09E82B56B7990004F443 /* libFirebaseCoreDiagnostics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseCoreDiagnostics.a;
 			remoteRef = E0CD09E72B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09EA2B56B7990004F443 /* FirebaseCrashlytics */ = {
+		E0CD09EA2B56B7990004F443 /* libFirebaseCrashlytics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseCrashlytics.a;
 			remoteRef = E0CD09E92B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09EC2B56B7990004F443 /* FirebaseFirestore */ = {
+		E0CD09EC2B56B7990004F443 /* libFirebaseFirestore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseFirestore.a;
 			remoteRef = E0CD09EB2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09EE2B56B7990004F443 /* FirebaseFunctions */ = {
+		E0CD09EE2B56B7990004F443 /* libFirebaseFunctions.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseFunctions.a;
 			remoteRef = E0CD09ED2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09F02B56B7990004F443 /* FirebaseInAppMessaging */ = {
+		E0CD09F02B56B7990004F443 /* libFirebaseInAppMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseInAppMessaging.a;
 			remoteRef = E0CD09EF2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09F22B56B7990004F443 /* FirebaseInAppMessaging-InAppMessagingDisplayResources */ = {
+		E0CD09F22B56B7990004F443 /* InAppMessagingDisplayResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = InAppMessagingDisplayResources.bundle;
 			remoteRef = E0CD09F12B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09F42B56B7990004F443 /* FirebaseInstallations */ = {
+		E0CD09F42B56B7990004F443 /* libFirebaseInstallations.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseInstallations.a;
 			remoteRef = E0CD09F32B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09F62B56B7990004F443 /* FirebaseInstanceID */ = {
+		E0CD09F62B56B7990004F443 /* libFirebaseInstanceID.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseInstanceID.a;
 			remoteRef = E0CD09F52B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09F82B56B7990004F443 /* FirebaseMessaging */ = {
+		E0CD09F82B56B7990004F443 /* libFirebaseMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseMessaging.a;
 			remoteRef = E0CD09F72B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09FA2B56B7990004F443 /* FirebasePerformance */ = {
+		E0CD09FA2B56B7990004F443 /* libFirebasePerformance.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebasePerformance.a;
 			remoteRef = E0CD09F92B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09FC2B56B7990004F443 /* FirebaseRemoteConfig */ = {
+		E0CD09FC2B56B7990004F443 /* libFirebaseRemoteConfig.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseRemoteConfig.a;
 			remoteRef = E0CD09FB2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD09FE2B56B7990004F443 /* FirebaseStorage */ = {
+		E0CD09FE2B56B7990004F443 /* libFirebaseStorage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFirebaseStorage.a;
 			remoteRef = E0CD09FD2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A002B56B7990004F443 /* Folly */ = {
+		E0CD0A002B56B7990004F443 /* libFolly.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFolly.a;
 			remoteRef = E0CD09FF2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A022B56B7990004F443 /* glog */ = {
+		E0CD0A022B56B7990004F443 /* libglog.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libglog.a;
 			remoteRef = E0CD0A012B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A042B56B7990004F443 /* Google-Maps-iOS-Utils */ = {
+		E0CD0A042B56B7990004F443 /* libGoogle-Maps-iOS-Utils.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libGoogle-Maps-iOS-Utils.a";
 			remoteRef = E0CD0A032B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A062B56B7990004F443 /* GoogleDataTransport */ = {
+		E0CD0A062B56B7990004F443 /* libGoogleDataTransport.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGoogleDataTransport.a;
 			remoteRef = E0CD0A052B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A082B56B7990004F443 /* GoogleUtilities */ = {
+		E0CD0A082B56B7990004F443 /* libGoogleUtilities.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGoogleUtilities.a;
 			remoteRef = E0CD0A072B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A0A2B56B7990004F443 /* gRPC-C++ */ = {
+		E0CD0A0A2B56B7990004F443 /* libgRPC-C++.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libgRPC-C++.a";
 			remoteRef = E0CD0A092B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A0C2B56B7990004F443 /* gRPC-C++-gRPCCertificates-Cpp */ = {
+		E0CD0A0C2B56B7990004F443 /* gRPCCertificates-Cpp.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "gRPCCertificates-Cpp.bundle";
 			remoteRef = E0CD0A0B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A0E2B56B7990004F443 /* gRPC-Core */ = {
+		E0CD0A0E2B56B7990004F443 /* libgRPC-Core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libgRPC-Core.a";
 			remoteRef = E0CD0A0D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A102B56B7990004F443 /* GTMAppAuth */ = {
+		E0CD0A102B56B7990004F443 /* libGTMAppAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGTMAppAuth.a;
 			remoteRef = E0CD0A0F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A122B56B7990004F443 /* GTMSessionFetcher */ = {
+		E0CD0A122B56B7990004F443 /* libGTMSessionFetcher.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGTMSessionFetcher.a;
 			remoteRef = E0CD0A112B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A142B56B7990004F443 /* leveldb-library */ = {
+		E0CD0A142B56B7990004F443 /* libleveldb-library.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libleveldb-library.a";
 			remoteRef = E0CD0A132B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A162B56B7990004F443 /* libwebp */ = {
+		E0CD0A162B56B7990004F443 /* liblibwebp.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = liblibwebp.a;
 			remoteRef = E0CD0A152B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A182B56B7990004F443 /* lottie-ios */ = {
+		E0CD0A182B56B7990004F443 /* liblottie-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "liblottie-ios.a";
 			remoteRef = E0CD0A172B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A1A2B56B7990004F443 /* lottie-react-native */ = {
+		E0CD0A1A2B56B7990004F443 /* liblottie-react-native.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "liblottie-react-native.a";
 			remoteRef = E0CD0A192B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A1C2B56B7990004F443 /* nanopb */ = {
+		E0CD0A1C2B56B7990004F443 /* libnanopb.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libnanopb.a;
 			remoteRef = E0CD0A1B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A1E2B56B7990004F443 /* PanModal */ = {
+		E0CD0A1E2B56B7990004F443 /* libPanModal.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libPanModal.a;
 			remoteRef = E0CD0A1D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A202B56B7990004F443 /* Pods-unboxme */ = {
+		E0CD0A202B56B7990004F443 /* libPods-unboxme.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libPods-unboxme.a";
 			remoteRef = E0CD0A1F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A222B56B7990004F443 /* PromisesObjC */ = {
+		E0CD0A222B56B7990004F443 /* libPromisesObjC.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libPromisesObjC.a;
 			remoteRef = E0CD0A212B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A242B56B7990004F443 /* Protobuf */ = {
+		E0CD0A242B56B7990004F443 /* libProtobuf.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libProtobuf.a;
 			remoteRef = E0CD0A232B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A262B56B7990004F443 /* RCTTypeSafety */ = {
+		E0CD0A262B56B7990004F443 /* libRCTTypeSafety.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRCTTypeSafety.a;
 			remoteRef = E0CD0A252B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A282B56B7990004F443 /* React-Core */ = {
+		E0CD0A282B56B7990004F443 /* libReact-Core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-Core.a";
 			remoteRef = E0CD0A272B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A2A2B56B7990004F443 /* React-Core-AccessibilityResources */ = {
+		E0CD0A2A2B56B7990004F443 /* AccessibilityResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = AccessibilityResources.bundle;
 			remoteRef = E0CD0A292B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A2C2B56B7990004F443 /* React-CoreModules */ = {
+		E0CD0A2C2B56B7990004F443 /* libReact-CoreModules.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-CoreModules.a";
 			remoteRef = E0CD0A2B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A2E2B56B7990004F443 /* React-cxxreact */ = {
+		E0CD0A2E2B56B7990004F443 /* libReact-cxxreact.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-cxxreact.a";
 			remoteRef = E0CD0A2D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A302B56B7990004F443 /* React-jsi */ = {
+		E0CD0A302B56B7990004F443 /* libReact-jsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-jsi.a";
 			remoteRef = E0CD0A2F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A322B56B7990004F443 /* React-jsiexecutor */ = {
+		E0CD0A322B56B7990004F443 /* libReact-jsiexecutor.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-jsiexecutor.a";
 			remoteRef = E0CD0A312B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A342B56B7990004F443 /* React-jsinspector */ = {
+		E0CD0A342B56B7990004F443 /* libReact-jsinspector.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-jsinspector.a";
 			remoteRef = E0CD0A332B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A362B56B7990004F443 /* react-native-config */ = {
+		E0CD0A362B56B7990004F443 /* libreact-native-config.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-config.a";
 			remoteRef = E0CD0A352B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A382B56B7990004F443 /* react-native-cookies */ = {
+		E0CD0A382B56B7990004F443 /* libreact-native-cookies.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-cookies.a";
 			remoteRef = E0CD0A372B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A3A2B56B7990004F443 /* react-native-create-thumbnail */ = {
+		E0CD0A3A2B56B7990004F443 /* libreact-native-create-thumbnail.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-create-thumbnail.a";
 			remoteRef = E0CD0A392B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A3C2B56B7990004F443 /* react-native-fbsdk */ = {
+		E0CD0A3C2B56B7990004F443 /* libreact-native-fbsdk.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-fbsdk.a";
 			remoteRef = E0CD0A3B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A3E2B56B7990004F443 /* react-native-get-random-values */ = {
+		E0CD0A3E2B56B7990004F443 /* libreact-native-get-random-values.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-get-random-values.a";
 			remoteRef = E0CD0A3D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A402B56B7990004F443 /* react-native-google-maps */ = {
+		E0CD0A402B56B7990004F443 /* libreact-native-google-maps.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-google-maps.a";
 			remoteRef = E0CD0A3F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A422B56B7990004F443 /* react-native-image-picker */ = {
+		E0CD0A422B56B7990004F443 /* libreact-native-image-picker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-image-picker.a";
 			remoteRef = E0CD0A412B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A442B56B7990004F443 /* react-native-maps */ = {
+		E0CD0A442B56B7990004F443 /* libreact-native-maps.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-maps.a";
 			remoteRef = E0CD0A432B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A462B56B7990004F443 /* react-native-netinfo */ = {
+		E0CD0A462B56B7990004F443 /* libreact-native-netinfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-netinfo.a";
 			remoteRef = E0CD0A452B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A482B56B7990004F443 /* react-native-safe-area-context */ = {
+		E0CD0A482B56B7990004F443 /* libreact-native-safe-area-context.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-safe-area-context.a";
 			remoteRef = E0CD0A472B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A4A2B56B7990004F443 /* react-native-splash-screen */ = {
+		E0CD0A4A2B56B7990004F443 /* libreact-native-splash-screen.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-splash-screen.a";
 			remoteRef = E0CD0A492B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A4C2B56B7990004F443 /* react-native-text-input-mask */ = {
+		E0CD0A4C2B56B7990004F443 /* libreact-native-text-input-mask.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-text-input-mask.a";
 			remoteRef = E0CD0A4B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A4E2B56B7990004F443 /* react-native-video */ = {
+		E0CD0A4E2B56B7990004F443 /* libreact-native-video.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-video.a";
 			remoteRef = E0CD0A4D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A502B56B7990004F443 /* react-native-webview */ = {
+		E0CD0A502B56B7990004F443 /* libreact-native-webview.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libreact-native-webview.a";
 			remoteRef = E0CD0A4F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A522B56B7990004F443 /* React-RCTAnimation */ = {
+		E0CD0A522B56B7990004F443 /* libReact-RCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTAnimation.a";
 			remoteRef = E0CD0A512B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A542B56B7990004F443 /* React-RCTBlob */ = {
+		E0CD0A542B56B7990004F443 /* libReact-RCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTBlob.a";
 			remoteRef = E0CD0A532B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A562B56B7990004F443 /* React-RCTImage */ = {
+		E0CD0A562B56B7990004F443 /* libReact-RCTImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTImage.a";
 			remoteRef = E0CD0A552B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A582B56B7990004F443 /* React-RCTLinking */ = {
+		E0CD0A582B56B7990004F443 /* libReact-RCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTLinking.a";
 			remoteRef = E0CD0A572B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A5A2B56B7990004F443 /* React-RCTNetwork */ = {
+		E0CD0A5A2B56B7990004F443 /* libReact-RCTNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTNetwork.a";
 			remoteRef = E0CD0A592B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A5C2B56B7990004F443 /* React-RCTSettings */ = {
+		E0CD0A5C2B56B7990004F443 /* libReact-RCTSettings.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTSettings.a";
 			remoteRef = E0CD0A5B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A5E2B56B7990004F443 /* React-RCTText */ = {
+		E0CD0A5E2B56B7990004F443 /* libReact-RCTText.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTText.a";
 			remoteRef = E0CD0A5D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A602B56B7990004F443 /* React-RCTVibration */ = {
+		E0CD0A602B56B7990004F443 /* libReact-RCTVibration.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReact-RCTVibration.a";
 			remoteRef = E0CD0A5F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A622B56B7990004F443 /* ReactCommon */ = {
+		E0CD0A622B56B7990004F443 /* libReactCommon.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libReactCommon.a;
 			remoteRef = E0CD0A612B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A642B56B7990004F443 /* rn-fetch-blob */ = {
+		E0CD0A642B56B7990004F443 /* librn-fetch-blob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "librn-fetch-blob.a";
 			remoteRef = E0CD0A632B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A662B56B7990004F443 /* RNAppleAuthentication */ = {
+		E0CD0A662B56B7990004F443 /* libRNAppleAuthentication.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNAppleAuthentication.a;
 			remoteRef = E0CD0A652B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A682B56B7990004F443 /* RNCAsyncStorage */ = {
+		E0CD0A682B56B7990004F443 /* libRNCAsyncStorage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNCAsyncStorage.a;
 			remoteRef = E0CD0A672B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A6A2B56B7990004F443 /* RNCClipboard */ = {
+		E0CD0A6A2B56B7990004F443 /* libRNCClipboard.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNCClipboard.a;
 			remoteRef = E0CD0A692B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A6C2B56B7990004F443 /* RNCMaskedView */ = {
+		E0CD0A6C2B56B7990004F443 /* libRNCMaskedView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNCMaskedView.a;
 			remoteRef = E0CD0A6B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A6E2B56B7990004F443 /* RNDateTimePicker */ = {
+		E0CD0A6E2B56B7990004F443 /* libRNDateTimePicker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNDateTimePicker.a;
 			remoteRef = E0CD0A6D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A702B56B7990004F443 /* RNDeviceInfo */ = {
+		E0CD0A702B56B7990004F443 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNDeviceInfo.a;
 			remoteRef = E0CD0A6F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A722B56B7990004F443 /* RNFastImage */ = {
+		E0CD0A722B56B7990004F443 /* libRNFastImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFastImage.a;
 			remoteRef = E0CD0A712B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A742B56B7990004F443 /* RNFBApp */ = {
+		E0CD0A742B56B7990004F443 /* libRNFBApp.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBApp.a;
 			remoteRef = E0CD0A732B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A762B56B7990004F443 /* RNFBAuth */ = {
+		E0CD0A762B56B7990004F443 /* libRNFBAuth.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBAuth.a;
 			remoteRef = E0CD0A752B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A782B56B7990004F443 /* RNFBCrashlytics */ = {
+		E0CD0A782B56B7990004F443 /* libRNFBCrashlytics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBCrashlytics.a;
 			remoteRef = E0CD0A772B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A7A2B56B7990004F443 /* RNFBFirestore */ = {
+		E0CD0A7A2B56B7990004F443 /* libRNFBFirestore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBFirestore.a;
 			remoteRef = E0CD0A792B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A7C2B56B7990004F443 /* RNFBFunctions */ = {
+		E0CD0A7C2B56B7990004F443 /* libRNFBFunctions.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBFunctions.a;
 			remoteRef = E0CD0A7B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A7E2B56B7990004F443 /* RNFBInAppMessaging */ = {
+		E0CD0A7E2B56B7990004F443 /* libRNFBInAppMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBInAppMessaging.a;
 			remoteRef = E0CD0A7D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A802B56B7990004F443 /* RNFBMessaging */ = {
+		E0CD0A802B56B7990004F443 /* libRNFBMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBMessaging.a;
 			remoteRef = E0CD0A7F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A822B56B7990004F443 /* RNFBPerf */ = {
+		E0CD0A822B56B7990004F443 /* libRNFBPerf.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBPerf.a;
 			remoteRef = E0CD0A812B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A842B56B7990004F443 /* RNFBRemoteConfig */ = {
+		E0CD0A842B56B7990004F443 /* libRNFBRemoteConfig.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBRemoteConfig.a;
 			remoteRef = E0CD0A832B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A862B56B7990004F443 /* RNFBStorage */ = {
+		E0CD0A862B56B7990004F443 /* libRNFBStorage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFBStorage.a;
 			remoteRef = E0CD0A852B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A882B56B7990004F443 /* RNFS */ = {
+		E0CD0A882B56B7990004F443 /* libRNFS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFS.a;
 			remoteRef = E0CD0A872B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A8A2B56B7990004F443 /* RNGestureHandler */ = {
+		E0CD0A8A2B56B7990004F443 /* libRNGestureHandler.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNGestureHandler.a;
 			remoteRef = E0CD0A892B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A8C2B56B7990004F443 /* RNGoogleSignin */ = {
+		E0CD0A8C2B56B7990004F443 /* libRNGoogleSignin.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNGoogleSignin.a;
 			remoteRef = E0CD0A8B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A8E2B56B7990004F443 /* RNInputMask */ = {
+		E0CD0A8E2B56B7990004F443 /* libRNInputMask.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNInputMask.a;
 			remoteRef = E0CD0A8D2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A902B56B7990004F443 /* RNLocalize */ = {
+		E0CD0A902B56B7990004F443 /* libRNLocalize.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNLocalize.a;
 			remoteRef = E0CD0A8F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A922B56B7990004F443 /* RNReanimated */ = {
+		E0CD0A922B56B7990004F443 /* libRNReanimated.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNReanimated.a;
 			remoteRef = E0CD0A912B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A942B56B7990004F443 /* RNScreens */ = {
+		E0CD0A942B56B7990004F443 /* libRNScreens.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNScreens.a;
 			remoteRef = E0CD0A932B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A962B56B7990004F443 /* RNShare */ = {
+		E0CD0A962B56B7990004F443 /* libRNShare.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNShare.a;
 			remoteRef = E0CD0A952B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A982B56B7990004F443 /* RNSVG */ = {
+		E0CD0A982B56B7990004F443 /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNSVG.a;
 			remoteRef = E0CD0A972B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A9A2B56B7990004F443 /* RNVectorIcons */ = {
+		E0CD0A9A2B56B7990004F443 /* libRNVectorIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = E0CD0A992B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A9C2B56B7990004F443 /* SDWebImage */ = {
+		E0CD0A9C2B56B7990004F443 /* libSDWebImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSDWebImage.a;
 			remoteRef = E0CD0A9B2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0AA02B56B7990004F443 /* SDWebImageWebPCoder */ = {
+		E0CD0AA02B56B7990004F443 /* libSDWebImageWebPCoder.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSDWebImageWebPCoder.a;
 			remoteRef = E0CD0A9F2B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0AA22B56B7990004F443 /* Yoga */ = {
+		E0CD0AA22B56B7990004F443 /* libYoga.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libYoga.a;
@@ -142845,7 +142845,6 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -142870,7 +142869,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

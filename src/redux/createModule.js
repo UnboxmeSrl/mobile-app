@@ -1,4 +1,3 @@
-import firestore from '@react-native-firebase/firestore'
 import { createAction, createAsyncThunk, createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { normalize } from 'normalizr'
 import { defaultTo, head, isEmpty, isNil, pick, pickBy, pipe, prop, values } from 'ramda'
@@ -23,19 +22,19 @@ export const createReduxModule = ({ name, initialState = {} }) => {
 }
 
 export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) => {
-  const ref = firestore().collection(collection)
+  // const ref = firestore().collection(collection)
   const collectionAdapter = createEntityAdapter()
   const initialState = collectionAdapter.getInitialState()
-  const getDocumentReference = (id) => ref.doc(id)
-  const whereQuery = (uid) =>
-    limitToOwner ? ref.where('user', '==', firestore().collection(USERS_COLLECTION).doc(uid)) : ref
+  // const getDocumentReference = (id) => ref.doc(id)
+  // const whereQuery = (uid) =>
+  //   limitToOwner ? ref.where('user', '==', firestore().collection(USERS_COLLECTION).doc(uid)) : ref
 
   const fetchAll = createAsyncThunk(`${collection}/fetch`, async (payload, { rejectWithValue }) => {
     try {
-      const snapshot = await whereQuery('').get()
-      const data = snapshot?.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      const normalized = normalize(data, [schema])
-      return normalized.entities
+      // const snapshot = await whereQuery('').get()
+      // const data = snapshot?.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      // const normalized = normalize(data, [schema])
+      // return normalized.entities
     } catch (error) {
       logger.error(`fetchAll - ${collection}`, { error })
       throw error
@@ -43,11 +42,10 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
   })
   const fetchById = createAsyncThunk(`${collection}/fetchById`, async (id, { rejectWithValue }) => {
     try {
-      const snapshot = await whereQuery('').doc(id).get()
-      const data = { ...snapshot.data(), id: snapshot.id }
-      const normalized = normalize(data, schema)
-
-      return normalized.entities
+      // const snapshot = await whereQuery('').doc(id).get()
+      // const data = { ...snapshot.data(), id: snapshot.id }
+      // const normalized = normalize(data, schema)
+      // return normalized.entities
     } catch (error) {
       logger.error(`fetchById - ${collection}`, { error })
 
@@ -57,12 +55,12 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
 
   const createOne = createAsyncThunk(`${collection}/createOne`, async (payload, { rejectWithValue }) => {
     try {
-      const id = ref.doc().id
-      const doc = ref.doc(id)
-      await doc.set({ id, ...payload, createdAt: firestore.FieldValue.serverTimestamp() })
-      const data = await doc.get()
-      const normalized = normalize(data.data(), schema)
-      return normalized.entities
+      // const id = ref.doc().id
+      // const doc = ref.doc(id)
+      // await doc.set({ id, ...payload, createdAt: firestore.FieldValue.serverTimestamp() })
+      // const data = await doc.get()
+      // const normalized = normalize(data.data(), schema)
+      // return normalized.entities
     } catch (error) {
       logger.error(`createOne - ${collection}`, { error })
       throw error
@@ -71,11 +69,11 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
 
   const updateOne = createAsyncThunk(`${collection}/updateOne`, async ({ id, ...payload }, { rejectWithValue }) => {
     try {
-      const doc = ref.doc(id)
-      await doc.update({ ...payload, updatedAt: firestore.FieldValue.serverTimestamp() })
-      const data = await doc.get()
-      const normalized = normalize(data.data(), schema)
-      return normalized.entities
+      // const doc = ref.doc(id)
+      // await doc.update({ ...payload, updatedAt: firestore.FieldValue.serverTimestamp() })
+      // const data = await doc.get()
+      // const normalized = normalize(data.data(), schema)
+      // return normalized.entities
     } catch (error) {
       logger.error(`updateOne - ${collection}`, { error })
       throw error
@@ -84,10 +82,10 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
 
   const removeById = createAsyncThunk(`${collection}/removeOne`, async ({ id }, { rejectWithValue }) => {
     try {
-      const doc = ref.doc(id)
-      await doc.delete()
-      console.log(id)
-      return id
+      // const doc = ref.doc(id)
+      // await doc.delete()
+      // console.log(id)
+      // return id
     } catch (error) {
       logger.error(`removeOne - ${collection}`, { error })
 
@@ -139,7 +137,6 @@ export const createFirebaseReduxModule = ({ collection, schema, limitToOwner }) 
       setDataFirestore,
       updateOne,
     },
-    getDocumentReference,
     selectors: {
       ...adapterSelectors,
       selectAllByFieldId,

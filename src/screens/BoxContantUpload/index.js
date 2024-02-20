@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import { prop, propOr } from 'ramda'
-
-import { contentRef, getContentDir } from '@const/firebase'
 import { MODAL_NAMES, SCREEN_NAMES, STACK_NAMES } from '@const/navigation'
 import { ORDER_CONTENT_IN_REVIEW, ORDER_ON_THE_WAY } from '@const/order'
 import { useAction } from '@hooks/common'
@@ -47,7 +45,7 @@ export const BoxContentUploadScreen = (callback, deps) => {
     })
   }
   const fetchFiles = useCallback(async () => {
-    const data = await contentRef.ref(getContentDir(box, order)).list()
+    const data = []
     setItems(propOr([], 'items', data))
   }, [box, order])
   useEffect(() => {

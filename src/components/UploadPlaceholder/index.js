@@ -5,14 +5,11 @@ import RNFS from 'react-native-fs'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
-import storage, { firebase } from '@react-native-firebase/storage'
 import { last } from 'ramda'
 import * as lasturi from 'ramda'
 import RNFetchBlob from 'rn-fetch-blob'
-
 import { WIDTH_ANIMATION_DURATION } from '@components/ProgressBar'
 import { screenWidth } from '@const/common'
-import { CONTENT_STORAGE_BUCKET, contentRef, getContentPath } from '@const/firebase'
 import { selectBoxById } from '@redux/modules/boxes'
 import { selectOrderByBoxId } from '@redux/modules/orders'
 import { logger, showToastError } from '@services'
@@ -67,10 +64,6 @@ export const UploadPlaceholder = ({ fromStorage, item }) => {
     launchImageLibrary({ mediaType: 'video' }, async ({ uri, fileName, ...rest }) => {
       if (uri) {
         const name = fileName || last(uri.split('/'))
-        const uriFinal = await getPathForFirebaseStorage(uri)
-        setFile({ name, uri: uriFinal })
-        const ref = contentRef.ref(getContentPath(box, order, name))
-        setTask(ref.putFile(uriFinal))
       } else {
         // showToastError('Something went wrong')
       }
@@ -78,12 +71,8 @@ export const UploadPlaceholder = ({ fromStorage, item }) => {
   }
   const onRemove = async () => {
     if (fromStorage) {
-      const ref = contentRef.ref(item.fullPath)
-      await ref.delete()
       setRemoved(true)
     } else if (isCompleted) {
-      const ref = contentRef.ref(getContentPath(box, order, file.name))
-      await ref.delete()
     } else {
       task?.abort()
     }
@@ -102,11 +91,11 @@ export const UploadPlaceholder = ({ fromStorage, item }) => {
 
       task
         .then(() => {
-          logger.info('Image uploaded to the bucket!')
+          // logger.info('Image uploaded to the bucket!')
           setIsCompleted(true)
         })
         .catch((e) => {
-          logger.error(e)
+          // logger.error(e)
         })
     }
   }, [task])

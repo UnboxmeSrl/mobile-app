@@ -2247,9 +2247,9 @@
   "version" "11.4.1"
 
 "@react-native-firebase/app@^11.4.1", "@react-native-firebase/app@11.4.1":
-  "integrity" "sha512-Jz5CBhqkybxHjTFr5V0K+Jq2YivzPbu9exSze61/z1zSaIfBhR4G38wmHk44VWAl+PEX8GaYy9yfT69tLiCERA=="
-  "resolved" "https://registry.npmjs.org/@react-native-firebase/app/-/app-11.5.0.tgz"
-  "version" "11.5.0"
+  "integrity" "sha512-RzG3kGzKwO/Ets3S4XxAoki4GhzaHRVrnUDyr7U1zOL46xqOMGD7MKTmpYBa9qzh5GOz3aQwlRvu1yRhPHNGKA=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/app/-/app-11.4.1.tgz"
+  "version" "11.4.1"
   dependencies:
     "opencollective-postinstall" "^2.0.1"
     "superstruct" "^0.6.2"
@@ -2260,11 +2260,6 @@
   "version" "11.4.1"
   dependencies:
     "stacktrace-js" "^2.0.0"
-
-"@react-native-firebase/firestore@^11.4.1":
-  "integrity" "sha512-bptsAFRR5RbnsHnpRbJP8JVS1YugPtHOPS83ufESIInJvd7lVrWo3w6NJZmVbjIs696WVtN534J2zRRenACqxw=="
-  "resolved" "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-11.4.1.tgz"
-  "version" "11.4.1"
 
 "@react-native-firebase/functions@^11.4.1":
   "integrity" "sha512-6FgA99GfflLvLzNyKUAObLCGbmZZo7ca2AJ1q+qdg7ykPOkGswFKAwHmLrwpewGcHKubdQXZonhcFBLMu8dlhg=="

@@ -1,8 +1,6 @@
-import firestore from '@react-native-firebase/firestore'
 import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 import { format } from 'date-fns'
 import { __, equals, isEmpty, isNil, not, pipe, prop, propOr } from 'ramda'
-
 import { USERS_COLLECTION } from '@const/firebase'
 import { APPROVED_USER, IN_REVIEW_USER, REJECTED_USER } from '@const/verification'
 import { createReduxModule } from '@redux/createModule'
@@ -36,18 +34,18 @@ const initialState = {
   [_initialized]: false,
 }
 
-const ref = firestore().collection(USERS_COLLECTION)
+// const ref = firestore().collection(USERS_COLLECTION)
 
 export const updateQuestionnaire = (field, value) => updateMe({ [`${_questionnaire}.${field}`]: value })
 export const updateMe = createAsyncThunk(`${AUTH_NAMESPACE}/updateMe`, async (payload) => {
   const user = ''
   const uid = user?.uid
-  const doc = await ref.doc(uid).get()
+  // const doc = await ref.doc(uid).get()
 
   if (doc.exists) {
-    return await ref.doc(uid).update({ ...payload, uid })
+    // return await ref.doc(uid).update({ ...payload, uid })
   } else {
-    return await ref.doc(uid).set({ uid, ...payload })
+    // return await ref.doc(uid).set({ uid, ...payload })
   }
 })
 
