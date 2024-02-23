@@ -12,6 +12,7 @@ import { setBookings } from '../../redux/slices/restaurantSlice'
 import { getBookings, userLogin } from '../../services'
 
 import { SignInEmailPresenter } from './SignInEmailPresenter'
+import OneSignal from 'react-native-onesignal'
 
 export const SignInEmailModal = () => {
   const [loading, setLoading] = useState(false)
@@ -35,6 +36,7 @@ export const SignInEmailModal = () => {
         //   onAuthSuccess()
         // }
         if (res?.id) {
+          OneSignal.setExternalUserId(res?.id?.toString())
           console.log('res', res)
           dispatch(setLoginData(res))
           const params = `/${res?.id}`

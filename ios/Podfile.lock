@@ -84,6 +84,16 @@ PODS:
   - lottie-react-native (4.0.2):
     - lottie-ios (~> 3.1.8)
     - React-Core
+  - OneSignalXCFramework (3.12.6):
+    - OneSignalXCFramework/OneSignalCore (= 3.12.6)
+    - OneSignalXCFramework/OneSignalExtension (= 3.12.6)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.12.6)
+  - OneSignalXCFramework/OneSignalCore (3.12.6)
+  - OneSignalXCFramework/OneSignalExtension (3.12.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalOutcomes (3.12.6):
+    - OneSignalXCFramework/OneSignalCore
   - PanModal (1.2.7)
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
@@ -285,6 +295,9 @@ PODS:
     - React-Core
   - react-native-netinfo (6.0.0):
     - React-Core
+  - react-native-onesignal (4.5.2):
+    - OneSignalXCFramework (= 3.12.6)
+    - React (< 1.0.0, >= 0.13.0)
   - react-native-safe-area-context (3.2.0):
     - React-Core
   - react-native-splash-screen (3.2.0):
@@ -387,6 +400,8 @@ PODS:
   - RNInputMask (4.1.0)
   - RNLocalize (2.0.2):
     - React-Core
+  - RNPermissions (3.8.0):
+    - React-Core
   - RNReanimated (1.13.2):
     - React-Core
   - RNScreens (2.16.1):
@@ -436,6 +451,7 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-text-input-mask (from `../node_modules/react-native-text-input-mask`)
@@ -464,6 +480,7 @@ DEPENDENCIES:
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
   - RNInputMask (from `../node_modules/react-native-text-input-mask/ios/InputMask`)
   - RNLocalize (from `../node_modules/react-native-localize`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
@@ -484,6 +501,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - libwebp
+    - OneSignalXCFramework
     - PanModal
     - SDWebImage
     - SDWebImageWebPCoder
@@ -541,6 +559,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
+  react-native-onesignal:
+    :path: "../node_modules/react-native-onesignal"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
@@ -597,6 +617,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-text-input-mask/ios/InputMask"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -629,6 +651,7 @@ SPEC CHECKSUMS:
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   lottie-react-native: 4dff8fe8d10ddef9e7880e770080f4a56121397e
+  OneSignalXCFramework: ff1c970b7aeb4ac0fe48fb35393eb5d8bf378135
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
@@ -649,6 +672,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: 05eefd9232123c5ebde7979c3eefb890b57a87ff
   react-native-maps: 2d405b4e8cee0282e4c02bac434d81450dfea877
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
+  react-native-onesignal: ab800900cffeca4d9db70a05244013fc8a36ceb8
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-text-input-mask: cffd00848940e7670cf233a99e7be782257935ed
@@ -677,6 +701,7 @@ SPEC CHECKSUMS:
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNInputMask: 815461ebdf396beb62cf58916c35cf6930adb991
   RNLocalize: 43f6c30d8e19ad92282ae434d310fb463b31f419
+  RNPermissions: 3d8b344e056732a00ece4c487b6e9ee53d9c6ddc
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 92ab26929065db7cbbf8a8413b00ac56db9f6032
   RNShare: c93ee0df653c76d913554272d56f6ffd8bdcb3cc
@@ -686,6 +711,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 7efc73a43f1213bae431a9cacb76a0444024b6c9
+PODFILE CHECKSUM: 49390ccb0b83c6529cfe65ef69001935cfac7020
 
 COCOAPODS: 1.15.2

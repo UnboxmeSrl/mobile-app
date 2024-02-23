@@ -128,6 +128,13 @@ const useBookingDetails = () => {
         return false
       }
     })
+
+    filteredData.forEach((item) => {
+      const weekdays = item.weekdays
+      const pauseDays = item.pause_days
+      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay.day === day.day))
+      item.weekdays = filteredWeekdays
+    })
     console.log('filteredTimeData: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)
   }
@@ -144,6 +151,13 @@ const useBookingDetails = () => {
       else {
         return false
       }
+    })
+
+    filteredData.forEach((item) => {
+      const weekdays = item.weekdays
+      const pauseDays = item.pause_days
+      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay.day === day.day))
+      item.weekdays = filteredWeekdays
     })
     console.log('filteredTimeData: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)

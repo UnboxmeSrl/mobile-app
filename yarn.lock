@@ -7934,9 +7934,9 @@
   "version" "1.6.6"
 
 "joi@^17.2.1":
-  "integrity" "sha512-vtxmq+Lsc5SlfqotnfVjlViWfOL9nt/avKNbKYizwf6gsCfq9NYY/ceYRMFD8XDdrjJ9abJyScWmhmIiy+XRtQ=="
-  "resolved" "https://registry.npmjs.org/joi/-/joi-17.12.1.tgz"
-  "version" "17.12.1"
+  "integrity" "sha512-RonXAIzCiHLc8ss3Ibuz45u28GOsWE1UpfDXLbN/9NKbL4tCJf8TWYVKsoYuuh+sAUt7fsSNpA+r2+TBA6Wjmw=="
+  "resolved" "https://registry.npmjs.org/joi/-/joi-17.12.2.tgz"
+  "version" "17.12.2"
   dependencies:
     "@hapi/hoek" "^9.3.0"
     "@hapi/topo" "^5.1.0"
@@ -9918,6 +9918,13 @@
   dependencies:
     "find-up" "^4.0.0"
 
+"pkg-dir@^5.0.0":
+  "integrity" "sha512-NPE8TDbzl/3YQYY7CSS228s3g2ollTFnc+Qi3tqmqJp9Vg2ovUpixcJEo2HJScN2Ez+kEaal6y70c0ehqJBJeA=="
+  "resolved" "https://registry.npmjs.org/pkg-dir/-/pkg-dir-5.0.0.tgz"
+  "version" "5.0.0"
+  dependencies:
+    "find-up" "^5.0.0"
+
 "pkg-up@^3.1.0":
   "integrity" "sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA=="
   "resolved" "https://registry.npmjs.org/pkg-up/-/pkg-up-3.1.0.tgz"
@@ -10385,6 +10392,21 @@
     "redux" "^4.0.1"
     "redux-saga" "^1.0.2"
 
+"react-native-onesignal@^4.5.2":
+  "integrity" "sha512-o7ksZAYzotmYsSSv5j+3779G5uoPbh7cPeJapJTPIfImtbsCjDhMVIix0qKxfT3R3V25BPxvMT0P5kM5ijVu9g=="
+  "resolved" "https://registry.npmjs.org/react-native-onesignal/-/react-native-onesignal-4.5.2.tgz"
+  "version" "4.5.2"
+  dependencies:
+    "invariant" "^2.2.2"
+
+"react-native-permissions@^3.8.0":
+  "integrity" "sha512-BfZ7ksgdpGchHZH8M/kxCGZbWeACANbnPmb3hNjVOMDQusc4PWlPpobX3eBqYMSKbpi7bMECeV9BVU4QuwAf9A=="
+  "resolved" "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-3.8.0.tgz"
+  "version" "3.8.0"
+  dependencies:
+    "picocolors" "^1.0.0"
+    "pkg-dir" "^5.0.0"
+
 "react-native-reanimated@*", "react-native-reanimated@^1.0.0-alpha", "react-native-reanimated@^1.13.2":
   "integrity" "sha512-O+WhgxSjOIzcVdAAvx+h2DY331Ek1knKlaq+jsNLpC1fhRy9XTdOObovgob/aF2ve9uJfPEawCx8381g/tUJZQ=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-1.13.2.tgz"
@@ -10517,7 +10539,7 @@
     "escape-string-regexp" "2.0.0"
     "invariant" "2.2.4"
 
-"react-native-windows@^0.57.2", "react-native-windows@>=0.61":
+"react-native-windows@^0.57.2", "react-native-windows@>=0.61", "react-native-windows@>=0.62.0":
   "integrity" "sha512-rj/18rb1ms6TQPRqlLwJje+E73lMAeqYiahDXEFkO/Qsn4bgwMP8YUEVrH+H52WNzWNkcExeIiGw3WRCPHjQGQ=="
   "resolved" "https://registry.npmjs.org/react-native-windows/-/react-native-windows-0.73.8.tgz"
   "version" "0.73.8"
@@ -10564,7 +10586,7 @@
     "ws" "^6.2.2"
     "yargs" "^17.6.2"
 
-"react-native@*", "react-native@^0.59.5", "react-native@^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || 1000.0.0", "react-native@^0.73.0", "react-native@>= 0.30.0", "react-native@>= 0.51", "react-native@>= 0.59", "react-native@>= 0.60.2", "react-native@>=0.42.0", "react-native@>=0.46", "react-native@>=0.50.0", "react-native@>=0.56", "react-native@>=0.57", "react-native@>=0.57.0", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@>=0.59.0-rc.0 <1.0.x", "react-native@>=0.59.1", "react-native@>=0.60", "react-native@>=0.60 <0.64", "react-native@>=0.60.0", "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@0.63.4":
+"react-native@*", "react-native@^0.59.5", "react-native@^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || 1000.0.0", "react-native@^0.73.0", "react-native@>= 0.30.0", "react-native@>= 0.51", "react-native@>= 0.59", "react-native@>= 0.60.2", "react-native@>=0.42.0", "react-native@>=0.46", "react-native@>=0.50.0", "react-native@>=0.56", "react-native@>=0.57", "react-native@>=0.57.0", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@>=0.59.0-rc.0 <1.0.x", "react-native@>=0.59.1", "react-native@>=0.60", "react-native@>=0.60 <0.64", "react-native@>=0.60.0", "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@>=0.63.3", "react-native@0.63.4":
   "integrity" "sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.63.4.tgz"
   "version" "0.63.4"
@@ -10688,7 +10710,7 @@
     "global" "^4.3.0"
     "react-proxy" "^1.1.7"
 
-"react@*", "react@^16.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.1", "react@^16.8.3 || ^17", "react@^17 || ^18", "react@^18.2.0", "react@>= 15.2.1", "react@>= 16.0 || < 17.0", "react@>= 16.8.0", "react@>=15.0.0", "react@>=16.0", "react@>=16.4.0", "react@>=16.5.1", "react@~16.8.6 || ~16.9.0 || ~16.11.0 || ~16.13.1 || ~17.0.1", "react@16.13.1", "react@17.0.1", "react@18.2.0":
+"react@*", "react@^16.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.1", "react@^16.8.3 || ^17", "react@^17 || ^18", "react@^18.2.0", "react@>= 15.2.1", "react@>= 16.0 || < 17.0", "react@>= 16.8.0", "react@>=15.0.0", "react@>=16.0", "react@>=16.13.1", "react@>=16.4.0", "react@>=16.5.1", "react@~16.8.6 || ~16.9.0 || ~16.11.0 || ~16.13.1 || ~17.0.1", "react@16.13.1", "react@17.0.1", "react@18.2.0":
   "integrity" "sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.13.1.tgz"
   "version" "16.13.1"

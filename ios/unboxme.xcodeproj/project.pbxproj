@@ -10,12 +10,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		230F90E964181CE83A5FC94A /* libPods-unboxme.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF1C55457345E5F195A2DDC /* libPods-unboxme.a */; };
 		265EFE51EE3A4208B37346A2 /* FuturaNewLight-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A815DD5BA3C409C8EB1E938 /* FuturaNewLight-Reg.ttf */; };
 		5DA70149670148ADB1C3215E /* FuturaNewMedium-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3092163EF7A43CFA32B91AB /* FuturaNewMedium-Reg.ttf */; };
 		79A7E38B3A0C451BA1B53204 /* AbrilFatface-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17ED3768D9EA441690FD48D4 /* AbrilFatface-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B8B3FAC9F5F2449B944FB037 /* FuturaNewDemi-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 041D84639DFF459EAC6FB0DE /* FuturaNewDemi-Reg.ttf */; };
+		CB09D30CA50F5FE18350F0DC /* libPods-unboxme.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D42214969AEEC0D09E5AA7 /* libPods-unboxme.a */; };
 		CE32358C25BB3359009A3838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE32358B25BB3359009A3838 /* GoogleService-Info.plist */; };
 		CE59628725BDD2E900FF187D /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		CE90C3DB25B8BF0A00C7DCC9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90C3DA25B8BF0A00C7DCC9 /* File.swift */; };
@@ -1520,6 +1520,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* unboxmeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = unboxmeTests.m; sourceTree = "<group>"; };
 		041D84639DFF459EAC6FB0DE /* FuturaNewDemi-Reg.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FuturaNewDemi-Reg.ttf"; path = "../src/assets/fonts/FuturaNewDemi-Reg.ttf"; sourceTree = "<group>"; };
+		0DDBFE3729958DBED62255CC /* Pods-unboxme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.debug.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* unboxme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unboxme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = unboxme/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = unboxme/AppDelegate.m; sourceTree = "<group>"; };
@@ -1531,12 +1532,11 @@
 		540DBD2950F343C4B576F5C1 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Light.ttf"; path = "../src/assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; };
 		7141457BC541468796BCE789 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "JosefinSans-Regular.ttf"; path = "../src/assets/fonts/JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
 		7474195421B94B1DAC71D87A /* JosefinSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "JosefinSans-SemiBold.ttf"; path = "../src/assets/fonts/JosefinSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		7F42CB30F514A47E24BF8F0D /* Pods-unboxme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.debug.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.debug.xcconfig"; sourceTree = "<group>"; };
 		81400E2AA94C4E62A2A74F14 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = unboxme/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8C23F3E453DE195685F0C73B /* Pods-unboxme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.release.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.release.xcconfig"; sourceTree = "<group>"; };
 		9ECDBC17F8F340E283F1A6CD /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "JosefinSans-Bold.ttf"; path = "../src/assets/fonts/JosefinSans-Bold.ttf"; sourceTree = "<group>"; };
-		9FF1C55457345E5F195A2DDC /* libPods-unboxme.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unboxme.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B397E9D4B933DA37F311A10A /* Pods-unboxme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unboxme.release.xcconfig"; path = "Target Support Files/Pods-unboxme/Pods-unboxme.release.xcconfig"; sourceTree = "<group>"; };
+		C2D42214969AEEC0D09E5AA7 /* libPods-unboxme.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unboxme.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE32358B25BB3359009A3838 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE90C3A325B8B50100C7DCC9 /* unboxme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = unboxme.entitlements; path = unboxme/unboxme.entitlements; sourceTree = "<group>"; };
 		CE90C3D925B8BF0A00C7DCC9 /* unboxme-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unboxme-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -49814,7 +49814,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				230F90E964181CE83A5FC94A /* libPods-unboxme.a in Frameworks */,
+				CB09D30CA50F5FE18350F0DC /* libPods-unboxme.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49863,7 +49863,7 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				9FF1C55457345E5F195A2DDC /* libPods-unboxme.a */,
+				C2D42214969AEEC0D09E5AA7 /* libPods-unboxme.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -49902,8 +49902,8 @@
 		DA0E7278DF1652935591BE60 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7F42CB30F514A47E24BF8F0D /* Pods-unboxme.debug.xcconfig */,
-				8C23F3E453DE195685F0C73B /* Pods-unboxme.release.xcconfig */,
+				0DDBFE3729958DBED62255CC /* Pods-unboxme.debug.xcconfig */,
+				B397E9D4B933DA37F311A10A /* Pods-unboxme.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -141140,7 +141140,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "unboxme" */;
 			buildPhases = (
-				AA72E7E248AA3939F3EF85A5 /* [CP] Check Pods Manifest.lock */,
+				33DE1306875142ED67B31C23 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				CE81C96625C56F490040CCDB /* Headers */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -141148,7 +141148,8 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				CEFA82CA25C35D580042609F /* Embed App Extensions */,
-				BCCA5816FA5CD8EAD9CE0CE3 /* [CP] Copy Pods Resources */,
+				D8A177307E713F1AFC20B7C5 /* [CP] Embed Pods Frameworks */,
+				D8A6AC42E80B147622663573 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -142766,7 +142767,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=/Users/mw/.nvm/versions/node/v16.2.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		AA72E7E248AA3939F3EF85A5 /* [CP] Check Pods Manifest.lock */ = {
+		33DE1306875142ED67B31C23 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -142788,7 +142789,31 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BCCA5816FA5CD8EAD9CE0CE3 /* [CP] Copy Pods Resources */ = {
+		D8A177307E713F1AFC20B7C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignal.framework/OneSignal",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalCore/OneSignalCore.framework/OneSignalCore",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalExtension/OneSignalExtension.framework/OneSignalExtension",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalOutcomes/OneSignalOutcomes.framework/OneSignalOutcomes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalOutcomes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8A6AC42E80B147622663573 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -142966,7 +142991,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F42CB30F514A47E24BF8F0D /* Pods-unboxme.debug.xcconfig */;
+			baseConfigurationReference = 0DDBFE3729958DBED62255CC /* Pods-unboxme.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -142979,6 +143004,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = unboxme/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Claris;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
@@ -142998,7 +143024,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C23F3E453DE195685F0C73B /* Pods-unboxme.release.xcconfig */;
+			baseConfigurationReference = B397E9D4B933DA37F311A10A /* Pods-unboxme.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -143010,6 +143036,7 @@
 				DEVELOPMENT_TEAM = 84KM93C3TE;
 				INFOPLIST_FILE = unboxme/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Claris;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
