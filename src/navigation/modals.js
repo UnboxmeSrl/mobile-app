@@ -15,6 +15,7 @@ import { TimeslotsModal } from '@screens/Timeslots'
 import { WebViewModal } from '@screens/WebView'
 import { YourRatingModal } from '@screens/YourRating'
 import { MODAL_NAMES } from 'src/constants/navigation'
+import { SignUpWithEmail } from '../components/AuthSheets'
 
 export const MODALS = {
   [MODAL_NAMES.Login]: {
@@ -24,7 +25,7 @@ export const MODALS = {
     screen: WebViewModal,
   },
   [MODAL_NAMES.SignUpEmail]: {
-    screen: SignUpEmailModal,
+    screen: SignUpWithEmail,
   },
   [MODAL_NAMES.SignInEmail]: {
     screen: SignInEmailModal,

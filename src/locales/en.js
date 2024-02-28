@@ -239,6 +239,7 @@ export default {
       tellEveryone: 'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
       withEmail: 'Sign up with email',
       withPhone: 'Sign up with phone number',
+      signUp: 'Sign up',
     },
     submit: 'Submit',
     tags: 'Tags & Links',

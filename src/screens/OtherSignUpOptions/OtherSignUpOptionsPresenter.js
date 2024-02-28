@@ -10,36 +10,32 @@ import { RouteContainer } from '@components/RouteContainer'
 import { BodyText } from '@components/Text'
 import { BoldTextLink } from '@components/TextButton'
 import { COLORS } from '@const'
+import { FONTS } from '../../constants/fonts'
+import { CreatePassword, ForgotPassword, SignInWithEmail, SignUpWithEmail } from '../../components/AuthSheets'
 
-export const OtherSignUpOptionsPresenter = ({
-  navigateToEmailModal,
-  navigateToPhoneModal,
-  onSuccess,
-  loading,
-  setLoading,
-}) => (
-  <RouteContainer tKey={'otherSignUpOptions.title'} withArrow withPadding>
-    <Header>
-      <Body tKey={'signUp.createAccount'} />
-    </Header>
-    <Buttons>
-      <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+export const OtherSignUpOptionsPresenter = React.forwardRef(
+  ({ navigateToEmailModal, navigateToPhoneModal, onSuccess, loading, setLoading }, ref) => {
+    return (
+      <RouteContainer tKey={'signUp.signUp'} withArrow withPadding>
+        <Header>
+          <Body tKey={'signUp.createAccount'} />
+        </Header>
+        <Buttons>
+          {/* <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
       <FacebookLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
       <GoogleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
-      <OrLogInText color={COLORS.dark} tKey={'signUp.orSignUp'} />
-      <Button
-        loading={loading}
-        onPress={navigateToEmailModal}
-        tKey={'signUp.withEmail'}
-      />
-      <Button
-        loading={loading}
-        onPress={navigateToPhoneModal}
-        tKey={'signUp.withPhone'}
-      />
-    </Buttons>
-    <PoliciesPart dark />
-  </RouteContainer>
+      <OrLogInText color={COLORS.dark} tKey={'signUp.orSignUp'} /> */}
+          <Button loading={loading} onPress={navigateToEmailModal} tKey={'signUp.withEmail'} />
+          <Button loading={loading} onPress={navigateToPhoneModal} tKey={'signUp.withPhone'} light />
+        </Buttons>
+        <PoliciesPart dark />
+        {/* <SignUpWithEmail ref={ref} /> */}
+        {/* <CreatePassword ref={ref} /> */}
+        {/* <ForgotPassword ref={ref} /> */}
+        <SignInWithEmail ref={ref} />
+      </RouteContainer>
+    )
+  }
 )
 
 const Header = styled.View`
@@ -48,10 +44,11 @@ const Header = styled.View`
 `
 const Body = styled(BodyText)`
   text-align: center;
+  font-family: ${FONTS.quicksand};
 `
 const Buttons = styled.View`
   flex: 0.7;
-  justify-content: flex-start;
+  justify-content: flex-end;
 `
 const PoliciesPart = styled(Policies)`
   flex: 0.1;

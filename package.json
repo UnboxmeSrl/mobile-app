@@ -1,7 +1,7 @@
 {
   "name": "unboxme",
   "version": "1.0.0",
-  "buildNumber": 4,
+  "buildNumber": 5,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -13,7 +13,7 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "postinstall": "react-native setup-ios-permissions && pod-install && patch-package rm -rf node_modules/react-native-instagram-login/node_modules/react-native-webview"
+    "postinstall": "patch-package"
   },
   "reactNativePermissionsIOS": [
     "Camera",
@@ -36,6 +36,7 @@
     "@react-native-community/netinfo": "^6.0.0",
     "@react-navigation/core": "^3.7.8",
     "@reduxjs/toolkit": "^1.5.0",
+    "@types/react-native": "^0.73.0",
     "axios": "^0.21.4",
     "date-fns": "^2.19.0",
     "i18n-js": "^3.8.0",
@@ -66,11 +67,13 @@
     "react-native-google-places-autocomplete": "^2.2.0",
     "react-native-image-picker": "^3.5.0",
     "react-native-instagram-login": "^2.0.4",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-localize": "^2.0.1",
     "react-native-maps": "^0.28.0",
     "react-native-offline": "^5.7.0",
     "react-native-onesignal": "^4.5.2",
     "react-native-permissions": "^3.8.0",
+    "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "https://github.com/UnboxmeSrl/react-native-screens.git",
@@ -96,13 +99,13 @@
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
   },
-  
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@babel/runtime": "^7.12.13",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@types/react": "^18.2.60",
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",

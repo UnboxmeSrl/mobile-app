@@ -59,6 +59,7 @@ export const SCREEN_NAMES = {
   Wizard: 'Wizard',
   YourScheduleDetailsScreen: 'YourScheduleDetailsScreen',
   YourScheduleScreen: 'YourScheduleScreen',
+  PersonalDetailsScreen: 'PersonalDetailsScreen',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

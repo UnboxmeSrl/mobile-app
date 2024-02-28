@@ -65,4 +65,8 @@ export const IMAGES = {
   user: require('./images/user.png'),
   threeDots: require('./images/three-dots.png'),
   reject: require('./images/reject.png'),
+  closeSquare: require('./images/close-square.png'),
+  passwordEye: require('./images/password-eye.png'),
+  arrowLeft: require('./images/arrow-left.png'),
+  downArrow: require('./images/down-arrow.png'),
 }

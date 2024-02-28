@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 
 import { BackArrow } from '@components/BackArrow'
 import { H3, Subtitle } from '@components/Text'
+import { FONTS } from '../../constants/fonts'
 
 const HEADER_HEIGHT = 48
 
@@ -38,6 +39,7 @@ const Header = styled.View`
 `
 const HeaderTitle = styled(H3)`
   line-height: 48px;
+  font-family: ${FONTS.quicksandBold};
 `
 const Back = styled(BackArrow)`
   left: 8px;

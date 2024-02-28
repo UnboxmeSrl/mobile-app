@@ -27,6 +27,7 @@ import { NewCouponScreen } from '../screens/NewCoupon'
 import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
 import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
 import { PublishContentScreen } from '../screens/PublishContent'
+import { PersonalDetails } from '../screens/Auth'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -103,5 +104,8 @@ export default {
   },
   [SCREEN_NAMES.PublishContentScreen]: {
     screen: PublishContentScreen,
+  },
+  [SCREEN_NAMES.PersonalDetailsScreen]: {
+    screen: PersonalDetails,
   },
 }

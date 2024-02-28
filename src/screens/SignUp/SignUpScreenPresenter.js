@@ -29,16 +29,8 @@ export const SignUpScreenPresenter = ({
       </Header>
       <Buttons>
         <MainButton loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
-        <Button
-          loadingloading={loading}
-          onPress={navigateToSignUp}
-          tKey={'login.otherOptions'}
-        />
-        <AlreadyHaveButton
-          color={COLORS.dark}
-          onPress={navigateToSignIn}
-          tKey={'login.alreadyHaveAccount'}
-        />
+        <Button loadingloading={loading} onPress={navigateToSignUp} tKey={'login.otherOptions'} />
+        <AlreadyHaveButton color={COLORS.dark} onPress={navigateToSignIn} tKey={'login.alreadyHaveAccount'} />
       </Buttons>
       <Button loadingloading={loading} onPress={onSkip} tKey={'login.skip'} />
       <PoliciesPart />

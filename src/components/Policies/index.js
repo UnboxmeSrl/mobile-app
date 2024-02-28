@@ -6,6 +6,7 @@ import { SmallText } from '@components/Text'
 import { TextButton } from '@components/TextButton'
 import { COLORS } from '@const'
 import { MODAL_NAMES } from '@const/navigation'
+import { FONTS } from '../../constants/fonts'
 
 export const Policies = ({ style, dark }) => {
   const { navigate } = useNavigation()
@@ -15,10 +16,8 @@ export const Policies = ({ style, dark }) => {
     },
     [navigate]
   )
-  const navigateToTerms = () =>
-    navigateToWebview('https://policies.google.com/terms?hl=en-US')
-  const navigateToPrivacy = () =>
-    navigateToWebview('https://policies.google.com/privacy?hl=en-US')
+  const navigateToTerms = () => navigateToWebview('https://policies.google.com/terms?hl=en-US')
+  const navigateToPrivacy = () => navigateToWebview('https://policies.google.com/privacy?hl=en-US')
   const color = dark ? COLORS.black : COLORS.white
 
   return (
@@ -27,13 +26,7 @@ export const Policies = ({ style, dark }) => {
         <Text color={color} tKey={'auth.bySigning'} />
       </Row>
       <Row>
-        <Button
-          color={color}
-          fontSize={14}
-          onPress={navigateToTerms}
-          small
-          tKey={'termsOfUse'}
-        />
+        <Button color={color} fontSize={14} onPress={navigateToTerms} small tKey={'termsOfUse'} />
         <Text color={color} tKey={'and'} />
         <Button color={color} onPress={navigateToPrivacy} tKey={'privacyPolicy'} />
       </Row>
@@ -47,10 +40,14 @@ const View = styled.View`
 const Row = styled.View`
   flex-direction: row;
 `
-const Text = styled(SmallText)``
+const Text = styled(SmallText)`
+  font-family: ${FONTS.quicksand};
+`
+
 const Button = styled(TextButton).attrs({
   textStyle: {
-    fontSize: 14,
+    fontSize: 15,
     lineHeight: 20,
+    fontFamily: FONTS.quicksandBold,
   },
 })``

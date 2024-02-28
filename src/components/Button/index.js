@@ -5,7 +5,8 @@ import styled from 'styled-components/native'
 
 import { BUTTON_HEIGHT } from '@components/Button/constants'
 import { ButtonText, Subtitle } from '@components/Text'
-import { COLORS } from '@const'
+import { COLORS } from '../../constants/colors'
+import { FONTS } from '../../constants/fonts'
 
 export const Button = ({
   children,
@@ -18,10 +19,10 @@ export const Button = ({
   disabled,
   ...rest
 }) => {
-  const color = light ? COLORS.achromaticBlack : COLORS.white
+  const color = light ? COLORS.primary : COLORS.white
   return (
     <ThemedButton
-      bgColor={light ? COLORS.veryLight : COLORS.primary}
+      bgColor={light ? COLORS.lightBrown : COLORS.primary}
       disabled={loading || disabled}
       loading={loading}
       {...rest}

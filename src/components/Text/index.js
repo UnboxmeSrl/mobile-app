@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { prop, propOr } from 'ramda'
 import styled from 'styled-components/native'
 
-import { COLORS, FONTS } from '@const'
+import { COLORS } from '@const'
 import { withTheme } from '@services/withTheme'
+import { FONTS } from '../../constants/fonts'
 
 const ThemedText = styled.Text`
   color: ${propOr(withTheme(COLORS.black, COLORS.white), 'color')};
@@ -25,7 +26,7 @@ const H3Styled = styled(H2Styled)`
   line-height: 32px;
 `
 const ButtonStyled = styled(ThemedText)`
-  font-family: ${FONTS.medium};
+  font-family: ${FONTS.quicksandMedium};
   font-size: 18px;
   line-height: 24px;
 `

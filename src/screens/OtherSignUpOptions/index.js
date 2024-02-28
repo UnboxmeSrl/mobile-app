@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useRef } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
@@ -9,9 +9,11 @@ import { OtherSignUpOptionsPresenter } from './OtherSignUpOptionsPresenter'
 export const OtherSingUpOptionsScreen = () => {
   const [loading, setLoading] = useState(false)
   const { navigate } = useNavigation()
+  const ref = useRef()
 
   const navigateToEmailModal = () => {
-    navigate(MODAL_NAMES.SignUpEmail)
+    ref?.current?.open()
+    // navigate(MODAL_NAMES.SignUpEmail)
   }
   const navigateToPhoneModal = () => {
     navigate(MODAL_NAMES.AuthPhone)
@@ -27,5 +29,5 @@ export const OtherSingUpOptionsScreen = () => {
     onSuccess,
     setLoading,
   }
-  return <OtherSignUpOptionsPresenter {...props} />
+  return <OtherSignUpOptionsPresenter {...props} ref={ref} />
 }
