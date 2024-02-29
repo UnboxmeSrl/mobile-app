@@ -1,1 +1,1 @@
-export { default as usePersonalDetails } from './usePersonalDetails'
+export { default as useAuthPersonalDetails } from './useAuthPersonalDetails'

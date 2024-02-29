@@ -69,4 +69,8 @@ export const IMAGES = {
   passwordEye: require('./images/password-eye.png'),
   arrowLeft: require('./images/arrow-left.png'),
   downArrow: require('./images/down-arrow.png'),
+  sampleFlag: require('./images/sample-flag.png'),
+  checkMark: require('./images/check-mark.png'),
+  plus: require('./images/plus.png'),
+  checkRight: require('./images/check-right.png'),
 }

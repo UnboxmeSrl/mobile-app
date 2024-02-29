@@ -16,9 +16,6 @@ import { SettingsScreen } from '@screens/Settings'
 import { SignInScreen } from '@screens/SignIn'
 import { SignUpScreen } from '@screens/SignUp'
 import { WizardScreen } from '@screens/Wizard'
-
-import { SCREEN_NAMES } from '@const/navigation'
-
 import BookingDetailsScreen from '../screens/BookingDetails/BookingDetailsScreen'
 import BookingOnApprovalScreen from '../screens/BookingOnApproval/BookingOnApprovalScreen'
 import ContentScreen from '../screens/Content/ContentScreen'
@@ -27,7 +24,18 @@ import { NewCouponScreen } from '../screens/NewCoupon'
 import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
 import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
 import { PublishContentScreen } from '../screens/PublishContent'
-import { PersonalDetails } from '../screens/Auth'
+import {
+  AuthAgencyScreen,
+  AuthCityScreen,
+  AuthDateOfBirthScreen,
+  AuthGenderScreen,
+  AuthInterestTopicsScreen,
+  AuthNationalityScreen,
+  AuthPersonalDetailsScreen,
+  AuthProfilePictureScreen,
+  AuthUserTypeScreen,
+} from '../screens/Auth'
+import { SCREEN_NAMES } from '../constants/navigation'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -105,7 +113,31 @@ export default {
   [SCREEN_NAMES.PublishContentScreen]: {
     screen: PublishContentScreen,
   },
-  [SCREEN_NAMES.PersonalDetailsScreen]: {
-    screen: PersonalDetails,
+  [SCREEN_NAMES.AuthPersonalDetailsScreen]: {
+    screen: AuthPersonalDetailsScreen,
+  },
+  [SCREEN_NAMES.AuthGenderScreen]: {
+    screen: AuthGenderScreen,
+  },
+  [SCREEN_NAMES.AuthDateOfBirthScreen]: {
+    screen: AuthDateOfBirthScreen,
+  },
+  [SCREEN_NAMES.AuthNationalityScreen]: {
+    screen: AuthNationalityScreen,
+  },
+  [SCREEN_NAMES.AuthCityScreen]: {
+    screen: AuthCityScreen,
+  },
+  [SCREEN_NAMES.AuthAgencyScreen]: {
+    screen: AuthAgencyScreen,
+  },
+  [SCREEN_NAMES.AuthUserTypeScreen]: {
+    screen: AuthUserTypeScreen,
+  },
+  [SCREEN_NAMES.AuthInterestTopicsScreen]: {
+    screen: AuthInterestTopicsScreen,
+  },
+  [SCREEN_NAMES.AuthProfilePictureScreen]: {
+    screen: AuthProfilePictureScreen,
   },
 }

@@ -59,7 +59,15 @@ export const SCREEN_NAMES = {
   Wizard: 'Wizard',
   YourScheduleDetailsScreen: 'YourScheduleDetailsScreen',
   YourScheduleScreen: 'YourScheduleScreen',
-  PersonalDetailsScreen: 'PersonalDetailsScreen',
+  AuthPersonalDetailsScreen: 'AuthPersonalDetailsScreen',
+  AuthGenderScreen: 'AuthGenderScreen',
+  AuthDateOfBirthScreen: 'AuthDateOfBirthScreen',
+  AuthNationalityScreen: 'AuthNationalityScreen',
+  AuthCityScreen: 'AuthCityScreen',
+  AuthAgencyScreen: 'AuthAgencyScreen',
+  AuthUserTypeScreen: 'AuthUserTypeScreen',
+  AuthInterestTopicsScreen: 'AuthInterestTopicsScreen',
+  AuthProfilePictureScreen: 'AuthProfilePictureScreen',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

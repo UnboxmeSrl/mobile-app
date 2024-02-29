@@ -1,14 +1,15 @@
 import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import CountryPicker from 'react-native-country-picker-modal'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { IMAGES } from '../../../assets/images'
 import { CustomButton, CustomHeader, CustomTextInput } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
-import { usePersonalDetails } from './hooks'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import useAuthPersonalDetails from './hooks/useAuthPersonalDetails'
 
-const PersonalDetails = () => {
+const AuthPersonalDetailsScreen = () => {
   const {
     name,
     setName,
@@ -20,19 +21,33 @@ const PersonalDetails = () => {
     setPhoneNumber,
     isFocused,
     setIsFocused,
-  } = usePersonalDetails()
+    country,
+    onSelect,
+    handleNextPress,
+  } = useAuthPersonalDetails()
 
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
-        <CustomHeader title={'personal details'} />
+        <CustomHeader title={'personal details'} step={1} />
         <CustomTextInput placeholder={'Name'} value={name} handleOnChangeText={setName} />
         <CustomTextInput placeholder={'Surname'} value={surname} handleOnChangeText={setSurname} />
         <CustomTextInput placeholder={'Nickname'} value={nickName} handleOnChangeText={setNickName} />
         <View style={styles.phoneNumberMainContainer}>
           <View style={styles.countryCodeContainer}>
-            <Text>+21</Text>
-            <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
+            <CountryPicker
+              onSelect={onSelect}
+              withFilter={true}
+              withCallingCode={true}
+              renderFlagButton={({ onOpen }) => {
+                return (
+                  <TouchableOpacity onPress={onOpen} style={styles.countryCodeInnerContainer}>
+                    <Text>{`+${country?.callingCode?.[0] ?? '21'}`}</Text>
+                    <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
+                  </TouchableOpacity>
+                )
+              }}
+            />
           </View>
           <View
             style={[styles.phoneNumberTextInputContainer, isFocused && styles.phoneNumberTextInputContainerWithFocus]}
@@ -49,15 +64,19 @@ const PersonalDetails = () => {
         </View>
       </View>
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={() => {}} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} />
       </View>
     </KeyboardAwareScrollView>
   )
 }
 
-export default PersonalDetails
+export default AuthPersonalDetailsScreen
 
 const styles = StyleSheet.create({
+  countryCodeInnerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   btnContainer: {
     marginTop: verticalScale(70),
   },
@@ -66,6 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   downArrowIcon: {
+    marginLeft: scale(5),
     height: verticalScale(6.38),
     width: scale(11.63),
   },

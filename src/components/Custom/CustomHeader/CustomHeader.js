@@ -3,18 +3,20 @@ import React from 'react'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { COLORS, FONTS } from '../../../constants'
 import { IMAGES } from '../../../assets/images'
+import { useNavigation } from 'react-navigation-hooks'
 
-const CustomHeader = ({ title }) => {
+const CustomHeader = ({ title, step }) => {
+  const navigation = useNavigation()
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => {}} style={styles.backIconContainer}>
+      <TouchableOpacity onPress={() => navigation.pop()} style={styles.backIconContainer}>
         <Image resizeMode="cover" source={IMAGES.arrowLeft} style={styles.backIcon} />
       </TouchableOpacity>
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitleText}>{title}</Text>
       </View>
       <View style={{}}>
-        <Text style={styles.progressText}>1/6</Text>
+        <Text style={styles.progressText}>{`${step}/10`}</Text>
       </View>
     </View>
   )

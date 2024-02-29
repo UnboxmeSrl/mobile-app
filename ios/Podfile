@@ -15,7 +15,8 @@ target 'unboxme' do
   pod 'react-native-google-maps', :path => rn_maps_path
   pod 'PanModal', '~> 1.2.7'
   pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
-
+  pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
+  
   post_install do |installer|
     flipper_post_install(installer)
   end
