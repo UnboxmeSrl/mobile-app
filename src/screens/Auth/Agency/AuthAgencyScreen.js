@@ -8,7 +8,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../../assets/images'
 
 const AuthAgencyScreen = () => {
-  const { selectedValue, setSelectedValue, agencyName, setAgencyName, handleNextPress } = useAuthAgency()
+  const { isBtnDisabled, selectedValue, setSelectedValue, agencyName, setAgencyName, handleNextPress } = useAuthAgency()
 
   return (
     <View style={styles.mainContainer}>
@@ -38,7 +38,7 @@ const AuthAgencyScreen = () => {
       )}
 
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
     </View>
   )

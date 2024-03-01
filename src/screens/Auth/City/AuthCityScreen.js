@@ -7,13 +7,13 @@ import { useAuthCity } from './hooks'
 import { verticalScale } from 'react-native-size-matters'
 
 const AuthCityScreen = () => {
-  const { city, setCity, handleNextPress } = useAuthCity()
+  const { isBtnDisabled, city, setCity, handleNextPress } = useAuthCity()
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'City'} step={5} />
       <CustomTextInput placeholder={'City'} value={city} handleOnChangeText={setCity} />
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
     </View>
   )

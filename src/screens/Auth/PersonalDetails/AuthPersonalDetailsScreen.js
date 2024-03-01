@@ -55,7 +55,7 @@ const AuthPersonalDetailsScreen = () => {
             <TextInput
               placeholder={'Phone number'}
               value={phoneNumber}
-              onChangeText={setPhoneNumber}
+              onChangeText={(val) => setPhoneNumber(val)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               style={styles.phoneNumberTextInput}

@@ -7,7 +7,7 @@ import { useAuthGender } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
 const AuthGenderScreen = () => {
-  const { isLoading, genderList, selectedGender, setSelectedGender, handleNextPress } = useAuthGender()
+  const { isLoading, genderList, selectedGender, isBtnDisabled, setSelectedGender, handleNextPress } = useAuthGender()
 
   return (
     <View style={styles.mainContainer}>
@@ -37,7 +37,7 @@ const AuthGenderScreen = () => {
             />
           </View>
           <View style={styles.btnContainer}>
-            <CustomButton title={'Next'} handlePress={handleNextPress} />
+            <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
           </View>
         </>
       )}

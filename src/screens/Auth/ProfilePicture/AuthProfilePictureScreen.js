@@ -9,6 +9,7 @@ import { useAuthProfilePicture } from './hooks'
 
 const AuthProfilePictureScreen = () => {
   const {
+    isBtnDisabled,
     profilePicData,
     profilePicUploadRef,
     handleProfilePicture,
@@ -52,7 +53,7 @@ const AuthProfilePictureScreen = () => {
         </View>
       </View>
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
 
       <PickerModal

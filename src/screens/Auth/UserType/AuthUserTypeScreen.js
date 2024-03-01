@@ -7,7 +7,7 @@ import { useAuthUserType } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
 const AuthUserTypeScreen = () => {
-  const { userTypeList, selectedUserType, setSelectedUserType, handleNextPress } = useAuthUserType()
+  const { isBtnDisabled, userTypeList, selectedUserType, setSelectedUserType, handleNextPress } = useAuthUserType()
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'What are you?'} step={7} />
@@ -30,7 +30,7 @@ const AuthUserTypeScreen = () => {
         />
       </View>
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
     </View>
   )

@@ -11,6 +11,7 @@ import DatePicker from 'react-native-date-picker'
 
 const AuthDateOfBirthScreen = () => {
   const {
+    isBtnDisabled,
     isDatePickerOpen,
     setIsDatePickerOpen,
     date,
@@ -48,7 +49,7 @@ const AuthDateOfBirthScreen = () => {
         }}
       />
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
     </View>
   )

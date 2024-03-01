@@ -31,3 +31,13 @@ export const userLogin = async (data) => {
     console.log(error)
   }
 }
+
+export const getInterestTopics = async () => {
+  try {
+    const url = Api.PROFILE.GET_INTEREST_TOPICS
+    const response = await Fetch.get(url)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -20,7 +20,7 @@ export default {
       },
     }
     console.log(url, data)
-    const response = await axios.post(url, data)
+    const response = await axios.post(url, data, options)
     return response?.data
   },
 

@@ -13,6 +13,7 @@ export const Api = {
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
     USER_LOGIN: `${BASE_URL}/api:bwh6Xc5O/user_login`,
     USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/signup`,
+    GET_INTEREST_TOPICS: `${BASE_URL}/api:bwh6Xc5O/interest_topics`,
   },
   RESTAURANTS: {
     ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,

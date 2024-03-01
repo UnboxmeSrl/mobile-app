@@ -8,7 +8,14 @@ import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
 import { useCreatePassword } from './hooks'
 
 const CreatePassword = React.forwardRef(({}, ref) => {
-  const { password, setPassword, confirmPassword, setConfirmPassword } = useCreatePassword()
+  const {
+    isBtnDisabled,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    handleCreatePasswordPress,
+  } = useCreatePassword()
 
   return (
     <BottomSheet ref={ref}>
@@ -27,7 +34,11 @@ const CreatePassword = React.forwardRef(({}, ref) => {
           isSecureTextInput={true}
         />
         <View style={styles.btnContainer}>
-          <CustomButton title={'Continue'} handlePress={() => {}} />
+          <CustomButton
+            title={'Continue'}
+            handlePress={() => handleCreatePasswordPress(ref)}
+            disabled={isBtnDisabled}
+          />
         </View>
       </View>
     </BottomSheet>

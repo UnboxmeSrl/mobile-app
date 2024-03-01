@@ -1,45 +1,60 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { COLORS, FONTS } from '../../../constants'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import { CustomButton, CustomHeader } from '../../../components'
+import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../../assets/images'
+import { CustomButton, CustomHeader } from '../../../components'
+import { COLORS, FONTS } from '../../../constants'
 import { useAuthInterestTopics } from './hooks'
 
 const AuthInterestTopicsScreen = () => {
-  const { interestTopicsList, selectedInterests, handleInterestSelect, handleNextPress } = useAuthInterestTopics()
+  const {
+    isLoading,
+    isBtnDisabled,
+    interestTopicsList,
+    selectedInterests,
+    handleInterestSelect,
+    handleNextPress,
+  } = useAuthInterestTopics()
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'Interests & Topics'} step={8} />
-      <View style={styles.interestTopicsMainContainer}>
-        {interestTopicsList.map((item, index) => {
-          let isSelected = false
-          const filteredRes = selectedInterests?.filter((si) => si?.id === item?.id)
-          if (filteredRes.length > 0) {
-            isSelected = true
-          }
-          return (
-            <TouchableOpacity
-              onPress={() => handleInterestSelect(item)}
-              style={[styles.topicContainer, isSelected && styles.topicContainerWithSelection]}
-              key={index}
-            >
-              {!isSelected && <Image source={IMAGES.plus} style={styles.plusIcon} />}
-              <Text style={[styles.topicText, isSelected && styles.topicTextWithSelection]}>{item?.name}</Text>
-              {isSelected && <Image source={IMAGES.checkRight} style={styles.checkIcon} />}
-            </TouchableOpacity>
-          )
-        })}
-      </View>
-
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>Let the venues owners know about your topics</Text>
-      </View>
-
-      <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
-      </View>
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size={moderateScale(20)} color={COLORS.primary} />
+        </View>
+      ) : (
+        <>
+          <View style={styles.interestTopicsMainContainer}>
+            {interestTopicsList?.map((item, index) => {
+              let isSelected = false
+              const filteredRes = selectedInterests?.filter((si) => si?.id === item?.id)
+              if (filteredRes.length > 0) {
+                isSelected = true
+              }
+              return (
+                <TouchableOpacity
+                  onPress={() => handleInterestSelect(item)}
+                  style={[styles.topicContainer, isSelected && styles.topicContainerWithSelection]}
+                  key={index}
+                >
+                  {!isSelected && <Image source={IMAGES.plus} style={styles.plusIcon} />}
+                  <Text style={[styles.topicText, isSelected && styles.topicTextWithSelection]}>
+                    {item?.interest_topics}
+                  </Text>
+                  {isSelected && <Image source={IMAGES.checkRight} style={styles.checkIcon} />}
+                </TouchableOpacity>
+              )
+            })}
+          </View>
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.descriptionText}>Let the venues owners know about your topics</Text>
+          </View>
+          <View style={styles.btnContainer}>
+            <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+          </View>
+        </>
+      )}
     </View>
   )
 }
@@ -107,5 +122,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     flex: 1,
     marginTop: getStatusBarHeight(),
+  },
+  loaderContainer: {
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

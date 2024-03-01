@@ -7,8 +7,15 @@ import { BottomSheet } from '../../BottomSheet'
 import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
 import { useSignUpWithEmail } from './hooks'
 
-const SignUpWithEmail = React.forwardRef(({}, ref) => {
-  const { email, setEmail, isSendPress } = useSignUpWithEmail()
+const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
+  const {
+    email,
+    setEmail,
+    isBtnDisabled,
+    isSendPress,
+    handleSignUpPress,
+    handleSignUpPressAfterCodeSend,
+  } = useSignUpWithEmail(closeSignUpSheet)
 
   return (
     <BottomSheet ref={ref}>
@@ -33,7 +40,11 @@ const SignUpWithEmail = React.forwardRef(({}, ref) => {
           </>
         )}
 
-        <CustomButton title={'Send a message'} handlePress={() => {}} />
+        <CustomButton
+          title={'Send a message'}
+          handlePress={isSendPress ? handleSignUpPressAfterCodeSend : handleSignUpPress}
+          disabled={isBtnDisabled}
+        />
       </View>
     </BottomSheet>
   )

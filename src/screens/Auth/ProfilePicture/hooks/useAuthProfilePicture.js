@@ -4,6 +4,8 @@ import { navigate } from '../../../../services'
 import { checkPermission, openCamera, openGallery } from '../../../../utils'
 import { PERMISSIONS } from 'react-native-permissions'
 import { Platform } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { setAuthData } from '../../../../redux/slices'
 
 const useAuthProfilePicture = () => {
   const [profilePicData, setProfilePicData] = useState([1, 2, 3, 4])
@@ -13,6 +15,8 @@ const useAuthProfilePicture = () => {
   const formData = new FormData()
   const androidVersion = Platform.Version
   const [pictureIndex, setPictureIndex] = useState()
+  const dispatch = useDispatch()
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
   const handleProfilePicture = async (index) => {
     setPictureIndex(index)
@@ -54,10 +58,18 @@ const useAuthProfilePicture = () => {
   }
 
   const handleNextPress = () => {
+    dispatch(setAuthData({ profilePictures: profilePicData }))
     navigate(SCREEN_NAMES.AuthCodeFromFriendScreen)
   }
 
+  useEffect(() => {
+    if (profilePicData?.[0]?.uri) {
+      setIsBtnDisabled(false)
+    }
+  }, [profilePicData])
+
   return {
+    isBtnDisabled,
     profilePicData,
     profilePicUploadRef,
     handleProfilePicture,

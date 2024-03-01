@@ -9,6 +9,7 @@ import { useAuthSocialNetwork } from './hooks'
 
 const AuthSocialNetworkScreen = () => {
   const {
+    isBtnDisabled,
     tiktokUserName,
     setTiktokUserName,
     tiktokSheetRef,
@@ -17,6 +18,7 @@ const AuthSocialNetworkScreen = () => {
     instaSheetRef,
     handleOnTikTokPress,
     handleOnInstaPress,
+    handleNextPress,
   } = useAuthSocialNetwork()
 
   return (
@@ -66,7 +68,7 @@ const AuthSocialNetworkScreen = () => {
       </View>
 
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={() => {}} disabled={true} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
 
       <SocialMediaSheet
@@ -76,7 +78,7 @@ const AuthSocialNetworkScreen = () => {
         placeholder={'your tiktok username'}
         field={tiktokUserName}
         onChangeText={setTiktokUserName}
-        handlePress={() => {}}
+        handlePress={() => tiktokSheetRef?.current?.close()}
       />
 
       <SocialMediaSheet
@@ -86,7 +88,7 @@ const AuthSocialNetworkScreen = () => {
         placeholder={'your Instagram username'}
         field={instaUserName}
         onChangeText={setInstaUserName}
-        handlePress={() => {}}
+        handlePress={() => instaSheetRef?.current?.close()}
       />
     </View>
   )
