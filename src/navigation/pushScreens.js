@@ -27,12 +27,14 @@ import { PublishContentScreen } from '../screens/PublishContent'
 import {
   AuthAgencyScreen,
   AuthCityScreen,
+  AuthCodeFromFriendScreen,
   AuthDateOfBirthScreen,
   AuthGenderScreen,
   AuthInterestTopicsScreen,
   AuthNationalityScreen,
   AuthPersonalDetailsScreen,
   AuthProfilePictureScreen,
+  AuthSocialNetworkScreen,
   AuthUserTypeScreen,
 } from '../screens/Auth'
 import { SCREEN_NAMES } from '../constants/navigation'
@@ -139,5 +141,11 @@ export default {
   },
   [SCREEN_NAMES.AuthProfilePictureScreen]: {
     screen: AuthProfilePictureScreen,
+  },
+  [SCREEN_NAMES.AuthCodeFromFriendScreen]: {
+    screen: AuthCodeFromFriendScreen,
+  },
+  [SCREEN_NAMES.AuthSocialNetworkScreen]: {
+    screen: AuthSocialNetworkScreen,
   },
 }

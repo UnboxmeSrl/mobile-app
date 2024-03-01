@@ -1,17 +1,12 @@
 import React from 'react'
 import styled from 'styled-components/native'
-
-import { AppleLogin } from '@components/Auth/AppleLogin'
-import { FacebookLogin } from '@components/Auth/FacebookLogin'
-import { GoogleLogin } from '@components/Auth/GoogleLogin'
 import { Button } from '@components/Button'
 import { Policies } from '@components/Policies'
 import { RouteContainer } from '@components/RouteContainer'
 import { BodyText } from '@components/Text'
 import { BoldTextLink } from '@components/TextButton'
-import { COLORS } from '@const'
+import { SignUpWithEmail } from '../../components/AuthSheets'
 import { FONTS } from '../../constants/fonts'
-import { CreatePassword, ForgotPassword, SignInWithEmail, SignUpWithEmail } from '../../components/AuthSheets'
 
 export const OtherSignUpOptionsPresenter = React.forwardRef(
   ({ navigateToEmailModal, navigateToPhoneModal, onSuccess, loading, setLoading }, ref) => {
@@ -29,10 +24,9 @@ export const OtherSignUpOptionsPresenter = React.forwardRef(
           <Button loading={loading} onPress={navigateToPhoneModal} tKey={'signUp.withPhone'} light />
         </Buttons>
         <PoliciesPart dark />
-        {/* <SignUpWithEmail ref={ref} /> */}
+        <SignUpWithEmail ref={ref} />
         {/* <CreatePassword ref={ref} /> */}
         {/* <ForgotPassword ref={ref} /> */}
-        <SignInWithEmail ref={ref} />
       </RouteContainer>
     )
   }

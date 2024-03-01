@@ -59,6 +59,7 @@ const AuthPersonalDetailsScreen = () => {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               style={styles.phoneNumberTextInput}
+              keyboardType={'number-pad'}
             />
           </View>
         </View>

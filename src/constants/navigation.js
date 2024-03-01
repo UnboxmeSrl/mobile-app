@@ -68,6 +68,8 @@ export const SCREEN_NAMES = {
   AuthUserTypeScreen: 'AuthUserTypeScreen',
   AuthInterestTopicsScreen: 'AuthInterestTopicsScreen',
   AuthProfilePictureScreen: 'AuthProfilePictureScreen',
+  AuthCodeFromFriendScreen: 'AuthCodeFromFriendScreen',
+  AuthSocialNetworkScreen: 'AuthSocialNetworkScreen',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

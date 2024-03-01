@@ -15,7 +15,7 @@ const useAuthPersonalDetails = () => {
   }
 
   const handleNextPress = () => {
-    navigate(SCREEN_NAMES.AuthGenderScreen)
+    navigate(SCREEN_NAMES.AuthNationalityScreen)
   }
 
   return {

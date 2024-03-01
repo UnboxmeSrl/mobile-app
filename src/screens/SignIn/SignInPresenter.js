@@ -10,36 +10,26 @@ import { RouteContainer } from '@components/RouteContainer'
 import { BodyText } from '@components/Text'
 import { BoldTextLink } from '@components/TextButton'
 import { COLORS } from '@const'
+import { SignInWithEmail } from '../../components'
 
-export const SignInPresenter = ({
-  navigateToEmailModal,
-  navigateToPhoneModal,
-  onSuccess,
-  loading,
-  setLoading,
-}) => (
-  <RouteContainer tKey={'otherSignInOptions.title'} withArrow withPadding>
-    <Header>
-      <Body tKey={'signIn.getPersonalized'} />
-    </Header>
-    <Buttons>
-      <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
-      <FacebookLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
-      <GoogleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
-      <OrLogInText color={COLORS.dark} tKey={'signIn.orLogIn'} />
-      <Button
-        loading={loading}
-        onPress={navigateToEmailModal}
-        tKey={'signIn.withEmail'}
-      />
-      <Button
-        loading={loading}
-        onPress={navigateToPhoneModal}
-        tKey={'signIn.withPhone'}
-      />
-    </Buttons>
-    <PoliciesPart dark />
-  </RouteContainer>
+export const SignInPresenter = React.forwardRef(
+  ({ navigateToEmailModal, navigateToPhoneModal, onSuccess, loading, setLoading }, ref) => (
+    <RouteContainer tKey={'otherSignInOptions.title'} withArrow withPadding>
+      <Header>
+        <Body tKey={'signIn.getPersonalized'} />
+      </Header>
+      <Buttons>
+        <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+        <FacebookLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+        <GoogleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
+        <OrLogInText color={COLORS.dark} tKey={'signIn.orLogIn'} />
+        <Button loading={loading} onPress={navigateToEmailModal} tKey={'signIn.withEmail'} />
+        <Button loading={loading} onPress={navigateToPhoneModal} tKey={'signIn.withPhone'} />
+      </Buttons>
+      <PoliciesPart dark />
+      <SignInWithEmail ref={ref} />
+    </RouteContainer>
+  )
 )
 
 const Header = styled.View`

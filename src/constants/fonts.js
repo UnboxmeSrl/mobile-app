@@ -10,5 +10,10 @@ export const FONTS = {
   josefinSans: 'JosefinSans-Regular',
   josefinSansBold: 'JosefinSans-Bold',
   josefinSansSemiBold: 'JosefinSans-SemiBold',
+  inter: 'Inter-Regular',
+  interBold: 'Inter-Bold',
+  interLight: 'Inter-Light',
+  interMedium: 'Inter-Medium',
+  interSemiBold: 'Inter-SemiBold',
   system: 'System',
 }

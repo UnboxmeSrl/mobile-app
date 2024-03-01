@@ -4,11 +4,15 @@ import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
-const CustomButton = ({ title, handlePress }) => {
+const CustomButton = ({ title, handlePress, disabled = false }) => {
   return (
     <View style={styles.btnMainContainer}>
-      <TouchableOpacity onPress={handlePress} style={styles.btnContainer}>
-        <Text style={styles.btnText}> {title}</Text>
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={handlePress}
+        style={[styles.btnContainer, disabled && styles.disabledBtnContainer]}
+      >
+        <Text style={[styles.btnText, disabled && styles.disabledBtnText]}> {title}</Text>
       </TouchableOpacity>
     </View>
   )
@@ -17,6 +21,12 @@ const CustomButton = ({ title, handlePress }) => {
 export default CustomButton
 
 const styles = StyleSheet.create({
+  disabledBtnText: {
+    color: COLORS.gray,
+  },
+  disabledBtnContainer: {
+    backgroundColor: COLORS.cultured,
+  },
   btnContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.lightBrown,

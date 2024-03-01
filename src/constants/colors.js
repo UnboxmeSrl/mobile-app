@@ -47,4 +47,6 @@ export const COLORS = {
   paleRose: '#FFE8F8',
   byzantine: '#C837AB',
   hanBlue: '#3771C8',
+  cultured: '#F5F5F5',
+  darkSilver: '#717171',
 }

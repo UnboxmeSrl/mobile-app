@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
@@ -9,14 +9,17 @@ export const SignInScreen = () => {
   const [loading, setLoading] = useState(false)
   const { navigate } = useNavigation()
   const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
+  const ref = useRef()
 
   const navigateToEmailModal = () => {
-    navigate({
-      params: {
-        isFromBookRedirected: isFromBookRedirected,
-      },
-      routeName: MODAL_NAMES.SignInEmail,
-    })
+    ref?.current?.open()
+    // 👇🏻 👇🏻 👇🏻 👇🏻 Need to Update this
+    // navigate({
+    //   params: {
+    //     isFromBookRedirected: isFromBookRedirected,
+    //   },
+    //   routeName: MODAL_NAMES.SignInEmail,
+    // })
   }
   const navigateToPhoneModal = () => {
     navigate(MODAL_NAMES.AuthPhone)
@@ -32,5 +35,5 @@ export const SignInScreen = () => {
     onSuccess,
     setLoading,
   }
-  return <SignInPresenter {...props} />
+  return <SignInPresenter {...props} ref={ref} />
 }

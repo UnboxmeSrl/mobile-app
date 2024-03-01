@@ -16,7 +16,7 @@ const CustomHeader = ({ title, step }) => {
         <Text style={styles.headerTitleText}>{title}</Text>
       </View>
       <View style={{}}>
-        <Text style={styles.progressText}>{`${step}/10`}</Text>
+        <Text style={styles.progressText}>{`${step}/11`}</Text>
       </View>
     </View>
   )

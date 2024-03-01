@@ -80,8 +80,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires to access your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need to access your Location to send you proper notifications</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app requires to access your Photo Library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library for content uploading</string>
 	<key>UIAppFonts</key>
@@ -99,6 +103,11 @@
 		<string>JosefinSans-Bold.ttf</string>
 		<string>JosefinSans-Regular.ttf</string>
 		<string>JosefinSans-SemiBold.ttf</string>
+		<string>Inter-Bold.ttf</string>
+		<string>Inter-Light.ttf</string>
+		<string>Inter-Medium.ttf</string>
+		<string>Inter-Regular.ttf</string>
+		<string>Inter-SemiBold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

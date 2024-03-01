@@ -73,4 +73,9 @@ export const IMAGES = {
   checkMark: require('./images/check-mark.png'),
   plus: require('./images/plus.png'),
   checkRight: require('./images/check-right.png'),
+  gallery: require('./images/gallery.png'),
+  camera: require('./images/camera.png'),
+  galleryImage: require('./images/gallery-image.png'),
+  tiktokIcon: require('./images/tiktok-icon.png'),
+  loginInto: require('./images/login-into.png'),
 }
