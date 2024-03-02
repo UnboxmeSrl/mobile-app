@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
-import { navigate, userSignUp } from '../../../../services'
-import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { setAuthData, setLoginData } from '../../../../redux/slices'
+import { navigate, reset, userSignUp } from '@services'
+import { MAIN_NAVIGATOR } from '@const/navigation'
 
 const useAuthSocialNetwork = () => {
   const [tiktokUserName, setTiktokUserName] = useState()
@@ -39,7 +39,7 @@ const useAuthSocialNetwork = () => {
     formData.append('City', userDetails?.city)
     formData.append('Agency', userDetails?.agencyData?.hasAgency)
     formData.append('Freelance', userDetails?.agencyData?.freelance)
-    formData.append('Profile_pic', userDetails?.profilePictures?.[0])
+    // formData.append('Profile_pic', userDetails?.profilePictures?.[0])
     formData.append('Tiktok_account', userDetails?.tiktokUserName)
     formData.append('TikTok', userDetails?.tiktokUserName ? 'true' : 'false')
     formData.append('IG_account', userDetails?.instaUserName)
@@ -62,9 +62,11 @@ const useAuthSocialNetwork = () => {
 
     // console.log('🟩 Form Data', JSON.stringify(formData))
     const res = await userSignUp(formData)
+    console.log('🚀 ~ handleNextPress ~ res:', JSON.stringify(res))
     if (res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
-      // reset(MAIN_NAVIGATOR)
+      dispatch(setLoginData(res))
+      reset(MAIN_NAVIGATOR)
     }
   }
 

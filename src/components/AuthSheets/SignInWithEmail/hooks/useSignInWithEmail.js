@@ -7,7 +7,7 @@ const useSignInWithEmail = () => {
   const [password, setPassword] = useState()
 
   const handleLoginPress = (ref) => {
-    navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
+    // navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
     ref?.current?.close()
   }
 

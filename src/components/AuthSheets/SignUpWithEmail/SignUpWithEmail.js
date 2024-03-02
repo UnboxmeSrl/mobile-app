@@ -36,7 +36,7 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
                 We just sent you a temporary login code. Please check your inbox.
               </Text>
             </View>
-            <CustomTextInput placeholder={'Code'} isRemoveTextIconVisible={true} />
+            {/* <CustomTextInput placeholder={'Code'} isRemoveTextIconVisible={true} /> */}
           </>
         )}
 
