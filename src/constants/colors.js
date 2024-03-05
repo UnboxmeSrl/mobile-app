@@ -50,4 +50,6 @@ export const COLORS = {
   hanBlue: '#3771C8',
   cultured: '#F5F5F5',
   darkSilver: '#717171',
+  newPrimary: '#FF385C',
+  veryLight01: 'rgba(250,255, 255, 0.3)',
 }

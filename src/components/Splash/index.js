@@ -28,7 +28,7 @@ export const Splash = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
 
   useEffect(() => {
-    navigate(SCREEN_NAMES.Onboarding)
+    navigate(SCREEN_NAMES.OnboardingNew)
 
     setTimeout(() => {
       SplashScreen.hide()

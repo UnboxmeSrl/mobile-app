@@ -42,6 +42,7 @@ export const SCREEN_NAMES = {
   EditProfile: 'EditProfile',
   Home: 'Home',
   Onboarding: 'Onboarding',
+  OnboardingNew: 'OnboardingNew',
   OtherSignUp: 'OtherSignUp',
   Prizes: 'Prizes',
   ProductSelection: 'ProductSelection',
@@ -70,6 +71,7 @@ export const SCREEN_NAMES = {
   AuthProfilePictureScreen: 'AuthProfilePictureScreen',
   AuthCodeFromFriendScreen: 'AuthCodeFromFriendScreen',
   AuthSocialNetworkScreen: 'AuthSocialNetworkScreen',
+  SignUpNew: 'SignUpNew',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

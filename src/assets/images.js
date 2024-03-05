@@ -89,4 +89,14 @@ export const IMAGES = {
   tiktokAddNew: require('./images/tiktok-add-new.png'),
   storyAddNew: require('./images/story-add-new.png'),
   reelsAddNew: require('./images/reels-add-new.png'),
+
+  onboarding: {
+    onboardingGroupImages: require('./images/onboarding/onboarding-group-images.png'),
+    onboardingSocial: require('./images/onboarding/onboarding-social.png'),
+    onboardingHotels: require('./images/onboarding/onboarding-hotels.png'),
+    onboardingThirdImage: require('./images/onboarding/onboarding-third-image.png'),
+    onboardingFifth: require('./images/onboarding/onboarding-fifth.png'),
+  },
+
+  authBackground: require('./images/auth-background.png'),
 }
