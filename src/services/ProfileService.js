@@ -13,13 +13,15 @@ export const getGenderList = async () => {
 }
 
 export const userSignUp = async (data) => {
-  try {
-    const url = Api.PROFILE.USER_SIGN_UP
-    const response = await Fetch.postWithMedia(url, data)
-    return response
-  } catch (error) {
-    console.log(error)
-  }
+  const url = Api.PROFILE.USER_SIGN_UP
+  let response
+  await Fetch.postWithMedia(url, data)
+    .then((res) => (response = res))
+    .catch((error) => {
+      console.log('🛑 Error: ', error?.response)
+      response = error?.response
+    })
+  return response
 }
 
 export const userLogin = async (data) => {

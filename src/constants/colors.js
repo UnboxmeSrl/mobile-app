@@ -36,6 +36,7 @@ export const COLORS = {
   tertiary: '#FAF4EF',
   veryLight: '#FAF6F5',
   veryLight04: 'rgba(250,246, 245, 0.4)',
+  veryLight06: 'rgba(250,246, 245, 0.8)',
   white: '#FFFFFF',
   whiteShadedTransparent: '#DADADA',
   yankeesBlue: '#1E293B',

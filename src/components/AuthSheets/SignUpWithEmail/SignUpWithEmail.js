@@ -11,6 +11,9 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
   const {
     email,
     setEmail,
+    error,
+    verificationCode,
+    setVerificationCode,
     isBtnDisabled,
     isSendPress,
     handleSignUpPress,
@@ -29,6 +32,12 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
           isRemoveTextIconVisible={true}
         />
 
+        {error?.message && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{error?.message}</Text>
+          </View>
+        )}
+
         {isSendPress && (
           <>
             <View style={styles.codeDescriptionContainer}>
@@ -36,7 +45,12 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
                 We just sent you a temporary login code. Please check your inbox.
               </Text>
             </View>
-            {/* <CustomTextInput placeholder={'Code'} isRemoveTextIconVisible={true} /> */}
+            <CustomTextInput
+              placeholder={'Code'}
+              value={verificationCode}
+              handleOnChangeText={setVerificationCode}
+              isRemoveTextIconVisible={true}
+            />
           </>
         )}
 
@@ -53,6 +67,18 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
 export default SignUpWithEmail
 
 const styles = StyleSheet.create({
+  errorText: {
+    color: COLORS.error,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+  },
+  errorContainer: {
+    marginTop: verticalScale(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '85%',
+    alignSelf: 'center',
+  },
   codeDescriptionText: {
     fontFamily: FONTS.quicksand,
     fontWeight: '400',

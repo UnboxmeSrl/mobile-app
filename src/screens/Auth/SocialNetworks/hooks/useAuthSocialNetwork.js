@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAuthData, setLoginData } from '../../../../redux/slices'
 import { navigate, reset, userSignUp } from '@services'
 import { MAIN_NAVIGATOR } from '@const/navigation'
+import { showToastError } from '../../../../services'
 
 const useAuthSocialNetwork = () => {
   const [tiktokUserName, setTiktokUserName] = useState()
@@ -63,10 +64,13 @@ const useAuthSocialNetwork = () => {
     // console.log('🟩 Form Data', JSON.stringify(formData))
     const res = await userSignUp(formData)
     console.log('🚀 ~ handleNextPress ~ res:', JSON.stringify(res))
-    if (res?.id) {
+
+    if (res?.status === 200 || res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
       dispatch(setLoginData(res))
       reset(MAIN_NAVIGATOR)
+    } else {
+      showToastError(res?.data)
     }
   }
 

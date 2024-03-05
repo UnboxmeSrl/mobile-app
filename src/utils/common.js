@@ -4,11 +4,11 @@ export const checkActionName = (actionName) => {
   if (actionName) {
     switch (actionName) {
       case 'Reel':
-        return IMAGES.reel
+        return IMAGES.reelsAddNew
       case 'TikTok':
-        return IMAGES.tiktok
+        return IMAGES.tiktokAddNew
       case 'Story':
-        return IMAGES.instagramStory
+        return IMAGES.storyAddNew
       case 'Maps & Story':
         return IMAGES.googleMaps
       case 'Diary Instagram':

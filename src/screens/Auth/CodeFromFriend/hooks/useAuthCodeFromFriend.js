@@ -25,6 +25,10 @@ const useAuthCodeFromFriend = () => {
     navigate(SCREEN_NAMES.AuthSocialNetworkScreen)
   }
 
+  const handleSkipPress = () => {
+    navigate(SCREEN_NAMES.AuthSocialNetworkScreen)
+  }
+
   useEffect(() => {
     code1Ref?.current?.focus()
   }, [])
@@ -48,6 +52,7 @@ const useAuthCodeFromFriend = () => {
     focusedTextInput,
     setFocusedTextInput,
     isError,
+    handleSkipPress,
     handleNextPress,
   }
 }

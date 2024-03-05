@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { CustomButton, CustomHeader } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
@@ -27,6 +27,7 @@ const AuthCodeFromFriendScreen = () => {
     focusedTextInput,
     setFocusedTextInput,
     isError,
+    handleSkipPress,
     handleNextPress,
   } = useAuthCodeFromFriend()
 
@@ -155,6 +156,10 @@ const AuthCodeFromFriendScreen = () => {
           </View>
         )}
 
+        <TouchableOpacity onPress={handleSkipPress} activeOpacity={0.5} style={styles.skipContainer}>
+          <Text style={styles.skipText}>Skip</Text>
+        </TouchableOpacity>
+
         <View style={styles.btnContainer}>
           <CustomButton title={'Next'} handlePress={handleNextPress} />
         </View>
@@ -166,6 +171,17 @@ const AuthCodeFromFriendScreen = () => {
 export default AuthCodeFromFriendScreen
 
 const styles = StyleSheet.create({
+  skipText: {
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(20),
+    color: COLORS.black,
+  },
+  skipContainer: {
+    marginTop: verticalScale(45),
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
   btnContainer: {
     marginTop: verticalScale(250),
   },

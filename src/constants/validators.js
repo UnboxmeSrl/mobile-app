@@ -15,6 +15,7 @@ export const EMAIL_RULES = {
     },
   },
 }
+
 export const PASSWORD_RULES = {
   minLength: { message: 'isTooShort', value: 6 },
   required: 'isRequired',
@@ -31,4 +32,9 @@ export const CODE_RULES = {
 
 export const REQUIRED_RULE = {
   required: 'isRequired',
+}
+
+export const REGEX = {
+  passwordRegExp: /^(?=.*\d)(?=.*[a-z]).{8,}$/,
+  emailRegExp: /^\S+@\S+\.\S+$/,
 }

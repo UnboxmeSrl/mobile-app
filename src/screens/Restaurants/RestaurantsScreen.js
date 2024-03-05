@@ -37,7 +37,7 @@ const RestaurantsScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity onPress={handleLocationPress} style={styles.selectedLocation}>
-        <Image resizeMode="contain" source={IMAGES.location} style={styles.locationIcon} />
+        <Image resizeMode="contain" source={IMAGES.locationNew} style={styles.locationIcon} />
         <Text style={styles.locationFont}>{cityData?.CityName}</Text>
       </TouchableOpacity>
       {isLoading ? (
@@ -105,11 +105,12 @@ const styles = StyleSheet.create({
   },
   locationFont: {
     fontFamily: FONTS.quicksandBold,
+    color: COLORS.primary,
     fontSize: moderateScale(20),
   },
   locationIcon: {
-    height: moderateScale(18),
-    marginRight: scale(10),
+    height: moderateScale(14),
+    marginRight: scale(11.2),
     width: moderateScale(18),
   },
   mainContainer: {
@@ -125,11 +126,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     borderColor: COLORS.lightGray,
-    borderRadius: moderateScale(8),
-    borderWidth: moderateScale(2),
+    borderRadius: moderateScale(16),
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: scale(25),
-    paddingVertical: verticalScale(3),
+    width: '90%',
+    backgroundColor: COLORS.isabelLine,
+    height: verticalScale(40),
+    marginTop: verticalScale(10),
   },
 })
