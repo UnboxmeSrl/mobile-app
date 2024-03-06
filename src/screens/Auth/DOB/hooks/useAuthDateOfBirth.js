@@ -12,9 +12,9 @@ const useAuthDateOfBirth = () => {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
   const handleNextPress = () => {
-    const prepDate = `${selectedDate.getDate() < 10 ? `0${selectedDate.getDate()}` : selectedDate.getDate()}/${
+    const prepDate = `${selectedDate.getDate() < 10 ? `0${selectedDate.getDate()}` : selectedDate.getDate()}-${
       selectedDate.getMonth() + 1 < 10 ? `0${selectedDate.getMonth() + 1}` : selectedDate.getMonth() + 1
-    }/${selectedDate.getFullYear()}`
+    }-${selectedDate.getFullYear()}`
     dispatch(setAuthData({ birthDate: prepDate }))
     navigate(SCREEN_NAMES.AuthNationalityScreen)
   }

@@ -13,7 +13,7 @@ import { COLORS } from '@const'
 import { SignInWithEmail } from '../../components'
 
 export const SignInPresenter = React.forwardRef(
-  ({ navigateToEmailModal, navigateToPhoneModal, onSuccess, loading, setLoading }, ref) => (
+  ({ navigateToEmailModal, navigateToPhoneModal, isFromBookRedirected, onSuccess, loading, setLoading }, ref) => (
     <RouteContainer tKey={'otherSignInOptions.title'} withArrow withPadding>
       <Header>
         <Body tKey={'signIn.getPersonalized'} />
@@ -27,7 +27,7 @@ export const SignInPresenter = React.forwardRef(
         <Button loading={loading} onPress={navigateToPhoneModal} tKey={'signIn.withPhone'} />
       </Buttons>
       <PoliciesPart dark />
-      <SignInWithEmail ref={ref} />
+      <SignInWithEmail isFromBookRedirected={isFromBookRedirected} ref={ref} />
     </RouteContainer>
   )
 )

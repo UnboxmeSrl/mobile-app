@@ -1,14 +1,47 @@
 import { useState } from 'react'
-import { navigate } from '@services'
+import OneSignal from 'react-native-onesignal'
+import { useNavigation } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { setLoginData } from '../../../../redux/slices/authSlice'
+import { setBookings } from '../../../../redux/slices/restaurantSlice'
+import { userLogin } from '../../../../services'
+import { getBookings } from '../../../../services/RestaurantService'
 
-const useSignInWithEmail = () => {
+const useSignInWithEmail = (isFromBookRedirected) => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [loading, setLoading] = useState(false)
+  const { navigate } = useNavigation()
+  const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
+  const dispatch = useDispatch()
 
-  const handleLoginPress = (ref) => {
+  const handleLoginPress = async (ref) => {
     // navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
-    ref?.current?.close()
+
+    try {
+      setLoading(true)
+      const prepData = { email, password }
+      const res = await userLogin(prepData)
+      console.log('res', res)
+      setLoading(false)
+      if (res?.id) {
+        OneSignal.setExternalUserId(res?.id?.toString())
+        dispatch(setLoginData(res))
+        const params = `/${res?.id}`
+        const bookingRes = await getBookings(params)
+        dispatch(setBookings(bookingRes))
+        if (serviceDetails?.id && isFromBookRedirected) {
+          navigate(SCREEN_NAMES.ServiceDetails)
+        } else {
+          navigate(SCREEN_NAMES.Cities)
+        }
+        ref?.current?.close()
+      } else {
+      }
+    } catch (e) {
+      setLoading(false)
+    }
   }
 
   return {

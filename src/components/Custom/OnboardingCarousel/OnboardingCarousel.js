@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
+import { moderateScale } from 'react-native-size-matters'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { COLORS } from '../../../constants/colors'
 
@@ -9,22 +9,21 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH)
 
 const OnboardingCarousel = ({ data, Component, activeIndex, setActiveIndex }) => {
   const carouselRef = useRef(null)
-  console.log('index:', activeIndex)
+
+  useEffect(() => {
+    carouselRef.current.snapToItem(activeIndex, true)
+  }, [activeIndex])
+
   return (
     <View style={styles.headerCarouselContainer}>
       <Carousel
         data={data}
-        enableMomentum={true}
         inactiveSlideOpacity={0}
         inactiveSlideShift={0}
         itemWidth={ITEM_WIDTH}
         layout="default"
         layoutCardOffset={9}
-        onSnapToItem={(index) => {
-          console.log('test')
-          setActiveIndex(index)
-          // carouselRef.current.snapToItem(index)
-        }}
+        onSnapToItem={(index) => setActiveIndex(index)}
         ref={carouselRef}
         renderItem={Component}
         sliderWidth={SLIDER_WIDTH}

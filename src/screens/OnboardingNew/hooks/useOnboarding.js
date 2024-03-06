@@ -34,16 +34,15 @@ const useOnboarding = () => {
   ]
 
   const handleNextPress = () => {
-    if (activeIndex <= 4) {
-      const newIndex = (activeIndex + 1) % carouselItems.length
-      setActiveIndex(newIndex)
-
-      //   // Use carouselRef to scroll to the next item
-      //   if (carouselRef.current) {
-      //     carouselRef.current.snapToItem(newIndex)
-      //   }
+    setActiveIndex((activeIndex) => activeIndex + 1)
+    if (activeIndex > 3) {
       navigate(SCREEN_NAMES.SignUpNew)
     }
+    //   // Use carouselRef to scroll to the next item
+    //   if (carouselRef.current) {
+    //     carouselRef.current.snapToItem(newIndex)
+    //   }
+    // navigate(SCREEN_NAMES.SignUpNew)
   }
   return {
     carouselRef,

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getServiceCategories, getServices } from '../../../services/LocationsService'
+import { Linking } from 'react-native'
 
 const useRestaurantDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
@@ -56,6 +57,12 @@ const useRestaurantDetails = () => {
     }
   }
 
+  const handleRedirection = (targetUrl) => {
+    if (targetUrl) {
+      Linking.openURL(targetUrl)
+    }
+  }
+
   useEffect(() => {
     getServiceCategoriesData()
   }, [])
@@ -74,6 +81,7 @@ const useRestaurantDetails = () => {
     restaurantDetails,
     serviceCategories,
     services,
+    handleRedirection,
   }
 }
 

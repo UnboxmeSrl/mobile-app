@@ -1,13 +1,14 @@
 import React, { createRef, useEffect, useRef, useState } from 'react'
 import { Animated, useWindowDimensions } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
 
 import { SCREEN_NAMES } from '@const/navigation'
 import { selectIsAuthenticated, selectIsAuthInitialized } from '@redux/modules/auth'
 import { navigate } from '@services'
+import { setLoginData } from '../../redux/slices'
 
 const Wrapper = styled(Animated.View)`
   width: ${prop('width')}px
@@ -26,9 +27,20 @@ export const Splash = () => {
   const ref = createRef()
   const authInitialized = useSelector(selectIsAuthInitialized)
   const isAuthenticated = useSelector(selectIsAuthenticated)
+  const dispatch = useDispatch()
+  const isApplied = useSelector((state) => state.authSlice.isApplied)
 
   useEffect(() => {
+    /* TODO: when you complete your every changes uncomment below code:
+     because this isApplied is to know that user has signed up & is waiting for approval from admin */
+
+    // if (isApplied) {
+    //   navigate(SCREEN_NAMES.AppliedScreen)
+    // } else {
     navigate(SCREEN_NAMES.OnboardingNew)
+    // }
+
+    // dispatch(setLoginData({}))
 
     setTimeout(() => {
       SplashScreen.hide()

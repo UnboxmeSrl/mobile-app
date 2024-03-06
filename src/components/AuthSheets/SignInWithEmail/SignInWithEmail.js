@@ -7,8 +7,8 @@ import { BottomSheet } from '../../BottomSheet'
 import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
 import useSignInWithEmail from './hooks/useSignInWithEmail'
 
-const SignInWithEmail = React.forwardRef(({}, ref) => {
-  const { email, setEmail, password, setPassword, handleLoginPress } = useSignInWithEmail()
+const SignInWithEmail = React.forwardRef(({ isFromBookRedirected = false }, ref) => {
+  const { email, setEmail, password, setPassword, handleLoginPress } = useSignInWithEmail(isFromBookRedirected)
 
   return (
     <BottomSheet ref={ref}>

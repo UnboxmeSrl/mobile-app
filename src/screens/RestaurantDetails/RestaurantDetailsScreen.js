@@ -22,6 +22,7 @@ const RestaurantDetails = () => {
     serviceCategories,
     onCategoryChange,
     handleBackPress,
+    handleRedirection,
   } = useRestaurantDetails()
   console.log('Restaurant Details', JSON.stringify(restaurantDetails))
 
@@ -62,24 +63,33 @@ const RestaurantDetails = () => {
         <View style={styles.restaurantDetailsContainer}>
           <Text style={styles.restaurantNameText}>{restaurantDetails?.Name}</Text>
           <View style={styles.socialLinksContainer}>
-            <View style={styles.commonSocialLinksContainer}>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Tiktok)}
+              style={styles.commonSocialLinksContainer}
+            >
               <View style={styles.commonSocialLinksImageContainer}>
                 <Image resizeMode="contain" source={IMAGES.tiktokNew} style={styles.commonStyleForIcon} />
               </View>
               <Text style={styles.commonStyleSocialLinkText}>TikTok</Text>
-            </View>
-            <View style={styles.commonSocialLinksContainer}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Instagram)}
+              style={styles.commonSocialLinksContainer}
+            >
               <View style={styles.commonSocialLinksImageContainer}>
                 <Image resizeMode="contain" source={IMAGES.insta} style={styles.commonStyleForIcon} />
               </View>
               <Text style={styles.commonStyleSocialLinkText}>Instagram</Text>
-            </View>
-            <View style={styles.commonSocialLinksContainer}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}
+              style={styles.commonSocialLinksContainer}
+            >
               <View style={styles.commonSocialLinksImageContainer}>
                 <Image resizeMode="contain" source={IMAGES.internet} style={styles.commonStyleForIcon} />
               </View>
               <Text style={styles.commonStyleSocialLinkText}>Website</Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.aboutTitleContainer}>
             <Text style={styles.aboutTitleText}>About</Text>

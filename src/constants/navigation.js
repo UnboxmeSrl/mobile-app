@@ -57,6 +57,7 @@ export const SCREEN_NAMES = {
   Settings: 'Settings',
   SignIn: 'SignIn',
   SignUp: 'SignUp',
+  AppliedScreen: 'AppliedScreen',
   Wizard: 'Wizard',
   YourScheduleDetailsScreen: 'YourScheduleDetailsScreen',
   YourScheduleScreen: 'YourScheduleScreen',

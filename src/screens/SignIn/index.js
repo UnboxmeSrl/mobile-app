@@ -12,14 +12,14 @@ export const SignInScreen = () => {
   const ref = useRef()
 
   const navigateToEmailModal = () => {
-    // ref?.current?.open()
-    // 👇🏻 👇🏻 👇🏻 👇🏻 Need to Update this
-    navigate({
-      params: {
-        isFromBookRedirected: isFromBookRedirected,
-      },
-      routeName: MODAL_NAMES.SignInEmail,
-    })
+    ref?.current?.open()
+    // ✅ ✅ ✅ ✅ Updated this but this code is for future reference
+    // navigate({
+    //   params: {
+    //     isFromBookRedirected: isFromBookRedirected,
+    //   },
+    //   routeName: MODAL_NAMES.SignInEmail,
+    // })
   }
   const navigateToPhoneModal = () => {
     navigate(MODAL_NAMES.AuthPhone)
@@ -32,6 +32,7 @@ export const SignInScreen = () => {
     loading,
     navigateToEmailModal,
     navigateToPhoneModal,
+    isFromBookRedirected,
     onSuccess,
     setLoading,
   }

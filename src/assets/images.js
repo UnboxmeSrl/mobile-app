@@ -99,4 +99,7 @@ export const IMAGES = {
   },
 
   authBackground: require('./images/auth-background.png'),
+  appliedScreenBackground: require('./images/applied-screen-background.png'),
+  appLogo: require('./images/app-logo.png'),
+  addUser: require('./images/add-user.png'),
 }

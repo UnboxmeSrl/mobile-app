@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthData, setLoginData } from '../../../../redux/slices'
+import { setAuthData, setIsApplied, setLoginData } from '../../../../redux/slices'
 import { navigate, reset, userSignUp } from '@services'
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { showToastError } from '../../../../services'
+import { SCREEN_NAMES } from '../../../../constants/navigation'
 
 const useAuthSocialNetwork = () => {
   const [tiktokUserName, setTiktokUserName] = useState()
@@ -68,7 +69,9 @@ const useAuthSocialNetwork = () => {
     if (res?.status === 200 || res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
       dispatch(setLoginData(res))
-      reset(MAIN_NAVIGATOR)
+      // reset(MAIN_NAVIGATOR)
+      dispatch(setIsApplied(true))
+      navigate(SCREEN_NAMES.AppliedScreen)
     } else {
       showToastError(res?.data)
     }

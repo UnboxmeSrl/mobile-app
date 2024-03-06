@@ -27,6 +27,7 @@ const CustomTextInput = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           style={styles.textInput}
+          autoCapitalize={'none'}
           placeholder={placeholder}
           keyboardType={keyboardType}
           secureTextEntry={isSecureText}

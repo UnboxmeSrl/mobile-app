@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     marginTop: verticalScale(30),
-    height: verticalScale(425),
+    height: verticalScale(410),
     width: '100%',
   },
 })

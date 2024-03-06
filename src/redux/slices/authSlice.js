@@ -5,6 +5,7 @@ import { sliceNames } from '../../constants'
 const initialState = {
   authData: {},
   loginData: {},
+  isApplied: false,
 }
 
 const AuthSlice = createSlice({
@@ -22,9 +23,12 @@ const AuthSlice = createSlice({
     setLoginData: (state, actions) => {
       state.loginData = actions?.payload
     },
+    setIsApplied: (state, actions) => {
+      state.isApplied = actions?.payload
+    },
   },
 })
 
-export const { setAuthData, setLoginData } = AuthSlice.actions
+export const { setAuthData, setLoginData, setIsApplied } = AuthSlice.actions
 
 export default AuthSlice.reducer
