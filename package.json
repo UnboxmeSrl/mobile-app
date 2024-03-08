@@ -1,6 +1,6 @@
 {
   "name": "unboxme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "buildNumber": 8,
   "private": true,
   "scripts": {
@@ -13,7 +13,8 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "clean": "cd android && ./gradlew clean"
   },
   "reactNativePermissionsIOS": [
     "Camera",
@@ -88,10 +89,10 @@
     "react-native-svg": "^12.1.0",
     "react-native-swiper": "^1.6.0",
     "react-native-text-input-mask": "^2.0.1",
-    "react-native-toast-message": "^1.6.0",
+    "react-native-toast-message": "1.6.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.1.1",
-    "react-native-webview": "^11.3.1",
+    "react-native-webview": "11.3.1",
     "react-navigation": "4.4.2",
     "react-navigation-hooks": "^1.1.0",
     "react-navigation-stack": "2.3.8",
