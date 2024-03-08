@@ -16,7 +16,7 @@ import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useYourSchedule } from './hooks'
-import { checkActionName } from '../../utils'
+import { checkAction, checkActionName } from '../../utils'
 import { ContentStatusModal } from '../../components'
 
 const YourScheduleScreen = () => {
@@ -79,15 +79,20 @@ const YourScheduleScreen = () => {
               const timeFrame = item?._timeframes_turbo
               const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
 
+              let actionNumId = item?._actions_turbo?.action_num_id ?? 0
+              let icon = checkAction(actionNumId, true)?.action_icon
               let actionName = item?._actions_turbo?.Action_Name ?? 0
               if (item?.diary_action_turbo_id) {
-                actionName = item?._diary_action_turbo?.action
+                actionName = item?._diary_action_turbo?.action_for_others
+                if (actionNumId === 3) {
+                  actionName = item?._diary_action_turbo?.action
+                }
+                icon = checkActionName(actionName)
               }
-              const icon = checkActionName(actionName)
 
               return (
                 <TouchableOpacity
-                  onPress={() => handleCardPress(item, approvalStatus, actionName)}
+                  onPress={() => handleCardPress(item, approvalStatus, actionName, actionNumId)}
                   style={styles.cardContainer}
                 >
                   <View
@@ -160,19 +165,19 @@ const YourScheduleScreen = () => {
                           >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
                         </View>
 
-                        {actionName ? (
+                        {actionNumId == 6 && item?.diary_action_turbo_id === 0 ? (
+                          <View style={styles.reelsContainer}>
+                            <Text style={styles.reelsTitleText}>{`${actionName}`}</Text>
+                            <View style={styles.tiktokReelsIconsContainer}>
+                              <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
+                              <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
+                            </View>
+                          </View>
+                        ) : (
                           <View style={styles.storyContainer}>
                             <Text style={styles.storyText}>{actionName}</Text>
                             <View style={styles.storyIconContainer}>
                               <Image resizeMode="cover" source={icon} style={styles.storyIcon} />
-                            </View>
-                          </View>
-                        ) : (
-                          <View style={styles.reelsContainer}>
-                            <Text style={styles.reelsTitleText}>{`Tiktok/ Reels`}</Text>
-                            <View style={styles.tiktokReelsIconsContainer}>
-                              <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
-                              <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
                             </View>
                           </View>
                         )}
@@ -189,11 +194,16 @@ const YourScheduleScreen = () => {
             data={contentList}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onContentRefresh} />}
             renderItem={({ item, index }) => {
+              let actionNumId = item?._actions_turbo?.action_num_id ?? 0
+              let icon = checkAction(actionNumId)?.action_icon
               let actionName = item?._actions_turbo?.Action_Name ?? 0
               if (item?.diary_action_turbo_id) {
-                actionName = item?._diary_action_turbo?.action
+                actionName = item?._diary_action_turbo?.action_for_others
+                if (actionNumId === 3) {
+                  actionName = item?._diary_action_turbo?.action
+                }
+                icon = checkActionName(actionName)
               }
-              const icon = checkActionName(actionName)
               let contentApprovalStatus = item?.content_status_turbo_id
               if (item?.content_status_turbo_id) {
                 contentApprovalStatus = item?._content_status_turbo?.name
@@ -210,7 +220,7 @@ const YourScheduleScreen = () => {
                       </View>
                       <View style={contentStyles.socialMediaIconNameContainer}>
                         <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} />
-                        <Text style={contentStyles.socialMediaNameText}>{`${item?._actions_turbo?.Action_Name}`}</Text>
+                        <Text style={contentStyles.socialMediaNameText}>{`${actionName}`}</Text>
                       </View>
                     </View>
 
@@ -430,6 +440,7 @@ const styles = StyleSheet.create({
   },
   reelsTitleText: {
     color: COLORS.gray,
+    textAlign: 'center',
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
   },
@@ -509,6 +520,7 @@ const styles = StyleSheet.create({
   },
   storyText: {
     color: COLORS.gray,
+    textAlign: 'center',
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
   },

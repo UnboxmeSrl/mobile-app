@@ -14,7 +14,7 @@ const ContentScreen = () => {
     isLoading,
     isDataFetching,
     diaryItems,
-    actionName,
+    actionNumId,
     selectedApp,
     setSelectedApp,
     handleBackPress,
@@ -36,7 +36,7 @@ const ContentScreen = () => {
           <View style={styles.loaderContainer}>
             <ActivityIndicator color={COLORS.primary} size={20} />
           </View>
-        ) : actionName === 'Diary Instagram' ? (
+        ) : actionNumId === 3 ? (
           <FlatList
             data={diaryItems}
             renderItem={({ item, index }) => {
@@ -69,15 +69,15 @@ const ContentScreen = () => {
         ) : (
           <>
             <TouchableOpacity
-              onPress={() => setSelectedApp(1)}
-              style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
+              onPress={() => setSelectedApp(0)}
+              style={[styles.cardContainer, selectedApp === 0 && { borderColor: COLORS.black, borderWidth: 1 }]}
             >
               <View style={styles.socialMediaMainDetailsContainer}>
                 <View style={styles.socialMediaImageContainer}>
-                  <Image resizeMode="cover" source={IMAGES.reel} style={styles.testImage} />
+                  <Image resizeMode="cover" source={IMAGES.reelsAddNew} style={styles.testImage} />
                 </View>
                 <View style={styles.socialMediaNameContainer}>
-                  <Text style={styles.socialMediaNameText}>{`${'Full Reel'}`}</Text>
+                  <Text style={styles.socialMediaNameText}>{`Full ${diaryItems?.[0]?.action_for_others}`}</Text>
                   <View style={styles.ratingContainer}>
                     <Text style={styles.ratingUsersText}>240</Text>
                     <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -89,15 +89,15 @@ const ContentScreen = () => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setSelectedApp(2)}
-              style={[styles.cardContainer, selectedApp === 2 && { borderColor: COLORS.black, borderWidth: 1 }]}
+              onPress={() => setSelectedApp(1)}
+              style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
             >
               <View style={styles.socialMediaMainDetailsContainer}>
                 <View style={styles.tiktokImageContainer}>
-                  <Image resizeMode="cover" source={IMAGES.tiktok} style={styles.tiktokImage} />
+                  <Image resizeMode="cover" source={IMAGES.tiktokAddNew} style={styles.tiktokImage} />
                 </View>
                 <View style={styles.socialMediaNameContainer}>
-                  <Text style={styles.socialMediaNameText}>{`${'Full Tik Tok'}`}</Text>
+                  <Text style={styles.socialMediaNameText}>{`Full ${diaryItems?.[1]?.action_for_others}`}</Text>
                   <View style={styles.ratingContainer}>
                     <Text style={styles.ratingUsersText}>240</Text>
                     <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
   },
   socialMediaImageContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(20),
     height: verticalScale(67),
     justifyContent: 'center',
@@ -255,8 +255,8 @@ const styles = StyleSheet.create({
   },
   testImage: {
     borderRadius: moderateScale(10),
-    height: moderateScale(31.52),
-    width: moderateScale(32.5),
+    height: moderateScale(67),
+    width: moderateScale(67),
   },
   tiktokImage: {
     borderRadius: moderateScale(10),

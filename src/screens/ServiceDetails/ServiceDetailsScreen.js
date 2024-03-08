@@ -7,7 +7,7 @@ import { IMAGES } from '../../assets/images'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { checkActionName } from '../../utils'
+import { checkAction, checkActionName } from '../../utils'
 import { useServiceDetails } from './hooks'
 import { CommonHeader } from '../../components'
 
@@ -48,15 +48,12 @@ const ServiceDetails = () => {
             }}
             data={[serviceDetails?.Offer_Cover]}
           />
-          {/* <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
-          </TouchableOpacity> */}
         </View>
 
         <View style={styles.titleRatingMainRow}>
           <View style={styles.itemTitleIconContainer}>
             <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
-            <Text style={styles.titleText}>Story Combo</Text>
+            <Text style={styles.titleText}>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
           </View>
           <View style={styles.dealLeftContainer}>
             <Text style={styles.deaLeftText}>{`1 deal left`}</Text>
@@ -64,32 +61,34 @@ const ServiceDetails = () => {
         </View>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {serviceDetails?.actions?.map((item, index) => {
-            return (
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text style={styles.amenitiesTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text style={styles.amenitiesDescription}>at your choice</Text>
-                </View>
-              </View>
-            )
-          })}
+          <View style={styles.amenityMainContainer}>
+            <View style={styles.amenityIconContainer}>
+              <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+            </View>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
+              <Text style={styles.amenitiesDescription}>at your choice</Text>
+            </View>
+          </View>
 
-          {/* <View style={styles.amenityContainer}>
-                        <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-                        <Image source={IMAGES.drinks} style={styles.amenityIcon} />
-                      </View>
-                      <View style={styles.amenityContainer}>
-                        <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
-                        <Image source={IMAGES.meals} style={styles.amenityIcon} />
-                      </View>
-                      <View style={styles.amenityContainer}>
-                        <Text style={styles.amenityTitle}>{` ${item?._actions_turbo?.Extra_People} X Persons`}</Text>
-                        <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
-                      </View> */}
+          <View style={styles.amenityMainContainer}>
+            <View style={styles.amenityIconContainer}>
+              <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+            </View>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+              <Text style={styles.amenitiesDescription}>at your choice</Text>
+            </View>
+          </View>
+
+          <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text
+                style={[styles.amenitiesTitle, styles.friendAmentityText]}
+              >{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
+              <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+            </View>
+          </View>
         </ScrollView>
 
         <View style={styles.divider} />
@@ -100,28 +99,61 @@ const ServiceDetails = () => {
           </View>
           <View style={styles.deadlineContainer}>
             <Image source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
-            <Text style={styles.deadlineText}>Deadline: 5 Days</Text>
+            <Text style={styles.deadlineText}>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
           </View>
         </View>
 
         <View style={styles.flatlistContainer}>
           <FlatList
-            data={serviceDetails?.actions}
+            data={[serviceDetails]}
             renderItem={({ item, index }) => {
-              const actionName = item?._actions_turbo?.Action_Name
+              const actionNumId = item?._actions_turbo?.action_num_id
               // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-              const icon = checkActionName(actionName)
+              const icon = checkAction(actionNumId)
+              console.log('icon', icon)
               return (
                 <>
-                  {actionName === 'Diary Instagram' ? (
-                    diaryItems.map((diaryItem) => (
+                  {actionNumId === 3 ? (
+                    diaryItems.map((diaryItem, innerIndex) => (
+                      <>
+                        <View style={styles.mainSocialItemContainer}>
+                          <View style={styles.socialMediaImageContainer}>
+                            <Image source={icon?.action_icon} style={styles.socialMediaImage} />
+                          </View>
+                          <View style={styles.socialMediaTitleDescriptionContainer}>
+                            <View style={styles.socialMediaTitleContainer}>
+                              <Text style={styles.socialMediaTitle}>{diaryItem?.action} video</Text>
+                              <View style={styles.ratingsContainer}>
+                                <Text style={styles.ratingsText}>60</Text>
+                                <Image source={IMAGES.star} style={styles.ratingIcon} />
+                              </View>
+                            </View>
+                            <View style={styles.socialMediaDescriptionContainer}>
+                              <Text style={styles.socialMediaDescriptionText}>
+                                You have to publish a Tiktok video following the brief and tagging both the venue and
+                                claris.app
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+                        {innerIndex == 0 && (
+                          <View style={styles.orContainer}>
+                            <View style={styles.orDivider} />
+                            <Text style={styles.orText}>Or</Text>
+                            <View style={styles.orDivider} />
+                          </View>
+                        )}
+                      </>
+                    ))
+                  ) : actionNumId === 6 ? (
+                    <>
                       <View style={styles.mainSocialItemContainer}>
                         <View style={styles.socialMediaImageContainer}>
-                          <Image source={icon} style={styles.socialMediaImage} />
+                          <Image source={IMAGES.reelsAddNew} style={styles.socialMediaImage} />
                         </View>
                         <View style={styles.socialMediaTitleDescriptionContainer}>
                           <View style={styles.socialMediaTitleContainer}>
-                            <Text style={styles.socialMediaTitle}>{diaryItem?.action} video</Text>
+                            <Text style={styles.socialMediaTitle}>{`Reels`} video</Text>
                             <View style={styles.ratingsContainer}>
                               <Text style={styles.ratingsText}>60</Text>
                               <Image source={IMAGES.star} style={styles.ratingIcon} />
@@ -135,48 +167,38 @@ const ServiceDetails = () => {
                           </View>
                         </View>
                       </View>
-                      // <View showsVerticalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
-                      //   <View style={styles.socialItemMainContainer}>
-                      //     <View style={styles.tiktokMainContainer}>
-                      //       <View style={styles.tiktokIconNameContainer}>
-                      //         <Image source={icon} style={styles.tiktokIconImage} />
-                      //         <Text style={styles.tiktokTitleText}>{diaryItem?.action}</Text>
 
-                      //         <View style={styles.ratingContainer}>
-                      //           <Text style={styles.ratingUsersText}>240</Text>
-                      //           <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-                      //         </View>
-                      //       </View>
-                      //       <View>
-                      //         <View style={styles.infoContainer}>
-                      //           <Text style={styles.infoTextTitle}>i</Text>
-                      //         </View>
-                      //       </View>
-                      //     </View>
+                      <View style={styles.orContainer}>
+                        <View style={styles.orDivider} />
+                        <Text style={styles.orText}>Or</Text>
+                        <View style={styles.orDivider} />
+                      </View>
 
-                      //     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.amenitiesContainer}>
-                      //     <View style={styles.amenityContainer}>
-                      //       <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-                      //       <Image source={IMAGES.drinks} style={styles.amenityIcon} />
-                      //     </View>
-                      //     <View style={styles.amenityContainer}>
-                      //       <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
-                      //       <Image source={IMAGES.meals} style={styles.amenityIcon} />
-                      //     </View>
-                      //     <View style={styles.amenityContainer}>
-                      //       <Text
-                      //         style={styles.amenityTitle}
-                      //       >{` ${item?._actions_turbo?.Extra_People} X Persons`}</Text>
-                      //       <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
-                      //     </View>
-                      //   </ScrollView>
-                      //   </View>
-                      // </View>
-                    ))
+                      <View style={styles.mainSocialItemContainer}>
+                        <View style={styles.socialMediaImageContainer}>
+                          <Image source={IMAGES.tiktokAddNew} style={styles.socialMediaImage} />
+                        </View>
+                        <View style={styles.socialMediaTitleDescriptionContainer}>
+                          <View style={styles.socialMediaTitleContainer}>
+                            <Text style={styles.socialMediaTitle}>{`Tiktok`} video</Text>
+                            <View style={styles.ratingsContainer}>
+                              <Text style={styles.ratingsText}>60</Text>
+                              <Image source={IMAGES.star} style={styles.ratingIcon} />
+                            </View>
+                          </View>
+                          <View style={styles.socialMediaDescriptionContainer}>
+                            <Text style={styles.socialMediaDescriptionText}>
+                              You have to publish a Tiktok video following the brief and tagging both the venue and
+                              claris.app
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </>
                   ) : (
                     <View style={styles.mainSocialItemContainer}>
                       <View style={styles.socialMediaImageContainer}>
-                        <Image source={icon} style={styles.socialMediaImage} />
+                        <Image source={icon?.action_icon} style={styles.socialMediaImage} />
                       </View>
                       <View style={styles.socialMediaTitleDescriptionContainer}>
                         <View style={styles.socialMediaTitleContainer}>
@@ -195,131 +217,17 @@ const ServiceDetails = () => {
                       </View>
                     </View>
                   )}
-                  {serviceDetails?.actions?.length > 1 && index === 0 && (
-                    <View style={styles.orContainer}>
-                      <View style={styles.orDivider} />
-                      <Text style={styles.orText}>Or</Text>
-                      <View style={styles.orDivider} />
-                    </View>
-                  )}
                 </>
               )
             }}
           />
         </View>
 
-        {/* <View style={styles.serviceDetailsContainer}>
-          <Text style={styles.restaurantNameText}>{serviceDetails?.Offer_Name}</Text>
-
-          <View style={styles.socialMediaContentTitleContainer}>
-            <Text style={styles.socialMediaTitleText}>Social Media Content</Text>
-          </View>
-          <FlatList
-            data={serviceDetails?.actions}
-            renderItem={({ item, index }) => {
-              const actionName = item?._actions_turbo?.Action_Name
-              // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-              const icon = checkActionName(actionName)
-              return (
-                <>
-                  {actionName === 'Diary Instagram' ? (
-                    diaryItems.map((diaryItem) => (
-                      <View showsVerticalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
-                        <View style={styles.socialItemMainContainer}>
-                          <View style={styles.tiktokMainContainer}>
-                            <View style={styles.tiktokIconNameContainer}>
-                              <Image source={icon} style={styles.tiktokIconImage} />
-                              <Text style={styles.tiktokTitleText}>{diaryItem?.action}</Text>
-
-                              <View style={styles.ratingContainer}>
-                                <Text style={styles.ratingUsersText}>240</Text>
-                                <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-                              </View>
-                            </View>
-                            <View>
-                              <View style={styles.infoContainer}>
-                                <Text style={styles.infoTextTitle}>i</Text>
-                              </View>
-                            </View>
-                          </View>
-
-                          <ScrollView
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            style={styles.amenitiesContainer}
-                          >
-                            <View style={styles.amenityContainer}>
-                              <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-                              <Image source={IMAGES.drinks} style={styles.amenityIcon} />
-                            </View>
-                            <View style={styles.amenityContainer}>
-                              <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
-                              <Image source={IMAGES.meals} style={styles.amenityIcon} />
-                            </View>
-                            <View style={styles.amenityContainer}>
-                              <Text
-                                style={styles.amenityTitle}
-                              >{` ${item?._actions_turbo?.Extra_People} X Persons`}</Text>
-                              <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
-                            </View>
-                          </ScrollView>
-                        </View>
-                      </View>
-                    ))
-                  ) : (
-                    <View showsVerticalScrollIndicator={false} style={styles.mainSocialMediaContainer}>
-                      <View style={styles.socialItemMainContainer}>
-                        <View style={styles.tiktokMainContainer}>
-                          <View style={styles.tiktokIconNameContainer}>
-                            <Image source={icon} style={styles.tiktokIconImage} />
-                            <Text style={styles.tiktokTitleText}>{item?._actions_turbo?.Action_Name}</Text>
-
-                            <View style={styles.ratingContainer}>
-                              <Text style={styles.ratingUsersText}>240</Text>
-                              <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
-                            </View>
-                          </View>
-                          <View>
-                            <View style={styles.infoContainer}>
-                              <Text style={styles.infoTextTitle}>i</Text>
-                            </View>
-                          </View>
-                        </View>
-
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.amenitiesContainer}>
-                          <View style={styles.amenityContainer}>
-                            <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-                            <Image source={IMAGES.drinks} style={styles.amenityIcon} />
-                          </View>
-                          <View style={styles.amenityContainer}>
-                            <Text style={styles.amenityTitle}>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
-                            <Image source={IMAGES.meals} style={styles.amenityIcon} />
-                          </View>
-                          <View style={styles.amenityContainer}>
-                            <Text
-                              style={styles.amenityTitle}
-                            >{` ${item?._actions_turbo?.Extra_People} X Persons`}</Text>
-                            <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
-                          </View>
-                        </ScrollView>
-                      </View>
-                    </View>
-                  )}
-                  {serviceDetails?.actions?.length > 1 && index === 0 && (
-                    <View style={styles.orContainer}>
-                      <Text style={styles.orText}>Or</Text>
-                    </View>
-                  )}
-                </>
-              )
-            }}
-          />
-
-          <TouchableOpacity style={styles.howItWorksContainer}>
+        {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
-          </TouchableOpacity>
-        </View> */}
+          </TouchableOpacity> */}
+
         <View style={styles.bookBtnMainContainer}>
           <TouchableOpacity onPress={handleBookPress} style={styles.bookBtnContainer}>
             <Text style={styles.bookBtnText}>Book Now</Text>
@@ -331,6 +239,16 @@ const ServiceDetails = () => {
 }
 
 const styles = StyleSheet.create({
+  friendAmenityTitle: {
+    textAlign: 'center',
+  },
+  friendAmentityText: {
+    textAlign: 'center',
+  },
+  friendAmenityContainer: {
+    width: scale(80),
+    justifyContent: 'center',
+  },
   orDivider: {
     borderWidth: 0.5,
     opacity: 0.5,
@@ -520,43 +438,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
     marginTop: verticalScale(8),
-  },
-  // amenitiesContainer: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   marginTop: verticalScale(10),
-  // },
-  // amenityContainer: {
-  //   alignItems: 'center',
-  //   backgroundColor: COLORS.lightBrown,
-  //   borderRadius: moderateScale(10),
-  //   flexDirection: 'row',
-  //   height: verticalScale(35),
-  //   justifyContent: 'center',
-  //   marginLeft: scale(10),
-  //   width: scale(125),
-  // },
-  // amenityIcon: {
-  //   height: moderateScale(23),
-  //   marginLeft: scale(15),
-  //   width: moderateScale(23),
-  // },
-  // amenityTitle: {
-  //   color: COLORS.achromaticBlack,
-  //   fontFamily: FONTS.quicksand,
-  //   fontSize: moderateScale(14),
-  // },
-  backIcon: {
-    height: moderateScale(30),
-    left: 20,
-    position: 'absolute',
-    top: 20,
-    width: moderateScale(30),
-  },
-  backIconContainer: {
-    height: verticalScale(50),
-    position: 'absolute',
-    width: scale(50),
   },
   bookBtnContainer: {
     alignItems: 'center',

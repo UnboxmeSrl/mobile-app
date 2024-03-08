@@ -37,12 +37,13 @@ const useYourSchedule = () => {
     setRefreshing(false)
   }
 
-  const handleCardPress = (item, approvalStatus, actionName) => {
+  const handleCardPress = (item, approvalStatus, actionName, actionNumId) => {
     if (approvalStatus === 'Pending') {
-      if (actionName === 'Diary Instagram' && item?.diary_action_turbo_id === 0) {
+      if (item?.diary_action_turbo_id === 0) {
         navigate({
           params: {
             actionName: actionName,
+            actionNumId: actionNumId,
             bookingDetails: item,
           },
           routeName: SCREEN_NAMES.ContentScreen,
@@ -53,14 +54,6 @@ const useYourSchedule = () => {
             bookingDetails: item,
           },
           routeName: SCREEN_NAMES.YourScheduleDetailsScreen,
-        })
-      } else {
-        navigate({
-          params: {
-            actionName: actionName,
-            bookingDetails: item,
-          },
-          routeName: SCREEN_NAMES.ContentScreen,
         })
       }
     } else if (approvalStatus === 'Accepted') {

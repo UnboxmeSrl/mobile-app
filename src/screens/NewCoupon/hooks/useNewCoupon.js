@@ -3,7 +3,7 @@ import { useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setRestaurantDetails } from '../../../redux/slices/restaurantSlice'
-import { checkActionName } from '../../../utils'
+import { checkAction, checkActionName } from '../../../utils'
 
 const useNewCoupon = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -14,12 +14,17 @@ const useNewCoupon = () => {
   const month = bookingDate.toLocaleString('default', { month: 'long' })
   const timeFrame = bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo
 
+  let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0
+  let icon = checkAction(actionNumId)?.action_icon
   let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
 
   if (bookingDetails?.diary_action_turbo_id) {
-    actionName = bookingDetails?._diary_action_turbo?.action
+    actionName = bookingDetails?._diary_action_turbo?.action_for_others
+    if (actionNumId === 3) {
+      actionName = bookingDetails?._diary_action_turbo?.action
+    }
+    icon = checkActionName(actionName)
   }
-  const icon = checkActionName(actionName)
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.YourScheduleScreen)

@@ -102,4 +102,5 @@ export const IMAGES = {
   appliedScreenBackground: require('./images/applied-screen-background.png'),
   appLogo: require('./images/app-logo.png'),
   addUser: require('./images/add-user.png'),
+  fullDedicated: require('./images/full-dedicated.png'),
 }

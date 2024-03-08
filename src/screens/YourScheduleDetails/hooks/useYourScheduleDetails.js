@@ -4,7 +4,7 @@ import { useNavigationParam } from 'react-navigation-hooks'
 import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { checkActionName } from '../../../utils'
+import { checkAction, checkActionName } from '../../../utils'
 import { cancelBooking, getAllCanceledBookings, getBookings } from '../../../services'
 import { Alert } from 'react-native'
 import { setBookings, setCanceledBookings } from '../../../redux/slices/restaurantSlice'
@@ -25,12 +25,19 @@ const useYourScheduleDetails = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const timeFrame = bookingDetails?._timeframes_turbo
+
+  let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0
+  let icon = checkAction(actionNumId)?.action_icon
   let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
 
   if (bookingDetails?.diary_action_turbo_id) {
-    actionName = bookingDetails?._diary_action_turbo?.action
+    actionName = bookingDetails?._diary_action_turbo?.action_for_others
+    if (actionNumId === 3) {
+      actionName = bookingDetails?._diary_action_turbo?.action
+    }
+    icon = checkActionName(actionName)
   }
-  const icon = checkActionName(actionName)
+
   const dispatch = useDispatch()
 
   const handleBackPress = () => {

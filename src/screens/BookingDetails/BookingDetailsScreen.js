@@ -24,6 +24,7 @@ const BookingDetailsScreen = () => {
     currentWeekDay,
     currentDate,
     selectedTimeFame,
+    isTimeCalculating,
     setSelectedTimeFame,
     startDate,
     weekDayWiseTimeSlots,
@@ -86,24 +87,26 @@ const BookingDetailsScreen = () => {
               </View>
             </View>
 
-            <CalendarStrip
-              calendarHeaderStyle={styles.calendarHeaderStyle}
-              dateNameStyle={styles.dateNameStyle}
-              dateNumberStyle={styles.dateNumberStyle}
-              datesBlacklist={datesBlacklistFunc}
-              endDate={endDate}
-              highlightDateContainerStyle={styles.highlightedDateContainer}
-              highlightDateNameStyle={styles.highlightDateNameStyle}
-              highlightDateNumberStyle={styles.highlightDateNumberStyle}
-              iconLeft={IMAGES.back}
-              iconRight={IMAGES.back}
-              //   renderDate={renderDate}
-              onDateSelected={(date) => setSelectedDate(date)}
-              selectedDate={selectedDate}
-              showMonth={false}
-              showYear={false}
-              startingDate={startDate}
-            />
+            {!isTimeCalculating && (
+              <CalendarStrip
+                calendarHeaderStyle={styles.calendarHeaderStyle}
+                dateNameStyle={styles.dateNameStyle}
+                dateNumberStyle={styles.dateNumberStyle}
+                datesBlacklist={datesBlacklistFunc}
+                endDate={endDate}
+                highlightDateContainerStyle={styles.highlightedDateContainer}
+                highlightDateNameStyle={styles.highlightDateNameStyle}
+                highlightDateNumberStyle={styles.highlightDateNumberStyle}
+                iconLeft={IMAGES.back}
+                iconRight={IMAGES.back}
+                //   renderDate={renderDate}
+                onDateSelected={(date) => setSelectedDate(date)}
+                selectedDate={selectedDate}
+                showMonth={false}
+                showYear={false}
+                startingDate={startDate}
+              />
+            )}
           </View>
           <View />
         </View>

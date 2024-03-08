@@ -17,6 +17,7 @@ const useBookingDetails = () => {
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([])
   const [selectedTimeFame, setSelectedTimeFame] = useState()
   const [isLoading, setIsLoading] = useState(false)
+  const [isTimeCalculating, setIsTimeCalculating] = useState(true)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
 
@@ -58,13 +59,7 @@ const useBookingDetails = () => {
     }-${
       currentBookingDateTime.getDate() < 10 ? `0${currentBookingDateTime.getDate()}` : currentBookingDateTime.getDate()
     }`
-    console.log(
-      ' conditionCheck',
-      currentBookingDateTime,
-      formattedDate,
-      serviceDetails?.actions?.length,
-      serviceDetails?.actions?.[0]?.actions_turbo_id
-    )
+    console.log(' conditionCheck', currentBookingDateTime, formattedDate, serviceDetails?.actions_turbo_id)
     const prepData = {
       ApprovalStatus: false,
       Approved: serviceDetails?.Story,
@@ -84,7 +79,7 @@ const useBookingDetails = () => {
       Submitbutton_: 'false',
       Title: '',
       action_status_turbo_id: 0,
-      actions_turbo_id: serviceDetails?.actions?.length === 1 ? serviceDetails?.actions?.[0]?.actions_turbo_id : 0,
+      actions_turbo_id: serviceDetails?.actions_turbo_id,
       booking_status_id: 0,
       deal_scheme_id: 0,
       events_id: 0,
@@ -97,6 +92,7 @@ const useBookingDetails = () => {
     console.log('prepData: ', prepData)
     const res = await addRestaurantBooking(prepData)
     if (res?.id) {
+      console.log('Booking Details:', res)
       navigate({
         params: {
           bookingDetails: res,
@@ -161,6 +157,7 @@ const useBookingDetails = () => {
     })
     console.log('filteredTimeData: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)
+    setIsTimeCalculating(false)
   }, [selectedDate])
 
   const datesBlacklistFunc = (date) => {
@@ -212,6 +209,7 @@ const useBookingDetails = () => {
     handleConfirmBtnPress,
     handleRemoveBtnPress,
     isLoading,
+    isTimeCalculating,
     isDateAvailable,
     selectedDate,
     selectedTimeFame,
