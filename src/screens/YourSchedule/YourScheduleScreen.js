@@ -71,6 +71,7 @@ const YourScheduleScreen = () => {
         (selectedTab === 1 && (
           <FlatList
             data={bookings}
+            keyExtractor={(_, index) => index.toString()}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onBookingRefresh} />}
             renderItem={({ item, index }) => {
               const myDate = new Date(item?.BookingDay)
@@ -192,6 +193,7 @@ const YourScheduleScreen = () => {
         (selectedTab === 2 && (
           <FlatList
             data={contentList}
+            keyExtractor={(_, index) => index.toString()}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onContentRefresh} />}
             renderItem={({ item, index }) => {
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-
 import { sliceNames } from '../../constants'
 
 const initialState = {
   authData: {},
   loginData: {},
   isApplied: false,
+  isFirstTimeLogin: true,
 }
 
 const AuthSlice = createSlice({
@@ -26,9 +26,12 @@ const AuthSlice = createSlice({
     setIsApplied: (state, actions) => {
       state.isApplied = actions?.payload
     },
+    setIsFirstTimeLogin: (state, actions) => {
+      state.isFirstTimeLogin = actions?.payload
+    },
   },
 })
 
-export const { setAuthData, setLoginData, setIsApplied } = AuthSlice.actions
+export const { setAuthData, setLoginData, setIsApplied, setIsFirstTimeLogin } = AuthSlice.actions
 
 export default AuthSlice.reducer

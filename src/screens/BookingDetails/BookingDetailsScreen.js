@@ -123,6 +123,7 @@ const BookingDetailsScreen = () => {
             }
             data={weekDayWiseTimeSlots}
             numColumns={2}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => {
               const isSelected = item?.id === selectedTimeFame?.id
               return (

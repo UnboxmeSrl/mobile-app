@@ -1,33 +1,36 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { IMAGES } from '../../../assets/images'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../../constants/fonts'
-import { COLORS } from '../../../constants/colors'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { COLORS, FONTS } from '../../../constants'
 
-const FifthOnboarding = () => {
+const FirstScreen = () => {
   return (
-    <View style={styles.mainContainer}>
+    <View>
+      <Image
+        source={IMAGES.onboarding.loginOnboarding.firstLoginOne}
+        style={styles.imageStyle}
+        resizeMode={'contain'}
+      />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>
-            {`Climb your path to `}
-            <Text style={styles.colorChangeText}>{`Legendary level  `}</Text>
+            {`Book `}
+            <Text style={styles.colorChangeText}>{`your Deals `}</Text>
+            {`in advance`}
           </Text>
         </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>{`Only Reel and Tiktok requests will require approvation `}</Text>
+        </View>
       </View>
-      <Image source={IMAGES.onboarding.onboardingFifth} style={styles.imageStyle} resizeMode={'contain'} />
     </View>
   )
 }
 
-export default FifthOnboarding
+export default FirstScreen
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    marginTop: getStatusBarHeight(),
-  },
   descriptionText: {
     fontFamily: FONTS.quicksand,
     color: COLORS.white,
@@ -56,8 +59,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(0),
   },
   imageStyle: {
-    marginTop: verticalScale(30),
-    height: verticalScale(410),
+    height: verticalScale(370),
     width: '100%',
   },
 })

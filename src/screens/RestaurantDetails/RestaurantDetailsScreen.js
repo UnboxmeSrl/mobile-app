@@ -117,6 +117,7 @@ const RestaurantDetails = () => {
 
           <FlatList
             data={services}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => {
               return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
             }}

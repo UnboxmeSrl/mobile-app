@@ -21,6 +21,7 @@ const AuthGenderScreen = () => {
           <View style={styles.genderFlatlistContainer}>
             <FlatList
               data={genderList}
+              keyExtractor={(_, index) => index.toString()}
               renderItem={({ item, index }) => {
                 const isSelected = selectedGender?.id === item?.id
                 return (

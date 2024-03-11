@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { addRestaurantBooking, getTimeFrames } from '../../../services'
+import { addRestaurantBooking, getTimeFrames, showToastError } from '../../../services'
 
 const useBookingDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -91,16 +91,19 @@ const useBookingDetails = () => {
 
     console.log('prepData: ', prepData)
     const res = await addRestaurantBooking(prepData)
-    if (res?.id) {
+    if (res?.status === 200) {
       console.log('Booking Details:', res)
       navigate({
         params: {
-          bookingDetails: res,
+          bookingDetails: res?.data,
         },
         routeName: SCREEN_NAMES.BookingOnApprovalScreen,
       })
     } else {
-      Alert.alert('something went wrong')
+      const error = {
+        message: res?.data,
+      }
+      showToastError(error)
     }
     setIsLoading(false)
   }

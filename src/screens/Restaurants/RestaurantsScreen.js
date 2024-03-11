@@ -40,18 +40,18 @@ const RestaurantsScreen = () => {
         <Image resizeMode="contain" source={IMAGES.locationNew} style={styles.locationIcon} />
         <Text style={styles.locationFont}>{cityData?.CityName}</Text>
       </TouchableOpacity>
+      <Categories
+        categoriesIds={categoriesIds}
+        category={filter}
+        customCategories={categories}
+        onPress={onCategoryChange}
+      />
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator color={COLORS.primary} size={20} />
         </View>
       ) : (
         <>
-          <Categories
-            categoriesIds={categoriesIds}
-            category={filter}
-            customCategories={categories}
-            onPress={onCategoryChange}
-          />
           <View style={styles.restaurantsFlatlistContainer}>
             <FlatList
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}

@@ -39,6 +39,7 @@ const ContentScreen = () => {
         ) : actionNumId === 3 ? (
           <FlatList
             data={diaryItems}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => {
               return (
                 <TouchableOpacity

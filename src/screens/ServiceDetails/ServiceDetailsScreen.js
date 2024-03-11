@@ -106,6 +106,7 @@ const ServiceDetails = () => {
         <View style={styles.flatlistContainer}>
           <FlatList
             data={[serviceDetails]}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => {
               const actionNumId = item?._actions_turbo?.action_num_id
               // const diaryItems = ['TikTok Diary', 'Instagram Diary']

@@ -14,6 +14,7 @@ const AuthUserTypeScreen = () => {
       <View style={styles.userTypeFlatlistContainer}>
         <FlatList
           data={userTypeList}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => {
             const isSelected = selectedUserType?.id === item?.id
             return (

@@ -3,7 +3,7 @@ import OneSignal from 'react-native-onesignal'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { setLoginData } from '../../../../redux/slices/authSlice'
+import { setIsFirstTimeLogin, setLoginData } from '../../../../redux/slices/authSlice'
 import { setBookings } from '../../../../redux/slices/restaurantSlice'
 import { userLogin } from '../../../../services'
 import { getBookings } from '../../../../services/RestaurantService'
@@ -14,6 +14,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
   const [loading, setLoading] = useState(false)
   const { navigate } = useNavigation()
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
+  const isFirstTimeLogin = useSelector((state) => state.authSlice.isFirstTimeLogin)
   const dispatch = useDispatch()
 
   const handleLoginPress = async (ref) => {
@@ -31,7 +32,12 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         const params = `/${res?.id}`
         const bookingRes = await getBookings(params)
         dispatch(setBookings(bookingRes))
-        if (serviceDetails?.id && isFromBookRedirected) {
+
+        console.log('isFirstTimeLogin', isFirstTimeLogin)
+        if (isFirstTimeLogin) {
+          dispatch(setIsFirstTimeLogin(false))
+          navigate(SCREEN_NAMES.LoginOnboarding)
+        } else if (serviceDetails?.id && isFromBookRedirected) {
           navigate(SCREEN_NAMES.ServiceDetails)
         } else {
           navigate(SCREEN_NAMES.Cities)

@@ -34,6 +34,7 @@ const ArchiveScreen = () => {
       ) : (
         <FlatList
           data={canceledBookings}
+          keyExtractor={(_, index) => index.toString()}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListEmptyComponent={
             <View style={styles.emptyComponentContainer}>

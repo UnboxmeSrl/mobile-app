@@ -38,7 +38,7 @@ import {
   AuthUserTypeScreen,
 } from '../screens/Auth'
 import { SCREEN_NAMES } from '../constants/navigation'
-import { OnboardingNew } from '../screens/OnboardingNew'
+import { LoginOnboarding, OnboardingNew } from '../screens/OnboardingNew'
 import SignUpNew from '../screens/SignUpNew/SignUpNew'
 import AppliedScreen from '../screens/SignUpNew/AppliedScreen/AppliedScreen'
 
@@ -160,5 +160,8 @@ export default {
   },
   [SCREEN_NAMES.AppliedScreen]: {
     screen: AppliedScreen,
+  },
+  [SCREEN_NAMES.LoginOnboarding]: {
+    screen: LoginOnboarding,
   },
 }

@@ -1,33 +1,39 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { IMAGES } from '../../../assets/images'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../../constants/fonts'
-import { COLORS } from '../../../constants/colors'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { COLORS, FONTS } from '../../../constants'
 
-const FifthOnboarding = () => {
+const SecondScreen = () => {
   return (
-    <View style={styles.mainContainer}>
+    <View>
+      <Image
+        source={IMAGES.onboarding.loginOnboarding.firstLoginSecond}
+        style={styles.imageStyle}
+        resizeMode={'contain'}
+      />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>
-            {`Climb your path to `}
-            <Text style={styles.colorChangeText}>{`Legendary level  `}</Text>
+            {`Show the `}
+            <Text style={styles.colorChangeText}>{`coupon `}</Text>
+            {`at the venue`}
+          </Text>
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>
+            {`Show your coupon to the staff, to unlock the `}
+            <Text style={styles.boldedText}>{`free service`}</Text>
           </Text>
         </View>
       </View>
-      <Image source={IMAGES.onboarding.onboardingFifth} style={styles.imageStyle} resizeMode={'contain'} />
     </View>
   )
 }
 
-export default FifthOnboarding
+export default SecondScreen
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    marginTop: getStatusBarHeight(),
-  },
   descriptionText: {
     fontFamily: FONTS.quicksand,
     color: COLORS.white,
@@ -36,11 +42,15 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     marginTop: verticalScale(10),
+    marginBottom: verticalScale(15),
     width: '85%',
     alignSelf: 'center',
   },
   colorChangeText: {
     color: COLORS.newPrimary,
+  },
+  boldedText: {
+    fontFamily: FONTS.quicksandBold,
   },
   titleText: {
     fontFamily: FONTS.quicksandBold,
@@ -56,8 +66,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(0),
   },
   imageStyle: {
-    marginTop: verticalScale(30),
-    height: verticalScale(410),
+    height: verticalScale(370),
     width: '100%',
   },
 })
