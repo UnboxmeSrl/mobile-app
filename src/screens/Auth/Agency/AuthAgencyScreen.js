@@ -8,11 +8,19 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../../assets/images'
 
 const AuthAgencyScreen = () => {
-  const { isBtnDisabled, selectedValue, setSelectedValue, agencyName, setAgencyName, handleNextPress } = useAuthAgency()
+  const {
+    isBtnDisabled,
+    selectedValue,
+    setSelectedValue,
+    agencyName,
+    setAgencyName,
+    handleBackPress,
+    handleNextPress,
+  } = useAuthAgency()
 
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'your Agency'} step={6} />
+      <CustomHeader title={'your Agency'} step={6} handleBackPress={handleBackPress} />
       <View style={styles.OptionsMainContainer}>
         <TouchableOpacity onPress={() => setSelectedValue(1)} style={styles.freelancerContainer}>
           {selectedValue === 1 ? (

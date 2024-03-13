@@ -6,6 +6,8 @@ const initialState = {
   loginData: {},
   isApplied: false,
   isFirstTimeLogin: true,
+  isSignUpProcessStarted: false,
+  signUpProcessStage: 0,
 }
 
 const AuthSlice = createSlice({
@@ -29,9 +31,22 @@ const AuthSlice = createSlice({
     setIsFirstTimeLogin: (state, actions) => {
       state.isFirstTimeLogin = actions?.payload
     },
+    setIsSignUpProcessStarted: (state, actions) => {
+      state.isSignUpProcessStarted = actions?.payload
+    },
+    setSignUpProcessStage: (state, actions) => {
+      state.signUpProcessStage = actions?.payload
+    },
   },
 })
 
-export const { setAuthData, setLoginData, setIsApplied, setIsFirstTimeLogin } = AuthSlice.actions
+export const {
+  setAuthData,
+  setLoginData,
+  setIsApplied,
+  setIsFirstTimeLogin,
+  setIsSignUpProcessStarted,
+  setSignUpProcessStage,
+} = AuthSlice.actions
 
 export default AuthSlice.reducer

@@ -18,12 +18,13 @@ const AuthSocialNetworkScreen = () => {
     instaSheetRef,
     handleOnTikTokPress,
     handleOnInstaPress,
+    handleBackPress,
     handleNextPress,
   } = useAuthSocialNetwork()
 
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'Social networks'} step={11} />
+      <CustomHeader title={'Social networks'} step={11} handleBackPress={handleBackPress} />
       <View style={styles.descriptionContainer}>
         <Text style={styles.descriptionText}>Register your social networks</Text>
       </View>

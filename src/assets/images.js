@@ -108,4 +108,5 @@ export const IMAGES = {
   appLogo: require('./images/app-logo.png'),
   addUser: require('./images/add-user.png'),
   fullDedicated: require('./images/full-dedicated.png'),
+  overlay: require('./images/overlay.png'),
 }

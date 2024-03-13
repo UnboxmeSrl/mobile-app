@@ -4,10 +4,12 @@ import SecondScreen from '../SecondScreen'
 import ThirdScreen from '../ThirdScreen'
 import { navigate } from '../../../../services'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { useNavigationParam } from 'react-navigation-hooks'
 
 const useLoginOnboarding = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const carouselRef = useRef(null)
+  const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
   const carouselItems = [
     {
       id: 1,
@@ -26,7 +28,11 @@ const useLoginOnboarding = () => {
   const handleNextPress = () => {
     setActiveIndex((activeIndex) => activeIndex + 1)
     if (activeIndex > 1) {
-      navigate(SCREEN_NAMES.Cities)
+      if (isFromBookRedirected) {
+        navigate(SCREEN_NAMES.ServiceDetails)
+      } else {
+        navigate(SCREEN_NAMES.Cities)
+      }
     }
   }
   return {

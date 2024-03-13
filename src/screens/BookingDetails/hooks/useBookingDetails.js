@@ -17,7 +17,7 @@ const useBookingDetails = () => {
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([])
   const [selectedTimeFame, setSelectedTimeFame] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [isTimeCalculating, setIsTimeCalculating] = useState(true)
+  const [isDatesLoading, setIsDatesLoading] = useState(true)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
 
@@ -112,57 +112,6 @@ const useBookingDetails = () => {
     setSelectedTimeFame({})
   }
 
-  const getTimeFrameData = async () => {
-    const params = `/${restaurantDetails?.id}`
-    const res = await getTimeFrames(params)
-    setTimeFrameData(res)
-    const myDate = new Date(selectedDate)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-    setCurrentWeekDay(weekDay)
-    // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
-    const filteredData = res?.filter((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
-      if (filteredRes.length > 0) return true
-      else {
-        return false
-      }
-    })
-
-    filteredData.forEach((item) => {
-      const weekdays = item.weekdays
-      const pauseDays = item.pause_days
-      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay.day === day.day))
-      item.weekdays = filteredWeekdays
-    })
-    console.log('filteredTimeData: ' + JSON.stringify(filteredData))
-    setWeekDayWiseTimeSlots(filteredData)
-  }
-
-  useEffect(() => {
-    setSelectedTimeFame({})
-    const myDate = new Date(selectedDate)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-    console.log('weekDay: ' + weekDay)
-    setCurrentWeekDay(weekDay)
-    const filteredData = timeFrameData?.filter((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
-      if (filteredRes.length > 0) return true
-      else {
-        return false
-      }
-    })
-
-    filteredData.forEach((item) => {
-      const weekdays = item.weekdays
-      const pauseDays = item.pause_days
-      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay.day === day.day))
-      item.weekdays = filteredWeekdays
-    })
-    console.log('filteredTimeData: ' + JSON.stringify(filteredData))
-    setWeekDayWiseTimeSlots(filteredData)
-    setIsTimeCalculating(false)
-  }, [selectedDate])
-
   const datesBlacklistFunc = (date) => {
     const myDate = new Date(date)
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
@@ -182,9 +131,65 @@ const useBookingDetails = () => {
     }
   }
 
+  const getTimeFrameData = async () => {
+    const params = `/${restaurantDetails?.id}`
+    const res = await getTimeFrames(params)
+    setTimeFrameData(res)
+    const myDate = new Date(selectedDate)
+    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+    setCurrentWeekDay(weekDay)
+    // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    const filteredData = res?.filter((t) => {
+      const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
+      if (filteredRes.length > 0) return true
+      else {
+        return false
+      }
+    })
+
+    filteredData.forEach((item) => {
+      const weekdays = item.weekdays
+      const pauseDays = item.pause_days
+      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
+      item.weekdays = filteredWeekdays
+    })
+    console.log('filteredTimeData1: ' + JSON.stringify(filteredData))
+    setWeekDayWiseTimeSlots(filteredData)
+    setTimeout(() => {
+      setIsDatesLoading(false)
+    }, 2000)
+  }
+
   useEffect(() => {
     getTimeFrameData()
   }, [])
+
+  useEffect(() => {
+    if (!isDatesLoading) {
+      setSelectedTimeFame({})
+      const myDate = new Date(selectedDate)
+      const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+      console.log('weekDay: ' + weekDay)
+      setCurrentWeekDay(weekDay)
+      const filteredData = timeFrameData?.filter((t) => {
+        const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
+        if (filteredRes.length > 0) return true
+        else {
+          return false
+        }
+      })
+
+      console.log('timeFrameData', timeFrameData)
+      filteredData.forEach((item) => {
+        const weekdays = item.weekdays
+        const pauseDays = item.pause_days
+        const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
+        item.weekdays = filteredWeekdays
+      })
+      console.log('filteredTimeData2: ' + JSON.stringify(filteredData))
+      setWeekDayWiseTimeSlots(filteredData)
+    }
+  }, [selectedDate])
 
   useEffect(() => {
     console.log('selected Date:', selectedDate)
@@ -212,8 +217,8 @@ const useBookingDetails = () => {
     handleConfirmBtnPress,
     handleRemoveBtnPress,
     isLoading,
-    isTimeCalculating,
     isDateAvailable,
+    isDatesLoading,
     selectedDate,
     selectedTimeFame,
     setSelectedDate,

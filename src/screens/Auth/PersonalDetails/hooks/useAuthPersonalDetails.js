@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { navigate } from '../../../../services'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
 
 const useAuthPersonalDetails = () => {
-  const [name, setName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [nickName, setNickName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const userDetails = useSelector((state) => state.authSlice.authData)
+  const [name, setName] = useState(userDetails?.name ?? '')
+  const [surname, setSurname] = useState(userDetails?.surname ?? '')
+  const [nickName, setNickName] = useState(userDetails?.nickName ?? '')
+  const [phoneNumber, setPhoneNumber] = useState(userDetails?.phoneNumber ?? '')
   const [isFocused, setIsFocused] = useState()
-  const [country, setCountry] = useState()
+  const [country, setCountry] = useState(userDetails?.country ?? {})
   const dispatch = useDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
@@ -19,8 +20,9 @@ const useAuthPersonalDetails = () => {
   }
 
   const handleNextPress = () => {
-    const phonWithCountryCode = `+${country?.callingCode?.[0]}${phoneNumber}`
-    dispatch(setAuthData({ name, surname, nickName, phoneNumber: phonWithCountryCode }))
+    // const phonWithCountryCode = `+${country?.callingCode?.[0]}${phoneNumber}`
+    dispatch(setAuthData({ name, surname, nickName, country: country, phoneNumber: phoneNumber }))
+    dispatch(setSignUpProcessStage(2))
     navigate(SCREEN_NAMES.AuthGenderScreen)
   }
 

@@ -7,11 +7,19 @@ import { useAuthGender } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
 const AuthGenderScreen = () => {
-  const { isLoading, genderList, selectedGender, isBtnDisabled, setSelectedGender, handleNextPress } = useAuthGender()
+  const {
+    isLoading,
+    genderList,
+    selectedGender,
+    isBtnDisabled,
+    setSelectedGender,
+    handleBackPress,
+    handleNextPress,
+  } = useAuthGender()
 
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'Gender'} step={2} />
+      <CustomHeader title={'Gender'} step={2} handleBackPress={handleBackPress} />
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator size={moderateScale(20)} color={COLORS.primary} />

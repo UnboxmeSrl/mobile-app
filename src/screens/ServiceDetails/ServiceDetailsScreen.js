@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
   },
   socialMediaTitleContainer: {
     flexDirection: 'row',
+    width: '80%',
   },
   socialMediaTitleDescriptionContainer: {
     width: '70%',
@@ -288,7 +289,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   mainSocialItemContainer: {
-    height: verticalScale(118),
+    height: verticalScale(150),
     width: '90%',
     alignSelf: 'center',
     borderWidth: moderateScale(1),

@@ -17,6 +17,7 @@ import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useBookingDetails } from './hooks'
+import DeviceInfo from 'react-native-device-info'
 
 const BookingDetailsScreen = () => {
   const {
@@ -24,7 +25,6 @@ const BookingDetailsScreen = () => {
     currentWeekDay,
     currentDate,
     selectedTimeFame,
-    isTimeCalculating,
     setSelectedTimeFame,
     startDate,
     weekDayWiseTimeSlots,
@@ -33,6 +33,7 @@ const BookingDetailsScreen = () => {
     currentMonth,
     isLoading,
     isDateAvailable,
+    isDatesLoading,
     showPreviousWeek,
     showNextWeek,
     handleBackPress,
@@ -56,138 +57,154 @@ const BookingDetailsScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
-        <View style={styles.headerAndDateContainer}>
-          <View style={styles.headerContainer}>
-            <TouchableOpacity onPress={handleBackPress}>
-              <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
-            </TouchableOpacity>
+      {isDatesLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={COLORS.primary} size={30} />
+        </View>
+      ) : (
+        <>
+          <View style={styles.mainContainer}>
+            <View style={styles.headerAndDateContainer}>
+              <View style={styles.headerContainer}>
+                <TouchableOpacity onPress={handleBackPress}>
+                  <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+                </TouchableOpacity>
 
-            <View>
-              <Text style={styles.dateSelectTitleText}>Select a Date</Text>
+                <View>
+                  <Text style={styles.dateSelectTitleText}>Select a Date</Text>
+                </View>
+
+                <View style={{ alignItems: 'center' }}>
+                  {/* This need to remove in future */}
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text>{DeviceInfo.getBrand()}</Text>
+                    <Text> {DeviceInfo.getBuildNumber()}</Text>
+                    <Text> {DeviceInfo.getSystemVersion()}</Text>
+                    <Text> {DeviceInfo.getModel()}</Text>
+                  </View>
+                  {/* only above one line and style={{ alignItems: 'center' }} */}
+                  <Image resizeMode="cover" source={IMAGES.calender} style={styles.calenderIcon} />
+                </View>
+              </View>
+              {/* <DateTimePicker display="inline" value={new Date()} /> */}
+              <View style={styles.calendarMainContainer}>
+                <View style={styles.dateHeader}>
+                  <View>
+                    <Text style={styles.selectedMonthName}>{currentMonth}</Text>
+                  </View>
+                  <View style={styles.previousNextIconsContainer}>
+                    <TouchableOpacity onPress={showPreviousWeek}>
+                      <Image resizeMode="cover" source={IMAGES.back} style={styles.previousDatesIcon} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={showNextWeek}>
+                      <Image resizeMode="cover" source={IMAGES.back} style={styles.nextDatesIcon} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <CalendarStrip
+                  calendarHeaderStyle={styles.calendarHeaderStyle}
+                  dateNameStyle={styles.dateNameStyle}
+                  dateNumberStyle={styles.dateNumberStyle}
+                  datesBlacklist={datesBlacklistFunc}
+                  endDate={endDate}
+                  highlightDateContainerStyle={styles.highlightedDateContainer}
+                  highlightDateNameStyle={styles.highlightDateNameStyle}
+                  highlightDateNumberStyle={styles.highlightDateNumberStyle}
+                  iconLeft={IMAGES.back}
+                  iconRight={IMAGES.back}
+                  //   renderDate={renderDate}
+                  onDateSelected={(date) => setSelectedDate(date)}
+                  selectedDate={selectedDate}
+                  showMonth={false}
+                  showYear={false}
+                  startingDate={startDate}
+                  iconStyle={styles.calendarStripIcon}
+                  iconContainer={styles.calendarStripIconContainer}
+                />
+              </View>
+              <View />
             </View>
-            <View>
-              <Image resizeMode="cover" source={IMAGES.calender} style={styles.calenderIcon} />
+            <View style={styles.availableHoursContainer}>
+              <View style={styles.availableHoursTitleContainer}>
+                <Text style={styles.availableHoursTitleText}>Available Hours</Text>
+              </View>
+
+              <FlatList
+                ListEmptyComponent={
+                  <View style={styles.listEmptyContainer}>
+                    <Text style={styles.listEmptyText}>Not available on this day.</Text>
+                  </View>
+                }
+                data={weekDayWiseTimeSlots}
+                numColumns={2}
+                keyExtractor={(_, index) => index.toString()}
+                renderItem={({ item, index }) => {
+                  const isSelected = item?.id === selectedTimeFame?.id
+                  return (
+                    <TouchableOpacity
+                      onPress={() => setSelectedTimeFame(item)}
+                      style={[styles.hoursContainer, isSelected && styles.selectedTimeFrameStyle]}
+                    >
+                      <Image resizeMode="cover" source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
+                      <Text>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
+                    </TouchableOpacity>
+                  )
+                }}
+              />
+
+              <View style={styles.sendMessageTitleContainer}>
+                <Text style={styles.sendMessageTitleText}>Send Message (Optional)</Text>
+              </View>
+              <View style={styles.sendMessageTextContainer}>
+                <TextInput
+                  placeholder="Ask owner your specific questions about this apoitment"
+                  placeholderTextColor={COLORS.gray}
+                  style={styles.sendMessageTextInput}
+                />
+              </View>
+
+              {selectedTimeFame?.id && (
+                <View style={styles.selectedDateMainContainer}>
+                  <View style={styles.selectedDateContainer}>
+                    <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
+                    <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
+                  </View>
+                  <View style={styles.timeContainer}>
+                    <Text style={styles.selectedDateTitleText}>Date 1</Text>
+                    <Text
+                      style={styles.selectedDateWithTimeText}
+                    >{`${currentWeekDay}, ${selectedTimeFame?.Start}.${selectedTimeFame?.Minute_Start} - ${selectedTimeFame?.End}.${selectedTimeFame?.Minute_End}`}</Text>
+                  </View>
+                  <TouchableOpacity onPress={handleRemoveBtnPress} style={styles.removeBtnContainer}>
+                    <Text style={styles.removeBtnText}>Remove</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
           </View>
-          {/* <DateTimePicker display="inline" value={new Date()} /> */}
-          <View style={styles.calendarMainContainer}>
-            <View style={styles.dateHeader}>
-              <View>
-                <Text style={styles.selectedMonthName}>{currentMonth}</Text>
+          <View style={styles.bookBtnMainContainer}>
+            {isLoading ? (
+              <View style={styles.bookBtnContainer}>
+                <ActivityIndicator color={COLORS.primary} size={30} />
               </View>
-              <View style={styles.previousNextIconsContainer}>
-                <TouchableOpacity onPress={showPreviousWeek}>
-                  <Image resizeMode="cover" source={IMAGES.back} style={styles.previousDatesIcon} />
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={showNextWeek}>
-                  <Image resizeMode="cover" source={IMAGES.back} style={styles.nextDatesIcon} />
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            {!isTimeCalculating && (
-              <CalendarStrip
-                calendarHeaderStyle={styles.calendarHeaderStyle}
-                dateNameStyle={styles.dateNameStyle}
-                dateNumberStyle={styles.dateNumberStyle}
-                datesBlacklist={datesBlacklistFunc}
-                endDate={endDate}
-                highlightDateContainerStyle={styles.highlightedDateContainer}
-                highlightDateNameStyle={styles.highlightDateNameStyle}
-                highlightDateNumberStyle={styles.highlightDateNumberStyle}
-                iconLeft={IMAGES.back}
-                iconRight={IMAGES.back}
-                //   renderDate={renderDate}
-                onDateSelected={(date) => setSelectedDate(date)}
-                selectedDate={selectedDate}
-                showMonth={false}
-                showYear={false}
-                startingDate={startDate}
-              />
+            ) : (
+              <TouchableOpacity
+                disabled={!selectedTimeFame?.id}
+                onPress={handleConfirmBtnPress}
+                style={[
+                  styles.bookBtnContainer,
+                  selectedTimeFame?.id && {
+                    backgroundColor: COLORS.lightBrown,
+                  },
+                ]}
+              >
+                <Text style={styles.bookBtnText}>Confirm</Text>
+              </TouchableOpacity>
             )}
           </View>
-          <View />
-        </View>
-        <View style={styles.availableHoursContainer}>
-          <View style={styles.availableHoursTitleContainer}>
-            <Text style={styles.availableHoursTitleText}>Available Hours</Text>
-          </View>
-
-          <FlatList
-            ListEmptyComponent={
-              <View style={styles.listEmptyContainer}>
-                <Text style={styles.listEmptyText}>Not available on this day.</Text>
-              </View>
-            }
-            data={weekDayWiseTimeSlots}
-            numColumns={2}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              const isSelected = item?.id === selectedTimeFame?.id
-              return (
-                <TouchableOpacity
-                  onPress={() => setSelectedTimeFame(item)}
-                  style={[styles.hoursContainer, isSelected && styles.selectedTimeFrameStyle]}
-                >
-                  <Image resizeMode="cover" source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
-                  <Text>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
-                </TouchableOpacity>
-              )
-            }}
-          />
-
-          <View style={styles.sendMessageTitleContainer}>
-            <Text style={styles.sendMessageTitleText}>Send Message (Optional)</Text>
-          </View>
-          <View style={styles.sendMessageTextContainer}>
-            <TextInput
-              placeholder="Ask owner your specific questions about this apoitment"
-              placeholderTextColor={COLORS.gray}
-              style={styles.sendMessageTextInput}
-            />
-          </View>
-
-          {selectedTimeFame?.id && (
-            <View style={styles.selectedDateMainContainer}>
-              <View style={styles.selectedDateContainer}>
-                <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
-                <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
-              </View>
-              <View style={styles.timeContainer}>
-                <Text style={styles.selectedDateTitleText}>Date 1</Text>
-                <Text
-                  style={styles.selectedDateWithTimeText}
-                >{`${currentWeekDay}, ${selectedTimeFame?.Start}.${selectedTimeFame?.Minute_Start} - ${selectedTimeFame?.End}.${selectedTimeFame?.Minute_End}`}</Text>
-              </View>
-              <TouchableOpacity onPress={handleRemoveBtnPress} style={styles.removeBtnContainer}>
-                <Text style={styles.removeBtnText}>Remove</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-      </View>
-      <View style={styles.bookBtnMainContainer}>
-        {isLoading ? (
-          <View style={styles.bookBtnContainer}>
-            <ActivityIndicator color={COLORS.primary} size={30} />
-          </View>
-        ) : (
-          <TouchableOpacity
-            disabled={!selectedTimeFame?.id}
-            onPress={handleConfirmBtnPress}
-            style={[
-              styles.bookBtnContainer,
-              selectedTimeFame?.id && {
-                backgroundColor: COLORS.lightBrown,
-              },
-            ]}
-          >
-            <Text style={styles.bookBtnText}>Confirm</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+        </>
+      )}
     </ScrollView>
   )
 }
@@ -195,6 +212,20 @@ const BookingDetailsScreen = () => {
 export default BookingDetailsScreen
 
 const styles = StyleSheet.create({
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: '100%',
+  },
+  calendarStripIconContainer: {
+    height: 0,
+    width: 0,
+    marginHorizontal: scale(10),
+  },
+  calendarStripIcon: {
+    transform: [{ scale: 0 }],
+  },
   calendarHeaderStyle: {
     color: 'black',
   },
