@@ -39,7 +39,7 @@ const useAuthProfilePicture = () => {
     profilePicUploadRef.current.close()
   }
 
-  const handleGalleryPress = async () => {
+  const handleGalleryPress = async (pictureIndex = 0) => {
     const permission = isIos
       ? PERMISSIONS.IOS.PHOTO_LIBRARY
       : isAndroid &&
@@ -47,14 +47,14 @@ const useAuthProfilePicture = () => {
     const isGranted = await handlePermission(permission)
     if (isGranted) {
       const res = await openGallery({ selectionLimit: 1 })
-      console.log('test', res?.assets[0])
+      console.log('test', pictureIndex, res?.assets[0])
       if (res?.assets?.length > 0) {
-        let updatedData = profilePicData
+        const updatedData = [...profilePicData]
         updatedData[pictureIndex] = res?.assets[0]
         setProfilePicData([...updatedData])
       }
     }
-    profilePicUploadRef.current.close()
+    // profilePicUploadRef.current.close()
   }
 
   const handleNextPress = () => {

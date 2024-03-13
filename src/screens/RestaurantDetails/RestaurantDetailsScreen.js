@@ -108,18 +108,23 @@ const RestaurantDetails = () => {
             <Text style={styles.previewText}>Choose Service</Text>
           </View>
 
-          <Categories
+          {/* <Categories
             categoriesIds={categoriesIds}
             category={filter}
             customCategories={serviceCategories}
             onPress={onCategoryChange}
-          />
+          /> */}
 
           <FlatList
             data={services}
             renderItem={({ item, index }) => {
               return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
             }}
+            ListEmptyComponent={
+              <View style={styles.listEmptyContainer}>
+                <Text style={styles.listEmptyText}>No data found.</Text>
+              </View>
+            }
           />
         </View>
       </ScrollView>
@@ -254,6 +259,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: verticalScale(20),
+  },
+  listEmptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '8%'
+  },
+  listEmptyText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(16),
   },
 })
 

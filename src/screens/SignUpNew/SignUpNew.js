@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -6,10 +6,23 @@ import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useSignUp } from './hooks'
+import { SignInWithEmail } from '../../components'
+import { useNavigationParam } from 'react-navigation-hooks'
 
 const SignUpNew = () => {
   const { handleSignInPress, handleCreateAnAccountPress, handleGuestPress } = useSignUp()
-
+  const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
+  const bottomSheetRef = useRef()
+  const navigateToEmailModal = () => {
+    bottomSheetRef?.current?.open()
+    // ✅ ✅ ✅ ✅ Updated this but this code is for future reference
+    // navigate({
+    //   params: {
+    //     isFromBookRedirected: isFromBookRedirected,
+    //   },
+    //   routeName: MODAL_NAMES.SignInEmail,
+    // })
+  }
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={IMAGES.authBackground} style={styles.backgroundStyle}>
@@ -20,9 +33,12 @@ const SignUpNew = () => {
         </View>
 
         <View style={styles.authButtonsContainer}>
-          <TouchableOpacity onPress={handleSignInPress} style={styles.signInBtnContainer} activeOpacity={0.7}>
+          <TouchableOpacity onPress={navigateToEmailModal} style={styles.signInBtnContainer} activeOpacity={0.7}>
             <Text style={styles.signInBtnText}>Sign In</Text>
           </TouchableOpacity>
+          {/* <TouchableOpacity onPress={handleSignInPress} style={styles.signInBtnContainer} activeOpacity={0.7}>
+            <Text style={styles.signInBtnText}>Sign In</Text>
+          </TouchableOpacity> */}
 
           <TouchableOpacity onPress={handleCreateAnAccountPress} style={styles.signUpBtnContainer} activeOpacity={0.7}>
             <Text style={styles.signUpBtnText}>Create an account</Text>
@@ -49,6 +65,7 @@ const SignUpNew = () => {
             <Text style={styles.changedText}>{` Privacy Policy. `}</Text>
           </Text>
         </View>
+        <SignInWithEmail isFromBookRedirected={isFromBookRedirected} ref={bottomSheetRef} />
       </ImageBackground>
     </View>
   )

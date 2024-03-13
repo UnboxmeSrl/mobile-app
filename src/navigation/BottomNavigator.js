@@ -13,6 +13,7 @@ import { IMAGES } from '../assets/images'
 
 import HomeStack from './HomeStack'
 import ScheduleStack from './ScheduleStack'
+import ProfileStack from './ProfileStack'
 
 export default createBottomTabNavigator(
   {
@@ -40,18 +41,18 @@ export default createBottomTabNavigator(
       },
       screen: ScheduleStack,
     },
-    [SCREEN_NAMES.Prizes]: {
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => {
-          return (
-            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
-              <TabBarIcon focused={focused} icon={IMAGES.bell} />
-            </View>
-          )
-        },
-      },
-      screen: PrizesScreen,
-    },
+    // [SCREEN_NAMES.Prizes]: {
+    //   navigationOptions: {
+    //     tabBarIcon: ({ focused }) => {
+    //       return (
+    //         <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
+    //           <TabBarIcon focused={focused} icon={IMAGES.bell} />
+    //         </View>
+    //       )
+    //     },
+    //   },
+    //   screen: PrizesScreen,
+    // },
     [SCREEN_NAMES.Profile]: {
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
@@ -62,7 +63,7 @@ export default createBottomTabNavigator(
           )
         },
       },
-      screen: ProfileScreen,
+      screen: ProfileStack,
     },
   },
   {

@@ -1,5 +1,7 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable react/jsx-sort-props */
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { CustomButton, CustomHeader, SocialMediaSheet } from '../../../components'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { COLORS, FONTS } from '../../../constants'
@@ -20,7 +22,8 @@ const AuthSocialNetworkScreen = () => {
     handleOnInstaPress,
     handleNextPress,
   } = useAuthSocialNetwork()
-
+  const [tiktokInputValue, setTiktokInputValue] = useState('')
+  const [instaUserNameValue, setInstaUserNameValue] = useState('')
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'Social networks'} step={11} />
@@ -29,23 +32,63 @@ const AuthSocialNetworkScreen = () => {
       </View>
 
       <View style={styles.socialMediaMainContainer}>
-        <TouchableOpacity onPress={handleOnTikTokPress} style={styles.socialMediaItem} activeOpacity={0.5}>
+        <TouchableOpacity
+          onPress={handleOnTikTokPress}
+          style={[
+            styles.socialMediaItem,
+            { backgroundColor: tiktokInputValue.trim() !== '' ? COLORS.primary : COLORS.isabelLine },
+          ]}
+          activeOpacity={0.5}
+        >
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.tiktok} style={styles.socialMediaIcon} />
-            <Text style={styles.socialMediaNameText}>Tik tok account</Text>
+            <Text
+              style={[
+                styles.socialMediaNameText,
+                { color: tiktokInputValue.trim() !== '' ? COLORS.white : COLORS.gray },
+              ]}
+            >
+              Tik tok account
+            </Text>
           </View>
           <View style={styles.loginIntoIconContainer}>
-            <Image source={IMAGES.loginInto} style={styles.loginIntoIcon} />
+            <Image
+              source={IMAGES.loginInto}
+              style={[
+                styles.loginIntoIcon,
+                { tintColor: tiktokInputValue.trim() !== '' ? COLORS.white : COLORS.black },
+              ]}
+            />
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleOnInstaPress} style={styles.socialMediaItem} activeOpacity={0.5}>
+        <TouchableOpacity
+          onPress={handleOnInstaPress}
+          style={[
+            styles.socialMediaItem,
+            { backgroundColor: instaUserNameValue.trim() !== '' ? COLORS.primary : COLORS.isabelLine },
+          ]}
+          activeOpacity={0.5}
+        >
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
-            <Text style={styles.socialMediaNameText}>Instagram account</Text>
+            <Text
+              style={[
+                styles.socialMediaNameText,
+                { color: instaUserNameValue.trim() !== '' ? COLORS.white : COLORS.gray },
+              ]}
+            >
+              Instagram account
+            </Text>
           </View>
           <View style={styles.loginIntoIconContainer}>
-            <Image source={IMAGES.loginInto} style={styles.loginIntoIcon} />
+            <Image
+              source={IMAGES.loginInto}
+              style={[
+                styles.loginIntoIcon,
+                { tintColor: instaUserNameValue.trim() !== '' ? COLORS.white : COLORS.black },
+              ]}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -77,7 +120,11 @@ const AuthSocialNetworkScreen = () => {
         description={'Enter your tiktok account username'}
         placeholder={'your tiktok username'}
         field={tiktokUserName}
-        onChangeText={setTiktokUserName}
+        // onChangeText={setTiktokUserName}
+        onChangeText={(value) => {
+          setTiktokUserName(value)
+          setTiktokInputValue(value) // Update input value for TikTok
+        }}
         handlePress={() => tiktokSheetRef?.current?.close()}
       />
 
@@ -87,7 +134,11 @@ const AuthSocialNetworkScreen = () => {
         description={'Enter your tiktok account username'}
         placeholder={'your Instagram username'}
         field={instaUserName}
-        onChangeText={setInstaUserName}
+        // onChangeText={setInstaUserName}
+        onChangeText={(value) => {
+          setInstaUserName(value)
+          setInstaUserNameValue(value) // Update input value for TikTok
+        }}
         handlePress={() => instaSheetRef?.current?.close()}
       />
     </View>

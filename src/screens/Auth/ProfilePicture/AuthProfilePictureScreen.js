@@ -17,7 +17,7 @@ const AuthProfilePictureScreen = () => {
     handleGalleryPress,
     handleNextPress,
   } = useAuthProfilePicture()
-
+  console.log(profilePicData)
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'Profile picture'} step={9} />
@@ -29,7 +29,7 @@ const AuthProfilePictureScreen = () => {
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
-                onPress={() => handleProfilePicture(index)}
+                onPress={() => handleGalleryPress(index)}
                 style={styles.imageUploadContainer}
                 activeOpacity={0.4}
               >
@@ -56,11 +56,11 @@ const AuthProfilePictureScreen = () => {
         <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
       </View>
 
-      <PickerModal
+      {/* <PickerModal
         ref={profilePicUploadRef}
         handleCameraPress={handleCameraPress}
         handleGalleryPress={handleGalleryPress}
-      />
+      /> */}
     </View>
   )
 }

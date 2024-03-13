@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { format } from 'date-fns'
 import { __ } from 'ramda'
 import styled from 'styled-components/native'
 import { Instagram } from '@components/Auth/Instagram'
-import { Avatar } from '@components/Avatar'
+// import { Avatar } from '@components/Avatar'
 import { Button } from '@components/Button'
 import { Content } from '@components/Content'
 import { IconButton } from '@components/IconButton'
@@ -12,6 +12,25 @@ import { LoginGuest } from '@components/LoginGuest'
 import { RouteContainer } from '@components/RouteContainer'
 import { BodyText, ButtonText, Caption, H3, SmallText, Subtitle } from '@components/Text'
 import { COLORS, GENDER_LABELS } from '@const'
+import { Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import SubHeader from '../../components/Header/SubHeader'
+import perfectSize from '../../utils/responsiveSize'
+import Stack from '../../components/Elements/Stack'
+import Avatar from '../../components/Elements/Avatar'
+import userImg from '../../assets/images/userImg.png'
+import { colors } from '../../utils/theme'
+import AppInput from '../../components/InputFields/AppInput'
+import user from '../../assets/icons/user.png'
+import insta from '../../assets/icons/insta.png'
+import tiktok from '../../assets/icons/tiktok.png'
+import map from '../../assets/icons/map.png'
+import AppTextArea from '../../components/InputFields/AppTextArea'
+import AppButton from '../../components/Buttons'
+import Label from '../../components/Elements/Label'
+import Hobbies from '../../components/Elements/Hobbies'
+import HStack from '../../components/Elements/HStack'
+import { checkPermission, openGallery } from '../../utils'
+import { PERMISSIONS } from 'react-native-permissions'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -43,66 +62,178 @@ export const EditProfileScreenPresenter = ({
   navigateToDob,
   navigateToGender,
   navigateToCity,
-}) => (
-  <RouteContainer tKey={'profile.editProfile'} withArrow withPadding>
-    <Container>
-      <Center>
-        <Avatar onPress={onImagePress} source={source} />
-      </Center>
-      <Tile disabled>
-        <SmallText>Email</SmallText>
-        <RightColumn>
-          <Value>{'Add'}</Value>
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-      <Tile disabled>
-        <SmallText>Phone</SmallText>
-        <RightColumn>
-          <Value>{'Add'}</Value>
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-      <Space />
-      <Tile onPress={navigateToNameEdit}>
-        <SmallText>Name</SmallText>
-        <RightColumn>
-          <Value>{fullName}</Value>
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-      <Tile onPress={navigateToNameEdit}>
-        <SmallText>Nickname</SmallText>
-        <RightColumn>
-          <Value>{username}</Value>
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-      <Space />
-      <Tile onPress={navigateToGender}>
-        <SmallText>Gender</SmallText>
-        <RightColumn>
-          <Value tKey={GENDER_LABELS[gender]} />
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-      <Tile onPress={navigateToDob}>
-        <SmallText>Date of birth</SmallText>
-        <RightColumn>
-          <Value>{format(dob, 'dd/MM/yyyy')}</Value>
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-      <Tile onPress={navigateToCity}>
-        <SmallText>City</SmallText>
-        <RightColumn>
-          <Value>{city}</Value>
-          <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
-        </RightColumn>
-      </Tile>
-    </Container>
-  </RouteContainer>
-)
+}) => {
+  const [profilePicData, setProfilePicData] = useState(null)
+  const profilePicUploadRef = useRef()
+  const isIos = Platform.OS === 'ios'
+  const isAndroid = Platform.OS === 'android'
+  const androidVersion = Platform.Version
+  const intrestData = [
+    {
+      title: 'Sport',
+    },
+    {
+      title: 'Music',
+    },
+    {
+      title: 'Design',
+    },
+    {
+      title: 'Travel',
+    },
+    {
+      title: 'Digital Art',
+    },
+  ]
+
+  const handlePermission = async (permission) => {
+    const res = await checkPermission(permission)
+    return res
+  }
+  const handleGalleryPress = async () => {
+    const permission = isIos
+      ? PERMISSIONS.IOS.PHOTO_LIBRARY
+      : isAndroid &&
+        (androidVersion > 32 ? PERMISSIONS.ANDROID.READ_MEDIA_IMAGES : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
+    const isGranted = await handlePermission(permission)
+    if (isGranted) {
+      const res = await openGallery({ selectionLimit: 1 })
+
+      if (res?.assets?.length > 0) {
+        setProfilePicData(res?.assets[0])
+      }
+    }
+    // profilePicUploadRef.current.close()
+  }
+
+  return (
+    // <RouteContainer tKey={'profile.editProfile'} withArrow withPadding>
+    //   <Container>
+    <SafeAreaView style={{ flex: 1, paddingTop: perfectSize(24) }}>
+      <SubHeader title="Edit Profile" />
+      <ScrollView stylee={{ flex: 1 }}>
+        <Stack style={styles.avatarStack}>
+          <View style={styles.avatarGrid}>
+            <Avatar img={profilePicData || userImg} style={styles.avatar} />
+            <Pressable style={styles.uploadImg} onPress={handleGalleryPress}>
+              <Ionicons name="camera" style={styles.cameIcon} />
+            </Pressable>
+          </View>
+        </Stack>
+        <Stack>
+          <AppInput label="Full Name" placeholder="Full name" img={user} />
+          <AppTextArea label="Biography" placeholder="Write a new Bio here .." />
+          <AppInput label="Instagram link" placeholder="Ex: instagram.com/uichakir" img={insta} link />
+          <AppInput label="Tiktok link" placeholder="Ex: tiktok.com/uichakir" img={tiktok} link />
+          <AppInput label="Maps Account" placeholder="Ex: maps.com/uichakir" img={map} link />
+          <View>
+            <Label title="Intrests" />
+            <HStack style={styles.intrestGrid}>
+              {intrestData.map((item, ind) => (
+                <Hobbies key={ind} {...item} type="check" style={styles.hobbies} />
+              ))}
+            </HStack>
+          </View>
+          <AppButton title="Save changes" />
+        </Stack>
+      </ScrollView>
+      {/* <Center>
+      <Avatar onPress={onImagePress} source={source} />
+    </Center>
+    <Tile disabled>
+      <SmallText>Email</SmallText>
+      <RightColumn>
+        <Value>{'Add'}</Value>
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile>
+    <Tile disabled>
+      <SmallText>Phone</SmallText>
+      <RightColumn>
+        <Value>{'Add'}</Value>
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile>
+    <Space />
+    <Tile onPress={navigateToNameEdit}>
+      <SmallText>Name</SmallText>
+      <RightColumn>
+        <Value>{fullName}</Value>
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile>
+    <Tile onPress={navigateToNameEdit}>
+      <SmallText>Nickname</SmallText>
+      <RightColumn>
+        <Value>{username}</Value>
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile>
+    <Space />
+    <Tile onPress={navigateToGender}>
+      <SmallText>Gender</SmallText>
+      <RightColumn>
+        <Value tKey={GENDER_LABELS[gender]} />
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile>
+    <Tile onPress={navigateToDob}>
+      <SmallText>Date of birth</SmallText>
+      <RightColumn>
+        <Value>{format(dob, 'dd/MM/yyyy')}</Value>
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile>
+    <Tile onPress={navigateToCity}>
+      <SmallText>City</SmallText>
+      <RightColumn>
+        <Value>{city}</Value>
+        <Ionicons color={COLORS.achromaticBlack} name={'chevron-forward-outline'} size={20} />
+      </RightColumn>
+    </Tile> */}
+    </SafeAreaView>
+    // {/* </Container>
+    // </RouteContainer> */}
+  )
+}
+const styles = StyleSheet.create({
+  avatarStack: {
+    alignItems: 'center',
+  },
+  avatarGrid: {
+    position: 'relative',
+  },
+  avatar: {
+    height: perfectSize(140),
+    width: perfectSize(140),
+  },
+  uploadImg: {
+    height: perfectSize(50),
+    width: perfectSize(50),
+    borderRadius: perfectSize(50),
+    backgroundColor: colors.danger,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: perfectSize(2),
+    borderColor: colors.white,
+    position: 'absolute',
+    right: 0,
+    bottom: perfectSize(6),
+  },
+  cameIcon: {
+    color: colors.white,
+    fontSize: perfectSize(26),
+  },
+  intrestGrid: {
+    flexWrap: 'wrap',
+    paddingBottom: perfectSize(24),
+  },
+  hobbies: {
+    marginTop: perfectSize(12),
+    marginRight: perfectSize(8),
+  },
+})
 const Space = styled.View`
   height: 20px;
 `

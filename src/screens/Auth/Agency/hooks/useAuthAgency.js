@@ -18,17 +18,12 @@ const useAuthAgency = () => {
   }
 
   useEffect(() => {
-    if (selectedValue !== 0) {
-      if (selectedValue === 2) {
-        if (agencyName?.length > 0) {
-          console.log('test')
-          setIsBtnDisabled(false)
-        }
-      } else {
-        setIsBtnDisabled(false)
-      }
+    if (selectedValue === 1 || (agencyName?.length > 0 && selectedValue === 2)) {
+      setIsBtnDisabled(false)
+    } else {
+      setIsBtnDisabled(true)
     }
-  }, [selectedValue])
+  }, [selectedValue, agencyName])
 
   return {
     isBtnDisabled,

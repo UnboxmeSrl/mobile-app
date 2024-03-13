@@ -15,10 +15,10 @@ const RestaurantCard = ({ item, index }) => {
     <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
         <View style={styles.mainContainer}>
-          <View style={styles.ratingsContainer}>
+          {/* <View style={styles.ratingsContainer}>
             <Text style={styles.ratingsText}>+250</Text>
             <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
-          </View>
+          </View> */}
           {(item?.Influencer || item?.Model) && (
             <View style={styles.forModelsContainer}>
               <Text style={styles.forModelsText}>
