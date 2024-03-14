@@ -1,17 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Linking } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { IN_REVIEW_USER } from '@const/verification'
-import {
-  _tiktokUsername,
-  _verificationStatus,
-  selectAgencyName,
-  selectTiktokUsername,
-  updateMe,
-} from '@redux/modules/auth'
+import { _tiktokUsername, _verificationStatus, selectTiktokUsername, updateMe } from '@redux/modules/auth'
 
 import { setAuthData } from '../../redux/slices/authSlice'
 

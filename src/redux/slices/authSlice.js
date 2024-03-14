@@ -6,6 +6,7 @@ const initialState = {
   authData: {},
   loginData: {},
   isApplied: false,
+  onboardingData: false,
 }
 
 const AuthSlice = createSlice({
@@ -26,9 +27,16 @@ const AuthSlice = createSlice({
     setIsApplied: (state, actions) => {
       state.isApplied = actions?.payload
     },
+    setOnboardingData: (state, { payload }) => {
+      state.onboardingData = payload
+    },
   },
 })
 
-export const { setAuthData, setLoginData, setIsApplied } = AuthSlice.actions
+export const { setAuthData, setLoginData, setIsApplied, setOnboardingData } = AuthSlice.actions
 
 export default AuthSlice.reducer
+
+export const currentUserData = (state) => state.authSlice.loginData
+
+export const selectOnBordingData = (state) => state.authSlice.onboardingData

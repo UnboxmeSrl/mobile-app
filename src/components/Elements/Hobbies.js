@@ -4,9 +4,34 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
 import AppText from './AppText'
-
-const Hobbies = ({ titleStyle, style, icon, title, type }) => {
+import ball from '../../assets/icons/Soccer-Ball.png'
+import art from '../../assets/icons/Artist-Palette.png'
+import mic from '../../assets/icons/Microphone.png'
+import fitness from '../../assets/icons/user.png'
+import plan from '../../assets/icons/Airplane.png'
+const Hobbies = ({ titleStyle, style, interest_topics, type }) => {
   const [isChecked, setIsChecked] = useState(false)
+  let icon = null
+  switch (interest_topics) {
+    case 'Gaming':
+      icon = ball
+      break
+    case 'Music':
+      icon = mic
+      break
+    case 'Digital Art':
+      icon = art
+      break
+    case 'Travel':
+      icon = plan
+      break
+    case 'Sports':
+      icon = ball
+      break
+    case 'Fitness':
+      icon = fitness
+      break
+  }
 
   const handlePress = () => {
     setIsChecked(!isChecked)
@@ -22,7 +47,9 @@ const Hobbies = ({ titleStyle, style, icon, title, type }) => {
     >
       {type === 'check' && !isChecked && <Icon name="add-outline" style={[styles.icon, styles.addIcon]} />}
       {!!icon && <Image source={icon} style={styles.img} />}
-      <AppText style={[styles.title, titleStyle, { color: isChecked ? colors.danger : colors.dark }]}>{title}</AppText>
+      <AppText style={[styles.title, titleStyle, { color: isChecked ? colors.danger : colors.dark }]}>
+        {interest_topics}
+      </AppText>
       {type === 'check' && isChecked ? (
         <Icon name="checkmark-sharp" style={[styles.checkIcon, { color: isChecked ? colors.danger : colors.dark }]} />
       ) : null}

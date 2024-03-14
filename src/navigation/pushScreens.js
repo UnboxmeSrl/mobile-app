@@ -41,6 +41,7 @@ import { SCREEN_NAMES } from '../constants/navigation'
 import { OnboardingNew } from '../screens/OnboardingNew'
 import SignUpNew from '../screens/SignUpNew/SignUpNew'
 import AppliedScreen from '../screens/SignUpNew/AppliedScreen/AppliedScreen'
+import { RejectedScreen } from '../screens/RejectedScreen'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -160,5 +161,8 @@ export default {
   },
   [SCREEN_NAMES.AppliedScreen]: {
     screen: AppliedScreen,
+  },
+  [SCREEN_NAMES.RejectedScreen]: {
+    screen: RejectedScreen,
   },
 }

@@ -73,6 +73,7 @@ export const SCREEN_NAMES = {
   AuthCodeFromFriendScreen: 'AuthCodeFromFriendScreen',
   AuthSocialNetworkScreen: 'AuthSocialNetworkScreen',
   SignUpNew: 'SignUpNew',
+  RejectedScreen: 'RejectedScreen',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

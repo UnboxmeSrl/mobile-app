@@ -35,9 +35,9 @@ export const SignInEmailModal = () => {
         // if (user) {
         //   onAuthSuccess()
         // }
-        if (res?.id) {
+        if (res.UserStatus === 'approved') {
           OneSignal.setExternalUserId(res?.id?.toString())
-          console.log('res', res)
+          console.log('resLogin', res)
           dispatch(setLoginData(res))
           const params = `/${res?.id}`
           const bookingRes = await getBookings(params)
@@ -48,12 +48,13 @@ export const SignInEmailModal = () => {
             navigate(SCREEN_NAMES.Cities)
           }
         } else {
+          navigate(SCREEN_NAMES.AppliedScreen)
         }
       } catch (e) {
         setLoading(false)
       }
     },
-    [setLoading]
+    [setLoading, dispatch, navigate, serviceDetails, isFromBookRedirected]
   )
 
   const navigateToForgot = () => navigate(MODAL_NAMES.ForgotPassword)

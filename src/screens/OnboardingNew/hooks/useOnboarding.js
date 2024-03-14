@@ -6,10 +6,13 @@ import { FourthOnboarding } from '../FourthOnboarding'
 import { FifthOnboarding } from '../FifthOnboarding'
 import { navigate } from '@services'
 import { SCREEN_NAMES } from '@const/navigation'
+import { useDispatch } from 'react-redux'
+import { setOnboardingData } from '../../../redux/slices/authSlice'
 
 const useOnboarding = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const carouselRef = useRef(null)
+  const dispatch = useDispatch()
   const carouselItems = [
     {
       id: 1,
@@ -34,10 +37,15 @@ const useOnboarding = () => {
   ]
 
   const handleNextPress = () => {
-    setActiveIndex((activeIndex) => activeIndex + 1)
-    if (activeIndex > 3) {
-      navigate(SCREEN_NAMES.SignUpNew)
-    }
+    setActiveIndex((activeIndex) => {
+      const active = activeIndex + 1
+      if (active > 4) {
+        navigate(SCREEN_NAMES.SignUpNew)
+        dispatch(setOnboardingData(true))
+      }
+      return active
+    })
+
     //   // Use carouselRef to scroll to the next item
     //   if (carouselRef.current) {
     //     carouselRef.current.snapToItem(newIndex)

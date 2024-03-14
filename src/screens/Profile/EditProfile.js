@@ -9,7 +9,7 @@ export const EditProfile = ({}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SubHeader title="Profile" />
-      <ScrollView style={{ flex: 1 }}></ScrollView>
+      <ScrollView style={{ flex: 1 }} />
     </SafeAreaView>
   )
 }

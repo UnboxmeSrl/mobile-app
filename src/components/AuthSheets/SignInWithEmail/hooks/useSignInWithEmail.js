@@ -7,6 +7,7 @@ import { setLoginData } from '../../../../redux/slices/authSlice'
 import { setBookings } from '../../../../redux/slices/restaurantSlice'
 import { userLogin } from '../../../../services'
 import { getBookings } from '../../../../services/RestaurantService'
+import { setTempAuthData } from '../../../../redux/slices/tempAuth'
 
 const useSignInWithEmail = (isFromBookRedirected) => {
   const [email, setEmail] = useState()
@@ -18,14 +19,12 @@ const useSignInWithEmail = (isFromBookRedirected) => {
 
   const handleLoginPress = async (ref) => {
     // navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
-
     try {
       setLoading(true)
       const prepData = { email, password }
       const res = await userLogin(prepData)
-      console.log('res', res)
       setLoading(false)
-      if (res?.id) {
+      if (res.UserStatus === 'approved') {
         OneSignal.setExternalUserId(res?.id?.toString())
         dispatch(setLoginData(res))
         const params = `/${res?.id}`
@@ -34,10 +33,22 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         if (serviceDetails?.id && isFromBookRedirected) {
           navigate(SCREEN_NAMES.ServiceDetails)
         } else {
-          navigate(SCREEN_NAMES.Cities)
+          if (res.firstVisit === false) {
+            // -------screenLinkForFirstVisit-------
+            navigate(SCREEN_NAMES.Cities)
+          } else {
+            navigate(SCREEN_NAMES.Cities)
+          }
         }
         ref?.current?.close()
-      } else {
+      } else if (res.UserStatus === 'rejected') {
+        // ----------screenLinkForRejectedUser-------
+        // dispatch(
+        //   setTempAuthData({
+        //     isRejected: true,
+        //   })
+        // )
+        navigate(SCREEN_NAMES.RejectedScreen)
       }
     } catch (e) {
       setLoading(false)

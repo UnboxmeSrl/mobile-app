@@ -9,7 +9,7 @@ export const AUTH_NAMESPACE = 'auth'
 
 export const _initialized = 'initialized'
 export const _uid = 'uid'
-export const _fullName = 'fullName'
+export const _fullName = 'name'
 export const _gender = 'gender'
 export const _username = 'username'
 export const _city = 'city'

@@ -48,6 +48,7 @@ import tiktok from '../../assets/icons/tiktok.png'
 import { color } from 'react-native-reanimated'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { SCREEN_NAMES } from '../../constants/navigation'
+import { useSelector } from 'react-redux'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -70,6 +71,9 @@ export const ProfileScreenPresenter = ({
   source,
   navigation,
 }) => {
+  const userDetail = useSelector((state) => state.authSlice.loginData)
+  const state = useSelector((state) => state)
+  console.log('userDetail', state)
   const intrestData = [
     { title: 'Sport', icon: ball },
     { title: 'Music', icon: mic },
@@ -100,15 +104,15 @@ export const ProfileScreenPresenter = ({
               <Stack style={styles.content}>
                 <View style={styles.header}>
                   <View style={styles.avatarGrid}>
-                    <Avatar img={userImg} style={styles.avatar} />
+                    <Avatar img={userDetail?.Profile_pic?.url || userImg} style={styles.avatar} />
                     <Badge title="0 Missed bookings" style={styles.badge} variant="success" />
                   </View>
                   <View>
-                    <Text style={styles.title}>Hannah Burress</Text>
-                    <Text style={styles.from}>From Morocco</Text>
+                    <Text style={styles.title}>{fullName}</Text>
+                    <Text style={styles.from}>From {userDetail?.City}</Text>
                   </View>
                   <View style={styles.socialGrid}>
-                    <Pressable>
+                    <Pressable onPress={navigateToQuestionnaire}>
                       <Ionicons name="logo-instagram" style={styles.socialIcon} />
                     </Pressable>
                     <Divider style={styles.divider} />
@@ -143,7 +147,7 @@ export const ProfileScreenPresenter = ({
               <Stack style={styles.stackItem}>
                 <Title title="Intrests" />
                 <View style={styles.hobbies}>
-                  {intrestData.map((item, ind) => (
+                  {userDetail?.user_interest_topics_turbo_id?.map((item, ind) => (
                     <Hobbies key={ind} {...item} style={styles.hobbiesBadge} />
                   ))}
                 </View>

@@ -163,20 +163,21 @@ const styles = StyleSheet.create({
   listItem: {
     backgroundColor: COLORS.white,
     shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
     shadowOpacity: moderateScale(0.3),
     shadowRadius: moderateScale(4),
     elevation: moderateScale(5),
-    width: '98%',
+    width: '75%',
     alignSelf: 'center',
     // alignItems: 'center',
     height: moderateScale(292.21),
     borderRadius: moderateScale(20.79),
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),
+    marginHorizontal: scale(10),
   },
   itemImage: {
     borderRadius: moderateScale(20),
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   dealTimerContainer: {
-    width: '30%',
+    width: '40%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.whiteShadedTransparent,
