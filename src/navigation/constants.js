@@ -26,11 +26,9 @@ export const screenOptions = ({ route }) => ({
     let iconName
     if (route.name === SCREEN_NAMES.Home) {
       iconName = focused ? 'home' : 'home-outline'
-    } 
-    else if (route.name === SCREEN_NAMES.Awards) {
+    } else if (route.name === SCREEN_NAMES.Awards) {
       iconName = focused ? 'trophy' : 'trophy-outline'
-    } 
-    else {
+    } else {
       iconName = focused ? 'person' : 'person-outline'
     }
 
