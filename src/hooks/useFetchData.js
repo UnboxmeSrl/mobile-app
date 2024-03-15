@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { useAction } from '@hooks/common'
 import { fetchAddresses } from '@redux/modules/addresses'
-import { selectIsAuthenticated } from '@redux/modules/auth'
+// import { selectIsAuthenticated } from '@redux/modules/auth'
 import { fetchAwardCategories } from '@redux/modules/awardCategories'
 import { fetchAwards } from '@redux/modules/awards'
 import { fetchBookings } from '@redux/modules/bookings'
@@ -13,6 +13,7 @@ import { fetchCategories } from '@redux/modules/categories'
 import { fetchOrders } from '@redux/modules/orders'
 import { fetchProducts } from '@redux/modules/products'
 import { fetchTransactions } from '@redux/modules/transactions'
+import { selectIsAuthenticated } from '../redux/slices/authSlice'
 
 export const useFetchData = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)

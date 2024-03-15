@@ -13,7 +13,7 @@ import authModule, {
   selectHasQuestionnaire,
   selectImage,
   selectInstagramUsername,
-  selectIsAuthenticated,
+  // selectIsAuthenticated,
   selectSkincareRoutine,
   selectSkinType,
   selectTiktokUsername,
@@ -21,7 +21,7 @@ import authModule, {
 } from '@redux/modules/auth'
 
 import { ProfileScreenPresenter } from './ProfileScreenPresenter'
-import { userData } from '../../redux/slices/authSlice'
+import { selectIsAuthenticated, userData } from '../../redux/slices/authSlice'
 
 export const ProfileScreen = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)

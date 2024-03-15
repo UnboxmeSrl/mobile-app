@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { SCREEN_NAMES } from '@const/navigation'
-import { selectIsAuthenticated } from '@redux/modules/auth'
+import { selectIsAuthenticated } from '../redux/slices/authSlice'
+// import { selectIsAuthenticated } from '@redux/modules/auth'
 
 export const useAuthenticatedAction = (action) => {
   const { navigate } = useNavigation()
