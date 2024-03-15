@@ -40,14 +40,23 @@ const Hobbies = ({ titleStyle, style, interest_topics, type }) => {
     <Pressable
       style={({ pressed }) => [
         styles.btnStyle,
+        {
+          opacity: pressed ? 0.8 : 1,
+          backgroundColor: type === 'check' ? (isChecked ? colors.dangerLight : colors.light) : colors.light,
+        },
         style,
-        { opacity: pressed ? 0.8 : 1, backgroundColor: isChecked ? colors.dangerLight : colors.light },
       ]}
       onPress={handlePress}
     >
       {type === 'check' && !isChecked && <Icon name="add-outline" style={[styles.icon, styles.addIcon]} />}
       {!!icon && <Image source={icon} style={styles.img} />}
-      <AppText style={[styles.title, titleStyle, { color: isChecked ? colors.danger : colors.dark }]}>
+      <AppText
+        style={[
+          styles.title,
+          { color: type === 'check' ? (isChecked ? colors.danger : colors.dark) : colors.dark },
+          titleStyle,
+        ]}
+      >
         {interest_topics}
       </AppText>
       {type === 'check' && isChecked ? (
