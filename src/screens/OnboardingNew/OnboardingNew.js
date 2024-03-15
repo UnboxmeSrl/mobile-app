@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 import OnboardingCarousel from '../../components/Custom/OnboardingCarousel/OnboardingCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useOnboarding } from './hooks'
+import { useSelector } from 'react-redux'
+import { selectOnBordingData } from '../../redux/slices'
+import { useNavigation } from 'react-navigation-hooks'
+import { SCREEN_NAMES } from '../../constants/navigation'
 
 const OnboardingNew = () => {
   const { activeIndex, setActiveIndex, carouselItems, handleNextPress } = useOnboarding()
+  const navigation = useNavigation()
+  const isOnBoarding = useSelector(selectOnBordingData)
+
+  useEffect(() => {
+    if (isOnBoarding) navigation.navigate(SCREEN_NAMES.SignUpNew)
+  }, [isOnBoarding, navigation])
   return (
     <View style={styles.mainContainer}>
       <OnboardingCarousel

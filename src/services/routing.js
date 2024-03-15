@@ -49,7 +49,7 @@ const getStateForUnauthorizedAction = (action, navState, defaultGetStateForActio
 
 const getStateForModalAction = (action, navState, defaultGetStateForAction) => {
   const storeState = store.getState()
-  const isAuthenticated = true // TODO
+  const isAuthenticated = !!storeState.authSlice.loginData?.id
 
   if (
     !isAuthenticated ||

@@ -9,8 +9,8 @@ import art from '../../assets/icons/Artist-Palette.png'
 import mic from '../../assets/icons/Microphone.png'
 import fitness from '../../assets/icons/user.png'
 import plan from '../../assets/icons/Airplane.png'
-const Hobbies = ({ titleStyle, style, interest_topics, type }) => {
-  const [isChecked, setIsChecked] = useState(false)
+const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick }) => {
+  // const [isChecked, setIsChecked] = useState(false)
   let icon = null
   switch (interest_topics) {
     case 'Gaming':
@@ -32,12 +32,9 @@ const Hobbies = ({ titleStyle, style, interest_topics, type }) => {
       icon = fitness
       break
   }
-
-  const handlePress = () => {
-    setIsChecked(!isChecked)
-  }
   return (
     <Pressable
+      onPress={onClick}
       style={({ pressed }) => [
         styles.btnStyle,
         {
@@ -46,7 +43,6 @@ const Hobbies = ({ titleStyle, style, interest_topics, type }) => {
         },
         style,
       ]}
-      onPress={handlePress}
     >
       {type === 'check' && !isChecked && <Icon name="add-outline" style={[styles.icon, styles.addIcon]} />}
       {!!icon && <Image source={icon} style={styles.img} />}

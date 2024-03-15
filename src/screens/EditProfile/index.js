@@ -16,7 +16,7 @@ import {
   selectHasQuestionnaire,
   selectImage,
   selectInstagramUsername,
-  selectIsAuthenticated,
+  // selectIsAuthenticated,
   selectSkincareRoutine,
   selectSkinType,
   selectTiktokUsername,
@@ -27,6 +27,7 @@ import {
 import { hasReadAndroidPermission } from '@services/permissions'
 
 import { EditProfileScreenPresenter } from './EditProfileScreenPresenter'
+import { selectIsAuthenticated } from '../../redux/slices/authSlice'
 
 export const EditProfileScreen = () => {
   const [url, setUrl] = useState(null)

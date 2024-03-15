@@ -20,6 +20,7 @@ function AppInput(
     img,
     link,
     onPress,
+    onChange,
     autoCapitalize = 'none',
     ...rest
   },
@@ -41,6 +42,7 @@ function AppInput(
           editable={!isDisabled}
           // onFocus={Keyboard.emit}
           // ellipsizeMode="tail"
+          onChangeText={onChange}
           value={value}
           {...rest}
         />
