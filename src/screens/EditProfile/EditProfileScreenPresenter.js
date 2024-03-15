@@ -32,6 +32,7 @@ import HStack from '../../components/Elements/HStack'
 import { checkPermission, openGallery } from '../../utils'
 import { PERMISSIONS } from 'react-native-permissions'
 import { useSelector } from 'react-redux'
+import { Controller, useForm } from 'react-hook-form'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -89,6 +90,21 @@ export const EditProfileScreenPresenter = ({
     },
   ]
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      biography: userDetail?.bio ?? '',
+      fullName: userDetail?.name ?? '',
+      instagramLink: '',
+      interests: '',
+      mapsAccount: '',
+      tiktokLink: '',
+    },
+  })
+
   const handlePermission = async (permission) => {
     const res = await checkPermission(permission)
     return res
@@ -124,15 +140,87 @@ export const EditProfileScreenPresenter = ({
           </View>
         </Stack>
         <Stack>
-          <AppInput label="Full Name" placeholder="Full name" value={userDetail?.name} img={user} />
-          <AppTextArea label="Biography" value={userDetail?.bio || 'demo data'} placeholder="Write a new Bio here .." />
-          <AppInput label="Instagram link" placeholder="Ex: instagram.com/uichakir" img={insta} link />
-          <AppInput label="Tiktok link" placeholder="Ex: tiktok.com/uichakir" img={tiktok} link />
-          <AppInput label="Maps Account" placeholder="Ex: maps.com/uichakir" img={map} link />
+          <Controller
+            control={control}
+            name="fullName"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <AppInput
+                errors={errors.fullName?.message}
+                img={user}
+                label="Full Name"
+                // onChange={onChange}
+                placeholder="Full name"
+                value={value}
+              />
+            )}
+            rules={{ required: 'Name is required' }}
+          />
+          <Controller
+            control={control}
+            name="biography"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <AppTextArea
+                errors={errors.biography?.message}
+                label="Biography"
+                // onChangeText={onChange}
+                placeholder="Write a new Bio here .."
+                value={value}
+              />
+            )}
+            rules={{ required: 'Biography is required' }}
+          />
+          <Controller
+            control={control}
+            name="instagramLink"
+            render={({ field: { onChange, ref, onBlur, value } }) => (
+              <AppInput
+                img={insta}
+                label="Instagram link"
+                link
+                // onChange={onChange}
+                placeholder="Ex: instagram.com/uichakir"
+                value={value}
+                // errors={errors.instagramLink?.message}
+              />
+            )}
+            rules={{ required: 'link is required' }}
+          />
+          <Controller
+            control={control}
+            name="tiktokLink"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <AppInput
+                errors={errors.tiktokLink?.message}
+                img={tiktok}
+                label="Tiktok link"
+                link
+                // onChange={onChange}
+                placeholder="Ex: tiktok.com/uichakir"
+                value={value}
+              />
+            )}
+            rules={{ required: 'link is required' }}
+          />
+          <Controller
+            control={control}
+            name="mapsAccount"
+            render={({ field: { onChange, ref, onBlur, value } }) => (
+              <AppInput
+                errors={errors.mapsAccount?.message}
+                img={map}
+                label="Maps Account"
+                link
+                // onChange={onChange}
+                placeholder="Ex: maps.com/uichakir"
+                value={value}
+              />
+            )}
+            rules={{ required: 'link is required' }}
+          />
           <View>
             <Label title="Intrests" />
             <HStack style={styles.intrestGrid}>
-              {intrestData.map((item, ind) => (
+              {intrestData?.map((item, ind) => (
                 <Hobbies key={ind} {...item} type="check" style={styles.hobbies} />
               ))}
             </HStack>

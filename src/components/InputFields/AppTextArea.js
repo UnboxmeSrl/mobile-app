@@ -15,6 +15,7 @@ function AppTextArea(
     isDisabled,
     errors,
     autoCapitalize = 'none',
+    onChangeText,
     ...rest
   },
   ref
@@ -24,14 +25,15 @@ function AppTextArea(
       {label && <AppText style={styles.label}>{label}</AppText>}
       <TextInput
         ref={ref}
-        placeholder={placeholder}
-        style={[styles.textInput, textInputStyle]}
-        placeholderTextColor={colors.slate1}
         autoCapitalize={autoCapitalize}
         editable={!isDisabled}
+        value={value}
         multiline
         numberOfLines={4}
-        value={value}
+        style={[styles.textInput, textInputStyle]}
+        onChangeText={onChangeText}
+        placeholderTextColor={colors.slate1}
+        placeholder={placeholder}
         {...rest}
         textAlignVertical="top"
       />

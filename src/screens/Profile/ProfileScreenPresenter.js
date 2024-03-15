@@ -108,7 +108,7 @@ export const ProfileScreenPresenter = ({
                     <Badge title="0 Missed bookings" style={styles.badge} variant="success" />
                   </View>
                   <View>
-                    <Text style={styles.title}>{fullName}</Text>
+                    <Text style={styles.title}>{userDetail?.name}</Text>
                     <Text style={styles.from}>From {userDetail?.City}</Text>
                   </View>
                   <View style={styles.socialGrid}>
