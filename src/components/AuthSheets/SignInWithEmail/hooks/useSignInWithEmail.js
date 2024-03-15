@@ -34,20 +34,13 @@ const useSignInWithEmail = (isFromBookRedirected) => {
           navigate(SCREEN_NAMES.ServiceDetails)
         } else {
           if (res.firstVisit === false) {
-            // -------screenLinkForFirstVisit-------
-            navigate(SCREEN_NAMES.Cities)
+            navigate(SCREEN_NAMES.FirstWelcomeScreen)
           } else {
             navigate(SCREEN_NAMES.Cities)
           }
         }
         ref?.current?.close()
       } else if (res.UserStatus === 'rejected') {
-        // ----------screenLinkForRejectedUser-------
-        // dispatch(
-        //   setTempAuthData({
-        //     isRejected: true,
-        //   })
-        // )
         navigate(SCREEN_NAMES.RejectedScreen)
       }
     } catch (e) {

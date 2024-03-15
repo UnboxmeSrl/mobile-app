@@ -40,3 +40,5 @@ export default AuthSlice.reducer
 export const currentUserData = (state) => state.authSlice.loginData
 
 export const selectOnBordingData = (state) => state.authSlice.onboardingData
+
+export const isAuthenticated = (state) => state.authSlice.loginData?.id

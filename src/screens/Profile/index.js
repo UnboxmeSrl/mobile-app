@@ -44,7 +44,6 @@ export const ProfileScreen = () => {
   const fullName = useSelector(selectFullName)
   const username = useSelector(selectUsername)
   const city = useSelector(selectCity)
-  console.log('city', city, fullName, username)
   const tiktokUsername = useSelector(selectTiktokUsername)
   const instagramUsername = useSelector(selectInstagramUsername)
   const image = useSelector(selectImage)
