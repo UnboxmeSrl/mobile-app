@@ -192,9 +192,10 @@ android {
     release {
       if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
         storeFile file(MYAPP_UPLOAD_STORE_FILE)
-        storePassword pass
+        // storePassword pass
+        storePassword MYAPP_UPLOAD_STORE_PASSWORD
         keyAlias MYAPP_UPLOAD_KEY_ALIAS
-        keyPassword pass
+        keyPassword MYAPP_UPLOAD_KEY_PASSWORD
       }
     }
     debug {
@@ -213,7 +214,7 @@ android {
       // see https://reactnative.dev/docs/signed-apk-android.
       shrinkResources false
       minifyEnabled false
-      // signingConfig signingConfigs.release
+      signingConfig signingConfigs.release
       // minifyEnabled enableProguardInReleaseBuilds
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
     }
