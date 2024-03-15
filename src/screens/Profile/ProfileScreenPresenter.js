@@ -92,11 +92,15 @@ export const ProfileScreenPresenter = ({
     { title: 'Digital Art', icon: art },
     { title: 'Travel', icon: plan },
   ]
+<<<<<<< HEAD
 
+=======
+  console.log(isAuthenticated, 'auth')
+>>>>>>> 2c65a21f52a2c941ed63b927207d65636b606f3c
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <FormTask /> */}
-      {!isAuthenticated ? (
+      {isAuthenticated ? (
         <View style={{ flex: 1 }}>
           <View style={styles.infoGrid}>
             <Stack>
@@ -107,7 +111,7 @@ export const ProfileScreenPresenter = ({
                     <Icon name="star" style={styles.badgeIcon} />
                     <AppText style={styles.badgeTitle}>240 xp</AppText>
                   </Pressable>
-                  <Pressable style={[styles.xpBadge, styles.settBadge]}>
+                  <Pressable style={[styles.xpBadge, styles.settBadge]} onPress={navigateToSettings}>
                     <Icon name="settings-outline" style={styles.settBadgeIcon} />
                   </Pressable>
                 </View>

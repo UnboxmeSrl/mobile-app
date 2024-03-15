@@ -10,7 +10,8 @@ import { BUTTON_HEIGHT } from '@components/Button/constants'
 import { BodyText, ButtonText, SmallText, Subtitle } from '@components/Text'
 import { COLORS } from '@const'
 import { SCREEN_NAMES } from '@const/navigation'
-import { selectIsAuthenticated } from '@redux/modules/auth'
+import { selectIsAuthenticated } from '../../redux/slices/authSlice'
+// import { selectIsAuthenticated } from '@redux/modules/auth'
 
 export const LoginGuest = () => {
   const { navigate } = useNavigation()

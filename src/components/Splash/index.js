@@ -4,10 +4,10 @@ import SplashScreen from 'react-native-splash-screen'
 import { useDispatch, useSelector } from 'react-redux'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
-import { selectIsAuthenticated, selectIsAuthInitialized } from '@redux/modules/auth'
+// import { selectIsAuthenticated, selectIsAuthInitialized } from '@redux/modules/auth'
 import { navigate } from '@services'
-import { setLoginData } from '../../redux/slices'
-import { SCREEN_NAMES } from '../../constants/navigation'
+import { selectIsAuthenticated } from '../../redux/slices/authSlice'
+import { SCREEN_NAMES, STACK_NAMES } from '../../constants/navigation'
 import { checkSignUpProgress } from '../../utils'
 
 const Wrapper = styled(Animated.View)`
@@ -25,7 +25,6 @@ export const Splash = () => {
   const [show, setShow] = useState(true)
   const fadeAnim = useRef(new Animated.Value(1)).current
   const ref = createRef()
-  const authInitialized = useSelector(selectIsAuthInitialized)
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const dispatch = useDispatch()
 
@@ -39,7 +38,9 @@ export const Splash = () => {
 
     // dispatch(setLoginData({}))
 
-    if (isApplied) {
+    if (isAuthenticated) {
+      navigate(STACK_NAMES.BottomStack)
+    } else if (isApplied) {
       navigate(SCREEN_NAMES.AppliedScreen)
     } else if (isSignUpProcessStarted) {
       checkSignUpProgress(signUpProcessStage)
@@ -54,7 +55,7 @@ export const Splash = () => {
         setFadeOut(true)
       }, delay)
     }, 0)
-  }, [ref, authInitialized, isAuthenticated, show])
+  }, [ref, isAuthenticated, show])
 
   useEffect(() => {
     if (fadeOut) {

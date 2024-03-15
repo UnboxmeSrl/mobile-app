@@ -14,9 +14,10 @@ import { IconButton } from '@components/IconButton'
 import { COLORS } from '@const'
 import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
 import { useAction } from '@hooks/common'
-import authModule, { _initialized, _instagram, selectIsAuthenticated, selectWizardCode } from '@redux/modules/auth'
+import authModule, { _initialized, _instagram, selectWizardCode } from '@redux/modules/auth'
 import { persistor } from '@redux/store'
 import { logger, reset, showToastSuccess } from '@services'
+import { selectIsAuthenticated } from '../../redux/slices/authSlice'
 
 const version = getVersion()
 const buildNumber = getBuildNumber()
@@ -40,7 +41,7 @@ export const SettingsScreen = () => {
     } catch (error) {
       logger.error('Logout error', { error })
     }
-  }, [, reset])
+  }, [reset])
 
   const handleLogout = useCallback(async () => {
     Alert.alert('Confirmation', 'Are you sure you want to log out?', [
