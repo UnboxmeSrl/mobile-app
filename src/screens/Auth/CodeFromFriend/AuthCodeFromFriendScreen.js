@@ -28,13 +28,14 @@ const AuthCodeFromFriendScreen = () => {
     setFocusedTextInput,
     isError,
     handleSkipPress,
+    handleBackPress,
     handleNextPress,
   } = useAuthCodeFromFriend()
 
   return (
     <KeyboardAwareScrollView>
       <View style={styles.mainContainer}>
-        <CustomHeader title={'Code from friend'} step={10} />
+        <CustomHeader title={'Code from friend'} step={10} handleBackPress={handleBackPress} />
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
             If you came at the invitation of another user and they gave you their promo code, then enter it here!
@@ -52,9 +53,12 @@ const AuthCodeFromFriendScreen = () => {
             <TextInput
               ref={code1Ref}
               value={codeLetter1}
+              maxLength={1}
               onChangeText={(val) => {
                 setCodeLetter1(val)
-                code2Ref?.current?.focus()
+                if (val) {
+                  code2Ref?.current?.focus()
+                }
               }}
               onFocus={() => setFocusedTextInput(1)}
               style={[
@@ -74,9 +78,12 @@ const AuthCodeFromFriendScreen = () => {
             <TextInput
               ref={code2Ref}
               value={codeLetter2}
+              maxLength={1}
               onChangeText={(val) => {
                 setCodeLetter2(val)
-                code3Ref?.current?.focus()
+                if (val) {
+                  code3Ref?.current?.focus()
+                }
               }}
               onFocus={() => setFocusedTextInput(2)}
               style={[
@@ -96,9 +103,12 @@ const AuthCodeFromFriendScreen = () => {
             <TextInput
               ref={code3Ref}
               value={codeLetter3}
+              maxLength={1}
               onChangeText={(val) => {
                 setCodeLetter3(val)
-                code4Ref?.current?.focus()
+                if (val) {
+                  code4Ref?.current?.focus()
+                }
               }}
               onFocus={() => setFocusedTextInput(3)}
               style={[
@@ -118,9 +128,12 @@ const AuthCodeFromFriendScreen = () => {
             <TextInput
               ref={code4Ref}
               value={codeLetter4}
+              maxLength={1}
               onChangeText={(val) => {
                 setCodeLetter4(val)
-                code5Ref?.current?.focus()
+                if (val) {
+                  code5Ref?.current?.focus()
+                }
               }}
               onFocus={() => setFocusedTextInput(4)}
               style={[
@@ -140,6 +153,7 @@ const AuthCodeFromFriendScreen = () => {
             <TextInput
               ref={code5Ref}
               value={codeLetter5}
+              maxLength={1}
               onChangeText={(val) => setCodeLetter5(val)}
               onFocus={() => setFocusedTextInput(5)}
               style={[

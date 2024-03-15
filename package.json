@@ -1,7 +1,12 @@
 {
   "name": "unboxme",
+<<<<<<< HEAD
   "version": "1.0.4",
   "buildNumber": 8,
+=======
+  "version": "1.0.0",
+  "buildNumber": 13,
+>>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -88,7 +93,6 @@
     "react-native-splash-screen": "^3.2.0",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^12.1.0",
-    "react-native-swiper": "^1.6.0",
     "react-native-text-input-mask": "^2.0.1",
     "react-native-toast-message": "1.6.0",
     "react-native-vector-icons": "^9.2.0",

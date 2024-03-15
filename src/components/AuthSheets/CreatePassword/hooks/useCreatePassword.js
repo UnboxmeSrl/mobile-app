@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { navigate, showToastError } from '../../../../services'
 import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
+import { setAuthData, setIsSignUpProcessStarted, setSignUpProcessStage } from '../../../../redux/slices'
 import { REGEX } from '../../../../constants'
 
 const useCreatePassword = () => {
@@ -25,6 +25,8 @@ const useCreatePassword = () => {
       setError(errorObj)
     } else {
       dispatch(setAuthData({ password }))
+      dispatch(setIsSignUpProcessStarted(true))
+      dispatch(setSignUpProcessStage(1))
       navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
       setError({})
       ref?.current?.close()

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { navigate } from '../../../../services'
-import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthCodeFromFriend = () => {
+  const userDetails = useSelector((state) => state.authSlice.authData)
   const [codeLetter1, setCodeLetter1] = useState('')
   const [codeLetter2, setCodeLetter2] = useState('')
   const [codeLetter3, setCodeLetter3] = useState('')
@@ -18,10 +20,16 @@ const useAuthCodeFromFriend = () => {
   const code5Ref = useRef()
   const dispatch = useDispatch()
   const [isError, setIsError] = useState(false)
+  const navigation = useNavigation()
+
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthProfilePictureScreen)
+  }
 
   const handleNextPress = () => {
     const prepCode = codeLetter1 + codeLetter2 + codeLetter3 + codeLetter4 + codeLetter5
     dispatch(setAuthData({ codeFromFriend: prepCode }))
+    dispatch(setSignUpProcessStage(11))
     navigate(SCREEN_NAMES.AuthSocialNetworkScreen)
   }
 
@@ -53,6 +61,7 @@ const useAuthCodeFromFriend = () => {
     setFocusedTextInput,
     isError,
     handleSkipPress,
+    handleBackPress,
     handleNextPress,
   }
 }

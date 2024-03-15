@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { addRestaurantBooking, getTimeFrames } from '../../../services'
+import { addRestaurantBooking, getTimeFrames, showToastError } from '../../../services'
 
 const useBookingDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -17,6 +17,7 @@ const useBookingDetails = () => {
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([])
   const [selectedTimeFame, setSelectedTimeFame] = useState()
   const [isLoading, setIsLoading] = useState(false)
+  const [isDatesLoading, setIsDatesLoading] = useState(true)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
 
@@ -58,13 +59,7 @@ const useBookingDetails = () => {
     }-${
       currentBookingDateTime.getDate() < 10 ? `0${currentBookingDateTime.getDate()}` : currentBookingDateTime.getDate()
     }`
-    console.log(
-      ' conditionCheck',
-      currentBookingDateTime,
-      formattedDate,
-      serviceDetails?.actions?.length,
-      serviceDetails?.actions?.[0]?.actions_turbo_id
-    )
+    console.log(' conditionCheck', currentBookingDateTime, formattedDate, serviceDetails?.actions_turbo_id)
     const prepData = {
       ApprovalStatus: false,
       Approved: serviceDetails?.Story,
@@ -84,7 +79,7 @@ const useBookingDetails = () => {
       Submitbutton_: 'false',
       Title: '',
       action_status_turbo_id: 0,
-      actions_turbo_id: serviceDetails?.actions?.length === 1 ? serviceDetails?.actions?.[0]?.actions_turbo_id : 0,
+      actions_turbo_id: serviceDetails?.actions_turbo_id,
       booking_status_id: 0,
       deal_scheme_id: 0,
       events_id: 0,
@@ -96,15 +91,19 @@ const useBookingDetails = () => {
 
     console.log('prepData: ', prepData)
     const res = await addRestaurantBooking(prepData)
-    if (res?.id) {
+    if (res?.status === 200) {
+      console.log('Booking Details:', res)
       navigate({
         params: {
-          bookingDetails: res,
+          bookingDetails: res?.data,
         },
         routeName: SCREEN_NAMES.BookingOnApprovalScreen,
       })
     } else {
-      Alert.alert('something went wrong')
+      const error = {
+        message: res?.data,
+      }
+      showToastError(error)
     }
     setIsLoading(false)
   }
@@ -112,56 +111,6 @@ const useBookingDetails = () => {
   const handleRemoveBtnPress = () => {
     setSelectedTimeFame({})
   }
-
-  const getTimeFrameData = async () => {
-    const params = `/${restaurantDetails?.id}`
-    const res = await getTimeFrames(params)
-    setTimeFrameData(res)
-    const myDate = new Date(selectedDate)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-    setCurrentWeekDay(weekDay)
-    // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
-    const filteredData = res?.filter((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
-      if (filteredRes.length > 0) return true
-      else {
-        return false
-      }
-    })
-
-    filteredData.forEach((item) => {
-      const weekdays = item.weekdays
-      const pauseDays = item.pause_days
-      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay.day === day.day))
-      item.weekdays = filteredWeekdays
-    })
-    console.log('filteredTimeData: ' + JSON.stringify(filteredData))
-    setWeekDayWiseTimeSlots(filteredData)
-  }
-
-  useEffect(() => {
-    setSelectedTimeFame({})
-    const myDate = new Date(selectedDate)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-    console.log('weekDay: ' + weekDay)
-    setCurrentWeekDay(weekDay)
-    const filteredData = timeFrameData?.filter((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
-      if (filteredRes.length > 0) return true
-      else {
-        return false
-      }
-    })
-
-    filteredData.forEach((item) => {
-      const weekdays = item.weekdays
-      const pauseDays = item.pause_days
-      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay.day === day.day))
-      item.weekdays = filteredWeekdays
-    })
-    console.log('filteredTimeData: ' + JSON.stringify(filteredData))
-    setWeekDayWiseTimeSlots(filteredData)
-  }, [selectedDate])
 
   const datesBlacklistFunc = (date) => {
     const myDate = new Date(date)
@@ -182,9 +131,65 @@ const useBookingDetails = () => {
     }
   }
 
+  const getTimeFrameData = async () => {
+    const params = `/${restaurantDetails?.id}`
+    const res = await getTimeFrames(params)
+    setTimeFrameData(res)
+    const myDate = new Date(selectedDate)
+    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+    setCurrentWeekDay(weekDay)
+    // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    const filteredData = res?.filter((t) => {
+      const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
+      if (filteredRes.length > 0) return true
+      else {
+        return false
+      }
+    })
+
+    filteredData.forEach((item) => {
+      const weekdays = item.weekdays
+      const pauseDays = item.pause_days
+      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
+      item.weekdays = filteredWeekdays
+    })
+    console.log('filteredTimeData1: ' + JSON.stringify(filteredData))
+    setWeekDayWiseTimeSlots(filteredData)
+    setTimeout(() => {
+      setIsDatesLoading(false)
+    }, 2000)
+  }
+
   useEffect(() => {
     getTimeFrameData()
   }, [])
+
+  useEffect(() => {
+    if (!isDatesLoading) {
+      setSelectedTimeFame({})
+      const myDate = new Date(selectedDate)
+      const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+      console.log('weekDay: ' + weekDay)
+      setCurrentWeekDay(weekDay)
+      const filteredData = timeFrameData?.filter((t) => {
+        const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
+        if (filteredRes.length > 0) return true
+        else {
+          return false
+        }
+      })
+
+      console.log('timeFrameData', timeFrameData)
+      filteredData.forEach((item) => {
+        const weekdays = item.weekdays
+        const pauseDays = item.pause_days
+        const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
+        item.weekdays = filteredWeekdays
+      })
+      console.log('filteredTimeData2: ' + JSON.stringify(filteredData))
+      setWeekDayWiseTimeSlots(filteredData)
+    }
+  }, [selectedDate])
 
   useEffect(() => {
     console.log('selected Date:', selectedDate)
@@ -213,6 +218,7 @@ const useBookingDetails = () => {
     handleRemoveBtnPress,
     isLoading,
     isDateAvailable,
+    isDatesLoading,
     selectedDate,
     selectedTimeFame,
     setSelectedDate,

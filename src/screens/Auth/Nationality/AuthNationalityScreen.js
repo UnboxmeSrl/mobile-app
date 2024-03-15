@@ -10,11 +10,11 @@ import CountryPicker from 'react-native-country-picker-modal'
 import CountryFlag from 'react-native-country-flag'
 
 const AuthNationalityScreen = () => {
-  const { isBtnDisabled, country, handleNextPress, onSelect } = useAuthNationality()
+  const { isBtnDisabled, country, handleNextPress, handleBackPress, onSelect } = useAuthNationality()
 
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'Nationality'} step={4} />
+      <CustomHeader title={'Nationality'} step={4} handleBackPress={handleBackPress} />
       <CountryPicker
         onSelect={onSelect}
         containerButtonStyle={styles.countryContainer}

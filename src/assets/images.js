@@ -96,10 +96,17 @@ export const IMAGES = {
     onboardingHotels: require('./images/onboarding/onboarding-hotels.png'),
     onboardingThirdImage: require('./images/onboarding/onboarding-third-image.png'),
     onboardingFifth: require('./images/onboarding/onboarding-fifth.png'),
+    loginOnboarding: {
+      firstLoginOne: require('./images/onboarding/login/first-login-one.png'),
+      firstLoginSecond: require('./images/onboarding/login/first-login-second.png'),
+      firstLoginThird: require('./images/onboarding/login/first-login-third.png'),
+    },
   },
 
   authBackground: require('./images/auth-background.png'),
   appliedScreenBackground: require('./images/applied-screen-background.png'),
   appLogo: require('./images/app-logo.png'),
   addUser: require('./images/add-user.png'),
+  fullDedicated: require('./images/full-dedicated.png'),
+  overlay: require('./images/overlay.png'),
 }

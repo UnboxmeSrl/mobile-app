@@ -5,7 +5,7 @@ export const checkActionName = (actionName) => {
     switch (actionName) {
       case 'Reel':
         return IMAGES.reelsAddNew
-      case 'TikTok':
+      case 'Tiktok':
         return IMAGES.tiktokAddNew
       case 'Story':
         return IMAGES.storyAddNew
@@ -15,6 +15,56 @@ export const checkActionName = (actionName) => {
         return IMAGES.diary
       case 'Diary Tiktok':
         return IMAGES.diary
+    }
+  }
+}
+
+export const checkAction = (actionNumId) => {
+  let result
+  if (actionNumId) {
+    switch (actionNumId) {
+      case 1:
+        result = {
+          action_id: 1,
+          action_name: 'Story',
+          action_icon: IMAGES.storyAddNew,
+        }
+        return result
+      case 2:
+        result = {
+          action_id: 2,
+          action_name: 'Maps & Story',
+          action_icon: IMAGES.googleMaps,
+        }
+        return result
+      case 3:
+        result = {
+          action_id: 3,
+          action_name: 'Diary Instagram',
+          action_icon: IMAGES.diary,
+        }
+        return result
+      case 4:
+        result = {
+          action_id: 4,
+          action_name: 'Reel',
+          action_icon: IMAGES.reelsAddNew,
+        }
+        return result
+      case 5:
+        result = {
+          action_id: 5,
+          action_name: 'TikTok',
+          action_icon: IMAGES.tiktokAddNew,
+        }
+        return result
+      case 6:
+        result = {
+          action_id: 6,
+          action_name: 'Full Dedicated',
+          action_icon: IMAGES.fullDedicated,
+        }
+        return result
     }
   }
 }

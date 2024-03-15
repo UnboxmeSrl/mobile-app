@@ -31,6 +31,7 @@ const CitiesScreen = () => {
             </>
           }
           data={locationData}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => {
             return <LocationsTile item={item} />
           }}

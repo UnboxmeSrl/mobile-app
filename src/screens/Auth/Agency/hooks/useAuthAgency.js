@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { navigate } from '../../../../services'
-import { setAuthData } from '../../../../redux/slices'
-import { useDispatch } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthAgency = () => {
-  const [selectedValue, setSelectedValue] = useState(0)
-  const [agencyName, setAgencyName] = useState('')
+  const userDetails = useSelector((state) => state.authSlice.authData)
+  const [selectedValue, setSelectedValue] = useState(userDetails?.agencyData?.freelance ? 1 : 2)
+  const [agencyName, setAgencyName] = useState(userDetails?.agencyData?.hasAgency ?? '')
   const dispatch = useDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
+  const navigation = useNavigation()
+
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthCityScreen)
+  }
 
   const handleNextPress = () => {
     const prepData =
-      selectedValue == 1 ? { hasAgency: 'No Agency', freelance: true } : { hasAgency: agencyName, freelance: false }
+      selectedValue == 1 ? { hasAgency: '', freelance: true } : { hasAgency: agencyName, freelance: false }
     dispatch(setAuthData({ agencyData: prepData }))
+    dispatch(setSignUpProcessStage(7))
     navigate(SCREEN_NAMES.AuthUserTypeScreen)
   }
 
@@ -31,6 +39,7 @@ const useAuthAgency = () => {
     setSelectedValue,
     agencyName,
     setAgencyName,
+    handleBackPress,
     handleNextPress,
   }
 }

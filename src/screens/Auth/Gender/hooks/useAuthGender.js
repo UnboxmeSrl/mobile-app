@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import { getGenderList, navigate } from '../../../../services'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { setAuthData } from '../../../../redux/slices'
-import { useDispatch } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthGender = () => {
+  const userDetails = useSelector((state) => state.authSlice.authData)
   const [genderList, setGenderList] = useState([])
-  const [selectedGender, setSelectedGender] = useState()
+  const [selectedGender, setSelectedGender] = useState(userDetails?.gender ?? {})
   const [isLoading, setIsLoading] = useState(true)
   const dispatch = useDispatch()
+  const navigation = useNavigation()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
 
   const getGenderListData = async () => {
@@ -17,8 +20,14 @@ const useAuthGender = () => {
     setIsLoading(false)
   }
 
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthPersonalDetailsScreen)
+  }
+
   const handleNextPress = () => {
-    dispatch(setAuthData({ gender: selectedGender?.id }))
+    dispatch(setAuthData({ gender: selectedGender }))
+    dispatch(setSignUpProcessStage(3))
+    console.log('test')
     navigate(SCREEN_NAMES.AuthDateOfBirthScreen)
   }
 
@@ -38,6 +47,7 @@ const useAuthGender = () => {
     genderList,
     selectedGender,
     setSelectedGender,
+    handleBackPress,
     handleNextPress,
   }
 }

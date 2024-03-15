@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
-
 import { sliceNames } from '../../constants'
 
 const initialState = {
   authData: {},
   loginData: {},
   isApplied: false,
+<<<<<<< HEAD
   onboardingData: false,
+=======
+  isFirstTimeLogin: true,
+  isSignUpProcessStarted: false,
+  signUpProcessStage: 0,
+>>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
 }
 
 const AuthSlice = createSlice({
@@ -27,13 +32,35 @@ const AuthSlice = createSlice({
     setIsApplied: (state, actions) => {
       state.isApplied = actions?.payload
     },
+<<<<<<< HEAD
     setOnboardingData: (state, { payload }) => {
       state.onboardingData = payload
+=======
+    setIsFirstTimeLogin: (state, actions) => {
+      state.isFirstTimeLogin = actions?.payload
+    },
+    setIsSignUpProcessStarted: (state, actions) => {
+      state.isSignUpProcessStarted = actions?.payload
+    },
+    setSignUpProcessStage: (state, actions) => {
+      state.signUpProcessStage = actions?.payload
+>>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
     },
   },
 })
 
+<<<<<<< HEAD
 export const { setAuthData, setLoginData, setIsApplied, setOnboardingData } = AuthSlice.actions
+=======
+export const {
+  setAuthData,
+  setLoginData,
+  setIsApplied,
+  setIsFirstTimeLogin,
+  setIsSignUpProcessStarted,
+  setSignUpProcessStage,
+} = AuthSlice.actions
+>>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
 
 export default AuthSlice.reducer
 
