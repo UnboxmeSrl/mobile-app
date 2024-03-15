@@ -5,16 +5,19 @@ import { navigate, reset, userSignUp } from '@services'
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { showToastError } from '../../../../services'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthSocialNetwork = () => {
+  const userDetails = useSelector((state) => state.authSlice.authData)
   const [tiktokUserName, setTiktokUserName] = useState()
   const [instaUserName, setInstaUserName] = useState()
   const tiktokSheetRef = useRef()
   const instaSheetRef = useRef()
   const dispatch = useDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
-  const userDetails = useSelector((state) => state.authSlice.authData)
+
   const formData = new FormData()
+  const navigation = useNavigation()
 
   const handleOnTikTokPress = () => {
     tiktokSheetRef?.current?.open()
@@ -24,20 +27,40 @@ const useAuthSocialNetwork = () => {
     instaSheetRef?.current?.open()
   }
 
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthCodeFromFriendScreen)
+  }
+
   const handleNextPress = async () => {
     dispatch(setAuthData({ tiktokUserName, instaUserName }))
 
+    // User Type (Model, Influencer, Both)
     const isBothUserType = userDetails?.userType?.data ? true : false
+
+    // Phone Number
+    const phonWithCountryCode = `+${userDetails?.country?.callingCode?.[0]}${userDetails?.phoneNumber}`
+
+    // Gender
+    const genderId = userDetails?.gender?.id
+
+    // DOB (Birth Date)
+    const selectedDate = new Date(userDetails?.birthDate)
+    const birthDate = `${selectedDate.getDate() < 10 ? `0${selectedDate.getDate()}` : selectedDate.getDate()}-${
+      selectedDate.getMonth() + 1 < 10 ? `0${selectedDate.getMonth() + 1}` : selectedDate.getMonth() + 1
+    }-${selectedDate.getFullYear()}`
+
+    // Nationality
+    const nationality = userDetails?.nationality?.name
 
     formData.append('email', userDetails?.email)
     formData.append('password', userDetails?.password)
     formData.append('name', userDetails?.name)
     formData.append('surname', userDetails?.surname)
     formData.append('NickName', userDetails?.nickName)
-    formData.append('Phonenumber', userDetails?.phoneNumber)
-    formData.append('gender_list_id', userDetails?.gender)
-    formData.append('Birthday', userDetails?.birthDate)
-    formData.append('nationality', userDetails?.nationality)
+    formData.append('Phonenumber', phonWithCountryCode)
+    formData.append('gender_list_id', genderId)
+    formData.append('Birthday', birthDate)
+    formData.append('nationality', nationality)
     formData.append('City', userDetails?.city)
     formData.append('Agency', userDetails?.agencyData?.hasAgency)
     formData.append('Freelance', userDetails?.agencyData?.freelance)
@@ -95,6 +118,7 @@ const useAuthSocialNetwork = () => {
     instaSheetRef,
     handleOnTikTokPress,
     handleOnInstaPress,
+    handleBackPress,
     handleNextPress,
   }
 }

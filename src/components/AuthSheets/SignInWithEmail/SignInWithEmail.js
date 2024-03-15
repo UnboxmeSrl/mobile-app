@@ -8,7 +8,9 @@ import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
 import useSignInWithEmail from './hooks/useSignInWithEmail'
 
 const SignInWithEmail = React.forwardRef(({ isFromBookRedirected = false }, ref) => {
-  const { email, setEmail, password, setPassword, handleLoginPress } = useSignInWithEmail(isFromBookRedirected)
+  const { email, setEmail, isError, loading, password, setPassword, handleLoginPress } = useSignInWithEmail(
+    isFromBookRedirected
+  )
 
   return (
     <BottomSheet ref={ref}>
@@ -27,8 +29,20 @@ const SignInWithEmail = React.forwardRef(({ isFromBookRedirected = false }, ref)
           handleOnChangeText={setPassword}
           isSecureTextInput={true}
         />
+        {isError && (
+          <View style={{ marginTop: verticalScale(10), justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{ color: COLORS.error, fontSize: moderateScale(14), fontFamily: FONTS.quicksand }}>
+              Something went wrong.
+            </Text>
+          </View>
+        )}
         <View style={styles.btnContainer}>
-          <CustomButton title={'Login'} handlePress={() => handleLoginPress(ref)} />
+          <CustomButton
+            title={'Login'}
+            handlePress={() => handleLoginPress(ref)}
+            isLoading={loading}
+            disabled={loading}
+          />
         </View>
         <TouchableOpacity>
           <Text style={styles.forgotPasswordText}>Forgot your password?</Text>

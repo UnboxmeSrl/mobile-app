@@ -14,11 +14,12 @@ const AuthInterestTopicsScreen = () => {
     interestTopicsList,
     selectedInterests,
     handleInterestSelect,
+    handleBackPress,
     handleNextPress,
   } = useAuthInterestTopics()
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'Interests & Topics'} step={8} />
+      <CustomHeader title={'Interests & Topics'} step={8} handleBackPress={handleBackPress} />
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator size={moderateScale(20)} color={COLORS.primary} />

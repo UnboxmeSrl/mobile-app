@@ -4,11 +4,13 @@ import { navigate } from '../../../../services'
 import { checkPermission, openCamera, openGallery } from '../../../../utils'
 import { PERMISSIONS } from 'react-native-permissions'
 import { Platform } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthProfilePicture = () => {
-  const [profilePicData, setProfilePicData] = useState([1, 2, 3, 4])
+  const userDetails = useSelector((state) => state.authSlice.authData)
+  const [profilePicData, setProfilePicData] = useState(userDetails?.profilePictures ?? [(1, 2, 3, 4)])
   const profilePicUploadRef = useRef()
   const isIos = Platform.OS === 'ios'
   const isAndroid = Platform.OS === 'android'
@@ -17,6 +19,7 @@ const useAuthProfilePicture = () => {
   const [pictureIndex, setPictureIndex] = useState()
   const dispatch = useDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
+  const navigation = useNavigation()
 
   const handleProfilePicture = async (index) => {
     setPictureIndex(index)
@@ -57,8 +60,13 @@ const useAuthProfilePicture = () => {
     // profilePicUploadRef.current.close()
   }
 
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthInterestTopicsScreen)
+  }
+
   const handleNextPress = () => {
     dispatch(setAuthData({ profilePictures: profilePicData }))
+    dispatch(setSignUpProcessStage(10))
     navigate(SCREEN_NAMES.AuthCodeFromFriendScreen)
   }
 
@@ -75,6 +83,7 @@ const useAuthProfilePicture = () => {
     handleProfilePicture,
     handleCameraPress,
     handleGalleryPress,
+    handleBackPress,
     handleNextPress,
   }
 }

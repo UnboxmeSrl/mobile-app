@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { navigate } from '../../../../services'
-import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthCity = () => {
-  const [city, setCity] = useState()
+  const userDetails = useSelector((state) => state.authSlice.authData)
+  const [city, setCity] = useState(userDetails?.city ?? '')
   const dispatch = useDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
+  const navigation = useNavigation()
+
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthNationalityScreen)
+  }
 
   const handleNextPress = () => {
     dispatch(setAuthData({ city: city }))
+    dispatch(setSignUpProcessStage(6))
     navigate(SCREEN_NAMES.AuthAgencyScreen)
   }
 
@@ -24,6 +32,7 @@ const useAuthCity = () => {
     isBtnDisabled,
     city,
     setCity,
+    handleBackPress,
     handleNextPress,
   }
 }

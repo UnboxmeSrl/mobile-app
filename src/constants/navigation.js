@@ -1,5 +1,4 @@
 import { COLORS } from '@const'
-
 export const MAIN_NAVIGATOR = 'mainNavigator'
 
 export const STACK_NAMES = {
@@ -48,8 +47,8 @@ export const SCREEN_NAMES = {
   ProductSelection: 'ProductSelection',
   PublishContentScreen: 'PublishContentScreen',
   Profile: 'Profile',
-  Questionnaire: 'Questionnaire',
   NewCouponScreen: 'NewCouponScreen',
+  Questionnaire: 'Questionnaire',
   RestaurantDetails: 'RestaurantDetails',
   Restaurants: 'Restaurants',
   Schedule: 'Schedule',
@@ -72,7 +71,10 @@ export const SCREEN_NAMES = {
   AuthProfilePictureScreen: 'AuthProfilePictureScreen',
   AuthCodeFromFriendScreen: 'AuthCodeFromFriendScreen',
   AuthSocialNetworkScreen: 'AuthSocialNetworkScreen',
+  RejectedScreen: 'RejectedScreen',
+  FirstWelcomeScreen: 'FirstWellcomeScreen',
   SignUpNew: 'SignUpNew',
+  LoginOnboarding: 'LoginOnboarding',
 }
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
 export const COMMON_STATUS_BAR = {

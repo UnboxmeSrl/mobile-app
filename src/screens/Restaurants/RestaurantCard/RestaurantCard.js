@@ -19,6 +19,7 @@ const RestaurantCard = ({ item, index, userLocation }) => {
   return (
     <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
+        <Image source={IMAGES.overlay} style={styles.itemImage} resizeMode="cover" />
         <View style={styles.mainContainer}>
           {/* <View style={styles.ratingsContainer}>
             <Text style={styles.ratingsText}>+250</Text>

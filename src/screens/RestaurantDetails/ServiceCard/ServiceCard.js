@@ -8,6 +8,7 @@ import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 
 const ServiceCard = ({ item, index }) => {
   const { handleCardPress } = useServiceCard()
+  console.log('item: ' + JSON.stringify(item))
   return (
     // <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
     //   <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
@@ -47,7 +48,7 @@ const ServiceCard = ({ item, index }) => {
       <View style={styles.titleRatingMainRow}>
         <View style={styles.itemTitleIconContainer}>
           <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
-          <Text style={styles.titleText}>Story Combo</Text>
+          <Text style={styles.titleText}>{item?._actions_turbo?.Action_Name}</Text>
         </View>
         <View style={styles.ratingsContainer}>
           <Text style={styles.ratingsText}>60</Text>
@@ -59,9 +60,15 @@ const ServiceCard = ({ item, index }) => {
         <Text style={styles.descriptionText}>To publish with 24 hours</Text>
       </View>
 
-      <View style={styles.amenitiesContainer}>
-        <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-        <Text style={styles.amenityText}>1 X Meal</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <View style={styles.amenitiesContainer}>
+          <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+          <Text style={styles.amenityText}>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
+        </View>
+        <View style={styles.amenitiesContainer}>
+          <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+          <Text style={styles.amenityText}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   )
@@ -163,20 +170,21 @@ const styles = StyleSheet.create({
   listItem: {
     backgroundColor: COLORS.white,
     shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
     shadowOpacity: moderateScale(0.3),
     shadowRadius: moderateScale(4),
     elevation: moderateScale(5),
-    width: '98%',
+    width: '75%',
     alignSelf: 'center',
     // alignItems: 'center',
     height: moderateScale(292.21),
     borderRadius: moderateScale(20.79),
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),
+    marginHorizontal: scale(10),
   },
   itemImage: {
     borderRadius: moderateScale(20),
@@ -185,7 +193,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   dealTimerContainer: {
-    width: '30%',
+    width: '40%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.whiteShadedTransparent,

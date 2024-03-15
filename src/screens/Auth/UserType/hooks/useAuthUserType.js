@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { navigate } from '../../../../services'
-import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { useNavigation } from 'react-navigation-hooks'
 
 const useAuthUserType = () => {
-  const [selectedUserType, setSelectedUserType] = useState()
+  const userDetails = useSelector((state) => state.authSlice.authData)
+  const [selectedUserType, setSelectedUserType] = useState(userDetails?.userType ?? {})
   const dispatch = useDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
   const userTypeList = [
@@ -23,9 +25,15 @@ const useAuthUserType = () => {
       data: [7, 8],
     },
   ]
+  const navigation = useNavigation()
+
+  const handleBackPress = () => {
+    navigation.replace(SCREEN_NAMES.AuthAgencyScreen)
+  }
 
   const handleNextPress = () => {
     dispatch(setAuthData({ userType: selectedUserType }))
+    dispatch(setSignUpProcessStage(8))
     navigate(SCREEN_NAMES.AuthInterestTopicsScreen)
   }
 
@@ -40,6 +48,7 @@ const useAuthUserType = () => {
     userTypeList,
     selectedUserType,
     setSelectedUserType,
+    handleBackPress,
     handleNextPress,
   }
 }

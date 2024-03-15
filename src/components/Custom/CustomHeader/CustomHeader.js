@@ -5,11 +5,21 @@ import { COLORS, FONTS } from '../../../constants'
 import { IMAGES } from '../../../assets/images'
 import { useNavigation } from 'react-navigation-hooks'
 
-const CustomHeader = ({ title, step }) => {
+const CustomHeader = ({ title, step, handleBackPress }) => {
   const navigation = useNavigation()
+  console.log('handleBackPress', handleBackPress)
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.pop()} style={styles.backIconContainer}>
+      <TouchableOpacity
+        onPress={() => {
+          if (handleBackPress) {
+            handleBackPress()
+          } else {
+            navigation.pop()
+          }
+        }}
+        style={styles.backIconContainer}
+      >
         <Image resizeMode="cover" source={IMAGES.arrowLeft} style={styles.backIcon} />
       </TouchableOpacity>
       <View style={styles.headerTitleContainer}>

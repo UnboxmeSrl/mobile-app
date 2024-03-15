@@ -1,7 +1,7 @@
 import { useNavigationParam } from 'react-navigation-hooks'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { getBookingForContentList, navigate, updateContentUrl } from '../../../services'
-import { checkActionName } from '../../../utils'
+import { checkAction, checkActionName } from '../../../utils'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setContentList } from '../../../redux/slices'
@@ -16,11 +16,17 @@ const usePublishContent = () => {
   const [isSendToReview, setIsSendToReview] = useState(false)
   const [isContentStatusModalVisible, setIsContentStatusModalVisible] = useState(false)
   const [updatedContentDetails, setUpdatedContentDetails] = useState()
+
+  let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0
+  let icon = checkAction(actionNumId)?.action_icon
   let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0
   if (contentDetails?.diary_action_turbo_id) {
-    actionName = contentDetails?._diary_action_turbo?.action
+    actionName = contentDetails?._diary_action_turbo?.action_for_others
+    if (actionNumId === 3) {
+      actionName = item?._diary_action_turbo?.action
+    }
+    icon = checkActionName(actionName)
   }
-  const icon = checkActionName(actionName)
   const bookingDate = new Date(contentDetails?.BookingDay)
   const month = bookingDate.toLocaleString('default', { month: 'long' })
   const timeFrame = contentDetails?._timeframes ?? contentDetails?._timeframes_turbo

@@ -96,14 +96,14 @@ const RestaurantDetails = () => {
             <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
           </View>
           {/* <Text style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
-          <TouchableOpacity style={styles.howItWorksContainer}>
+          {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.aboutTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
 
           <View style={styles.previewTextContainer}>
             <Text style={styles.previewText}>Preview available timeframes </Text>
-          </View>
+          </View> */}
           <View style={styles.chooseServiceContainer}>
             <Text style={styles.previewText}>Choose Service</Text>
           </View>
@@ -116,7 +116,9 @@ const RestaurantDetails = () => {
           /> */}
 
           <FlatList
+            horizontal
             data={services}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => {
               return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
             }}
@@ -263,7 +265,7 @@ const styles = StyleSheet.create({
   listEmptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '8%'
+    marginTop: '8%',
   },
   listEmptyText: {
     color: COLORS.primary,

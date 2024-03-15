@@ -39,7 +39,8 @@ const useRestaurants = () => {
   const getCategoriesData = async () => {
     setIsLoading(true)
     const res = await getCategories()
-    const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...res]
+    console.log('res cat', res)
+    const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...res?.data]
     setCategories(addAllCategory)
     setIsLoading(false)
   }
@@ -54,7 +55,7 @@ const useRestaurants = () => {
 
   useEffect(() => {
     getRestaurantsData()
-  }, [isFocused, filter])
+  }, [filter])
 
   useEffect(() => {
     getCategoriesData()

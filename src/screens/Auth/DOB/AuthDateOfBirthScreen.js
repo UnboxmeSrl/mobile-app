@@ -17,12 +17,13 @@ const AuthDateOfBirthScreen = () => {
     date,
     selectedDate,
     setSelectedDate,
+    handleBackPress,
     handleNextPress,
   } = useAuthDateOfBirth()
 
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'Date of birth'} step={3} />
+      <CustomHeader title={'Date of birth'} step={3} handleBackPress={handleBackPress} />
       <TouchableOpacity onPress={() => setIsDatePickerOpen(true)} style={styles.dateContainer} activeOpacity={0.5}>
         <Text style={styles.dateText}>
           {`${

@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   linkUploadTextInputContainer: {
+    justifyContent: 'center',
     width: '82%',
   },
   linkUploadIcon: {
@@ -436,7 +437,7 @@ const styles = StyleSheet.create({
   },
   socialMediaNameContainer: {
     marginLeft: scale(15),
-    width: '40%',
+    width: '45%',
   },
   socialMediaNameText: {
     color: COLORS.black,

@@ -21,10 +21,10 @@ import authModule, {
 } from '@redux/modules/auth'
 
 import { ProfileScreenPresenter } from './ProfileScreenPresenter'
+import { userData } from '../../redux/slices/authSlice'
 
 export const ProfileScreen = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
-
   const { navigate } = useNavigation()
   const navigateToWizard = () => navigate(SCREEN_NAMES.Wizard)
   const navigateToLogin = () => navigate(SCREEN_NAMES.SignUp)
@@ -44,7 +44,6 @@ export const ProfileScreen = () => {
   const fullName = useSelector(selectFullName)
   const username = useSelector(selectUsername)
   const city = useSelector(selectCity)
-
   const tiktokUsername = useSelector(selectTiktokUsername)
   const instagramUsername = useSelector(selectInstagramUsername)
   const image = useSelector(selectImage)

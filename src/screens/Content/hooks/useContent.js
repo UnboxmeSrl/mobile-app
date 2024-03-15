@@ -16,9 +16,10 @@ import { setContentList } from '../../../redux/slices'
 
 const useContent = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
-  const [selectedApp, setSelectedApp] = useState(1)
+  const [selectedApp, setSelectedApp] = useState(0)
   const bookingDetails = useNavigationParam('bookingDetails')
   const actionName = useNavigationParam('actionName')
+  const actionNumId = useNavigationParam('actionNumId')
   const [isLoading, setIsLoading] = useState(false)
   const [diaryItems, setDiaryItems] = useState([])
   const [isDataFetching, setIsDataFetching] = useState(false)
@@ -38,56 +39,34 @@ const useContent = () => {
 
   const handleNextPress = async () => {
     setIsLoading(true)
-    if (actionName === 'Diary Instagram') {
-      /* Here, 
+    /* Here, 
             reel=1 for reel
             reel=2 for tiktok 
     */
-      const params = `/${bookingDetails?.id}`
-      const prepData = {
-        diary_action_turbo_id: diaryItems?.[selectedApp]?.id,
-      }
-      const res = await updateActionDiary(params, prepData)
-      console.log('update Diary Result: ', res)
-      if (res?.id) {
-        const params = `/${loginData?.id}`
-        const bookingRes = await getBookings(params)
-        dispatch(setBookings(bookingRes))
-        const newParams = `/${loginData?.id}`
-        const contentListRes = await getBookingForContentList(newParams)
-        dispatch(setContentList(contentListRes))
-        navigate({
-          params: {
-            bookingDetails: res,
-          },
-          routeName: SCREEN_NAMES.ContentBriefScreen,
-        })
-      } else {
-        Alert.alert('Something went wrong')
-      }
-    } else {
-      const params = `/${bookingDetails?.id}`
-      const actionId = bookingDetails?._offers_turbo?.actions?.[selectedApp - 1]?.actions_turbo_id
-      const prepData = { actions_turbo_id: actionId, bookingsturbo_id: bookingDetails?.id }
-      const res = await updateAction(params, prepData)
-      console.log('Update Action Result', res)
-      if (res?.id) {
-        const params = `/${loginData?.id}`
-        const bookingRes = await getBookings(params)
-        dispatch(setBookings(bookingRes))
-        const newParams = `/${loginData?.id}`
-        const contentListRes = await getBookingForContentList(newParams)
-        dispatch(setContentList(contentListRes))
-        navigate({
-          params: {
-            bookingDetails: res,
-          },
-          routeName: SCREEN_NAMES.ContentBriefScreen,
-        })
-      } else {
-        Alert.alert('Something went wrong')
-      }
+    const params = `/${bookingDetails?.id}`
+
+    const prepData = {
+      diary_action_turbo_id: diaryItems?.[selectedApp]?.id,
     }
+    const res = await updateActionDiary(params, prepData)
+    console.log('update Diary Result: ', res)
+    if (res?.id) {
+      const params = `/${loginData?.id}`
+      const bookingRes = await getBookings(params)
+      dispatch(setBookings(bookingRes))
+      const newParams = `/${loginData?.id}`
+      const contentListRes = await getBookingForContentList(newParams)
+      dispatch(setContentList(contentListRes))
+      navigate({
+        params: {
+          bookingDetails: res,
+        },
+        routeName: SCREEN_NAMES.ContentBriefScreen,
+      })
+    } else {
+      Alert.alert('Something went wrong')
+    }
+
     setIsLoading(false)
   }
 
@@ -99,7 +78,7 @@ const useContent = () => {
     isLoading,
     isDataFetching,
     diaryItems,
-    actionName,
+    actionNumId,
     handleBackPress,
     handleNextPress,
     selectedApp,

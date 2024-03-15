@@ -15,6 +15,7 @@ import products from '@redux/modules/products'
 import transactions from '@redux/modules/transactions'
 
 import authSlice from './slices/authSlice'
+import tempAuthSlice from './slices/tempAuth'
 import restaurantSlice from './slices/restaurantSlice'
 import contentSlice from './slices/contentSlice'
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   app: app.reducer,
   auth: auth.reducer,
   authSlice: authSlice,
+  tempAuth: tempAuthSlice,
   awardCategories: awardCategories.reducer,
   awards: awards.reducer,
   bookings: bookings.reducer,

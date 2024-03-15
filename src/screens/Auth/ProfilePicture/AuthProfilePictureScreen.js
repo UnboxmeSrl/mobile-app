@@ -15,12 +15,13 @@ const AuthProfilePictureScreen = () => {
     handleProfilePicture,
     handleCameraPress,
     handleGalleryPress,
+    handleBackPress,
     handleNextPress,
   } = useAuthProfilePicture()
   console.log(profilePicData)
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'Profile picture'} step={9} />
+      <CustomHeader title={'Profile picture'} step={9} handleBackPress={handleBackPress} />
       <View style={styles.imageUploadMainContainer}>
         <FlatList
           data={profilePicData}

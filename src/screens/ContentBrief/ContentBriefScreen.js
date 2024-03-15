@@ -38,6 +38,7 @@ const ContentBriefScreen = () => {
         <FlatList
           data={[0, 1]}
           numColumns={2}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
               <View style={styles.tagContainer}>
@@ -57,6 +58,7 @@ const ContentBriefScreen = () => {
         <FlatList
           data={[0, 1, 2, 3]}
           numColumns={2}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
               <View style={styles.tagContainer}>

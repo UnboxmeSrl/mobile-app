@@ -8,7 +8,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 const FifthOnboarding = () => {
   return (
-    <View style={{ marginTop: getStatusBarHeight() }}>
+    <View style={styles.mainContainer}>
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>
@@ -25,6 +25,9 @@ const FifthOnboarding = () => {
 export default FifthOnboarding
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    marginTop: getStatusBarHeight(),
+  },
   descriptionText: {
     fontFamily: FONTS.quicksand,
     color: COLORS.white,

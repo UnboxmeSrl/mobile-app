@@ -1,10 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
-const CustomButton = ({ title, handlePress, disabled = false }) => {
+const CustomButton = ({ title, handlePress, disabled = false, isLoading = false }) => {
   return (
     <View style={styles.btnMainContainer}>
       <TouchableOpacity
@@ -12,7 +12,11 @@ const CustomButton = ({ title, handlePress, disabled = false }) => {
         onPress={handlePress}
         style={[styles.btnContainer, disabled && styles.disabledBtnContainer]}
       >
-        <Text style={[styles.btnText, disabled && styles.disabledBtnText]}> {title}</Text>
+        {isLoading ? (
+          <ActivityIndicator size={30} color={COLORS.primary} />
+        ) : (
+          <Text style={[styles.btnText, disabled && styles.disabledBtnText]}> {title}</Text>
+        )}
       </TouchableOpacity>
     </View>
   )

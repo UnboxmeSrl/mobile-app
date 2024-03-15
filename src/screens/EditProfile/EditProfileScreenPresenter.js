@@ -31,6 +31,7 @@ import Hobbies from '../../components/Elements/Hobbies'
 import HStack from '../../components/Elements/HStack'
 import { checkPermission, openGallery } from '../../utils'
 import { PERMISSIONS } from 'react-native-permissions'
+import { useSelector } from 'react-redux'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -64,25 +65,27 @@ export const EditProfileScreenPresenter = ({
   navigateToCity,
 }) => {
   const [profilePicData, setProfilePicData] = useState(null)
+  const userDetail = useSelector((state) => state.authSlice.loginData)
+  console.log('userDetail', userDetail)
   const profilePicUploadRef = useRef()
   const isIos = Platform.OS === 'ios'
   const isAndroid = Platform.OS === 'android'
   const androidVersion = Platform.Version
   const intrestData = [
     {
-      title: 'Sport',
+      interest_topics: 'Sports',
     },
     {
-      title: 'Music',
+      interest_topics: 'Music',
     },
     {
-      title: 'Design',
+      interest_topics: 'Design',
     },
     {
-      title: 'Travel',
+      interest_topics: 'Travel',
     },
     {
-      title: 'Digital Art',
+      interest_topics: 'Digital Art',
     },
   ]
 
@@ -114,15 +117,15 @@ export const EditProfileScreenPresenter = ({
       <ScrollView stylee={{ flex: 1 }}>
         <Stack style={styles.avatarStack}>
           <View style={styles.avatarGrid}>
-            <Avatar img={profilePicData || userImg} style={styles.avatar} />
+            <Avatar img={userDetail?.Profile_pic?.url ?? userImg} style={styles.avatar} />
             <Pressable style={styles.uploadImg} onPress={handleGalleryPress}>
               <Ionicons name="camera" style={styles.cameIcon} />
             </Pressable>
           </View>
         </Stack>
         <Stack>
-          <AppInput label="Full Name" placeholder="Full name" img={user} />
-          <AppTextArea label="Biography" placeholder="Write a new Bio here .." />
+          <AppInput label="Full Name" placeholder="Full name" value={userDetail?.name} img={user} />
+          <AppTextArea label="Biography" value={userDetail?.bio || 'demo data'} placeholder="Write a new Bio here .." />
           <AppInput label="Instagram link" placeholder="Ex: instagram.com/uichakir" img={insta} link />
           <AppInput label="Tiktok link" placeholder="Ex: tiktok.com/uichakir" img={tiktok} link />
           <AppInput label="Maps Account" placeholder="Ex: maps.com/uichakir" img={map} link />

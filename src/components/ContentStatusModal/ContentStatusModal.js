@@ -5,15 +5,21 @@ import { FONTS } from '../../constants/fonts'
 import React from 'react'
 import { IMAGES } from '../../assets/images'
 import FastImage from 'react-native-fast-image'
-import { checkActionName, checkContentStatus } from '../../utils'
+import { checkAction, checkActionName, checkContentStatus } from '../../utils'
 
 const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegativeBtnPress, handlePositiveBtnPress }) => {
   const approvalStage = contentDetails?._content_status_turbo?.name
+  let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0
+  let icon = checkAction(actionNumId)?.action_icon
   let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0
   if (contentDetails?.diary_action_turbo_id) {
-    actionName = contentDetails?._diary_action_turbo?.action
+    actionName = contentDetails?._diary_action_turbo?.action_for_others
+    if (actionNumId === 3) {
+      actionName = item?._diary_action_turbo?.action
+    }
+    icon = checkActionName(actionName)
   }
-  const icon = checkActionName(actionName)
+
   const { title, description, statusIcon } = checkContentStatus(approvalStage)
   return (
     <Modal animationType="slide" onRequestClose={handleNegativeBtnPress} transparent visible={visible}>

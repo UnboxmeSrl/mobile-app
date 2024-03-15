@@ -15,14 +15,15 @@ import { reset } from '@services'
 import { userSignUp } from '../../services/ProfileService'
 
 import { WizardStepReviewPresenter } from './WizardStepReviewPresenter'
+import { isPending, userRejected } from '../../redux/slices/tempAuth'
 
 export const WizardStepReview = () => {
-  const isRejected = useSelector(selectIsRejected)
-  const inReview = useSelector(selectIsInReview)
+  const isRejected = useSelector(userRejected)
+  const inReview = useSelector(isPending)
   const isVerified = useSelector(selectIsVerified)
   const userDetails = useSelector((state) => state.authSlice.authData)
 
-  console.log('userDetails: ' + JSON.stringify(userDetails))
+  console.log('userDetails: ', userDetails)
 
   const openInstagram = async () => {
     Linking.openURL('https://www.instagram.com/unboxme__official/')
