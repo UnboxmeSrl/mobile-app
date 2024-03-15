@@ -1,12 +1,7 @@
 {
   "name": "unboxme",
-<<<<<<< HEAD
-  "version": "1.0.4",
-  "buildNumber": 8,
-=======
   "version": "1.0.0",
   "buildNumber": 13,
->>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
   "private": true,
   "scripts": {
     "android": "react-native run-android",

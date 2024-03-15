@@ -25,6 +25,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
       setLoading(true)
       const prepData = { email, password }
       const res = await userLogin(prepData)
+      console.log(res, 'res')
       setLoading(false)
       if (res.UserStatus === 'approved') {
         OneSignal.setExternalUserId(res?.id?.toString())
@@ -33,8 +34,8 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         const bookingRes = await getBookings(params)
         dispatch(setBookings(bookingRes))
 
-        console.log('isFirstTimeLogin', isFirstTimeLogin)
-        if (isFirstTimeLogin) {
+        // console.log('isFirstTimeLogin', isFirstTimeLogin)
+        if (res.firstVisit) {
           dispatch(setIsFirstTimeLogin(false))
           navigate({
             routeName: SCREEN_NAMES.LoginOnboarding,
@@ -45,24 +46,18 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         } else if (serviceDetails?.id && isFromBookRedirected) {
           navigate(SCREEN_NAMES.ServiceDetails)
         } else {
-          if (res.firstVisit === false) {
-            navigate(SCREEN_NAMES.FirstWelcomeScreen)
-          } else {
-            navigate(SCREEN_NAMES.Cities)
-          }
+          navigate(SCREEN_NAMES.Cities)
         }
+
         ref?.current?.close()
-<<<<<<< HEAD
       } else if (res.UserStatus === 'rejected') {
         navigate(SCREEN_NAMES.RejectedScreen)
-=======
       } else {
         const error = {
           message: 'Something went wrong',
         }
         showToastError(error)
         setIsError(true)
->>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
       }
     } catch (e) {
       setLoading(false)
