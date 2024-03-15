@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { ReduxNetworkProvider } from 'react-native-offline'
+import OneSignal from 'react-native-onesignal'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 import { Provider } from 'react-redux'
 import 'react-native-gesture-handler'
 import { PersistGate } from 'redux-persist/integration/react'
+
 import { AppGlobalHooks } from '@components/AppGlobalHooks'
 import MyErrorBoundary from '@components/MyErrorBoundary'
 import { Splash } from '@components/Splash'
@@ -14,9 +16,6 @@ import { ThemeProvider } from '@components/ThemeProvider'
 import NavigationContainer from '@nav/NavigationContainer'
 import { persistor, store } from '@redux/store'
 import i18n from '@services/i18n'
-import OneSignal from 'react-native-onesignal'
-import { PERMISSIONS } from 'react-native-permissions'
-import { checkPermission } from './utils'
 //
 // const db = firestore()
 // db.settings({ host: 'localhost:8080', ssl: false })
@@ -30,10 +29,10 @@ const App = () => {
   // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
   OneSignal.promptForPushNotificationsWithUserResponse()
 
-  //Method for handling notifications received while app in foreground
+  // Method for handling notifications received while app in foreground
   OneSignal.setNotificationWillShowInForegroundHandler((notificationReceivedEvent) => {
     console.log('OneSignal: notification will show in foreground:', notificationReceivedEvent)
-    let notification = notificationReceivedEvent.getNotification()
+    const notification = notificationReceivedEvent.getNotification()
     console.log('notification: ', notification)
     const data = notification.additionalData
     console.log('additionalData: ', data)
@@ -41,7 +40,7 @@ const App = () => {
     // notificationReceivedEvent.complete(notification)
   })
 
-  //Method for handling notifications opened
+  // Method for handling notifications opened
   OneSignal.setNotificationOpenedHandler((notification) => {
     console.log('OneSignal: notification opened:', notification)
   })

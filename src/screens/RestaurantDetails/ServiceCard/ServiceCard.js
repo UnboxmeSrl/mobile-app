@@ -1,10 +1,13 @@
 import React from 'react'
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+
 import { IMAGES } from '../../../assets/images'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
+
 import { useServiceCard } from './hooks'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import perfectSize from '../../../utils/responsiveSize'
 
 const ServiceCard = ({ item, index }) => {
   const { handleCardPress } = useServiceCard()
@@ -170,14 +173,11 @@ const styles = StyleSheet.create({
   listItem: {
     backgroundColor: COLORS.white,
     shadowColor: COLORS.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
+
     shadowOpacity: moderateScale(0.3),
     shadowRadius: moderateScale(4),
     elevation: moderateScale(5),
-    width: '75%',
+    width: perfectSize(300),
     alignSelf: 'center',
     // alignItems: 'center',
     height: moderateScale(292.21),

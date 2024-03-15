@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 import { sliceNames } from '../../constants'
 
 const initialState = {
@@ -69,6 +70,6 @@ export const currentUserData = (state) => state.authSlice.loginData
 
 export const selectOnBordingData = (state) => state.authSlice.onboardingData
 
-export const isAuthenticated = (state) => state.authSlice.loginData?.id
+export const selectIsAuthenticated = (state) => !!state.authSlice.loginData?.id
 
 export const userDetail = (state) => state.authSlice.profileData

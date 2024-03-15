@@ -1,60 +1,32 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable import/no-duplicates */
 import React, { useCallback, useEffect } from 'react'
+import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import { Instagram } from '@components/Auth/Instagram'
+
 // import { Avatar } from '@components/Avatar'
-import { Button } from '@components/Button'
-import { FormTask } from '@components/FormTask'
-import { IconButton } from '@components/IconButton'
-import { LoginGuest } from '@components/LoginGuest'
-import { Points } from '@components/Points'
-import { RouteContainer } from '@components/RouteContainer'
-import { BodyText, ButtonText, Caption, H3, Subtitle, TinyText } from '@components/Text'
-import { COLORS } from '@const'
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-  Switch,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-} from 'react-native'
 import AppText from '@components/Elements/AppText'
 import Avatar from '@components/Elements/Avatar'
 import Badge from '@components/Elements/Badge'
 import Divider from '@components/Elements/Divider'
 import Stack from '@components/Elements/Stack'
 import Title from '@components/Elements/Title'
-import AppButton from '../../components/Buttons'
-import perfectSize from '../../utils/responsiveSize'
-import { colors } from '../../utils/theme'
-import Feather from 'react-native-vector-icons/Feather'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import userImg from '../../assets/images/userImg.png'
+import { IconButton } from '@components/IconButton'
+import { LoginGuest } from '@components/LoginGuest'
+import { RouteContainer } from '@components/RouteContainer'
+import { Subtitle } from '@components/Text'
+import { COLORS } from '@const'
+
 import edit from '../../assets/icons/Edit.png'
-import ball from '../../assets/icons/Soccer-Ball.png'
-import art from '../../assets/icons/Artist-Palette.png'
-import mic from '../../assets/icons/Microphone.png'
-import plan from '../../assets/icons/Airplane.png'
+import tiktok from '../../assets/icons/tiktok.png'
+import userImg from '../../assets/images/userImg.png'
+import AppButton from '../../components/Buttons'
 import Hobbies from '../../components/Elements/Hobbies'
 import ReadMore from '../../components/Elements/ReadMore'
-import tiktok from '../../assets/icons/tiktok.png'
-import { color } from 'react-native-reanimated'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { SCREEN_NAMES } from '../../constants/navigation'
-import { useSelector } from 'react-redux'
 import { setproFileData, userDetail } from '../../redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
 import { getProfile } from '../../services'
-
-const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
-const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
+import perfectSize from '../../utils/responsiveSize'
+import { colors } from '../../utils/theme'
 
 export const ProfileScreenPresenter = ({
   navigateTikTokModal,
@@ -86,17 +58,12 @@ export const ProfileScreenPresenter = ({
   useEffect(() => {
     handleGetProfileData()
   }, [handleGetProfileData])
-  const intrestData = [
-    { title: 'Sport', icon: ball },
-    { title: 'Music', icon: mic },
-    { title: 'Digital Art', icon: art },
-    { title: 'Travel', icon: plan },
-  ]
-<<<<<<< HEAD
-
-=======
-  console.log(isAuthenticated, 'auth')
->>>>>>> 2c65a21f52a2c941ed63b927207d65636b606f3c
+  // const intrestData = [
+  //   { title: 'Sport', icon: ball },
+  //   { title: 'Music', icon: mic },
+  //   { title: 'Digital Art', icon: art },
+  //   { title: 'Travel', icon: plan },
+  // ]
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <FormTask /> */}
@@ -108,11 +75,11 @@ export const ProfileScreenPresenter = ({
                 <AppText style={styles.headerTitle}>Profile</AppText>
                 <View style={styles.badges}>
                   <Pressable style={styles.xpBadge}>
-                    <Icon name="star" style={styles.badgeIcon} />
+                    <Ionicons name="star" style={styles.badgeIcon} />
                     <AppText style={styles.badgeTitle}>240 xp</AppText>
                   </Pressable>
                   <Pressable style={[styles.xpBadge, styles.settBadge]} onPress={navigateToSettings}>
-                    <Icon name="settings-outline" style={styles.settBadgeIcon} />
+                    <Ionicons name="settings-outline" style={styles.settBadgeIcon} />
                   </Pressable>
                 </View>
               </View>
@@ -145,7 +112,7 @@ export const ProfileScreenPresenter = ({
                       variant="outline"
                       style={styles.btn}
                       labelStyle={styles.btnLabel}
-                      onPress={() => navigation.navigate(SCREEN_NAMES.EditProfile)}
+                      onPress={navigateToEditProfile}
                     />
                   </View>
                 </View>
@@ -171,77 +138,10 @@ export const ProfileScreenPresenter = ({
               </Stack>
             </ScrollView>
           </View>
-          {/* <Header>
-          <Points />
-          <Column>
-            <SmallButton Icon={EditIcon} onPress={navigateToEditProfile} />
-            <SmallButton
-              Icon={() => <Ionicons color={COLORS.achromaticBlack} name={'settings-outline'} size={24} />}
-              onPress={navigateToSettings}
-            />
-          </Column>
-        </Header>
-        <Center>
-          <Avatar source={source} />
-          <H3>{fullName}</H3>
-          <Caption>{city}</Caption>
-        </Center>
-        <Button
-          bgColor={COLORS.veryLight}
-          leftIconName={'logo-tiktok'}
-          light
-          onPress={navigateTikTokModal}
-          tKey={tiktokUsername ? 'onValidation' : 'connectTikTok'}
-          tOptions={{ username: `@${tiktokUsername}` }}
-        />
-        <Instagram bgColor={COLORS.tertiary} light />
-        <Tile onPress={navigateToQuestionnaire}>
-          <>
-            <Row style={{ marginBottom: 12 }}>
-              <ButtonText>Health profiling</ButtonText>
-              <EditIcon />
-            </Row>
-            {!hasQuestionnaire ? (
-              <BodyText>
-                Please fill it out so that we can select only the products that suit you and your type of skin.
-              </BodyText>
-            ) : (
-              <>
-                <Row>
-                  <BodyText>Skin type</BodyText>
-                  <Labels>{skinType}</Labels>
-                </Row>
-                <Row>
-                  <BodyText>Skin routine</BodyText>
-                  <Labels>{skincareRoutine ? 'Yes' : 'No'}</Labels>
-                </Row>
-                <Row>
-                  <BodyText>Cream types</BodyText>
-                  <Labels>{creams}</Labels>
-                </Row>
-                <Row>
-                  <BodyText>Favourite brands</BodyText>
-                  <Labels>{brands.length} brands</Labels>
-                </Row>
-              </>
-            )}
-          </>
-        </Tile>
-        <Tile onPress={navigateToInvite}>
-          <Row style={{ marginBottom: 12 }}>
-            <ButtonText>Invite a friend</ButtonText>
-            <AddPersonIcon />
-          </Row>
-          <BodyText>and get 300 points Experience!</BodyText>
-        </Tile> */}
         </View>
       ) : (
         <LoginGuest />
       )}
-      {/* <Button onPress={navigateToOnboarding} tKey={'onboardingTitle'} /> */}
-      {/* <Button onPress={navigateToAddresses} tKey={'addresses.title'} /> */}
-      {/* <Button onPress={navigateToYourRating} tKey={'Your Rating'} /> */}
-      {/* {isAuthenticated ? <Button onPress={navigateToQuestionnaire} tKey={'questionnaire.title'} /> : null} */}
     </SafeAreaView>
   )
 }

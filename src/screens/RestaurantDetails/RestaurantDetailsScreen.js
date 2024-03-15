@@ -3,13 +3,14 @@ import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View }
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
+
 import { IMAGES } from '../../assets/images'
-import { Categories } from '../../components/Categories'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { ServiceCard } from './ServiceCard'
+
 import { useRestaurantDetails } from './hooks'
+import { ServiceCard } from './ServiceCard'
 
 const RestaurantDetails = () => {
   const {

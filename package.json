@@ -14,7 +14,8 @@
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
     "postinstall": "patch-package",
-    "clean": "cd android && ./gradlew clean"
+    "clean": "cd android && ./gradlew clean",
+    "apk": "cd android && ./gradlew assembleRelease"
   },
   "reactNativePermissionsIOS": [
     "Camera",

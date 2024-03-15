@@ -1,13 +1,15 @@
 import React, { createRef, useEffect, useRef, useState } from 'react'
 import { Animated, useWindowDimensions } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
+
 // import { selectIsAuthenticated, selectIsAuthInitialized } from '@redux/modules/auth'
 import { navigate } from '@services'
-import { selectIsAuthenticated } from '../../redux/slices/authSlice'
+
 import { SCREEN_NAMES, STACK_NAMES } from '../../constants/navigation'
+import { selectIsAuthenticated, selectOnBordingData } from '../../redux/slices/authSlice'
 import { checkSignUpProgress } from '../../utils'
 
 const Wrapper = styled(Animated.View)`
@@ -26,7 +28,7 @@ export const Splash = () => {
   const fadeAnim = useRef(new Animated.Value(1)).current
   const ref = createRef()
   const isAuthenticated = useSelector(selectIsAuthenticated)
-  const dispatch = useDispatch()
+  const hideOnBoarding = useSelector(selectOnBordingData)
 
   const isApplied = useSelector((state) => state.authSlice.isApplied)
   const isSignUpProcessStarted = useSelector((state) => state.authSlice.isSignUpProcessStarted)
@@ -38,16 +40,20 @@ export const Splash = () => {
 
     // dispatch(setLoginData({}))
 
-    if (isAuthenticated) {
+    if (!hideOnBoarding) {
+      navigate(SCREEN_NAMES.OnboardingNew)
+    } else if (isAuthenticated) {
       navigate(STACK_NAMES.BottomStack)
     } else if (isApplied) {
       navigate(SCREEN_NAMES.AppliedScreen)
     } else if (isSignUpProcessStarted) {
       checkSignUpProgress(signUpProcessStage)
     } else {
-      navigate(SCREEN_NAMES.OnboardingNew)
+      navigate(SCREEN_NAMES.SignUpNew)
     }
+  }, [hideOnBoarding, isAuthenticated, isApplied, isSignUpProcessStarted, signUpProcessStage])
 
+  useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide()
       ref?.current?.play(0, 120)
@@ -55,7 +61,7 @@ export const Splash = () => {
         setFadeOut(true)
       }, delay)
     }, 0)
-  }, [ref, isAuthenticated, show])
+  }, [ref])
 
   useEffect(() => {
     if (fadeOut) {
