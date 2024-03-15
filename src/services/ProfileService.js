@@ -43,3 +43,24 @@ export const getInterestTopics = async () => {
     console.log(error)
   }
 }
+export const updateProfile = async (data) => {
+  try {
+    if (data) {
+      const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${data.id}`
+      const response = await Fetch.put(url, data)
+      return response
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getProfile = async (id) => {
+  try {
+    const url = `${Api.PROFILE.GET_USER_PROFILE}/${id}`
+    const response = await Fetch.get(url)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

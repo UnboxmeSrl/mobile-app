@@ -1,4 +1,4 @@
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { IMAGES } from '../../assets/images'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -6,119 +6,83 @@ import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { FONTS } from '../../constants/fonts'
 import { COLORS } from '../../constants/colors'
 import { useReject } from './hooks'
+import perfectSize from '../../utils/responsiveSize'
+import AppButton from '../../components/Buttons'
 
 const RejectedScreen = () => {
   const { handleGuestPress } = useReject()
   return (
-    <View style={styles.mainContainer}>
-      <ImageBackground source={IMAGES.appliedScreenBackground} style={styles.backgroundStyle}>
-        <View style={styles.viewForMargin}>
-          <View style={{ width: '95%', justifyContent: 'center', alignItems: 'center', marginTop: verticalScale(40) }}>
-            <Image
-              source={IMAGES.appLogo}
-              style={{ height: verticalScale(118), width: scale(99) }}
-              resizeMode={'contain'}
-            />
-          </View>
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>{`You have Rejected! `}</Text>
-          </View>
-        </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.content}>
+        <Image source={IMAGES.rejected} style={styles.image} />
+        <Text style={styles.title}>You have not been approved</Text>
 
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>{`Within 24H you will receive a response on your email `}</Text>
-        </View>
-
-        <TouchableOpacity style={styles.queryContainer}>
-          <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
-          <Text style={styles.queryText}>Questions? Send us a message</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleGuestPress} style={styles.guestBtnContainer} activeOpacity={0.7}>
-          <Image source={IMAGES.addUser} style={styles.addUserIcon} />
-          <Text style={styles.guestBtnText}>Continue as Guest</Text>
-        </TouchableOpacity>
-      </ImageBackground>
-    </View>
+        <Text style={styles.desc}>
+          We are sorry but for some reasons we are not able to include you in Claris for now! Don’t give up though you
+          may have the potential!
+        </Text>
+      </View>
+      <AppButton
+        onPress={handleGuestPress}
+        title="Continue as a guest"
+        style={styles.btn}
+        labelStyle={styles.btnLabel}
+      />
+    </SafeAreaView>
   )
 }
 
 export default RejectedScreen
 
 const styles = StyleSheet.create({
-  addUserIcon: {
-    height: moderateScale(19),
-    marginRight: scale(5),
-    tintColor: COLORS.white,
-    width: moderateScale(20),
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#131115',
+    padding: perfectSize(24),
   },
   backgroundStyle: {
     height: '100%',
     width: '100%',
   },
-  mainContainer: {
+  content: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  viewForMargin: {
-    marginTop: getStatusBarHeight(),
+  image: {
+    height: perfectSize(188),
+    width: perfectSize(209),
+    resizeMode: 'contain',
   },
-  titleText: {
+  title: {
     fontFamily: FONTS.quicksandBold,
-    color: COLORS.white,
+    color: '#F6475F',
     textAlign: 'center',
-    fontSize: moderateScale(25),
+    fontSize: perfectSize(32),
+    marginTop: perfectSize(85),
+    marginBottom: perfectSize(43),
   },
-  titleContainer: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: verticalScale(10),
-  },
-  descriptionText: {
+  desc: {
     fontFamily: FONTS.quicksandMedium,
     color: COLORS.white,
     textAlign: 'center',
-    fontSize: moderateScale(20),
+    fontSize: perfectSize(16),
   },
   descriptionContainer: {
     marginTop: verticalScale(10),
     width: '80%',
     alignSelf: 'center',
   },
-  queryContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginHorizontal: '5%',
-    marginTop: verticalScale(250),
-    width: '90%',
+  btn: {
+    height: perfectSize(48),
+    borderRadius: perfectSize(16),
   },
-  queryIcon: {
-    height: moderateScale(19),
-    marginRight: scale(5),
-    tintColor: COLORS.white,
-    width: moderateScale(20),
-  },
-  queryText: {
-    color: COLORS.white,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(16),
-  },
-  guestBtnText: {
-    fontFamily: FONTS.quicksandBold,
-    color: COLORS.white,
-    textAlign: 'center',
-    fontSize: moderateScale(18),
-  },
-  guestBtnContainer: {
-    width: '90%',
-    height: verticalScale(40),
-    marginTop: verticalScale(24),
-    borderColor: COLORS.white,
-    flexDirection: 'row',
-    borderWidth: moderateScale(1),
-    borderRadius: moderateScale(16),
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+  btnLabel: {
+    fontSize: perfectSize(18),
+    color: '#764837',
+    fontFamily: FONTS.quicksandLight,
+    textTransform: 'none',
+    letterSpacing: 0.36,
   },
 })

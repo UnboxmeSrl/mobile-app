@@ -1,4 +1,8 @@
 export const IMAGES = {
+  ball: require('./icons/Soccer-Ball.png'),
+  microphone: require('./icons/Microphone.png'),
+  rejected: require('./icons/rejected.png'),
+  userImage: require('./images/user-img.png'),
   acne: require('./images/acne.png'),
   aging: require('./images/aging.png'),
   approvalSuccess: require('./images/approval-success.png'),
