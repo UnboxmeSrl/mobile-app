@@ -4,7 +4,7 @@ import { getBuildNumber, getVersion } from 'react-native-device-info'
 import Share from 'react-native-share'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from 'react-navigation-hooks'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Clipboard from '@react-native-clipboard/clipboard'
 import CookieManager from '@react-native-community/cookies'
 import { GoogleSignin } from '@react-native-community/google-signin'
@@ -17,7 +17,8 @@ import { useAction } from '@hooks/common'
 import authModule, { _initialized, _instagram, selectWizardCode } from '@redux/modules/auth'
 import { persistor } from '@redux/store'
 import { logger, reset, showToastSuccess } from '@services'
-import { selectIsAuthenticated } from '../../redux/slices/authSlice'
+import { resetLogin, selectIsAuthenticated, setOnboardingData } from '../../redux/slices/authSlice'
+// import { dispatch } from '../../services'
 
 const version = getVersion()
 const buildNumber = getBuildNumber()
@@ -29,6 +30,7 @@ export const SettingsScreen = () => {
   const resetAuth = useAction(authModule.actions.reset)
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
+  const dispatch = useDispatch()
 
   const logout = useCallback(async () => {
     try {
@@ -36,6 +38,8 @@ export const SettingsScreen = () => {
 
       await persistor.purge()
       await GoogleSignin.signOut()
+      dispatch(resetLogin(false))
+      dispatch(selectIsAuthenticated)
       showToastSuccess("You've been logged out")
       logger.info('Logout succeded')
     } catch (error) {

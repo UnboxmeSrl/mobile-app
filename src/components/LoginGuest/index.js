@@ -11,22 +11,25 @@ import { BodyText, ButtonText, SmallText, Subtitle } from '@components/Text'
 import { COLORS } from '@const'
 import { SCREEN_NAMES } from '@const/navigation'
 import { selectIsAuthenticated } from '../../redux/slices/authSlice'
+import { SafeAreaView } from 'react-native'
 // import { selectIsAuthenticated } from '@redux/modules/auth'
 
 export const LoginGuest = () => {
   const { navigate } = useNavigation()
-  const navigateToLogin = () => navigate(SCREEN_NAMES.SignUp)
+  const navigateToLogin = () => navigate(SCREEN_NAMES.SignUpNew)
   const isAuthenticated = useSelector(selectIsAuthenticated)
 
   if (isAuthenticated) {
     return null
   }
   return (
-    <Wrapper>
-      <Subtitle tKey={'wantUseAll'} />
-      <Text tKey={'registerOrLogin'} />
-      <Button onPress={navigateToLogin} tKey={'loginTitle'} />
-    </Wrapper>
+    <SafeAreaView style={{ paddingTop: 60, paddingHorizontal: 18 }}>
+      <Wrapper>
+        <Subtitle tKey={'wantUseAll'} />
+        <Text tKey={'registerOrLogin'} />
+        <Button onPress={navigateToLogin} tKey={'loginTitle'} />
+      </Wrapper>
+    </SafeAreaView>
   )
 }
 
@@ -38,3 +41,7 @@ const Wrapper = styled.View`
   align-items: center;
   margin-top: 16px;
 `
+// const Button = styled.View`
+//   align-items: center;
+//   margin-top: 16px;
+// `

@@ -10,6 +10,7 @@ import { selectIsAuthenticated } from '../redux/slices/authSlice'
 export const useAuthenticatedAction = (action) => {
   const { navigate } = useNavigation()
   const isAuthenticated = useSelector(selectIsAuthenticated)
+  console.log('isAuthenticated', isAuthenticated)
 
   return useCallback(
     (data) =>

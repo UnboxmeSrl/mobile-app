@@ -15,6 +15,9 @@ const AuthSlice = createSlice({
   initialState: initialState,
   name: sliceNames.authSlice,
   reducers: {
+    resetLogin: (state) => {
+      state.loginData = {}
+    },
     setAuthData: (state, actions) => {
       console.log('Auth Data set Action', actions?.payload)
       state.authData = {
@@ -45,6 +48,7 @@ const AuthSlice = createSlice({
 })
 
 export const {
+  resetLogin,
   setAuthData,
   setLoginData,
   setIsApplied,
