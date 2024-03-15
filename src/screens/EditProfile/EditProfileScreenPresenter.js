@@ -1,37 +1,34 @@
-import React, { useRef, useState } from 'react'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { format } from 'date-fns'
-import { __ } from 'ramda'
-import styled from 'styled-components/native'
-import { Instagram } from '@components/Auth/Instagram'
-// import { Avatar } from '@components/Avatar'
-import { Button } from '@components/Button'
-import { Content } from '@components/Content'
-import { IconButton } from '@components/IconButton'
-import { LoginGuest } from '@components/LoginGuest'
-import { RouteContainer } from '@components/RouteContainer'
-import { BodyText, ButtonText, Caption, H3, SmallText, Subtitle } from '@components/Text'
-import { COLORS, GENDER_LABELS } from '@const'
+import React, { useEffect, useRef, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
-import SubHeader from '../../components/Header/SubHeader'
-import perfectSize from '../../utils/responsiveSize'
-import Stack from '../../components/Elements/Stack'
-import Avatar from '../../components/Elements/Avatar'
-import userImg from '../../assets/images/userImg.png'
-import { colors } from '../../utils/theme'
-import AppInput from '../../components/InputFields/AppInput'
-import user from '../../assets/icons/user.png'
-import insta from '../../assets/icons/insta.png'
-import tiktok from '../../assets/icons/tiktok.png'
-import map from '../../assets/icons/map.png'
-import AppTextArea from '../../components/InputFields/AppTextArea'
-import AppButton from '../../components/Buttons'
-import Label from '../../components/Elements/Label'
-import Hobbies from '../../components/Elements/Hobbies'
-import HStack from '../../components/Elements/HStack'
-import { checkPermission, openGallery } from '../../utils'
 import { PERMISSIONS } from 'react-native-permissions'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useSelector } from 'react-redux'
+import styled from 'styled-components/native'
+
+// import { Avatar } from '@components/Avatar'
+import { Caption } from '@components/Text'
+import { COLORS } from '@const'
+
+import insta from '../../assets/icons/insta.png'
+import map from '../../assets/icons/map.png'
+import tiktok from '../../assets/icons/tiktok.png'
+import user from '../../assets/icons/user.png'
+import userImg from '../../assets/images/userImg.png'
+import AppButton from '../../components/Buttons'
+import Avatar from '../../components/Elements/Avatar'
+import HStack from '../../components/Elements/HStack'
+import Hobbies from '../../components/Elements/Hobbies'
+import Label from '../../components/Elements/Label'
+import Stack from '../../components/Elements/Stack'
+import SubHeader from '../../components/Header/SubHeader'
+import AppInput from '../../components/InputFields/AppInput'
+import AppTextArea from '../../components/InputFields/AppTextArea'
+import { getInterestTopics } from '../../services'
+import { checkPermission, openGallery } from '../../utils'
+import perfectSize from '../../utils/responsiveSize'
+import { colors } from '../../utils/theme'
+import { userDetail } from '../../redux/slices/authSlice'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -65,30 +62,39 @@ export const EditProfileScreenPresenter = ({
   navigateToCity,
 }) => {
   const [profilePicData, setProfilePicData] = useState(null)
-  const userDetail = useSelector((state) => state.authSlice.loginData)
-  console.log('userDetail', userDetail)
+  const user = useSelector(userDetail)
+  const [intrests, setInrests] = useState([])
+  console.log('userDetail', user)
+  const [selectedIntrest, setSelectedIntrest] = useState()
   const profilePicUploadRef = useRef()
   const isIos = Platform.OS === 'ios'
   const isAndroid = Platform.OS === 'android'
   const androidVersion = Platform.Version
-  const intrestData = [
-    {
-      interest_topics: 'Sports',
-    },
-    {
-      interest_topics: 'Music',
-    },
-    {
-      interest_topics: 'Design',
-    },
-    {
-      interest_topics: 'Travel',
-    },
-    {
-      interest_topics: 'Digital Art',
-    },
-  ]
+ 
 
+  useEffect(() => {
+    getInterestTopicsData()
+  }, [])
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      biography: user?.bio ?? '',
+      fullName: user?.name ?? '',
+      id: user?.id,
+      instagramLink: '',
+      interests: '',
+      mapsAccount: '',
+      tiktokLink: '',
+    },
+  })
+  const getInterestTopicsData = async () => {
+    const res = await getInterestTopics()
+    setInrests(res?.data)
+  }
   const handlePermission = async (permission) => {
     const res = await checkPermission(permission)
     return res
@@ -108,7 +114,18 @@ export const EditProfileScreenPresenter = ({
     }
     // profilePicUploadRef.current.close()
   }
-
+  console.log(errors)
+  const onSubmit = (data) => {
+    console.log(data)
+    // disapatch(updateProfile(data))
+  }
+  const handleIntrest = (param, isChecked = false) => {
+    console.log(param)
+    setSelectedIntrest((pre) => ({
+      ...pre,
+      [param.id]: { ...param, isChecked: !isChecked },
+    }))
+  }
   return (
     // <RouteContainer tKey={'profile.editProfile'} withArrow withPadding>
     //   <Container>
@@ -124,20 +141,101 @@ export const EditProfileScreenPresenter = ({
           </View>
         </Stack>
         <Stack>
-          <AppInput label="Full Name" placeholder="Full name" value={userDetail?.name} img={user} />
-          <AppTextArea label="Biography" value={userDetail?.bio || 'demo data'} placeholder="Write a new Bio here .." />
-          <AppInput label="Instagram link" placeholder="Ex: instagram.com/uichakir" img={insta} link />
-          <AppInput label="Tiktok link" placeholder="Ex: tiktok.com/uichakir" img={tiktok} link />
-          <AppInput label="Maps Account" placeholder="Ex: maps.com/uichakir" img={map} link />
+          <Controller
+            control={control}
+            name="fullName"
+            render={({ value, onBlur, onChange, ref }) => (
+              <AppInput
+                errors={errors.fullName?.message}
+                img={user}
+                label="Full Name"
+                onChange={onChange}
+                placeholder="Full name"
+                value={value}
+              />
+            )}
+            rules={{ required: 'Name is required' }}
+          />
+          <Controller
+            control={control}
+            name="biography"
+            render={({ value, onBlur, onChange, ref }) => (
+              <AppTextArea
+                errors={errors.biography?.message}
+                label="Biography"
+                onChangeText={onChange}
+                placeholder="Write a new Bio here .."
+                value={value}
+              />
+            )}
+            rules={{ required: 'Biography is required' }}
+          />
+          <Controller
+            control={control}
+            name="instagramLink"
+            render={({ value, onChange, ref }) => (
+              <AppInput
+                errors={errors.instagramLink?.message}
+                img={insta}
+                label="Instagram link"
+                link
+                onChange={onChange}
+                placeholder="Ex: instagram.com/uichakir"
+                ref={ref}
+              />
+            )}
+            rules={{ required: 'link is required' }}
+          />
+          <Controller
+            control={control}
+            name="tiktokLink"
+            render={({ value, onChange, ref }) => (
+              <AppInput
+                errors={errors.tiktokLink?.message}
+                img={tiktok}
+                label="Tiktok link"
+                link
+                onChange={onChange}
+                placeholder="Ex: tiktok.com/uichakir"
+                ref={ref}
+                value={value}
+              />
+            )}
+            rules={{ required: 'link is required' }}
+          />
+          <Controller
+            control={control}
+            name="mapsAccount"
+            render={({ onChange, value, ref }) => (
+              <AppInput
+                errors={errors.mapsAccount?.message}
+                img={map}
+                label="Maps Account"
+                link
+                onChange={onChange}
+                placeholder="Ex: maps.com/uichakir"
+                ref={ref}
+                value={value}
+              />
+            )}
+            rules={{ required: 'link is required' }}
+          />
           <View>
             <Label title="Intrests" />
             <HStack style={styles.intrestGrid}>
-              {intrestData.map((item, ind) => (
-                <Hobbies key={ind} {...item} type="check" style={styles.hobbies} />
+              {intrests?.map((item, ind) => (
+                <Hobbies
+                  key={ind}
+                  {...item}
+                  isChecked={user?.user_interest_topics_turbo_id.some((data) => data.id === item.id)}
+                  onClick={() => handleIntrest(item)}
+                  style={styles.hobbies}
+                  type="check"
+                />
               ))}
             </HStack>
           </View>
-          <AppButton title="Save changes" />
+          <AppButton onPress={handleSubmit(onSubmit)} title="Save changes" />
         </Stack>
       </ScrollView>
       {/* <Center>

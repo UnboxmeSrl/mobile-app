@@ -36,14 +36,13 @@ const useSignInWithEmail = (isFromBookRedirected) => {
 
         // console.log('isFirstTimeLogin', isFirstTimeLogin)
         if (res.firstVisit === 1) {
-          // dispatch(setIsFirstTimeLogin(false))
-          navigate(SCREEN_NAMES.firstVisit)
-          // navigate({
-          //   routeName: SCREEN_NAMES.firstVisit,
-          //   params: {
-          //     isFromBookRedirected: isFromBookRedirected,
-          //   },
-          // })
+          dispatch(setIsFirstTimeLogin(false))
+          navigate({
+            routeName: SCREEN_NAMES.FirstWelcomeScreen,
+            // params: {
+            //   isFromBookRedirected: isFromBookRedirected,
+            // },
+          })
         } else if (serviceDetails?.id && isFromBookRedirected) {
           navigate(SCREEN_NAMES.ServiceDetails)
         } else {

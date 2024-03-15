@@ -3,11 +3,12 @@ import { sliceNames } from '../../constants'
 
 const initialState = {
   authData: {},
-  loginData: {},
   isApplied: false,
-  onboardingData: false,
   isFirstTimeLogin: true,
   isSignUpProcessStarted: false,
+  loginData: {},
+  onboardingData: false,
+  profileData: {},
   signUpProcessStage: 0,
 }
 
@@ -41,6 +42,9 @@ const AuthSlice = createSlice({
     setSignUpProcessStage: (state, actions) => {
       state.signUpProcessStage = actions?.payload
     },
+    setproFileData: (state, { payload }) => {
+      state.profileData = payload
+    },
   },
 })
 
@@ -52,6 +56,7 @@ export const {
   setIsSignUpProcessStarted,
   setSignUpProcessStage,
   setOnboardingData,
+  setproFileData,
 } = AuthSlice.actions
 
 export default AuthSlice.reducer
@@ -61,3 +66,5 @@ export const currentUserData = (state) => state.authSlice.loginData
 export const selectOnBordingData = (state) => state.authSlice.onboardingData
 
 export const isAuthenticated = (state) => state.authSlice.loginData?.id
+
+export const userDetail = (state) => state.authSlice.profileData

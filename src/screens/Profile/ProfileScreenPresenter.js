@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable import/no-duplicates */
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 import { Instagram } from '@components/Auth/Instagram'
@@ -49,6 +49,9 @@ import { color } from 'react-native-reanimated'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { useSelector } from 'react-redux'
+import { setproFileData, userDetail } from '../../redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { getProfile } from '../../services'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -71,15 +74,25 @@ export const ProfileScreenPresenter = ({
   source,
   navigation,
 }) => {
-  const userDetail = useSelector((state) => state.authSlice.loginData)
-  const state = useSelector((state) => state)
-  console.log('userDetail', state)
+  const disapatch = useDispatch()
+  const LoginDetail = useSelector((state) => state.authSlice.loginData)
+  const user = useSelector(userDetail)
+  const handleGetProfileData = useCallback(async () => {
+    const res = await getProfile(LoginDetail.id)
+    console.log('check', res)
+    disapatch(setproFileData(res.data))
+  }, [disapatch, LoginDetail])
+
+  useEffect(() => {
+    handleGetProfileData()
+  }, [handleGetProfileData])
   const intrestData = [
     { title: 'Sport', icon: ball },
     { title: 'Music', icon: mic },
     { title: 'Digital Art', icon: art },
     { title: 'Travel', icon: plan },
   ]
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <FormTask /> */}
@@ -104,12 +117,12 @@ export const ProfileScreenPresenter = ({
               <Stack style={styles.content}>
                 <View style={styles.header}>
                   <View style={styles.avatarGrid}>
-                    <Avatar img={userDetail?.Profile_pic?.url || userImg} style={styles.avatar} />
+                    <Avatar img={user?.Profile_pic?.url || userImg} style={styles.avatar} />
                     <Badge title="0 Missed bookings" style={styles.badge} variant="success" />
                   </View>
                   <View>
-                    <Text style={styles.title}>{fullName}</Text>
-                    <Text style={styles.from}>From {userDetail?.City}</Text>
+                    <Text style={styles.title}>{user?.name}</Text>
+                    <Text style={styles.from}>From {user?.City}</Text>
                   </View>
                   <View style={styles.socialGrid}>
                     <Pressable onPress={navigateToQuestionnaire}>
