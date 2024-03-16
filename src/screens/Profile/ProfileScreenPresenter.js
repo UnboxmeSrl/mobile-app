@@ -88,7 +88,10 @@ export const ProfileScreenPresenter = ({
               <Stack style={styles.content}>
                 <View style={styles.header}>
                   <View style={styles.avatarGrid}>
-                    <Avatar img={user?.Profile_pic?.url || userImg} style={styles.avatar} />
+                    <Avatar
+                      img={user?.Profile_pic?.url ? { uri: user?.Profile_pic?.url } : userImg}
+                      style={styles.avatar}
+                    />
                     <Badge title="0 Missed bookings" style={styles.badge} variant="success" />
                   </View>
                   <View>

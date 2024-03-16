@@ -13,27 +13,55 @@ import IonIcons from 'react-native-vector-icons/Ionicons'
 import AppText from '../../components/Elements/AppText'
 import HStack from '../../components/Elements/HStack'
 import Hobbies from '../../components/Elements/Hobbies'
+import { useDispatch, useSelector } from 'react-redux'
+import { setproFileData, userDetail } from '../../redux/slices/authSlice'
+import { useEffect } from 'react'
+import { useCallback } from 'react'
+import { getProfile } from '../../services'
 
 const FirstWellcomeScreen = () => {
   const { handleGuestPress } = useFirstWellcome()
+  const user = useSelector(userDetail)
+  const LoginDetail = useSelector((state) => state.authSlice.loginData)
+  const disapatch = useDispatch()
+  const handleGetProfileData = useCallback(async () => {
+    const res = await getProfile(LoginDetail.id)
+    console.log('check', res)
+    disapatch(setproFileData(res.data))
+  }, [disapatch, LoginDetail])
+
+  useEffect(() => {
+    handleGetProfileData()
+  }, [handleGetProfileData])
+  console.log('user in ', user)
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
         <View style={styles.item}>
           <View style={styles.avatarGrid}>
-            <Avatar img={IMAGES.userImage} style={styles.avatar} />
+            <Avatar
+              img={user?.Profile_pic?.url ? { uri: user?.Profile_pic?.url } : IMAGES.userImage}
+              style={styles.avatar}
+            />
             <View style={styles.checkView}>
               <IonIcons name="checkmark-sharp" style={styles.check} />
             </View>
           </View>
-          <AppText style={styles.name}>Bintang Wisata</AppText>
+          <AppText style={styles.name}>{user?.name ?? 'N/A'}</AppText>
           <AppText style={styles.location} numberOfLines={1} ellipsizeMode="tail">
-            From Jakarta
+            From {user?.City ?? 'N/A'}
           </AppText>
-          <AppText style={styles.userLabel}>✋ Hi! I'm Hannah, a software engineer by day...</AppText>
+          <AppText style={styles.userLabel}>{user?.bio}</AppText>
           <View style={styles.hobbiesGrid}>
-            <Hobbies interest_topics="Sports" style={styles.badge} titleStyle={styles.badgeTitle} />
-            <Hobbies interest_topics="Music" style={[styles.badge, styles.ml8]} titleStyle={styles.badgeTitle} />
+            {user?.user_interest_topics_turbo_id?.map((e, i) => (
+              <Hobbies
+                key={i}
+                interest_topics={e.interest_topics}
+                style={styles.badge}
+                titleStyle={styles.badgeTitle}
+              />
+            ))}
+            {/* <Hobbies interest_topics="Music" style={[styles.badge, styles.ml8]} titleStyle={styles.badgeTitle} /> */}
           </View>
         </View>
         <Text style={styles.title}>You have been accepted !</Text>

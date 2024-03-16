@@ -9,6 +9,7 @@ import art from '../../assets/icons/Artist-Palette.png'
 import mic from '../../assets/icons/Microphone.png'
 import fitness from '../../assets/icons/user.png'
 import plan from '../../assets/icons/Airplane.png'
+import science from '../../assets/icons/science.png'
 const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick }) => {
   // const [isChecked, setIsChecked] = useState(false)
   let icon = null
@@ -31,6 +32,9 @@ const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick 
     case 'Fitness':
       icon = fitness
       break
+    // case 'Science':
+    //   icon = science
+    //   break
   }
   return (
     <Pressable

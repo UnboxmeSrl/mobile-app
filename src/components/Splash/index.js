@@ -44,6 +44,7 @@ export const Splash = () => {
       navigate(SCREEN_NAMES.OnboardingNew)
     } else if (isAuthenticated) {
       navigate(STACK_NAMES.BottomStack)
+      /* navigate(SCREEN_NAMES.FirstWelcomeScreen) */
     } else if (isApplied) {
       navigate(SCREEN_NAMES.AppliedScreen)
     } else if (isSignUpProcessStarted) {

@@ -70,7 +70,6 @@ export const EditProfileScreenPresenter = ({
   const isIos = Platform.OS === 'ios'
   const isAndroid = Platform.OS === 'android'
   const androidVersion = Platform.Version
- 
 
   useEffect(() => {
     getInterestTopicsData()
@@ -134,7 +133,10 @@ export const EditProfileScreenPresenter = ({
       <ScrollView stylee={{ flex: 1 }}>
         <Stack style={styles.avatarStack}>
           <View style={styles.avatarGrid}>
-            <Avatar img={userDetail?.Profile_pic?.url ?? userImg} style={styles.avatar} />
+            <Avatar
+              img={userDetail?.Profile_pic?.url ? { uri: userDetail?.Profile_pic?.url } : userImg}
+              style={styles.avatar}
+            />
             <Pressable style={styles.uploadImg} onPress={handleGalleryPress}>
               <Ionicons name="camera" style={styles.cameIcon} />
             </Pressable>
