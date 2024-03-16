@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { getInterestTopics, navigate } from '../../../../services'
-import { useDispatch, useSelector } from 'react-redux'
-import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
 import { useNavigation } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { getInterestTopics, navigate } from '../../../../services'
 
 const useAuthInterestTopics = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
@@ -16,7 +17,7 @@ const useAuthInterestTopics = () => {
 
   const getInterestTopicsData = async () => {
     const res = await getInterestTopics()
-    setInterestTopicsList(res)
+    setInterestTopicsList(res.data)
     setIsLoading(false)
   }
 
@@ -51,13 +52,13 @@ const useAuthInterestTopics = () => {
   }, [selectedInterests])
 
   return {
+    handleBackPress,
+    handleInterestSelect,
+    handleNextPress,
+    interestTopicsList,
     isBtnDisabled,
     isLoading,
     selectedInterests,
-    interestTopicsList,
-    handleInterestSelect,
-    handleBackPress,
-    handleNextPress,
   }
 }
 

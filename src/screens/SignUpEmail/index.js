@@ -2,8 +2,9 @@ import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch } from 'react-redux'
-import { MAIN_NAVIGATOR } from '@const/navigation'
+
 import { PASSWORD_RULES } from '@const/validators'
+
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { setAuthData } from '../../redux/slices/authSlice'
 
@@ -29,7 +30,7 @@ export const SignUpEmailModal = () => {
         setLoading(false)
       }
     },
-    [setLoading]
+    [setLoading, dispatch, navigate]
   )
 
   const confirmPasswordRules = {

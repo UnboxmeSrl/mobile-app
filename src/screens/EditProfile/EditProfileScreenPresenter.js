@@ -1,16 +1,16 @@
 // eslint-disable-next-line simple-import-sort/imports
-import React, { useEffect, useRef, useState } from 'react'
+import Clipboard from '@react-native-clipboard/clipboard'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { Image, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { PERMISSIONS } from 'react-native-permissions'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import Clipboard from '@react-native-clipboard/clipboard'
 // import { Avatar } from '@components/Avatar'
 import { Caption } from '@components/Text'
 import { COLORS } from '@const'
-
+import { IMAGES } from '../../assets/images'
 import insta from '../../assets/icons/insta.png'
 import map from '../../assets/icons/map.png'
 import tiktok from '../../assets/icons/tiktok.png'
@@ -24,11 +24,17 @@ import Stack from '../../components/Elements/Stack'
 import SubHeader from '../../components/Header/SubHeader'
 import AppInput from '../../components/InputFields/AppInput'
 import AppTextArea from '../../components/InputFields/AppTextArea'
+import { setproFileData, userDetail } from '../../redux/slices/authSlice'
+import CountryPicker from 'react-native-country-picker-modal'
+import CountryFlag from 'react-native-country-flag'
 import { getInterestTopics, updateProfile } from '../../services'
 import { checkPermission, openGallery } from '../../utils'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
-import { setproFileData, userDetail } from '../../redux/slices/authSlice'
+import { TouchableOpacity } from 'react-native'
+import { Text } from 'react-native'
+import { scale, verticalScale } from 'react-native-size-matters'
+import { FONTS } from '../../constants'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -61,28 +67,33 @@ export const EditProfileScreenPresenter = ({
   navigateToGender,
   navigateToCity,
 }) => {
-  const disapatch = useDispatch()
+  const dispatch = useDispatch()
   const [profilePicData, setProfilePicData] = useState(null)
+
   const user = useSelector(userDetail)
+  const [country, setCountry] = useState({
+    cca2: user?.countryCode,
+    name: user?.nationality,
+  })
+  console.log('checkUser', user.Profile_pic)
   const [intrests, setInrests] = useState([])
   const [selectedIntrest, setSelectedIntrest] = useState({})
-  const profilePicUploadRef = useRef()
   const isIos = Platform.OS === 'ios'
   const isAndroid = Platform.OS === 'android'
   const androidVersion = Platform.Version
+
+  const preIntrest = useMemo(() => {
+    const data = user?.user_interest_topics_turbo_id.reduce(
+      (acc, item) => ({ ...acc, [item.id]: { ...item, isChecked: true } }),
+      {}
+    )
+    return data
+  }, [user?.user_interest_topics_turbo_id])
+
   useEffect(() => {
     getInterestTopicsData()
-    if (user?.user_interest_topics_turbo_id) {
-      setSelectedIntrest((prev) => {
-        const data = user?.user_interest_topics_turbo_id.reduce(
-          (acc, item) => ({ ...acc, [item.id]: { ...item, isChecked: true } }),
-          {}
-        )
-        return data
-      })
-    }
-  }, [user.user_interest_topics_turbo_id])
-
+  }, [])
+  console.log('selectedIntrest', selectedIntrest)
   const {
     control,
     handleSubmit,
@@ -91,12 +102,13 @@ export const EditProfileScreenPresenter = ({
   } = useForm({
     defaultValues: {
       biography: user?.bio ?? '',
+      countryCode: user?.countryCode ?? 'AI',
       fullName: user?.name ?? '',
       id: user?.id,
-      instagramLink: '',
-      interests: '',
+      instagramLink: user.IG_account ?? '',
       mapsAccount: '',
-      tiktokLink: '',
+      nationality: user?.nationality ?? 'Anguilla',
+      tiktokLink: user?.Tiktok_account ?? '',
     },
   })
   const getInterestTopicsData = async () => {
@@ -117,8 +129,7 @@ export const EditProfileScreenPresenter = ({
       const res = await openGallery({ selectionLimit: 1 })
 
       if (res?.assets?.length > 0) {
-        console.log(res?.assets[0])
-        // setProfilePicData(res?.assets[0])
+        setProfilePicData(res?.assets[0])
       }
     }
     // profilePicUploadRef.current.close()
@@ -127,47 +138,74 @@ export const EditProfileScreenPresenter = ({
     const text = await Clipboard.getString()
     setValue(param, text)
   }
-  const onSubmit = async (data) => {
-    const topicIds = Object.keys(selectedIntrest)
-    const tempBody = {
-      bio: data?.biography,
-      id: user?.id,
-      name: data?.fullName,
-      nationality: user?.City,
-      user_interest_topics_turbo_id: topicIds,
-    }
-    console.log(tempBody)
-    const res = await disapatch(updateProfile(tempBody))
-    if (res.success) {
-      disapatch(setproFileData(res.data))
-    }
-  }
-  const handleIntrest = (param, isChecked) => {
-    setSelectedIntrest((prev) => {
-      const prevData = { ...prev }
-      if (prevData[param.id] && prevData[param.id].isChecked === false) {
-        delete prevData[param.id]
+  const onSubmit = useCallback(
+    async (data) => {
+      const topicIds = Object.values({ ...preIntrest, ...selectedIntrest })?.filter((item) => item.isChecked)
+      console.log(topicIds, 'ids')
+      const formData = new FormData()
+      formData.append('bio', data?.biography)
+      formData.append('name', data?.fullName)
+      formData.append('nationality', country?.name)
+      formData.append('countryCode', country?.countryCode)
+      topicIds?.map((item) => formData.append('user_interest_topics_turbo_id[]', item.id))
+      if (profilePicData) {
+        formData.append('profileImage', {
+          name: profilePicData.fileName,
+          type: profilePicData.type,
+          uri: profilePicData.uri,
+        })
       } else {
-        prevData[param.id] = { ...param, isChecked }
+        formData.append('profileImage', user.Profile_pic.url)
       }
-      return prevData
-      // ...pre,
-      // [param.id]: { ...param, isChecked: !isChecked },
-    })
+      formData.append('IG_account', data?.instagramLink)
+      formData.append('Tiktok_account', data?.tiktokLink)
+      const resProfile = await updateProfile({ formData, userID: user?.id })
+      if (resProfile.success) {
+        dispatch(setproFileData(resProfile.data))
+      } else {
+        console.error('Profile update failed')
+      }
+    },
+    [dispatch, profilePicData, selectedIntrest, user, preIntrest, country]
+  )
+
+  const handleIntrest = useCallback(
+    (param, isChecked) => {
+      const interest = preIntrest[param.id]
+      setSelectedIntrest((prev) => {
+        const prevData = { ...prev }
+        if (prevData[param.id] && interest?.isChecked === isChecked) {
+          delete prevData[param.id]
+        } else {
+          prevData[param.id] = { ...param, isChecked }
+        }
+        return prevData
+      })
+    },
+    [preIntrest]
+  )
+  const onSelect = (country) => {
+    // console.log(country)
+    // setValue('nationality', country.name)
+    // setValue('countryCode', country.cca2)
+    setCountry(country)
   }
+
   return (
-    // <RouteContainer tKey={'profile.editProfile'} withArrow withPadding>
-    //   <Container>
     <SafeAreaView style={{ flex: 1, paddingTop: perfectSize(24) }}>
       <SubHeader title="Edit Profile" />
       <ScrollView stylee={{ flex: 1 }}>
         <Stack style={styles.avatarStack}>
           <View style={styles.avatarGrid}>
             <Avatar
-              img={userDetail?.Profile_pic?.url ? { uri: userDetail?.Profile_pic?.url } : userImg}
+              img={
+                profilePicData
+                  ? { uri: profilePicData.uri }
+                  : { uri: user?.Profile_pic?.url ? user?.Profile_pic?.url : userImg }
+              }
               style={styles.avatar}
             />
-            <Pressable style={styles.uploadImg} onPress={handleGalleryPress}>
+            <Pressable onPress={handleGalleryPress} style={styles.uploadImg}>
               <Ionicons name="camera" style={styles.cameIcon} />
             </Pressable>
           </View>
@@ -187,6 +225,28 @@ export const EditProfileScreenPresenter = ({
               />
             )}
             rules={{ required: 'Name is required' }}
+          />
+          <CountryPicker
+            containerButtonStyle={styles.countryContainer}
+            onSelect={onSelect}
+            renderFlagButton={({ onOpen }) => {
+              return (
+                <TouchableOpacity onPress={() => onOpen()} style={styles.countryContainer} activeOpacity={0.5}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    {country?.cca2 ? (
+                      <CountryFlag isoCode={country?.cca2 ?? 'de'} size={25} />
+                    ) : (
+                      <Image source={IMAGES.sampleFlag} style={styles.flagIcon} resizeMode={'contain'} />
+                    )}
+                    <Text style={styles.countryText}>{`${country?.name ?? 'Country'}`}</Text>
+                  </View>
+                  <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
+                </TouchableOpacity>
+              )
+            }}
+            withEmoji={true}
+            withFilter={true}
+            withFlagButton={true}
           />
           <Controller
             control={control}
@@ -215,9 +275,10 @@ export const EditProfileScreenPresenter = ({
                 onPress={() => handlePaste('instagramLink')}
                 placeholder="Ex: instagram.com/uichakir"
                 ref={ref}
+                value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <Controller
             control={control}
@@ -235,7 +296,7 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <Controller
             control={control}
@@ -253,7 +314,7 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <View>
             <Label title="Intrests" />
@@ -262,7 +323,8 @@ export const EditProfileScreenPresenter = ({
                 <Hobbies
                   key={ind}
                   // {...item}
-                  {...(selectedIntrest[item?.id] ?? item)}
+                  {...(preIntrest[item?.id] ?? item)}
+                  isChecked={(selectedIntrest[item.id] || preIntrest[item?.id])?.isChecked}
                   onClick={(checked) => handleIntrest(item, checked)}
                   style={styles.hobbies}
                   type="check"
@@ -364,6 +426,37 @@ const styles = StyleSheet.create({
   intrestGrid: {
     flexWrap: 'wrap',
     paddingBottom: perfectSize(24),
+  },
+  btnContainer: {
+    marginTop: verticalScale(170),
+  },
+  flagIcon: {
+    width: scale(24),
+    height: verticalScale(18),
+  },
+  countryContainer: {
+    marginTop: verticalScale(15),
+    height: verticalScale(48),
+    paddingHorizontal: scale(15),
+    width: '85%',
+    alignSelf: 'center',
+    borderWidth: perfectSize(1),
+    borderColor: COLORS.gainsboro,
+    borderRadius: perfectSize(10),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  countryText: {
+    fontFamily: FONTS.quicksand,
+    textAlign: 'center',
+    color: COLORS.gray,
+    fontSize: perfectSize(14),
+    marginLeft: scale(10),
+  },
+  downArrowIcon: {
+    height: verticalScale(6.38),
+    width: scale(11.63),
   },
   hobbies: {
     marginTop: perfectSize(12),

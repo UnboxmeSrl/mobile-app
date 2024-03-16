@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Linking } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
-import {
-  selectDobTs,
-  selectIsInReview,
-  selectIsRejected,
-  selectIsVerified,
-  selectVerificationStatus,
-} from '@redux/modules/auth'
+import { selectIsVerified } from '@redux/modules/auth'
 import { reset } from '@services'
 
+import { isPending, userRejected } from '../../redux/slices/tempAuth'
 import { userSignUp } from '../../services/ProfileService'
 
 import { WizardStepReviewPresenter } from './WizardStepReviewPresenter'
-import { isPending, userRejected } from '../../redux/slices/tempAuth'
 
 export const WizardStepReview = () => {
   const isRejected = useSelector(userRejected)
@@ -29,17 +23,17 @@ export const WizardStepReview = () => {
     Linking.openURL('https://www.instagram.com/unboxme__official/')
   }
   const navigateToHome = async () => {
-    const test = {
-      city: 'Gdsff',
-      dobTs: 1706130546134,
-      email: 'abc@gmail.com',
-      experienceType: 'zero', // not sending yet
-      fullName: 'Abc',
-      gender: 1,
-      hasAgency: false, // Agency name field still needs
-      password: '123456',
-      username: 'fsfsf',
-    }
+    // const test = {
+    //   city: 'Gdsff',
+    //   dobTs: 1706130546134,
+    //   email: 'abc@gmail.com',
+    //   experienceType: 'zero', // not sending yet
+    //   fullName: 'Abc',
+    //   gender: 1,
+    //   hasAgency: false, // Agency name field still needs
+    //   password: '123456',
+    //   username: 'fsfsf',
+    // }
     const prepData = {
       Agency: userDetails?.hasAgency,
       Birthday: userDetails?.dobTs,

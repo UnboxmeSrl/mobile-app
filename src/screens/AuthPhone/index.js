@@ -2,10 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Toast from 'react-native-toast-message'
 import { useSelector } from 'react-redux'
+
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { CODE_RULES } from '@const/validators'
 import { selectUid } from '@redux/modules/auth'
 import { reset } from '@services'
+
 import { AuthPhonePresenter } from './AuthPhonePresenter'
 
 export const AuthPhoneModal = () => {
@@ -21,7 +23,7 @@ export const AuthPhoneModal = () => {
       setLoading(true)
       setLoading(false)
     },
-    [setLoading, setConfirm]
+    [setLoading]
   )
 
   const verifyPhoneCode = useCallback(

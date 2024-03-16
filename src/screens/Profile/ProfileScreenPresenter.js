@@ -51,19 +51,12 @@ export const ProfileScreenPresenter = ({
   const user = useSelector(userDetail)
   const handleGetProfileData = useCallback(async () => {
     const res = await getProfile(LoginDetail.id)
-    console.log('check', res)
     disapatch(setproFileData(res.data))
   }, [disapatch, LoginDetail])
 
   useEffect(() => {
     handleGetProfileData()
   }, [handleGetProfileData])
-  // const intrestData = [
-  //   { title: 'Sport', icon: ball },
-  //   { title: 'Music', icon: mic },
-  //   { title: 'Digital Art', icon: art },
-  //   { title: 'Travel', icon: plan },
-  // ]
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <FormTask /> */}
@@ -92,7 +85,7 @@ export const ProfileScreenPresenter = ({
                       img={user?.Profile_pic?.url ? { uri: user?.Profile_pic?.url } : userImg}
                       style={styles.avatar}
                     />
-                    <Badge title="0 Missed bookings" style={styles.badge} variant="success" />
+                    <Badge style={styles.badge} title="0 Missed bookings" variant="success" />
                   </View>
                   <View>
                     <Text style={styles.title}>{user?.name}</Text>
@@ -110,12 +103,12 @@ export const ProfileScreenPresenter = ({
                   </View>
                   <View style={styles.btnGrid}>
                     <AppButton
-                      title="Edit Profile"
                       img={edit}
-                      variant="outline"
-                      style={styles.btn}
                       labelStyle={styles.btnLabel}
                       onPress={navigateToEditProfile}
+                      style={styles.btn}
+                      title="Edit Profile"
+                      variant="outline"
                     />
                   </View>
                 </View>
@@ -136,7 +129,7 @@ export const ProfileScreenPresenter = ({
                 <Title title="Intrests" />
                 <View style={styles.hobbies}>
                   {user?.user_interest_topics_turbo_id?.map((item, ind) => (
-                    <Hobbies key={ind} {...item} style={styles.hobbiesBadge} />
+                    <Hobbies key={ind} {...item} showIcons={true} style={styles.hobbiesBadge} />
                   ))}
                 </View>
               </Stack>

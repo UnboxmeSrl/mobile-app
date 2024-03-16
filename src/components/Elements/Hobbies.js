@@ -5,14 +5,14 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import plan from '../../assets/icons/Airplane.png'
 import art from '../../assets/icons/Artist-Palette.png'
 import mic from '../../assets/icons/Microphone.png'
+import Science from '../../assets/icons/science.png'
 import ball from '../../assets/icons/Soccer-Ball.png'
 import fitness from '../../assets/icons/user.png'
-import science from '../../assets/icons/science.png'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
 
 import AppText from './AppText'
-const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick }) => {
+const Hobbies = ({ titleStyle, style, interest_topics, showIcons, isChecked, type, onClick }) => {
   // const [isChecked, setIsChecked] = useState(false)
   let icon = null
   switch (interest_topics) {
@@ -30,6 +30,9 @@ const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick 
       break
     case 'Sports':
       icon = ball
+      break
+    case 'Science':
+      icon = Science
       break
     case 'Fitness':
       icon = fitness
@@ -51,7 +54,7 @@ const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick 
       ]}
     >
       {type === 'check' && !isChecked && <Icon name="add-outline" style={[styles.icon, styles.addIcon]} />}
-      {!!icon && <Image source={icon} style={styles.img} />}
+      {!!icon && showIcons && <Image source={icon} style={styles.img} />}
       <AppText
         style={[
           styles.title,
