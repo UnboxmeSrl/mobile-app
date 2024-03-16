@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Image, Pressable, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import perfectSize from '../../utils/responsiveSize'
-import { colors } from '../../utils/theme'
-import AppText from './AppText'
-import ball from '../../assets/icons/Soccer-Ball.png'
+
+import plan from '../../assets/icons/Airplane.png'
 import art from '../../assets/icons/Artist-Palette.png'
 import mic from '../../assets/icons/Microphone.png'
+import ball from '../../assets/icons/Soccer-Ball.png'
 import fitness from '../../assets/icons/user.png'
-import plan from '../../assets/icons/Airplane.png'
 import science from '../../assets/icons/science.png'
+import perfectSize from '../../utils/responsiveSize'
+import { colors } from '../../utils/theme'
+
+import AppText from './AppText'
 const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick }) => {
   // const [isChecked, setIsChecked] = useState(false)
   let icon = null
@@ -38,12 +40,12 @@ const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick 
   }
   return (
     <Pressable
-      onPress={onClick}
+      onPress={() => onClick && onClick(!isChecked)}
       style={({ pressed }) => [
         styles.btnStyle,
         {
-          opacity: pressed ? 0.8 : 1,
           backgroundColor: type === 'check' ? (isChecked ? colors.dangerLight : colors.light) : colors.light,
+          opacity: pressed ? 0.8 : 1,
         },
         style,
       ]}
@@ -67,35 +69,35 @@ const Hobbies = ({ titleStyle, style, interest_topics, isChecked, type, onClick 
 }
 
 const styles = StyleSheet.create({
+  addIcon: {
+    color: colors.dark,
+    fontSize: perfectSize(24),
+    marginRight: perfectSize(2),
+  },
   btnStyle: {
-    height: perfectSize(48),
-    flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: colors.light,
+    borderRadius: perfectSize(24),
+    flexDirection: 'row',
+    height: perfectSize(48),
     justifyContent: 'center',
     paddingHorizontal: perfectSize(16),
-    borderRadius: perfectSize(24),
-    backgroundColor: colors.light,
+  },
+  checkIcon: {
+    color: colors.dark,
+    fontSize: perfectSize(20),
+    marginLeft: perfectSize(4),
+  },
+  img: {
+    height: perfectSize(20),
+    marginRight: perfectSize(8),
+    resizeMode: 'contain',
+    width: perfectSize(20),
   },
   title: {
     fontSize: perfectSize(14),
     fontWeight: '500',
     textTransform: 'capitalize',
-  },
-  img: {
-    height: perfectSize(20),
-    width: perfectSize(20),
-    resizeMode: 'contain',
-    marginRight: perfectSize(8),
-  },
-  addIcon: {
-    marginRight: perfectSize(2),
-    fontSize: perfectSize(24),
-    color: colors.dark,
-  },
-  checkIcon: {
-    marginLeft: perfectSize(4),
-    fontSize: perfectSize(20),
-    color: colors.dark,
   },
 })
 

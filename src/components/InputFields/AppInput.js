@@ -1,9 +1,9 @@
-import React, { ForwardedRef, forwardRef, memo } from 'react'
-import { FieldError } from 'react-hook-form'
-import { Image, Pressable, StyleSheet, TextInput, TextInputProps, View } from 'react-native'
+import React, { forwardRef, memo } from 'react'
+import { Image, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import perfectSize from '../../utils/responsiveSize'
-import { colors, fonts } from '../../utils/theme'
+import { colors } from '../../utils/theme'
 import AppText from '../Elements/AppText'
 
 function AppInput(
@@ -33,16 +33,16 @@ function AppInput(
         {icon && <Icon name={icon} style={styles.icon} />}
         {img && <Image source={img} style={styles.img} />}
         <TextInput
-          ref={ref}
-          placeholder={placeholder}
-          style={[styles.textInput, textInputStyle]}
-          placeholderTextColor={colors.slate1}
-          numberOfLines={1}
           autoCapitalize={autoCapitalize}
           editable={!isDisabled}
+          numberOfLines={1}
+          onChangeText={onChange}
+          placeholder={placeholder}
+          placeholderTextColor={colors.slate1}
+          ref={ref}
+          style={[styles.textInput, textInputStyle]}
           // onFocus={Keyboard.emit}
           // ellipsizeMode="tail"
-          onChangeText={onChange}
           value={value}
           {...rest}
         />
@@ -63,50 +63,52 @@ const styles = StyleSheet.create({
     marginBottom: perfectSize(16),
     width: '100%',
   },
-  label: {
-    fontSize: perfectSize(14),
-    fontWeight: '500',
-    // fontFamily: fonts.inter500,
-    color: colors.infoLight,
-    textTransform: 'capitalize',
-    marginBottom: perfectSize(8),
-  },
   icon: {
-    fontSize: perfectSize(24),
     color: '#00000066',
+    fontSize: perfectSize(24),
   },
   img: {
     height: perfectSize(20),
-    width: perfectSize(20),
     resizeMode: 'contain',
+    width: perfectSize(20),
   },
   inputWrapper: {
-    height: perfectSize(64),
-    width: '100%',
-    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.light,
     borderRadius: perfectSize(18),
+    flexDirection: 'row',
+    height: perfectSize(64),
     paddingHorizontal: perfectSize(24),
     paddingVertical: 0,
+    width: '100%',
   },
-  textInput: {
-    height: '100%',
-    flex: 1,
-    zIndex: -1,
+  label: {
+    // fontFamily: fonts.inter500,
+    color: colors.infoLight,
+
     fontSize: perfectSize(14),
-    color: colors.dark,
-    paddingHorizontal: perfectSize(10),
-    paddingVertical: 0,
+
+    fontWeight: '500',
+    marginBottom: perfectSize(8),
+    textTransform: 'capitalize',
   },
   linkText: {
+    color: colors.danger,
     fontSize: perfectSize(14),
     fontWeight: '700',
-    color: colors.danger,
+  },
+  textInput: {
+    color: colors.dark,
+    flex: 1,
+    fontSize: perfectSize(14),
+    height: '100%',
+    paddingHorizontal: perfectSize(10),
+    paddingVertical: 0,
+    zIndex: -1,
   },
   warningText: {
-    fontSize: perfectSize(12),
     color: colors.danger,
+    fontSize: perfectSize(12),
     marginTop: 2,
   },
 })

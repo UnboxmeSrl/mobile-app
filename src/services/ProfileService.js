@@ -46,8 +46,10 @@ export const getInterestTopics = async () => {
 export const updateProfile = async (data) => {
   try {
     if (data) {
-      const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${data.id}`
+      const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${data?.id}`
+      console.log(data, url)
       const response = await Fetch.put(url, data)
+      console.log('responseOfUpdate', response)
       return response
     }
   } catch (error) {

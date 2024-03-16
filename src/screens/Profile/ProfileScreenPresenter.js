@@ -78,7 +78,7 @@ export const ProfileScreenPresenter = ({
                     <Ionicons name="star" style={styles.badgeIcon} />
                     <AppText style={styles.badgeTitle}>240 xp</AppText>
                   </Pressable>
-                  <Pressable style={[styles.xpBadge, styles.settBadge]} onPress={navigateToSettings}>
+                  <Pressable onPress={navigateToSettings} style={[styles.xpBadge, styles.settBadge]}>
                     <Ionicons name="settings-outline" style={styles.settBadgeIcon} />
                   </Pressable>
                 </View>
@@ -124,17 +124,18 @@ export const ProfileScreenPresenter = ({
               <Stack style={styles.stackItem}>
                 <Title title="Bio" />
                 <ReadMore
-                  desc="✋ Hi! I'm Alex, a software engineer by day 💻, and a literature-loving artist by night 🎨.
-                    Positive vibes only! Let's connect ✋ Hi! I'm Alex, a software engineer by day 💻, and a
-                    literature-loving artist by night 🎨. Positive vibes only! Let's connect connect ✋ Hi! I'm Alex, a
-                    software engineer by day 💻, and a literature-loving artist by night 🎨. Positive vibes only! Let's
-                    connect"
+                  // desc="✋ Hi! I'm Alex, a software engineer by day 💻, and a literature-loving artist by night 🎨.
+                  //   Positive vibes only! Let's connect ✋ Hi! I'm Alex, a software engineer by day 💻, and a
+                  //   literature-loving artist by night 🎨. Positive vibes only! Let's connect connect ✋ Hi! I'm Alex, a
+                  //   software engineer by day 💻, and a literature-loving artist by night 🎨. Positive vibes only! Let's
+                  //   connect"
+                  desc={user?.bio}
                 />
               </Stack>
               <Stack style={styles.stackItem}>
                 <Title title="Intrests" />
                 <View style={styles.hobbies}>
-                  {userDetail?.user_interest_topics_turbo_id?.map((item, ind) => (
+                  {user?.user_interest_topics_turbo_id?.map((item, ind) => (
                     <Hobbies key={ind} {...item} style={styles.hobbiesBadge} />
                   ))}
                 </View>
