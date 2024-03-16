@@ -1,10 +1,12 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
+
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 import { BottomSheet } from '../../BottomSheet'
 import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
+
 import { useSignUpWithEmail } from './hooks'
 
 const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
@@ -16,20 +18,26 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
     setVerificationCode,
     isBtnDisabled,
     isSendPress,
+    setIsSendPress,
     handleSignUpPress,
     handleSignUpPressAfterCodeSend,
   } = useSignUpWithEmail(closeSignUpSheet)
 
   return (
-    <BottomSheet ref={ref}>
+    <BottomSheet
+      onClose={() => {
+        setIsSendPress(false)
+      }}
+      ref={ref}
+    >
       <View style={styles.mainContainer}>
         <CustomTitle title={'Enter your email'} />
         <CustomTextInput
+          handleOnChangeText={setEmail}
+          isRemoveTextIconVisible={true}
+          keyboardType="email-address"
           placeholder={'Ex: Chakir@gmail.com'}
           value={email}
-          handleOnChangeText={setEmail}
-          keyboardType="email-address"
-          isRemoveTextIconVisible={true}
         />
 
         {error?.message && (
@@ -46,18 +54,18 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
               </Text>
             </View>
             <CustomTextInput
-              placeholder={'Code'}
-              value={verificationCode}
               handleOnChangeText={setVerificationCode}
               isRemoveTextIconVisible={true}
+              placeholder={'Code'}
+              value={verificationCode}
             />
           </>
         )}
 
         <CustomButton
-          title={'Send a message'}
-          handlePress={isSendPress ? handleSignUpPressAfterCodeSend : handleSignUpPress}
           disabled={isBtnDisabled}
+          handlePress={isSendPress ? handleSignUpPressAfterCodeSend : handleSignUpPress}
+          title={isSendPress ? 'Verify Otp' : 'Send a message'}
         />
       </View>
     </BottomSheet>

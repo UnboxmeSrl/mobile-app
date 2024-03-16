@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setAuthData } from '../../../../redux/slices/authSlice'
+
 import { REGEX } from '../../../../constants'
+import { setAuthData } from '../../../../redux/slices/authSlice'
 import { getOtp, verifyOtp } from '../../../../services/SignUp'
 
 const useSignUpWithEmail = (closeSignUpSheet) => {
@@ -13,6 +14,12 @@ const useSignUpWithEmail = (closeSignUpSheet) => {
   const createPasswordRef = useRef()
   const [error, setError] = useState({})
 
+  useEffect(() => {
+    setError((err) => {
+      if (err?.message) return {}
+      return err
+    })
+  }, [email])
   const handleSignUpPress = async () => {
     if (email && REGEX.emailRegExp.test(email)) {
       const data = {
@@ -24,6 +31,9 @@ const useSignUpWithEmail = (closeSignUpSheet) => {
       console.log('getOtp Response', res)
       if (res.success) {
         setIsSendPress(true)
+      } else {
+        const errorObj = res
+        setError(errorObj)
       }
     } else {
       const errorObj = {
@@ -58,6 +68,7 @@ const useSignUpWithEmail = (closeSignUpSheet) => {
     error,
     verificationCode,
     setVerificationCode,
+    setIsSendPress,
     isBtnDisabled,
     isSendPress,
     createPasswordRef,

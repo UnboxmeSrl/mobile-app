@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
-import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { navigate } from '../../../../services'
-import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { SCREEN_NAMES } from '../../../../constants/navigation'
+import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
+import { navigate } from '../../../../services'
 
 const useAuthDateOfBirth = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
@@ -23,7 +24,7 @@ const useAuthDateOfBirth = () => {
     // const prepDate = `${selectedDate.getDate() < 10 ? `0${selectedDate.getDate()}` : selectedDate.getDate()}-${
     //   selectedDate.getMonth() + 1 < 10 ? `0${selectedDate.getMonth() + 1}` : selectedDate.getMonth() + 1
     // }-${selectedDate.getFullYear()}`
-    dispatch(setAuthData({ birthDate: selectedDate }))
+    dispatch(setAuthData({ birthDate: selectedDate.toISOString() }))
     dispatch(setSignUpProcessStage(4))
     navigate(SCREEN_NAMES.AuthNationalityScreen)
   }
