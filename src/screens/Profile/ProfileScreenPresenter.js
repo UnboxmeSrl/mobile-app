@@ -58,12 +58,6 @@ export const ProfileScreenPresenter = ({
   useEffect(() => {
     handleGetProfileData()
   }, [handleGetProfileData])
-  // const intrestData = [
-  //   { title: 'Sport', icon: ball },
-  //   { title: 'Music', icon: mic },
-  //   { title: 'Digital Art', icon: art },
-  //   { title: 'Travel', icon: plan },
-  // ]
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <FormTask /> */}
@@ -136,7 +130,7 @@ export const ProfileScreenPresenter = ({
                 <Title title="Intrests" />
                 <View style={styles.hobbies}>
                   {user?.user_interest_topics_turbo_id?.map((item, ind) => (
-                    <Hobbies key={ind} {...item} style={styles.hobbiesBadge} />
+                    <Hobbies key={ind} {...item} showIcons={true} style={styles.hobbiesBadge} />
                   ))}
                 </View>
               </Stack>

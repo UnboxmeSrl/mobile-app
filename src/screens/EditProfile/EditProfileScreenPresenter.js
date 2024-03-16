@@ -24,7 +24,7 @@ import Stack from '../../components/Elements/Stack'
 import SubHeader from '../../components/Header/SubHeader'
 import AppInput from '../../components/InputFields/AppInput'
 import AppTextArea from '../../components/InputFields/AppTextArea'
-import { getInterestTopics, updateProfile } from '../../services'
+import { getInterestTopics, updateProfile, updateProfilePicture } from '../../services'
 import { checkPermission, openGallery } from '../../utils'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
@@ -61,7 +61,7 @@ export const EditProfileScreenPresenter = ({
   navigateToGender,
   navigateToCity,
 }) => {
-  const disapatch = useDispatch()
+  const dispatch = useDispatch()
   const [profilePicData, setProfilePicData] = useState(null)
   const user = useSelector(userDetail)
   const [intrests, setInrests] = useState([])
@@ -118,7 +118,7 @@ export const EditProfileScreenPresenter = ({
 
       if (res?.assets?.length > 0) {
         console.log(res?.assets[0])
-        // setProfilePicData(res?.assets[0])
+        setProfilePicData(res?.assets[0])
       }
     }
     // profilePicUploadRef.current.close()
@@ -129,6 +129,12 @@ export const EditProfileScreenPresenter = ({
   }
   const onSubmit = async (data) => {
     const topicIds = Object.keys(selectedIntrest)
+    const bodyForImage = {
+      id: user?.id,
+      profileImage: profilePicData,
+    }
+    const resProfileresImage = await updateProfilePicture(bodyForImage)
+    console.log(resProfileresImage, 'resProfileresImage')
     const tempBody = {
       bio: data?.biography,
       id: user?.id,
@@ -136,12 +142,15 @@ export const EditProfileScreenPresenter = ({
       nationality: user?.City,
       user_interest_topics_turbo_id: topicIds,
     }
-    console.log(tempBody)
-    const res = await disapatch(updateProfile(tempBody))
-    if (res.success) {
-      disapatch(setproFileData(res.data))
+    const resProfile = await updateProfile(tempBody)
+    console.log(resProfile, 'resProfile')
+    if (resProfileresImage.success && resProfile.success) {
+      dispatch(setproFileData(resProfileresImage.data))
+    } else {
+      console.error('Profile update failed')
     }
   }
+
   const handleIntrest = (param, isChecked) => {
     setSelectedIntrest((prev) => {
       const prevData = { ...prev }
@@ -156,18 +165,20 @@ export const EditProfileScreenPresenter = ({
     })
   }
   return (
-    // <RouteContainer tKey={'profile.editProfile'} withArrow withPadding>
-    //   <Container>
     <SafeAreaView style={{ flex: 1, paddingTop: perfectSize(24) }}>
       <SubHeader title="Edit Profile" />
       <ScrollView stylee={{ flex: 1 }}>
         <Stack style={styles.avatarStack}>
           <View style={styles.avatarGrid}>
             <Avatar
-              img={userDetail?.Profile_pic?.url ? { uri: userDetail?.Profile_pic?.url } : userImg}
+              img={
+                profilePicData
+                  ? { uri: profilePicData.uri }
+                  : { uri: user?.Profile_pic?.url ? user?.Profile_pic?.url : userImg }
+              }
               style={styles.avatar}
             />
-            <Pressable style={styles.uploadImg} onPress={handleGalleryPress}>
+            <Pressable onPress={handleGalleryPress} style={styles.uploadImg}>
               <Ionicons name="camera" style={styles.cameIcon} />
             </Pressable>
           </View>
@@ -217,7 +228,7 @@ export const EditProfileScreenPresenter = ({
                 ref={ref}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <Controller
             control={control}
@@ -235,7 +246,7 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <Controller
             control={control}
@@ -253,7 +264,7 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <View>
             <Label title="Intrests" />

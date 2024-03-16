@@ -14,6 +14,7 @@ export const Api = {
     GET_INTEREST_TOPICS: `${BASE_URL}/api:bwh6Xc5O/interest_topics`,
     GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo`,
     USER_LOGIN: `${BASE_URL}/api:bwh6Xc5O/user_login`,
+    USER_PROFILE_PIC_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_profile_pic`,
     USER_PROFILE_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_user_turbo`,
     USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/signup`,
   },
@@ -30,5 +31,9 @@ export const Api = {
   CONTENT: {
     GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content`,
     UPDATE_CONTENT_URL: `${BASE_URL}/api:bwh6Xc5O/update_content_url`,
+  },
+  SIGN_UP_WITH_EMAIL: {
+    GET_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/email`,
+    VERIFY_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/verification`,
   },
 }

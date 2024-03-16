@@ -12,10 +12,10 @@ import {
 } from '@redux/modules/auth'
 import { reset } from '@services'
 
+import { isPending, userRejected } from '../../redux/slices/tempAuth'
 import { userSignUp } from '../../services/ProfileService'
 
 import { WizardStepReviewPresenter } from './WizardStepReviewPresenter'
-import { isPending, userRejected } from '../../redux/slices/tempAuth'
 
 export const WizardStepReview = () => {
   const isRejected = useSelector(userRejected)

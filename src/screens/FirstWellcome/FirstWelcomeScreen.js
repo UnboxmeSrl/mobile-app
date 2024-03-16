@@ -1,23 +1,20 @@
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../assets/images'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../constants/fonts'
-import { COLORS } from '../../constants/colors'
-import { useFirstWellcome } from './hooks'
-import perfectSize from '../../utils/responsiveSize'
-import AppButton from '../../components/Buttons'
-import Avatar from '../../components/Elements/Avatar'
+import React, { useCallback, useEffect } from 'react'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
-import AppText from '../../components/Elements/AppText'
-import HStack from '../../components/Elements/HStack'
-import Hobbies from '../../components/Elements/Hobbies'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { IMAGES } from '../../assets/images'
+import AppButton from '../../components/Buttons'
+import AppText from '../../components/Elements/AppText'
+import Avatar from '../../components/Elements/Avatar'
+import Hobbies from '../../components/Elements/Hobbies'
+import { COLORS } from '../../constants/colors'
+import { FONTS } from '../../constants/fonts'
 import { setproFileData, userDetail } from '../../redux/slices/authSlice'
-import { useEffect } from 'react'
-import { useCallback } from 'react'
 import { getProfile } from '../../services'
+import perfectSize from '../../utils/responsiveSize'
+
+import { useFirstWellcome } from './hooks'
 
 const FirstWellcomeScreen = () => {
   const { handleGuestPress } = useFirstWellcome()
@@ -48,15 +45,15 @@ const FirstWellcomeScreen = () => {
             </View>
           </View>
           <AppText style={styles.name}>{user?.name ?? 'N/A'}</AppText>
-          <AppText style={styles.location} numberOfLines={1} ellipsizeMode="tail">
+          <AppText ellipsizeMode="tail" numberOfLines={1} style={styles.location}>
             From {user?.City ?? 'N/A'}
           </AppText>
           <AppText style={styles.userLabel}>{user?.bio}</AppText>
           <View style={styles.hobbiesGrid}>
             {user?.user_interest_topics_turbo_id?.map((e, i) => (
               <Hobbies
-                key={i}
                 interest_topics={e.interest_topics}
+                key={i}
                 style={styles.badge}
                 titleStyle={styles.badgeTitle}
               />
@@ -67,7 +64,7 @@ const FirstWellcomeScreen = () => {
         <Text style={styles.title}>You have been accepted !</Text>
         <Text style={styles.desc}>Congratulations your account has been accepted into Claris!</Text>
       </View>
-      <AppButton onPress={handleGuestPress} title="Enter" style={styles.btn} labelStyle={styles.btnLabel} />
+      <AppButton labelStyle={styles.btnLabel} onPress={handleGuestPress} style={styles.btn} title="Enter" />
     </SafeAreaView>
   )
 }
@@ -75,6 +72,56 @@ const FirstWellcomeScreen = () => {
 export default FirstWellcomeScreen
 
 const styles = StyleSheet.create({
+  avatar: {
+    height: perfectSize(190),
+    width: perfectSize(190),
+  },
+  avatarGrid: {
+    position: 'relative',
+  },
+  check: {
+    color: '#fff',
+    fontSize: perfectSize(30),
+  },
+  badge: {
+    backgroundColor: '#FFFFFF14',
+  },
+  checkView: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: perfectSize(48),
+    position: 'absolute',
+    borderRadius: perfectSize(70),
+    right: perfectSize(20),
+    backgroundColor: '#008A05',
+    top: perfectSize(-8),
+    justifyContent: 'center',
+    width: perfectSize(48),
+  },
+  badgeTitle: {
+    color: '#fff',
+  },
+  content: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  desc: {
+    color: COLORS.white,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: perfectSize(16),
+    textAlign: 'center',
+  },
+  hobbiesGrid: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  btn: {
+    borderRadius: perfectSize(16),
+    height: perfectSize(48),
+  },
   mainContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -82,11 +129,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#131115',
     padding: perfectSize(24),
   },
-  content: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+  btnLabel: {
+    color: '#764837',
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: perfectSize(18),
+    letterSpacing: 0.36,
+    textTransform: 'none',
   },
   item: {
     flexDirection: 'column',
@@ -97,85 +145,34 @@ const styles = StyleSheet.create({
     backgroundColor: '#20070B',
     width: '100%',
   },
-  avatarGrid: {
-    position: 'relative',
-  },
-  avatar: {
-    height: perfectSize(190),
-    width: perfectSize(190),
-  },
-  checkView: {
-    position: 'absolute',
-    right: perfectSize(20),
-    top: perfectSize(-8),
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: perfectSize(48),
-    width: perfectSize(48),
-    borderRadius: perfectSize(70),
-    backgroundColor: '#008A05',
-  },
-  check: {
-    fontSize: perfectSize(30),
-    color: '#fff',
-  },
-  name: {
-    fontSize: perfectSize(22),
-    fontFamily: FONTS.quicksandBold,
-    color: '#fff',
-  },
   location: {
+    color: '#fff',
+    fontFamily: FONTS.quicksandMedium,
     fontSize: perfectSize(15),
-    fontFamily: FONTS.quicksandMedium,
-    color: '#fff',
     marginTop: perfectSize(4),
-  },
-  userLabel: {
-    fontSize: perfectSize(14),
-    fontFamily: FONTS.quicksandMedium,
-    color: '#fff',
-    maxWidth: '90%',
-    textAlign: 'center',
-    marginVertical: perfectSize(12),
-  },
-  hobbiesGrid: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  badge: {
-    backgroundColor: '#FFFFFF14',
   },
   ml8: {
     marginLeft: perfectSize(8),
   },
-  badgeTitle: {
+  name: {
+    fontFamily: FONTS.quicksandBold,
     color: '#fff',
+    fontSize: perfectSize(22),
   },
   title: {
-    fontFamily: FONTS.quicksandBold,
     color: '#F6475F',
-    textAlign: 'center',
+    fontFamily: FONTS.quicksandBold,
     fontSize: perfectSize(32),
-    marginTop: perfectSize(40),
     marginBottom: perfectSize(17),
-  },
-  desc: {
-    fontFamily: FONTS.quicksandMedium,
-    color: COLORS.white,
+    marginTop: perfectSize(40),
     textAlign: 'center',
-    fontSize: perfectSize(16),
   },
-  btn: {
-    height: perfectSize(48),
-    borderRadius: perfectSize(16),
-  },
-  btnLabel: {
-    fontSize: perfectSize(18),
-    color: '#764837',
+  userLabel: {
     fontFamily: FONTS.quicksandMedium,
-    textTransform: 'none',
-    letterSpacing: 0.36,
+    color: '#fff',
+    fontSize: perfectSize(14),
+    marginVertical: perfectSize(12),
+    maxWidth: '90%',
+    textAlign: 'center',
   },
 })
