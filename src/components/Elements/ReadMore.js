@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
+
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
+
 import AppText from './AppText'
 
 function ReadMore({ desc }) {
@@ -11,7 +13,7 @@ function ReadMore({ desc }) {
   }
   return (
     <View style={styles.bioDescGrid}>
-      <AppText style={styles.bioDesc} numberOfLines={showFullText ? undefined : 3} ellipsizeMode="tail">
+      <AppText ellipsizeMode="tail" numberOfLines={showFullText ? undefined : 3} style={styles.bioDesc}>
         {desc}
       </AppText>
       <TouchableOpacity onPress={handleReadMore} style={styles.readMoreBtn}>
@@ -22,23 +24,26 @@ function ReadMore({ desc }) {
 }
 
 const styles = StyleSheet.create({
-  bioDescGrid: {
-    flexDirection: 'column',
-    alignItems: 'baseline',
-  },
   bioDesc: {
-    fontSize: perfectSize(15),
     // fontFamily: fonts.inter400,
     color: colors.info,
+
+    fontSize: perfectSize(15),
+  },
+  bioDescGrid: {
+    alignItems: 'baseline',
+    flexDirection: 'column',
+  },
+  readMore: {
+    // fontFamily: fonts.inter600,
+    color: colors.primary,
+
+    fontSize: perfectSize(16),
+
+    fontWeight: '600',
   },
   readMoreBtn: {
     alignSelf: 'flex-end',
-  },
-  readMore: {
-    fontSize: perfectSize(16),
-    fontWeight: '600',
-    // fontFamily: fonts.inter600,
-    color: colors.primary,
   },
 })
 export default ReadMore

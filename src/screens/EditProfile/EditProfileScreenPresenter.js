@@ -1,11 +1,12 @@
+// eslint-disable-next-line simple-import-sort/imports
 import React, { useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { PERMISSIONS } from 'react-native-permissions'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-
+import Clipboard from '@react-native-clipboard/clipboard'
 // import { Avatar } from '@components/Avatar'
 import { Caption } from '@components/Text'
 import { COLORS } from '@const'
@@ -13,7 +14,6 @@ import { COLORS } from '@const'
 import insta from '../../assets/icons/insta.png'
 import map from '../../assets/icons/map.png'
 import tiktok from '../../assets/icons/tiktok.png'
-import user from '../../assets/icons/user.png'
 import userImg from '../../assets/images/userImg.png'
 import AppButton from '../../components/Buttons'
 import Avatar from '../../components/Elements/Avatar'
@@ -24,11 +24,11 @@ import Stack from '../../components/Elements/Stack'
 import SubHeader from '../../components/Header/SubHeader'
 import AppInput from '../../components/InputFields/AppInput'
 import AppTextArea from '../../components/InputFields/AppTextArea'
-import { getInterestTopics } from '../../services'
+import { getInterestTopics, updateProfile } from '../../services'
 import { checkPermission, openGallery } from '../../utils'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
-import { userDetail } from '../../redux/slices/authSlice'
+import { setproFileData, userDetail } from '../../redux/slices/authSlice'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -61,25 +61,33 @@ export const EditProfileScreenPresenter = ({
   navigateToGender,
   navigateToCity,
 }) => {
+  const disapatch = useDispatch()
   const [profilePicData, setProfilePicData] = useState(null)
   const user = useSelector(userDetail)
   const [intrests, setInrests] = useState([])
-  console.log('userDetail', user)
-  const [selectedIntrest, setSelectedIntrest] = useState()
+  const [selectedIntrest, setSelectedIntrest] = useState({})
   const profilePicUploadRef = useRef()
   const isIos = Platform.OS === 'ios'
   const isAndroid = Platform.OS === 'android'
   const androidVersion = Platform.Version
- 
-
   useEffect(() => {
     getInterestTopicsData()
-  }, [])
+    if (user?.user_interest_topics_turbo_id) {
+      setSelectedIntrest((prev) => {
+        const data = user?.user_interest_topics_turbo_id.reduce(
+          (acc, item) => ({ ...acc, [item.id]: { ...item, isChecked: true } }),
+          {}
+        )
+        return data
+      })
+    }
+  }, [user.user_interest_topics_turbo_id])
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       biography: user?.bio ?? '',
@@ -109,22 +117,43 @@ export const EditProfileScreenPresenter = ({
       const res = await openGallery({ selectionLimit: 1 })
 
       if (res?.assets?.length > 0) {
-        setProfilePicData(res?.assets[0])
+        console.log(res?.assets[0])
+        // setProfilePicData(res?.assets[0])
       }
     }
     // profilePicUploadRef.current.close()
   }
-  console.log(errors)
-  const onSubmit = (data) => {
-    console.log(data)
-    // disapatch(updateProfile(data))
+  const handlePaste = async (param) => {
+    const text = await Clipboard.getString()
+    setValue(param, text)
   }
-  const handleIntrest = (param, isChecked = false) => {
-    console.log(param)
-    setSelectedIntrest((pre) => ({
-      ...pre,
-      [param.id]: { ...param, isChecked: !isChecked },
-    }))
+  const onSubmit = async (data) => {
+    const topicIds = Object.keys(selectedIntrest)
+    const tempBody = {
+      bio: data?.biography,
+      id: user?.id,
+      name: data?.fullName,
+      nationality: user?.City,
+      user_interest_topics_turbo_id: topicIds,
+    }
+    console.log(tempBody)
+    const res = await disapatch(updateProfile(tempBody))
+    if (res.success) {
+      disapatch(setproFileData(res.data))
+    }
+  }
+  const handleIntrest = (param, isChecked) => {
+    setSelectedIntrest((prev) => {
+      const prevData = { ...prev }
+      if (prevData[param.id] && prevData[param.id].isChecked === false) {
+        delete prevData[param.id]
+      } else {
+        prevData[param.id] = { ...param, isChecked }
+      }
+      return prevData
+      // ...pre,
+      // [param.id]: { ...param, isChecked: !isChecked },
+    })
   }
   return (
     // <RouteContainer tKey={'profile.editProfile'} withArrow withPadding>
@@ -134,8 +163,8 @@ export const EditProfileScreenPresenter = ({
       <ScrollView stylee={{ flex: 1 }}>
         <Stack style={styles.avatarStack}>
           <View style={styles.avatarGrid}>
-            <Avatar img={userDetail?.Profile_pic?.url ?? userImg} style={styles.avatar} />
-            <Pressable style={styles.uploadImg} onPress={handleGalleryPress}>
+            <Avatar img={user?.Profile_pic?.url ?? userImg} style={styles.avatar} />
+            <Pressable onPress={handleGalleryPress} style={styles.uploadImg}>
               <Ionicons name="camera" style={styles.cameIcon} />
             </Pressable>
           </View>
@@ -180,6 +209,7 @@ export const EditProfileScreenPresenter = ({
                 label="Instagram link"
                 link
                 onChange={onChange}
+                onPress={() => handlePaste('instagramLink')}
                 placeholder="Ex: instagram.com/uichakir"
                 ref={ref}
               />
@@ -196,6 +226,7 @@ export const EditProfileScreenPresenter = ({
                 label="Tiktok link"
                 link
                 onChange={onChange}
+                onPress={() => handlePaste('tiktokLink')}
                 placeholder="Ex: tiktok.com/uichakir"
                 ref={ref}
                 value={value}
@@ -213,6 +244,7 @@ export const EditProfileScreenPresenter = ({
                 label="Maps Account"
                 link
                 onChange={onChange}
+                onPress={() => handlePaste('mapsAccount')}
                 placeholder="Ex: maps.com/uichakir"
                 ref={ref}
                 value={value}
@@ -226,9 +258,9 @@ export const EditProfileScreenPresenter = ({
               {intrests?.map((item, ind) => (
                 <Hobbies
                   key={ind}
-                  {...item}
-                  isChecked={user?.user_interest_topics_turbo_id.some((data) => data.id === item.id)}
-                  onClick={() => handleIntrest(item)}
+                  // {...item}
+                  {...(selectedIntrest[item?.id] ?? item)}
+                  onClick={(checked) => handleIntrest(item, checked)}
                   style={styles.hobbies}
                   type="check"
                 />
