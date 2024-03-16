@@ -155,11 +155,7 @@ export const EditProfileScreenPresenter = ({
           uri: profilePicData.uri,
         })
       } else {
-        formData.append('profileImage', {
-          name: user.Profile_pic.fileName,
-          type: user.Profile_pic.type,
-          uri: user.Profile_pic.uri,
-        })
+        formData.append('profileImage', user.Profile_pic.url)
       }
       formData.append('IG_account', data?.instagramLink)
       formData.append('Tiktok_account', data?.tiktokLink)
@@ -170,7 +166,7 @@ export const EditProfileScreenPresenter = ({
         console.error('Profile update failed')
       }
     },
-    [dispatch, profilePicData, selectedIntrest, user, preIntrest]
+    [dispatch, profilePicData, selectedIntrest, user, preIntrest, country]
   )
 
   const handleIntrest = useCallback(
