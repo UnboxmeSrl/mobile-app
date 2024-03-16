@@ -44,6 +44,7 @@ const RestaurantsScreen = () => {
     try {
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+        console.log('location granted check', granted)
         if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
           return Alert.alert('Location Permission', 'Location permission denied')
         }
@@ -68,8 +69,9 @@ const RestaurantsScreen = () => {
       Alert.alert('Location Permission', 'Something went wrong!')
     }
   }, [])
-  console.log('userlocation in Restaurant screen', userLocation, restaurantsData?.latitude)
+  // console.log('userlocation in Restaurant screen', userLocation, restaurantsData?.latitude)
   useEffect(() => {
+    console.log('check useEffect n restarant screen')
     requestLocationPermission()
   }, [requestLocationPermission])
 
