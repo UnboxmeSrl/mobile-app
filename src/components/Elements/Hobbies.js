@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import plan from '../../assets/icons/Airplane.png'
 import art from '../../assets/icons/Artist-Palette.png'
 import mic from '../../assets/icons/Microphone.png'
+import Science from '../../assets/icons/science.png'
 import ball from '../../assets/icons/Soccer-Ball.png'
 import fitness from '../../assets/icons/user.png'
 import perfectSize from '../../utils/responsiveSize'
@@ -29,6 +30,9 @@ const Hobbies = ({ titleStyle, style, interest_topics, showIcons, isChecked, typ
       break
     case 'Sports':
       icon = ball
+      break
+    case 'Science':
+      icon = Science
       break
     case 'Fitness':
       icon = fitness

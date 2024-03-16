@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react'
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { getDistance } from 'geolib'
 
 import { IMAGES } from '../../../assets/images'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 
 import { useRestaurantCard } from './hooks'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getDistance } from 'geolib'
 
 const RestaurantCard = ({ item, index, userLocation }) => {
   const { handleCardPress } = useRestaurantCard()
@@ -15,11 +15,10 @@ const RestaurantCard = ({ item, index, userLocation }) => {
     const distance = getDistance(userLocation, { latitude: item.Latitude, longitude: item.Longitude } || {})
     return (distance / 1000).toFixed(2)
   }, [item.Latitude, item.Longitude, userLocation])
-  console.log('distance from user ', distanceFromUser, userLocation)
   return (
     <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
-        <Image source={IMAGES.overlay} style={styles.itemImage} resizeMode="cover" />
+        <Image resizeMode="cover" source={IMAGES.overlay} style={styles.itemImage} />
         <View style={styles.mainContainer}>
           {/* <View style={styles.ratingsContainer}>
             <Text style={styles.ratingsText}>+250</Text>

@@ -43,30 +43,16 @@ export const getInterestTopics = async () => {
     console.log(error)
   }
 }
-export const updateProfile = async (data) => {
+export const updateProfile = async ({ formData, userID }) => {
   try {
-    if (data) {
-      const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${data?.id}`
-      console.log(data, url)
-      const response = await Fetch.put(url, data)
+    if (userID) {
+      const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${userID}`
+      const response = await Fetch.postMedia(url, formData)
+      console.log('checkPRofile', response)
       return response
     }
   } catch (error) {
     console.log(error)
-  }
-}
-export const updateProfilePicture = async (data) => {
-  try {
-    if (data) {
-      console.log(data)
-      const url = `${Api.PROFILE.USER_PROFILE_PIC_UPDATE}/${data?.id}`
-      const formData = new FormData()
-      formData.append('profileImage', data?.profilePicData)
-      const response = await Fetch.postMedia(url, formData)
-      return response
-    }
-  } catch (error) {
-    return error
   }
 }
 
