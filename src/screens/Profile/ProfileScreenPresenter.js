@@ -53,7 +53,7 @@ export const ProfileScreenPresenter = ({
     const res = await getProfile(LoginDetail.id)
     disapatch(setproFileData(res.data))
   }, [disapatch, LoginDetail])
-
+  console.log('user', user?.Profile_pic)
   useEffect(() => {
     handleGetProfileData()
   }, [handleGetProfileData])

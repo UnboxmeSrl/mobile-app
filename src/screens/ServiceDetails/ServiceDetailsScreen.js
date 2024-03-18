@@ -3,13 +3,15 @@ import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View }
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
+
 import { IMAGES } from '../../assets/images'
+import { CommonHeader } from '../../components'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { checkAction, checkActionName } from '../../utils'
+
 import { useServiceDetails } from './hooks'
-import { CommonHeader } from '../../components'
 
 const ServiceDetails = () => {
   const {
@@ -38,10 +40,10 @@ const ServiceDetails = () => {
                 <>
                   {isImageLoading && <View style={styles.imageLoader} />}
                   <FastImage
+                    onLoadEnd={() => setIsImageLoading(false)}
                     resizeMode="cover"
                     source={{ priority: FastImage.priority.high, uri: item?.url }}
                     style={styles.imageStyle}
-                    onLoadEnd={() => setIsImageLoading(false)}
                   />
                 </>
               )
@@ -240,67 +242,15 @@ const ServiceDetails = () => {
 }
 
 const styles = StyleSheet.create({
+  friendAmenityContainer: {
+    justifyContent: 'center',
+    width: scale(80),
+  },
   friendAmenityTitle: {
     textAlign: 'center',
   },
   friendAmentityText: {
     textAlign: 'center',
-  },
-  friendAmenityContainer: {
-    width: scale(80),
-    justifyContent: 'center',
-  },
-  orDivider: {
-    borderWidth: 0.5,
-    opacity: 0.5,
-    alignSelf: 'center',
-    borderColor: COLORS.gray,
-    width: '20%',
-  },
-  socialMediaDescriptionText: {
-    color: COLORS.greyFont,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(15),
-  },
-  socialMediaDescriptionContainer: {
-    marginTop: verticalScale(10),
-  },
-  socialMediaTitle: {
-    color: COLORS.black,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(17),
-  },
-  socialMediaTitleContainer: {
-    flexDirection: 'row',
-    width: '80%',
-  },
-  socialMediaTitleDescriptionContainer: {
-    width: '70%',
-    marginLeft: scale(10),
-    justifyContent: 'center',
-  },
-  socialMediaImage: {
-    height: moderateScale(40),
-    width: moderateScale(40),
-  },
-  socialMediaImageContainer: {
-    width: '20%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  mainSocialItemContainer: {
-    height: verticalScale(150),
-    width: '90%',
-    alignSelf: 'center',
-    borderWidth: moderateScale(1),
-    borderColor: COLORS.gainsboro,
-    borderRadius: moderateScale(16),
-    marginTop: verticalScale(24),
-    flexDirection: 'row',
-  },
-  flatlistContainer: {
-    flex: 1,
-    marginBottom: verticalScale(20),
   },
   deadlineText: {
     color: COLORS.primary,
@@ -308,139 +258,150 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
     marginLeft: scale(10),
   },
-  timeCircleIcon: {
-    tintColor: COLORS.primary,
-    height: moderateScale(18),
-    width: moderateScale(18),
+  mainSocialItemContainer: {
+    height: verticalScale(150),
+    alignSelf: 'center',
+    width: '90%',
+    borderColor: COLORS.gainsboro,
+    borderWidth: moderateScale(1),
+    borderRadius: moderateScale(16),
+    flexDirection: 'row',
+    marginTop: verticalScale(24),
   },
   deadlineContainer: {
     width: '50%',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  contentRequiredText: {
-    color: COLORS.black,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(18),
+  orDivider: {
+    alignSelf: 'center',
+    borderColor: COLORS.gray,
+    borderWidth: 0.5,
+    opacity: 0.5,
+    width: '20%',
   },
   contentRequiredContainer: {
     width: '50%',
     alignItems: 'center',
   },
+  socialMediaDescriptionContainer: {
+    marginTop: verticalScale(10),
+  },
   contentRequiredRow: {
     flexDirection: 'row',
-    width: '100%',
     marginTop: verticalScale(5),
+    width: '100%',
   },
-  divider: {
-    borderWidth: 0.5,
-    opacity: 0.5,
-    alignSelf: 'center',
-    borderColor: COLORS.gray,
-    width: '90%',
-    marginVertical: verticalScale(20),
+  socialMediaDescriptionText: {
+    color: COLORS.greyFont,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(15),
   },
-  deaLeftText: {
-    color: COLORS.primary,
+  contentRequiredText: {
+    color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(18),
   },
-  dealLeftContainer: {
-    width: '22%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: verticalScale(20),
-    borderRadius: moderateScale(12),
-    marginTop: verticalScale(10),
-    borderWidth: moderateScale(1),
-    borderColor: COLORS.primary,
+  socialMediaImage: {
+    height: moderateScale(40),
+    width: moderateScale(40),
   },
   amenityMainContainer: {
-    width: scale(149.01),
     height: verticalScale(52),
-    flexDirection: 'row',
+    width: scale(149.01),
     borderRadius: moderateScale(16),
+    flexDirection: 'row',
     borderWidth: moderateScale(1),
-    marginTop: verticalScale(10),
     marginLeft: scale(20),
+    marginTop: verticalScale(10),
     borderColor: COLORS.gainsboro,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  amenityIconContainer: {
-    width: '30%',
-    justifyContent: 'center',
-    alignItems: 'center',
+  socialMediaTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(17),
   },
   amenityIcon: {
     height: moderateScale(26),
     width: moderateScale(26),
   },
-  amenityTitleDescriptionContainer: {
-    width: '60%',
-    justifyContent: 'center',
+  socialMediaTitleContainer: {
+    flexDirection: 'row',
+    width: '80%',
   },
   amenitiesTitle: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12.13),
   },
+  socialMediaTitleDescriptionContainer: {
+    width: '70%',
+    marginLeft: scale(10),
+    justifyContent: 'center',
+  },
   amenitiesDescription: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
   },
-  ratingIcon: {
-    height: moderateScale(11.56),
-    width: moderateScale(12),
-  },
-  ratingsText: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(14),
-  },
-  ratingsContainer: {
-    width: '15%',
+  socialMediaImageContainer: {
+    width: '20%',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    borderRadius: moderateScale(20),
-    flexDirection: 'row',
-    marginLeft: scale(20),
   },
-  titleText: {
-    color: COLORS.black,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(15),
+  amenityIconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '30%',
   },
-  socialIcon: {
+  flatlistContainer: {
+    flex: 1,
+    marginBottom: verticalScale(20),
+  },
+  amenityTitleDescriptionContainer: {
+    justifyContent: 'center',
+    width: '60%',
+  },
+  timeCircleIcon: {
+    tintColor: COLORS.primary,
     height: moderateScale(18),
     width: moderateScale(18),
-    marginRight: scale(10),
   },
-  itemTitleIconContainer: {
-    width: '60%',
-    alignItems: 'center',
-    borderRadius: moderateScale(20),
-    flexDirection: 'row',
-    marginLeft: scale(20),
-    marginRight: scale(20),
-    marginTop: verticalScale(10),
+  deaLeftText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(12),
   },
-  titleRatingMainRow: {
-    flexDirection: 'row',
-    width: '95%',
-    marginTop: verticalScale(5),
-    justifyContent: 'space-evenly',
-  },
-
-  //-----------------------------------
-
+  // -----------------------------------
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
     marginTop: verticalScale(8),
   },
+
+  dealLeftContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '22%',
+    borderRadius: moderateScale(12),
+    borderWidth: moderateScale(1),
+    height: verticalScale(20),
+    borderColor: COLORS.primary,
+    marginTop: verticalScale(10),
+  },
+
+  divider: {
+    borderWidth: 0.5,
+    alignSelf: 'center',
+    opacity: 0.5,
+    borderColor: COLORS.gray,
+    marginVertical: verticalScale(20),
+    width: '90%',
+  },
+
   bookBtnContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.lightBrown,
@@ -449,27 +410,64 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+
+  itemTitleIconContainer: {
+    alignItems: 'center',
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    width: '60%',
+    marginLeft: scale(20),
+    marginRight: scale(20),
+    marginTop: verticalScale(10),
+  },
+
   bookBtnMainContainer: {
     marginTop: verticalScale(14),
     padding: moderateScale(24),
     width: '100%',
   },
+
+  ratingIcon: {
+    height: moderateScale(11.56),
+    width: moderateScale(12),
+  },
+
   bookBtnText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
   },
+
+  ratingsContainer: {
+    alignItems: 'center',
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '15%',
+    marginLeft: scale(20),
+  },
+
   chooseServiceContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     height: verticalScale(40),
     marginTop: verticalScale(8),
   },
+  ratingsText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+  },
   extraPersonIcon: {
     height: moderateScale(13.23),
     marginLeft: scale(15),
     width: moderateScale(20.25),
+  },
+  socialIcon: {
+    height: moderateScale(18),
+    marginRight: scale(10),
+    width: moderateScale(18),
   },
   howItWorksContainer: {
     alignItems: 'center',
@@ -478,17 +476,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: verticalScale(50),
   },
+  imageLoader: {
+    backgroundColor: COLORS.lightPink,
+    height: verticalScale(170),
+    position: 'absolute',
+    width: '100%',
+  },
+  titleText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(15),
+  },
   imageStyle: {
     alignSelf: 'center',
     borderRadius: moderateScale(24),
     height: verticalScale(170),
     width: '90%',
-  },
-  imageLoader: {
-    position: 'absolute',
-    height: verticalScale(170),
-    width: '100%',
-    backgroundColor: COLORS.lightPink,
   },
   infoContainer: {
     alignItems: 'center',
@@ -499,6 +502,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: verticalScale(10),
     width: moderateScale(22),
+  },
+  titleRatingMainRow: {
+    flexDirection: 'row',
+    width: '95%',
+    marginTop: verticalScale(5),
+    justifyContent: 'space-evenly',
   },
   infoText: {
     color: COLORS.primary,
@@ -523,12 +532,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   orContainer: {
-    flexDirection: 'row',
-    width: '100%',
     alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginRight: scale(20),
     marginTop: verticalScale(20),
+    width: '100%',
   },
   orText: {
     color: COLORS.achromaticBlack,

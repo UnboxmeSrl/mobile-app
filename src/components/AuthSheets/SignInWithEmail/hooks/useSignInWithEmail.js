@@ -25,7 +25,6 @@ const useSignInWithEmail = (isFromBookRedirected) => {
       setLoading(true)
       const prepData = { email, password }
       const res = await userLogin(prepData)
-      console.log(res, 'res')
       setLoading(false)
       if (res.UserStatus === 'approved') {
         OneSignal.setExternalUserId(res?.id?.toString())

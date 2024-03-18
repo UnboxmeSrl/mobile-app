@@ -1,13 +1,13 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS, FONTS } from '../../../constants'
-import { IMAGES } from '../../../assets/images'
 import { useNavigation } from 'react-navigation-hooks'
+
+import { IMAGES } from '../../../assets/images'
+import { COLORS, FONTS } from '../../../constants'
 
 const CustomHeader = ({ title, step, handleBackPress }) => {
   const navigation = useNavigation()
-  console.log('handleBackPress', handleBackPress)
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
@@ -35,12 +35,6 @@ const CustomHeader = ({ title, step, handleBackPress }) => {
 export default CustomHeader
 
 const styles = StyleSheet.create({
-  progressText: {
-    fontFamily: FONTS.quicksandBold,
-    textAlign: 'center',
-    color: COLORS.primary,
-    fontSize: moderateScale(14),
-  },
   backIcon: {
     height: moderateScale(24),
     tintColor: COLORS.achromaticBlack,
@@ -52,9 +46,9 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
     justifyContent: 'space-between',
     marginHorizontal: scale(20),
+    marginVertical: verticalScale(20),
   },
   headerTitleContainer: {
     marginTop: verticalScale(-5),
@@ -63,5 +57,11 @@ const styles = StyleSheet.create({
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(20),
+  },
+  progressText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(14),
+    textAlign: 'center',
   },
 })

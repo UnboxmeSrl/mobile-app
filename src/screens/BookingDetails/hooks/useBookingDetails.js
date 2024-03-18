@@ -59,7 +59,6 @@ const useBookingDetails = () => {
     }-${
       currentBookingDateTime.getDate() < 10 ? `0${currentBookingDateTime.getDate()}` : currentBookingDateTime.getDate()
     }`
-    console.log(' conditionCheck', currentBookingDateTime, formattedDate, serviceDetails?.actions_turbo_id)
     const prepData = {
       ApprovalStatus: false,
       Approved: serviceDetails?.Story,
@@ -89,10 +88,8 @@ const useBookingDetails = () => {
       user_turbo_id: loginData?.id,
     }
 
-    console.log('prepData: ', prepData)
     const res = await addRestaurantBooking(prepData)
     if (res?.status === 200) {
-      console.log('Booking Details:', res)
       navigate({
         params: {
           bookingDetails: res?.data,
@@ -153,7 +150,6 @@ const useBookingDetails = () => {
       const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
       item.weekdays = filteredWeekdays
     })
-    console.log('filteredTimeData1: ' + JSON.stringify(filteredData))
     setWeekDayWiseTimeSlots(filteredData)
     setTimeout(() => {
       setIsDatesLoading(false)
@@ -169,7 +165,6 @@ const useBookingDetails = () => {
       setSelectedTimeFame({})
       const myDate = new Date(selectedDate)
       const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
-      console.log('weekDay: ' + weekDay)
       setCurrentWeekDay(weekDay)
       const filteredData = timeFrameData?.filter((t) => {
         const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
@@ -179,23 +174,20 @@ const useBookingDetails = () => {
         }
       })
 
-      console.log('timeFrameData', timeFrameData)
       filteredData.forEach((item) => {
         const weekdays = item.weekdays
         const pauseDays = item.pause_days
         const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
         item.weekdays = filteredWeekdays
       })
-      console.log('filteredTimeData2: ' + JSON.stringify(filteredData))
+      console.log('Filtered Data', JSON.stringify(filteredData))
       setWeekDayWiseTimeSlots(filteredData)
     }
   }, [selectedDate])
 
   useEffect(() => {
-    console.log('selected Date:', selectedDate)
     const myDate = new Date(selectedDate)
     const month = myDate.toLocaleString('default', { month: 'long' })
-    console.log('month: ' + month)
     setCurrentMonth(month)
     setCurrentDate(myDate.getDate())
   }, [selectedDate])
@@ -203,7 +195,6 @@ const useBookingDetails = () => {
   useEffect(() => {
     const myDate = new Date(startDate)
     const month = myDate.toLocaleString('default', { month: 'long' })
-    console.log('month: ' + month)
     setCurrentMonth(month)
   }, [startDate])
 

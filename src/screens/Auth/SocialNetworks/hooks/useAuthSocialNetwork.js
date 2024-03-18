@@ -87,11 +87,11 @@ const useAuthSocialNetwork = () => {
 
     // console.log('🟩 Form Data', JSON.stringify(formData))
     const res = await userSignUp(formData)
-    console.log('🚀 ~ handleNextPress ~ res:', res.data)
+    // console.log('🚀 ~ handleNextPress ~ res:', res.data)
 
     if (res?.status === 200 || res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
-      dispatch(setLoginData(res))
+      // dispatch(setLoginData(res))
       // reset(MAIN_NAVIGATOR)
       dispatch(setIsApplied(true))
       navigate(SCREEN_NAMES.AppliedScreen)

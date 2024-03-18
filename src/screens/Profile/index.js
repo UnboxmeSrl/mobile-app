@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import { GoogleSignin } from '@react-native-community/google-signin'
+
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
 import { useAction, useAuthenticatedAction } from '@hooks/common'
 import authModule, {
@@ -20,8 +21,9 @@ import authModule, {
   selectUsername,
 } from '@redux/modules/auth'
 
-import { ProfileScreenPresenter } from './ProfileScreenPresenter'
 import { selectIsAuthenticated, userData } from '../../redux/slices/authSlice'
+
+import { ProfileScreenPresenter } from './ProfileScreenPresenter'
 
 export const ProfileScreen = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)

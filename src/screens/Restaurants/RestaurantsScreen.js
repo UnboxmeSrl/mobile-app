@@ -1,4 +1,3 @@
-import { Categories } from '@components/Categories'
 import React, { useCallback, useEffect, useState } from 'react'
 import {
   ActivityIndicator,
@@ -13,15 +12,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import Geolocation from 'react-native-geolocation-service'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
+
+import { Categories } from '@components/Categories'
+
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { RestaurantCard } from './RestaurantCard'
-import { useRestaurants } from './hooks'
-import Geolocation from 'react-native-geolocation-service'
 import { geolocationSetting } from '../../utils/smallComponents'
+
+import { useRestaurants } from './hooks'
+import { RestaurantCard } from './RestaurantCard'
 
 const RestaurantsScreen = () => {
   const {
@@ -29,11 +32,9 @@ const RestaurantsScreen = () => {
     cityData,
     categories,
     filter,
-    setFilter,
     refreshing,
     onRefresh,
     categoriesIds,
-    category,
     restaurantsData,
     onCategoryChange,
     handleLocationPress,
@@ -93,7 +94,6 @@ const RestaurantsScreen = () => {
         <>
           <View style={styles.restaurantsFlatlistContainer}>
             <FlatList
-              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
               ListEmptyComponent={
                 <View style={styles.listEmptyContainer}>
                   <Text style={styles.listEmptyText}>No data found.</Text>
@@ -102,6 +102,7 @@ const RestaurantsScreen = () => {
               contentContainerStyle={styles.listMain}
               data={restaurantsData}
               keyExtractor={(_, index) => index.toString()}
+              refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} />}
               renderItem={({ item, index }) => {
                 return <RestaurantCard index={index} item={item} userLocation={userLocation} />
               }}
@@ -143,8 +144,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   locationFont: {
-    fontFamily: FONTS.quicksandBold,
     color: COLORS.primary,
+    fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(20),
   },
   locationIcon: {
@@ -164,14 +165,14 @@ const styles = StyleSheet.create({
   selectedLocation: {
     alignItems: 'center',
     alignSelf: 'center',
+    backgroundColor: COLORS.isabelLine,
     borderColor: COLORS.lightGray,
     borderRadius: moderateScale(16),
     flexDirection: 'row',
+    height: verticalScale(40),
     justifyContent: 'center',
+    marginTop: verticalScale(10),
     paddingHorizontal: scale(25),
     width: '90%',
-    backgroundColor: COLORS.isabelLine,
-    height: verticalScale(40),
-    marginTop: verticalScale(10),
   },
 })

@@ -190,7 +190,7 @@ export const EditProfileScreenPresenter = ({
     // setValue('countryCode', country.cca2)
     setCountry(country)
   }
-
+  console.log(profilePicData)
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: perfectSize(24) }}>
       <SubHeader title="Edit Profile" />
@@ -200,8 +200,10 @@ export const EditProfileScreenPresenter = ({
             <Avatar
               img={
                 profilePicData
-                  ? { uri: profilePicData.uri }
-                  : { uri: user?.Profile_pic?.url ? user?.Profile_pic?.url : userImg }
+                  ? { uri: profilePicData?.uri }
+                  : user?.Profile_pic?.url
+                  ? { uri: user?.Profile_pic?.url }
+                  : userImg
               }
               style={styles.avatar}
             />
@@ -314,7 +316,6 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
           />
           <View>
             <Label title="Intrests" />
