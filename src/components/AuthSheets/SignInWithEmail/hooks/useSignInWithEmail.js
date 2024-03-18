@@ -16,50 +16,33 @@ const useSignInWithEmail = (isFromBookRedirected) => {
   const [isError, setIsError] = useState(false)
   const { navigate } = useNavigation()
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
-  const isFirstTimeLogin = useSelector((state) => state.authSlice.isFirstTimeLogin)
   const dispatch = useDispatch()
 
   const handleLoginPress = async (ref) => {
-    // navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
-    try {
-      setLoading(true)
-      const prepData = { email, password }
-      const res = await userLogin(prepData)
-      setLoading(false)
-      if (res.UserStatus === 'approved') {
-        OneSignal.setExternalUserId(res?.id?.toString())
-        dispatch(setLoginData(res))
-        const params = `/${res?.id}`
-        const bookingRes = await getBookings(params)
-        dispatch(setBookings(bookingRes))
-
-        // console.log('isFirstTimeLogin', isFirstTimeLogin)
-        if (res.firstVisit === 1) {
-          dispatch(setIsFirstTimeLogin(false))
-          navigate({
-            routeName: SCREEN_NAMES.FirstWelcomeScreen,
-            // params: {
-            //   isFromBookRedirected: isFromBookRedirected,
-            // },
-          })
-        } else if (serviceDetails?.id && isFromBookRedirected) {
-          navigate(SCREEN_NAMES.ServiceDetails)
-        } else {
-          navigate(SCREEN_NAMES.Cities)
-        }
-
-        ref?.current?.close()
-      } else if (res.UserStatus === 'rejected') {
-        navigate(SCREEN_NAMES.RejectedScreen)
+    setLoading(true)
+    const prepData = { email, password }
+    const res = await userLogin(prepData)
+    setLoading(false)
+    if (res.UserStatus === 'approved') {
+      OneSignal.setExternalUserId(res?.id?.toString())
+      dispatch(setLoginData(res))
+      const params = `/${res?.id}`
+      const bookingRes = await getBookings(params)
+      dispatch(setBookings(bookingRes))
+      if (res.firstVisit === 1) {
+        dispatch(setIsFirstTimeLogin(false))
+        navigate(SCREEN_NAMES.FirstWelcomeScreen)
+      } else if (serviceDetails?.id && isFromBookRedirected) {
+        navigate(SCREEN_NAMES.ServiceDetails)
       } else {
-        const error = {
-          message: 'Something went wrong',
-        }
-        showToastError(error)
-        setIsError(true)
+        navigate(SCREEN_NAMES.Cities)
       }
-    } catch (e) {
-      setLoading(false)
+    } else if (res.UserStatus === '' || res.UserStatus === 'onapproval') {
+      navigate(SCREEN_NAMES.AppliedScreen)
+    } else if (res.UserStatus === 'rejected') {
+      navigate(SCREEN_NAMES.RejectedScreen)
+    } else {
+      setIsError(true)
     }
   }
 

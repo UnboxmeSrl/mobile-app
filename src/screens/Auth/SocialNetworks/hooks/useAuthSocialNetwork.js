@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthData, setIsApplied, setLoginData } from '../../../../redux/slices'
+import { resetAuthData, resetLogin, setAuthData, setIsApplied, setLoginData } from '../../../../redux/slices'
 import { navigate, reset, userSignUp } from '@services'
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { showToastError } from '../../../../services'
@@ -91,9 +91,10 @@ const useAuthSocialNetwork = () => {
 
     if (res?.status === 200 || res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
-      // dispatch(setLoginData(res))
+      dispatch(resetAuthData({}))
+      dispatch(resetLogin())
       // reset(MAIN_NAVIGATOR)
-      dispatch(setIsApplied(true))
+      // dispatch(setIsApplied(true))
       navigate(SCREEN_NAMES.AppliedScreen)
     } else {
       showToastError(res?.data)

@@ -1,11 +1,17 @@
-import { selectAwardPrizeCategory } from '@redux/modules/app'
-import { navigate } from '@services'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Alert, PermissionsAndroid, Platform } from 'react-native'
+import Geolocation from 'react-native-geolocation-service'
 import { useIsFocused, useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
+import { getDistance } from 'geolib'
+
+import { selectAwardPrizeCategory } from '@redux/modules/app'
+import { navigate } from '@services'
+
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getCategories, getRestaurants } from '../../../services/LocationsService'
+import { geolocationSetting } from '../../../utils/smallComponents'
 
 const useRestaurants = () => {
   const categoriesIds = useSelector(selectCategoryById)
@@ -25,6 +31,42 @@ const useRestaurants = () => {
     setRefreshing(false)
   }
 
+  const [userLocation, setUserLocation] = useState({})
+  const requestLocationPermission = useCallback(async () => {
+    try {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+        console.log('location granted check', granted)
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          return Alert.alert('Location Permission', 'Location permission denied')
+        }
+      } else {
+        const granted = await Geolocation.requestAuthorization('whenInUse')
+        if (granted !== 'granted') {
+          return Alert.alert('Location Permission', 'Location permission denied')
+        }
+      }
+      Geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude })
+          // dispatch(setUserCoordinates(position.coords))
+        },
+        (err) => {
+          console.log('err', err)
+        },
+        geolocationSetting
+      )
+    } catch (err) {
+      // console.log('location error ', err.message);
+      Alert.alert('Location Permission', 'Something went wrong!')
+    }
+  }, [])
+  // console.log('userlocation in Restaurant screen', userLocation, restaurantsData?.latitude)
+  useEffect(() => {
+    console.log('check useEffect n restarant screen')
+    requestLocationPermission()
+  }, [requestLocationPermission])
+
   const getRestaurantsData = async () => {
     setIsLoading(true)
     const prepData = {
@@ -36,11 +78,25 @@ const useRestaurants = () => {
     setIsLoading(false)
   }
 
+  const sortedRestaurants = useMemo(
+    () =>
+      (restaurantsData || [])
+        .map((rest) => {
+          rest.distance = getDistance(userLocation, { latitude: rest.Latitude, longitude: rest.Longitude } || {}) / 1000
+          return rest
+        })
+        ?.sort((a, b) => {
+          return a.distance - b.distance
+        }),
+    [restaurantsData, userLocation]
+  )
+
   const getCategoriesData = async () => {
     setIsLoading(true)
     const res = await getCategories()
     console.log('res cat', res)
     const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...res?.data]
+
     setCategories(addAllCategory)
     setIsLoading(false)
   }
@@ -67,12 +123,13 @@ const useRestaurants = () => {
     category,
     cityData,
     filter,
-    refreshing,
-    onRefresh,
+    userLocation,
     handleLocationPress,
     isLoading,
     onCategoryChange,
-    restaurantsData,
+    onRefresh,
+    refreshing,
+    restaurantsData: sortedRestaurants,
     setFilter,
   }
 }

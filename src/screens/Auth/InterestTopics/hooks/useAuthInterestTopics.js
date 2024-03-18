@@ -8,7 +8,7 @@ import { getInterestTopics, navigate } from '../../../../services'
 
 const useAuthInterestTopics = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
-  const [interestTopicsList, setInterestTopicsList] = useState()
+  const [interestTopicsList, setInterestTopicsList] = useState([])
   const [selectedInterests, setSelectedInterests] = useState(userDetails?.userInterests ?? [])
   const [isLoading, setIsLoading] = useState(true)
   const dispatch = useDispatch()
@@ -17,8 +17,10 @@ const useAuthInterestTopics = () => {
 
   const getInterestTopicsData = async () => {
     const res = await getInterestTopics()
-    setInterestTopicsList(res.data)
     setIsLoading(false)
+    if (res?.data?.length) {
+      setInterestTopicsList(res.data)
+    }
   }
 
   const handleInterestSelect = (selectedTopic) => {

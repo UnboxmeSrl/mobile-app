@@ -28,9 +28,12 @@ export const userLogin = async (data) => {
   try {
     const url = Api.PROFILE.USER_LOGIN
     const response = await Fetch.post(url, data)
+    console.log('api', response)
     return response
   } catch (error) {
-    console.log(error)
+    return {
+      message: 'Something went wrong',
+    }
   }
 }
 

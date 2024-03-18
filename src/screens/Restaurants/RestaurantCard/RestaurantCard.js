@@ -9,15 +9,9 @@ import { FONTS } from '../../../constants/fonts'
 
 import { useRestaurantCard } from './hooks'
 
-const RestaurantCard = ({ item, index, userLocation }) => {
+const RestaurantCard = ({ item }) => {
   const { handleCardPress } = useRestaurantCard()
-  const distanceFromUser = useMemo(() => {
-    if (userLocation) {
-      const distance = getDistance(userLocation, { latitude: item.Latitude, longitude: item.Longitude } || {})
-      return (distance / 1000).toFixed(2)
-    }
-  }, [item.Latitude, item.Longitude, userLocation])
-  // console.log('distance from user ', distanceFromUser, userLocation)
+console.log(item)
   return (
     <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
@@ -38,7 +32,7 @@ const RestaurantCard = ({ item, index, userLocation }) => {
         </View>
         <View style={styles.nameLocationContainer}>
           <Text style={styles.restaurantNameText}>{item?.Name}</Text>
-          {distanceFromUser && <Text style={styles.distanceText}>{distanceFromUser} km from here</Text>}
+          {!!item.distance && <Text style={styles.distanceText}>{item.distance.toFixed(2)} km from here</Text>}
         </View>
       </ImageBackground>
     </TouchableOpacity>

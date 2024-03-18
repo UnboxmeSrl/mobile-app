@@ -28,6 +28,9 @@ const AuthSlice = createSlice({
       }
       console.log('Settled Auth Data', state.authData)
     },
+    resetAuthData: (state) => {
+      state.authData = {}
+    },
     setLoginData: (state, actions) => {
       state.loginData = actions?.payload
     },
@@ -62,6 +65,7 @@ export const {
   setSignUpProcessStage,
   setOnboardingData,
   setproFileData,
+  resetAuthData,
 } = AuthSlice.actions
 
 export default AuthSlice.reducer

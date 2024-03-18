@@ -1,10 +1,12 @@
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { IMAGES } from '../../../assets/images'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../../constants/fonts'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+
+import { IMAGES } from '../../../assets/images'
 import { COLORS } from '../../../constants/colors'
+import { FONTS } from '../../../constants/fonts'
+
 import { useApplied } from './hooks'
 
 const AppliedScreen = () => {
@@ -13,11 +15,11 @@ const AppliedScreen = () => {
     <View style={styles.mainContainer}>
       <ImageBackground source={IMAGES.appliedScreenBackground} style={styles.backgroundStyle}>
         <View style={styles.viewForMargin}>
-          <View style={{ width: '95%', justifyContent: 'center', alignItems: 'center', marginTop: verticalScale(40) }}>
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: verticalScale(40), width: '95%' }}>
             <Image
+              resizeMode={'contain'}
               source={IMAGES.appLogo}
               style={{ height: verticalScale(118), width: scale(99) }}
-              resizeMode={'contain'}
             />
           </View>
           <View style={styles.titleContainer}>
@@ -34,7 +36,7 @@ const AppliedScreen = () => {
           <Text style={styles.queryText}>Questions? Send us a message</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleGuestPress} style={styles.guestBtnContainer} activeOpacity={0.7}>
+        <TouchableOpacity activeOpacity={0.7} onPress={handleGuestPress} style={styles.guestBtnContainer}>
           <Image source={IMAGES.addUser} style={styles.addUserIcon} />
           <Text style={styles.guestBtnText}>Continue as Guest</Text>
         </TouchableOpacity>
@@ -56,33 +58,37 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  mainContainer: {
-    flex: 1,
-  },
-  viewForMargin: {
-    marginTop: getStatusBarHeight(),
-  },
-  titleText: {
-    fontFamily: FONTS.quicksandBold,
-    color: COLORS.white,
-    textAlign: 'center',
-    fontSize: moderateScale(25),
-  },
-  titleContainer: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: verticalScale(10),
-  },
-  descriptionText: {
-    fontFamily: FONTS.quicksandMedium,
-    color: COLORS.white,
-    textAlign: 'center',
-    fontSize: moderateScale(20),
-  },
   descriptionContainer: {
+    alignSelf: 'center',
     marginTop: verticalScale(10),
     width: '80%',
+  },
+  descriptionText: {
+    color: COLORS.white,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(20),
+    textAlign: 'center',
+  },
+  guestBtnContainer: {
+    height: verticalScale(40),
+    borderColor: COLORS.white,
+    width: '90%',
+    borderWidth: moderateScale(1),
+    marginTop: verticalScale(24),
+    borderRadius: moderateScale(16),
+    flexDirection: 'row',
+    alignItems: 'center',
     alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  guestBtnText: {
+    color: COLORS.white,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+    textAlign: 'center',
+  },
+  mainContainer: {
+    flex: 1,
   },
   queryContainer: {
     alignItems: 'center',
@@ -103,22 +109,18 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
   },
-  guestBtnText: {
-    fontFamily: FONTS.quicksandBold,
-    color: COLORS.white,
-    textAlign: 'center',
-    fontSize: moderateScale(18),
-  },
-  guestBtnContainer: {
-    width: '90%',
-    height: verticalScale(40),
-    marginTop: verticalScale(24),
-    borderColor: COLORS.white,
-    flexDirection: 'row',
-    borderWidth: moderateScale(1),
-    borderRadius: moderateScale(16),
-    justifyContent: 'center',
-    alignItems: 'center',
+  titleContainer: {
     alignSelf: 'center',
+    width: '95%',
+    marginTop: verticalScale(10),
+  },
+  titleText: {
+    color: COLORS.white,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(25),
+    textAlign: 'center',
+  },
+  viewForMargin: {
+    marginTop: getStatusBarHeight(),
   },
 })

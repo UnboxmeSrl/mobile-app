@@ -145,6 +145,7 @@ const BookingDetailsScreen = () => {
                   const isSelected = item?.id === selectedTimeFame?.id
                   return (
                     <TouchableOpacity
+                      key={item.id + 'booking'}
                       onPress={() => setSelectedTimeFame(item)}
                       style={[styles.hoursContainer, isSelected && styles.selectedTimeFrameStyle]}
                     >

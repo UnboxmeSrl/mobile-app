@@ -1,22 +1,24 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 import RBSheet from 'react-native-raw-bottom-sheet'
-import { useSignUpWithEmail } from './hooks'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+
 import { COLORS } from '../../../constants/colors'
-import { verticalScale, scale, moderateScale } from 'react-native-size-matters'
 import { FONTS } from '../../../constants/fonts'
+
+import { useSignUpWithEmail } from './hooks'
 
 const SignUpWithEmail = React.forwardRef(({}, ref) => {
   const { height } = useSignUpWithEmail()
   return (
     <RBSheet
-      ref={ref}
-      height={verticalScale(height / 2)}
       closeOnDragDown
       customStyles={{
         container: styles.containerStyle,
       }}
+      height={verticalScale(height / 2)}
       keyboardAvoidingViewEnabled
+      ref={ref}
     >
       <View style={styles.mainContainer}>
         <View style={{ marginLeft: scale(24) }}>
@@ -24,13 +26,13 @@ const SignUpWithEmail = React.forwardRef(({}, ref) => {
         </View>
         <TextInput
           style={{
-            marginTop: verticalScale(22),
-            height: verticalScale(48),
-            width: '88%',
             alignSelf: 'center',
-            borderWidth: moderateScale(1),
             borderColor: COLORS.gainsboro,
             borderRadius: moderateScale(10),
+            borderWidth: moderateScale(1),
+            height: verticalScale(48),
+            marginTop: verticalScale(22),
+            width: '88%',
           }}
         />
       </View>
@@ -41,19 +43,19 @@ const SignUpWithEmail = React.forwardRef(({}, ref) => {
 export default SignUpWithEmail
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: COLORS.white,
-    marginTop: verticalScale(24),
-  },
   containerStyle: {
     borderTopLeftRadius: moderateScale(30),
     borderTopRightRadius: moderateScale(30),
   },
   emailTitleText: {
+    color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(20),
-    color: COLORS.achromaticBlack,
     fontWeight: '700',
+  },
+  mainContainer: {
+    backgroundColor: COLORS.white,
+    flex: 1,
+    marginTop: verticalScale(24),
   },
 })

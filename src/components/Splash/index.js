@@ -45,9 +45,11 @@ export const Splash = () => {
     } else if (isAuthenticated) {
       navigate(STACK_NAMES.BottomStack)
       /* navigate(SCREEN_NAMES.FirstWelcomeScreen) */
-    } else if (isApplied) {
-      navigate(SCREEN_NAMES.AppliedScreen)
-    } else if (isSignUpProcessStarted) {
+    }
+    //  if (isApplied) {
+    //   navigate(SCREEN_NAMES.AppliedScreen)
+    // } else
+    else if (isSignUpProcessStarted) {
       checkSignUpProgress(signUpProcessStage)
     } else {
       navigate(SCREEN_NAMES.SignUpNew)

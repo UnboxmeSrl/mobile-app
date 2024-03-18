@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Dimensions } from 'react-native'
 
 const useSignUpWithEmail = () => {

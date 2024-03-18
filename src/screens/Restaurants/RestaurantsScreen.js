@@ -25,6 +25,7 @@ import { geolocationSetting } from '../../utils/smallComponents'
 
 import { useRestaurants } from './hooks'
 import { RestaurantCard } from './RestaurantCard'
+import { getDistance } from 'geolib'
 
 const RestaurantsScreen = () => {
   const {
@@ -32,6 +33,7 @@ const RestaurantsScreen = () => {
     cityData,
     categories,
     filter,
+    userLocation,
     refreshing,
     onRefresh,
     categoriesIds,
@@ -39,42 +41,6 @@ const RestaurantsScreen = () => {
     onCategoryChange,
     handleLocationPress,
   } = useRestaurants()
-  // let userLocation;
-  const [userLocation, setUserLocation] = useState({})
-  const requestLocationPermission = useCallback(async () => {
-    try {
-      if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
-        console.log('location granted check', granted)
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          return Alert.alert('Location Permission', 'Location permission denied')
-        }
-      } else {
-        const granted = await Geolocation.requestAuthorization('whenInUse')
-        if (granted !== 'granted') {
-          return Alert.alert('Location Permission', 'Location permission denied')
-        }
-      }
-      Geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude })
-          // dispatch(setUserCoordinates(position.coords))
-        },
-        (err) => {
-          console.log('err', err)
-        },
-        geolocationSetting
-      )
-    } catch (err) {
-      // console.log('location error ', err.message);
-      Alert.alert('Location Permission', 'Something went wrong!')
-    }
-  }, [])
-  // console.log('userlocation in Restaurant screen', userLocation, restaurantsData?.latitude)
-  useEffect(() => {
-    console.log('check useEffect n restarant screen')
-    requestLocationPermission()
-  }, [requestLocationPermission])
 
   return (
     <View style={styles.mainContainer}>
@@ -106,7 +72,7 @@ const RestaurantsScreen = () => {
               keyExtractor={(_, index) => index.toString()}
               refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} />}
               renderItem={({ item, index }) => {
-                return <RestaurantCard index={index} item={item} userLocation={userLocation} />
+                return <RestaurantCard index={index} item={item} />
               }}
               showsVerticalScrollIndicator={false}
             />
