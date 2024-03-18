@@ -12,9 +12,12 @@ import { useRestaurantCard } from './hooks'
 const RestaurantCard = ({ item, index, userLocation }) => {
   const { handleCardPress } = useRestaurantCard()
   const distanceFromUser = useMemo(() => {
-    const distance = getDistance(userLocation, { latitude: item.Latitude, longitude: item.Longitude } || {})
-    return (distance / 1000).toFixed(2)
+    if (userLocation) {
+      const distance = getDistance(userLocation, { latitude: item.Latitude, longitude: item.Longitude } || {})
+      return (distance / 1000).toFixed(2)
+    }
   }, [item.Latitude, item.Longitude, userLocation])
+  // console.log('distance from user ', distanceFromUser, userLocation)
   return (
     <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
@@ -35,7 +38,7 @@ const RestaurantCard = ({ item, index, userLocation }) => {
         </View>
         <View style={styles.nameLocationContainer}>
           <Text style={styles.restaurantNameText}>{item?.Name}</Text>
-          <Text style={styles.distanceText}>{distanceFromUser} km from here</Text>
+          {distanceFromUser && <Text style={styles.distanceText}>{distanceFromUser} km from here</Text>}
         </View>
       </ImageBackground>
     </TouchableOpacity>

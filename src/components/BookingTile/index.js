@@ -16,7 +16,7 @@ import { selectAwardById } from '@redux/modules/awards'
 
 export const BookingTile = ({ ...data }) => {
   const award = useSelector(selectAwardById(data.award))
-  console.log(data)
+  console.log(data, 'award data')
   return (
     <Wrapper>
       <Row>

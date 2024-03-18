@@ -3,16 +3,17 @@ import { StyleSheet } from 'react-native'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
-const BottomSheet = React.forwardRef(({ children }, ref) => {
+const BottomSheet = React.forwardRef(({ children, onClose }, ref) => {
   return (
     <RBSheet
-      ref={ref}
-      height={verticalScale(450)}
       closeOnDragDown
       customStyles={{
         container: styles.containerStyle,
       }}
+      height={verticalScale(450)}
       keyboardAvoidingViewEnabled
+      onClose={onClose}
+      ref={ref}
     >
       {children}
     </RBSheet>

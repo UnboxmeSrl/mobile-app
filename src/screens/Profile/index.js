@@ -1,12 +1,10 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
-import { GoogleSignin } from '@react-native-community/google-signin'
 
 import { MODAL_NAMES, SCREEN_NAMES } from '@const/navigation'
-import { useAction, useAuthenticatedAction } from '@hooks/common'
-import authModule, {
-  _initialized,
+import { useAuthenticatedAction } from '@hooks/common'
+import {
   selectBrands,
   selectCity,
   selectCreams,
@@ -21,7 +19,7 @@ import authModule, {
   selectUsername,
 } from '@redux/modules/auth'
 
-import { selectIsAuthenticated, userData } from '../../redux/slices/authSlice'
+import { selectIsAuthenticated } from '../../redux/slices/authSlice'
 
 import { ProfileScreenPresenter } from './ProfileScreenPresenter'
 

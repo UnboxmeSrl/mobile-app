@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { IMAGES } from '../../assets/images'
 import AppButton from '../../components/Buttons'
 import AppText from '../../components/Elements/AppText'
@@ -10,11 +9,11 @@ import Avatar from '../../components/Elements/Avatar'
 import Hobbies from '../../components/Elements/Hobbies'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
+import perfectSize from '../../utils/responsiveSize'
+import { useFirstWellcome } from './hooks'
+
 import { setproFileData, userDetail } from '../../redux/slices/authSlice'
 import { getProfile } from '../../services'
-import perfectSize from '../../utils/responsiveSize'
-
-import { useFirstWellcome } from './hooks'
 
 const FirstWellcomeScreen = () => {
   const { handleGuestPress } = useFirstWellcome()

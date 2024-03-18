@@ -30,17 +30,11 @@ import { colors } from '../../utils/theme'
 
 export const ProfileScreenPresenter = ({
   navigateTikTokModal,
-  fullName,
-  city,
-  tiktokUsername,
+
   isAuthenticated,
-  hasQuestionnaire,
+
   navigateToQuestionnaire,
-  skinType,
-  skincareRoutine,
-  creams,
-  brands,
-  navigateToInvite,
+
   navigateToSettings,
   navigateToEditProfile,
   source,

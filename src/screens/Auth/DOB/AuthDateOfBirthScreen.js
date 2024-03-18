@@ -37,17 +37,17 @@ const AuthDateOfBirthScreen = () => {
         <Image source={IMAGES.calender} style={styles.calenderIcon} />
       </TouchableOpacity>
       <DatePicker
-        modal
-        open={isDatePickerOpen}
         date={date}
+        modal
         mode={'date'}
+        onCancel={() => {
+          setIsDatePickerOpen(false)
+        }}
         onConfirm={(date) => {
           setIsDatePickerOpen(false)
           setSelectedDate(date)
         }}
-        onCancel={() => {
-          setIsDatePickerOpen(false)
-        }}
+        open={isDatePickerOpen}
       />
       <View style={styles.btnContainer}>
         <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />

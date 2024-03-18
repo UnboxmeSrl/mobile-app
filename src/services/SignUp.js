@@ -6,12 +6,13 @@ export const getOtp = async (data) => {
   try {
     if (data) {
       const url = Api.SIGN_UP_WITH_EMAIL.GET_OTP
-      console.log(data, url)
+      // console.log(data, url)
       const response = await Fetch.post(url, data)
       return response
     }
   } catch (error) {
     console.log(error)
+    return { message: error.message, success: false }
   }
 }
 export const verifyOtp = async (data) => {
@@ -24,5 +25,6 @@ export const verifyOtp = async (data) => {
     }
   } catch (error) {
     console.log(error)
+    return { message: error.message, success: false }
   }
 }

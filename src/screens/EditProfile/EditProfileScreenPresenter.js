@@ -280,7 +280,7 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <Controller
             control={control}
@@ -298,7 +298,7 @@ export const EditProfileScreenPresenter = ({
                 value={value}
               />
             )}
-            rules={{ required: 'link is required' }}
+            // rules={{ required: 'link is required' }}
           />
           <Controller
             control={control}

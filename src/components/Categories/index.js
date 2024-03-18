@@ -13,7 +13,7 @@ export const Categories = ({ categoriesIds, onPress, category, customCategories 
 
   const Component = useCallback(
     (props) => {
-      console.log(props)
+      console.log(props, 'CHEECK PROPS DATA')
       return (
         <CategoryPresenter
           onPress={() => onPress(props.id ?? props.value)}

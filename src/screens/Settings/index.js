@@ -38,8 +38,8 @@ export const SettingsScreen = () => {
 
       await persistor.purge()
       await GoogleSignin.signOut()
-      dispatch(resetLogin(false))
-      dispatch(selectIsAuthenticated)
+      dispatch(resetLogin())
+      // dispatch(selectIsAuthenticated)
       showToastSuccess("You've been logged out")
       logger.info('Logout succeded')
     } catch (error) {
