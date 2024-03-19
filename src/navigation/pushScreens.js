@@ -1,7 +1,6 @@
 import { AddNewAddress } from '@screens/AddNewAddress'
 import { AddressesScreen } from '@screens/Addresses'
 import { AwardScreen } from '@screens/AwardScreen'
-import { AwardScreenPresenter } from '@screens/AwardScreen/AwardScreenPresenter'
 import { BoxBriefScreen } from '@screens/BoxBrief'
 import { BoxBrief2Screen } from '@screens/BoxBrief2'
 import { BoxContentUploadScreen } from '@screens/BoxContantUpload'
@@ -16,14 +15,8 @@ import { SettingsScreen } from '@screens/Settings'
 import { SignInScreen } from '@screens/SignIn'
 import { SignUpScreen } from '@screens/SignUp'
 import { WizardScreen } from '@screens/Wizard'
-import BookingDetailsScreen from '../screens/BookingDetails/BookingDetailsScreen'
-import BookingOnApprovalScreen from '../screens/BookingOnApproval/BookingOnApprovalScreen'
-import ContentScreen from '../screens/Content/ContentScreen'
-import ContentBriefScreen from '../screens/ContentBrief/ContentBriefScreen'
-import { NewCouponScreen } from '../screens/NewCoupon'
-import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
-import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
-import { PublishContentScreen } from '../screens/PublishContent'
+
+import { SCREEN_NAMES } from '../constants/navigation'
 import {
   AuthAgencyScreen,
   AuthCityScreen,
@@ -37,12 +30,19 @@ import {
   AuthSocialNetworkScreen,
   AuthUserTypeScreen,
 } from '../screens/Auth'
-import { SCREEN_NAMES } from '../constants/navigation'
-import { LoginOnboarding, OnboardingNew } from '../screens/OnboardingNew'
-import SignUpNew from '../screens/SignUpNew/SignUpNew'
-import AppliedScreen from '../screens/SignUpNew/AppliedScreen/AppliedScreen'
-import { RejectedScreen } from '../screens/RejectedScreen'
+import BookingDetailsScreen from '../screens/BookingDetails/BookingDetailsScreen'
+import BookingOnApprovalScreen from '../screens/BookingOnApproval/BookingOnApprovalScreen'
+import ContentScreen from '../screens/Content/ContentScreen'
+import ContentBriefScreen from '../screens/ContentBrief/ContentBriefScreen'
 import FirstWellcomeScreen from '../screens/FirstWellcome/FirstWelcomeScreen'
+import { NewCouponScreen } from '../screens/NewCoupon'
+import { OnboardingNew } from '../screens/OnboardingNew'
+import { PublishContentScreen } from '../screens/PublishContent'
+import { RejectedScreen } from '../screens/RejectedScreen'
+import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
+import AppliedScreen from '../screens/SignUpNew/AppliedScreen/AppliedScreen'
+import SignUpNew from '../screens/SignUpNew/SignUpNew'
+import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {

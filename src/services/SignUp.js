@@ -28,3 +28,15 @@ export const verifyOtp = async (data) => {
     return { message: error.message, success: false }
   }
 }
+export const getOtpByNumber = async (data) => {
+  try {
+    if (data) {
+      const url = Api.SIGN_UP_WITH_PHONE.GET_OTP
+      console.log('checkPRofile', url, data)
+      const response = await Fetch.post(url, data)
+      return response
+    }
+  } catch (error) {
+    return { message: error.message, success: false }
+  }
+}

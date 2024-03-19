@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { BackHandler, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../assets/images'
@@ -23,6 +23,10 @@ const SignUpNew = () => {
     //   routeName: MODAL_NAMES.SignInEmail,
     // })
   }
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () => backHandler.remove()
+  }, [])
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={IMAGES.authBackground} style={styles.backgroundStyle}>

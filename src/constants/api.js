@@ -36,4 +36,7 @@ export const Api = {
     GET_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/email`,
     VERIFY_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/verification`,
   },
+  SIGN_UP_WITH_PHONE: {
+    GET_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/number`,
+  },
 }

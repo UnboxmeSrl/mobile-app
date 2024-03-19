@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Alert, PermissionsAndroid, Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import { useIsFocused, useNavigationParam } from 'react-navigation-hooks'
+import { useNavigationParam } from 'react-navigation-hooks'
 import { useSelector } from 'react-redux'
 import { getDistance } from 'geolib'
 
@@ -22,7 +22,6 @@ const useRestaurants = () => {
   const [filter, setFilter] = useState(0)
   const [categories, setCategories] = useState([])
   const [refreshing, setRefreshing] = useState(false)
-  const isFocused = useIsFocused()
 
   const onRefresh = () => {
     setRefreshing(true)
@@ -49,7 +48,6 @@ const useRestaurants = () => {
       Geolocation.getCurrentPosition(
         (position) => {
           setUserLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude })
-          // dispatch(setUserCoordinates(position.coords))
         },
         (err) => {
           console.log('err', err)
@@ -57,11 +55,9 @@ const useRestaurants = () => {
         geolocationSetting
       )
     } catch (err) {
-      // console.log('location error ', err.message);
       Alert.alert('Location Permission', 'Something went wrong!')
     }
   }, [])
-  // console.log('userlocation in Restaurant screen', userLocation, restaurantsData?.latitude)
   useEffect(() => {
     console.log('check useEffect n restarant screen')
     requestLocationPermission()
@@ -111,6 +107,7 @@ const useRestaurants = () => {
 
   useEffect(() => {
     getRestaurantsData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
 
   useEffect(() => {
@@ -123,7 +120,6 @@ const useRestaurants = () => {
     category,
     cityData,
     filter,
-    userLocation,
     handleLocationPress,
     isLoading,
     onCategoryChange,
@@ -131,6 +127,7 @@ const useRestaurants = () => {
     refreshing,
     restaurantsData: sortedRestaurants,
     setFilter,
+    userLocation,
   }
 }
 

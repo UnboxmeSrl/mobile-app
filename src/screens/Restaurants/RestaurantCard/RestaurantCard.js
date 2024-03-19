@@ -11,7 +11,6 @@ import { useRestaurantCard } from './hooks'
 
 const RestaurantCard = ({ item }) => {
   const { handleCardPress } = useRestaurantCard()
-console.log(item)
   return (
     <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
       <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>

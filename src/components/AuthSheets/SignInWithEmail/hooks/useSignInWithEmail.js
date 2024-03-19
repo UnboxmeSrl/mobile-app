@@ -3,7 +3,7 @@ import OneSignal from 'react-native-onesignal'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { setIsFirstTimeLogin, setLoginData } from '../../../../redux/slices/authSlice'
+import { setIsFirstTimeLogin, setLoginData, setOnboardingData } from '../../../../redux/slices/authSlice'
 import { setBookings } from '../../../../redux/slices/restaurantSlice'
 import { showToastError, userLogin } from '../../../../services'
 import { getBookings } from '../../../../services/RestaurantService'
@@ -38,8 +38,10 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         navigate(SCREEN_NAMES.Cities)
       }
     } else if (res.UserStatus === '' || res.UserStatus === 'onapproval') {
+      dispatch(setOnboardingData(true))
       navigate(SCREEN_NAMES.AppliedScreen)
     } else if (res.UserStatus === 'rejected') {
+      dispatch(setOnboardingData(true))
       navigate(SCREEN_NAMES.RejectedScreen)
     } else {
       setIsError(true)

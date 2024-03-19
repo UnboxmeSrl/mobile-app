@@ -1,55 +1,69 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Toast from 'react-native-toast-message'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { MAIN_NAVIGATOR } from '@const/navigation'
 import { CODE_RULES } from '@const/validators'
 import { selectUid } from '@redux/modules/auth'
-import { reset } from '@services'
+
+import { SCREEN_NAMES } from '../../constants/navigation'
+import { setLoginData } from '../../redux/slices/authSlice'
+import { navigate, showToastError, showToastSuccess } from '../../services'
+import { getOtpByNumber, verifyOtp } from '../../services/SignUp'
 
 import { AuthPhonePresenter } from './AuthPhonePresenter'
 
 export const AuthPhoneModal = () => {
   const [loading, setLoading] = useState(false)
   const [confirm, setConfirm] = useState(null)
+  const dispatch = useDispatch()
   const [timer, setTimer] = useState(60)
   const userId = useSelector(selectUid)
   const { control, handleSubmit, errors, watch } = useForm()
   const phone = watch('phone')
-
-  const sendVerificationCode = useCallback(
-    async ({ phone }) => {
+  const sendVerificationCode = useCallback(async () => {
+    try {
       setLoading(true)
+      const res = await getOtpByNumber({
+        phoneNumber: phone,
+      })
+      if (res?.success) {
+        showToastSuccess('Verification code sent')
+        setConfirm(res?.success)
+      }
       setLoading(false)
-    },
-    [setLoading]
-  )
+    } catch (error) {
+      showToastError(error)
+      setLoading(false)
+    }
+  }, [setLoading, phone])
 
   const verifyPhoneCode = useCallback(
     async ({ code }) => {
       try {
         setLoading(true)
-        await confirm.confirm(code)
-        setLoading(false)
+        const body = {
+          code,
+        }
+        const res = await verifyOtp(body)
+        if (res?.success) {
+          dispatch(setLoginData(res?.data))
+          navigate(SCREEN_NAMES.AppliedScreen)
+        }
       } catch (error) {
-        Toast.show({
-          text1: 'Error',
-          text2: error?.message,
-          type: 'error',
-        })
+        showToastError(error)
         setLoading(false)
       }
     },
-    [setLoading, confirm]
+    [setLoading, dispatch]
   )
 
   // auto validation for android
-  useEffect(() => {
-    if (confirm?.confirm && userId) {
-      reset(MAIN_NAVIGATOR)
-    }
-  }, [confirm, userId])
+  // useEffect(() => {
+  //   if (confirm?.confirm && userId) {
+  //     reset(MAIN_NAVIGATOR)
+  //   }
+  // }, [confirm, userId])
 
   const resendCode = useCallback(() => {
     sendVerificationCode({ phone })
@@ -57,7 +71,7 @@ export const AuthPhoneModal = () => {
 
   useEffect(() => {
     let timer = null
-    if (confirm?.confirm) {
+    if (confirm) {
       timer = setInterval(() => setTimer((timer) => Math.max(0, timer - 1)), 1000)
     }
     return () => {
@@ -69,7 +83,7 @@ export const AuthPhoneModal = () => {
 
   const onSubmit = confirm ? verifyPhoneCode : sendVerificationCode
   const onPress = handleSubmit(onSubmit)
-  const showCodeInput = confirm && confirm.confirm
+  const showCodeInput = confirm
   const tKey = showCodeInput ? 'auth.verifyCode' : 'auth.sendVerificationCode'
   const codeRules = showCodeInput ? CODE_RULES : {}
   const resendDisabled = timer > 0

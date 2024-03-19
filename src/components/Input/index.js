@@ -29,7 +29,7 @@ export const Input = ({
   const { t } = useTranslation()
   const placeholder = t(placeholderKey, '')
   const errorKey = errors[name]?.message
-  const errorMessage = t(`errors.${errorKey}`)
+  const errorMessage = errorKey ? t(`errors.${errorKey}`) : ''
 
   const { returnKeyType } = useMemo(
     () => ({

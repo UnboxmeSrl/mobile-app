@@ -15,9 +15,9 @@ const useSignUp = () => {
   }
 
   return {
-    handleSignInPress,
     handleCreateAnAccountPress,
     handleGuestPress,
+    handleSignInPress,
   }
 }
 
