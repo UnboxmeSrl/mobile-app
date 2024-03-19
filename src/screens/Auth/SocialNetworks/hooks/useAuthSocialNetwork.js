@@ -14,7 +14,7 @@ const useAuthSocialNetwork = () => {
   const tiktokSheetRef = useRef()
   const instaSheetRef = useRef()
   const dispatch = useDispatch()
-  const [isBtnDisabled, setIsBtnDisabled] = useState(true)
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false)
 
   const formData = new FormData()
   const navigation = useNavigation()

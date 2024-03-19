@@ -28,8 +28,7 @@ const SocialMediaSheet = React.forwardRef(
             <View style={styles.descriptionContainer}>
               <Text style={styles.descriptionText}>{`And send us a message to prove you’re the account owner`}</Text>
             </View>
-
-            <CustomButton title={'Send a message'} handlePress={handlePress} />
+            <CustomButton title={'Add'} handlePress={handlePress} />
           </View>
         </View>
       </BottomSheet>

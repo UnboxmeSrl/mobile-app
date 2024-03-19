@@ -131,9 +131,17 @@ const useBookingDetails = () => {
   const getTimeFrameData = async () => {
     const params = `/${restaurantDetails?.id}`
     const res = await getTimeFrames(params)
+    console.log(
+      'res timframe',
+      res,
+      res[0].DayOfWeek,
+      res[0].weekdays.map((e) => e)
+    )
+    // console.log('res timframe', res[0]._weekdaysturbo?.day, res[0].weekdays)
     setTimeFrameData(res)
     const myDate = new Date(selectedDate)
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+    console.log('weekDay long', weekDay)
     setCurrentWeekDay(weekDay)
     // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
     const filteredData = res?.filter((t) => {
@@ -143,6 +151,11 @@ const useBookingDetails = () => {
         return false
       }
     })
+    console.log(
+      'timeframe filtered data',
+      filteredData
+      // filteredData[0].weekdays.map((e) => e)
+    )
 
     filteredData.forEach((item) => {
       const weekdays = item.weekdays
@@ -166,6 +179,7 @@ const useBookingDetails = () => {
       const myDate = new Date(selectedDate)
       const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
       setCurrentWeekDay(weekDay)
+      console.log('weekday', weekDay)
       const filteredData = timeFrameData?.filter((t) => {
         const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
         if (filteredRes.length > 0) return true
@@ -187,6 +201,7 @@ const useBookingDetails = () => {
 
   useEffect(() => {
     const myDate = new Date(selectedDate)
+    console.log('selecxted dates ', selectedDate)
     const month = myDate.toLocaleString('default', { month: 'long' })
     setCurrentMonth(month)
     setCurrentDate(myDate.getDate())
