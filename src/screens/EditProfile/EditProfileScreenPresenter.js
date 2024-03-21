@@ -83,8 +83,8 @@ export const EditProfileScreenPresenter = ({
   const androidVersion = Platform.Version
 
   const preIntrest = useMemo(() => {
-    const data = user?.user_interest_topics_turbo_id.reduce(
-      (acc, item) => ({ ...acc, [item.id]: { ...item, isChecked: true } }),
+    const data = user?.user_interest_topics_turbo_id?.reduce(
+      (acc, item) => ({ ...acc, [item?.id]: { ...item, isChecked: true } }),
       {}
     )
     return data
@@ -147,28 +147,35 @@ export const EditProfileScreenPresenter = ({
       formData.append('nationality', country?.name)
       formData.append('countryCode', country?.countryCode)
       topicIds?.map((item) => formData.append('user_interest_topics_turbo_id[]', item.id))
-      if (profilePicData) {
+
+      // Check if user.Profile_pic is defined before accessing its properties
+      if (user && user.Profile_pic && user.Profile_pic.url) {
         formData.append('profileImage', {
           name: profilePicData.fileName,
           type: profilePicData.type,
           uri: profilePicData.uri,
         })
       } else {
-        formData.append('profileImage', user.Profile_pic.url)
+        // Handle the case where user.Profile_pic.url is null or undefined
+        formData.append('profileImage', user?.Profile_pic?.url || userImg)
       }
+
       formData.append('IG_account', data?.instagramLink)
       formData.append('Tiktok_account', data?.tiktokLink)
+
       const resProfile = await updateProfile({ formData, userID: user?.id })
-      console.log('resProfile', resProfile)
-      if (resProfile.success) {
+      if (resProfile && resProfile?.success) {
         dispatch(setproFileData(resProfile.data))
         showToastSuccess('Profile Update Success')
         setLoading(false)
       } else {
         console.error('Profile update failed')
-        showToastError(resProfile?.data)
+        showToastError({
+          message: 'please Select Profile Picture',
+        })
         setLoading(false)
       }
+      setLoading(false)
     },
     [dispatch, profilePicData, selectedIntrest, user, preIntrest, country]
   )

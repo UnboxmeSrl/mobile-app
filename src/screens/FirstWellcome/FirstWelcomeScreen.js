@@ -51,7 +51,7 @@ const FirstWellcomeScreen = () => {
           <View style={styles.hobbiesGrid}>
             {user?.user_interest_topics_turbo_id?.map((e, i) => (
               <Hobbies
-                interest_topics={e.interest_topics}
+                interest_topics={e?.interest_topics}
                 key={i}
                 style={styles.badge}
                 titleStyle={styles.badgeTitle}
