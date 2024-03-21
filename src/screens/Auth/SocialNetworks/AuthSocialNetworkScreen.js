@@ -1,12 +1,14 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 /* eslint-disable react/jsx-sort-props */
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import { CustomButton, CustomHeader, SocialMediaSheet } from '../../../components'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import { COLORS, FONTS } from '../../../constants'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+
 import { IMAGES } from '../../../assets/images'
+import { CustomButton, CustomHeader, SocialMediaSheet } from '../../../components'
+import { COLORS, FONTS } from '../../../constants'
+
 import { useAuthSocialNetwork } from './hooks'
 
 const AuthSocialNetworkScreen = () => {
@@ -93,7 +95,7 @@ const AuthSocialNetworkScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.socialMediaDescriptionContainer}>
+      {/* <View style={styles.socialMediaDescriptionContainer}>
         <Text style={styles.socialMediaDescriptionText}>
           connect Instagram business account to get the Pro-influ checkmark on your profile
         </Text>
@@ -109,10 +111,10 @@ const AuthSocialNetworkScreen = () => {
             <Image source={IMAGES.loginInto} style={[styles.loginIntoIcon, styles.instaBusinessLoginIntoIcon]} />
           </View>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} />
       </View>
 
       <SocialMediaSheet

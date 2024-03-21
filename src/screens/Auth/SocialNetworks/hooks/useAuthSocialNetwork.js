@@ -103,11 +103,6 @@ const useAuthSocialNetwork = () => {
 
   // navigate(SCREEN_NAMES.AuthInterestTopicsScreen)
 
-  useEffect(() => {
-    if (tiktokUserName && instaUserName) {
-      setIsBtnDisabled(false)
-    }
-  }, [tiktokUserName, instaUserName])
 
   return {
     isBtnDisabled,

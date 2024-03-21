@@ -7,11 +7,22 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useSignUp } from './hooks'
 import { SignInWithEmail } from '../../components'
-import { useNavigationParam } from 'react-navigation-hooks'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
+import { useCallback } from 'react'
+import { MODAL_NAMES } from '../../constants/navigation'
 
 const SignUpNew = () => {
   const { handleSignInPress, handleCreateAnAccountPress, handleGuestPress } = useSignUp()
+  const { navigate } = useNavigation()
   const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
+  const navigateToWebview = useCallback(
+    (uri) => {
+      navigate({ params: { uri }, routeName: MODAL_NAMES.WebView })
+    },
+    [navigate]
+  )
+  const navigateToTerms = () => navigateToWebview('https://www.joinclaris.com/terms-of-service/')
+  const navigateToPrivacy = () => navigateToWebview(' https://www.joinclaris.com/privacy-policy')
   const bottomSheetRef = useRef()
   const navigateToEmailModal = () => {
     bottomSheetRef?.current?.open()
@@ -62,7 +73,7 @@ const SignUpNew = () => {
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
             {`By signing up, you `}
-            <Text style={styles.changedText}>{`agree `}</Text>
+            <Text style={styles.changedText}>{`agree`}</Text>
             {`to Claris’s`}
             <Text style={styles.changedText}>{` Terms of Use `}</Text>
             {`and `}

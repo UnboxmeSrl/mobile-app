@@ -44,6 +44,7 @@ export const AuthPhoneModal = () => {
         setLoading(true)
         const body = {
           code,
+          phoneNumber: phone,
         }
         const res = await verifyOtp(body)
         if (res?.success) {
@@ -55,7 +56,7 @@ export const AuthPhoneModal = () => {
         setLoading(false)
       }
     },
-    [setLoading, dispatch]
+    [setLoading, dispatch, phone]
   )
 
   // auto validation for android

@@ -16,8 +16,8 @@ export const Policies = ({ style, dark }) => {
     },
     [navigate]
   )
-  const navigateToTerms = () => navigateToWebview('https://policies.google.com/terms?hl=en-US')
-  const navigateToPrivacy = () => navigateToWebview('https://policies.google.com/privacy?hl=en-US')
+  const navigateToTerms = () => navigateToWebview('https://www.joinclaris.com/terms-of-service/')
+  const navigateToPrivacy = () => navigateToWebview(' https://www.joinclaris.com/privacy-policy')
   const color = dark ? COLORS.black : COLORS.white
 
   return (

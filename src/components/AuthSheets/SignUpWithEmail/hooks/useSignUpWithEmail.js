@@ -46,6 +46,7 @@ const useSignUpWithEmail = (closeSignUpSheet) => {
   const handleSignUpPressAfterCodeSend = async () => {
     const body = {
       code: verificationCode,
+      email,
       // code: '1234',
     }
     const res = await verifyOtp(body)

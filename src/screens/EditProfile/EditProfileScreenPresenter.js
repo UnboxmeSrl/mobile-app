@@ -27,7 +27,7 @@ import AppTextArea from '../../components/InputFields/AppTextArea'
 import { setproFileData, userDetail } from '../../redux/slices/authSlice'
 import CountryPicker from 'react-native-country-picker-modal'
 import CountryFlag from 'react-native-country-flag'
-import { getInterestTopics, updateProfile } from '../../services'
+import { getInterestTopics, showToastError, showToastSuccess, updateProfile } from '../../services'
 import { checkPermission, openGallery } from '../../utils'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
@@ -69,7 +69,7 @@ export const EditProfileScreenPresenter = ({
 }) => {
   const dispatch = useDispatch()
   const [profilePicData, setProfilePicData] = useState(null)
-
+  const [loading, setLoading] = useState(false)
   const user = useSelector(userDetail)
   const [country, setCountry] = useState({
     cca2: user?.countryCode,
@@ -93,7 +93,6 @@ export const EditProfileScreenPresenter = ({
   useEffect(() => {
     getInterestTopicsData()
   }, [])
-  console.log('selectedIntrest', selectedIntrest)
   const {
     control,
     handleSubmit,
@@ -140,8 +139,8 @@ export const EditProfileScreenPresenter = ({
   }
   const onSubmit = useCallback(
     async (data) => {
+      setLoading(true)
       const topicIds = Object.values({ ...preIntrest, ...selectedIntrest })?.filter((item) => item.isChecked)
-      console.log(topicIds, 'ids')
       const formData = new FormData()
       formData.append('bio', data?.biography)
       formData.append('name', data?.fullName)
@@ -160,10 +159,15 @@ export const EditProfileScreenPresenter = ({
       formData.append('IG_account', data?.instagramLink)
       formData.append('Tiktok_account', data?.tiktokLink)
       const resProfile = await updateProfile({ formData, userID: user?.id })
+      console.log('resProfile', resProfile)
       if (resProfile.success) {
         dispatch(setproFileData(resProfile.data))
+        showToastSuccess('Profile Update Success')
+        setLoading(false)
       } else {
         console.error('Profile update failed')
+        showToastError(resProfile?.data)
+        setLoading(false)
       }
     },
     [dispatch, profilePicData, selectedIntrest, user, preIntrest, country]
@@ -185,12 +189,8 @@ export const EditProfileScreenPresenter = ({
     [preIntrest]
   )
   const onSelect = (country) => {
-    // console.log(country)
-    // setValue('nationality', country.name)
-    // setValue('countryCode', country.cca2)
     setCountry(country)
   }
-  console.log(profilePicData)
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: perfectSize(24) }}>
       <SubHeader title="Edit Profile" />
@@ -333,7 +333,7 @@ export const EditProfileScreenPresenter = ({
               ))}
             </HStack>
           </View>
-          <AppButton onPress={handleSubmit(onSubmit)} title="Save changes" />
+          <AppButton disabled={loading} onPress={handleSubmit(onSubmit)} title="Save changes" />
         </Stack>
       </ScrollView>
       {/* <Center>
