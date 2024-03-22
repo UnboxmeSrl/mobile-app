@@ -9,7 +9,14 @@ import styled from 'styled-components/native'
 import { navigate } from '@services'
 
 import { SCREEN_NAMES, STACK_NAMES } from '../../constants/navigation'
-import { selectIsAuthenticated, selectOnBordingData } from '../../redux/slices/authSlice'
+import {
+  selectIsApproved,
+  selectIsAuthenticated,
+  selectIsFirstVisit,
+  selectIsPending,
+  selectIsRejected,
+  selectOnBordingData,
+} from '../../redux/slices/authSlice'
 import { checkSignUpProgress } from '../../utils'
 
 const Wrapper = styled(Animated.View)`
@@ -30,31 +37,38 @@ export const Splash = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const hideOnBoarding = useSelector(selectOnBordingData)
 
-  const isApplied = useSelector((state) => state.authSlice.isApplied)
+  const isApplied = useSelector(selectIsPending)
+  const rejectedUser = useSelector(selectIsRejected)
+  const approvedUser = useSelector(selectIsApproved)
+  const firstVisit = useSelector(selectIsFirstVisit)
   const isSignUpProcessStarted = useSelector((state) => state.authSlice.isSignUpProcessStarted)
   const signUpProcessStage = useSelector((state) => state.authSlice.signUpProcessStage)
-
   useEffect(() => {
-    /* TODO: when you complete your every changes uncomment below code:
-     because this isApplied is to know that user has signed up & is waiting for approval from admin */
-
-    // dispatch(setLoginData({}))
-
     if (!hideOnBoarding) {
       navigate(SCREEN_NAMES.OnboardingNew)
-    } else if (isAuthenticated) {
+    } else if (isAuthenticated && isApplied) {
+      navigate(STACK_NAMES.AppliedScreen)
+    } else if (isAuthenticated && firstVisit && approvedUser) {
+      navigate(STACK_NAMES.FirstWelcomeScreen)
+    } else if (isAuthenticated && approvedUser) {
       navigate(STACK_NAMES.BottomStack)
-      /* navigate(SCREEN_NAMES.FirstWelcomeScreen) */
-    }
-    //  if (isApplied) {
-    //   navigate(SCREEN_NAMES.AppliedScreen)
-    // } else
-    else if (isSignUpProcessStarted) {
+    } else if (rejectedUser && isAuthenticated) {
+      navigate(STACK_NAMES.RejectedScreen)
+    } else if (isSignUpProcessStarted) {
       checkSignUpProgress(signUpProcessStage)
     } else {
       navigate(SCREEN_NAMES.SignUpNew)
     }
-  }, [hideOnBoarding, isAuthenticated, isApplied, isSignUpProcessStarted, signUpProcessStage])
+  }, [
+    hideOnBoarding,
+    isAuthenticated,
+    isApplied,
+    approvedUser,
+    isSignUpProcessStarted,
+    signUpProcessStage,
+    firstVisit,
+    rejectedUser,
+  ])
 
   useEffect(() => {
     setTimeout(() => {

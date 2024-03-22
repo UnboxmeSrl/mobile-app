@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createDraftSafeSelector, createSlice } from '@reduxjs/toolkit'
 
 import { sliceNames } from '../../constants'
 
@@ -76,4 +76,15 @@ export const selectOnBordingData = (state) => state.authSlice.onboardingData
 
 export const selectIsAuthenticated = (state) => !!state.authSlice.loginData?.id
 
+export const selectIsFirstVisit = (state) => state.authSlice.loginData?.firstVisit === 1
+
 export const userDetail = (state) => state.authSlice.profileData
+
+export const selectIsApproved = (state) => state.authSlice?.loginData?.userStatus === 'approved'
+
+export const selectIsRejected = (state) => state.authSlice?.loginData?.userStatus === 'rejected'
+
+export const selectIsPending = createDraftSafeSelector(
+  [selectIsApproved, selectIsRejected],
+  (approved, rejected) => !approved && !rejected
+)
