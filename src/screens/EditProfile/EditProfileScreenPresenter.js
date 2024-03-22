@@ -14,7 +14,7 @@ import { IMAGES } from '../../assets/images'
 import insta from '../../assets/icons/insta.png'
 import map from '../../assets/icons/map.png'
 import tiktok from '../../assets/icons/tiktok.png'
-import userImg from '../../assets/images/userImg.png'
+import userImg from '../../assets/images/userProfile.jpg'
 import AppButton from '../../components/Buttons'
 import Avatar from '../../components/Elements/Avatar'
 import HStack from '../../components/Elements/HStack'
@@ -35,6 +35,7 @@ import { TouchableOpacity } from 'react-native'
 import { Text } from 'react-native'
 import { scale, verticalScale } from 'react-native-size-matters'
 import { FONTS } from '../../constants'
+import AppText from '../../components/Elements/AppText'
 
 const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
 const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
@@ -75,7 +76,6 @@ export const EditProfileScreenPresenter = ({
     cca2: user?.countryCode,
     name: user?.nationality,
   })
-  console.log('checkUser', user.Profile_pic)
   const [intrests, setInrests] = useState([])
   const [selectedIntrest, setSelectedIntrest] = useState({})
   const isIos = Platform.OS === 'ios'
@@ -101,7 +101,6 @@ export const EditProfileScreenPresenter = ({
   } = useForm({
     defaultValues: {
       biography: user?.bio ?? '',
-      countryCode: user?.countryCode ?? 'AI',
       fullName: user?.name ?? '',
       id: user?.id,
       instagramLink: user.IG_account ?? '',
@@ -139,43 +138,51 @@ export const EditProfileScreenPresenter = ({
   }
   const onSubmit = useCallback(
     async (data) => {
-      setLoading(true)
+      // setLoading(true)
       const topicIds = Object.values({ ...preIntrest, ...selectedIntrest })?.filter((item) => item.isChecked)
+      console.log('formData', topicIds)
+
       const formData = new FormData()
       formData.append('bio', data?.biography)
       formData.append('name', data?.fullName)
       formData.append('nationality', country?.name)
-      formData.append('countryCode', country?.countryCode)
-      topicIds?.map((item) => formData.append('user_interest_topics_turbo_id[]', item.id))
+      formData.append('countryCode', country?.cca2)
+      topicIds
+        ?.filter((item) => item?.id)
+        .forEach((item) => {
+          formData.append('user_interest_topics_turbo_id[]', item.id)
+        })
 
-      // Check if user.Profile_pic is defined before accessing its properties
-      if (user && user.Profile_pic && user.Profile_pic.url) {
+      if (profilePicData && profilePicData?.uri) {
         formData.append('profileImage', {
           name: profilePicData.fileName,
           type: profilePicData.type,
           uri: profilePicData.uri,
         })
       } else {
-        // Handle the case where user.Profile_pic.url is null or undefined
-        formData.append('profileImage', user?.Profile_pic?.url || userImg)
+        formData.append(
+          'profileImage',
+          user?.Profile_pic?.url ?? {
+            name: 'rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+            type: 'image/jpeg',
+            uri: 'file:///data/user/0/com.claris.app/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+          }
+        )
       }
 
       formData.append('IG_account', data?.instagramLink)
       formData.append('Tiktok_account', data?.tiktokLink)
-
       const resProfile = await updateProfile({ formData, userID: user?.id })
       if (resProfile && resProfile?.success) {
         dispatch(setproFileData(resProfile.data))
         showToastSuccess('Profile Update Success')
         setLoading(false)
       } else {
-        console.error('Profile update failed')
         showToastError({
           message: 'please Select Profile Picture',
         })
         setLoading(false)
       }
-      setLoading(false)
     },
     [dispatch, profilePicData, selectedIntrest, user, preIntrest, country]
   )
@@ -196,7 +203,11 @@ export const EditProfileScreenPresenter = ({
     [preIntrest]
   )
   const onSelect = (country) => {
-    setCountry(country)
+    setCountry((prev) => ({
+      ...prev,
+      cca2: country.cca2,
+      name: country.name,
+    }))
   }
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: perfectSize(24) }}>
@@ -235,28 +246,31 @@ export const EditProfileScreenPresenter = ({
             )}
             rules={{ required: 'Name is required' }}
           />
-          <CountryPicker
-            containerButtonStyle={styles.countryContainer}
-            onSelect={onSelect}
-            renderFlagButton={({ onOpen }) => {
-              return (
-                <TouchableOpacity onPress={() => onOpen()} style={styles.countryContainer} activeOpacity={0.5}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    {country?.cca2 ? (
-                      <CountryFlag isoCode={country?.cca2 ?? 'de'} size={25} />
-                    ) : (
-                      <Image source={IMAGES.sampleFlag} style={styles.flagIcon} resizeMode={'contain'} />
-                    )}
-                    <Text style={styles.countryText}>{`${country?.name ?? 'Country'}`}</Text>
-                  </View>
-                  <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
-                </TouchableOpacity>
-              )
-            }}
-            withEmoji={true}
-            withFilter={true}
-            withFlagButton={true}
-          />
+          <View>
+            <AppText style={styles.copuntrylabel}>Country</AppText>
+            <CountryPicker
+              containerButtonStyle={styles.countryContainer}
+              onSelect={onSelect}
+              renderFlagButton={({ onOpen }) => {
+                return (
+                  <TouchableOpacity onPress={() => onOpen()} style={styles.countryContainer} activeOpacity={0.5}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      {country?.cca2 ? (
+                        <CountryFlag isoCode={country?.cca2 ?? 'de'} size={25} />
+                      ) : (
+                        <Image source={IMAGES.sampleFlag} style={styles.flagIcon} resizeMode={'contain'} />
+                      )}
+                      <Text style={styles.countryText}>{`${country?.name ?? 'Country'}`}</Text>
+                    </View>
+                    <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
+                  </TouchableOpacity>
+                )
+              }}
+              withEmoji={true}
+              withFilter={true}
+              withFlagButton={true}
+            />
+          </View>
           <Controller
             control={control}
             name="biography"
@@ -442,25 +456,37 @@ const styles = StyleSheet.create({
     width: scale(24),
     height: verticalScale(18),
   },
+  copuntrylabel: {
+    // fontFamily: fonts.inter500,
+    color: colors.infoLight,
+
+    fontSize: perfectSize(14),
+
+    fontWeight: '500',
+    marginBottom: perfectSize(8),
+    textTransform: 'capitalize',
+  },
   countryContainer: {
-    marginTop: verticalScale(15),
-    height: verticalScale(48),
-    paddingHorizontal: scale(15),
-    width: '85%',
+    // marginTop: verticalScale(15),
+    alignItems: 'center',
     alignSelf: 'center',
-    borderWidth: perfectSize(1),
+    backgroundColor: colors.light,
     borderColor: COLORS.gainsboro,
     borderRadius: perfectSize(10),
-    alignItems: 'center',
+    borderWidth: perfectSize(1),
     flexDirection: 'row',
+    height: verticalScale(48),
     justifyContent: 'space-between',
+    marginBottom: verticalScale(10),
+    paddingHorizontal: scale(15),
+    width: '100%',
   },
   countryText: {
+    color: colors.dark,
     fontFamily: FONTS.quicksand,
-    textAlign: 'center',
-    color: COLORS.gray,
     fontSize: perfectSize(14),
     marginLeft: scale(10),
+    textAlign: 'center',
   },
   downArrowIcon: {
     height: verticalScale(6.38),

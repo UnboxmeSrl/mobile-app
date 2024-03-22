@@ -51,7 +51,7 @@ export const updateProfile = async ({ formData, userID }) => {
     if (userID) {
       const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${userID}`
       const response = await Fetch.postMedia(url, formData)
-
+      console.log('response', response)
       return response
     }
   } catch (error) {
