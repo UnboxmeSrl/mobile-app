@@ -1,11 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { resetAuthData, resetLogin, setAuthData, setIsApplied, setLoginData } from '../../../../redux/slices'
-import { navigate, reset, userSignUp } from '@services'
-import { MAIN_NAVIGATOR } from '@const/navigation'
-import { showToastError } from '../../../../services'
-import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { useNavigation } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { MAIN_NAVIGATOR } from '@const/navigation'
+import { navigate, reset, userSignUp } from '@services'
+
+import { SCREEN_NAMES } from '../../../../constants/navigation'
+import {
+  resetAuthData,
+  resetLogin,
+  setAuthData,
+  setIsApplied,
+  setLoginData,
+  setproFileData,
+} from '../../../../redux/slices'
+import { showToastError } from '../../../../services'
 
 const useAuthSocialNetwork = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
@@ -32,10 +41,10 @@ const useAuthSocialNetwork = () => {
   }
 
   const handleNextPress = async () => {
-    dispatch(setAuthData({ tiktokUserName, instaUserName }))
+    dispatch(setAuthData({ instaUserName, tiktokUserName }))
 
     // User Type (Model, Influencer, Both)
-    const isBothUserType = userDetails?.userType?.data ? true : false
+    const isBothUserType = !!userDetails?.userType?.data
 
     // Phone Number
     const phonWithCountryCode = `+${userDetails?.country?.callingCode?.[0]}${userDetails?.phoneNumber}`
@@ -92,7 +101,8 @@ const useAuthSocialNetwork = () => {
     if (res?.status === 200 || res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
       dispatch(resetAuthData({}))
-      dispatch(resetLogin())
+      dispatch(setproFileData(res.data))
+      dispatch(setLoginData(res.data))
       // reset(MAIN_NAVIGATOR)
       // dispatch(setIsApplied(true))
       navigate(SCREEN_NAMES.AppliedScreen)
@@ -103,19 +113,18 @@ const useAuthSocialNetwork = () => {
 
   // navigate(SCREEN_NAMES.AuthInterestTopicsScreen)
 
-
   return {
-    isBtnDisabled,
-    tiktokUserName,
-    setTiktokUserName,
-    tiktokSheetRef,
-    instaUserName,
-    setInstaUserName,
+    handleBackPress,
+    handleOnInstaPress,
+    handleNextPress,
     instaSheetRef,
     handleOnTikTokPress,
-    handleOnInstaPress,
-    handleBackPress,
-    handleNextPress,
+    instaUserName,
+    isBtnDisabled,
+    setInstaUserName,
+    setTiktokUserName,
+    tiktokSheetRef,
+    tiktokUserName,
   }
 }
 

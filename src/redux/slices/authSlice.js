@@ -21,12 +21,10 @@ const AuthSlice = createSlice({
       state.loginData = {}
     },
     setAuthData: (state, actions) => {
-      console.log('Auth Data set Action', actions?.payload)
       state.authData = {
         ...state.authData,
         ...actions?.payload,
       }
-      console.log('Settled Auth Data', state.authData)
     },
     resetAuthData: (state) => {
       state.authData = {}

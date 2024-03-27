@@ -1,7 +1,7 @@
 {
   "name": "unboxme",
   "version": "1.0.0",
-  "buildNumber": 13,
+  "buildNumber": 16,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -15,7 +15,8 @@
     "release:major": "standard-version --release-as major",
     "postinstall": "patch-package",
     "clean": "cd android && ./gradlew clean",
-    "apk": "cd android && ./gradlew assembleRelease"
+    "apk": "cd android && ./gradlew assembleRelease",
+    "aab": "cd android && ./gradlew bundleRelease"
   },
   "reactNativePermissionsIOS": [
     "Camera",

@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import OneSignal from 'react-native-onesignal'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { setIsFirstTimeLogin, setLoginData, setOnboardingData } from '../../../../redux/slices/authSlice'
 import { setBookings } from '../../../../redux/slices/restaurantSlice'
+import { setTempAuthData } from '../../../../redux/slices/tempAuth'
 import { showToastError, userLogin } from '../../../../services'
 import { getBookings } from '../../../../services/RestaurantService'
-import { setTempAuthData } from '../../../../redux/slices/tempAuth'
 
 const useSignInWithEmail = (isFromBookRedirected) => {
   const [email, setEmail] = useState()
@@ -56,12 +57,12 @@ const useSignInWithEmail = (isFromBookRedirected) => {
 
   return {
     email,
-    setEmail,
-    password,
+    handleLoginPress,
     isError,
     loading,
+    password,
+    setEmail,
     setPassword,
-    handleLoginPress,
   }
 }
 

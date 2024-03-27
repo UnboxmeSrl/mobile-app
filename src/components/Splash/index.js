@@ -43,20 +43,38 @@ export const Splash = () => {
   const firstVisit = useSelector(selectIsFirstVisit)
   const isSignUpProcessStarted = useSelector((state) => state.authSlice.isSignUpProcessStarted)
   const signUpProcessStage = useSelector((state) => state.authSlice.signUpProcessStage)
+  // console.log(
+  //   'isAuthenticated',
+  //   isAuthenticated,
+  //   hideOnBoarding,
+  //   isApplied,
+  //   rejectedUser,
+  //   approvedUser,
+  //   firstVisit,
+  //   isSignUpProcessStarted,
+  //   signUpProcessStage
+  // )
   useEffect(() => {
     if (!hideOnBoarding) {
+      console.log('hideOnBoarding')
       navigate(SCREEN_NAMES.OnboardingNew)
     } else if (isAuthenticated && isApplied) {
-      navigate(STACK_NAMES.AppliedScreen)
+      console.log('isApplied')
+      navigate(SCREEN_NAMES.AppliedScreen)
     } else if (isAuthenticated && firstVisit && approvedUser) {
-      navigate(STACK_NAMES.FirstWelcomeScreen)
+      console.log('firstVisit')
+      navigate(SCREEN_NAMES.FirstWelcomeScreen)
     } else if (isAuthenticated && approvedUser) {
+      console.log('approvedUser')
       navigate(STACK_NAMES.BottomStack)
     } else if (rejectedUser && isAuthenticated) {
-      navigate(STACK_NAMES.RejectedScreen)
+      console.log('rejectedUser')
+      navigate(SCREEN_NAMES.RejectedScreen)
     } else if (isSignUpProcessStarted) {
+      console.log('isSignUpProcessStarted')
       checkSignUpProgress(signUpProcessStage)
     } else {
+      console.log('else')
       navigate(SCREEN_NAMES.SignUpNew)
     }
   }, [
@@ -69,7 +87,6 @@ export const Splash = () => {
     firstVisit,
     rejectedUser,
   ])
-
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide()

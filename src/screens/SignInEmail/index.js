@@ -30,7 +30,6 @@ export const SignInEmailModal = () => {
         // const user = await signInWithEmail(email, password)
         const prepData = { email, password }
         const res = await userLogin(prepData)
-        console.log('res', res)
         setLoading(false)
         // if (user) {
         //   onAuthSuccess()

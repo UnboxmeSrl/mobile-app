@@ -92,10 +92,13 @@ const RestaurantDetails = () => {
               <Text style={styles.commonStyleSocialLinkText}>Website</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.aboutTitleContainer}>
-            <Text style={styles.aboutTitleText}>About</Text>
-            <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
-          </View>
+          {restaurantDetails?.About && (
+            <View style={styles.aboutTitleContainer}>
+              <Text style={styles.aboutTitleText}>About</Text>
+              <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
+            </View>
+          )}
+
           {/* <Text style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
           {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.aboutTitleText}>How it works </Text>

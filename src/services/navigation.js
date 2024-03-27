@@ -63,10 +63,7 @@ const getCurrentRouteName = (nav, nestingLevel) => {
 export const useCurrentRouteName = (nestingLevel = Infinity) => {
   const navState = useNavigationState()
 
-  return useMemo(() => getCurrentRouteName(navState, nestingLevel), [
-    navState,
-    nestingLevel,
-  ])
+  return useMemo(() => getCurrentRouteName(navState, nestingLevel), [navState, nestingLevel])
 }
 
 export const getStackRouterRoot = (nav) => {

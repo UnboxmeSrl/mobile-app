@@ -28,7 +28,7 @@ export const userLogin = async (data) => {
   try {
     const url = Api.PROFILE.USER_LOGIN
     const response = await Fetch.post(url, data)
-    console.log('api', response)
+
     return response
   } catch (error) {
     return {
