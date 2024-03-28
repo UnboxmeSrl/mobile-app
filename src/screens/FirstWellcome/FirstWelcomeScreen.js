@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+
 import { IMAGES } from '../../assets/images'
 import AppButton from '../../components/Buttons'
 import AppText from '../../components/Elements/AppText'
@@ -10,26 +11,13 @@ import Hobbies from '../../components/Elements/Hobbies'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import perfectSize from '../../utils/responsiveSize'
-import { useFirstWellcome } from './hooks'
 
-import { setproFileData, userDetail } from '../../redux/slices/authSlice'
-import { getProfile } from '../../services'
+import { useFirstWellcome } from './hooks'
 
 const FirstWellcomeScreen = () => {
   const { handleGuestPress } = useFirstWellcome()
-  const user = useSelector(userDetail)
-  const LoginDetail = useSelector((state) => state.authSlice.loginData)
-  const disapatch = useDispatch()
-  const handleGetProfileData = useCallback(async () => {
-    const res = await getProfile(LoginDetail.id)
-    console.log('check', res)
-    disapatch(setproFileData(res.data))
-  }, [disapatch, LoginDetail])
+  const user = useSelector((state) => state.authSlice.loginData)
 
-  useEffect(() => {
-    handleGetProfileData()
-  }, [handleGetProfileData])
-  console.log('user in ', user)
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
@@ -111,22 +99,29 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: perfectSize(16),
     textAlign: 'center',
+    width: '80%',
   },
   hobbiesGrid: {
     alignItems: 'center',
+    maxWidth: '100%',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
+    // backgroundColor: 'cyan',
   },
   btn: {
     borderRadius: perfectSize(16),
     height: perfectSize(48),
+    width: '80%',
+    alignSelf: 'center',
   },
   mainContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: '#131115',
-    padding: perfectSize(24),
+    paddingVertical: perfectSize(24),
+    // backgroundColor: 'yellow',
   },
   btnLabel: {
     color: '#764837',
@@ -165,6 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: perfectSize(17),
     marginTop: perfectSize(40),
     textAlign: 'center',
+    width: '80%',
   },
   userLabel: {
     fontFamily: FONTS.quicksandMedium,

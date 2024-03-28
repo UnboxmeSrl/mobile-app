@@ -105,7 +105,7 @@ export const UploadPlaceholder = ({ fromStorage, item }) => {
   }
   useEffect(() => {
     if (fromStorage) {
-      console.log({ fromStorage })
+      // console.log({ fromStorage })
       getDownloadUrl()
     }
   }, [fromStorage])

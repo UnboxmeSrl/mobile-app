@@ -1,23 +1,19 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { Alert } from 'react-native'
 import { getBuildNumber, getVersion } from 'react-native-device-info'
-import Share from 'react-native-share'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
-import Clipboard from '@react-native-clipboard/clipboard'
-import CookieManager from '@react-native-community/cookies'
 import { GoogleSignin } from '@react-native-community/google-signin'
 import { SettingsPresenter } from '@screens/Settings/SettingsPresenter'
 
 import { IconButton } from '@components/IconButton'
 import { COLORS } from '@const'
 import { MAIN_NAVIGATOR, SCREEN_NAMES } from '@const/navigation'
-import { useAction } from '@hooks/common'
-import authModule, { _initialized, _instagram, selectWizardCode } from '@redux/modules/auth'
 import { persistor } from '@redux/store'
 import { logger, reset, showToastSuccess } from '@services'
-import { resetLogin, selectIsAuthenticated, setOnboardingData } from '../../redux/slices/authSlice'
+
+import { resetLogin, selectIsAuthenticated } from '../../redux/slices/authSlice'
 // import { dispatch } from '../../services'
 
 const version = getVersion()
@@ -27,7 +23,7 @@ const LogoutIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'log-out
 
 export const SettingsScreen = () => {
   const { navigate } = useNavigation()
-  const resetAuth = useAction(authModule.actions.reset)
+  // const resetAuth = useAction(authModule.actions.reset)
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
   const dispatch = useDispatch()
@@ -39,13 +35,14 @@ export const SettingsScreen = () => {
       await persistor.purge()
       await GoogleSignin.signOut()
       dispatch(resetLogin())
+      // dispatch(setIsFirstTimeLogin(true))
       // dispatch(selectIsAuthenticated)
       showToastSuccess("You've been logged out")
       logger.info('Logout succeded')
     } catch (error) {
       logger.error('Logout error', { error })
     }
-  }, [reset])
+  }, [dispatch])
 
   const handleLogout = useCallback(async () => {
     Alert.alert('Confirmation', 'Are you sure you want to log out?', [

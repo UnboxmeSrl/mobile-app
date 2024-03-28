@@ -41,7 +41,7 @@ export const BoxTile = ({ box }) => {
   const contentApproved = order?.status === ORDER_CONTENT_APPROVED
   const withRating = order?.status === ORDER_WITH_RATING
 
-  console.log(withRating)
+  // console.log(withRating)
 
   const buttonOnPress = useCallback(() => {
     if (approved) {

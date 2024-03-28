@@ -14,7 +14,7 @@ const AuthDateOfBirthScreen = () => {
     isBtnDisabled,
     isDatePickerOpen,
     setIsDatePickerOpen,
-    date,
+    // date,
     selectedDate,
     setSelectedDate,
     handleBackPress,
@@ -37,7 +37,7 @@ const AuthDateOfBirthScreen = () => {
         <Image source={IMAGES.calender} style={styles.calenderIcon} />
       </TouchableOpacity>
       <DatePicker
-        date={date}
+        date={selectedDate ?? new Date()}
         modal
         mode={'date'}
         onCancel={() => {

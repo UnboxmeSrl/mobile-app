@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import OneSignal from 'react-native-onesignal'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
-import { reset } from '@services'
+import { MODAL_NAMES } from '@const/navigation'
 
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { setLoginData } from '../../redux/slices/authSlice'
@@ -12,7 +12,6 @@ import { setBookings } from '../../redux/slices/restaurantSlice'
 import { getBookings, userLogin } from '../../services'
 
 import { SignInEmailPresenter } from './SignInEmailPresenter'
-import OneSignal from 'react-native-onesignal'
 
 export const SignInEmailModal = () => {
   const [loading, setLoading] = useState(false)

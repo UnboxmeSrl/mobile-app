@@ -12,11 +12,12 @@ export const Api = {
   PROFILE: {
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
     GET_INTEREST_TOPICS: `${BASE_URL}/api:bwh6Xc5O/interest_topics`,
-    GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo`,
+    GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo_profile`,
+    // GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo`,
     USER_LOGIN: `${BASE_URL}/api:bwh6Xc5O/user_login`,
     USER_PROFILE_PIC_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_profile_pic`,
     USER_PROFILE_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_user_turbo`,
-    USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/signup`,
+    USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/user/signup`,
   },
   RESTAURANTS: {
     ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,

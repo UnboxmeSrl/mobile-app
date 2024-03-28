@@ -85,6 +85,9 @@ const styles = StyleSheet.create({
     height: perfectSize(48),
     justifyContent: 'center',
     paddingHorizontal: perfectSize(16),
+    margin: perfectSize(4),
+    borderWidth: perfectSize(1),
+    borderColor: colors.slate1,
   },
   checkIcon: {
     color: colors.dark,

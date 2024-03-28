@@ -14,7 +14,7 @@ const initialState = {
 }
 
 const AuthSlice = createSlice({
-  initialState: initialState,
+  initialState: { ...initialState },
   name: sliceNames.authSlice,
   reducers: {
     resetLogin: (state) => {
@@ -26,11 +26,14 @@ const AuthSlice = createSlice({
         ...actions?.payload,
       }
     },
-    resetAuthData: (state) => {
-      state.authData = {}
-    },
+    resetAuthData: (state) => ({ ...initialState, onboardingData: state.onboardingData }),
     setLoginData: (state, actions) => {
       state.loginData = actions?.payload
+    },
+    updateLoginData: (state, actions) => {
+      if (state.loginData?.id) {
+        state.loginData = { ...state.loginData, ...actions?.payload }
+      }
     },
     setIsApplied: (state, actions) => {
       state.isApplied = actions?.payload
@@ -50,6 +53,13 @@ const AuthSlice = createSlice({
     setproFileData: (state, { payload }) => {
       state.profileData = payload
     },
+    updateUserCount: (state, { payload }) => {
+      console.log('setPayload outer')
+      if (payload && state.loginData?.id) {
+        console.log('setPayload')
+        state.loginData.firstVisit = payload
+      }
+    },
   },
 })
 
@@ -64,6 +74,8 @@ export const {
   setOnboardingData,
   setproFileData,
   resetAuthData,
+  updateUserCount,
+  updateLoginData,
 } = AuthSlice.actions
 
 export default AuthSlice.reducer
@@ -75,12 +87,13 @@ export const selectOnBordingData = (state) => state.authSlice.onboardingData
 export const selectIsAuthenticated = (state) => !!state.authSlice.loginData?.id
 
 export const selectIsFirstVisit = (state) => state.authSlice.loginData?.firstVisit === 1
+// export const selectIsFirstVisit = (state) => state.authSlice.isFirstTimeLogin
 
 export const userDetail = (state) => state.authSlice.profileData
 
-export const selectIsApproved = (state) => state.authSlice?.loginData?.userStatus === 'approved'
+export const selectIsApproved = (state) => state.authSlice?.loginData?.UserStatus === 'approved'
 
-export const selectIsRejected = (state) => state.authSlice?.loginData?.userStatus === 'rejected'
+export const selectIsRejected = (state) => state.authSlice?.loginData?.UserStatus === 'rejected'
 
 export const selectIsPending = createDraftSafeSelector(
   [selectIsApproved, selectIsRejected],

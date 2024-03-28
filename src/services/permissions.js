@@ -9,7 +9,7 @@ export async function hasReadAndroidPermission() {
   const permission = PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
 
   const hasPermission = await PermissionsAndroid.check(permission)
-  console.log(hasPermission)
+  // console.log(hasPermission, 'hasPermission')
   if (hasPermission) {
     return true
   }

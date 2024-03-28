@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components/native'
+import { useSelector } from 'react-redux'
 
 // import { Avatar } from '@components/Avatar'
 import AppText from '@components/Elements/AppText'
@@ -11,11 +10,7 @@ import Badge from '@components/Elements/Badge'
 import Divider from '@components/Elements/Divider'
 import Stack from '@components/Elements/Stack'
 import Title from '@components/Elements/Title'
-import { IconButton } from '@components/IconButton'
 import { LoginGuest } from '@components/LoginGuest'
-import { RouteContainer } from '@components/RouteContainer'
-import { Subtitle } from '@components/Text'
-import { COLORS } from '@const'
 
 import edit from '../../assets/icons/Edit.png'
 import tiktok from '../../assets/icons/tiktok.png'
@@ -23,34 +18,28 @@ import userImg from '../../assets/images/userImg.png'
 import AppButton from '../../components/Buttons'
 import Hobbies from '../../components/Elements/Hobbies'
 import ReadMore from '../../components/Elements/ReadMore'
-import { setproFileData, userDetail } from '../../redux/slices/authSlice'
-import { getProfile } from '../../services'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
 
 export const ProfileScreenPresenter = ({
-  navigateTikTokModal,
-
   isAuthenticated,
-
   navigateToQuestionnaire,
-
   navigateToSettings,
   navigateToEditProfile,
-  source,
-  navigation,
 }) => {
-  const disapatch = useDispatch()
-  const LoginDetail = useSelector((state) => state.authSlice.loginData)
-  const user = useSelector(userDetail)
-  const handleGetProfileData = useCallback(async () => {
-    const res = await getProfile(LoginDetail.id)
-    disapatch(setproFileData(res.data))
-  }, [disapatch, LoginDetail])
-  console.log('user', user?.Profile_pic)
-  useEffect(() => {
-    handleGetProfileData()
-  }, [handleGetProfileData])
+  // const disapatch = useDispatch()
+  const user = useSelector((state) => state.authSlice.loginData)
+
+  // const handleGetProfileData = useCallback(async () => {
+  //   if (user?.id) {
+  //     const res = await getProfile(user?.id)
+  //     disapatch(setproFileData(res.data))
+  //   }
+  // }, [disapatch])
+  // // console.log('user', user?.Profile_pic)
+  // useEffect(() => {
+  //   handleGetProfileData()
+  // }, [handleGetProfileData])
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <FormTask /> */}
@@ -110,14 +99,18 @@ export const ProfileScreenPresenter = ({
               </Stack>
               <Stack style={styles.stackItem}>
                 <Title title="Bio" />
-                <ReadMore
-                  // desc="✋ Hi! I'm Alex, a software engineer by day 💻, and a literature-loving artist by night 🎨.
-                  //   Positive vibes only! Let's connect ✋ Hi! I'm Alex, a software engineer by day 💻, and a
-                  //   literature-loving artist by night 🎨. Positive vibes only! Let's connect connect ✋ Hi! I'm Alex, a
-                  //   software engineer by day 💻, and a literature-loving artist by night 🎨. Positive vibes only! Let's
-                  //   connect"
-                  desc={user?.bio}
-                />
+                {user?.bio ? (
+                  <ReadMore
+                    // desc="✋ Hi! I'm Alex, a software engineer by day 💻, and a literature-loving artist by night 🎨.
+                    //   Positive vibes only! Let's connect ✋ Hi! I'm Alex, a software engineer by day 💻, and a
+                    //   literature-loving artist by night 🎨. Positive vibes only! Let's connect connect ✋ Hi! I'm Alex, a
+                    //   software engineer by day 💻, and a literature-loving artist by night 🎨. Positive vibes only! Let's
+                    //   connect"
+                    desc={user?.bio}
+                  />
+                ) : (
+                  <Text>N/A</Text>
+                )}
               </Stack>
               <Stack style={styles.stackItem}>
                 <Title title="Intrests" />
@@ -270,35 +263,3 @@ const styles = StyleSheet.create({
     marginBottom: perfectSize(8),
   },
 })
-const Container = styled(RouteContainer)`
-  flex: 1;
-`
-const Center = styled.View`
-  align-items: center;
-  justify-content: center;
-  top: -20px;
-`
-const Column = styled.View`
-  flex-direction: row;
-`
-const Header = styled.View`
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 8px 20px;
-`
-const SmallButton = styled(IconButton)`
-  margin-left: 4px;
-`
-const Tile = styled.TouchableOpacity`
-  background-color: ${COLORS.tertiary};
-  border-radius: 20px;
-  margin: 12px 20px;
-  padding: 20px;
-`
-const Row = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 8px;
-`
-const Labels = styled(Subtitle)``

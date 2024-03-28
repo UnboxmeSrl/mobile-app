@@ -1,32 +1,33 @@
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { verticalScale } from 'react-native-size-matters'
+
 import { IMAGES } from '../../assets/images'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../constants/fonts'
-import { COLORS } from '../../constants/colors'
-import { useReject } from './hooks'
-import perfectSize from '../../utils/responsiveSize'
 import AppButton from '../../components/Buttons'
+import { COLORS } from '../../constants/colors'
+import { FONTS } from '../../constants/fonts'
+import perfectSize from '../../utils/responsiveSize'
+
+import { useReject } from './hooks'
 
 const RejectedScreen = () => {
   const { handleGuestPress } = useReject()
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
         <Image source={IMAGES.rejected} style={styles.image} />
         <Text style={styles.title}>You have not been approved</Text>
-
         <Text style={styles.desc}>
           We are sorry but for some reasons we are not able to include you in Claris for now! Don’t give up though you
           may have the potential!
         </Text>
       </View>
       <AppButton
-        onPress={handleGuestPress}
-        title="Continue as a guest"
-        style={styles.btn}
         labelStyle={styles.btnLabel}
+        onPress={handleGuestPress}
+        style={styles.btn}
+        title="Continue as a guest"
       />
     </SafeAreaView>
   )

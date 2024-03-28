@@ -2,20 +2,31 @@
 import Clipboard from '@react-native-clipboard/clipboard'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Image, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import {
+  Image,
+  Platform,
+  Text,
+  TouchableOpacity,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native'
 import { PERMISSIONS } from 'react-native-permissions'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components/native'
-// import { Avatar } from '@components/Avatar'
-import { Caption } from '@components/Text'
 import { COLORS } from '@const'
-import { IMAGES } from '../../assets/images'
+import CountryFlag from 'react-native-country-flag'
+import CountryPicker from 'react-native-country-picker-modal'
+import { scale, verticalScale } from 'react-native-size-matters'
 import insta from '../../assets/icons/insta.png'
 import map from '../../assets/icons/map.png'
 import tiktok from '../../assets/icons/tiktok.png'
+import { IMAGES } from '../../assets/images'
 import userImg from '../../assets/images/userProfile.jpg'
 import AppButton from '../../components/Buttons'
+import AppText from '../../components/Elements/AppText'
 import Avatar from '../../components/Elements/Avatar'
 import HStack from '../../components/Elements/HStack'
 import Hobbies from '../../components/Elements/Hobbies'
@@ -24,54 +35,18 @@ import Stack from '../../components/Elements/Stack'
 import SubHeader from '../../components/Header/SubHeader'
 import AppInput from '../../components/InputFields/AppInput'
 import AppTextArea from '../../components/InputFields/AppTextArea'
-import { setproFileData, userDetail } from '../../redux/slices/authSlice'
-import CountryPicker from 'react-native-country-picker-modal'
-import CountryFlag from 'react-native-country-flag'
+import { FONTS } from '../../constants'
+import { setproFileData } from '../../redux/slices/authSlice'
 import { getInterestTopics, showToastError, showToastSuccess, updateProfile } from '../../services'
 import { checkPermission, openGallery } from '../../utils'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
-import { TouchableOpacity } from 'react-native'
-import { Text } from 'react-native'
-import { scale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../constants'
-import AppText from '../../components/Elements/AppText'
 
-const EditIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'create-outline'} size={24} />
-const AddPersonIcon = () => <Ionicons color={COLORS.achromaticBlack} name={'person-add-outline'} size={24} />
-
-export const EditProfileScreenPresenter = ({
-  navigateTikTokModal,
-  fullName,
-  username,
-  city,
-  tiktokUsername,
-  isAuthenticated,
-  hasQuestionnaire,
-  navigateToQuestionnaire,
-  skinType,
-  skincareRoutine,
-  creams,
-  brands,
-  navigateToInvite,
-  onImagePress,
-  url,
-  image,
-  source,
-  phone,
-  gender,
-  dob,
-  email,
-  navigateToWizard,
-  navigateToNameEdit,
-  navigateToDob,
-  navigateToGender,
-  navigateToCity,
-}) => {
+export const EditProfileScreenPresenter = () => {
   const dispatch = useDispatch()
   const [profilePicData, setProfilePicData] = useState(null)
   const [loading, setLoading] = useState(false)
-  const user = useSelector(userDetail)
+  const user = useSelector((state) => state.authSlice.loginData)
   const [country, setCountry] = useState({
     cca2: user?.countryCode,
     name: user?.nationality,
@@ -241,6 +216,7 @@ export const EditProfileScreenPresenter = ({
                 label="Full Name"
                 onChange={onChange}
                 placeholder="Full name"
+                ref={ref}
                 value={value}
               />
             )}
@@ -253,12 +229,12 @@ export const EditProfileScreenPresenter = ({
               onSelect={onSelect}
               renderFlagButton={({ onOpen }) => {
                 return (
-                  <TouchableOpacity onPress={() => onOpen()} style={styles.countryContainer} activeOpacity={0.5}>
+                  <TouchableOpacity activeOpacity={0.5} onPress={() => onOpen()} style={styles.countryContainer}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                       {country?.cca2 ? (
                         <CountryFlag isoCode={country?.cca2 ?? 'de'} size={25} />
                       ) : (
-                        <Image source={IMAGES.sampleFlag} style={styles.flagIcon} resizeMode={'contain'} />
+                        <Image resizeMode={'contain'} source={IMAGES.sampleFlag} style={styles.flagIcon} />
                       )}
                       <Text style={styles.countryText}>{`${country?.name ?? 'Country'}`}</Text>
                     </View>
@@ -497,30 +473,3 @@ const styles = StyleSheet.create({
     marginRight: perfectSize(8),
   },
 })
-const Space = styled.View`
-  height: 20px;
-`
-const Container = styled.ScrollView`
-  flex: 1;
-`
-const RightColumn = styled.View`
-  flex-direction: row;
-`
-const Value = styled(Caption)`
-  margin-right: 12px;
-`
-const Center = styled.View`
-  align-items: center;
-  justify-content: center;
-`
-const Tile = styled.TouchableOpacity`
-  align-items: center;
-  background-color: ${COLORS.veryLight};
-  border-radius: 16px;
-  flex-direction: row;
-  height: 52px;
-  justify-content: space-between;
-  margin: 4px;
-  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
-  padding: 8px 20px;
-`

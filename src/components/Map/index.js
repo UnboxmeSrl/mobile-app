@@ -18,7 +18,7 @@ export const Map = ({ initialRegion = INITIAL_REGION, region, markerCoordinate, 
       // markerRef?.current?.showCallout()
     }
   }, [markerRef, markerCoordinate])
-  console.log(markerCoordinate)
+  // console.log(markerCoordinate)
   return (
     <Container>
       <MapStyled initalRegion={initialRegion} ref={mapRef} region={region}>

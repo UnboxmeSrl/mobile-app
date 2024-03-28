@@ -1,7 +1,7 @@
-import React, { createRef, useEffect, useRef, useState } from 'react'
+import React, { createRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Animated, useWindowDimensions } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { prop } from 'ramda'
 import styled from 'styled-components/native'
 
@@ -16,7 +16,9 @@ import {
   selectIsPending,
   selectIsRejected,
   selectOnBordingData,
+  updateLoginData,
 } from '../../redux/slices/authSlice'
+import { getProfile } from '../../services'
 import { checkSignUpProgress } from '../../utils'
 
 const Wrapper = styled(Animated.View)`
@@ -28,6 +30,7 @@ const Wrapper = styled(Animated.View)`
 const delay = 500
 
 export const Splash = () => {
+  const dispatch = useDispatch()
   const windowWidth = useWindowDimensions().width
   const windowHeight = useWindowDimensions().height
   const [fadeOut, setFadeOut] = useState(false)
@@ -43,6 +46,8 @@ export const Splash = () => {
   const firstVisit = useSelector(selectIsFirstVisit)
   const isSignUpProcessStarted = useSelector((state) => state.authSlice.isSignUpProcessStarted)
   const signUpProcessStage = useSelector((state) => state.authSlice.signUpProcessStage)
+  const LoginDetail = useSelector((state) => state.authSlice.loginData)
+  /* const authData = useSelector((state) => state.authSlice.authData) */
   // console.log(
   //   'isAuthenticated',
   //   isAuthenticated,
@@ -54,6 +59,26 @@ export const Splash = () => {
   //   isSignUpProcessStarted,
   //   signUpProcessStage
   // )
+
+  const handleGetProfileData = useCallback(async () => {
+    const res = await getProfile()
+    console.log('check', res)
+    dispatch(updateLoginData(res))
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log('checkAuthDAta in FIRST WELCOME SCREEN', LoginDetail)
+    if (LoginDetail && (LoginDetail?.UserStatus === '' || LoginDetail?.UserStatus === 'onapproval')) {
+      const timeout = setTimeout(() => {
+        handleGetProfileData()
+        // will call after every 10 minutes
+      }, 1000 * 60 * 10)
+      return () => {
+        if (timeout) clearTimeout(timeout)
+      }
+    }
+  }, [handleGetProfileData, LoginDetail])
+  /* console.log('userStatus details', signUpProcessStage, approvedUser, firstVisit, LoginDetail) */
   useEffect(() => {
     if (!hideOnBoarding) {
       console.log('hideOnBoarding')

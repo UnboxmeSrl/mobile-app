@@ -1,17 +1,19 @@
 import React from 'react'
 import { Linking } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { MAIN_NAVIGATOR } from '@const/navigation'
 import { selectIsVerified } from '@redux/modules/auth'
 import { reset } from '@services'
 
+import { resetAuthData, setLoginData } from '../../redux/slices'
 import { isPending, userRejected } from '../../redux/slices/tempAuth'
 import { userSignUp } from '../../services/ProfileService'
 
 import { WizardStepReviewPresenter } from './WizardStepReviewPresenter'
 
 export const WizardStepReview = () => {
+  const dispatch = useDispatch()
   const isRejected = useSelector(userRejected)
   const inReview = useSelector(isPending)
   const isVerified = useSelector(selectIsVerified)
@@ -34,7 +36,7 @@ export const WizardStepReview = () => {
     //   password: '123456',
     //   username: 'fsfsf',
     // }
-    const prepData = {
+    const formData = new FormData({
       Agency: userDetails?.hasAgency,
       Birthday: userDetails?.dobTs,
       City: userDetails?.city,
@@ -50,10 +52,28 @@ export const WizardStepReview = () => {
       name: userDetails?.fullName,
       password: userDetails?.password,
       telegram_id: 0,
+    })
+    const profilePicData = userDetails?.profilePictures?.[0]
+    if (profilePicData && profilePicData?.uri) {
+      formData.append('profileImage', {
+        name: profilePicData.fileName,
+        type: profilePicData.type,
+        uri: profilePicData.uri,
+      })
+    } else {
+      formData.append('profileImage', {
+        name: 'rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+        type: 'image/jpeg',
+        uri: 'file:///data/user/0/com.claris.app/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+      })
     }
-    const res = await userSignUp(prepData)
+
+    const res = await userSignUp(formData)
+    console.log('🟩 Success Data before', res)
     if (res?.id) {
       console.log('🟩 Success Data', res)
+      dispatch(resetAuthData())
+      dispatch(setLoginData(res))
       reset(MAIN_NAVIGATOR)
     }
   }

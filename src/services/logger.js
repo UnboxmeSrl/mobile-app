@@ -23,7 +23,7 @@ const handleLog = ({ message, data = {}, level }) => {
     : undefined
 
   if (level === INFO) {
-    console.log(message, data)
+    console.log('message, data in INFO', message, data)
   } else if (level === ERROR) {
     console.error(message, data)
   }

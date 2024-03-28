@@ -14,15 +14,29 @@ export const getGenderList = async () => {
 
 export const userSignUp = async (data) => {
   const url = Api.PROFILE.USER_SIGN_UP
-  let response
-  await Fetch.postWithMedia(url, data)
-    .then((res) => (response = res))
-    .catch((error) => {
-      console.log('🛑 Error: ', error?.response)
-      response = error?.response
-    })
-  return response
+
+  try {
+    return await Fetch.postWithMedia(url, data)
+  } catch (error) {
+    console.log('🛑 Error: ', error?.response)
+    return {
+      message: 'Something went wrong',
+    }
+  }
 }
+
+// export const addProfilePic = async ({ formData, userID }) => {
+//   try {
+//     if (profile) {
+//       const url = `${Api.PROFILE.USER_PROFILE_UPDATE}/${userID}`
+//       const response = await Fetch.postMedia(url, formData)
+//       console.log('response', response)
+//       return response
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 export const userLogin = async (data) => {
   try {
@@ -59,12 +73,22 @@ export const updateProfile = async ({ formData, userID }) => {
   }
 }
 
-export const getProfile = async (id) => {
+export const getProfile = async () => {
   try {
-    const url = `${Api.PROFILE.GET_USER_PROFILE}/${id}`
-    const response = await Fetch.get(url)
-    return response
+    const url = Api.PROFILE.GET_USER_PROFILE
+    const response = await Fetch.get(url, { axiosSecure: true })
+    console.log('getProfiele respoonese', response)
+    return response?.data
   } catch (error) {
     console.log(error)
   }
 }
+// export const getProfile = async (id) => {
+//   try {
+//     const url = `${Api.PROFILE.GET_USER_PROFILE}/${id}`
+//     const response = await Fetch.get(url)
+//     return response
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }

@@ -9,8 +9,8 @@ import { navigate } from '../../../../services'
 const useAuthDateOfBirth = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
-  const [date, setDate] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date(userDetails?.birthDate) ?? '')
+  // const [date, setDate] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState(userDetails?.birthDate ? new Date(userDetails?.birthDate) : null)
 
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
   const dispatch = useDispatch()
@@ -39,7 +39,7 @@ const useAuthDateOfBirth = () => {
     isBtnDisabled,
     isDatePickerOpen,
     setIsDatePickerOpen,
-    date,
+    // date,
     selectedDate,
     setSelectedDate,
     handleBackPress,

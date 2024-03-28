@@ -21,7 +21,7 @@ export const InviteFriend = () => {
   const onShare = () =>
     Share.open({ message: generatedLink, title: generatedLink })
       .then((res) => {
-        console.log(res)
+        console.log('onShareRes', res)
       })
       .catch((err) => {
         err && console.log(err)

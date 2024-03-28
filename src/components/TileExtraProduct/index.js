@@ -6,7 +6,7 @@ import { COLORS } from '@const'
 
 const WIDTH = 150
 export const TileExtraProduct = ({ imageUrl }) => {
-  console.log(imageUrl)
+  // console.log(imageUrl)
   return (
     <Wrapper>
       <BackgroundColor />

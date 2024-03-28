@@ -18,7 +18,7 @@ const AuthProfilePictureScreen = () => {
     handleBackPress,
     handleNextPress,
   } = useAuthProfilePicture()
-  console.log(profilePicData)
+  // console.log('profilePicData in AuthProfilepICSCREEN', profilePicData)
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'Profile picture'} step={9} handleBackPress={handleBackPress} />

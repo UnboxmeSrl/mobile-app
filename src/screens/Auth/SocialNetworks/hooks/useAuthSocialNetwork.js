@@ -1,20 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { MAIN_NAVIGATOR } from '@const/navigation'
-import { navigate, reset, userSignUp } from '@services'
+import { userSignUp } from '@services'
 
 import { SCREEN_NAMES } from '../../../../constants/navigation'
-import {
-  resetAuthData,
-  resetLogin,
-  setAuthData,
-  setIsApplied,
-  setLoginData,
-  setproFileData,
-} from '../../../../redux/slices'
-import { showToastError } from '../../../../services'
+import { resetAuthData, setAuthData, setLoginData } from '../../../../redux/slices'
+import { navigate, showToastError } from '../../../../services'
 
 const useAuthSocialNetwork = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
@@ -23,7 +15,10 @@ const useAuthSocialNetwork = () => {
   const tiktokSheetRef = useRef()
   const instaSheetRef = useRef()
   const dispatch = useDispatch()
-  const [isBtnDisabled, setIsBtnDisabled] = useState(false)
+  const [
+    isBtnDisabled,
+    // setIsBtnDisabled
+  ] = useState(false)
 
   const formData = new FormData()
   const navigation = useNavigation()
@@ -73,10 +68,24 @@ const useAuthSocialNetwork = () => {
     formData.append('City', userDetails?.city)
     formData.append('Agency', userDetails?.agencyData?.hasAgency)
     formData.append('Freelance', userDetails?.agencyData?.freelance)
-    // formData.append('Profile_pic', userDetails?.profilePictures?.[0])
-    formData.append('Tiktok_account', userDetails?.tiktokUserName)
+    const profilePicData = userDetails?.profilePictures?.[0]
+    if (profilePicData && profilePicData?.uri) {
+      formData.append('profileImage', {
+        name: profilePicData.fileName,
+        type: profilePicData.type,
+        uri: profilePicData.uri,
+      })
+    } else {
+      formData.append('profileImage', {
+        name: 'rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+        type: 'image/jpeg',
+        uri: 'file:///data/user/0/com.claris.app/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+      })
+    }
+
+    formData.append('Tiktok_account', userDetails?.tiktokUserName || '')
     formData.append('TikTok', userDetails?.tiktokUserName ? 'true' : 'false')
-    formData.append('IG_account', userDetails?.instaUserName)
+    formData.append('IG_account', userDetails?.instaUserName || '')
     formData.append('IG', userDetails?.instaUserName ? 'true' : 'false')
     formData.append('telegram_id', 0)
     isBothUserType
@@ -97,17 +106,16 @@ const useAuthSocialNetwork = () => {
     // console.log('🟩 Form Data', JSON.stringify(formData))
     const res = await userSignUp(formData)
     // console.log('🚀 ~ handleNextPress ~ res:', res.data)
-
-    if (res?.status === 200 || res?.id) {
+    if (res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res))
-      dispatch(resetAuthData({}))
-      dispatch(setproFileData(res.data))
-      dispatch(setLoginData(res.data))
+      dispatch(resetAuthData())
+      // dispatch(setproFileData(res.data))
+      dispatch(setLoginData(res))
       // reset(MAIN_NAVIGATOR)
       // dispatch(setIsApplied(true))
       navigate(SCREEN_NAMES.AppliedScreen)
     } else {
-      showToastError(res?.data)
+      showToastError(res)
     }
   }
 
