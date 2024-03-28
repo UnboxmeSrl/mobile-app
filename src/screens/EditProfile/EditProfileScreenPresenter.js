@@ -1,25 +1,25 @@
 // eslint-disable-next-line simple-import-sort/imports
+import { COLORS } from '@const'
 import Clipboard from '@react-native-clipboard/clipboard'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
   Image,
   Platform,
-  Text,
-  TouchableOpacity,
   Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
   View,
 } from 'react-native'
-import { PERMISSIONS } from 'react-native-permissions'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { useDispatch, useSelector } from 'react-redux'
-import { COLORS } from '@const'
 import CountryFlag from 'react-native-country-flag'
 import CountryPicker from 'react-native-country-picker-modal'
+import { PERMISSIONS } from 'react-native-permissions'
 import { scale, verticalScale } from 'react-native-size-matters'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useDispatch, useSelector } from 'react-redux'
 import insta from '../../assets/icons/insta.png'
 import map from '../../assets/icons/map.png'
 import tiktok from '../../assets/icons/tiktok.png'
@@ -36,7 +36,7 @@ import SubHeader from '../../components/Header/SubHeader'
 import AppInput from '../../components/InputFields/AppInput'
 import AppTextArea from '../../components/InputFields/AppTextArea'
 import { FONTS } from '../../constants'
-import { setproFileData } from '../../redux/slices/authSlice'
+import { updateLoginData } from '../../redux/slices/authSlice'
 import { getInterestTopics, showToastError, showToastSuccess, updateProfile } from '../../services'
 import { checkPermission, openGallery } from '../../utils'
 import perfectSize from '../../utils/responsiveSize'
@@ -149,7 +149,7 @@ export const EditProfileScreenPresenter = () => {
       formData.append('Tiktok_account', data?.tiktokLink)
       const resProfile = await updateProfile({ formData, userID: user?.id })
       if (resProfile && resProfile?.success) {
-        dispatch(setproFileData(resProfile.data))
+        dispatch(updateLoginData(resProfile.data))
         showToastSuccess('Profile Update Success')
         setLoading(false)
       } else {
