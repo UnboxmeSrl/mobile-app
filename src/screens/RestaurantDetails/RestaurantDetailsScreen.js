@@ -15,92 +15,92 @@ import { ServiceCard } from './ServiceCard'
 const RestaurantDetails = () => {
   const {
     services,
-    categoriesIds,
+    // categoriesIds,
     restaurantDetails,
-    filter,
+    // filter,
     isImageLoading,
     setIsImageLoading,
-    serviceCategories,
-    onCategoryChange,
+    // serviceCategories,
+    // onCategoryChange,
     handleBackPress,
-    handleRedirection,
+    // handleRedirection,
   } = useRestaurantDetails()
-  console.log('Restaurant Details', JSON.stringify(restaurantDetails))
+  // console.log('Restaurant Details', JSON.stringify(restaurantDetails))
 
   return (
     <View style={styles.mainContainer}>
-      {/* <ScrollView> */}
-      <View>
-        {restaurantDetails?.GalleryRestaurant ? (
-          <CustomCarousel
-            Component={({ item, index }) => {
-              return (
-                <>
-                  {isImageLoading && <View style={styles.imageLoader} />}
-                  <FastImage
-                    resizeMode="cover"
-                    source={{ priority: FastImage.priority.high, uri: item?.url }}
-                    style={[styles.imageStyle]}
-                    onLoadEnd={() => setIsImageLoading(false)}
-                  />
-                </>
-              )
-            }}
-            data={restaurantDetails?.GalleryRestaurant}
-          />
-        ) : (
-          <View style={styles.emptyImages}>
-            <Text style={styles.emptyImagesText}>Images are not available for this restaurant.</Text>
-          </View>
-        )}
-        <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-          <Image
-            resizeMode="cover"
-            source={IMAGES.back}
-            style={[styles.backIcon, !restaurantDetails?.GalleryRestaurant && { tintColor: COLORS.black }]}
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.restaurantDetailsContainer}>
-        <Text style={styles.restaurantNameText}>{restaurantDetails?.Name}</Text>
-        <View style={styles.socialLinksContainer}>
-          <TouchableOpacity
-            onPress={() => handleRedirection(restaurantDetails?.Tiktok)}
-            style={styles.commonSocialLinksContainer}
-          >
-            <View style={styles.commonSocialLinksImageContainer}>
-              <Image resizeMode="contain" source={IMAGES.tiktokNew} style={styles.commonStyleForIcon} />
+      <ScrollView>
+        <View>
+          {restaurantDetails?.GalleryRestaurant ? (
+            <CustomCarousel
+              Component={({ item, index }) => {
+                return (
+                  <>
+                    {isImageLoading && <View style={styles.imageLoader} />}
+                    <FastImage
+                      onLoadEnd={() => setIsImageLoading(false)}
+                      resizeMode="cover"
+                      source={{ priority: FastImage.priority.high, uri: item?.url }}
+                      style={[styles.imageStyle]}
+                    />
+                  </>
+                )
+              }}
+              data={restaurantDetails?.GalleryRestaurant}
+            />
+          ) : (
+            <View style={styles.emptyImages}>
+              <Text style={styles.emptyImagesText}>Images are not available for this restaurant.</Text>
             </View>
-            <Text style={styles.commonStyleSocialLinkText}>TikTok</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleRedirection(restaurantDetails?.Instagram)}
-            style={styles.commonSocialLinksContainer}
-          >
-            <View style={styles.commonSocialLinksImageContainer}>
-              <Image resizeMode="contain" source={IMAGES.insta} style={styles.commonStyleForIcon} />
-            </View>
-            <Text style={styles.commonStyleSocialLinkText}>Instagram</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}
-            style={styles.commonSocialLinksContainer}
-          >
-            <View style={styles.commonSocialLinksImageContainer}>
-              <Image resizeMode="contain" source={IMAGES.internet} style={styles.commonStyleForIcon} />
-            </View>
-            <Text style={styles.commonStyleSocialLinkText}>Website</Text>
+          )}
+          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={[styles.backIcon, !restaurantDetails?.GalleryRestaurant && { tintColor: COLORS.black }]}
+            />
           </TouchableOpacity>
         </View>
-        {!!restaurantDetails?.About && (
-          <View style={styles.aboutTitleContainer}>
-            <Text style={styles.aboutTitleText}>About</Text>
-            <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
-          </View>
-        )}
+        <View style={styles.restaurantDetailsContainer}>
+          <Text style={styles.restaurantNameText}>{restaurantDetails?.Name}</Text>
+          {/* <View style={styles.socialLinksContainer}>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Tiktok)}
+              style={styles.commonSocialLinksContainer}
+            >
+              <View style={styles.commonSocialLinksImageContainer}>
+                <Image resizeMode="contain" source={IMAGES.tiktokNew} style={styles.commonStyleForIcon} />
+              </View>
+              <Text style={styles.commonStyleSocialLinkText}>TikTok</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Instagram)}
+              style={styles.commonSocialLinksContainer}
+            >
+              <View style={styles.commonSocialLinksImageContainer}>
+                <Image resizeMode="contain" source={IMAGES.insta} style={styles.commonStyleForIcon} />
+              </View>
+              <Text style={styles.commonStyleSocialLinkText}>Instagram</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}
+              style={styles.commonSocialLinksContainer}
+            >
+              <View style={styles.commonSocialLinksImageContainer}>
+                <Image resizeMode="contain" source={IMAGES.internet} style={styles.commonStyleForIcon} />
+              </View>
+              <Text style={styles.commonStyleSocialLinkText}>Website</Text>
+            </TouchableOpacity>
+          </View> */}
+          {!!restaurantDetails?.About && (
+            <View style={styles.aboutTitleContainer}>
+              <Text style={styles.aboutTitleText}>About</Text>
+              <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
+            </View>
+          )}
 
-        {/* <Text style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
-        {/* <TouchableOpacity style={styles.howItWorksContainer}>
+          {/* <Text style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
+          {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.aboutTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
@@ -108,62 +108,44 @@ const RestaurantDetails = () => {
           <View style={styles.previewTextContainer}>
             <Text style={styles.previewText}>Preview available timeframes </Text>
           </View> */}
-        <View style={styles.chooseServiceContainer}>
-          <Text style={styles.previewText}>Choose Service</Text>
-        </View>
+          <View style={styles.chooseServiceContainer}>
+            <Text style={styles.previewText}>Choose Service</Text>
+          </View>
 
-        {/* <Categories
+          {/* <Categories
             categoriesIds={categoriesIds}
             category={filter}
             customCategories={serviceCategories}
             onPress={onCategoryChange}
           /> */}
 
-        <FlatList
-          horizontal
-          data={services}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
-          }}
-          ListEmptyComponent={
-            <View style={styles.listEmptyContainer}>
-              <Text style={styles.listEmptyText}>No data found.</Text>
-            </View>
-          }
-        />
-      </View>
-      {/* </ScrollView> */}
+          <FlatList
+            ListEmptyComponent={
+              <View style={styles.listEmptyContainer}>
+                <Text style={styles.listEmptyText}>No data found.</Text>
+              </View>
+            }
+            data={services}
+            horizontal
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item, index }) => {
+              return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
+            }}
+          />
+        </View>
+      </ScrollView>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  aboutTitleContainer: {
-    marginTop: verticalScale(8),
-  },
-  imageLoader: {
-    position: 'absolute',
-    height: verticalScale(180),
-    width: '100%',
-    backgroundColor: COLORS.lightPink,
-  },
-  emptyImages: {
-    height: verticalScale(180),
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLORS.lightPink,
-  },
-  emptyImagesText: {
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(12),
-    color: COLORS.primary,
-  },
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
+    marginTop: verticalScale(8),
+  },
+  aboutTitleContainer: {
     marginTop: verticalScale(8),
   },
   aboutTitleText: {
@@ -205,11 +187,29 @@ const styles = StyleSheet.create({
     height: moderateScale(20),
     width: moderateScale(20),
   },
+  emptyImages: {
+    height: verticalScale(180),
+    justifyContent: 'center',
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: COLORS.lightPink,
+  },
   commonStyleSocialLinkText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
     marginTop: verticalScale(10),
+  },
+  imageLoader: {
+    position: 'absolute',
+    height: verticalScale(180),
+    width: '100%',
+    backgroundColor: COLORS.lightPink,
+  },
+  emptyImagesText: {
+    fontFamily: FONTS.quicksand,
+    color: COLORS.primary,
+    fontSize: moderateScale(12),
   },
   howItWorksContainer: {
     alignItems: 'center',
@@ -227,6 +227,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
     marginTop: verticalScale(3),
+  },
+  listEmptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '8%',
+  },
+  listEmptyText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(16),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -265,16 +275,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: verticalScale(20),
-  },
-  listEmptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '8%',
-  },
-  listEmptyText: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(16),
   },
 })
 

@@ -71,8 +71,8 @@ export const Splash = () => {
     if (LoginDetail && (LoginDetail?.UserStatus === '' || LoginDetail?.UserStatus === 'onapproval')) {
       const timeout = setTimeout(() => {
         handleGetProfileData()
-        // will call after every 10 minutes
-      }, 1000 * 60 * 10)
+        // will call after every 2 minutes
+      }, 1000 * 60 * 2)
       return () => {
         if (timeout) clearTimeout(timeout)
       }

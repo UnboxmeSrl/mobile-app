@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native'
 import CalendarStrip from 'react-native-calendar-strip'
-import DeviceInfo from 'react-native-device-info'
+// import DeviceInfo from 'react-native-device-info'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -34,7 +34,7 @@ const BookingDetailsScreen = () => {
     selectedDate,
     currentMonth,
     isLoading,
-    isDateAvailable,
+    // isDateAvailable,
     isDatesLoading,
     showPreviousWeek,
     showNextWeek,
@@ -78,12 +78,12 @@ const BookingDetailsScreen = () => {
 
                 <View style={{ alignItems: 'center' }}>
                   {/* This need to remove in future */}
-                  <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                  {/* <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                     <Text>{DeviceInfo.getBrand()}</Text>
                     <Text> {DeviceInfo.getBuildNumber()}</Text>
                     <Text> {DeviceInfo.getSystemVersion()}</Text>
                     <Text> {DeviceInfo.getModel()}</Text>
-                  </View>
+                  </View> */}
                   {/* only above one line and style={{ alignItems: 'center' }} */}
                   <Image resizeMode="cover" source={IMAGES.calender} style={styles.calenderIcon} />
                 </View>
@@ -115,14 +115,14 @@ const BookingDetailsScreen = () => {
                   highlightDateNumberStyle={styles.highlightDateNumberStyle}
                   iconContainer={styles.calendarStripIconContainer}
                   iconLeft={IMAGES.back}
+                  iconRight={IMAGES.back}
                   iconStyle={styles.calendarStripIcon}
+                  onDateSelected={(date) => setSelectedDate(date)}
                   selectedDate={selectedDate}
                   showMonth={false}
                   showYear={false}
                   startingDate={startDate}
-                  iconRight={IMAGES.back}
                   //   renderDate={renderDate}
-                  onDateSelected={(date) => setSelectedDate(date)}
                 />
               </View>
               <View />
@@ -222,27 +222,16 @@ const styles = StyleSheet.create({
   availableHoursTitleContainer: {
     marginTop: verticalScale(16),
   },
-  calendarHeaderStyle: {
-    color: 'black',
-  },
   availableHoursTitleText: {
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginTop: verticalScale(10),
   },
-  calendarStripIcon: {
-    transform: [{ scale: 0 }],
-  },
   backIcon: {
     height: moderateScale(30),
     tintColor: COLORS.achromaticBlack,
     width: moderateScale(30),
-  },
-  calendarStripIconContainer: {
-    height: 0,
-    marginHorizontal: scale(10),
-    width: 0,
   },
   bookBtnContainer: {
     alignItems: 'center',
@@ -251,11 +240,6 @@ const styles = StyleSheet.create({
     height: verticalScale(44),
     justifyContent: 'center',
     width: '100%',
-  },
-  dateNameStyle: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(12),
   },
   bookBtnMainContainer: {
     borderBottomWidth: 0,
@@ -266,40 +250,30 @@ const styles = StyleSheet.create({
     padding: moderateScale(24),
     width: '100%',
   },
-  loaderContainer: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: '100%',
-  },
   bookBtnText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
   },
-  highlightDateNameStyle: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(12),
+  calendarHeaderStyle: {
+    color: 'black',
   },
   calendarMainContainer: {
     marginBottom: verticalScale(24),
   },
-  highlightDateNumberStyle: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(16),
+  calendarStripIcon: {
+    transform: [{ scale: 0 }],
+  },
+  calendarStripIconContainer: {
+    height: 0,
+    marginHorizontal: scale(10),
+    width: 0,
   },
   calenderIcon: {
     height: moderateScale(24),
     tintColor: COLORS.achromaticBlack,
     width: moderateScale(24),
-  },
-  dateNumberStyle: {
-    color: COLORS.yankeesBlue,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(16),
   },
   dateHeader: {
     alignItems: 'center',
@@ -307,6 +281,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: scale(10),
     marginVertical: verticalScale(24),
+  },
+  dateNameStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
+  },
+  dateNumberStyle: {
+    color: COLORS.yankeesBlue,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(16),
   },
   dateSelectTitleText: {
     color: COLORS.achromaticBlack,
@@ -322,6 +306,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginVertical: verticalScale(20),
+  },
+  highlightDateNameStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
+  },
+  highlightDateNumberStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(16),
   },
   highlightedDateContainer: {
     backgroundColor: COLORS.lightBrown,
@@ -351,6 +345,12 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
+  },
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: '100%',
   },
   mainContainer: {
     backgroundColor: COLORS.white,
