@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -19,8 +19,11 @@ const ServiceDetails = () => {
     services,
     categoriesIds,
     isImageLoading,
+    isLoading,
+    isBookBtnPressed,
     setIsImageLoading,
     serviceDetails,
+    dealsLeft,
     filter,
     serviceCategories,
     onCategoryChange,
@@ -28,104 +31,141 @@ const ServiceDetails = () => {
     handleBookPress,
   } = useServiceDetails()
 
-  console.log('Service Details', JSON.stringify(serviceDetails))
   return (
     <View style={styles.mainContainer}>
       <CommonHeader title={'Deals'} />
-      <ScrollView>
-        <View>
-          <CustomCarousel
-            Component={({ item, index }) => {
-              return (
-                <>
-                  {isImageLoading && <View style={styles.imageLoader} />}
-                  <FastImage
-                    onLoadEnd={() => setIsImageLoading(false)}
-                    resizeMode="cover"
-                    source={{ priority: FastImage.priority.high, uri: item?.url }}
-                    style={styles.imageStyle}
-                  />
-                </>
-              )
-            }}
-            data={[serviceDetails?.Offer_Cover]}
-          />
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={COLORS.primary} size={30} />
         </View>
-
-        <View style={styles.titleRatingMainRow}>
-          <View style={styles.itemTitleIconContainer}>
-            <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
-            <Text style={styles.titleText}>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
-          </View>
-          <View style={styles.dealLeftContainer}>
-            <Text style={styles.deaLeftText}>{`1 deal left`}</Text>
-          </View>
-        </View>
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={styles.amenityMainContainer}>
-            <View style={styles.amenityIconContainer}>
-              <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-            </View>
-            <View style={styles.amenityTitleDescriptionContainer}>
-              <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
-              <Text style={styles.amenitiesDescription}>at your choice</Text>
-            </View>
-          </View>
-
-          <View style={styles.amenityMainContainer}>
-            <View style={styles.amenityIconContainer}>
-              <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
-            </View>
-            <View style={styles.amenityTitleDescriptionContainer}>
-              <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-              <Text style={styles.amenitiesDescription}>at your choice</Text>
-            </View>
+      ) : (
+        <ScrollView>
+          <View>
+            <CustomCarousel
+              Component={({ item, index }) => {
+                return (
+                  <>
+                    {isImageLoading && <View style={styles.imageLoader} />}
+                    <FastImage
+                      resizeMode="cover"
+                      source={{ priority: FastImage.priority.high, uri: item?.url }}
+                      style={styles.imageStyle}
+                      onLoadEnd={() => setIsImageLoading(false)}
+                    />
+                  </>
+                )
+              }}
+              data={[serviceDetails?.Offer_Cover]}
+            />
           </View>
 
-          <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
-            <View style={styles.amenityTitleDescriptionContainer}>
+          <View style={styles.titleRatingMainRow}>
+            <View style={styles.itemTitleIconContainer}>
+              <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
+              <Text style={styles.titleText}>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
+            </View>
+            <View style={styles.dealLeftContainer}>
+              <Text style={styles.deaLeftText}>{`${dealsLeft}`}</Text>
+            </View>
+          </View>
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
+              <View style={styles.amenityIconContainer}>
+                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                <Text style={styles.amenitiesDescription}>at your choice</Text>
+              </View>
+            </View>
+
+            <View style={styles.amenityMainContainer}>
+              <View style={styles.amenityIconContainer}>
+                <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                <Text style={styles.amenitiesDescription}>at your choice</Text>
+              </View>
+            </View>
+
+            <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text
+                  style={[styles.amenitiesTitle, styles.friendAmentityText]}
+                >{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
+                <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+              </View>
+            </View>
+          </ScrollView>
+
+          <View style={styles.divider} />
+
+          <View style={styles.contentRequiredRow}>
+            <View style={styles.contentRequiredContainer}>
+              <Text style={styles.contentRequiredText}>Content required</Text>
+            </View>
+            <View style={styles.deadlineContainer}>
+              <Image source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
               <Text
-                style={[styles.amenitiesTitle, styles.friendAmentityText]}
-              >{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
-              <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+                style={styles.deadlineText}
+              >{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
             </View>
           </View>
-        </ScrollView>
 
-        <View style={styles.divider} />
-
-        <View style={styles.contentRequiredRow}>
-          <View style={styles.contentRequiredContainer}>
-            <Text style={styles.contentRequiredText}>Content required</Text>
-          </View>
-          <View style={styles.deadlineContainer}>
-            <Image source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
-            <Text style={styles.deadlineText}>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
-          </View>
-        </View>
-
-        <View style={styles.flatlistContainer}>
-          <FlatList
-            data={[serviceDetails]}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              const actionNumId = item?._actions_turbo?.action_num_id
-              // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-              const icon = checkAction(actionNumId)
-              console.log('icon', icon)
-              return (
-                <>
-                  {actionNumId === 3 ? (
-                    diaryItems.map((diaryItem, innerIndex) => (
+          <View style={styles.flatlistContainer}>
+            <FlatList
+              data={[serviceDetails]}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({ item, index }) => {
+                const actionNumId = item?._actions_turbo?.action_num_id
+                // const diaryItems = ['TikTok Diary', 'Instagram Diary']
+                const icon = checkAction(actionNumId)
+                console.log('icon', icon, actionNumId)
+                return (
+                  <>
+                    {actionNumId === 3 ? (
+                      diaryItems?.map((diaryItem, innerIndex) => (
+                        <>
+                          <View style={styles.mainSocialItemContainer} key={innerIndex}>
+                            <View style={styles.socialMediaImageContainer}>
+                              <Image source={icon?.action_icon} style={styles.socialMediaImage} />
+                            </View>
+                            <View style={styles.socialMediaTitleDescriptionContainer}>
+                              <View style={styles.socialMediaTitleContainer}>
+                                <Text style={styles.socialMediaTitle}>{diaryItem?.action} video</Text>
+                                <View style={styles.ratingsContainer}>
+                                  <Text style={styles.ratingsText}>60</Text>
+                                  <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                </View>
+                              </View>
+                              <View style={styles.socialMediaDescriptionContainer}>
+                                <Text style={styles.socialMediaDescriptionText}>
+                                  You have to publish a Tiktok video following the brief and tagging both the venue and
+                                  claris.app
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
+                          {innerIndex == 0 && (
+                            <View style={styles.orContainer}>
+                              <View style={styles.orDivider} />
+                              <Text style={styles.orText}>Or</Text>
+                              <View style={styles.orDivider} />
+                            </View>
+                          )}
+                        </>
+                      ))
+                    ) : actionNumId === 6 ? (
                       <>
                         <View style={styles.mainSocialItemContainer}>
                           <View style={styles.socialMediaImageContainer}>
-                            <Image source={icon?.action_icon} style={styles.socialMediaImage} />
+                            <Image source={IMAGES.reelsAddNew} style={styles.socialMediaImage} />
                           </View>
                           <View style={styles.socialMediaTitleDescriptionContainer}>
                             <View style={styles.socialMediaTitleContainer}>
-                              <Text style={styles.socialMediaTitle}>{diaryItem?.action} video</Text>
+                              <Text style={styles.socialMediaTitle}>{`Reels`} video</Text>
                               <View style={styles.ratingsContainer}>
                                 <Text style={styles.ratingsText}>60</Text>
                                 <Image source={IMAGES.star} style={styles.ratingIcon} />
@@ -139,24 +179,42 @@ const ServiceDetails = () => {
                             </View>
                           </View>
                         </View>
-                        {innerIndex == 0 && (
-                          <View style={styles.orContainer}>
-                            <View style={styles.orDivider} />
-                            <Text style={styles.orText}>Or</Text>
-                            <View style={styles.orDivider} />
+
+                        <View style={styles.orContainer}>
+                          <View style={styles.orDivider} />
+                          <Text style={styles.orText}>Or</Text>
+                          <View style={styles.orDivider} />
+                        </View>
+
+                        <View style={styles.mainSocialItemContainer}>
+                          <View style={styles.socialMediaImageContainer}>
+                            <Image source={IMAGES.tiktokAddNew} style={styles.socialMediaImage} />
                           </View>
-                        )}
+                          <View style={styles.socialMediaTitleDescriptionContainer}>
+                            <View style={styles.socialMediaTitleContainer}>
+                              <Text style={styles.socialMediaTitle}>{`Tiktok`} video</Text>
+                              <View style={styles.ratingsContainer}>
+                                <Text style={styles.ratingsText}>60</Text>
+                                <Image source={IMAGES.star} style={styles.ratingIcon} />
+                              </View>
+                            </View>
+                            <View style={styles.socialMediaDescriptionContainer}>
+                              <Text style={styles.socialMediaDescriptionText}>
+                                You have to publish a Tiktok video following the brief and tagging both the venue and
+                                claris.app
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
                       </>
-                    ))
-                  ) : actionNumId === 6 ? (
-                    <>
+                    ) : (
                       <View style={styles.mainSocialItemContainer}>
                         <View style={styles.socialMediaImageContainer}>
-                          <Image source={IMAGES.reelsAddNew} style={styles.socialMediaImage} />
+                          <Image source={icon?.action_icon} style={styles.socialMediaImage} />
                         </View>
                         <View style={styles.socialMediaTitleDescriptionContainer}>
                           <View style={styles.socialMediaTitleContainer}>
-                            <Text style={styles.socialMediaTitle}>{`Reels`} video</Text>
+                            <Text style={styles.socialMediaTitle}>{item?._actions_turbo?.Action_Name} video</Text>
                             <View style={styles.ratingsContainer}>
                               <Text style={styles.ratingsText}>60</Text>
                               <Image source={IMAGES.star} style={styles.ratingIcon} />
@@ -170,87 +228,103 @@ const ServiceDetails = () => {
                           </View>
                         </View>
                       </View>
+                    )}
+                  </>
+                )
+              }}
+            />
+          </View>
 
-                      <View style={styles.orContainer}>
-                        <View style={styles.orDivider} />
-                        <Text style={styles.orText}>Or</Text>
-                        <View style={styles.orDivider} />
-                      </View>
-
-                      <View style={styles.mainSocialItemContainer}>
-                        <View style={styles.socialMediaImageContainer}>
-                          <Image source={IMAGES.tiktokAddNew} style={styles.socialMediaImage} />
-                        </View>
-                        <View style={styles.socialMediaTitleDescriptionContainer}>
-                          <View style={styles.socialMediaTitleContainer}>
-                            <Text style={styles.socialMediaTitle}>{`Tiktok`} video</Text>
-                            <View style={styles.ratingsContainer}>
-                              <Text style={styles.ratingsText}>60</Text>
-                              <Image source={IMAGES.star} style={styles.ratingIcon} />
-                            </View>
-                          </View>
-                          <View style={styles.socialMediaDescriptionContainer}>
-                            <Text style={styles.socialMediaDescriptionText}>
-                              You have to publish a Tiktok video following the brief and tagging both the venue and
-                              claris.app
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </>
-                  ) : (
-                    <View style={styles.mainSocialItemContainer}>
-                      <View style={styles.socialMediaImageContainer}>
-                        <Image source={icon?.action_icon} style={styles.socialMediaImage} />
-                      </View>
-                      <View style={styles.socialMediaTitleDescriptionContainer}>
-                        <View style={styles.socialMediaTitleContainer}>
-                          <Text style={styles.socialMediaTitle}>{item?._actions_turbo?.Action_Name} video</Text>
-                          <View style={styles.ratingsContainer}>
-                            <Text style={styles.ratingsText}>60</Text>
-                            <Image source={IMAGES.star} style={styles.ratingIcon} />
-                          </View>
-                        </View>
-                        <View style={styles.socialMediaDescriptionContainer}>
-                          <Text style={styles.socialMediaDescriptionText}>
-                            You have to publish a Tiktok video following the brief and tagging both the venue and
-                            claris.app
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                </>
-              )
-            }}
-          />
-        </View>
-
-        {/* <TouchableOpacity style={styles.howItWorksContainer}>
+          {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity> */}
 
-        <View style={styles.bookBtnMainContainer}>
-          <TouchableOpacity onPress={handleBookPress} style={styles.bookBtnContainer}>
-            <Text style={styles.bookBtnText}>Book Now</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+          <View style={styles.bookBtnMainContainer}>
+            <TouchableOpacity onPress={handleBookPress} style={styles.bookBtnContainer} disabled={isBookBtnPressed}>
+              {isBookBtnPressed ? (
+                <ActivityIndicator size={30} color={COLORS.primary} />
+              ) : (
+                <Text style={styles.bookBtnText}>Book Now</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      )}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  friendAmenityContainer: {
+  firstAmenityMainContainer: {
+    marginLeft: scale(20),
+  },
+  loaderContainer: {
+    alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
-    width: scale(80),
   },
   friendAmenityTitle: {
     textAlign: 'center',
   },
   friendAmentityText: {
     textAlign: 'center',
+  },
+  friendAmenityContainer: {
+    // width: scale(80),
+    justifyContent: 'center',
+  },
+  orDivider: {
+    borderWidth: 0.5,
+    opacity: 0.5,
+    alignSelf: 'center',
+    borderColor: COLORS.gray,
+    width: '20%',
+  },
+  socialMediaDescriptionText: {
+    color: COLORS.greyFont,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(15),
+  },
+  socialMediaDescriptionContainer: {
+    marginTop: verticalScale(10),
+  },
+  socialMediaTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(17),
+  },
+  socialMediaTitleContainer: {
+    flexDirection: 'row',
+    width: '80%',
+  },
+  socialMediaTitleDescriptionContainer: {
+    width: '70%',
+    marginLeft: scale(10),
+    justifyContent: 'center',
+  },
+  socialMediaImage: {
+    height: moderateScale(40),
+    width: moderateScale(40),
+  },
+  socialMediaImageContainer: {
+    width: '20%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainSocialItemContainer: {
+    height: verticalScale(150),
+    width: '90%',
+    alignSelf: 'center',
+    borderWidth: moderateScale(1),
+    borderColor: COLORS.gainsboro,
+    borderRadius: moderateScale(16),
+    marginTop: verticalScale(24),
+    flexDirection: 'row',
+  },
+  flatlistContainer: {
+    flex: 1,
+    marginBottom: verticalScale(20),
   },
   deadlineText: {
     color: COLORS.primary,
@@ -302,39 +376,48 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(18),
   },
-  socialMediaImage: {
-    height: moderateScale(40),
-    width: moderateScale(40),
+  dealLeftContainer: {
+    // width: '22%',
+    paddingHorizontal: scale(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: verticalScale(20),
+    borderRadius: moderateScale(12),
+    marginTop: verticalScale(10),
+    borderWidth: moderateScale(1),
+    borderColor: COLORS.primary,
   },
   amenityMainContainer: {
-    height: verticalScale(52),
-    width: scale(149.01),
+    // width: scale(120),
+    height: verticalScale(45),
+    flexDirection: 'row',
     borderRadius: moderateScale(16),
     flexDirection: 'row',
     borderWidth: moderateScale(1),
-    marginLeft: scale(20),
     marginTop: verticalScale(10),
+    marginLeft: scale(10),
+    paddingHorizontal: scale(10),
     borderColor: COLORS.gainsboro,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  socialMediaTitle: {
-    color: COLORS.black,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(17),
+  amenityIconContainer: {
+    marginRight: scale(10),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   amenityIcon: {
-    height: moderateScale(26),
-    width: moderateScale(26),
+    height: moderateScale(20),
+    width: moderateScale(20),
   },
-  socialMediaTitleContainer: {
-    flexDirection: 'row',
-    width: '80%',
+  amenityTitleDescriptionContainer: {
+    // width: '60%',
+    justifyContent: 'center',
   },
   amenitiesTitle: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(12.13),
+    fontSize: moderateScale(12),
   },
   socialMediaTitleDescriptionContainer: {
     width: '70%',
@@ -344,7 +427,7 @@ const styles = StyleSheet.create({
   amenitiesDescription: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(11),
   },
   socialMediaImageContainer: {
     width: '20%',
@@ -436,7 +519,6 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
-    fontWeight: '600',
   },
 
   ratingsContainer: {

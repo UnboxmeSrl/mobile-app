@@ -90,7 +90,6 @@ const useRestaurants = () => {
   const getCategoriesData = async () => {
     setIsLoading(true)
     const res = await getCategories()
-    console.log('res cat', res)
     const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...res?.data]
 
     setCategories(addAllCategory)

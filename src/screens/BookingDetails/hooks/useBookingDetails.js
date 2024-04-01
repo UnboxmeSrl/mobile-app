@@ -6,6 +6,7 @@ import { SCREEN_NAMES } from '../../../constants/navigation'
 import { addRestaurantBooking, getTimeFrames, showToastError } from '../../../services'
 
 const useBookingDetails = () => {
+  const timeFrameData = useSelector((state) => state.restaurantSlice.timeFrameData)
   const loginData = useSelector((state) => state.authSlice.loginData)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -13,7 +14,8 @@ const useBookingDetails = () => {
   const [currentMonth, setCurrentMonth] = useState('')
   const [currentWeekDay, setCurrentWeekDay] = useState('')
   const [currentDate, setCurrentDate] = useState('')
-  const [timeFrameData, setTimeFrameData] = useState([])
+  // const [timeFrameData, setTimeFrameData] = useState([])
+
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([])
   const [selectedTimeFame, setSelectedTimeFame] = useState()
   const [isLoading, setIsLoading] = useState(false)
@@ -143,12 +145,17 @@ const useBookingDetails = () => {
     const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
     console.log('weekDay long', weekDay)
     setCurrentWeekDay(weekDay)
-    // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
-    const filteredData = res?.filter((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
-      if (filteredRes.length > 0) return true
-      else {
-        return false
+
+    console.log('timeFrameData:', timeFrameData)
+    const updatedData = timeFrameData.map((item) => {
+      const weekdays = item.weekdays
+      const pauseDays = item.pause_days
+
+      console.log('weekdays: ' + weekdays, 'pauseDays: ' + pauseDays)
+      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
+      return {
+        ...item,
+        weekdays: filteredWeekdays,
       }
     })
     console.log(
@@ -157,11 +164,15 @@ const useBookingDetails = () => {
       // filteredData[0].weekdays.map((e) => e)
     )
 
-    filteredData.forEach((item) => {
-      const weekdays = item.weekdays
-      const pauseDays = item.pause_days
-      const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
-      item.weekdays = filteredWeekdays
+    console.log('filteredTimeData2: ' + JSON.stringify(updatedData))
+    const resu = updatedData?.map((t) => {
+      const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
+      if (filteredRes.length > 0) {
+        console.log('yes')
+        setWeekDayWiseTimeSlots(updatedData)
+      } else {
+        setWeekDayWiseTimeSlots([])
+      }
     })
     setWeekDayWiseTimeSlots(filteredData)
     setTimeout(() => {

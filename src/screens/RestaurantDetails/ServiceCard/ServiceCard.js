@@ -11,7 +11,6 @@ import perfectSize from '../../../utils/responsiveSize'
 
 const ServiceCard = ({ item, index }) => {
   const { handleCardPress } = useServiceCard()
-  console.log('item: ' + JSON.stringify(item))
   return (
     // <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
     //   <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
@@ -43,9 +42,9 @@ const ServiceCard = ({ item, index }) => {
           style={styles.imageBgContainer}
           imageStyle={styles.actualPicture}
         >
-          <View style={styles.dealTimerContainer}>
+          {/* <View style={styles.dealTimerContainer}>
             <Text style={styles.dealTimeLeftText}>1 deal left</Text>
-          </View>
+          </View> */}
         </ImageBackground>
       </View>
       <View style={styles.titleRatingMainRow}>
