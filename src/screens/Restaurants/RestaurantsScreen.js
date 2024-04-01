@@ -55,6 +55,11 @@ const RestaurantsScreen = () => {
           <View style={styles.restaurantsFlatlistContainer}>
             <FlatList
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+              getItemLayout={(_, index) => ({
+                length: verticalScale(200),
+                offset: verticalScale(200) * index,
+                index,
+              })}
               ListEmptyComponent={
                 <View style={styles.listEmptyContainer}>
                   <Text style={styles.listEmptyText}>No data found.</Text>

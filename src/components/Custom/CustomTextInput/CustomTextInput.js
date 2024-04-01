@@ -29,6 +29,7 @@ const CustomTextInput = ({
           style={styles.textInput}
           autoCapitalize={'none'}
           placeholder={placeholder}
+          placeholderTextColor={COLORS.grey}
           keyboardType={keyboardType}
           secureTextEntry={isSecureText}
         />

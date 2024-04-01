@@ -13,12 +13,8 @@ const FirstWellcomeScreen = () => {
     <View style={styles.mainContainer}>
       <ImageBackground source={IMAGES.appliedScreenBackground} style={styles.backgroundStyle}>
         <View style={styles.viewForMargin}>
-          <View style={{ width: '95%', justifyContent: 'center', alignItems: 'center', marginTop: verticalScale(40) }}>
-            <Image
-              source={IMAGES.appLogo}
-              style={{ height: verticalScale(118), width: scale(99) }}
-              resizeMode={'contain'}
-            />
+          <View style={styles.appLogoContainer}>
+            <Image source={IMAGES.appLogo} style={styles.appLogo} resizeMode={'contain'} />
           </View>
           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>{`You have Rejected! `}</Text>
@@ -46,6 +42,16 @@ const FirstWellcomeScreen = () => {
 export default FirstWellcomeScreen
 
 const styles = StyleSheet.create({
+  appLogo: {
+    height: verticalScale(118),
+    width: scale(99),
+  },
+  appLogoContainer: {
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: verticalScale(40),
+  },
   addUserIcon: {
     height: moderateScale(19),
     marginRight: scale(5),

@@ -7,6 +7,7 @@ const initialState = {
   restaurantDetails: {},
   serviceDetails: {},
   canceledBookings: [],
+  timeFrameData: [],
 }
 
 const RestaurantSlice = createSlice({
@@ -26,9 +27,18 @@ const RestaurantSlice = createSlice({
     setCanceledBookings: (state, actions) => {
       state.canceledBookings = actions?.payload
     },
+    setTimeFrameData: (state, actions) => {
+      state.timeFrameData = actions?.payload
+    },
   },
 })
 
-export const { setRestaurantDetails, setServiceDetails, setBookings, setCanceledBookings } = RestaurantSlice.actions
+export const {
+  setRestaurantDetails,
+  setServiceDetails,
+  setBookings,
+  setCanceledBookings,
+  setTimeFrameData,
+} = RestaurantSlice.actions
 
 export default RestaurantSlice.reducer

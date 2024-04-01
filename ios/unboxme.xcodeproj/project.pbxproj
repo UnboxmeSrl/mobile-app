@@ -77,6 +77,20 @@
 			remoteGlobalIDString = 778C1572AE22EE933ACA12594B6DF949;
 			remoteInfo = RNPermissions;
 		};
+		E033B7F12BBA7F4F003D9025 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0CDA2F42B56B75B0004F443 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF9852680BCD6EC8B15F622B5B92A838;
+			remoteInfo = "AppAuth-AppAuthCore_Privacy";
+		};
+		E033B8442BBA7F4F003D9025 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0BB8B582B56B64900DBB7CD /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF9852680BCD6EC8B15F622B5B92A838;
+			remoteInfo = "AppAuth-AppAuthCore_Privacy";
+		};
 		E0BBF1C02B56B68900DBB7CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E0BBCE6E2B56B67200DBB7CD /* GoogleMapsDemos.xcodeproj */;
@@ -50705,6 +50719,7 @@
 			isa = PBXGroup;
 			children = (
 				E0BBF2372B56B68900DBB7CD /* AppAuth */,
+				E033B8452BBA7F4F003D9025 /* AppAuth-AppAuthCore_Privacy */,
 				E0BBF23B2B56B68900DBB7CD /* DoubleConversion */,
 				E0BBF23D2B56B68900DBB7CD /* FBReactNativeSpec */,
 				E0BBF23F2B56B68900DBB7CD /* FBSDKCoreKit */,
@@ -50717,7 +50732,7 @@
 				E0BBF2752B56B68900DBB7CD /* GTMSessionFetcher */,
 				E0BBF2792B56B68900DBB7CD /* libwebp */,
 				E0BBF27B2B56B68900DBB7CD /* lottie-ios */,
-				E0BBF27D2B56B68900DBB7CD /* lottie-react-native */,
+				E0BBF27D2B56B68900DBB7CD /* liblottie-react-native.a */,
 				E0BBF2812B56B68900DBB7CD /* PanModal */,
 				E0BBF2832B56B68900DBB7CD /* Pods-unboxme */,
 				E0BBF2892B56B68900DBB7CD /* RCTTypeSafety */,
@@ -50730,7 +50745,7 @@
 				E0BBF2972B56B68900DBB7CD /* React-jsinspector */,
 				E0BBF2992B56B68900DBB7CD /* react-native-config */,
 				E0BBF29B2B56B68900DBB7CD /* react-native-cookies */,
-				E0BBF29D2B56B68900DBB7CD /* react-native-create-thumbnail */,
+				E0BBF29D2B56B68900DBB7CD /* libreact-native-create-thumbnail.a */,
 				E02E147D2B9198EB00709DFD /* react-native-date-picker */,
 				E0BBF29F2B56B68900DBB7CD /* react-native-fbsdk */,
 				E0BBF2A12B56B68900DBB7CD /* react-native-get-random-values */,
@@ -50740,7 +50755,7 @@
 				E0BBF2A92B56B68900DBB7CD /* react-native-netinfo */,
 				E02E147F2B9198EB00709DFD /* react-native-onesignal */,
 				E0BBF2AB2B56B68900DBB7CD /* react-native-safe-area-context */,
-				E0BBF2AD2B56B68900DBB7CD /* react-native-splash-screen */,
+				E0BBF2AD2B56B68900DBB7CD /* libreact-native-splash-screen.a */,
 				E0BBF2AF2B56B68900DBB7CD /* react-native-text-input-mask */,
 				E0BBF2B12B56B68900DBB7CD /* react-native-video */,
 				E0BBF2B32B56B68900DBB7CD /* react-native-webview */,
@@ -50761,7 +50776,7 @@
 				E0BBF2D12B56B68900DBB7CD /* RNDateTimePicker */,
 				E0BBF2D32B56B68900DBB7CD /* RNDeviceInfo */,
 				E0BBF2D52B56B68900DBB7CD /* RNFastImage */,
-				E0BBF2EB2B56B68900DBB7CD /* RNFS */,
+				E0BBF2EB2B56B68900DBB7CD /* libRNFS.a */,
 				E0BBF2ED2B56B68900DBB7CD /* RNGestureHandler */,
 				E0BBF2EF2B56B68900DBB7CD /* RNGoogleSignin */,
 				E0BBF2F12B56B68900DBB7CD /* RNInputMask */,
@@ -50770,7 +50785,7 @@
 				E0BBF2F52B56B68900DBB7CD /* RNReanimated */,
 				E0BBF2F72B56B68900DBB7CD /* RNScreens */,
 				E0BBF2F92B56B68900DBB7CD /* RNShare */,
-				E0BBF2FB2B56B68900DBB7CD /* RNSVG */,
+				E0BBF2FB2B56B68900DBB7CD /* libRNSVG.a */,
 				E0BBF2FD2B56B68900DBB7CD /* RNVectorIcons */,
 				E0BBF2FF2B56B68900DBB7CD /* SDWebImage */,
 				E0BBF3032B56B68900DBB7CD /* SDWebImageWebPCoder */,
@@ -100827,6 +100842,7 @@
 			isa = PBXGroup;
 			children = (
 				E0CD09D42B56B7990004F443 /* AppAuth */,
+				E033B7F22BBA7F4F003D9025 /* AppAuth-AppAuthCore_Privacy */,
 				E0CD09D82B56B7990004F443 /* DoubleConversion */,
 				E0CD09DA2B56B7990004F443 /* FBReactNativeSpec */,
 				E0CD09DC2B56B7990004F443 /* FBSDKCoreKit */,
@@ -100839,7 +100855,7 @@
 				E0CD0A122B56B7990004F443 /* GTMSessionFetcher */,
 				E0CD0A162B56B7990004F443 /* libwebp */,
 				E0CD0A182B56B7990004F443 /* lottie-ios */,
-				E0CD0A1A2B56B7990004F443 /* lottie-react-native */,
+				E0CD0A1A2B56B7990004F443 /* liblottie-react-native.a */,
 				E0CD0A1E2B56B7990004F443 /* PanModal */,
 				E0CD0A202B56B7990004F443 /* Pods-unboxme */,
 				E0CD0A262B56B7990004F443 /* RCTTypeSafety */,
@@ -100852,7 +100868,7 @@
 				E0CD0A342B56B7990004F443 /* React-jsinspector */,
 				E0CD0A362B56B7990004F443 /* react-native-config */,
 				E0CD0A382B56B7990004F443 /* react-native-cookies */,
-				E0CD0A3A2B56B7990004F443 /* react-native-create-thumbnail */,
+				E0CD0A3A2B56B7990004F443 /* libreact-native-create-thumbnail.a */,
 				E02E14272B9198EB00709DFD /* react-native-date-picker */,
 				E0CD0A3C2B56B7990004F443 /* react-native-fbsdk */,
 				E0CD0A3E2B56B7990004F443 /* react-native-get-random-values */,
@@ -100862,7 +100878,7 @@
 				E0CD0A462B56B7990004F443 /* react-native-netinfo */,
 				E02E14292B9198EB00709DFD /* react-native-onesignal */,
 				E0CD0A482B56B7990004F443 /* react-native-safe-area-context */,
-				E0CD0A4A2B56B7990004F443 /* react-native-splash-screen */,
+				E0CD0A4A2B56B7990004F443 /* libreact-native-splash-screen.a */,
 				E0CD0A4C2B56B7990004F443 /* react-native-text-input-mask */,
 				E0CD0A4E2B56B7990004F443 /* react-native-video */,
 				E0CD0A502B56B7990004F443 /* react-native-webview */,
@@ -100883,7 +100899,7 @@
 				E0CD0A6E2B56B7990004F443 /* RNDateTimePicker */,
 				E0CD0A702B56B7990004F443 /* RNDeviceInfo */,
 				E0CD0A722B56B7990004F443 /* RNFastImage */,
-				E0CD0A882B56B7990004F443 /* RNFS */,
+				E0CD0A882B56B7990004F443 /* libRNFS.a */,
 				E0CD0A8A2B56B7990004F443 /* RNGestureHandler */,
 				E0CD0A8C2B56B7990004F443 /* RNGoogleSignin */,
 				E0CD0A8E2B56B7990004F443 /* RNInputMask */,
@@ -100892,7 +100908,7 @@
 				E0CD0A922B56B7990004F443 /* RNReanimated */,
 				E0CD0A942B56B7990004F443 /* RNScreens */,
 				E0CD0A962B56B7990004F443 /* RNShare */,
-				E0CD0A982B56B7990004F443 /* RNSVG */,
+				E0CD0A982B56B7990004F443 /* libRNSVG.a */,
 				E0CD0A9A2B56B7990004F443 /* RNVectorIcons */,
 				E0CD0A9C2B56B7990004F443 /* SDWebImage */,
 				E0CD0AA02B56B7990004F443 /* SDWebImageWebPCoder */,
@@ -140667,9 +140683,9 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 84KM93C3TE;
+						DevelopmentTeam = X97N4763PG;
 						LastSwiftMigration = 1230;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -140799,6 +140815,22 @@
 			remoteRef = E02E14802B9198EB00709DFD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E033B7F22BBA7F4F003D9025 /* AppAuth-AppAuthCore_Privacy */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = "AppAuth-AppAuthCore_Privacy";
+			path = AppAuthCore_Privacy.bundle;
+			remoteRef = E033B7F12BBA7F4F003D9025 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E033B8452BBA7F4F003D9025 /* AppAuth-AppAuthCore_Privacy */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = "AppAuth-AppAuthCore_Privacy";
+			path = AppAuthCore_Privacy.bundle;
+			remoteRef = E033B8442BBA7F4F003D9025 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E0BBF1C12B56B68900DBB7CD /* GoogleMapsDemos.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -140910,7 +140942,7 @@
 			remoteRef = E0BBF27A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF27D2B56B68900DBB7CD /* lottie-react-native */ = {
+		E0BBF27D2B56B68900DBB7CD /* liblottie-react-native.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "lottie-react-native";
@@ -141014,7 +141046,7 @@
 			remoteRef = E0BBF29A2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF29D2B56B68900DBB7CD /* react-native-create-thumbnail */ = {
+		E0BBF29D2B56B68900DBB7CD /* libreact-native-create-thumbnail.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "react-native-create-thumbnail";
@@ -141078,7 +141110,7 @@
 			remoteRef = E0BBF2AA2B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2AD2B56B68900DBB7CD /* react-native-splash-screen */ = {
+		E0BBF2AD2B56B68900DBB7CD /* libreact-native-splash-screen.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "react-native-splash-screen";
@@ -141246,7 +141278,7 @@
 			remoteRef = E0BBF2D42B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2EB2B56B68900DBB7CD /* RNFS */ = {
+		E0BBF2EB2B56B68900DBB7CD /* libRNFS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = RNFS;
@@ -141310,7 +141342,7 @@
 			remoteRef = E0BBF2F82B56B68900DBB7CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0BBF2FB2B56B68900DBB7CD /* RNSVG */ = {
+		E0BBF2FB2B56B68900DBB7CD /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = RNSVG;
@@ -141461,7 +141493,7 @@
 			remoteRef = E0CD0A172B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A1A2B56B7990004F443 /* lottie-react-native */ = {
+		E0CD0A1A2B56B7990004F443 /* liblottie-react-native.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "lottie-react-native";
@@ -141565,7 +141597,7 @@
 			remoteRef = E0CD0A372B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A3A2B56B7990004F443 /* react-native-create-thumbnail */ = {
+		E0CD0A3A2B56B7990004F443 /* libreact-native-create-thumbnail.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "react-native-create-thumbnail";
@@ -141629,7 +141661,7 @@
 			remoteRef = E0CD0A472B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A4A2B56B7990004F443 /* react-native-splash-screen */ = {
+		E0CD0A4A2B56B7990004F443 /* libreact-native-splash-screen.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "react-native-splash-screen";
@@ -141797,7 +141829,7 @@
 			remoteRef = E0CD0A712B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A882B56B7990004F443 /* RNFS */ = {
+		E0CD0A882B56B7990004F443 /* libRNFS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = RNFS;
@@ -141861,7 +141893,7 @@
 			remoteRef = E0CD0A952B56B7990004F443 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E0CD0A982B56B7990004F443 /* RNSVG */ = {
+		E0CD0A982B56B7990004F443 /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = RNSVG;
@@ -141947,7 +141979,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=/Users/mw/.nvm/versions/node/v16.2.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=/usr/local/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		33DE1306875142ED67B31C23 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -142002,6 +142034,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-unboxme/Pods-unboxme-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/AppAuth/AppAuthCore_Privacy.bundle",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
@@ -142025,6 +142058,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AppAuthCore_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
@@ -142179,24 +142213,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = unboxme/unboxme.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = 84KM93C3TE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 14;
+				DEVELOPMENT_TEAM = X97N4763PG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = unboxme/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Claris;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.unboxme.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.claris.app;
 				PRODUCT_NAME = unboxme;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.unboxme.app";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "unboxme-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -142212,24 +142246,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = unboxme/unboxme.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = 84KM93C3TE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 14;
+				DEVELOPMENT_TEAM = X97N4763PG;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = unboxme/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Claris;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.unboxme.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.claris.app;
 				PRODUCT_NAME = unboxme;
-				PROVISIONING_PROFILE = "364a2e45-19a1-4330-b6b7-b428cc80de4d";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.unboxme.app";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "unboxme-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

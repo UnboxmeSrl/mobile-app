@@ -1,10 +1,12 @@
 import { navigate } from '@services'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
-import { getDiaryActions } from '../../../services'
-import { getServiceCategories, getServices } from '../../../services/LocationsService'
+import { getDiaryActions, getTimeFrames } from '../../../services'
+import { getServiceCategories, getServiceDealsLeft, getServices } from '../../../services/LocationsService'
+import { useIsFocused } from 'react-navigation-hooks'
+import { setTimeFrameData } from '../../../redux/slices'
 
 const useServiceDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -16,6 +18,11 @@ const useServiceDetails = () => {
   const [serviceCategories, setServiceCategories] = useState([])
   const [diaryItems, setDiaryItems] = useState([])
   const [filter, setFilter] = useState(0)
+  const [dealsLeft, setDealsLeft] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [isBookBtnPressed, setIsBookBtnPressed] = useState(false)
+  const isFocused = useIsFocused()
+  const dispatch = useDispatch()
 
   const getServicesData = async () => {
     const prepData = {
@@ -24,6 +31,22 @@ const useServiceDetails = () => {
     }
     const res = await getServices(prepData)
     setServices(res)
+  }
+
+  const getServiceDealsLeftData = async () => {
+    const prepData = {
+      restaurant_turbo_id: restaurantDetails?.id,
+      offers_turbo_id: serviceDetails?.id,
+    }
+    const res = await getServiceDealsLeft(prepData)
+    let deals
+    if (res?.status === 200) {
+      deals = `${res?.deal_left} deal left`
+    } else if (res?.status === 201) {
+      deals = `No deal limit`
+    }
+    setDealsLeft(deals)
+    setIsLoading(false)
   }
 
   const getServiceCategoriesData = async () => {
@@ -44,6 +67,12 @@ const useServiceDetails = () => {
     setDiaryItems(res)
   }
 
+  const getTimeFrameData = async () => {
+    const params = `/${restaurantDetails?.id}`
+    const res = await getTimeFrames(params)
+    dispatch(setTimeFrameData(res))
+  }
+
   const onCategoryChange = (serviceCategoryId) => {
     console.log('Category change', serviceCategoryId)
     setFilter(serviceCategoryId)
@@ -54,9 +83,12 @@ const useServiceDetails = () => {
   }
 
   const handleBookPress = () => {
+    setIsBookBtnPressed(true)
     if (loginData?.id) {
+      setIsBookBtnPressed(false)
       navigate(SCREEN_NAMES.BookingDetails)
     } else {
+      setIsBookBtnPressed(false)
       navigate({
         params: {
           isFromBookRedirected: true,
@@ -69,7 +101,12 @@ const useServiceDetails = () => {
   useEffect(() => {
     getServiceCategoriesData()
     getDiaryActionsData()
+    getTimeFrameData()
   }, [])
+
+  useEffect(() => {
+    getServiceDealsLeftData()
+  }, [isFocused])
 
   useEffect(() => {
     getServicesData()
@@ -81,6 +118,9 @@ const useServiceDetails = () => {
     filter,
     isImageLoading,
     setIsImageLoading,
+    isLoading,
+    isBookBtnPressed,
+    dealsLeft,
     handleBackPress,
     handleBookPress,
     onCategoryChange,

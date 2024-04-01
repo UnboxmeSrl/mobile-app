@@ -41,7 +41,7 @@ const useOnboarding = () => {
       const active = activeIndex + 1
       if (active > 4) {
         navigate(SCREEN_NAMES.SignUpNew)
-        dispatch(setOnboardingData(true))
+        // dispatch(setOnboardingData(true))
       }
       return active
     })

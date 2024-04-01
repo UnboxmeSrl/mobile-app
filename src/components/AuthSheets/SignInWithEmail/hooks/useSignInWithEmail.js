@@ -52,17 +52,14 @@ const useSignInWithEmail = (isFromBookRedirected) => {
           }
         }
         ref?.current?.close()
-<<<<<<< HEAD
       } else if (res.UserStatus === 'rejected') {
         navigate(SCREEN_NAMES.RejectedScreen)
-=======
       } else {
         const error = {
           message: 'Something went wrong',
         }
         showToastError(error)
         setIsError(true)
->>>>>>> ea5f8f6e137a3d3b7e795a5e433b7664b1f2d3b5
       }
     } catch (e) {
       setLoading(false)

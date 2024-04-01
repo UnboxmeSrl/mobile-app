@@ -51,3 +51,13 @@ export const getServices = async (data) => {
     console.log(error)
   }
 }
+
+export const getServiceDealsLeft = async (data) => {
+  try {
+    const url = Api.LOCATIONS.GET_SERVICE_DEALS_LEFT
+    const response = await Fetch.post(url, data)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

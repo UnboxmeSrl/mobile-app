@@ -6,6 +6,7 @@ import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useNewCoupon } from './hooks'
+import FastImage from 'react-native-fast-image'
 
 const NewCouponScreen = () => {
   const {
@@ -38,7 +39,18 @@ const NewCouponScreen = () => {
 
       <View style={styles.mainInnerView}>
         <View style={styles.userDetailsContainer}>
-          <Image source={IMAGES.testImage} style={styles.userImage} />
+          {loginData?.Profile_pic ? (
+            <FastImage
+              resizeMode="cover"
+              source={{
+                priority: FastImage.priority.high,
+                uri: loginData?.Profile_pic?.url,
+              }}
+              style={styles.userImage}
+            />
+          ) : (
+            <Image source={IMAGES.testImage} style={styles.userImage} />
+          )}
           <View style={styles.userFullNameContainer}>
             <Text style={styles.fullNameText}>{loginData?.name}</Text>
           </View>
