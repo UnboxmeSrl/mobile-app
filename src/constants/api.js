@@ -7,6 +7,7 @@ export const Api = {
     CITY_WISE_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/getRestaurantByCity_0`,
     GET_SERVICES: `${BASE_URL}/api:bwh6Xc5O/getServicesForRestaurant`,
     GET_SERVICE_CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/serviceCategories`,
+    GET_SERVICE_DEALS_LEFT: `${BASE_URL}/api:bwh6Xc5O/get_deal_left`,
     RESTAURANTS: `${BASE_URL}/api:WVfdccpj/restaurant`,
   },
   PROFILE: {

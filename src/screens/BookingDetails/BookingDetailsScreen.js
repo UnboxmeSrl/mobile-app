@@ -106,7 +106,7 @@ const BookingDetailsScreen = () => {
                   calendarHeaderStyle={styles.calendarHeaderStyle}
                   dateNameStyle={styles.dateNameStyle}
                   dateNumberStyle={styles.dateNumberStyle}
-                  datesBlacklist={datesBlacklistFunc}
+                  // datesBlacklist={datesBlacklistFunc}
                   endDate={endDate}
                   highlightDateContainerStyle={styles.highlightedDateContainer}
                   highlightDateNameStyle={styles.highlightDateNameStyle}
@@ -130,28 +130,30 @@ const BookingDetailsScreen = () => {
                 <Text style={styles.availableHoursTitleText}>Available Hours</Text>
               </View>
 
-              <FlatList
-                ListEmptyComponent={
-                  <View style={styles.listEmptyContainer}>
-                    <Text style={styles.listEmptyText}>Not available on this day.</Text>
-                  </View>
-                }
-                data={weekDayWiseTimeSlots}
-                numColumns={2}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item, index }) => {
-                  const isSelected = item?.id === selectedTimeFame?.id
-                  return (
-                    <TouchableOpacity
-                      onPress={() => setSelectedTimeFame(item)}
-                      style={[styles.hoursContainer, isSelected && styles.selectedTimeFrameStyle]}
-                    >
-                      <Image resizeMode="cover" source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
-                      <Text>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
-                    </TouchableOpacity>
-                  )
-                }}
-              />
+              {!isDatesLoading && (
+                <FlatList
+                  ListEmptyComponent={
+                    <View style={styles.listEmptyContainer}>
+                      <Text style={styles.listEmptyText}>Not available on this day.</Text>
+                    </View>
+                  }
+                  data={weekDayWiseTimeSlots}
+                  numColumns={2}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item, index }) => {
+                    const isSelected = item?.id === selectedTimeFame?.id
+                    return (
+                      <TouchableOpacity
+                        onPress={() => setSelectedTimeFame(item)}
+                        style={[styles.hoursContainer, isSelected && styles.selectedTimeFrameStyle]}
+                      >
+                        <Image resizeMode="cover" source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
+                        <Text>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
+                      </TouchableOpacity>
+                    )
+                  }}
+                />
+              )}
 
               <View style={styles.sendMessageTitleContainer}>
                 <Text style={styles.sendMessageTitleText}>Send Message (Optional)</Text>

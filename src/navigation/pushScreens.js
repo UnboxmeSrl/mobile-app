@@ -166,6 +166,9 @@ export default {
   [SCREEN_NAMES.RejectedScreen]: {
     screen: RejectedScreen,
   },
+  [SCREEN_NAMES.LoginOnboarding]: {
+    screen: LoginOnboarding,
+  },
   [SCREEN_NAMES.FirstWelcomeScreen]: {
     screen: FirstWellcomeScreen,
   },

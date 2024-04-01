@@ -39,7 +39,7 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
       exclusiveContent {
                   // We get React Native's Android binaries exclusively through npm,
-                     // from a local Maven repo inside node_modules/react-native/.
+                      // from a local Maven repo inside node_modules/react-native/.
                       // (The use of exclusiveContent prevents looking elsewhere like Maven Central
                          // and potentially getting a wrong version.)
                 filter {
