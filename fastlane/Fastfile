@@ -25,10 +25,10 @@ lane :notify_slack do
   slack(message: "*Unboxme #{version} (#{buildNumber})* was distributed for #{lane_context[SharedValues::PLATFORM_NAME]}", default_payloads: [])
 end
 
-platform :iOS do
+platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :build_and_upload do
-    match(type: "appstore", app_identifier: ["com.unboxme.app"])
+    match(type: "appstore", app_identifier: ["com.claris.app"])
     build_app(workspace: "./ios/unboxme.xcworkspace", scheme: "unboxme",  clean: true, export_method: "app-store")
     changelog_data = handle_changelog
     upload_to_testflight(skip_waiting_for_build_processing: true)

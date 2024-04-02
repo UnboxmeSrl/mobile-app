@@ -35,6 +35,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		224115A32BB7435400E58AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0CDA2F42B56B75B0004F443 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E27A38CC948BD4D313572AFA78E2142;
+			remoteInfo = "react-native-geolocation-service";
+		};
+		224115F62BB7435400E58AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0BB8B582B56B64900DBB7CD /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E27A38CC948BD4D313572AFA78E2142;
+			remoteInfo = "react-native-geolocation-service";
+		};
+		22DDCC7D2BB899BA00E875E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0CDA2F42B56B75B0004F443 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF9852680BCD6EC8B15F622B5B92A838;
+			remoteInfo = "AppAuth-AppAuthCore_Privacy";
+		};
+		22DDCCD12BB899BA00E875E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0BB8B582B56B64900DBB7CD /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF9852680BCD6EC8B15F622B5B92A838;
+			remoteInfo = "AppAuth-AppAuthCore_Privacy";
+		};
 		E02E14262B9198EB00709DFD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E0CDA2F42B56B75B0004F443 /* Pods.xcodeproj */;
@@ -50748,6 +50776,7 @@
 				E0BBF29D2B56B68900DBB7CD /* libreact-native-create-thumbnail.a */,
 				E02E147D2B9198EB00709DFD /* react-native-date-picker */,
 				E0BBF29F2B56B68900DBB7CD /* react-native-fbsdk */,
+				224115F72BB7435400E58AAF /* react-native-geolocation-service */,
 				E0BBF2A12B56B68900DBB7CD /* react-native-get-random-values */,
 				E0BBF2A32B56B68900DBB7CD /* react-native-google-maps */,
 				E0BBF2A52B56B68900DBB7CD /* react-native-image-picker */,
@@ -100871,6 +100900,7 @@
 				E0CD0A3A2B56B7990004F443 /* libreact-native-create-thumbnail.a */,
 				E02E14272B9198EB00709DFD /* react-native-date-picker */,
 				E0CD0A3C2B56B7990004F443 /* react-native-fbsdk */,
+				224115A42BB7435400E58AAF /* react-native-geolocation-service */,
 				E0CD0A3E2B56B7990004F443 /* react-native-get-random-values */,
 				E0CD0A402B56B7990004F443 /* react-native-google-maps */,
 				E0CD0A422B56B7990004F443 /* react-native-image-picker */,
@@ -140767,6 +140797,38 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		224115A42BB7435400E58AAF /* react-native-geolocation-service */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = "react-native-geolocation-service";
+			path = "libreact-native-geolocation-service.a";
+			remoteRef = 224115A32BB7435400E58AAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		224115F72BB7435400E58AAF /* react-native-geolocation-service */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = "react-native-geolocation-service";
+			path = "libreact-native-geolocation-service.a";
+			remoteRef = 224115F62BB7435400E58AAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22DDCC7E2BB899BA00E875E3 /* AppAuth-AppAuthCore_Privacy */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = "AppAuth-AppAuthCore_Privacy";
+			path = AppAuthCore_Privacy.bundle;
+			remoteRef = 22DDCC7D2BB899BA00E875E3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22DDCCD22BB899BA00E875E3 /* AppAuth-AppAuthCore_Privacy */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = "AppAuth-AppAuthCore_Privacy";
+			path = AppAuthCore_Privacy.bundle;
+			remoteRef = 22DDCCD12BB899BA00E875E3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E02E14272B9198EB00709DFD /* react-native-date-picker */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -142209,7 +142271,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0DDBFE3729958DBED62255CC /* Pods-unboxme.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = unboxme/unboxme.entitlements;
@@ -142242,7 +142304,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B397E9D4B933DA37F311A10A /* Pods-unboxme.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = unboxme/unboxme.entitlements;

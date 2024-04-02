@@ -81,9 +81,9 @@ PODS:
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
   - lottie-ios (3.1.8)
-  - lottie-react-native (3.5.0):
+  - lottie-react-native (4.0.2):
     - lottie-ios (~> 3.1.8)
-    - React
+    - React-Core
   - OneSignalXCFramework (3.12.6):
     - OneSignalXCFramework/OneSignalCore (= 3.12.6)
     - OneSignalXCFramework/OneSignalExtension (= 3.12.6)
@@ -285,6 +285,8 @@ PODS:
   - react-native-fbsdk/Share (3.0.0):
     - FBSDKShareKit (~> 8.1)
     - React
+  - react-native-geolocation-service (5.3.1):
+    - React
   - react-native-get-random-values (1.11.0):
     - React-Core
   - react-native-google-maps (0.28.1):
@@ -411,8 +413,8 @@ PODS:
     - React
   - RNShare (6.5.0):
     - React-Core
-  - RNSVG (12.1.0):
-    - React
+  - RNSVG (12.5.1):
+    - React-Core
   - RNVectorIcons (9.2.0):
     - React-Core
   - SDWebImage (5.11.1):
@@ -449,6 +451,7 @@ DEPENDENCIES:
   - react-native-create-thumbnail (from `../node_modules/react-native-create-thumbnail`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
+  - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
@@ -554,6 +557,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-date-picker"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
+  react-native-geolocation-service:
+    :path: "../node_modules/react-native-geolocation-service"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
   react-native-google-maps:
@@ -655,7 +660,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
-  lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
+  lottie-react-native: 4dff8fe8d10ddef9e7880e770080f4a56121397e
   OneSignalXCFramework: ff1c970b7aeb4ac0fe48fb35393eb5d8bf378135
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
@@ -673,6 +678,7 @@ SPEC CHECKSUMS:
   react-native-create-thumbnail: e022bcdcba8a0b4529a50d3fa1a832ec921be39d
   react-native-date-picker: 5637f417bb0c1981bc9d483324d5eb5929a1651c
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
+  react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-google-maps: 915cea64470a6e7581b782d8659bf8a7e2dee302
   react-native-image-picker: 60f4246eb5bb7187fc15638a8c1f13abd3820695
@@ -707,11 +713,11 @@ SPEC CHECKSUMS:
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNInputMask: 815461ebdf396beb62cf58916c35cf6930adb991
   RNLocalize: d4b8af4e442d4bcca54e68fc687a2129b4d71a81
-  RNPermissions: 256fa32c3f306b7404eb7a4e442e814bd101dc63
+  RNPermissions: 4e3714e18afe7141d000beae3755e5b5fb2f5e05
   RNReanimated: c1b56d030d1616239861534d9adb531f8cffab68
   RNScreens: 92ab26929065db7cbbf8a8413b00ac56db9f6032
   RNShare: 047d42214f875d731bde73a2b67418638af85ad9
-  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
@@ -719,4 +725,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 115544be53274d4334bc010a475cda7f36406e0c
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.11.3
