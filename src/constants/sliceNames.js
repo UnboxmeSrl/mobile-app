@@ -3,4 +3,5 @@ export const sliceNames = {
   tempAuth: 'TempAuth',
   restaurantSlice: 'RestaurantSlice',
   contentSlice: 'ContentSlice',
+  serviceSlice: 'ServiceSlice',
 }

@@ -1,19 +1,23 @@
 import { navigate } from '@services'
 import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { addRestaurantBooking, getTimeFrames, showToastError } from '../../../services'
+import { getServices } from '../../../services/LocationsService'
+import { setServices } from '../../../redux/slices'
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector((state) => state.restaurantSlice.timeFrameData)
   const loginData = useSelector((state) => state.authSlice.loginData)
+  const services = useSelector((state) => state.serviceSlice.services)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [currentMonth, setCurrentMonth] = useState('')
   const [currentWeekDay, setCurrentWeekDay] = useState('')
   const [currentDate, setCurrentDate] = useState('')
+  const dispatch = useDispatch()
   // const [timeFrameData, setTimeFrameData] = useState([])
 
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([])
@@ -95,6 +99,12 @@ const useBookingDetails = () => {
     const res = await addRestaurantBooking(prepData)
     if (res?.status === 200) {
       console.log('Booking Details:', res)
+      const prepData = {
+        category_id: 0,
+        restaurant_id: restaurantDetails?.id,
+      }
+      const servicesRes = await getServices(prepData)
+      dispatch(setServices(servicesRes))
       navigate({
         params: {
           bookingDetails: res?.data,
@@ -116,16 +126,15 @@ const useBookingDetails = () => {
 
   const datesBlacklistFunc = (date) => {
     const myDate = new Date(date)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+    const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
     // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
     const filteredData = timeFrameData?.filter((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt.day === weekDay)
-      if (filteredRes.length > 0) return true
+      const filteredRes = t?.pause_days?.filter((wt) => wt?.day === weekDay)
+      if (filteredRes?.length > 0) return false
       else {
-        return false
+        return true
       }
     })
-
     if (filteredData.length === 0) {
       return true
     } else {
@@ -173,7 +182,7 @@ const useBookingDetails = () => {
   useEffect(() => {
     setSelectedTimeFame({})
     const myDate = new Date(selectedDate)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+    const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
     console.log('weekDay: ' + weekDay)
     setCurrentWeekDay(weekDay)
 
@@ -194,7 +203,6 @@ const useBookingDetails = () => {
     const resu = updatedData?.map((t) => {
       const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
       if (filteredRes.length > 0) {
-        console.log('yes')
         setWeekDayWiseTimeSlots(updatedData)
       } else {
         setWeekDayWiseTimeSlots([])
@@ -209,7 +217,7 @@ const useBookingDetails = () => {
   useEffect(() => {
     console.log('selected Date:', selectedDate)
     const myDate = new Date(selectedDate)
-    const month = myDate.toLocaleString('default', { month: 'long' })
+    const month = myDate.toLocaleString('en-US', { month: 'long' })
     console.log('month: ' + month)
     setCurrentMonth(month)
     setCurrentDate(myDate.getDate())
@@ -217,7 +225,7 @@ const useBookingDetails = () => {
 
   useEffect(() => {
     const myDate = new Date(startDate)
-    const month = myDate.toLocaleString('default', { month: 'long' })
+    const month = myDate.toLocaleString('en-US', { month: 'long' })
     console.log('month: ' + month)
     setCurrentMonth(month)
   }, [startDate])

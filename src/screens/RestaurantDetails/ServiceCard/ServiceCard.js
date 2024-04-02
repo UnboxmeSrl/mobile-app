@@ -31,55 +31,65 @@ const ServiceCard = ({ item, index }) => {
     //   </ImageBackground>
     // </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem} activeOpacity={0.6}>
-      <View style={styles.imageContainer}>
-        <ImageBackground
-          resizeMode="cover"
-          source={{ uri: item?.Offer_Cover?.url }}
-          style={styles.imageBgContainer}
-          imageStyle={styles.actualPicture}
-        >
-          {/* <View style={styles.dealTimerContainer}>
-            <Text style={styles.dealTimeLeftText}>1 deal left</Text>
-          </View> */}
-        </ImageBackground>
-      </View>
-      <View style={styles.titleRatingMainRow}>
-        <View style={styles.itemTitleIconContainer}>
-          <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
-          <Text style={styles.titleText}>{item?._actions_turbo?.Action_Name}</Text>
+    <View style={styles.mainItemContainer}>
+      <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem} activeOpacity={0.6}>
+        <View style={styles.imageContainer}>
+          <ImageBackground
+            resizeMode="cover"
+            source={{ uri: item?.Offer_Cover?.url }}
+            style={styles.imageBgContainer}
+            imageStyle={styles.actualPicture}
+          >
+            <Image source={IMAGES.overlay} style={styles.itemImage} resizeMode="cover" />
+            <View style={styles.dealTimerContainer}>
+              <Text style={styles.dealTimeLeftText}>{`${item?.deal_left} deal left`}</Text>
+            </View>
+          </ImageBackground>
         </View>
-        <View style={styles.ratingsContainer}>
-          <Text style={styles.ratingsText}>60</Text>
-          <Image source={IMAGES.star} style={styles.ratingIcon} />
+        <View style={styles.titleRatingMainRow}>
+          <View style={styles.itemTitleIconContainer}>
+            <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
+            <Text style={styles.titleText}>{item?._actions_turbo?.Action_Name}</Text>
+          </View>
+          <View style={styles.ratingsContainer}>
+            <Text style={styles.ratingsText}>60</Text>
+            <Image source={IMAGES.star} style={styles.ratingIcon} />
+          </View>
         </View>
-      </View>
 
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>To publish with 24 hours</Text>
-      </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>To publish with 24 hours</Text>
+        </View>
 
-      <View style={{ flexDirection: 'row' }}>
-        <View style={styles.amenitiesContainer}>
-          <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-          <Text style={styles.amenityText}>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
+        <View style={styles.amenitiesMainContainer}>
+          <View style={styles.amenitiesContainer}>
+            <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+            <Text style={styles.amenityText}>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
+          </View>
+          <View style={styles.amenitiesContainer}>
+            <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+            <Text style={styles.amenityText}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+          </View>
         </View>
-        <View style={styles.amenitiesContainer}>
-          <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
-          <Text style={styles.amenityText}>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   )
 }
 
 export default ServiceCard
 
 const styles = StyleSheet.create({
+  amenitiesMainContainer: {
+    flexDirection: 'row',
+  },
+  mainItemContainer: {
+    flex: 1,
+    marginRight: scale(20),
+  },
   amenityText: {
     color: COLORS.greyFont,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(14),
+    fontFamily: FONTS.interSemiBold,
+    fontSize: moderateScale(12),
   },
   amenityIcon: {
     height: moderateScale(22.52),
@@ -90,7 +100,7 @@ const styles = StyleSheet.create({
     height: moderateScale(34.64),
     backgroundColor: COLORS.cultured,
     borderRadius: moderateScale(58.03),
-    marginLeft: scale(20),
+    marginLeft: scale(10),
     marginTop: verticalScale(10),
     flexDirection: 'row',
     alignItems: 'center',
@@ -120,8 +130,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginLeft: scale(20),
-    marginRight: scale(20),
     marginTop: verticalScale(10),
   },
   titleText: {
@@ -139,7 +147,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginLeft: scale(20),
+    marginLeft: scale(5),
     marginRight: scale(20),
     marginTop: verticalScale(10),
   },
@@ -176,37 +184,38 @@ const styles = StyleSheet.create({
     shadowOpacity: moderateScale(0.3),
     shadowRadius: moderateScale(4),
     elevation: moderateScale(5),
-    width: '75%',
+    width: '98%',
     alignSelf: 'center',
     // alignItems: 'center',
     height: moderateScale(292.21),
     borderRadius: moderateScale(20.79),
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),
-    marginHorizontal: scale(10),
+    marginHorizontal: scale(20),
   },
   itemImage: {
-    borderRadius: moderateScale(20),
-    height: '100%',
+    position: 'absolute',
+    borderRadius: moderateScale(25.3),
+    height: moderateScale(146.78),
+    right: scale(5),
     overflow: 'hidden',
-    width: '100%',
+    width: '98%',
   },
   dealTimerContainer: {
-    width: '40%',
+    width: scale(73),
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.whiteShadedTransparent,
+    backgroundColor: COLORS.white,
     borderRadius: moderateScale(20),
     flexDirection: 'row',
     marginRight: scale(20),
     marginTop: verticalScale(10),
-    paddingHorizontal: scale(15),
     paddingVertical: verticalScale(3),
   },
   dealTimeLeftText: {
     textAlign: 'center',
-    color: COLORS.white,
-    fontFamily: FONTS.quicksandBold,
+    color: COLORS.primary,
+    fontFamily: FONTS.interBold,
     fontSize: moderateScale(12),
   },
 })

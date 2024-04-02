@@ -26,7 +26,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
       const prepData = { email, password }
       const res = await userLogin(prepData)
       setLoading(false)
-      if (res.UserStatus === 'approved') {
+      if (res?.UserStatus === 'approved') {
         OneSignal.setExternalUserId(res?.id?.toString())
         dispatch(setLoginData(res))
         const params = `/${res?.id}`
@@ -52,7 +52,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
           }
         }
         ref?.current?.close()
-      } else if (res.UserStatus === 'rejected') {
+      } else if (res?.UserStatus === 'rejected') {
         navigate(SCREEN_NAMES.RejectedScreen)
       } else {
         const error = {
