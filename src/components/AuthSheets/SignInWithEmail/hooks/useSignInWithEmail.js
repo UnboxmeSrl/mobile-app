@@ -20,31 +20,42 @@ const useSignInWithEmail = (isFromBookRedirected) => {
   const dispatch = useDispatch()
 
   const handleLoginPress = async (ref) => {
-    setLoading(true)
-    const prepData = { email, password }
-    const res = await userLogin(prepData)
-    setLoading(false)
-    if (res.UserStatus === 'approved') {
-      OneSignal.setExternalUserId(res?.id?.toString())
-      dispatch(setLoginData(res))
-      const params = `/${res?.id}`
-      const bookingRes = await getBookings(params)
-      dispatch(setBookings(bookingRes))
-      if (res.firstVisit === 1) {
-        // dispatch(setIsFirstTimeLogin(false))
-        navigate(SCREEN_NAMES.FirstWelcomeScreen)
-      } else if (serviceDetails?.id && isFromBookRedirected) {
-        navigate(SCREEN_NAMES.ServiceDetails)
+    // navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
+    try {
+      setLoading(true)
+      const prepData = { email, password }
+      const res = await userLogin(prepData)
+      console.log(res, 'res')
+      setLoading(false)
+      if (res?.UserStatus === 'approved') {
+        OneSignal.setExternalUserId(res?.id?.toString())
+        dispatch(setLoginData(res))
+        const params = `/${res?.id}`
+        const bookingRes = await getBookings(params)
+        dispatch(setBookings(bookingRes))
+
+        // console.log('isFirstTimeLogin', isFirstTimeLogin)
+        if (res.firstVisit === 1) {
+          // dispatch(setIsFirstTimeLogin(false))
+          navigate(SCREEN_NAMES.FirstWelcomeScreen)
+        } else if (serviceDetails?.id && isFromBookRedirected) {
+          navigate(SCREEN_NAMES.ServiceDetails)
+        } else {
+          navigate(SCREEN_NAMES.Cities)
+        }
+
+        ref?.current?.close()
+      } else if (res.UserStatus === '' || res.UserStatus === 'onapproval') {
+        dispatch(setOnboardingData(true))
+        navigate(SCREEN_NAMES.AppliedScreen)
+      } else if (res.UserStatus === 'rejected') {
+        dispatch(setOnboardingData(true))
+        navigate(SCREEN_NAMES.RejectedScreen)
       } else {
-        navigate(SCREEN_NAMES.Cities)
+        setIsError(true)
       }
-    } else if (res.UserStatus === '' || res.UserStatus === 'onapproval') {
-      dispatch(setOnboardingData(true))
-      navigate(SCREEN_NAMES.AppliedScreen)
-    } else if (res.UserStatus === 'rejected') {
-      dispatch(setOnboardingData(true))
-      navigate(SCREEN_NAMES.RejectedScreen)
-    } else {
+    } catch (err) {
+      setLoading(false)
       setIsError(true)
     }
   }

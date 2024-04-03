@@ -433,6 +433,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - OneSignalXCFramework (< 4.0, >= 3.0)
   - PanModal (~> 1.2.7)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -723,6 +724,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 115544be53274d4334bc010a475cda7f36406e0c
+PODFILE CHECKSUM: 0e34140c416f3a1bf71be410edfe8a70c307553d
 
 COCOAPODS: 1.15.2

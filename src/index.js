@@ -1,5 +1,6 @@
 import React from 'react'
 import { I18nextProvider } from 'react-i18next'
+import Config from 'react-native-config'
 import { ReduxNetworkProvider } from 'react-native-offline'
 import OneSignal from 'react-native-onesignal'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -16,6 +17,7 @@ import { ThemeProvider } from '@components/ThemeProvider'
 import NavigationContainer from '@nav/NavigationContainer'
 import { persistor, store } from '@redux/store'
 import i18n from '@services/i18n'
+
 //
 // const db = firestore()
 // db.settings({ host: 'localhost:8080', ssl: false })
@@ -23,8 +25,9 @@ import i18n from '@services/i18n'
 // auth().useEmulator('http://localhost:9099')
 
 const App = () => {
+  console.log('object', Config.ONE_SIGNAL_APP_ID)
   // OneSignal Initialization
-  OneSignal.setAppId('3c04e5f2-7b9f-421d-9f4f-b8842b3527cf')
+  OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID)
 
   // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
   OneSignal.promptForPushNotificationsWithUserResponse()

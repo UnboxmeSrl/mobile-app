@@ -131,6 +131,7 @@ const RestaurantDetails = () => {
             renderItem={({ item, index }) => {
               return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
             }}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
       </ScrollView>
@@ -239,8 +240,8 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
   },
   mainContainer: {
-    backgroundColor: COLORS.white,
     flex: 1,
+    backgroundColor: COLORS.white,
     marginTop: getStatusBarHeight(),
   },
   previewText: {
@@ -256,6 +257,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(8),
   },
   restaurantDetailsContainer: {
+    flex: 1,
     paddingHorizontal: scale(15),
   },
   restaurantNameText: {

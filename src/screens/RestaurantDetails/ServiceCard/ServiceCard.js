@@ -42,9 +42,10 @@ const ServiceCard = ({ item, index }) => {
           source={{ uri: item?.Offer_Cover?.url }}
           style={styles.imageBgContainer}
         >
-          {/* <View style={styles.dealTimerContainer}>
-            <Text style={styles.dealTimeLeftText}>1 deal left</Text>
-          </View> */}
+          <Image source={IMAGES.overlay} style={styles.itemImage} resizeMode="cover" />
+          <View style={styles.dealTimerContainer}>
+            <Text style={styles.dealTimeLeftText}>{`${item?.deal_left} deal left`}</Text>
+          </View>
         </ImageBackground>
       </View>
       <View style={styles.titleRatingMainRow}>
@@ -62,7 +63,7 @@ const ServiceCard = ({ item, index }) => {
         <Text style={styles.descriptionText}>To publish with 24 hours</Text>
       </View>
 
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+      <View style={styles.amenitiesMainContainer}>
         <View style={styles.amenitiesContainer}>
           <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
           <Text style={styles.amenityText}>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
@@ -79,10 +80,16 @@ const ServiceCard = ({ item, index }) => {
 export default ServiceCard
 
 const styles = StyleSheet.create({
+  amenitiesMainContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+  },
+
   amenityText: {
     color: COLORS.greyFont,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(14),
+    fontFamily: FONTS.interSemiBold,
+    fontSize: moderateScale(12),
   },
   amenityIcon: {
     height: moderateScale(22.52),
@@ -124,8 +131,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginLeft: scale(20),
-    marginRight: scale(20),
     marginTop: verticalScale(10),
   },
   titleText: {
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginLeft: scale(20),
+    marginLeft: scale(5),
     marginRight: scale(20),
     marginTop: verticalScale(10),
   },
@@ -184,30 +189,31 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(20.79),
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),
-    marginHorizontal: scale(10),
+    marginHorizontal: perfectSize(20),
   },
   itemImage: {
-    borderRadius: moderateScale(20),
-    height: '100%',
+    position: 'absolute',
+    borderRadius: moderateScale(25.3),
+    height: moderateScale(146.78),
+    right: scale(5),
     overflow: 'hidden',
-    width: '100%',
+    width: '98%',
   },
   dealTimerContainer: {
-    width: '40%',
+    width: scale(73),
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.whiteShadedTransparent,
+    backgroundColor: COLORS.white,
     borderRadius: moderateScale(20),
     flexDirection: 'row',
     marginRight: scale(20),
     marginTop: verticalScale(10),
-    paddingHorizontal: scale(15),
     paddingVertical: verticalScale(3),
   },
   dealTimeLeftText: {
     textAlign: 'center',
-    color: COLORS.white,
-    fontFamily: FONTS.quicksandBold,
+    color: COLORS.primary,
+    fontFamily: FONTS.interBold,
     fontSize: moderateScale(12),
   },
 })

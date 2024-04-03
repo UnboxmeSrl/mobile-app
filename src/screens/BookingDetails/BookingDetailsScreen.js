@@ -76,7 +76,7 @@ const BookingDetailsScreen = () => {
                   <Text style={styles.dateSelectTitleText}>Select a Date</Text>
                 </View>
 
-                <View style={{ alignItems: 'center' }}>
+                <View style={styles.calendarContainer}>
                   {/* This need to remove in future */}
                   {/* <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                     <Text>{DeviceInfo.getBrand()}</Text>
@@ -108,7 +108,7 @@ const BookingDetailsScreen = () => {
                   calendarHeaderStyle={styles.calendarHeaderStyle}
                   dateNameStyle={styles.dateNameStyle}
                   dateNumberStyle={styles.dateNumberStyle}
-                  // datesBlacklist={datesBlacklistFunc}
+                  datesBlacklist={datesBlacklistFunc}
                   endDate={endDate}
                   highlightDateContainerStyle={styles.highlightedDateContainer}
                   highlightDateNameStyle={styles.highlightDateNameStyle}
@@ -140,10 +140,15 @@ const BookingDetailsScreen = () => {
                     </View>
                   }
                   data={weekDayWiseTimeSlots}
-                  numColumns={2}
                   keyExtractor={(_, index) => index.toString()}
+                  numColumns={2}
                   renderItem={({ item, index }) => {
-                    const isSelected = item?.id === selectedTimeFame?.id
+                    let isSelected = item?.id === selectedTimeFame?.id
+                    if (!selectedTimeFame?.id && index === 0) {
+                      console.log('selectedTimeFrame:', selectedTimeFame, index)
+                      isSelected = true
+                      setSelectedTimeFame(item)
+                    }
                     return (
                       <TouchableOpacity
                         onPress={() => setSelectedTimeFame(item)}
@@ -220,6 +225,7 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(16),
     marginTop: verticalScale(10),
   },
+
   availableHoursTitleContainer: {
     marginTop: verticalScale(16),
   },
@@ -257,6 +263,9 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18),
     fontWeight: '600',
   },
+  calendarContainer: {
+    alignItems: 'center',
+  },
   calendarHeaderStyle: {
     color: 'black',
   },
@@ -265,6 +274,11 @@ const styles = StyleSheet.create({
   },
   calendarStripIcon: {
     transform: [{ scale: 0 }],
+  },
+  dateNameStyle: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
   },
   calendarStripIconContainer: {
     height: 0,
@@ -282,11 +296,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: scale(10),
     marginVertical: verticalScale(24),
-  },
-  dateNameStyle: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(12),
   },
   dateNumberStyle: {
     color: COLORS.yankeesBlue,

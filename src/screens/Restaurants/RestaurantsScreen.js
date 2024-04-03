@@ -1,18 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   Image,
-  PermissionsAndroid,
-  Platform,
   RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native'
-import Geolocation from 'react-native-geolocation-service'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
@@ -21,11 +17,9 @@ import { Categories } from '@components/Categories'
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { geolocationSetting } from '../../utils/smallComponents'
 
 import { useRestaurants } from './hooks'
 import { RestaurantCard } from './RestaurantCard'
-import { getDistance } from 'geolib'
 
 const RestaurantsScreen = () => {
   const {

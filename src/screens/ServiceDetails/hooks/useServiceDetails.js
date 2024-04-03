@@ -7,7 +7,7 @@ import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
-import { setTimeFrameData } from '../../../redux/slices'
+import { setServices, setTimeFrameData } from '../../../redux/slices'
 import { getDiaryActions, getTimeFrames } from '../../../services'
 import { getServiceCategories, getServiceDealsLeft, getServices } from '../../../services/LocationsService'
 
@@ -17,7 +17,8 @@ const useServiceDetails = () => {
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
   const [isImageLoading, setIsImageLoading] = useState(true)
-  const [services, setServices] = useState()
+  // const [services, setServices] = useState()
+  const services = useSelector((state) => state.serviceSlice.services)
   const [serviceCategories, setServiceCategories] = useState([])
   const [diaryItems, setDiaryItems] = useState([])
   const [filter, setFilter] = useState(0)
@@ -33,7 +34,7 @@ const useServiceDetails = () => {
       restaurant_id: serviceDetails?.id,
     }
     const res = await getServices(prepData)
-    setServices(res)
+    dispatch(setServices(res))
   }
 
   const getServiceDealsLeftData = async () => {
@@ -45,9 +46,11 @@ const useServiceDetails = () => {
     let deals
     if (res?.status === 200) {
       deals = `${res?.deal_left} deal left`
-    } else if (res?.status === 201) {
-      deals = `No deal limit`
     }
+    // else if (res?.status === 201) {
+    //   deals = `No deal limit`
+    // }
+
     setDealsLeft(deals)
     setIsLoading(false)
   }
