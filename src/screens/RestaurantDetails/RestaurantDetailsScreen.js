@@ -118,6 +118,7 @@ const RestaurantDetails = () => {
 
           <FlatList
             horizontal
+            showsHorizontalScrollIndicator={false}
             data={services}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => {
@@ -226,8 +227,8 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(3),
   },
   mainContainer: {
-    backgroundColor: COLORS.white,
     flex: 1,
+    backgroundColor: COLORS.white,
     marginTop: getStatusBarHeight(),
   },
   previewText: {
@@ -243,6 +244,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(8),
   },
   restaurantDetailsContainer: {
+    flex: 1,
     paddingHorizontal: scale(15),
   },
   restaurantNameText: {

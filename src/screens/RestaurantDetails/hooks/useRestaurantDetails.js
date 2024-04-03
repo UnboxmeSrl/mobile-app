@@ -1,21 +1,25 @@
 import { navigate } from '@services'
 import { useEffect, useState } from 'react'
-import { useNavigationParam } from 'react-navigation-hooks'
-import { useSelector } from 'react-redux'
+import { useIsFocused, useNavigationParam } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getServiceCategories, getServices } from '../../../services/LocationsService'
 import { Linking } from 'react-native'
+import { setServices } from '../../../redux/slices'
 
 const useRestaurantDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
+  const services = useSelector((state) => state.serviceSlice.services)
   const cityData = useNavigationParam('cityData')
-  const [services, setServices] = useState()
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
   const [isImageLoading, setIsImageLoading] = useState(true)
+  const dispatch = useDispatch()
+  const isFocused = useIsFocused()
 
+  console.log('Services', services)
   const getServicesData = async () => {
     const prepData = {
       category_id: filter,
@@ -23,7 +27,7 @@ const useRestaurantDetails = () => {
     }
     const res = await getServices(prepData)
     console.log('res', res)
-    setServices(res)
+    dispatch(setServices(res))
   }
 
   const getServiceCategoriesData = async () => {
@@ -70,6 +74,12 @@ const useRestaurantDetails = () => {
   useEffect(() => {
     getServicesData()
   }, [filter])
+
+  useEffect(() => {
+    if (isFocused && services?.length === 0) {
+      getServicesData()
+    }
+  }, [isFocused])
 
   return {
     categoriesIds,

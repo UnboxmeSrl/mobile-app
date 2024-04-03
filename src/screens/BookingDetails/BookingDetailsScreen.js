@@ -74,14 +74,14 @@ const BookingDetailsScreen = () => {
                   <Text style={styles.dateSelectTitleText}>Select a Date</Text>
                 </View>
 
-                <View style={{ alignItems: 'center' }}>
+                <View style={styles.calendarContainer}>
                   {/* This need to remove in future */}
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text>{DeviceInfo.getBrand()}</Text>
                     <Text> {DeviceInfo.getBuildNumber()}</Text>
                     <Text> {DeviceInfo.getSystemVersion()}</Text>
                     <Text> {DeviceInfo.getModel()}</Text>
-                  </View>
+                  </View> */}
                   {/* only above one line and style={{ alignItems: 'center' }} */}
                   <Image resizeMode="cover" source={IMAGES.calender} style={styles.calenderIcon} />
                 </View>
@@ -106,7 +106,7 @@ const BookingDetailsScreen = () => {
                   calendarHeaderStyle={styles.calendarHeaderStyle}
                   dateNameStyle={styles.dateNameStyle}
                   dateNumberStyle={styles.dateNumberStyle}
-                  // datesBlacklist={datesBlacklistFunc}
+                  datesBlacklist={datesBlacklistFunc}
                   endDate={endDate}
                   highlightDateContainerStyle={styles.highlightedDateContainer}
                   highlightDateNameStyle={styles.highlightDateNameStyle}
@@ -141,7 +141,12 @@ const BookingDetailsScreen = () => {
                   numColumns={2}
                   keyExtractor={(_, index) => index.toString()}
                   renderItem={({ item, index }) => {
-                    const isSelected = item?.id === selectedTimeFame?.id
+                    let isSelected = item?.id === selectedTimeFame?.id
+                    if (!selectedTimeFame?.id && index === 0) {
+                      console.log('selectedTimeFrame:', selectedTimeFame, index)
+                      isSelected = true
+                      setSelectedTimeFame(item)
+                    }
                     return (
                       <TouchableOpacity
                         onPress={() => setSelectedTimeFame(item)}
@@ -214,6 +219,9 @@ const BookingDetailsScreen = () => {
 export default BookingDetailsScreen
 
 const styles = StyleSheet.create({
+  calendarContainer: {
+    alignItems: 'center',
+  },
   loaderContainer: {
     alignItems: 'center',
     flex: 1,
