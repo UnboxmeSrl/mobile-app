@@ -1,7 +1,7 @@
 {
   "name": "ClarisApp",
   "version": "1.0",
-  "buildNumber": 18,
+  "buildNumber": 19,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
