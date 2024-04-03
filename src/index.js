@@ -17,6 +17,7 @@ import i18n from '@services/i18n'
 import OneSignal from 'react-native-onesignal'
 import { PERMISSIONS } from 'react-native-permissions'
 import { checkPermission } from './utils'
+import Config from 'react-native-config'
 //
 // const db = firestore()
 // db.settings({ host: 'localhost:8080', ssl: false })
@@ -24,8 +25,9 @@ import { checkPermission } from './utils'
 // auth().useEmulator('http://localhost:9099')
 
 const App = () => {
+  console.log('object', Config.ONE_SIGNAL_APP_ID)
   // OneSignal Initialization
-  OneSignal.setAppId('3c04e5f2-7b9f-421d-9f4f-b8842b3527cf')
+  OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID)
 
   // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
   OneSignal.promptForPushNotificationsWithUserResponse()

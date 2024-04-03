@@ -4,7 +4,9 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.unboxme.app</string>
+		<string>group.claris.app</string>
+		<string>group.com.claris.app.onesignal</string>
+		<string>group.com.claris.app</string>
 	</array>
 </dict>
 </plist>

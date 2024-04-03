@@ -135,7 +135,7 @@ const useBookingDetails = () => {
         return true
       }
     })
-    if (filteredData.length === 0) {
+    if (filteredData?.length === 0) {
       return true
     } else {
       return false
