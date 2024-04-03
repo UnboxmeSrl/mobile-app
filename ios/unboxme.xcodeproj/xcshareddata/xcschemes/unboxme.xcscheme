@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "BUILD=$(/opt/homebrew/bin/jq &apos;.buildNumber&apos; ${PROJECT_DIR}/../package.json) &#10;VERSION=$(/opt/homebrew/bin/jq -r &apos;.version&apos; ${PROJECT_DIR}/../package.json) &#10;plutil -replace CFBundleVersion -string $BUILD &quot;${PROJECT_DIR}/unboxme/Info.plist&quot;&#10;plutil -replace CFBundleShortVersionString -string $VERSION &quot;${PROJECT_DIR}/unboxme/Info.plist&quot;&#10;plutil -replace CFBundleVersion -string $BUILD &quot;${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist&quot;&#10;plutil -replace CFBundleShortVersionString -string $VERSION &quot;${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist&quot;&#10;"
+               scriptText = "BUILD=$(jq &apos;.buildNumber&apos; ${PROJECT_DIR}/../package.json) &#10;VERSION=$(jq -r &apos;.version&apos; ${PROJECT_DIR}/../package.json) &#10;plutil -replace CFBundleVersion -string $BUILD &quot;${PROJECT_DIR}/unboxme/Info.plist&quot;&#10;plutil -replace CFBundleShortVersionString -string $VERSION &quot;${PROJECT_DIR}/unboxme/Info.plist&quot;&#10;plutil -replace CFBundleVersion -string $BUILD &quot;${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist&quot;&#10;plutil -replace CFBundleShortVersionString -string $VERSION &quot;${PROJECT_DIR}/OneSignalNotificationServiceExtension/Info.plist&quot;&#10;"
                shellToInvoke = "/bin/sh">
                <EnvironmentBuildable>
                   <BuildableReference
@@ -60,7 +60,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"

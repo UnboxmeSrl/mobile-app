@@ -4,6 +4,7 @@ import { Alert } from 'react-native'
 import { useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { addRestaurantBooking, getTimeFrames, showToastError } from '../../../services'
+import { setTimeFrameData } from '../../../redux/slices'
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector((state) => state.restaurantSlice.timeFrameData)
@@ -159,8 +160,8 @@ const useBookingDetails = () => {
       }
     })
     console.log(
-      'timeframe filtered data',
-      filteredData
+      'timeframe filtered data'
+      // filteredData
       // filteredData[0].weekdays.map((e) => e)
     )
 
@@ -174,7 +175,7 @@ const useBookingDetails = () => {
         setWeekDayWiseTimeSlots([])
       }
     })
-    setWeekDayWiseTimeSlots(filteredData)
+    // setWeekDayWiseTimeSlots(filteredData)
     setTimeout(() => {
       setIsDatesLoading(false)
     }, 2000)
