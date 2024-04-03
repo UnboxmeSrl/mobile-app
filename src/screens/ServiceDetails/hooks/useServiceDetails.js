@@ -1,12 +1,15 @@
-import { navigate } from '@services'
 import { useEffect, useState } from 'react'
+import Toast from 'react-native-toast-message'
+import { useIsFocused } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { navigate } from '@services'
+
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
+import { setTimeFrameData } from '../../../redux/slices'
 import { getDiaryActions, getTimeFrames } from '../../../services'
 import { getServiceCategories, getServiceDealsLeft, getServices } from '../../../services/LocationsService'
-import { useIsFocused } from 'react-navigation-hooks'
-import { setTimeFrameData } from '../../../redux/slices'
 
 const useServiceDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -35,8 +38,8 @@ const useServiceDetails = () => {
 
   const getServiceDealsLeftData = async () => {
     const prepData = {
-      restaurant_turbo_id: restaurantDetails?.id,
       offers_turbo_id: serviceDetails?.id,
+      restaurant_turbo_id: restaurantDetails?.id,
     }
     const res = await getServiceDealsLeft(prepData)
     let deals
@@ -85,8 +88,15 @@ const useServiceDetails = () => {
   const handleBookPress = () => {
     setIsBookBtnPressed(true)
     if (loginData?.id) {
-      setIsBookBtnPressed(false)
-      navigate(SCREEN_NAMES.BookingDetails)
+      if (loginData?.UserStatus === 'approved') {
+        setIsBookBtnPressed(false)
+        navigate(SCREEN_NAMES.BookingDetails)
+      } else {
+        Toast.show({
+          text1: 'Your Account is not yet approved',
+          type: 'error',
+        })
+      }
     } else {
       setIsBookBtnPressed(false)
       navigate({
@@ -113,20 +123,20 @@ const useServiceDetails = () => {
   }, [filter])
 
   return {
-    diaryItems,
     categoriesIds,
-    filter,
-    isImageLoading,
-    setIsImageLoading,
-    isLoading,
-    isBookBtnPressed,
     dealsLeft,
+    diaryItems,
+    filter,
     handleBackPress,
     handleBookPress,
+    isBookBtnPressed,
+    isImageLoading,
+    isLoading,
     onCategoryChange,
     serviceCategories,
     serviceDetails,
     services,
+    setIsImageLoading,
   }
 }
 

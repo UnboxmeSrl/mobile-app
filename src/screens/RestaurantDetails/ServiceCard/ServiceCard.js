@@ -5,9 +5,9 @@ import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { IMAGES } from '../../../assets/images'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
+import perfectSize from '../../../utils/responsiveSize'
 
 import { useServiceCard } from './hooks'
-import perfectSize from '../../../utils/responsiveSize'
 
 const ServiceCard = ({ item, index }) => {
   const { handleCardPress } = useServiceCard()
@@ -34,13 +34,13 @@ const ServiceCard = ({ item, index }) => {
     //   </ImageBackground>
     // </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem} activeOpacity={0.6}>
+    <TouchableOpacity activeOpacity={0.6} onPress={() => handleCardPress(item)} style={styles.listItem}>
       <View style={styles.imageContainer}>
         <ImageBackground
+          imageStyle={styles.actualPicture}
           resizeMode="cover"
           source={{ uri: item?.Offer_Cover?.url }}
           style={styles.imageBgContainer}
-          imageStyle={styles.actualPicture}
         >
           {/* <View style={styles.dealTimerContainer}>
             <Text style={styles.dealTimeLeftText}>1 deal left</Text>
@@ -62,7 +62,7 @@ const ServiceCard = ({ item, index }) => {
         <Text style={styles.descriptionText}>To publish with 24 hours</Text>
       </View>
 
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         <View style={styles.amenitiesContainer}>
           <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
           <Text style={styles.amenityText}>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
@@ -89,11 +89,12 @@ const styles = StyleSheet.create({
     width: moderateScale(22.52),
   },
   amenitiesContainer: {
-    width: scale(100),
+    // width: scale(100),
+    paddingHorizontal: perfectSize(10),
     height: moderateScale(34.64),
     backgroundColor: COLORS.cultured,
     borderRadius: moderateScale(58.03),
-    marginLeft: scale(20),
+    // marginLeft: scale(20),
     marginTop: verticalScale(10),
     flexDirection: 'row',
     alignItems: 'center',

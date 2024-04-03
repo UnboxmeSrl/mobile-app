@@ -9,25 +9,25 @@ import { CommonHeader } from '../../components'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { checkAction, checkActionName } from '../../utils'
+import { checkAction } from '../../utils'
 
 import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
   const {
     diaryItems,
-    services,
-    categoriesIds,
+    // services,
+    // categoriesIds,
     isImageLoading,
     isLoading,
     isBookBtnPressed,
     setIsImageLoading,
     serviceDetails,
     dealsLeft,
-    filter,
-    serviceCategories,
-    onCategoryChange,
-    handleBackPress,
+    // filter,
+    // serviceCategories,
+    // onCategoryChange,
+    // handleBackPress,
     handleBookPress,
   } = useServiceDetails()
 
@@ -47,10 +47,10 @@ const ServiceDetails = () => {
                   <>
                     {isImageLoading && <View style={styles.imageLoader} />}
                     <FastImage
+                      onLoadEnd={() => setIsImageLoading(false)}
                       resizeMode="cover"
                       source={{ priority: FastImage.priority.high, uri: item?.url }}
                       style={styles.imageStyle}
-                      onLoadEnd={() => setIsImageLoading(false)}
                     />
                   </>
                 )
@@ -332,49 +332,42 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
     marginLeft: scale(10),
   },
-  mainSocialItemContainer: {
-    height: verticalScale(150),
-    alignSelf: 'center',
-    width: '90%',
-    borderColor: COLORS.gainsboro,
-    borderWidth: moderateScale(1),
-    borderRadius: moderateScale(16),
-    flexDirection: 'row',
-    marginTop: verticalScale(24),
+  timeCircleIcon: {
+    tintColor: COLORS.primary,
+    height: moderateScale(18),
+    width: moderateScale(18),
   },
   deadlineContainer: {
     width: '50%',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  orDivider: {
-    alignSelf: 'center',
-    borderColor: COLORS.gray,
-    borderWidth: 0.5,
-    opacity: 0.5,
-    width: '20%',
+  contentRequiredText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
   },
   contentRequiredContainer: {
     width: '50%',
     alignItems: 'center',
   },
-  socialMediaDescriptionContainer: {
-    marginTop: verticalScale(10),
-  },
   contentRequiredRow: {
     flexDirection: 'row',
-    marginTop: verticalScale(5),
     width: '100%',
+    marginTop: verticalScale(5),
   },
-  socialMediaDescriptionText: {
-    color: COLORS.greyFont,
-    fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(15),
+  divider: {
+    borderWidth: 0.5,
+    opacity: 0.5,
+    alignSelf: 'center',
+    borderColor: COLORS.gray,
+    width: '90%',
+    marginVertical: verticalScale(20),
   },
-  contentRequiredText: {
-    color: COLORS.black,
+  deaLeftText: {
+    color: COLORS.primary,
     fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(12),
   },
   dealLeftContainer: {
     // width: '22%',
@@ -392,14 +385,14 @@ const styles = StyleSheet.create({
     height: verticalScale(45),
     flexDirection: 'row',
     borderRadius: moderateScale(16),
-    flexDirection: 'row',
     borderWidth: moderateScale(1),
     marginTop: verticalScale(10),
+    marginLeft: scale(20),
     marginLeft: scale(10),
     paddingHorizontal: scale(10),
     borderColor: COLORS.gainsboro,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   amenityIconContainer: {
     marginRight: scale(10),
@@ -419,72 +412,60 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
   },
-  socialMediaTitleDescriptionContainer: {
-    width: '70%',
-    marginLeft: scale(10),
-    justifyContent: 'center',
-  },
   amenitiesDescription: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(11),
   },
-  socialMediaImageContainer: {
-    width: '20%',
-    justifyContent: 'center',
+  ratingIcon: {
+    height: moderateScale(11.56),
+    width: moderateScale(12),
+  },
+  ratingsText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+  },
+  ratingsContainer: {
+    width: '15%',
     alignItems: 'center',
+    justifyContent: 'space-evenly',
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    marginLeft: scale(20),
   },
-  amenityIconContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '30%',
+  titleText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(15),
   },
-  flatlistContainer: {
-    flex: 1,
-    marginBottom: verticalScale(20),
-  },
-  amenityTitleDescriptionContainer: {
-    justifyContent: 'center',
-    width: '60%',
-  },
-  timeCircleIcon: {
-    tintColor: COLORS.primary,
+  socialIcon: {
     height: moderateScale(18),
     width: moderateScale(18),
+    marginRight: scale(10),
   },
-  deaLeftText: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(12),
+  itemTitleIconContainer: {
+    width: '60%',
+    alignItems: 'center',
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    marginLeft: scale(20),
+    marginRight: scale(20),
+    marginTop: verticalScale(10),
   },
-  // -----------------------------------
+  titleRatingMainRow: {
+    flexDirection: 'row',
+    width: '95%',
+    marginTop: verticalScale(5),
+    justifyContent: 'space-evenly',
+  },
+  //-----------------------------------
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
     marginTop: verticalScale(8),
   },
-
-  dealLeftContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '22%',
-    borderRadius: moderateScale(12),
-    borderWidth: moderateScale(1),
-    height: verticalScale(20),
-    borderColor: COLORS.primary,
-    marginTop: verticalScale(10),
-  },
-
-  divider: {
-    borderWidth: 0.5,
-    alignSelf: 'center',
-    opacity: 0.5,
-    borderColor: COLORS.gray,
-    marginVertical: verticalScale(20),
-    width: '90%',
-  },
-
   bookBtnContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.lightBrown,
@@ -493,63 +474,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-
-  itemTitleIconContainer: {
-    alignItems: 'center',
-    borderRadius: moderateScale(20),
-    flexDirection: 'row',
-    width: '60%',
-    marginLeft: scale(20),
-    marginRight: scale(20),
-    marginTop: verticalScale(10),
-  },
-
   bookBtnMainContainer: {
     marginTop: verticalScale(14),
     padding: moderateScale(24),
     width: '100%',
   },
-
-  ratingIcon: {
-    height: moderateScale(11.56),
-    width: moderateScale(12),
-  },
-
   bookBtnText: {
     color: COLORS.primary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
   },
-
-  ratingsContainer: {
-    alignItems: 'center',
-    borderRadius: moderateScale(20),
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    width: '15%',
-    marginLeft: scale(20),
-  },
-
   chooseServiceContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     height: verticalScale(40),
     marginTop: verticalScale(8),
   },
-  ratingsText: {
-    color: COLORS.primary,
-    fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(14),
-  },
   extraPersonIcon: {
     height: moderateScale(13.23),
     marginLeft: scale(15),
     width: moderateScale(20.25),
-  },
-  socialIcon: {
-    height: moderateScale(18),
-    marginRight: scale(10),
-    width: moderateScale(18),
   },
   howItWorksContainer: {
     alignItems: 'center',
@@ -558,22 +502,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: verticalScale(50),
   },
-  imageLoader: {
-    backgroundColor: COLORS.lightPink,
-    height: verticalScale(170),
-    position: 'absolute',
-    width: '100%',
-  },
-  titleText: {
-    color: COLORS.black,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(15),
-  },
   imageStyle: {
     alignSelf: 'center',
     borderRadius: moderateScale(24),
     height: verticalScale(170),
     width: '90%',
+  },
+  imageLoader: {
+    position: 'absolute',
+    height: verticalScale(170),
+    width: '100%',
+    backgroundColor: COLORS.lightPink,
   },
   infoContainer: {
     alignItems: 'center',
@@ -584,12 +523,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: verticalScale(10),
     width: moderateScale(22),
-  },
-  titleRatingMainRow: {
-    flexDirection: 'row',
-    width: '95%',
-    marginTop: verticalScale(5),
-    justifyContent: 'space-evenly',
   },
   infoText: {
     color: COLORS.primary,
@@ -614,12 +547,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   orContainer: {
-    alignItems: 'center',
     flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
     justifyContent: 'space-evenly',
     marginRight: scale(20),
     marginTop: verticalScale(20),
-    width: '100%',
   },
   orText: {
     color: COLORS.achromaticBlack,
@@ -740,7 +673,6 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(9),
     textAlign: 'center',
   },
-
   tiktokIconImage: {
     height: moderateScale(29.09),
     width: moderateScale(32),

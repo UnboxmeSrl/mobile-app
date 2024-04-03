@@ -33,12 +33,7 @@ const RestaurantSlice = createSlice({
   },
 })
 
-export const {
-  setRestaurantDetails,
-  setServiceDetails,
-  setBookings,
-  setCanceledBookings,
-  setTimeFrameData,
-} = RestaurantSlice.actions
+export const { setRestaurantDetails, setServiceDetails, setBookings, setCanceledBookings, setTimeFrameData } =
+  RestaurantSlice.actions
 
 export default RestaurantSlice.reducer

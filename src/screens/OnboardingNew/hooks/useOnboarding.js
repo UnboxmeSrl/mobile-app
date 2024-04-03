@@ -1,13 +1,15 @@
 import React, { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { SCREEN_NAMES } from '@const/navigation'
+import { navigate } from '@services'
+
+import { setOnboardingData } from '../../../redux/slices/authSlice'
+import { FifthOnboarding } from '../FifthOnboarding'
 import { FirstOnboarding } from '../FirstOnboarding'
+import { FourthOnboarding } from '../FourthOnboarding'
 import { SecondOnboarding } from '../SecondOnboarding'
 import { ThirdOnboarding } from '../ThirdOnboarding'
-import { FourthOnboarding } from '../FourthOnboarding'
-import { FifthOnboarding } from '../FifthOnboarding'
-import { navigate } from '@services'
-import { SCREEN_NAMES } from '@const/navigation'
-import { useDispatch } from 'react-redux'
-import { setOnboardingData } from '../../../redux/slices/authSlice'
 
 const useOnboarding = () => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -41,7 +43,7 @@ const useOnboarding = () => {
       const active = activeIndex + 1
       if (active > 4) {
         navigate(SCREEN_NAMES.SignUpNew)
-        // dispatch(setOnboardingData(true))
+        dispatch(setOnboardingData(true))
       }
       return active
     })

@@ -33,7 +33,6 @@ const RestaurantsScreen = () => {
     cityData,
     categories,
     filter,
-    userLocation,
     refreshing,
     onRefresh,
     categoriesIds,
@@ -62,11 +61,6 @@ const RestaurantsScreen = () => {
         <>
           <View style={styles.restaurantsFlatlistContainer}>
             <FlatList
-              getItemLayout={(_, index) => ({
-                length: verticalScale(200),
-                offset: verticalScale(200) * index,
-                index,
-              })}
               ListEmptyComponent={
                 <View style={styles.listEmptyContainer}>
                   <Text style={styles.listEmptyText}>No data found.</Text>
@@ -74,6 +68,11 @@ const RestaurantsScreen = () => {
               }
               contentContainerStyle={styles.listMain}
               data={restaurantsData}
+              getItemLayout={(_, index) => ({
+                index,
+                length: verticalScale(200),
+                offset: verticalScale(200) * index,
+              })}
               keyExtractor={(_, index) => index.toString()}
               refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} />}
               renderItem={({ item, index }) => {

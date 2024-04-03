@@ -5,7 +5,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import rootReducer from './rootReducer'
 
 const persistConfig = {
-  key: 'root',
+  key: 'claris-app',
   storage: AsyncStorage,
   whitelist: ['authSlice'],
 }
@@ -15,9 +15,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
   middleware: getDefaultMiddleware({
     immutableCheck: { warnAfter: 128 },
-    serializableCheck: { warnAfter: 128 },
-    immutableCheck: false,
-    serializableCheck: false,
+    // serializableCheck: { warnAfter: 128 },
+    // immutableCheck: false,
+    // serializableCheck: false,
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
