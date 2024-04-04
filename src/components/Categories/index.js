@@ -25,7 +25,12 @@ export const Categories = ({ categoriesIds, onPress, category, customCategories 
   )
   return (
     <Wrapper>
-      <List Component={Component} contentContainerStyle={{ paddingLeft: 20 }} data={categories} />
+      <List
+        Component={Component}
+        contentContainerStyle={{ paddingLeft: 20 }}
+        data={categories}
+        keyExtractor={(_, index) => index.toString()}
+      />
     </Wrapper>
   )
 }

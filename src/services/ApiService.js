@@ -67,4 +67,9 @@ export default {
 
     return response?.data
   },
+
+  delete: async (url) => {
+    const response = await axios.delete(url)
+    return response?.data
+  },
 }

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    width: '52%',
+    width: '53%',
     marginTop: verticalScale(20),
     marginBottom: verticalScale(10),
     justifyContent: 'space-between',

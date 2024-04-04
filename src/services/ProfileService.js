@@ -83,6 +83,18 @@ export const getProfile = async () => {
     console.log(error)
   }
 }
+
+export const deleteUserAccount = async (userId) => {
+  try {
+    const url = Api.PROFILE.DELETE_USER_ACCOUNT + userId
+    console.log('url:', url)
+    const response = await Fetch.delete(url, { axiosSecure: true })
+    console.log('delete response', response)
+    return response?.data
+  } catch (error) {
+    console.log(error)
+  }
+}
 // export const getProfile = async (id) => {
 //   try {
 //     const url = `${Api.PROFILE.GET_USER_PROFILE}/${id}`

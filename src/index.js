@@ -25,7 +25,6 @@ import i18n from '@services/i18n'
 // auth().useEmulator('http://localhost:9099')
 
 const App = () => {
-  console.log('object', Config.ONE_SIGNAL_APP_ID)
   // OneSignal Initialization
   OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID)
 

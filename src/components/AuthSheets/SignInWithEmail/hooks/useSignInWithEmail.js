@@ -48,9 +48,11 @@ const useSignInWithEmail = (isFromBookRedirected) => {
       } else if (res.UserStatus === '' || res.UserStatus === 'onapproval') {
         dispatch(setOnboardingData(true))
         navigate(SCREEN_NAMES.AppliedScreen)
+        ref?.current?.close()
       } else if (res.UserStatus === 'rejected') {
         dispatch(setOnboardingData(true))
         navigate(SCREEN_NAMES.RejectedScreen)
+        ref?.current?.close()
       } else {
         setIsError(true)
       }

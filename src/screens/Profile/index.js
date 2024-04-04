@@ -32,7 +32,7 @@ export const ProfileScreen = () => {
   const navigateToYourRating = () => navigate(MODAL_NAMES.YourRating)
   const navigateToAddresses = () => navigate(SCREEN_NAMES.Addresses)
   const navigateToInvite = () => navigate(MODAL_NAMES.InviteFriends)
-  const navigateToSettings = () => navigate(SCREEN_NAMES.Settings)
+  const navigateToSettings = () => navigate(SCREEN_NAMES.SettingsNew)
   const navigateToEditProfile = () => navigate(SCREEN_NAMES.EditProfile)
   const hasQuestionnaire = useSelector(selectHasQuestionnaire)
   const skinType = useSelector(selectSkinType)

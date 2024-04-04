@@ -10,7 +10,8 @@ import { FONTS } from '../../constants/fonts'
 import { useContentBrief } from './hooks'
 
 const ContentBriefScreen = () => {
-  const { isReel, icon, actionName, bookingDetails, handleBackPress, handleOpenCouponPress } = useContentBrief()
+  const { isReel, icon, actionName, bookingDetails, handleBackPress, handleTagCopyPress, handleOpenCouponPress } =
+    useContentBrief()
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -23,13 +24,11 @@ const ContentBriefScreen = () => {
             <Text style={styles.headerTitleText}>Content Brief</Text>
           </View>
         </View>
-
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
-            Realize a Tiktok or a Reel about Pizzami. Show your favourite pizza, talk about the friendly atmosphere and
-            show the view you can see outside
-          </Text>
-        </View>
+        {bookingDetails?._restaurant_turbo?.About?.length > 0 && (
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.descriptionText}>{bookingDetails?._restaurant_turbo?.About}</Text>
+          </View>
+        )}
 
         <View style={styles.labelContainer}>
           <Text style={styles.labelText}>Tags</Text>
@@ -43,8 +42,8 @@ const ContentBriefScreen = () => {
             return (
               <View style={styles.tagContainer}>
                 <Text style={styles.tagText}>{bookingDetails?._restaurant_turbo?.Tags}</Text>
-                <TouchableOpacity>
-                  <Image resizeMode="cover" source={IMAGES.copy} style={styles.copyIcon} />
+                <TouchableOpacity onPress={() => handleTagCopyPress(bookingDetails?._restaurant_turbo?.Tags)}>
+                  <Image resizeMode="contain" source={IMAGES.copy} style={styles.copyIcon} />
                 </TouchableOpacity>
               </View>
             )
@@ -55,7 +54,7 @@ const ContentBriefScreen = () => {
           <Text style={styles.labelText}>Hashtags</Text>
         </View>
 
-        <FlatList
+        {/* <FlatList
           data={[0, 1, 2, 3]}
           numColumns={2}
           keyExtractor={(_, index) => index.toString()}
@@ -69,7 +68,7 @@ const ContentBriefScreen = () => {
               </View>
             )
           }}
-        />
+        /> */}
 
         <View style={styles.socialMediaMainDetailsContainer}>
           <View style={styles.socialMediaImageContainer}>
@@ -252,9 +251,10 @@ const styles = StyleSheet.create({
   tagContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginHorizontal: '8%',
+    marginLeft: '8%',
+    marginRight: '5%',
     marginTop: verticalScale(8),
-    width: '30%',
+    width: '34%',
   },
   tagText: {
     color: COLORS.black,

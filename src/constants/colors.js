@@ -52,4 +52,5 @@ export const COLORS = {
   darkSilver: '#717171',
   newPrimary: '#FF385C',
   veryLight01: 'rgba(250,255, 255, 0.3)',
+  lightRed: '#FFB3B2',
 }

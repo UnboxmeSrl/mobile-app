@@ -28,7 +28,7 @@ const OnboardingNew = () => {
         }}
         data={carouselItems}
       />
-      <TouchableOpacity onPress={handleNextPress} style={styles.btnContainer} activeOpacity={0.7}>
+      <TouchableOpacity onPress={() => handleNextPress()} style={styles.btnContainer} activeOpacity={0.7}>
         <Text style={styles.btnText}>Next</Text>
       </TouchableOpacity>
     </View>

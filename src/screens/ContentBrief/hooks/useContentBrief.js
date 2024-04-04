@@ -4,6 +4,8 @@ import { navigate } from '@services'
 
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { checkAction, checkActionName } from '../../../utils'
+import Clipboard from '@react-native-clipboard/clipboard'
+import { showToastSuccess } from '../../../services'
 
 const useContentBrief = () => {
   const bookingDetails = useNavigationParam('bookingDetails')
@@ -25,6 +27,11 @@ const useContentBrief = () => {
     icon = checkActionName(actionName)
   }
 
+  const handleTagCopyPress = (copyText) => {
+    Clipboard.setString(copyText)
+    showToastSuccess('Text copied successfully!')
+  }
+
   const handleOpenCouponPress = () => {
     navigate({
       params: {
@@ -41,6 +48,7 @@ const useContentBrief = () => {
     handleOpenCouponPress,
     icon,
     isReel,
+    handleTagCopyPress,
   }
 }
 

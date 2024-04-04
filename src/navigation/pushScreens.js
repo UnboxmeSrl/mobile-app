@@ -44,6 +44,7 @@ import ServiceDetails from '../screens/ServiceDetails/ServiceDetailsScreen'
 import AppliedScreen from '../screens/SignUpNew/AppliedScreen/AppliedScreen'
 import SignUpNew from '../screens/SignUpNew/SignUpNew'
 import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
+import { SettingsNew } from '../screens/SettingsNew'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -172,5 +173,8 @@ export default {
   },
   [SCREEN_NAMES.FirstWelcomeScreen]: {
     screen: FirstWellcomeScreen,
+  },
+  [SCREEN_NAMES.SettingsNew]: {
+    screen: SettingsNew,
   },
 }

@@ -20,6 +20,7 @@ import Hobbies from '../../components/Elements/Hobbies'
 import ReadMore from '../../components/Elements/ReadMore'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
+import { COLORS } from '../../constants'
 
 export const ProfileScreenPresenter = ({
   isAuthenticated,
@@ -41,7 +42,7 @@ export const ProfileScreenPresenter = ({
   //   handleGetProfileData()
   // }, [handleGetProfileData])
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       {/* <FormTask /> */}
       {isAuthenticated ? (
         <View style={{ flex: 1 }}>

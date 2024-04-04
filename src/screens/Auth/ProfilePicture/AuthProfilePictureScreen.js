@@ -26,7 +26,7 @@ const AuthProfilePictureScreen = () => {
         <FlatList
           data={profilePicData}
           numColumns={2}
-          keyExtractor={(_, index) => index}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity

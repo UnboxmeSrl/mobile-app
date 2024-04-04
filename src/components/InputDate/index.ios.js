@@ -4,24 +4,13 @@ import { useTranslation } from 'react-i18next'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { format } from 'date-fns'
 import styled from 'styled-components/native'
-
-import InputDateAndroid from '@components/InputDate/index'
 import { TinyText } from '@components/Text'
 import { COLORS, FONTS } from '@const'
 
 const WRAPPER_HEIGHT = 54
 const INPUT_HEIGHT = 44
 
-const InputDateiOS = ({
-  control,
-  name,
-  errors,
-  rules,
-  placeholderKey,
-  RightIcon,
-  disabled,
-  setValue,
-}) => {
+const InputDateiOS = ({ control, name, errors, rules, placeholderKey, RightIcon, disabled, setValue }) => {
   const { t } = useTranslation()
   const placeholder = t(placeholderKey, '')
   const errorKey = errors[name]?.message

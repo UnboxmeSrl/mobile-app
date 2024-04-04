@@ -51,7 +51,7 @@ export const OtherSingUpOptionsScreen = () => {
       <GoogleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
       <OrLogInText color={COLORS.dark} tKey={'signUp.orSignUp'} /> */}
         <Button loading={loading} onPress={navigateToEmailModal} tKey={'signUp.withEmail'} />
-        <Button loading={loading} onPress={navigateToPhoneModal} tKey={'signUp.withPhone'} light />
+        {/* <Button loading={loading} onPress={navigateToPhoneModal} tKey={'signUp.withPhone'} light /> */}
       </Buttons>
       <PoliciesPart dark />
       <SignUpWithEmail ref={ref} closeSignUpSheet={closeSignUpSheet} />
