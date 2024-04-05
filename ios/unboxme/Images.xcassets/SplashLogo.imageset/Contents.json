@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "influencer logo.png",
+      "filename" : "app-logo@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "influencer logo 1.png",
+      "filename" : "app-logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "influencer logo 2.png",
+      "filename" : "app-logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
