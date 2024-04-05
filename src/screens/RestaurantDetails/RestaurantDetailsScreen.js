@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -14,6 +14,7 @@ import { ServiceCard } from './ServiceCard'
 
 const RestaurantDetails = () => {
   const {
+    isLoading,
     services,
     // categoriesIds,
     restaurantDetails,
@@ -23,7 +24,7 @@ const RestaurantDetails = () => {
     // serviceCategories,
     // onCategoryChange,
     handleBackPress,
-    // handleRedirection,
+    handleRedirection,
   } = useRestaurantDetails()
   // console.log('Restaurant Details', JSON.stringify(restaurantDetails))
 
@@ -63,6 +64,11 @@ const RestaurantDetails = () => {
         </View>
         <View style={styles.restaurantDetailsContainer}>
           <Text style={styles.restaurantNameText}>{restaurantDetails?.Name}</Text>
+          {restaurantDetails?.Adress && (
+            <TouchableOpacity onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}>
+              <Text style={styles.restaurantAddressText}>{restaurantDetails?.Adress}</Text>
+            </TouchableOpacity>
+          )}
           {/* <View style={styles.socialLinksContainer}>
             <TouchableOpacity
               onPress={() => handleRedirection(restaurantDetails?.Tiktok)}
@@ -119,20 +125,29 @@ const RestaurantDetails = () => {
             onPress={onCategoryChange}
           /> */}
 
-          <FlatList
-            ListEmptyComponent={
-              <View style={styles.listEmptyContainer}>
-                <Text style={styles.listEmptyText}>No data found.</Text>
-              </View>
-            }
-            data={services}
-            horizontal
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              return <ServiceCard index={index} item={item} restaurantDetails={restaurantDetails} />
-            }}
-            showsHorizontalScrollIndicator={false}
-          />
+          {isLoading ? (
+            <View style={styles.loaderContainer}>
+              <ActivityIndicator color={COLORS.primary} size={20} />
+            </View>
+          ) : (
+            <FlatList
+              ListEmptyComponent={
+                !isLoading && (
+                  <View style={styles.listEmptyContainer}>
+                    <Text style={styles.listEmptyText}>No data found.</Text>
+                  </View>
+                )
+              }
+              data={services}
+              horizontal
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({ item, index }) => {
+                const deals = item?.Deal_limit - item?.deal_done
+                return <ServiceCard index={index} item={item} deals={deals} restaurantDetails={restaurantDetails} />
+              }}
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
       </ScrollView>
     </View>
@@ -140,6 +155,19 @@ const RestaurantDetails = () => {
 }
 
 const styles = StyleSheet.create({
+  loaderContainer: {
+    marginTop: '25%',
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  restaurantAddressText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksand,
+    textDecorationLine: 'underline',
+    fontSize: moderateScale(12),
+    marginTop: verticalScale(10),
+  },
   aboutDescriptionText: {
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
@@ -232,7 +260,7 @@ const styles = StyleSheet.create({
   listEmptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '8%',
+    marginTop: '8s%',
   },
   listEmptyText: {
     color: COLORS.primary,

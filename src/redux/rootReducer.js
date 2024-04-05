@@ -19,6 +19,7 @@ import tempAuthSlice from './slices/tempAuth'
 import restaurantSlice from './slices/restaurantSlice'
 import contentSlice from './slices/contentSlice'
 import serviceSlice from './slices/serviceSlice'
+import locationSlice from './slices/locationSlice'
 
 const rootReducer = combineReducers({
   addresses: addresses.reducer,
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   restaurantSlice: restaurantSlice,
   contentSlice: contentSlice,
   serviceSlice: serviceSlice,
+  locationSlice: locationSlice,
   transactions: transactions.reducer,
 })
 

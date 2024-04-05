@@ -55,18 +55,18 @@ const useServiceDetails = () => {
     setIsLoading(false)
   }
 
-  const getServiceCategoriesData = async () => {
-    const res = await getServiceCategories()
-    const filteredCatNames = res?.map((cat) => {
-      const tmp = {
-        ...cat,
-        CategoryName: cat?.Category_type,
-      }
-      return tmp
-    })
-    const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...filteredCatNames]
-    setServiceCategories(addAllCategory)
-  }
+  // const getServiceCategoriesData = async () => {
+  //   const res = await getServiceCategories()
+  //   const filteredCatNames = res?.map((cat) => {
+  //     const tmp = {
+  //       ...cat,
+  //       CategoryName: cat?.Category_type,
+  //     }
+  //     return tmp
+  //   })
+  //   const addAllCategory = [{ CategoryName: 'All categories', id: 0 }, ...filteredCatNames]
+  //   setServiceCategories(addAllCategory)
+  // }
 
   const getDiaryActionsData = async () => {
     const res = await getDiaryActions()
@@ -79,10 +79,10 @@ const useServiceDetails = () => {
     dispatch(setTimeFrameData(res))
   }
 
-  const onCategoryChange = (serviceCategoryId) => {
-    console.log('Category change', serviceCategoryId)
-    setFilter(serviceCategoryId)
-  }
+  // const onCategoryChange = (serviceCategoryId) => {
+  //   console.log('Category change', serviceCategoryId)
+  //   setFilter(serviceCategoryId)
+  // }
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.RestaurantDetails)
@@ -112,7 +112,8 @@ const useServiceDetails = () => {
   }
 
   useEffect(() => {
-    getServiceCategoriesData()
+    // getServiceCategoriesData()
+    getServicesData()
     getDiaryActionsData()
     getTimeFrameData()
   }, [])
@@ -121,21 +122,17 @@ const useServiceDetails = () => {
     getServiceDealsLeftData()
   }, [isFocused])
 
-  useEffect(() => {
-    getServicesData()
-  }, [filter])
-
   return {
     categoriesIds,
     dealsLeft,
     diaryItems,
-    filter,
+    // filter,
     handleBackPress,
     handleBookPress,
     isBookBtnPressed,
     isImageLoading,
     isLoading,
-    onCategoryChange,
+    // onCategoryChange,
     serviceCategories,
     serviceDetails,
     services,

@@ -45,6 +45,7 @@ import AppliedScreen from '../screens/SignUpNew/AppliedScreen/AppliedScreen'
 import SignUpNew from '../screens/SignUpNew/SignUpNew'
 import YourScheduleDetailsScreen from '../screens/YourScheduleDetails/YourScheduleDetailsScreen'
 import { SettingsNew } from '../screens/SettingsNew'
+import CitiesScreen from '../screens/Cities/CitiesScreen'
 
 export default {
   [SCREEN_NAMES.Onboarding]: {
@@ -177,4 +178,7 @@ export default {
   [SCREEN_NAMES.SettingsNew]: {
     screen: SettingsNew,
   },
+  // [SCREEN_NAMES.Cities]: {
+  //   screen: CitiesScreen,
+  // },
 }

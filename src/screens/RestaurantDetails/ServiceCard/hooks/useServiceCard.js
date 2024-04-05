@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { setServiceDetails } from '../../../../redux/slices/restaurantSlice'
 
-const useServiceCard = () => {
+const useServiceCard = (item) => {
   const dispatch = useDispatch()
   const handleCardPress = (item) => {
     dispatch(setServiceDetails(item))

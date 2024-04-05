@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Alert, PermissionsAndroid, Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import { useNavigationParam } from 'react-navigation-hooks'
-import { useSelector } from 'react-redux'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { getDistance } from 'geolib'
 
 import { selectAwardPrizeCategory } from '@redux/modules/app'
@@ -12,16 +12,20 @@ import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getCategories, getRestaurants } from '../../../services/LocationsService'
 import { geolocationSetting } from '../../../utils/smallComponents'
+import { setCity } from '../../../redux/slices'
 
 const useRestaurants = () => {
   const categoriesIds = useSelector(selectCategoryById)
   const category = useSelector(selectAwardPrizeCategory)
-  const cityData = useNavigationParam('cityData')
+  // const cityData = useNavigationParam('cityData')
+  const cityData = useSelector((state) => state.locationSlice.city)
   const [isLoading, setIsLoading] = useState(false)
   const [restaurantsData, setRestaurantsData] = useState()
   const [filter, setFilter] = useState(0)
   const [categories, setCategories] = useState([])
   const [refreshing, setRefreshing] = useState(false)
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
 
   const onRefresh = () => {
     setRefreshing(true)
@@ -97,7 +101,7 @@ const useRestaurants = () => {
   }
 
   const handleLocationPress = () => {
-    navigate(SCREEN_NAMES.Cities)
+    navigation.replace(SCREEN_NAMES.Cities)
   }
 
   const onCategoryChange = (CategoryId) => {

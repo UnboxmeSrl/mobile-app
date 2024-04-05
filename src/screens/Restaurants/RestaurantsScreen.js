@@ -56,9 +56,12 @@ const RestaurantsScreen = () => {
           <View style={styles.restaurantsFlatlistContainer}>
             <FlatList
               ListEmptyComponent={
-                <View style={styles.listEmptyContainer}>
-                  <Text style={styles.listEmptyText}>No data found.</Text>
-                </View>
+                !isLoading &&
+                restaurantsData?.length === 0 && (
+                  <View style={styles.listEmptyContainer}>
+                    <Text style={styles.listEmptyText}>No data found.</Text>
+                  </View>
+                )
               }
               contentContainerStyle={styles.listMain}
               data={restaurantsData}

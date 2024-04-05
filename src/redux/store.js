@@ -7,7 +7,7 @@ import rootReducer from './rootReducer'
 const persistConfig = {
   key: 'claris-app',
   storage: AsyncStorage,
-  whitelist: ['authSlice'],
+  whitelist: ['authSlice', 'locationSlice'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

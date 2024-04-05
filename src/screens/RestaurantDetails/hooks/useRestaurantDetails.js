@@ -13,6 +13,7 @@ const useRestaurantDetails = () => {
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
   const services = useSelector((state) => state.serviceSlice.services)
   const cityData = useNavigationParam('cityData')
+  const [isLoading, setIsLoading] = useState(true)
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
   const [isImageLoading, setIsImageLoading] = useState(true)
@@ -28,6 +29,7 @@ const useRestaurantDetails = () => {
     const res = await getServices(prepData)
     console.log('res', res)
     dispatch(setServices(res))
+    setIsLoading(false)
   }
 
   const getServiceCategoriesData = async () => {
@@ -79,9 +81,13 @@ const useRestaurantDetails = () => {
     if (isFocused && services?.length === 0) {
       getServicesData()
     }
+    return () => {
+      dispatch(setServices([]))
+    }
   }, [isFocused])
 
   return {
+    isLoading,
     categoriesIds,
     filter,
     isImageLoading,

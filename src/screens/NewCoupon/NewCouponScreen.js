@@ -117,7 +117,7 @@ const NewCouponScreen = () => {
 
       <View style={styles.viewDescriptionContainer}>
         <Text style={styles.viewDescriptionText}>
-          * Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci, dictumst nec aliquet id.
+          * Show the present coupon to the restaurant staff to claim your deal
         </Text>
       </View>
       <View style={styles.goToContentBtnMainContainer}>

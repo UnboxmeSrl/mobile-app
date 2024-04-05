@@ -7,9 +7,13 @@ import { navigate } from '@services'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { SCREEN_NAMES } from '../../constants/navigation'
+import { useDispatch } from 'react-redux'
+import { setCity } from '../../redux/slices'
 
 const LocationsTile = ({ item }) => {
+  const dispatch = useDispatch()
   const handleBtnPress = () => {
+    dispatch(setCity(item))
     navigate({
       params: { cityData: item },
       routeName: SCREEN_NAMES.Restaurants,

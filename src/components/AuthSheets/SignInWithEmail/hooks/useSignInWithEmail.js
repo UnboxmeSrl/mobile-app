@@ -9,6 +9,7 @@ import { setBookings } from '../../../../redux/slices/restaurantSlice'
 import { setTempAuthData } from '../../../../redux/slices/tempAuth'
 import { showToastError, userLogin } from '../../../../services'
 import { getBookings } from '../../../../services/RestaurantService'
+import { setCity } from '../../../../redux/slices'
 
 const useSignInWithEmail = (isFromBookRedirected) => {
   const [email, setEmail] = useState()
@@ -27,6 +28,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
       const res = await userLogin(prepData)
       console.log(res, 'res')
       setLoading(false)
+      dispatch(setCity({}))
       if (res?.UserStatus === 'approved') {
         OneSignal.setExternalUserId(res?.id?.toString())
         dispatch(setLoginData(res))

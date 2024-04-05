@@ -4,4 +4,5 @@ export const sliceNames = {
   restaurantSlice: 'RestaurantSlice',
   contentSlice: 'ContentSlice',
   serviceSlice: 'ServiceSlice',
+  locationSlice: 'LocationSlice',
 }

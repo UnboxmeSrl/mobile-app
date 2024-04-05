@@ -6,11 +6,11 @@ import { IMAGES } from '../../../assets/images'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 import perfectSize from '../../../utils/responsiveSize'
-
+import FastImage from 'react-native-fast-image'
 import { useServiceCard } from './hooks'
 
-const ServiceCard = ({ item, index }) => {
-  const { handleCardPress } = useServiceCard()
+const ServiceCard = ({ item, index, deals }) => {
+  const { handleCardPress } = useServiceCard(item)
   return (
     // <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
     //   <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
@@ -44,13 +44,18 @@ const ServiceCard = ({ item, index }) => {
         >
           <Image source={IMAGES.overlay} style={styles.itemImage} resizeMode="cover" />
           <View style={styles.dealTimerContainer}>
-            <Text style={styles.dealTimeLeftText}>{`${item?.deal_left} deal left`}</Text>
+            <Text style={styles.dealTimeLeftText}>{`${deals} deal left`}</Text>
           </View>
         </ImageBackground>
       </View>
       <View style={styles.titleRatingMainRow}>
         <View style={styles.itemTitleIconContainer}>
-          <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
+          <FastImage
+            resizeMode="contain"
+            source={{ priority: FastImage.priority.high, uri: item?._actions_turbo?.Action_icon?.url }}
+            style={styles.socialIcon}
+          />
+          {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
           <Text style={styles.titleText}>{item?._actions_turbo?.Action_Name}</Text>
         </View>
         <View style={styles.ratingsContainer}>
@@ -139,8 +144,8 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(15),
   },
   socialIcon: {
-    height: moderateScale(18),
-    width: moderateScale(18),
+    height: moderateScale(25),
+    width: moderateScale(25),
     marginRight: scale(10),
   },
   itemTitleIconContainer: {
