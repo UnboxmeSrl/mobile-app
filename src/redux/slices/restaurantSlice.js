@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-
 import { sliceNames } from '../../constants'
 
 const initialState = {
@@ -8,6 +7,7 @@ const initialState = {
   serviceDetails: {},
   canceledBookings: [],
   timeFrameData: [],
+  socialActions: [],
 }
 
 const RestaurantSlice = createSlice({
@@ -30,10 +30,19 @@ const RestaurantSlice = createSlice({
     setTimeFrameData: (state, actions) => {
       state.timeFrameData = actions?.payload
     },
+    setSocialActions: (state, actions) => {
+      state.socialActions = actions.payload
+    },
   },
 })
 
-export const { setRestaurantDetails, setServiceDetails, setBookings, setCanceledBookings, setTimeFrameData } =
-  RestaurantSlice.actions
+export const {
+  setRestaurantDetails,
+  setServiceDetails,
+  setBookings,
+  setCanceledBookings,
+  setTimeFrameData,
+  setSocialActions,
+} = RestaurantSlice.actions
 
 export default RestaurantSlice.reducer

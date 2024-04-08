@@ -93,7 +93,12 @@ const NewCouponScreen = () => {
         <View style={styles.tiktokContainer}>
           <Text style={styles.tiktokTitleText}>Content Type</Text>
           <View style={styles.tiktokIconTextContainer}>
-            <Image resizeMode="cover" source={icon} style={styles.contentTypeImage} />
+            <FastImage
+              resizeMode="contain"
+              source={{ priority: FastImage.priority.high, uri: icon }}
+              style={styles.contentTypeImage}
+            />
+            {/* <Image resizeMode="cover" source={icon} style={styles.contentTypeImage} /> */}
             <Text style={styles.tiktokDescription}>{actionName}</Text>
           </View>
         </View>

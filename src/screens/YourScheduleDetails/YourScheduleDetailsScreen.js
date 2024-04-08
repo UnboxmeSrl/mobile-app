@@ -137,7 +137,15 @@ const YourScheduleDetailsScreen = () => {
           <View style={styles.tiktokContainer}>
             <Text style={styles.tiktokTitleText}>Content Type</Text>
             <View style={styles.tiktokIconTextContainer}>
-              <Image resizeMode="cover" source={icon} style={styles.tiktokIcon} />
+              <FastImage
+                resizeMode="contain"
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: icon,
+                }}
+                style={styles.tiktokIcon}
+              />
+              {/* <Image resizeMode="cover" source={icon} style={styles.tiktokIcon} /> */}
               <Text style={styles.tiktokDesctiption}>{`Full ${actionName}`}</Text>
             </View>
           </View>

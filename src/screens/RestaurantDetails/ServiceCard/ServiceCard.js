@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 
   amenityText: {
     color: COLORS.greyFont,
-    fontFamily: FONTS.interSemiBold,
+    fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
   },
   amenityIcon: {
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   dealTimeLeftText: {
     textAlign: 'center',
     color: COLORS.primary,
-    fontFamily: FONTS.interBold,
+    fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
   },
 })

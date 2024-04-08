@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     width: moderateScale(21.62),
   },
   uploadText: {
-    fontFamily: FONTS.inter,
+    fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
     color: COLORS.darkSilver,
     marginTop: verticalScale(15.72),

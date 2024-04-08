@@ -15,6 +15,7 @@ import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
   const {
+    socialActions,
     diaryItems,
     // services,
     // categoriesIds,
@@ -31,6 +32,7 @@ const ServiceDetails = () => {
     handleBookPress,
   } = useServiceDetails()
 
+  console.log('Service Details: ' + JSON.stringify(serviceDetails))
   return (
     <View style={styles.mainContainer}>
       <CommonHeader title={'Deals'} />
@@ -61,7 +63,12 @@ const ServiceDetails = () => {
 
           <View style={styles.titleRatingMainRow}>
             <View style={styles.itemTitleIconContainer}>
-              <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} />
+              <FastImage
+                resizeMode="contain"
+                source={{ priority: FastImage.priority.high, uri: serviceDetails?._actions_turbo?.Action_icon?.url }}
+                style={styles.socialIcon}
+              />
+              {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
               <Text style={styles.titleText}>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
             </View>
             <View style={styles.dealLeftContainer}>
@@ -121,8 +128,8 @@ const ServiceDetails = () => {
               renderItem={({ item, index }) => {
                 const actionNumId = item?._actions_turbo?.action_num_id
                 // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-                const icon = checkAction(actionNumId)
-                console.log('icon', icon, actionNumId)
+                const actions = checkAction(actionNumId, socialActions)
+                // console.log('icon', icon, actionNumId)
                 return (
                   <>
                     {actionNumId === 3 ? (
@@ -130,7 +137,15 @@ const ServiceDetails = () => {
                         <>
                           <View style={styles.mainSocialItemContainer} key={innerIndex}>
                             <View style={styles.socialMediaImageContainer}>
-                              <Image source={icon?.action_icon} style={styles.socialMediaImage} />
+                              <FastImage
+                                resizeMode="contain"
+                                source={{
+                                  priority: FastImage.priority.high,
+                                  uri: item?._actions_turbo?.Action_icon?.url,
+                                }}
+                                style={styles.socialMediaImage}
+                              />
+                              {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                             </View>
                             <View style={styles.socialMediaTitleDescriptionContainer}>
                               <View style={styles.socialMediaTitleContainer}>
@@ -158,59 +173,57 @@ const ServiceDetails = () => {
                         </>
                       ))
                     ) : actionNumId === 6 ? (
-                      <>
-                        <View style={styles.mainSocialItemContainer}>
-                          <View style={styles.socialMediaImageContainer}>
-                            <Image source={IMAGES.reelsAddNew} style={styles.socialMediaImage} />
-                          </View>
-                          <View style={styles.socialMediaTitleDescriptionContainer}>
-                            <View style={styles.socialMediaTitleContainer}>
-                              <Text style={styles.socialMediaTitle}>{`Reels`} video</Text>
-                              <View style={styles.ratingsContainer}>
-                                <Text style={styles.ratingsText}>60</Text>
-                                <Image source={IMAGES.star} style={styles.ratingIcon} />
+                      actions?.duo_actions?.map((innerItem, innerIndex) => (
+                        <>
+                          <View style={styles.mainSocialItemContainer} key={innerIndex}>
+                            <View style={styles.socialMediaImageContainer}>
+                              <FastImage
+                                resizeMode="contain"
+                                source={{
+                                  priority: FastImage.priority.high,
+                                  uri: innerItem?.Action_icon?.url,
+                                }}
+                                style={styles.socialMediaImage}
+                              />
+                              {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
+                            </View>
+                            <View style={styles.socialMediaTitleDescriptionContainer}>
+                              <View style={styles.socialMediaTitleContainer}>
+                                <Text style={styles.socialMediaTitle}>{innerItem?.Action_Name}</Text>
+                                <View style={styles.ratingsContainer}>
+                                  <Text style={styles.ratingsText}>60</Text>
+                                  <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                </View>
+                              </View>
+                              <View style={styles.socialMediaDescriptionContainer}>
+                                <Text style={styles.socialMediaDescriptionText}>
+                                  You have to publish a Tiktok video following the brief and tagging both the venue and
+                                  claris.app
+                                </Text>
                               </View>
                             </View>
-                            <View style={styles.socialMediaDescriptionContainer}>
-                              <Text style={styles.socialMediaDescriptionText}>
-                                You have to publish a Tiktok video following the brief and tagging both the venue and
-                                claris.app
-                              </Text>
-                            </View>
                           </View>
-                        </View>
-
-                        <View style={styles.orContainer}>
-                          <View style={styles.orDivider} />
-                          <Text style={styles.orText}>Or</Text>
-                          <View style={styles.orDivider} />
-                        </View>
-
-                        <View style={styles.mainSocialItemContainer}>
-                          <View style={styles.socialMediaImageContainer}>
-                            <Image source={IMAGES.tiktokAddNew} style={styles.socialMediaImage} />
-                          </View>
-                          <View style={styles.socialMediaTitleDescriptionContainer}>
-                            <View style={styles.socialMediaTitleContainer}>
-                              <Text style={styles.socialMediaTitle}>{`Tiktok`} video</Text>
-                              <View style={styles.ratingsContainer}>
-                                <Text style={styles.ratingsText}>60</Text>
-                                <Image source={IMAGES.star} style={styles.ratingIcon} />
-                              </View>
+                          {innerIndex == 0 && (
+                            <View style={styles.orContainer}>
+                              <View style={styles.orDivider} />
+                              <Text style={styles.orText}>Or</Text>
+                              <View style={styles.orDivider} />
                             </View>
-                            <View style={styles.socialMediaDescriptionContainer}>
-                              <Text style={styles.socialMediaDescriptionText}>
-                                You have to publish a Tiktok video following the brief and tagging both the venue and
-                                claris.app
-                              </Text>
-                            </View>
-                          </View>
-                        </View>
-                      </>
+                          )}
+                        </>
+                      ))
                     ) : (
                       <View style={styles.mainSocialItemContainer}>
                         <View style={styles.socialMediaImageContainer}>
-                          <Image source={icon?.action_icon} style={styles.socialMediaImage} />
+                          <FastImage
+                            resizeMode="contain"
+                            source={{
+                              priority: FastImage.priority.high,
+                              uri: item?._actions_turbo?.Action_icon?.url,
+                            }}
+                            style={styles.socialMediaImage}
+                          />
+                          {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                         </View>
                         <View style={styles.socialMediaTitleDescriptionContainer}>
                           <View style={styles.socialMediaTitleContainer}>

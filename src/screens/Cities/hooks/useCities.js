@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import { getCities } from '../../../services/LocationsService'
-import { useDispatch } from 'react-redux'
-import { setLoginData } from '../../../redux/slices/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { SCREEN_NAMES } from '../../../constants/navigation'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 
 const useCities = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [locationData, setLocationData] = useState()
   const [refreshing, setRefreshing] = useState(false)
+  const city = useSelector((state) => state.locationSlice.city)
+  const isFromRestaurant = useNavigationParam('isFromRestaurant')
+  const navigation = useNavigation()
   const dispatch = useDispatch()
 
   const onRefresh = () => {
@@ -24,8 +28,14 @@ const useCities = () => {
   }
 
   useEffect(() => {
-    // dispatch(setLoginData({}))
-    getCitiesData()
+    if (city?.id && !isFromRestaurant) {
+      navigation.replace({
+        params: { cityData: city },
+        routeName: SCREEN_NAMES.Restaurants,
+      })
+    } else {
+      getCitiesData()
+    }
   }, [])
 
   return {

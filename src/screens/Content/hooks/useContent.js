@@ -13,9 +13,11 @@ import {
   updateActionDiary,
 } from '../../../services'
 import { setContentList } from '../../../redux/slices'
+import { checkAction } from '../../../utils'
 
 const useContent = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
+  const socialActions = useSelector((state) => state.restaurantSlice.socialActions)
   const [selectedApp, setSelectedApp] = useState(0)
   const bookingDetails = useNavigationParam('bookingDetails')
   const actionName = useNavigationParam('actionName')
@@ -23,6 +25,8 @@ const useContent = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [diaryItems, setDiaryItems] = useState([])
   const [isDataFetching, setIsDataFetching] = useState(false)
+  const actions = checkAction(actionNumId, socialActions)
+  console.log('diary items', diaryItems)
 
   const dispatch = useDispatch()
 
@@ -75,6 +79,7 @@ const useContent = () => {
   }, [])
 
   return {
+    actions,
     isLoading,
     isDataFetching,
     diaryItems,

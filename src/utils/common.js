@@ -19,15 +19,18 @@ export const checkActionName = (actionName) => {
   }
 }
 
-export const checkAction = (actionNumId) => {
-  let result
+export const checkAction = (actionNumId, actions) => {
+  let result, filterRes
+
   if (actionNumId) {
+    filterRes = actions?.filter((a) => a?.action_num_id === 4 || a?.action_num_id === 5)
     switch (actionNumId) {
       case 1:
         result = {
           action_id: 1,
           action_name: 'Story',
           action_icon: IMAGES.storyAddNew,
+          // action_icon: filterRes?.Action_icon?.url,
         }
         return result
       case 2:
@@ -35,6 +38,7 @@ export const checkAction = (actionNumId) => {
           action_id: 2,
           action_name: 'Maps & Story',
           action_icon: IMAGES.googleMaps,
+          // action_icon: filterRes?.Action_icon?.url,
         }
         return result
       case 3:
@@ -42,6 +46,7 @@ export const checkAction = (actionNumId) => {
           action_id: 3,
           action_name: 'Diary Instagram',
           action_icon: IMAGES.diary,
+          // action_icon: filterRes?.Action_icon?.url,
         }
         return result
       case 4:
@@ -49,6 +54,7 @@ export const checkAction = (actionNumId) => {
           action_id: 4,
           action_name: 'Reel',
           action_icon: IMAGES.reelsAddNew,
+          // action_icon: filterRes?.Action_icon?.url,
         }
         return result
       case 5:
@@ -56,6 +62,7 @@ export const checkAction = (actionNumId) => {
           action_id: 5,
           action_name: 'TikTok',
           action_icon: IMAGES.tiktokAddNew,
+          // action_icon: filterRes?.Action_icon?.url,
         }
         return result
       case 6:
@@ -63,6 +70,7 @@ export const checkAction = (actionNumId) => {
           action_id: 6,
           action_name: 'Full Dedicated',
           action_icon: IMAGES.fullDedicated,
+          duo_actions: filterRes,
         }
         return result
     }

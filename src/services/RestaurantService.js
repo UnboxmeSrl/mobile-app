@@ -81,3 +81,13 @@ export const getDiaryActions = async () => {
     console.log(error)
   }
 }
+
+export const getAllActions = async (params) => {
+  try {
+    const url = Api.RESTAURANTS.GET_ALL_ACTIONS
+    const response = await Fetch.get(url)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

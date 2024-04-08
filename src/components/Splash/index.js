@@ -18,8 +18,9 @@ import {
   selectOnBordingData,
   updateLoginData,
 } from '../../redux/slices/authSlice'
-import { getProfile } from '../../services'
+import { getAllActions, getProfile } from '../../services'
 import { checkSignUpProgress } from '../../utils'
+import { setSocialActions } from '../../redux/slices'
 
 const Wrapper = styled(Animated.View)`
   width: ${prop('width')}px
@@ -62,12 +63,15 @@ export const Splash = () => {
 
   const handleGetProfileData = useCallback(async () => {
     const res = await getProfile()
-    console.log('check', res)
     dispatch(updateLoginData(res))
   }, [dispatch])
 
+  const getAllSocialActions = async () => {
+    const res = await getAllActions()
+    dispatch(setSocialActions(res))
+  }
+
   useEffect(() => {
-    console.log('checkAuthDAta in FIRST WELCOME SCREEN', LoginDetail)
     if (LoginDetail && (LoginDetail?.UserStatus === '' || LoginDetail?.UserStatus === 'onapproval')) {
       const timeout = setTimeout(() => {
         handleGetProfileData()
@@ -99,7 +103,6 @@ export const Splash = () => {
       console.log('isSignUpProcessStarted')
       checkSignUpProgress(signUpProcessStage)
     } else {
-      console.log('else')
       navigate(SCREEN_NAMES.SignUpNew)
     }
   }, [
@@ -133,6 +136,10 @@ export const Splash = () => {
       })
     }
   }, [fadeOut, fadeAnim])
+
+  useEffect(() => {
+    getAllSocialActions()
+  }, [])
 
   if (!show) {
     return null

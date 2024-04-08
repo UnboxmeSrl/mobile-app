@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleText: {
-    fontFamily: FONTS.josefinSansSemiBold,
+    fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     color: COLORS.achromaticBlack,
   },
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   descriptionText: {
-    fontFamily: FONTS.josefinSans,
+    fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
     color: COLORS.achromaticBlack,
     textAlign: 'center',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     borderRightColor: COLORS.lightGray,
   },
   yesBtnText: {
-    fontFamily: FONTS.josefinSans,
+    fontFamily: FONTS.quicksand,
     fontSize: moderateScale(16),
     color: COLORS.dark,
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     padding: moderateScale(10),
   },
   noBtnText: {
-    fontFamily: FONTS.josefinSans,
+    fontFamily: FONTS.quicksand,
     fontSize: moderateScale(16),
     color: COLORS.dark,
   },

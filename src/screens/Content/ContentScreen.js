@@ -2,15 +2,15 @@ import React from 'react'
 import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
+import FastImage from 'react-native-fast-image'
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useContent } from './hooks'
 
 const ContentScreen = () => {
   const {
+    actions,
     isLoading,
     isDataFetching,
     diaryItems,
@@ -20,6 +20,7 @@ const ContentScreen = () => {
     handleBackPress,
     handleNextPress,
   } = useContent()
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -48,7 +49,14 @@ const ContentScreen = () => {
                 >
                   <View style={styles.socialMediaMainDetailsContainer}>
                     <View style={styles.socialMediaImageContainer}>
-                      <Image resizeMode="cover" source={IMAGES.diary} style={styles.testImage} />
+                      <FastImage
+                        resizeMode="contain"
+                        source={{
+                          priority: FastImage.priority.high,
+                          uri: item?.action_icon?.url,
+                        }}
+                        style={styles.testImage}
+                      />
                     </View>
                     <View style={styles.socialMediaNameContainer}>
                       <Text style={styles.socialMediaNameText}>{`${item?.action}`}</Text>
@@ -68,50 +76,43 @@ const ContentScreen = () => {
             }}
           />
         ) : (
-          <>
-            <TouchableOpacity
-              onPress={() => setSelectedApp(0)}
-              style={[styles.cardContainer, selectedApp === 0 && { borderColor: COLORS.black, borderWidth: 1 }]}
-            >
-              <View style={styles.socialMediaMainDetailsContainer}>
-                <View style={styles.socialMediaImageContainer}>
-                  <Image resizeMode="cover" source={IMAGES.reelsAddNew} style={styles.testImage} />
-                </View>
-                <View style={styles.socialMediaNameContainer}>
-                  <Text style={styles.socialMediaNameText}>{`Full ${diaryItems?.[0]?.action_for_others}`}</Text>
-                  <View style={styles.ratingContainer}>
-                    <Text style={styles.ratingUsersText}>240</Text>
-                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+          <FlatList
+            data={actions?.duo_actions}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => setSelectedApp(index)}
+                  style={[styles.cardContainer, selectedApp === index && { borderColor: COLORS.black, borderWidth: 1 }]}
+                >
+                  <View style={styles.socialMediaMainDetailsContainer}>
+                    <View style={styles.socialMediaImageContainer}>
+                      <FastImage
+                        resizeMode="contain"
+                        source={{
+                          priority: FastImage.priority.high,
+                          uri: item?.Action_icon?.url,
+                        }}
+                        style={styles.testImage}
+                      />
+                    </View>
+                    <View style={styles.socialMediaNameContainer}>
+                      <Text style={styles.socialMediaNameText}>{`${item?.Action_Name}`}</Text>
+                      <View style={styles.ratingContainer}>
+                        <Text style={styles.ratingUsersText}>240</Text>
+                        <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                      </View>
+                    </View>
                   </View>
-                </View>
-              </View>
-              <View style={styles.descriptionContainer}>
-                <Text style={styles.descriptionText}>A Reel fully dedicated to your experience at the Restaurant</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setSelectedApp(1)}
-              style={[styles.cardContainer, selectedApp === 1 && { borderColor: COLORS.black, borderWidth: 1 }]}
-            >
-              <View style={styles.socialMediaMainDetailsContainer}>
-                <View style={styles.tiktokImageContainer}>
-                  <Image resizeMode="cover" source={IMAGES.tiktokAddNew} style={styles.tiktokImage} />
-                </View>
-                <View style={styles.socialMediaNameContainer}>
-                  <Text style={styles.socialMediaNameText}>{`Full ${diaryItems?.[1]?.action_for_others}`}</Text>
-                  <View style={styles.ratingContainer}>
-                    <Text style={styles.ratingUsersText}>240</Text>
-                    <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                  <View style={styles.descriptionContainer}>
+                    <Text style={styles.descriptionText}>
+                      {`A ${item?.Action_Name} fully dedicated to your experience at the Restaurant`}
+                    </Text>
                   </View>
-                </View>
-              </View>
-              <View style={styles.descriptionContainer}>
-                <Text style={styles.descriptionText}>
-                  A TikTok video fully dedicated to your experience at the Restaurant
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </>
+                </TouchableOpacity>
+              )
+            }}
+          />
         )}
 
         {!isDataFetching && (

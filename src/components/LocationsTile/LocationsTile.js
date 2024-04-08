@@ -9,12 +9,14 @@ import { FONTS } from '../../constants/fonts'
 import { SCREEN_NAMES } from '../../constants/navigation'
 import { useDispatch } from 'react-redux'
 import { setCity } from '../../redux/slices'
+import { useNavigation } from 'react-navigation-hooks'
 
 const LocationsTile = ({ item }) => {
+  const navigation = useNavigation()
   const dispatch = useDispatch()
   const handleBtnPress = () => {
     dispatch(setCity(item))
-    navigate({
+    navigation.replace({
       params: { cityData: item },
       routeName: SCREEN_NAMES.Restaurants,
     })

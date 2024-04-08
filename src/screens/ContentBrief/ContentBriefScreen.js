@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
+import FastImage from 'react-native-fast-image'
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
@@ -10,8 +10,16 @@ import { FONTS } from '../../constants/fonts'
 import { useContentBrief } from './hooks'
 
 const ContentBriefScreen = () => {
-  const { isReel, icon, actionName, bookingDetails, handleBackPress, handleTagCopyPress, handleOpenCouponPress } =
-    useContentBrief()
+  const {
+    isReel,
+    actionNumId,
+    icon,
+    actionName,
+    bookingDetails,
+    handleBackPress,
+    handleTagCopyPress,
+    handleOpenCouponPress,
+  } = useContentBrief()
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -72,7 +80,14 @@ const ContentBriefScreen = () => {
 
         <View style={styles.socialMediaMainDetailsContainer}>
           <View style={styles.socialMediaImageContainer}>
-            <Image resizeMode="cover" source={icon} style={styles.testImage} />
+            <FastImage
+              resizeMode="contain"
+              source={{
+                priority: FastImage.priority.high,
+                uri: icon,
+              }}
+              style={styles.testImage}
+            />
           </View>
           <View style={styles.socialMediaNameContainer}>
             <Text style={styles.socialMediaNameText}>{actionName}</Text>

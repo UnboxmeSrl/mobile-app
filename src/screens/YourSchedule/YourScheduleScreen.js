@@ -73,22 +73,26 @@ const YourScheduleScreen = () => {
             data={bookings}
             keyExtractor={(_, index) => index.toString()}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onBookingRefresh} />}
+            ListEmptyComponent={
+              <View style={styles.listEmptyContainer}>
+                <Text style={styles.listEmptyText}>No bookings are there.</Text>
+              </View>
+            }
             renderItem={({ item, index }) => {
               const myDate = new Date(item?.BookingDay)
               const month = myDate.toLocaleString('default', { month: 'long' })
               const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
               const timeFrame = item?._timeframes_turbo
               const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
-
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0
-              let icon = checkAction(actionNumId, true)?.action_icon
+              let icon = item?._actions_turbo?.Action_icon?.url
               let actionName = item?._actions_turbo?.Action_Name ?? 0
-              if (item?.diary_action_turbo_id) {
+
+              if (actionNumId === 6 && item?._diary_action_turbo?.id) {
+                icon = item?._diary_action_turbo?.action_icon?.url
                 actionName = item?._diary_action_turbo?.action_for_others
-                if (actionNumId === 3) {
-                  actionName = item?._diary_action_turbo?.action
-                }
-                icon = checkActionName(actionName)
+              } else if (item?.diary_action_turbo_id) {
+                actionName = item?._diary_action_turbo?.action
               }
 
               return (
@@ -166,7 +170,7 @@ const YourScheduleScreen = () => {
                           >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
                         </View>
 
-                        {actionNumId == 6 && item?.diary_action_turbo_id === 0 ? (
+                        {/* {actionNumId == 6 && item?.diary_action_turbo_id === 0 ? (
                           <View style={styles.reelsContainer}>
                             <Text style={styles.reelsTitleText}>{`${actionName}`}</Text>
                             <View style={styles.tiktokReelsIconsContainer}>
@@ -174,14 +178,22 @@ const YourScheduleScreen = () => {
                               <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
                             </View>
                           </View>
-                        ) : (
-                          <View style={styles.storyContainer}>
-                            <Text style={styles.storyText}>{actionName}</Text>
-                            <View style={styles.storyIconContainer}>
-                              <Image resizeMode="cover" source={icon} style={styles.storyIcon} />
-                            </View>
+                        ) : ( */}
+                        <View style={styles.storyContainer}>
+                          <Text style={styles.storyText}>{actionName}</Text>
+                          <View style={styles.storyIconContainer}>
+                            <FastImage
+                              resizeMode="contain"
+                              source={{
+                                priority: FastImage.priority.high,
+                                uri: icon,
+                              }}
+                              style={styles.storyIcon}
+                            />
+                            {/* <Image resizeMode="cover" source={icon} style={styles.storyIcon} /> */}
                           </View>
-                        )}
+                        </View>
+                        {/* )} */}
                       </View>
                     </View>
                   </View>
@@ -195,17 +207,23 @@ const YourScheduleScreen = () => {
             data={contentList}
             keyExtractor={(_, index) => index.toString()}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onContentRefresh} />}
+            ListEmptyComponent={
+              <View style={styles.listEmptyContainer}>
+                <Text style={styles.listEmptyText}>No content uploaded yet.</Text>
+              </View>
+            }
             renderItem={({ item, index }) => {
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0
-              let icon = checkAction(actionNumId)?.action_icon
+              let icon = item?._actions_turbo?.Action_icon?.url
               let actionName = item?._actions_turbo?.Action_Name ?? 0
-              if (item?.diary_action_turbo_id) {
+
+              if (actionNumId === 6 && item?._diary_action_turbo?.id) {
+                icon = item?._diary_action_turbo?.action_icon?.url
                 actionName = item?._diary_action_turbo?.action_for_others
-                if (actionNumId === 3) {
-                  actionName = item?._diary_action_turbo?.action
-                }
-                icon = checkActionName(actionName)
+              } else if (item?.diary_action_turbo_id) {
+                actionName = item?._diary_action_turbo?.action
               }
+
               let contentApprovalStatus = item?.content_status_turbo_id
               if (item?.content_status_turbo_id) {
                 contentApprovalStatus = item?._content_status_turbo?.name
@@ -221,7 +239,15 @@ const YourScheduleScreen = () => {
                         </View>
                       </View>
                       <View style={contentStyles.socialMediaIconNameContainer}>
-                        <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} />
+                        <FastImage
+                          resizeMode="contain"
+                          source={{
+                            priority: FastImage.priority.high,
+                            uri: icon,
+                          }}
+                          style={contentStyles.socialMediaIcon}
+                        />
+                        {/* <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} /> */}
                         <Text style={contentStyles.socialMediaNameText}>{`${actionName}`}</Text>
                       </View>
                     </View>
@@ -332,6 +358,17 @@ const YourScheduleScreen = () => {
 export default YourScheduleScreen
 
 const styles = StyleSheet.create({
+  listEmptyContainer: {
+    alignItems: 'center',
+    height: verticalScale(40),
+    justifyContent: 'center',
+    marginTop: '50%',
+  },
+  listEmptyText: {
+    color: COLORS.primary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(16),
+  },
   locationTimeMainContainer: {
     width: '100%',
   },

@@ -30,6 +30,7 @@ const useBookingDetails = () => {
   const [isDatesLoading, setIsDatesLoading] = useState(true)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
+
   const showNextWeek = () => {
     const newStartDate = new Date(startDate)
     newStartDate.setDate(startDate.getDate() + 7)
@@ -38,6 +39,7 @@ const useBookingDetails = () => {
     setStartDate(newStartDate)
     setEndDate(newEndDate)
   }
+
   const showPreviousWeek = () => {
     const newStartDate = new Date(startDate)
     newStartDate.setDate(startDate.getDate() - 7)
@@ -46,13 +48,16 @@ const useBookingDetails = () => {
     setStartDate(newStartDate)
     setEndDate(newEndDate)
   }
+
   const isDateAvailable = (date) => {
     // Replace this with logic to check if the date is available for booking
     return true // Return true for available, false for unavailable
   }
+
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.ServiceDetails)
   }
+
   const handleConfirmBtnPress = async () => {
     setIsLoading(true)
     const currentBookingDateTime = new Date(selectedDate)
@@ -117,9 +122,11 @@ const useBookingDetails = () => {
     }
     setIsLoading(false)
   }
+
   const handleRemoveBtnPress = () => {
     setSelectedTimeFame({})
   }
+
   const datesBlacklistFunc = (date) => {
     const myDate = new Date(date)
     const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
@@ -171,6 +178,7 @@ const useBookingDetails = () => {
   //   getTimeFrameData()
   // }, [])
   // TODO: Till Here
+
   useEffect(() => {
     setSelectedTimeFame({})
     const myDate = new Date(selectedDate)
@@ -178,7 +186,6 @@ const useBookingDetails = () => {
     console.log('weekDay: ' + weekDay)
     setCurrentWeekDay(weekDay)
 
-    console.log('timeFrameData:', timeFrameData)
     const updatedData = timeFrameData.map((item) => {
       const weekdays = item.weekdays
       const pauseDays = item.pause_days
@@ -203,6 +210,7 @@ const useBookingDetails = () => {
       setIsDatesLoading(false)
     }, 2000)
   }, [selectedDate])
+
   useEffect(() => {
     console.log('selected Date:', selectedDate)
     const myDate = new Date(selectedDate)
@@ -211,12 +219,14 @@ const useBookingDetails = () => {
     setCurrentMonth(month)
     setCurrentDate(myDate.getDate())
   }, [selectedDate])
+
   useEffect(() => {
     const myDate = new Date(startDate)
     const month = myDate.toLocaleString('en-US', { month: 'long' })
     console.log('month: ' + month)
     setCurrentMonth(month)
   }, [startDate])
+
   return {
     currentDate,
     currentMonth,

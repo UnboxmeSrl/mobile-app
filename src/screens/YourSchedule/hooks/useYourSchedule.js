@@ -38,8 +38,9 @@ const useYourSchedule = () => {
   }
 
   const handleCardPress = (item, approvalStatus, actionName, actionNumId) => {
+    console.log(item, approvalStatus, actionName, actionNumId)
     if (approvalStatus === 'Pending') {
-      if (item?.diary_action_turbo_id === 0) {
+      if ((actionNumId === 6 || actionNumId === 3) && !item?._diary_action_turbo?.id) {
         navigate({
           params: {
             actionName: actionName,

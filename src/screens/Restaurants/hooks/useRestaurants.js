@@ -101,7 +101,12 @@ const useRestaurants = () => {
   }
 
   const handleLocationPress = () => {
-    navigation.replace(SCREEN_NAMES.Cities)
+    navigation.replace({
+      params: {
+        isFromRestaurant: true,
+      },
+      routeName: SCREEN_NAMES.Cities,
+    })
   }
 
   const onCategoryChange = (CategoryId) => {

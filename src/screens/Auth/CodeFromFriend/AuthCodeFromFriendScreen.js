@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   codeText: {
     flex: 1,
-    fontFamily: FONTS.interBold,
+    fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(23.15),
     color: COLORS.gray,
     textAlign: 'center',

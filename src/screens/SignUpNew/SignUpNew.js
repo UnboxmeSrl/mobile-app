@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   },
   orText: {
     color: COLORS.white,
-    fontFamily: FONTS.interMedium,
+    fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
   },
   orDivider: {

@@ -13,6 +13,7 @@ import { getServiceCategories, getServiceDealsLeft, getServices } from '../../..
 
 const useServiceDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
+  const socialActions = useSelector((state) => state.restaurantSlice.socialActions)
   const categoriesIds = useSelector(selectCategoryById)
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
@@ -123,6 +124,7 @@ const useServiceDetails = () => {
   }, [isFocused])
 
   return {
+    socialActions,
     categoriesIds,
     dealsLeft,
     diaryItems,
