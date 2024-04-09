@@ -10,6 +10,9 @@ import { FONTS } from '../../constants/fonts'
 import { useNavigation } from 'react-navigation-hooks'
 import { MAIN_NAVIGATOR, MODAL_NAMES } from '@const/navigation'
 import { reset } from '@services'
+import { StyleSheet, Text } from 'react-native'
+import { COLORS } from '../../constants'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 
 export const OtherSingUpOptionsScreen = () => {
   const [loading, setLoading] = useState(false)
@@ -43,7 +46,14 @@ export const OtherSingUpOptionsScreen = () => {
   return (
     <RouteContainer tKey={'signUp.signUp'} withArrow withPadding>
       <Header>
-        <Body tKey={'signUp.createAccount'} />
+        {/* <Body tKey={'signUp.createAccount'} /> */}
+        <Text style={styles.descriptionText}>
+          {`Create your account to be able to be selected into the `}
+          <Text style={styles.innerText}>{`Claris community`}</Text>.
+        </Text>
+        <Text
+          style={styles.descriptionSecond}
+        >{`The community accepts both influencers and models of all genders.`}</Text>
       </Header>
       <Buttons>
         {/* <AppleLogin loading={loading} onSuccess={onSuccess} setLoading={setLoading} />
@@ -81,3 +91,26 @@ const OrLogInText = styled(BoldTextLink)`
   margin-bottom: 24px;
   margin-top: 24px;
 `
+
+const styles = StyleSheet.create({
+  innerText: {
+    fontFamily: FONTS.quicksandBold,
+  },
+  descriptionText: {
+    paddingHorizontal: scale(10),
+    fontFamily: FONTS.quicksand,
+    color: COLORS.greyFont,
+    fontSize: moderateScale(14),
+    textAlign: 'center',
+    marginTop: verticalScale(-20),
+    lineHeight: verticalScale(15),
+  },
+  descriptionSecond: {
+    paddingHorizontal: scale(10),
+    fontFamily: FONTS.quicksand,
+    color: COLORS.greyFont,
+    fontSize: moderateScale(14),
+    textAlign: 'center',
+    lineHeight: verticalScale(15),
+  },
+})

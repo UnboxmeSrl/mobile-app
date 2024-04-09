@@ -38,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>FacebookAppID</key>
 	<string>685306192164982</string>
 	<key>FacebookDisplayName</key>
@@ -84,6 +84,8 @@
 	<string>This app requires to access Apple Music</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires to access your camera</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need to access your Location to send you proper notifications</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need to access your Location to send you proper notifications</string>
 	<key>NSMicrophoneUsageDescription</key>
