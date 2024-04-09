@@ -58,12 +58,23 @@ const useYourSchedule = () => {
         })
       }
     } else if (approvalStatus === 'Accepted') {
-      navigate({
-        params: {
-          bookingDetails: item,
-        },
-        routeName: SCREEN_NAMES.YourScheduleDetailsScreen,
-      })
+      if ((actionNumId === 6 || actionNumId === 3) && !item?._diary_action_turbo?.id) {
+        navigate({
+          params: {
+            actionName: actionName,
+            actionNumId: actionNumId,
+            bookingDetails: item,
+          },
+          routeName: SCREEN_NAMES.ContentScreen,
+        })
+      } else {
+        navigate({
+          params: {
+            bookingDetails: item,
+          },
+          routeName: SCREEN_NAMES.YourScheduleDetailsScreen,
+        })
+      }
     }
   }
 

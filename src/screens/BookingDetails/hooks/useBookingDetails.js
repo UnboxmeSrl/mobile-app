@@ -69,10 +69,13 @@ const useBookingDetails = () => {
     }-${
       currentBookingDateTime.getDate() < 10 ? `0${currentBookingDateTime.getDate()}` : currentBookingDateTime.getDate()
     }`
+
+    const actionNumId = serviceDetails?._actions_turbo?.action_num_id
+    const isApproved = actionNumId === 1 || actionNumId === 2 || actionNumId === 3
     console.log(' conditionCheck', currentBookingDateTime, formattedDate, serviceDetails?.actions_turbo_id)
     const prepData = {
       ApprovalStatus: false,
-      Approved: serviceDetails?.Story,
+      Approved: isApproved,
       BookingDay: formattedDate,
       BookingTimestamp: bookingTimeStamp,
       BoxVisibility: 'true',
