@@ -22,7 +22,7 @@ const AuthInterestTopicsScreen = () => {
       <CustomHeader title={'Interests & Topics'} step={8} handleBackPress={handleBackPress} />
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size={moderateScale(20)} color={COLORS.primary} />
+          <ActivityIndicator size={moderateScale(20)} color={COLORS.newPrimary} />
         </View>
       ) : (
         <>
@@ -75,13 +75,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   checkIcon: {
+    tintColor: COLORS.newPrimary,
     marginLeft: scale(5),
     height: moderateScale(8.25),
     width: moderateScale(12),
   },
   topicTextWithSelection: {
     fontFamily: FONTS.quicksandBold,
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
   },
   topicText: {
     fontFamily: FONTS.quicksand,
@@ -96,14 +97,14 @@ const styles = StyleSheet.create({
   },
   topicContainerWithSelection: {
     backgroundColor: COLORS.white,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
     borderWidth: moderateScale(2),
   },
   topicContainer: {
     paddingHorizontal: moderateScale(15),
     height: verticalScale(48),
     marginTop: verticalScale(10),
-    backgroundColor: COLORS.isabelLine,
+    backgroundColor: COLORS.lightNewPrimaryA6,
     flexDirection: 'row',
     marginHorizontal: scale(5),
     borderRadius: moderateScale(56),

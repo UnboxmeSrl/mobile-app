@@ -29,7 +29,7 @@ const ArchiveScreen = () => {
       </View>
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator color={COLORS.primary} size={20} />
+          <ActivityIndicator color={COLORS.newPrimary} size={20} />
         </View>
       ) : (
         <FlatList

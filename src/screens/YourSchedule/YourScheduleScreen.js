@@ -65,7 +65,7 @@ const YourScheduleScreen = () => {
 
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator color={COLORS.primary} size={20} />
+          <ActivityIndicator color={COLORS.newPrimary} size={20} />
         </View>
       ) : (
         (selectedTab === 1 && (
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     marginTop: '50%',
   },
   listEmptyText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.veryLight,
+    backgroundColor: COLORS.lightNewPrimary40,
     borderRadius: moderateScale(5),
     height: verticalScale(83),
     justifyContent: 'center',
@@ -484,25 +484,26 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
   },
   selectedDateDayText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(10),
     textAlign: 'center',
   },
   selectedDateMonthText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
     textAlign: 'center',
   },
   selectedDateNumberText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(24),
     textAlign: 'center',
   },
   selectedTab: {
-    backgroundColor: COLORS.desertSand,
+    // backgroundColor: COLORS.desertSand,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(20),
     borderWidth: 0,
     height: verticalScale(32),
@@ -511,19 +512,21 @@ const styles = StyleSheet.create({
   },
   selectedTabText: {
     color: COLORS.white,
-    fontFamily: FONTS.quicksandMedium,
+    fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
   },
   selectionTabContainer: {
     alignSelf: 'center',
-    backgroundColor: COLORS.veryLight,
+    // backgroundColor: COLORS.veryLight,
+    backgroundColor: COLORS.lightNewPrimary,
     borderRadius: moderateScale(20),
     borderWidth: 0,
     flexDirection: 'row',
     height: verticalScale(40),
   },
   selectionTabText: {
-    color: COLORS.desertSand,
+    // color: COLORS.desertSand,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
   },
@@ -704,7 +707,7 @@ const contentStyles = StyleSheet.create({
   },
   socialMediaNameText: {
     marginTop: verticalScale(8),
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
     textAlign: 'center',
@@ -762,11 +765,11 @@ const contentStyles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(10.2),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(10.58),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12.09),
   },
@@ -797,6 +800,7 @@ const contentStyles = StyleSheet.create({
   },
   ratingSocialMediaMainContainer: {
     height: verticalScale(132),
-    backgroundColor: COLORS.isabelLine,
+    // backgroundColor: COLORS.isabelLine,
+    backgroundColor: COLORS.lightNewPrimary40,
   },
 })

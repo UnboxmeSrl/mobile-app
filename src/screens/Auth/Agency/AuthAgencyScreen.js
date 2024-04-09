@@ -79,9 +79,10 @@ const styles = StyleSheet.create({
     width: moderateScale(24),
     borderRadius: moderateScale(24),
     borderWidth: moderateScale(1),
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
   },
   checkMarkIcon: {
+    // tintColor: COLORS.newPrimary,
     height: moderateScale(24),
     width: moderateScale(24),
   },

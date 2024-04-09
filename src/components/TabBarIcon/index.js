@@ -1,12 +1,11 @@
 import React from 'react'
 import { Image } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-
-import { COLORS } from '@const'
+import { COLORS } from '../../constants'
 
 export const TabBarIcon = ({ focused, icon }) => {
   // const iconName = focused ? activeIcon : icon
-  const color = focused ? COLORS.lightTaupe : COLORS.gray
+  const color = focused ? COLORS.newPrimary : COLORS.gray
 
   // return <Ionicons color={color} name={iconName} size={24} />
 

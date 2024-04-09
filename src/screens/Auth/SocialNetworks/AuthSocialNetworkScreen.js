@@ -39,7 +39,7 @@ const AuthSocialNetworkScreen = () => {
           onPress={handleOnTikTokPress}
           style={[
             styles.socialMediaItem,
-            { backgroundColor: tiktokInputValue.trim() !== '' ? COLORS.primary : COLORS.isabelLine },
+            { backgroundColor: tiktokInputValue.trim() !== '' ? COLORS.newPrimary : COLORS.lightNewPrimaryA6 },
           ]}
           activeOpacity={0.5}
         >
@@ -69,7 +69,7 @@ const AuthSocialNetworkScreen = () => {
           onPress={handleOnInstaPress}
           style={[
             styles.socialMediaItem,
-            { backgroundColor: instaUserNameValue.trim() !== '' ? COLORS.primary : COLORS.isabelLine },
+            { backgroundColor: instaUserNameValue.trim() !== '' ? COLORS.newPrimary : COLORS.lightNewPrimaryA6 },
           ]}
           activeOpacity={0.5}
         >
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     tintColor: COLORS.white,
   },
   socialMediaItem: {
-    backgroundColor: COLORS.isabelLine,
+    backgroundColor: COLORS.lightNewPrimaryA6,
     width: '90%',
     height: verticalScale(40),
     flexDirection: 'row',
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(57),
   },
   instaBusinessItem: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.newPrimary,
     width: '90%',
     height: verticalScale(40),
     flexDirection: 'row',

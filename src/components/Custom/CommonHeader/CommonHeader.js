@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   progressText: {
     fontFamily: FONTS.quicksandBold,
     textAlign: 'center',
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontSize: moderateScale(14),
   },
   backIcon: {

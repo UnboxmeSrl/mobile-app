@@ -13,7 +13,7 @@ const CustomButton = ({ title, handlePress, disabled = false, isLoading = false 
         style={[styles.btnContainer, disabled && styles.disabledBtnContainer]}
       >
         {isLoading ? (
-          <ActivityIndicator size={30} color={COLORS.primary} />
+          <ActivityIndicator size={30} color={COLORS.black22} />
         ) : (
           <Text style={[styles.btnText, disabled && styles.disabledBtnText]}> {title}</Text>
         )}
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   btnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
   },

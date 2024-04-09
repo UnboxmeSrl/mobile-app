@@ -9,7 +9,7 @@ const useCities = () => {
   const [locationData, setLocationData] = useState()
   const [refreshing, setRefreshing] = useState(false)
   const city = useSelector((state) => state.locationSlice.city)
-  const isFromRestaurant = useNavigationParam('isFromRestaurant')
+  const isFromOtherScreen = useNavigationParam('isFromOtherScreen')
   const navigation = useNavigation()
   const dispatch = useDispatch()
 
@@ -28,7 +28,7 @@ const useCities = () => {
   }
 
   useEffect(() => {
-    if (city?.id && !isFromRestaurant) {
+    if (city?.id && !isFromOtherScreen) {
       navigation.replace({
         params: { cityData: city },
         routeName: SCREEN_NAMES.Restaurants,

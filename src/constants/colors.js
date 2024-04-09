@@ -58,4 +58,8 @@ export const COLORS = {
   chinBlack: '#131115',
   thistle: '#DBC0DD',
   licorice: '#20070B',
+  black22: '#222222',
+  lightNewPrimary: '#FFEFF2',
+  lightNewPrimary40: '#FFEFF240',
+  lightNewPrimaryA6: '#FFEFF2A6',
 }

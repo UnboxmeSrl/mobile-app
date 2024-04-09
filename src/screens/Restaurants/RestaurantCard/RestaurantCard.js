@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   ratingIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(12),
     marginLeft: scale(2),
     width: moderateScale(12),

@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   amenityContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimaryA6,
     borderRadius: moderateScale(10),
     flexDirection: 'row',
     height: verticalScale(38),
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   },
   goToContentBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   goToContentBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   leftCutter: {
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimary40,
     borderRadius: moderateScale(25),
     height: moderateScale(25),
     left: scale(-12),
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     width: moderateScale(25),
   },
   mainContainer: {
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimary40,
     flex: 1,
     marginTop: getStatusBarHeight(),
   },

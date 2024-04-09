@@ -127,7 +127,7 @@ const RestaurantDetails = () => {
 
           {isLoading ? (
             <View style={styles.loaderContainer}>
-              <ActivityIndicator color={COLORS.primary} size={20} />
+              <ActivityIndicator color={COLORS.newPrimary} size={20} />
             </View>
           ) : (
             <FlatList
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   restaurantAddressText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksand,
     textDecorationLine: 'underline',
     fontSize: moderateScale(12),
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.lightPink,
   },
   commonStyleSocialLinkText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
     marginTop: verticalScale(10),
@@ -233,11 +233,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: verticalScale(180),
     width: '100%',
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimaryA6,
   },
   emptyImagesText: {
     fontFamily: FONTS.quicksand,
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontSize: moderateScale(12),
   },
   howItWorksContainer: {
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   infoText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
     marginTop: verticalScale(3),
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     marginTop: '8s%',
   },
   listEmptyText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },

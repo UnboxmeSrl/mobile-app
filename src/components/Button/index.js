@@ -19,10 +19,10 @@ export const Button = ({
   disabled,
   ...rest
 }) => {
-  const color = light ? COLORS.primary : COLORS.white
+  const color = light ? COLORS.primary : COLORS.black22
   return (
     <ThemedButton
-      bgColor={light ? COLORS.lightBrown : COLORS.primary}
+      bgColor={light ? COLORS.lightBrown : COLORS.newPrimary}
       disabled={loading || disabled}
       loading={loading}
       {...rest}
@@ -37,7 +37,7 @@ export const Button = ({
 
 const ThemedButton = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${({ disabled, bgColor }) => (disabled ? COLORS.lightGray : bgColor || COLORS.primary)};
+  background-color: ${({ disabled, bgColor }) => (disabled ? COLORS.lightGray : bgColor || COLORS.newPrimary)};
   border-radius: 16px;
   flex-direction: row;
   height: 48px;

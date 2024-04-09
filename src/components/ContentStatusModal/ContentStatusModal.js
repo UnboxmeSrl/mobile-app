@@ -136,7 +136,7 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
           <View style={styles.okayBtnMainContainer}>
             {isLoading ? (
               <View style={styles.okayBtnContainer}>
-                <ActivityIndicator color={COLORS.primary} size={30} />
+                <ActivityIndicator color={COLORS.black22} size={30} />
               </View>
             ) : (
               <TouchableOpacity onPress={handlePositiveBtnPress} style={styles.okayBtnContainer}>
@@ -206,11 +206,11 @@ const styles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(16),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(16),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -304,11 +304,11 @@ const styles = StyleSheet.create({
   queryIcon: {
     height: moderateScale(19),
     marginRight: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(20),
   },
   queryText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginLeft: scale(16),
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   okayBtnText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',

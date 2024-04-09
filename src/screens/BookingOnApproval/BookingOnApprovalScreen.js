@@ -137,7 +137,7 @@ const BookingOnApprovalScreen = () => {
       <View style={styles.goToScheduleBtnMainContainer}>
         {isLoading ? (
           <View style={styles.goToScheduleBtnContainer}>
-            <ActivityIndicator color={COLORS.primary} size={30} />
+            <ActivityIndicator color={COLORS.black22} size={30} />
           </View>
         ) : (
           <TouchableOpacity onPress={handleGoToSchedulePress} style={styles.goToScheduleBtnContainer}>
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   goToScheduleBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   goToScheduleBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   locationText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
     textDecorationLine: 'underline',
@@ -287,11 +287,11 @@ const styles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(16),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(16),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
   },
   selectedDateContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.lightNewPrimary,
     borderRadius: moderateScale(10),
     justifyContent: 'center',
     width: '20%',
@@ -337,13 +337,13 @@ const styles = StyleSheet.create({
     width: '95%',
   },
   selectedDateMonthText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(18),
     textAlign: 'center',
   },
   selectedDateNumberText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(18),
     textAlign: 'center',
