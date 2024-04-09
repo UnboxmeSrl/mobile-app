@@ -1,3 +1,4 @@
+import com.android.build.OutputFile
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
@@ -19,7 +20,7 @@ project.ext.vectoricons = [
     iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
 ]
 
-import com.android.build.OutputFile
+
 
 def getPassword(String currentUser, String keyChain) {
    def stdout = new ByteArrayOutputStream()
