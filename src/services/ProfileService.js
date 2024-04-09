@@ -77,7 +77,6 @@ export const getProfile = async () => {
   try {
     const url = Api.PROFILE.GET_USER_PROFILE
     const response = await Fetch.get(url, { axiosSecure: true })
-    console.log('getProfiele respoonese', response)
     return response?.data
   } catch (error) {
     console.log(error)

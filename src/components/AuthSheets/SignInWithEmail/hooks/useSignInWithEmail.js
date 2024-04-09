@@ -37,7 +37,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         dispatch(setBookings(bookingRes))
 
         // console.log('isFirstTimeLogin', isFirstTimeLogin)
-        if (res.firstVisit === 1) {
+        if (res?.firstVisit === 1) {
           // dispatch(setIsFirstTimeLogin(false))
           navigate(SCREEN_NAMES.FirstWelcomeScreen)
         } else if (serviceDetails?.id && isFromBookRedirected) {
@@ -47,11 +47,11 @@ const useSignInWithEmail = (isFromBookRedirected) => {
         }
 
         ref?.current?.close()
-      } else if (res.UserStatus === '' || res.UserStatus === 'onapproval') {
+      } else if (res?.UserStatus === '' || res?.UserStatus === 'onapproval') {
         dispatch(setOnboardingData(true))
         navigate(SCREEN_NAMES.AppliedScreen)
         ref?.current?.close()
-      } else if (res.UserStatus === 'rejected') {
+      } else if (res?.UserStatus === 'rejected') {
         dispatch(setOnboardingData(true))
         navigate(SCREEN_NAMES.RejectedScreen)
         ref?.current?.close()

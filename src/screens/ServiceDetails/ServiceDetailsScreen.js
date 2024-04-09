@@ -32,7 +32,7 @@ const ServiceDetails = () => {
     handleBookPress,
   } = useServiceDetails()
 
-  console.log('Service Details: ' + JSON.stringify(serviceDetails))
+  // console.log('Service Details: ' + JSON.stringify(serviceDetails))
   return (
     <View style={styles.mainContainer}>
       <CommonHeader title={'Deals'} />

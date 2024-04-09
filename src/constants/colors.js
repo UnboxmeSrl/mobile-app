@@ -53,4 +53,9 @@ export const COLORS = {
   newPrimary: '#FF385C',
   veryLight01: 'rgba(250,255, 255, 0.3)',
   lightRed: '#FFB3B2',
+  magicPotion: '#F6475F',
+  micGreen: '#008A05',
+  chinBlack: '#131115',
+  thistle: '#DBC0DD',
+  licorice: '#20070B',
 }

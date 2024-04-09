@@ -13,7 +13,6 @@ const useAuthNationality = () => {
   const navigation = useNavigation()
 
   const onSelect = (country) => {
-    console.log('country', country)
     setCountry(country)
   }
 

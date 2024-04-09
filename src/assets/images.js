@@ -113,4 +113,5 @@ export const IMAGES = {
   addUser: require('./images/add-user.png'),
   fullDedicated: require('./images/full-dedicated.png'),
   overlay: require('./images/overlay.png'),
+  profileTemplate: require('./images/profile-template.png'),
 }

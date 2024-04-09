@@ -27,7 +27,6 @@ const useAuthGender = () => {
   const handleNextPress = () => {
     dispatch(setAuthData({ gender: selectedGender }))
     dispatch(setSignUpProcessStage(3))
-    console.log('test')
     navigate(SCREEN_NAMES.AuthDateOfBirthScreen)
   }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import { useSelector } from 'react-redux'
-
+import FastImage from 'react-native-fast-image'
 import { IMAGES } from '../../assets/images'
 import AppButton from '../../components/Buttons'
 import AppText from '../../components/Elements/AppText'
@@ -11,8 +11,8 @@ import Hobbies from '../../components/Elements/Hobbies'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import perfectSize from '../../utils/responsiveSize'
-
 import { useFirstWellcome } from './hooks'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const FirstWellcomeScreen = () => {
   const { handleGuestPress } = useFirstWellcome()
@@ -23,10 +23,25 @@ const FirstWellcomeScreen = () => {
       <View style={styles.content}>
         <View style={styles.item}>
           <View style={styles.avatarGrid}>
-            <Avatar
+            <View style={styles.profileImageContainer}>
+              <FastImage
+                resizeMode="cover"
+                tintColor={COLORS.newPrimary}
+                source={
+                  user?.Profile_pic?.urll
+                    ? {
+                        priority: FastImage.priority.high,
+                        uri: user?.Profile_pic?.url,
+                      }
+                    : IMAGES.profileTemplate
+                }
+                style={styles.profileImage}
+              />
+            </View>
+            {/* <Avatar
               img={user?.Profile_pic?.url ? { uri: user?.Profile_pic?.url } : IMAGES.userImage}
               style={styles.avatar}
-            />
+            /> */}
             <View style={styles.checkView}>
               <IonIcons name="checkmark-sharp" style={styles.check} />
             </View>
@@ -59,6 +74,17 @@ const FirstWellcomeScreen = () => {
 export default FirstWellcomeScreen
 
 const styles = StyleSheet.create({
+  profileImageContainer: {
+    height: perfectSize(190),
+    width: perfectSize(190),
+    borderRadius: perfectSize(273),
+    backgroundColor: COLORS.thistle,
+    overflow: 'hidden',
+  },
+  profileImage: {
+    height: '100%',
+    width: '100%',
+  },
   avatar: {
     height: perfectSize(190),
     width: perfectSize(190),
@@ -67,7 +93,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   check: {
-    color: '#fff',
+    color: COLORS.white,
     fontSize: perfectSize(30),
   },
   badge: {
@@ -80,13 +106,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: perfectSize(70),
     right: perfectSize(20),
-    backgroundColor: '#008A05',
+    backgroundColor: COLORS.micGreen,
     top: perfectSize(-8),
     justifyContent: 'center',
     width: perfectSize(48),
   },
   badgeTitle: {
-    color: '#fff',
+    color: COLORS.white,
   },
   content: {
     alignItems: 'center',
@@ -107,7 +133,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    // backgroundColor: 'cyan',
   },
   btn: {
     borderRadius: perfectSize(16),
@@ -119,12 +144,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: '#131115',
+    backgroundColor: COLORS.chinBlack,
     paddingVertical: perfectSize(24),
-    // backgroundColor: 'yellow',
   },
   btnLabel: {
-    color: '#764837',
+    color: COLORS.white,
     fontFamily: FONTS.quicksandMedium,
     fontSize: perfectSize(18),
     letterSpacing: 0.36,
@@ -136,11 +160,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: perfectSize(24),
     paddingVertical: perfectSize(28),
-    backgroundColor: '#20070B',
+    backgroundColor: COLORS.licorice,
     width: '100%',
   },
   location: {
-    color: '#fff',
+    color: COLORS.white,
     fontFamily: FONTS.quicksandMedium,
     fontSize: perfectSize(15),
     marginTop: perfectSize(4),
@@ -150,11 +174,11 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: FONTS.quicksandBold,
-    color: '#fff',
+    color: COLORS.white,
     fontSize: perfectSize(22),
   },
   title: {
-    color: '#F6475F',
+    color: COLORS.magicPotion,
     fontFamily: FONTS.quicksandBold,
     fontSize: perfectSize(32),
     marginBottom: perfectSize(17),
@@ -164,7 +188,7 @@ const styles = StyleSheet.create({
   },
   userLabel: {
     fontFamily: FONTS.quicksandMedium,
-    color: '#fff',
+    color: COLORS.white,
     fontSize: perfectSize(14),
     marginVertical: perfectSize(12),
     maxWidth: '90%',
