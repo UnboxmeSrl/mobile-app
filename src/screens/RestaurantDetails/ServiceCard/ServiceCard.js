@@ -122,11 +122,12 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   ratingIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(11.56),
     width: moderateScale(12),
   },
   ratingsText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
   },
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
   },
   dealTimeLeftText: {
     textAlign: 'center',
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
   },

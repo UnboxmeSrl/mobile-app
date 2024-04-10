@@ -20,7 +20,7 @@ const SettingsNew = () => {
           style={[styles.btnContainer, isDeleting && styles.disabledBtnContainer]}
         >
           {isDeleting ? (
-            <ActivityIndicator size={30} color={COLORS.primary} />
+            <ActivityIndicator size={30} color={COLORS.black22} />
           ) : (
             <Text style={[styles.btnText, isDeleting && styles.disabledBtnText]}>Delete Account</Text>
           )}
@@ -39,7 +39,7 @@ export default SettingsNew
 
 const styles = StyleSheet.create({
   versionText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
   },
   versionContainer: {

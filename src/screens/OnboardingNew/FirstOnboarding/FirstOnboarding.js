@@ -59,10 +59,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textsMainContainer: {
-    marginTop: verticalScale(0),
+    marginTop: verticalScale(410),
   },
   imageStyle: {
-    height: verticalScale(410),
+    position: 'absolute',
+    height: '100%',
     width: '100%',
   },
 })

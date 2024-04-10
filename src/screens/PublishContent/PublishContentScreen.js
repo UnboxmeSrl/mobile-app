@@ -113,7 +113,7 @@ const PublishContentScreen = () => {
                   <View style={styles.linkUploadTextInputContainer}>
                     <TextInput
                       placeholder="Paste content link here"
-                      placeholderTextColor={COLORS.primary}
+                      placeholderTextColor={COLORS.newPrimary}
                       style={styles.linkUploadTextInput}
                       value={link}
                       onChangeText={(val) => setLink(val)}
@@ -188,7 +188,7 @@ const PublishContentScreen = () => {
       <View style={styles.sendToReviewBtnMainContainer}>
         {isSendToReview ? (
           <View style={styles.sendToReviewBtnContainer}>
-            <ActivityIndicator color={COLORS.primary} size={30} />
+            <ActivityIndicator color={COLORS.black22} size={30} />
           </View>
         ) : (
           <TouchableOpacity onPress={handleSendToReviewBtnPress} style={styles.sendToReviewBtnContainer}>
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(10),
   },
   linkUploadTextInput: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
   },
@@ -457,11 +457,11 @@ const styles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(16),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(16),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
   },
   sendToReviewBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',
@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   sendToReviewBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',

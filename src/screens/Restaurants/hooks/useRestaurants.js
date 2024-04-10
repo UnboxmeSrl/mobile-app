@@ -103,7 +103,7 @@ const useRestaurants = () => {
   const handleLocationPress = () => {
     navigation.replace({
       params: {
-        isFromRestaurant: true,
+        isFromOtherScreen: true,
       },
       routeName: SCREEN_NAMES.Cities,
     })

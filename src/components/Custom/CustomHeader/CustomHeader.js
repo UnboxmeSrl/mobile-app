@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
   },
   progressText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
     textAlign: 'center',

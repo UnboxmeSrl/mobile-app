@@ -7,22 +7,15 @@ import { useAuthGender } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
 const AuthGenderScreen = () => {
-  const {
-    isLoading,
-    genderList,
-    selectedGender,
-    isBtnDisabled,
-    setSelectedGender,
-    handleBackPress,
-    handleNextPress,
-  } = useAuthGender()
+  const { isLoading, genderList, selectedGender, isBtnDisabled, setSelectedGender, handleBackPress, handleNextPress } =
+    useAuthGender()
 
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'Gender'} step={2} handleBackPress={handleBackPress} />
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size={moderateScale(20)} color={COLORS.primary} />
+          <ActivityIndicator size={moderateScale(20)} color={COLORS.newPrimary} />
         </View>
       ) : (
         <>
@@ -71,7 +64,7 @@ const styles = StyleSheet.create({
   },
   genderTextWithSelection: {
     fontFamily: FONTS.quicksandBold,
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
   },
   genderText: {
     fontFamily: FONTS.quicksand,
@@ -82,7 +75,7 @@ const styles = StyleSheet.create({
   genderContainerWithSelection: {
     backgroundColor: COLORS.white,
     borderWidth: moderateScale(2),
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
   },
   genderContainer: {
     height: verticalScale(56),
@@ -91,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: moderateScale(24),
-    backgroundColor: COLORS.isabelLine,
+    backgroundColor: COLORS.lightNewPrimaryA6,
     marginTop: verticalScale(16),
   },
   mainContainer: {

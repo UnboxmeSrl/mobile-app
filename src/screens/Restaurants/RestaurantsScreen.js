@@ -11,13 +11,10 @@ import {
 } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { Categories } from '@components/Categories'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useRestaurants } from './hooks'
 import { RestaurantCard } from './RestaurantCard'
 
@@ -49,7 +46,7 @@ const RestaurantsScreen = () => {
       />
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator color={COLORS.primary} size={20} />
+          <ActivityIndicator color={COLORS.newPrimary} size={20} />
         </View>
       ) : (
         <>
@@ -99,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: '60%',
   },
   listEmptyText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -113,11 +110,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   locationFont: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(20),
   },
   locationIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(14),
     marginRight: scale(11.2),
     width: moderateScale(18),
@@ -134,7 +132,8 @@ const styles = StyleSheet.create({
   selectedLocation: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: COLORS.isabelLine,
+    // backgroundColor: COLORS.isabelLine,
+    backgroundColor: COLORS.lightNewPrimary,
     borderColor: COLORS.lightGray,
     borderRadius: moderateScale(16),
     flexDirection: 'row',

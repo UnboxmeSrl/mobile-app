@@ -6,7 +6,6 @@ import { PrizesScreen } from '@screens/Prizes'
 import { ProfileScreen } from '@screens/Profile'
 
 import { TabBarIcon } from '@components/TabBarIcon'
-import { COLORS } from '@const'
 import { SCREEN_NAMES } from '@const/navigation'
 
 import { IMAGES } from '../assets/images'
@@ -14,6 +13,7 @@ import { IMAGES } from '../assets/images'
 import HomeStack from './HomeStack'
 import ScheduleStack from './ScheduleStack'
 import ProfileStack from './ProfileStack'
+import { COLORS } from '../constants'
 
 export default createBottomTabNavigator(
   {
@@ -73,7 +73,7 @@ export default createBottomTabNavigator(
     // ),
 
     tabBarOptions: {
-      activeTintColor: COLORS.lightTaupe,
+      activeTintColor: COLORS.newPrimary,
       inactiveTintColor: COLORS.white,
       style: {
         backgroundColor: COLORS.white,
@@ -89,7 +89,7 @@ export default createBottomTabNavigator(
 const styles = StyleSheet.create({
   activeTabStyle: {
     alignItems: 'center',
-    borderTopColor: COLORS.lightTaupe,
+    borderTopColor: COLORS.newPrimary,
     borderTopWidth: 3,
     flex: 1,
     justifyContent: 'center',

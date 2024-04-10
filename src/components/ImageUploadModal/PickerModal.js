@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     height: moderateScale(50),
     width: moderateScale(50),
     marginBottom: verticalScale(10),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
   },
   textStyle: {
     fontFamily: FONTS.quicksand,
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
   },
 })

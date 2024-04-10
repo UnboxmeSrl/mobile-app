@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(50),
   },
   codeTextWithFocus: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
   },
   codeText: {
     flex: 1,
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   codeContainerWithFocus: {
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
   },
   mainContainer: {
     backgroundColor: COLORS.white,

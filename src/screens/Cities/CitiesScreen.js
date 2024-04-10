@@ -15,7 +15,7 @@ const CitiesScreen = () => {
     <View style={styles.mainContainer}>
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator color={COLORS.primary} size={20} />
+          <ActivityIndicator color={COLORS.newPrimary} size={20} />
         </View>
       ) : (
         <FlatList

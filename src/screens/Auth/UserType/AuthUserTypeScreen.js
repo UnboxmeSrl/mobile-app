@@ -7,14 +7,8 @@ import { useAuthUserType } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
 
 const AuthUserTypeScreen = () => {
-  const {
-    isBtnDisabled,
-    userTypeList,
-    selectedUserType,
-    setSelectedUserType,
-    handleBackPress,
-    handleNextPress,
-  } = useAuthUserType()
+  const { isBtnDisabled, userTypeList, selectedUserType, setSelectedUserType, handleBackPress, handleNextPress } =
+    useAuthUserType()
   return (
     <View style={styles.mainContainer}>
       <CustomHeader title={'What are you?'} step={7} handleBackPress={handleBackPress} />
@@ -55,7 +49,7 @@ const styles = StyleSheet.create({
   },
   userTypeTextWithSelection: {
     fontFamily: FONTS.quicksandBold,
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
   },
   userTypeText: {
     fontFamily: FONTS.quicksand,
@@ -66,7 +60,7 @@ const styles = StyleSheet.create({
   userTypeContainerWithSelection: {
     backgroundColor: COLORS.white,
     borderWidth: moderateScale(2),
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
   },
   userTypeContainer: {
     height: verticalScale(56),
@@ -75,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: moderateScale(24),
-    backgroundColor: COLORS.isabelLine,
+    backgroundColor: COLORS.lightNewPrimaryA6,
     marginTop: verticalScale(16),
   },
   mainContainer: {

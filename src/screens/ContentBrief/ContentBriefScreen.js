@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     width: '15%',
   },
   copyIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(16),
     marginLeft: scale(7),
     width: moderateScale(16),
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
   },
   openCouponBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   openCouponBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
@@ -206,11 +207,11 @@ const styles = StyleSheet.create({
   queryIcon: {
     height: moderateScale(19),
     marginRight: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(20),
   },
   queryText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
   },
@@ -221,11 +222,11 @@ const styles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(16),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(16),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   socialMediaDescriptionText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
   },

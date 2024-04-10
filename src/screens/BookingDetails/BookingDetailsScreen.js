@@ -61,7 +61,7 @@ const BookingDetailsScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false}>
       {isDatesLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator color={COLORS.primary} size={30} />
+          <ActivityIndicator color={COLORS.newPrimary} size={30} />
         </View>
       ) : (
         <>
@@ -195,7 +195,7 @@ const BookingDetailsScreen = () => {
           <View style={styles.bookBtnMainContainer}>
             {isLoading ? (
               <View style={styles.bookBtnContainer}>
-                <ActivityIndicator color={COLORS.primary} size={30} />
+                <ActivityIndicator color={COLORS.black22} size={30} />
               </View>
             ) : (
               <TouchableOpacity
@@ -204,7 +204,7 @@ const BookingDetailsScreen = () => {
                 style={[
                   styles.bookBtnContainer,
                   selectedTimeFame?.id && {
-                    backgroundColor: COLORS.lightBrown,
+                    backgroundColor: COLORS.newPrimary,
                   },
                 ]}
               >
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   bookBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0 }],
   },
   dateNameStyle: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(12),
   },
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   headerAndDateContainer: {
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimary40,
   },
   headerContainer: {
     alignItems: 'center',
@@ -318,18 +318,18 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(20),
   },
   highlightDateNameStyle: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(12),
   },
   highlightDateNumberStyle: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(16),
   },
   highlightedDateContainer: {
-    backgroundColor: COLORS.lightBrown,
-    borderColor: COLORS.primary,
+    backgroundColor: COLORS.lightNewPrimaryA6,
+    borderColor: COLORS.newPrimary,
     borderRadius: moderateScale(8),
     borderWidth: moderateScale(1),
   },
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(16),
   },
   listEmptyText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
@@ -387,12 +387,12 @@ const styles = StyleSheet.create({
     width: '20%',
   },
   removeBtnText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
   },
   selectedDateContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.lightNewPrimary,
     borderRadius: moderateScale(10),
     justifyContent: 'center',
     width: '20%',
@@ -406,13 +406,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   selectedDateMonthText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(18),
     textAlign: 'center',
   },
   selectedDateNumberText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(18),
     textAlign: 'center',
@@ -435,7 +435,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   selectedTimeFrameStyle: {
-    borderColor: COLORS.primary,
+    backgroundColor: COLORS.lightNewPrimaryA6,
+    borderColor: COLORS.newPrimary,
     borderWidth: moderateScale(2),
   },
   sendMessageTextContainer: {

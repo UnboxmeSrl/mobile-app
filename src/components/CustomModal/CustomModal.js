@@ -21,7 +21,7 @@ const CustomModal = ({ visible, title, description, isLoading, handleNegativeBtn
           <View style={styles.buttonsContainer}>
             {isLoading ? (
               <View style={styles.yesBtnContainer}>
-                <ActivityIndicator color={COLORS.primary} size={20} />
+                <ActivityIndicator color={COLORS.newPrimary} size={20} />
               </View>
             ) : (
               <TouchableOpacity onPress={handlePositiveBtnPress} style={styles.yesBtnContainer}>

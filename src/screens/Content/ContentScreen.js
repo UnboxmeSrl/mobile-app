@@ -35,7 +35,7 @@ const ContentScreen = () => {
 
         {isDataFetching ? (
           <View style={styles.loaderContainer}>
-            <ActivityIndicator color={COLORS.primary} size={20} />
+            <ActivityIndicator color={COLORS.newPrimary} size={20} />
           </View>
         ) : actionNumId === 3 ? (
           <FlatList
@@ -45,7 +45,10 @@ const ContentScreen = () => {
               return (
                 <TouchableOpacity
                   onPress={() => setSelectedApp(index)}
-                  style={[styles.cardContainer, selectedApp === index && { borderColor: COLORS.black, borderWidth: 1 }]}
+                  style={[
+                    styles.cardContainer,
+                    selectedApp === index && { borderColor: COLORS.newPrimary, borderWidth: 1 },
+                  ]}
                 >
                   <View style={styles.socialMediaMainDetailsContainer}>
                     <View style={styles.socialMediaImageContainer}>
@@ -119,7 +122,7 @@ const ContentScreen = () => {
           <View style={styles.nextBtnMainContainer}>
             {isLoading ? (
               <View style={styles.nextBtnContainer}>
-                <ActivityIndicator color={COLORS.primary} size={30} />
+                <ActivityIndicator color={COLORS.black22} size={30} />
               </View>
             ) : (
               <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     alignSelf: 'center',
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimary40,
     borderColor: COLORS.whiteShadedTransparent,
     borderRadius: moderateScale(10),
     borderWidth: 1,
@@ -197,7 +200,7 @@ const styles = StyleSheet.create({
   },
   nextBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',
@@ -213,7 +216,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   nextBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
     fontWeight: '600',
@@ -225,11 +228,11 @@ const styles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(16),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(16),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },

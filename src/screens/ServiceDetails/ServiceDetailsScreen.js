@@ -38,7 +38,7 @@ const ServiceDetails = () => {
       <CommonHeader title={'Deals'} />
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator color={COLORS.primary} size={30} />
+          <ActivityIndicator color={COLORS.newPrimary} size={30} />
         </View>
       ) : (
         <ScrollView>
@@ -256,7 +256,7 @@ const ServiceDetails = () => {
           <View style={styles.bookBtnMainContainer}>
             <TouchableOpacity onPress={handleBookPress} style={styles.bookBtnContainer} disabled={isBookBtnPressed}>
               {isBookBtnPressed ? (
-                <ActivityIndicator size={30} color={COLORS.primary} />
+                <ActivityIndicator size={30} color={COLORS.black22} />
               ) : (
                 <Text style={styles.bookBtnText}>Book Now</Text>
               )}
@@ -340,13 +340,13 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(20),
   },
   deadlineText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginLeft: scale(10),
   },
   timeCircleIcon: {
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     height: moderateScale(18),
     width: moderateScale(18),
   },
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(20),
   },
   deaLeftText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
   },
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(12),
     marginTop: verticalScale(10),
     borderWidth: moderateScale(1),
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
   },
   amenityMainContainer: {
     // width: scale(120),
@@ -431,11 +431,12 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(11),
   },
   ratingIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(11.56),
     width: moderateScale(12),
   },
   ratingsText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
   },
@@ -481,7 +482,7 @@ const styles = StyleSheet.create({
   },
   bookBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(44),
     justifyContent: 'center',
@@ -493,7 +494,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   bookBtnText: {
-    color: COLORS.primary,
+    color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
   },
@@ -529,7 +530,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     alignItems: 'center',
-    borderColor: COLORS.primary,
+    borderColor: COLORS.newPrimary,
     borderRadius: moderateScale(5),
     borderWidth: 2,
     height: moderateScale(22),
@@ -538,13 +539,13 @@ const styles = StyleSheet.create({
     width: moderateScale(22),
   },
   infoText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(14),
     marginTop: verticalScale(3),
   },
   infoTextTitle: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
   },
@@ -591,11 +592,11 @@ const styles = StyleSheet.create({
   ratingIconImage: {
     height: moderateScale(16),
     marginLeft: scale(5),
-    tintColor: COLORS.primary,
+    tintColor: COLORS.newPrimary,
     width: moderateScale(16),
   },
   ratingUsersText: {
-    color: COLORS.primary,
+    color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(16),
   },
