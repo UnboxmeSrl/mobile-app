@@ -62,7 +62,6 @@ fastlane/screenshots
 # CocoaPods
 /ios/Pods/
 
-.env
 pc-api-4719532666987937571-874-251b40c0fdf8.json
 unboxme.app.dSYM.zip
-/fastlane/.env.default
+# /fastlane/.env.default
