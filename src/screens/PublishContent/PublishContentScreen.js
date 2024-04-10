@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
   },
   onApprovalItemsMainContainer: {
     alignSelf: 'center',
-    backgroundColor: COLORS.lightPink,
+    backgroundColor: COLORS.lightNewPrimary,
     borderRadius: moderateScale(10),
     paddingBottom: verticalScale(10),
     width: '95%',

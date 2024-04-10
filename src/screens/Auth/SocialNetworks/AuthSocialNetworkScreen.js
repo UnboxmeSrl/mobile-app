@@ -4,15 +4,14 @@ import React, { useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../../assets/images'
 import { CustomButton, CustomHeader, SocialMediaSheet } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
-
 import { useAuthSocialNetwork } from './hooks'
 
 const AuthSocialNetworkScreen = () => {
   const {
+    isLoading,
     isBtnDisabled,
     tiktokUserName,
     setTiktokUserName,
@@ -114,7 +113,7 @@ const AuthSocialNetworkScreen = () => {
       </View> */}
 
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
+        <CustomButton title={'Next'} handlePress={handleNextPress} isLoading={isLoading} disabled={isLoading} />
       </View>
 
       <SocialMediaSheet

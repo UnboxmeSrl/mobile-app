@@ -136,9 +136,9 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: '5%',
-    marginTop: verticalScale(20),
-    width: '90%',
+    paddingRight: '5%',
+    paddingLeft: '10%',
+    width: '100%',
   },
   descriptionText: {
     color: COLORS.black,

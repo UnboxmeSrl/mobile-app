@@ -12,6 +12,7 @@ const useAuthSocialNetwork = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
   const [tiktokUserName, setTiktokUserName] = useState()
   const [instaUserName, setInstaUserName] = useState()
+  const [isLoading, setIsLoading] = useState()
   const tiktokSheetRef = useRef()
   const instaSheetRef = useRef()
   const dispatch = useDispatch()
@@ -36,6 +37,7 @@ const useAuthSocialNetwork = () => {
   }
 
   const handleNextPress = async () => {
+    setIsLoading(true)
     dispatch(setAuthData({ instaUserName, tiktokUserName }))
 
     // User Type (Model, Influencer, Both)
@@ -55,6 +57,7 @@ const useAuthSocialNetwork = () => {
 
     // Nationality
     const nationality = userDetails?.nationality?.name
+    const countryCode = userDetails?.nationality?.cca2
 
     formData.append('email', userDetails?.email)
     formData.append('password', userDetails?.password)
@@ -65,6 +68,7 @@ const useAuthSocialNetwork = () => {
     formData.append('gender_list_id', genderId)
     formData.append('Birthday', birthDate)
     formData.append('nationality', nationality)
+    formData.append('countryCode', countryCode)
     formData.append('City', userDetails?.city)
     formData.append('Agency', userDetails?.agencyData?.hasAgency)
     formData.append('Freelance', userDetails?.agencyData?.freelance)
@@ -113,6 +117,7 @@ const useAuthSocialNetwork = () => {
       dispatch(setLoginData(res))
       // reset(MAIN_NAVIGATOR)
       // dispatch(setIsApplied(true))
+      setIsLoading(false)
       navigate(SCREEN_NAMES.AppliedScreen)
     } else {
       showToastError(res)
@@ -122,6 +127,7 @@ const useAuthSocialNetwork = () => {
   // navigate(SCREEN_NAMES.AuthInterestTopicsScreen)
 
   return {
+    isLoading,
     handleBackPress,
     handleOnInstaPress,
     handleNextPress,

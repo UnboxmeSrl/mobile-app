@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { REGEX } from '../../../../constants'
 import { setAuthData } from '../../../../redux/slices/authSlice'
 import { getOtp, verifyOtp } from '../../../../services/SignUp'
+import { showToastError } from '../../../../services'
 
 const useSignUpWithEmail = (closeSignUpSheet) => {
   const [email, setEmail] = useState()
@@ -20,6 +21,7 @@ const useSignUpWithEmail = (closeSignUpSheet) => {
       return err
     })
   }, [email])
+
   const handleSignUpPress = async () => {
     if (email && REGEX.emailRegExp.test(email)) {
       const data = {
@@ -52,6 +54,8 @@ const useSignUpWithEmail = (closeSignUpSheet) => {
     const res = await verifyOtp(body)
     if (res.success) {
       closeSignUpSheet()
+    } else {
+      showToastError(res)
     }
   }
 

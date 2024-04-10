@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
   },
   okayBtnContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.lightBrown,
+    backgroundColor: COLORS.lightNewPrimary,
     borderRadius: moderateScale(16),
     height: verticalScale(40),
     justifyContent: 'center',

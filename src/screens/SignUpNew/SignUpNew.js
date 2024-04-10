@@ -74,7 +74,7 @@ const SignUpNew = () => {
           <Text style={styles.descriptionText}>
             {`By signing up, you `}
             <Text style={styles.changedText}>{`agree`}</Text>
-            {`to Claris’s`}
+            {` to Claris’s`}
             <Text style={styles.changedText}>{` Terms of Use `}</Text>
             {`and `}
             <Text style={styles.changedText}>{` Privacy Policy. `}</Text>

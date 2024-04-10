@@ -76,7 +76,7 @@ export const ProfileScreenPresenter = ({
                     <Text style={styles.from}>From {user?.City}</Text>
                   </View>
                   <View style={styles.socialGrid}>
-                    <Pressable onPress={navigateToQuestionnaire}>
+                    <Pressable>
                       <Ionicons name="logo-instagram" style={styles.socialIcon} />
                     </Pressable>
                     <Divider style={styles.divider} />

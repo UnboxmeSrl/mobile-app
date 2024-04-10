@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   listEmptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '8s%',
+    marginTop: '8%',
   },
   listEmptyText: {
     color: COLORS.newPrimary,

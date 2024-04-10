@@ -51,7 +51,7 @@ const CustomTextInput = ({
             setIsSecureText(!isSecureText)
           }}
         >
-          <Image source={IMAGES.passwordEye} style={styles.passwordEyeIcon} />
+          <Image source={isSecureText ? IMAGES.passwordHide : IMAGES.passwordEye} style={styles.passwordEyeIcon} />
         </TouchableOpacity>
       )}
     </View>
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.black,
   },
   passwordEyeIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(16),
     width: moderateScale(22),
   },

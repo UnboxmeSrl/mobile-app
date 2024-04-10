@@ -114,4 +114,5 @@ export const IMAGES = {
   fullDedicated: require('./images/full-dedicated.png'),
   overlay: require('./images/overlay.png'),
   profileTemplate: require('./images/profile-template.png'),
+  passwordHide: require('./images/password-hide.png'),
 }

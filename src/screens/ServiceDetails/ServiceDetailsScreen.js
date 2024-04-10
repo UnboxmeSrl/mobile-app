@@ -3,14 +3,12 @@ import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, Touch
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { CommonHeader } from '../../components'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { checkAction } from '../../utils'
-
 import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
@@ -72,7 +70,7 @@ const ServiceDetails = () => {
               <Text style={styles.titleText}>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
             </View>
             <View style={styles.dealLeftContainer}>
-              <Text style={styles.deaLeftText}>{`${dealsLeft}`}</Text>
+              <Text style={styles.dealLeftText}>{`${dealsLeft}`}</Text>
             </View>
           </View>
 
@@ -131,11 +129,11 @@ const ServiceDetails = () => {
                 const actions = checkAction(actionNumId, socialActions)
                 // console.log('icon', icon, actionNumId)
                 return (
-                  <>
+                  <View>
                     {actionNumId === 3 ? (
                       diaryItems?.map((diaryItem, innerIndex) => (
-                        <>
-                          <View style={styles.mainSocialItemContainer} key={innerIndex}>
+                        <View key={innerIndex}>
+                          <View style={styles.mainSocialItemContainer}>
                             <View style={styles.socialMediaImageContainer}>
                               <FastImage
                                 resizeMode="contain"
@@ -170,11 +168,11 @@ const ServiceDetails = () => {
                               <View style={styles.orDivider} />
                             </View>
                           )}
-                        </>
+                        </View>
                       ))
                     ) : actionNumId === 6 ? (
                       actions?.duo_actions?.map((innerItem, innerIndex) => (
-                        <>
+                        <View key={innerIndex}>
                           <View style={styles.mainSocialItemContainer} key={innerIndex}>
                             <View style={styles.socialMediaImageContainer}>
                               <FastImage
@@ -210,7 +208,7 @@ const ServiceDetails = () => {
                               <View style={styles.orDivider} />
                             </View>
                           )}
-                        </>
+                        </View>
                       ))
                     ) : (
                       <View style={styles.mainSocialItemContainer}>
@@ -242,7 +240,7 @@ const ServiceDetails = () => {
                         </View>
                       </View>
                     )}
-                  </>
+                  </View>
                 )
               }}
             />
@@ -377,7 +375,7 @@ const styles = StyleSheet.create({
     width: '90%',
     marginVertical: verticalScale(20),
   },
-  deaLeftText: {
+  dealLeftText: {
     color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
@@ -400,7 +398,6 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(16),
     borderWidth: moderateScale(1),
     marginTop: verticalScale(10),
-    marginLeft: scale(20),
     marginLeft: scale(10),
     paddingHorizontal: scale(10),
     borderColor: COLORS.gainsboro,
