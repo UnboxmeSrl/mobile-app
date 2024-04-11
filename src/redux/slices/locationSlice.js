@@ -12,9 +12,12 @@ const LocationSlice = createSlice({
     setCity: (state, actions) => {
       state.city = actions?.payload
     },
+    resetLocationSlice: (state, actions) => {
+      state.city = {}
+    },
   },
 })
 
-export const { setCity } = LocationSlice.actions
+export const { setCity, resetLocationSlice } = LocationSlice.actions
 
 export default LocationSlice.reducer

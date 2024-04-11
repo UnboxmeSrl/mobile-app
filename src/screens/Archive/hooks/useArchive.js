@@ -32,7 +32,9 @@ const useArchive = () => {
   }
 
   useEffect(() => {
-    getAllCanceledBookingsData()
+    if (loginData?.id) {
+      getAllCanceledBookingsData()
+    }
   }, [])
 
   return {

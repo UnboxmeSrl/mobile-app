@@ -132,7 +132,8 @@ const RestaurantDetails = () => {
           ) : (
             <FlatList
               ListEmptyComponent={
-                !isLoading && (
+                !isLoading &&
+                services?.length === 0 && (
                   <View style={styles.listEmptyContainer}>
                     <Text style={styles.listEmptyText}>No data found.</Text>
                   </View>

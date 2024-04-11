@@ -13,9 +13,12 @@ const ContentSlice = createSlice({
     setContentList: (state, actions) => {
       state.contentList = actions?.payload
     },
+    resetContentSlice: (state, actions) => {
+      state.contentList = []
+    },
   },
 })
 
-export const { setContentList } = ContentSlice.actions
+export const { setContentList, resetContentSlice } = ContentSlice.actions
 
 export default ContentSlice.reducer

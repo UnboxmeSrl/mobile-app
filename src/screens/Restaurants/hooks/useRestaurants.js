@@ -19,7 +19,7 @@ const useRestaurants = () => {
   const category = useSelector(selectAwardPrizeCategory)
   // const cityData = useNavigationParam('cityData')
   const cityData = useSelector((state) => state.locationSlice.city)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [restaurantsData, setRestaurantsData] = useState()
   const [filter, setFilter] = useState(0)
   const [categories, setCategories] = useState([])
@@ -62,6 +62,7 @@ const useRestaurants = () => {
       Alert.alert('Location Permission', 'Something went wrong!')
     }
   }, [])
+
   useEffect(() => {
     console.log('check useEffect n restarant screen')
     requestLocationPermission()
@@ -75,7 +76,9 @@ const useRestaurants = () => {
     }
     const res = await getRestaurants(prepData)
     setRestaurantsData(res)
-    setIsLoading(false)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
   }
 
   const sortedRestaurants = useMemo(

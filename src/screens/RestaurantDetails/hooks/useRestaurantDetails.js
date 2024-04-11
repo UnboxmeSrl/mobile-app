@@ -21,7 +21,9 @@ const useRestaurantDetails = () => {
   const isFocused = useIsFocused()
 
   console.log('Services', services)
+
   const getServicesData = async () => {
+    setIsLoading(true)
     const prepData = {
       category_id: filter,
       restaurant_id: restaurantDetails?.id,

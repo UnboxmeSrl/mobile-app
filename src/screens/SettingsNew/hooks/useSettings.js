@@ -3,8 +3,15 @@ import { deleteUserAccount, logger, reset, showToastSuccess } from '../../../ser
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useState } from 'react'
 import { MAIN_NAVIGATOR } from '../../../constants/navigation'
-import { persistor } from '../../../redux/store'
-import { resetLogin } from '../../../redux/slices'
+import { persistor, store } from '../../../redux/store'
+import {
+  resetContentSlice,
+  resetLocationSlice,
+  resetLogin,
+  resetRestaurantSlice,
+  resetServiceSlice,
+  setCity,
+} from '../../../redux/slices'
 import { Alert } from 'react-native'
 
 const useSettings = () => {
@@ -16,19 +23,27 @@ const useSettings = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const logout = useCallback(async () => {
+  const logout = async () => {
     try {
       setIsLoading(true)
+      await persistor.purge()
+      dispatch(resetRestaurantSlice())
+      dispatch(resetContentSlice())
+      dispatch(resetServiceSlice())
+      setIsLoading(false)
       reset(MAIN_NAVIGATOR)
       dispatch(resetLogin())
-      await persistor.purge()
+      dispatch(setCity({}))
+      // store.dispatch({
+      //   type: 'RESET_STATE',
+      // })
+
       showToastSuccess("You've been logged out")
       logger.info('Logout succeeded')
-      setIsLoading(false)
     } catch (error) {
       logger.error('Logout error', { error })
     }
-  }, [dispatch])
+  }
 
   const handleLogout = useCallback(async () => {
     Alert.alert('Confirmation', 'Are you sure you want to log out?', [
@@ -61,6 +76,7 @@ const useSettings = () => {
           //TODO: Enable below if you need in future (satyam)
           // reset(MAIN_NAVIGATOR)
           dispatch(resetLogin())
+          dispatch(setCity({}))
           await persistor.purge()
           showToastSuccess(res)
           setIsDeleting(false)

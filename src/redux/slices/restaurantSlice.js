@@ -33,6 +33,10 @@ const RestaurantSlice = createSlice({
     setSocialActions: (state, actions) => {
       state.socialActions = actions.payload
     },
+    resetRestaurantSlice: (state, actions) => {
+      state.bookings = []
+      state.canceledBookings = []
+    },
   },
 })
 
@@ -43,6 +47,7 @@ export const {
   setCanceledBookings,
   setTimeFrameData,
   setSocialActions,
+  resetRestaurantSlice,
 } = RestaurantSlice.actions
 
 export default RestaurantSlice.reducer

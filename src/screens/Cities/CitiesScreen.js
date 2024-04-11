@@ -19,6 +19,7 @@ const CitiesScreen = () => {
         </View>
       ) : (
         <FlatList
+          showsVerticalScrollIndicator={false}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListHeaderComponent={
             <>

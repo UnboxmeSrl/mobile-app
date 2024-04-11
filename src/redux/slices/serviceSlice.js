@@ -12,9 +12,12 @@ const ServiceSlice = createSlice({
     setServices: (state, actions) => {
       state.services = actions?.payload
     },
+    resetServiceSlice: (state, actions) => {
+      state.services = []
+    },
   },
 })
 
-export const { setServices } = ServiceSlice.actions
+export const { setServices, resetServiceSlice } = ServiceSlice.actions
 
 export default ServiceSlice.reducer
