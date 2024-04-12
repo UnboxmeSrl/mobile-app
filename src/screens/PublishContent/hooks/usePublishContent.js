@@ -23,7 +23,7 @@ const usePublishContent = () => {
   if (contentDetails?.diary_action_turbo_id) {
     actionName = contentDetails?._diary_action_turbo?.action_for_others
     if (actionNumId === 3) {
-      actionName = item?._diary_action_turbo?.action
+      actionName = contentDetails?._diary_action_turbo?.action
     }
     icon = checkActionName(actionName)
   }
@@ -45,6 +45,7 @@ const usePublishContent = () => {
     navigate({
       params: {
         actionName: actionName,
+        actionNumId: actionNumId,
         bookingDetails: contentDetails,
       },
       routeName: SCREEN_NAMES.ContentScreen,

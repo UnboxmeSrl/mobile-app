@@ -189,9 +189,9 @@ const useBookingDetails = () => {
     console.log('weekDay: ' + weekDay)
     setCurrentWeekDay(weekDay)
 
-    const updatedData = timeFrameData.map((item) => {
-      const weekdays = item.weekdays
-      const pauseDays = item.pause_days
+    const updatedData = timeFrameData?.map((item) => {
+      const weekdays = item?.weekdays
+      const pauseDays = item?.pause_days
       console.log('weekdays: ' + weekdays, 'pauseDays: ' + pauseDays)
       const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
       return {

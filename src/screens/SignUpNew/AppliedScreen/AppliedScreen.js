@@ -121,6 +121,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   viewForMargin: {
-    marginTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight(),
   },
 })

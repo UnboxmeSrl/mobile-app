@@ -76,17 +76,12 @@ const useRestaurantDetails = () => {
   }, [])
 
   useEffect(() => {
-    getServicesData()
-  }, [filter])
-
-  useEffect(() => {
+    console.log('Length', services?.length)
     if (isFocused && services?.length === 0) {
+      console.log('testiiiii')
       getServicesData()
     }
-    return () => {
-      dispatch(setServices([]))
-    }
-  }, [isFocused])
+  }, [isFocused, filter])
 
   return {
     isLoading,

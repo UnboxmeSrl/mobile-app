@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    marginTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight(),
   },
   nextDatesIcon: {
     height: moderateScale(20),

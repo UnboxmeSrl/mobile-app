@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.lightNewPrimary40,
     flex: 1,
-    marginTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight(),
   },
   mainInnerView: {
     alignSelf: 'center',

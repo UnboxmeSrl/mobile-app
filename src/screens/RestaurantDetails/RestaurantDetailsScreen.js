@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    marginTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight(),
   },
   previewText: {
     color: COLORS.achromaticBlack,

@@ -77,7 +77,9 @@ const useServiceDetails = () => {
   const getTimeFrameData = async () => {
     const params = `/${restaurantDetails?.id}`
     const res = await getTimeFrames(params)
-    dispatch(setTimeFrameData(res))
+    setTimeout(() => {
+      dispatch(setTimeFrameData(res))
+    }, 1000)
   }
 
   // const onCategoryChange = (serviceCategoryId) => {
@@ -114,7 +116,7 @@ const useServiceDetails = () => {
 
   useEffect(() => {
     // getServiceCategoriesData()
-    getServicesData()
+    // getServicesData()
     getDiaryActionsData()
     getTimeFrameData()
   }, [])

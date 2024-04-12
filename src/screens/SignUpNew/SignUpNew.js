@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(210),
   },
   viewForMargin: {
-    marginTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight(),
   },
   backgroundStyle: {
     height: '100%',

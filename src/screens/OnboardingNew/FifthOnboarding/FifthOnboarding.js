@@ -26,7 +26,7 @@ export default FifthOnboarding
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight(),
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,
