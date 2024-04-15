@@ -147,7 +147,7 @@ const ServiceDetails = () => {
                             </View>
                             <View style={styles.socialMediaTitleDescriptionContainer}>
                               <View style={styles.socialMediaTitleContainer}>
-                                <Text style={styles.socialMediaTitle}>{diaryItem?.action} video</Text>
+                                <Text style={styles.socialMediaTitle}>{diaryItem?.action}</Text>
                                 <View style={styles.ratingsContainer}>
                                   <Text style={styles.ratingsText}>60</Text>
                                   <Image source={IMAGES.star} style={styles.ratingIcon} />
@@ -155,8 +155,7 @@ const ServiceDetails = () => {
                               </View>
                               <View style={styles.socialMediaDescriptionContainer}>
                                 <Text style={styles.socialMediaDescriptionText}>
-                                  You have to publish a Tiktok video following the brief and tagging both the venue and
-                                  claris.app
+                                  {`${item?._actions_turbo?.Descrizione}`}
                                 </Text>
                               </View>
                             </View>
@@ -194,10 +193,7 @@ const ServiceDetails = () => {
                                 </View>
                               </View>
                               <View style={styles.socialMediaDescriptionContainer}>
-                                <Text style={styles.socialMediaDescriptionText}>
-                                  You have to publish a Tiktok video following the brief and tagging both the venue and
-                                  claris.app
-                                </Text>
+                                <Text style={styles.socialMediaDescriptionText}>{`${innerItem?.Descrizione}`}</Text>
                               </View>
                             </View>
                           </View>
@@ -233,8 +229,7 @@ const ServiceDetails = () => {
                           </View>
                           <View style={styles.socialMediaDescriptionContainer}>
                             <Text style={styles.socialMediaDescriptionText}>
-                              You have to publish a Tiktok video following the brief and tagging both the venue and
-                              claris.app
+                              {`${item?._actions_turbo?.Descrizione}`}
                             </Text>
                           </View>
                         </View>

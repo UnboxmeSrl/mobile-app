@@ -36,6 +36,7 @@ const YourScheduleScreen = () => {
     handleContentCardPress,
     handleArchivePress,
   } = useYourSchedule()
+  console.log('Content List: ', contentList)
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -252,7 +253,12 @@ const YourScheduleScreen = () => {
                       </View>
                     </View>
 
-                    <View style={contentStyles.deadLineLocationContainer}>
+                    <View
+                      style={[
+                        contentStyles.deadLineLocationContainer,
+                        item?.content_status_turbo_id !== 0 && styles.underReviewContainer,
+                      ]}
+                    >
                       <View style={contentStyles.deadLineContainer}>
                         <View style={contentStyles.deadLineMainRow}>
                           <View
@@ -302,12 +308,14 @@ const YourScheduleScreen = () => {
                             <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.threeDotsIcon} />
                           </View> */}
                         </View>
-                        <View style={contentStyles.infoContainer}>
-                          <Image resizeMode="contain" source={IMAGES.info} style={contentStyles.infoIcon} />
-                          <Text
-                            style={contentStyles.deadLineText}
-                          >{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
-                        </View>
+                        {item?.content_status_turbo_id === 0 && (
+                          <View style={contentStyles.infoContainer}>
+                            <Image resizeMode="contain" source={IMAGES.info} style={contentStyles.infoIcon} />
+                            <Text
+                              style={contentStyles.deadLineText}
+                            >{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
+                          </View>
+                        )}
                       </View>
                       <View style={contentStyles.divider} />
                       <View style={contentStyles.locationMainRow}>
@@ -358,6 +366,10 @@ const YourScheduleScreen = () => {
 export default YourScheduleScreen
 
 const styles = StyleSheet.create({
+  underReviewContainer: {
+    marginTop: verticalScale(10),
+    paddingBottom: verticalScale(30),
+  },
   listEmptyContainer: {
     alignItems: 'center',
     height: verticalScale(40),
