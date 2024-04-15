@@ -1,21 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { setServices } from '../../../redux/slices'
 import {
   addRestaurantBooking,
   // getTimeFrames,
   showToastError,
 } from '../../../services'
-import { getServices } from '../../../services/LocationsService'
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector((state) => state.restaurantSlice.timeFrameData)
   const loginData = useSelector((state) => state.authSlice.loginData)
-  const services = useSelector((state) => state.serviceSlice.services)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -105,12 +100,6 @@ const useBookingDetails = () => {
     const res = await addRestaurantBooking(prepData)
     if (res?.status === 200) {
       console.log('Booking Details:', res)
-      const prepData = {
-        category_id: 0,
-        restaurant_id: restaurantDetails?.id,
-      }
-      const servicesRes = await getServices(prepData)
-      dispatch(setServices(servicesRes))
       navigate({
         params: {
           bookingDetails: res?.data,

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { store } from '../redux/store'
+import { showToastError } from './toast'
 
 export default {
   get: async (url, { axiosSecure = false, ...options } = {}) => {
@@ -18,8 +19,11 @@ export default {
     options.headers = { ...headers }
     console.log(token)
     // let response = await axios.get(url, options);
-    const response = await axios.get(url, options)
+    const response = await axios.get(url, options).catch((err) => {
+      showToastError(err)
+    })
     // const response = await axios.get(url, options)
+
     return response?.data
   },
 
@@ -29,7 +33,9 @@ export default {
       //   // 'Content-Type': 'multipart/form-data',
       // },
     }
-    const response = await axios.post(url, data, options)
+    const response = await axios.post(url, data, options).catch((err) => {
+      showToastError(err)
+    })
     // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
     return response?.data
   },
@@ -39,7 +45,9 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
     }
-    const response = await axios.put(url, data, options)
+    const response = await axios.put(url, data, options).catch((err) => {
+      showToastError(err)
+    })
     // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
     return response?.data
   },
@@ -50,7 +58,9 @@ export default {
       },
     }
     // console.log(url, data)
-    const response = await axios.post(url, data, options)
+    const response = await axios.post(url, data, options).catch((err) => {
+      showToastError(err)
+    })
     // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
     return response?.data
   },
@@ -59,17 +69,23 @@ export default {
     let response
     if (data === '') {
       // console.log(url)
-      response = await axios.put(url)
+      response = await axios.put(url).catch((err) => {
+        showToastError(err)
+      })
     } else {
       // console.log(url, data)
-      response = await axios.put(url, data)
+      response = await axios.put(url, data).catch((err) => {
+        showToastError(err)
+      })
     }
 
     return response?.data
   },
 
   delete: async (url) => {
-    const response = await axios.delete(url)
+    const response = await axios.delete(url).catch((err) => {
+      showToastError(err)
+    })
     return response?.data
   },
 }

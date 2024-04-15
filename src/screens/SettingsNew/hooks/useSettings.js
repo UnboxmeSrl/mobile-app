@@ -4,14 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useState } from 'react'
 import { MAIN_NAVIGATOR } from '../../../constants/navigation'
 import { persistor, store } from '../../../redux/store'
-import {
-  resetContentSlice,
-  resetLocationSlice,
-  resetLogin,
-  resetRestaurantSlice,
-  resetServiceSlice,
-  setCity,
-} from '../../../redux/slices'
+import { resetContentSlice, resetLocationSlice, resetLogin, resetRestaurantSlice, setCity } from '../../../redux/slices'
 import { Alert } from 'react-native'
 
 const useSettings = () => {

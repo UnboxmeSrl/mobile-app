@@ -17,6 +17,7 @@ const useYourSchedule = () => {
   const [isLoading, setIsLoading] = useState(false)
   const bookings = useSelector((state) => state.restaurantSlice.bookings)
   const contentList = useSelector((state) => state.contentSlice.contentList)
+  const isFromBookingDetails = useNavigationParam('isFromBookingDetails')
   const [isContentStatusModalVisible, setIsContentStatusModalVisible] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const dispatch = useDispatch()
@@ -123,7 +124,7 @@ const useYourSchedule = () => {
   }, [updatedContentDetails])
 
   useEffect(() => {
-    if (loginData?.id) {
+    if (loginData?.id && !isFromBookingDetails) {
       getBookingsData()
       getBookingForContentListData()
     }

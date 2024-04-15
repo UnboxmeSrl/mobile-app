@@ -9,7 +9,7 @@ import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { setServices, setTimeFrameData } from '../../../redux/slices'
 import { getDiaryActions, getTimeFrames } from '../../../services'
-import { getServiceCategories, getServiceDealsLeft, getServices } from '../../../services/LocationsService'
+import { getServiceCategories, getServiceDealsLeft } from '../../../services/LocationsService'
 
 const useServiceDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -18,8 +18,6 @@ const useServiceDetails = () => {
   const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
   const [isImageLoading, setIsImageLoading] = useState(true)
-  // const [services, setServices] = useState()
-  const services = useSelector((state) => state.serviceSlice.services)
   const [serviceCategories, setServiceCategories] = useState([])
   const [diaryItems, setDiaryItems] = useState([])
   const [filter, setFilter] = useState(0)
@@ -28,15 +26,6 @@ const useServiceDetails = () => {
   const [isBookBtnPressed, setIsBookBtnPressed] = useState(false)
   const isFocused = useIsFocused()
   const dispatch = useDispatch()
-
-  const getServicesData = async () => {
-    const prepData = {
-      category_id: filter,
-      restaurant_id: serviceDetails?.id,
-    }
-    const res = await getServices(prepData)
-    dispatch(setServices(res))
-  }
 
   const getServiceDealsLeftData = async () => {
     const prepData = {
@@ -122,7 +111,9 @@ const useServiceDetails = () => {
   }, [])
 
   useEffect(() => {
-    getServiceDealsLeftData()
+    if (isFocused) {
+      getServiceDealsLeftData()
+    }
   }, [isFocused])
 
   return {
@@ -139,7 +130,6 @@ const useServiceDetails = () => {
     // onCategoryChange,
     serviceCategories,
     serviceDetails,
-    services,
     setIsImageLoading,
   }
 }

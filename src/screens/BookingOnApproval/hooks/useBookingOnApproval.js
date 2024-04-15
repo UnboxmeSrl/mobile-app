@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
-import { setContentList, setServices } from '../../../redux/slices'
+import { setContentList } from '../../../redux/slices'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
 import { getBookingForContentList, getBookings } from '../../../services'
 
@@ -39,8 +39,12 @@ const useBookingOnApproval = () => {
     const contentListRes = await getBookingForContentList(newParams)
     dispatch(setContentList(contentListRes))
     setIsLoading(false)
-    dispatch(setServices([]))
-    navigate(SCREEN_NAMES.Schedule)
+    navigate({
+      params: {
+        isFromBookingDetails: true,
+      },
+      routeName: SCREEN_NAMES.Schedule,
+    })
   }
 
   useEffect(() => {

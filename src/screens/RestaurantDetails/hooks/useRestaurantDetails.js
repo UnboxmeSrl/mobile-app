@@ -6,12 +6,11 @@ import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getServiceCategories, getServices } from '../../../services/LocationsService'
 import { Linking } from 'react-native'
-import { setServices } from '../../../redux/slices'
 
 const useRestaurantDetails = () => {
   const categoriesIds = useSelector(selectCategoryById)
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
-  const services = useSelector((state) => state.serviceSlice.services)
+  const [services, setServices] = useState([])
   const cityData = useNavigationParam('cityData')
   const [isLoading, setIsLoading] = useState(false)
   const [serviceCategories, setServiceCategories] = useState([])
@@ -30,7 +29,7 @@ const useRestaurantDetails = () => {
     }
     const res = await getServices(prepData)
     console.log('res', res)
-    dispatch(setServices(res))
+    setServices(res)
     setIsLoading(false)
   }
 
@@ -77,7 +76,7 @@ const useRestaurantDetails = () => {
 
   useEffect(() => {
     console.log('Length', services?.length)
-    if (isFocused && services?.length === 0) {
+    if (isFocused) {
       console.log('testiiiii')
       getServicesData()
     }

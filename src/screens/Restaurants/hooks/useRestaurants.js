@@ -12,7 +12,6 @@ import { SCREEN_NAMES } from '../../../constants/navigation'
 import { selectCategoryById } from '../../../redux/modules/categories'
 import { getCategories, getRestaurants } from '../../../services/LocationsService'
 import { geolocationSetting } from '../../../utils/smallComponents'
-import { setCity, setServices } from '../../../redux/slices'
 
 const useRestaurants = () => {
   const categoriesIds = useSelector(selectCategoryById)
@@ -128,7 +127,6 @@ const useRestaurants = () => {
 
   useEffect(() => {
     console.log('Focused')
-    dispatch(setServices([]))
   }, [isFocused])
 
   return {

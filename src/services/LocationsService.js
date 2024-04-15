@@ -1,5 +1,4 @@
 import { Api } from '../constants/api'
-
 import Fetch from './ApiService'
 
 export const getCities = async () => {

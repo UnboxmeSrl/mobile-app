@@ -22,7 +22,7 @@ const useCities = () => {
   const getCitiesData = async () => {
     setIsLoading(true)
     const res = await getCities()
-    console.log(res)
+    console.log('test', res)
     setLocationData(res)
     setIsLoading(false)
   }
