@@ -29,7 +29,7 @@ const useSettings = () => {
       await persistor.purge()
       dispatch(resetRestaurantSlice())
       dispatch(resetContentSlice())
-      dispatch(resetServiceSlice())
+      // dispatch(resetServiceSlice())
       setIsLoading(false)
       reset(MAIN_NAVIGATOR)
       dispatch(resetLogin())

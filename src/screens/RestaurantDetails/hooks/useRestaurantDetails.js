@@ -13,7 +13,7 @@ const useRestaurantDetails = () => {
   const restaurantDetails = useSelector((state) => state.restaurantSlice.restaurantDetails)
   const services = useSelector((state) => state.serviceSlice.services)
   const cityData = useNavigationParam('cityData')
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [serviceCategories, setServiceCategories] = useState([])
   const [filter, setFilter] = useState(0)
   const [isImageLoading, setIsImageLoading] = useState(true)

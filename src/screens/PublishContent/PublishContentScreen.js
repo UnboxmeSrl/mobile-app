@@ -40,6 +40,7 @@ const PublishContentScreen = () => {
     handleEditPress,
     handleBackPress,
   } = usePublishContent()
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -60,7 +61,14 @@ const PublishContentScreen = () => {
               </TouchableOpacity>
             )}
             <View style={styles.socialMediaImageContainer}>
-              <FastImage resizeMode="contain" source={icon} style={styles.socialMediaImage} />
+              <FastImage
+                resizeMode="contain"
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: contentDetails?._actions_turbo?.Action_icon?.url,
+                }}
+                style={styles.socialMediaImage}
+              />
             </View>
             <View style={styles.socialMediaNameContainer}>
               <Text style={styles.socialMediaNameText}>{` ${
