@@ -91,9 +91,9 @@ const useYourScheduleDetails = () => {
 
   useEffect(() => {
     const myDate = new Date(bookingDetails?.BookingDay)
-    const month = myDate.toLocaleString('default', { month: 'long' })
+    const month = myDate.toLocaleString('en-US', { month: 'long' })
     setCurrentMonth(month)
-    const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+    const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
     setCurrentWeekDay(weekDay)
     setCurrentDate(myDate.getDate())
   }, [])

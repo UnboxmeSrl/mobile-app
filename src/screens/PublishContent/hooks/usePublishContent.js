@@ -28,7 +28,7 @@ const usePublishContent = () => {
     icon = checkActionName(actionName)
   }
   const bookingDate = new Date(contentDetails?.BookingDay)
-  const month = bookingDate.toLocaleString('default', { month: 'long' })
+  const month = bookingDate.toLocaleString('en-US', { month: 'long' })
   const timeFrame = contentDetails?._timeframes ?? contentDetails?._timeframes_turbo
   const dispatch = useDispatch()
 

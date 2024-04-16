@@ -29,6 +29,7 @@ const YourScheduleDetailsScreen = () => {
     handleContentBriefPress,
     handlePositiveBtnPress,
   } = useYourScheduleDetails()
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.mainContainer}>
@@ -178,7 +179,11 @@ const YourScheduleDetailsScreen = () => {
         </View>
 
         <View style={styles.openCouponBtnMainContainer}>
-          <TouchableOpacity onPress={handleOpenCouponPress} style={styles.openCouponBtnContainer}>
+          <TouchableOpacity
+            onPress={handleOpenCouponPress}
+            style={[styles.openCouponBtnContainer, !bookingDetails?.Approved && styles.disabledBtnContainer]}
+            disabled={!bookingDetails?.Approved}
+          >
             <Text style={styles.openCouponBtnText}>Open Coupon </Text>
           </TouchableOpacity>
         </View>
@@ -262,6 +267,10 @@ const styles = StyleSheet.create({
   deadlineTimeContainer: {
     marginRight: scale(15),
     width: '40%',
+  },
+  disabledBtnContainer: {
+    backgroundColor: COLORS.cultured,
+    opacity: 0.7,
   },
   extraPersonIcon: {
     height: moderateScale(13.23),

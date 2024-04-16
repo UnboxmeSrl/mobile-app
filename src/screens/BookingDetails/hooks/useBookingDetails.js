@@ -143,7 +143,7 @@ const useBookingDetails = () => {
   //   const res = await getTimeFrames(params)
   //   setTimeFrameData(res)
   //   const myDate = new Date(selectedDate)
-  //   const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+  //   const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
   //   setCurrentWeekDay(weekDay)
   //   // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
   //   const filteredData = res?.filter((t) => {

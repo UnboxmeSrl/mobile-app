@@ -11,7 +11,7 @@ const useNewCoupon = () => {
   const dispatch = useDispatch()
   const isReel = bookingDetails?.reel === '1'
   const bookingDate = new Date(bookingDetails?.BookingDay)
-  const month = bookingDate.toLocaleString('default', { month: 'long' })
+  const month = bookingDate.toLocaleString('en-US', { month: 'long' })
   const timeFrame = bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0

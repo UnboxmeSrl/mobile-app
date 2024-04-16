@@ -106,7 +106,11 @@ const ContentBriefScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.openCouponBtnMainContainer}>
-          <TouchableOpacity onPress={handleOpenCouponPress} style={styles.openCouponBtnContainer}>
+          <TouchableOpacity
+            onPress={handleOpenCouponPress}
+            disabled={!bookingDetails?.Approved}
+            style={[styles.openCouponBtnContainer, !bookingDetails?.Approved && styles.disabledBtnContainer]}
+          >
             <Text style={styles.openCouponBtnText}>Open Coupon</Text>
           </TouchableOpacity>
         </View>
@@ -144,6 +148,10 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
+  },
+  disabledBtnContainer: {
+    backgroundColor: COLORS.cultured,
+    opacity: 0.7,
   },
   headerContainer: {
     alignItems: 'center',

@@ -7,3 +7,7 @@ import { name as appName } from './app.json'
 enableScreens()
 
 AppRegistry.registerComponent(appName, () => App)
+
+if (__DEV__) {
+  require('./ReactotronConfig')
+}

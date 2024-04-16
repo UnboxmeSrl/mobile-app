@@ -221,6 +221,7 @@ export default PublishContentScreen
 
 const styles = StyleSheet.create({
   editIcon: {
+    tintColor: COLORS.newPrimary,
     height: moderateScale(16),
     width: moderateScale(16),
   },
@@ -263,6 +264,7 @@ const styles = StyleSheet.create({
     width: '82%',
   },
   linkUploadIcon: {
+    tintColor: COLORS.newPrimary,
     width: moderateScale(24),
     height: moderateScale(24),
   },

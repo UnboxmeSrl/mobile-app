@@ -43,8 +43,8 @@ const ArchiveScreen = () => {
           }
           renderItem={({ item, index }) => {
             const myDate = new Date(item?.BookingDay)
-            const month = myDate.toLocaleString('default', { month: 'long' })
-            const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+            const month = myDate.toLocaleString('en-US', { month: 'long' })
+            const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
             const timeFrame = item?._timeframes_turbo
             return (
               <View style={styles.cardContainer}>

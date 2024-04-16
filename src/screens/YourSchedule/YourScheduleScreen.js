@@ -81,8 +81,8 @@ const YourScheduleScreen = () => {
             }
             renderItem={({ item, index }) => {
               const myDate = new Date(item?.BookingDay)
-              const month = myDate.toLocaleString('default', { month: 'long' })
-              const weekDay = myDate.toLocaleString('default', { weekday: 'long' })
+              const month = myDate.toLocaleString('en-US', { month: 'long' })
+              const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
               const timeFrame = item?._timeframes_turbo
               const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0
