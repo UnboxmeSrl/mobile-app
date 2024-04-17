@@ -224,6 +224,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
   },
   ratingContainer: {
+    alignItems: 'center',
     flexDirection: 'row',
     marginTop: verticalScale(9),
   },

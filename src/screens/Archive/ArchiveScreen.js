@@ -59,7 +59,7 @@ const ArchiveScreen = () => {
                     <View style={styles.timeContainer}>
                       <Text style={styles.timeTitleText}>Time</Text>
                       <Text style={styles.timeText}>
-                        {`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}
+                        {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
                       </Text>
                     </View>
                     <View style={styles.divider} />
@@ -70,9 +70,9 @@ const ArchiveScreen = () => {
                       </Text>
                     </View>
                   </View>
-                  <View style={styles.rightIconContainer}>
+                  {/* <View style={styles.rightIconContainer}>
                     <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
-                  </View>
+                  </View> */}
                 </View>
               </View>
             )
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   timeServiceContainer: {
-    width: '60%',
+    width: '90%',
   },
   rightIconContainer: {
     width: '15%',

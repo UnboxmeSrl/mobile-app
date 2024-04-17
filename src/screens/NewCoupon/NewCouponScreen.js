@@ -85,7 +85,7 @@ const NewCouponScreen = () => {
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Time</Text>
             <Text style={styles.timeText}>
-              {`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}{' '}
+              {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
             </Text>
           </View>
         </View>
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: scale(10),
-    marginTop: verticalScale(30),
   },
   divider: {
     alignSelf: 'center',
@@ -219,6 +218,7 @@ const styles = StyleSheet.create({
     borderWidth: moderateScale(1),
     marginTop: verticalScale(14),
     padding: moderateScale(24),
+    marginBottom: verticalScale(30),
     width: '100%',
   },
   goToContentBtnText: {
@@ -258,8 +258,8 @@ const styles = StyleSheet.create({
     width: moderateScale(25),
   },
   mainContainer: {
-    backgroundColor: COLORS.lightNewPrimary40,
     flex: 1,
+    backgroundColor: COLORS.lightNewPrimary40,
     paddingTop: getStatusBarHeight(),
   },
   mainInnerView: {
@@ -321,6 +321,7 @@ const styles = StyleSheet.create({
     width: moderateScale(49),
   },
   tiktokIconTextContainer: {
+    alignItems: 'center',
     flexDirection: 'row',
     marginTop: verticalScale(10),
   },

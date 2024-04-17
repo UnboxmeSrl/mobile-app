@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 
 import { IMAGES } from '../../../assets/images'
@@ -56,7 +56,9 @@ const ServiceCard = ({ item, index, deals }) => {
             style={styles.socialIcon}
           />
           {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
-          <Text style={styles.titleText}>{item?._actions_turbo?.Action_Name}</Text>
+          <Text style={styles.titleText} numberOfLines={2}>
+            {item?._actions_turbo?.Action_Name}
+          </Text>
         </View>
         <View style={styles.ratingsContainer}>
           <Text style={styles.ratingsText}>60</Text>
@@ -152,6 +154,7 @@ const styles = StyleSheet.create({
   itemTitleIconContainer: {
     width: '60%',
     alignItems: 'center',
+    height: verticalScale(25),
     borderRadius: moderateScale(20),
     flexDirection: 'row',
     marginLeft: scale(5),
@@ -221,5 +224,10 @@ const styles = StyleSheet.create({
     color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
+    ...Platform.select({
+      android: {
+        marginTop: verticalScale(-2.5),
+      },
+    }),
   },
 })

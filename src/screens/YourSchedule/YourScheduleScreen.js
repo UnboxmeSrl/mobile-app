@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  Platform,
   RefreshControl,
   StyleSheet,
   Text,
@@ -36,7 +37,7 @@ const YourScheduleScreen = () => {
     handleContentCardPress,
     handleArchivePress,
   } = useYourSchedule()
-  console.log('Content List: ', contentList)
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -168,7 +169,7 @@ const YourScheduleScreen = () => {
                           <Text style={styles.timeTitleText}>Time</Text>
                           <Text
                             style={styles.timeText}
-                          >{`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
+                          >{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
                         </View>
 
                         {/* {actionNumId == 6 && item?.diary_action_turbo_id === 0 ? (
@@ -648,10 +649,12 @@ const contentStyles = StyleSheet.create({
     width: '75%',
   },
   rightIconContainer: {
-    width: '15%',
-    marginBottom: verticalScale(20),
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    // width: '10%',
+    // marginBottom: verticalScale(20),s
+    // marginTop: verticalScale(15),
+    marginLeft: scale(20),
+    // justifyContent: 'flex-end',
+    // alignItems: 'center',
   },
   cardContainer: {
     alignSelf: 'center',
@@ -659,9 +662,14 @@ const contentStyles = StyleSheet.create({
     borderRadius: moderateScale(10),
     borderWidth: 1,
     marginTop: verticalScale(16),
-    paddingBottom: verticalScale(15),
+    // paddingBottom: verticalScale(15),
     width: '95%',
-    height: verticalScale(132),
+    ...Platform.select({
+      ios: {
+        height: verticalScale(120),
+      },
+    }),
+    // height: verticalScale(132),
   },
   socialMediaIconNameContainer: {
     alignItems: 'center',
@@ -689,7 +697,7 @@ const contentStyles = StyleSheet.create({
   },
   locationNameContainer: {
     marginLeft: scale(10),
-    width: '70%',
+    width: '85%',
   },
   locationNameText: {
     color: COLORS.black,
@@ -703,11 +711,16 @@ const contentStyles = StyleSheet.create({
   },
   locationTextContainer: {
     width: '100%',
+    ...Platform.select({
+      ios: {
+        marginTop: verticalScale(5),
+      },
+    }),
   },
   nameLocationMainRow: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginTop: verticalScale(10),
+    // marginTop: verticalScale(10),
     width: '80%',
   },
   rightIcon: {
@@ -768,6 +781,7 @@ const contentStyles = StyleSheet.create({
   infoIcon: {
     height: moderateScale(12),
     width: moderateScale(12),
+    marginTop: verticalScale(5),
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -803,6 +817,7 @@ const contentStyles = StyleSheet.create({
   },
   locationMainRow: {
     flexDirection: 'row',
+    marginTop: verticalScale(10),
   },
   ratingSocialMediaContainer: {
     borderTopLeftRadius: moderateScale(10),

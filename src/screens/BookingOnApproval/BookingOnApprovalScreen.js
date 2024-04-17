@@ -103,7 +103,9 @@ const BookingOnApprovalScreen = () => {
           <View style={styles.locationNameContainer}>
             <Text style={styles.locationNameText}>{bookingDetails?._restaurant_turbo?.Name}</Text>
             <View style={styles.locationContainer}>
-              <Text style={styles.locationText}>{bookingDetails?._restaurant_turbo?.Adress}</Text>
+              <Text style={styles.locationText} numberOfLines={4}>
+                {bookingDetails?._restaurant_turbo?.Adress}
+              </Text>
             </View>
           </View>
         </View>
@@ -117,7 +119,7 @@ const BookingOnApprovalScreen = () => {
             <Text style={styles.selectedDateTitleText}>Selected Date</Text>
             <Text
               style={styles.selectedDateWithTimeText}
-            >{`${currentWeekDay}, ${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
+            >{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
           </View>
         </View>
 
@@ -209,7 +211,7 @@ const styles = StyleSheet.create({
     width: '95%',
   },
   locationContainer: {
-    width: '80%',
+    width: '90%',
   },
   locationImage: {
     borderRadius: moderateScale(67),
@@ -281,6 +283,7 @@ const styles = StyleSheet.create({
     width: '60%',
   },
   ratingContainer: {
+    alignItems: 'center',
     flexDirection: 'row',
     marginTop: verticalScale(9),
   },
@@ -368,7 +371,7 @@ const styles = StyleSheet.create({
     color: COLORS.achromaticBlack,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(5),
   },
   timeContainer: {
     alignItems: 'flex-start',

@@ -120,7 +120,7 @@ const YourScheduleDetailsScreen = () => {
               <Text style={styles.selectedDateTitleText}>Selected Date</Text>
               <Text
                 style={styles.selectedDateWithTimeText}
-              >{`${currentWeekDay}, ${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}</Text>
+              >{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
             </View>
             <TouchableOpacity style={styles.removeBtnContainer} onPress={handleAlertVisible}>
               <Text style={styles.removeBtnText}>Cancel</Text>
@@ -490,6 +490,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   tiktokContainer: {
+    justifyContent: 'center',
     marginLeft: scale(15),
     width: '50%',
   },
@@ -498,14 +499,15 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginLeft: scale(10),
-    marginTop: verticalScale(5),
-    width: '50%',
+    // marginTop: verticalScale(5),
+    width: '60%',
   },
   tiktokIcon: {
     height: moderateScale(49),
     width: moderateScale(49),
   },
   tiktokIconTextContainer: {
+    alignItems: 'center',
     flexDirection: 'row',
     marginTop: verticalScale(10),
   },

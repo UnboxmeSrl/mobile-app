@@ -183,7 +183,7 @@ const BookingDetailsScreen = () => {
                     <Text style={styles.selectedDateTitleText}>Date 1</Text>
                     <Text
                       style={styles.selectedDateWithTimeText}
-                    >{`${currentWeekDay}, ${selectedTimeFame?.Start}.${selectedTimeFame?.Minute_Start} - ${selectedTimeFame?.End}.${selectedTimeFame?.Minute_End}`}</Text>
+                    >{`${currentWeekDay}, ${selectedTimeFame?.Start}:${selectedTimeFame?.Minute_Start} - ${selectedTimeFame?.End}:${selectedTimeFame?.Minute_End}`}</Text>
                   </View>
                   <TouchableOpacity onPress={handleRemoveBtnPress} style={styles.removeBtnContainer}>
                     <Text style={styles.removeBtnText}>Remove</Text>

@@ -114,7 +114,7 @@ export const ProfileScreenPresenter = ({
                 )}
               </Stack>
               <Stack style={styles.stackItem}>
-                <Title title="Intrests" />
+                <Title title="Interests" />
                 <View style={styles.hobbies}>
                   {user?.user_interest_topics_turbo_id?.map((item, ind) => (
                     <Hobbies key={ind} {...item} showIcons={true} style={styles.hobbiesBadge} />

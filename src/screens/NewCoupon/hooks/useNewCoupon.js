@@ -1,5 +1,5 @@
 import { navigate } from '@services'
-import { useNavigationParam } from 'react-navigation-hooks'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setRestaurantDetails } from '../../../redux/slices/restaurantSlice'
@@ -9,6 +9,7 @@ const useNewCoupon = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
   const bookingDetails = useNavigationParam('bookingDetails')
   const dispatch = useDispatch()
+  const navigation = useNavigation()
   const isReel = bookingDetails?.reel === '1'
   const bookingDate = new Date(bookingDetails?.BookingDay)
   const month = bookingDate.toLocaleString('en-US', { month: 'long' })
@@ -26,7 +27,7 @@ const useNewCoupon = () => {
   }
 
   const handleBackPress = () => {
-    navigate(SCREEN_NAMES.YourScheduleScreen)
+    navigation.goBack()
   }
 
   const handleContentBriefPress = () => {

@@ -18,7 +18,6 @@ const RestaurantSlice = createSlice({
       state.bookings = actions?.payload
     },
     setRestaurantDetails: (state, actions) => {
-      console.log('Restaurant Data set Action', actions?.payload)
       state.restaurantDetails = actions?.payload
     },
     setServiceDetails: (state, actions) => {

@@ -1,5 +1,15 @@
 import React from 'react'
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -39,7 +49,7 @@ const ServiceDetails = () => {
           <ActivityIndicator color={COLORS.newPrimary} size={30} />
         </View>
       ) : (
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           <View>
             <CustomCarousel
               Component={({ item, index }) => {
@@ -279,6 +289,7 @@ const styles = StyleSheet.create({
   friendAmenityContainer: {
     // width: scale(80),
     justifyContent: 'center',
+    marginRight: scale(30),
   },
   orDivider: {
     borderWidth: 0.5,
@@ -371,6 +382,13 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(20),
   },
   dealLeftText: {
+    // backgroundColor: 'black',
+    textAlign: 'center',
+    ...Platform.select({
+      android: {
+        marginTop: verticalScale(-2.5),
+      },
+    }),
     color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(12),
@@ -393,8 +411,9 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(16),
     borderWidth: moderateScale(1),
     marginTop: verticalScale(10),
-    marginLeft: scale(10),
+    // marginLeft: scale(10),
     paddingHorizontal: scale(10),
+    marginHorizontal: scale(5),
     borderColor: COLORS.gainsboro,
     justifyContent: 'center',
     alignItems: 'center',

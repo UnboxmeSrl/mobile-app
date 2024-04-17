@@ -19,8 +19,6 @@ const useRestaurantDetails = () => {
   const dispatch = useDispatch()
   const isFocused = useIsFocused()
 
-  console.log('Services', services)
-
   const getServicesData = async () => {
     setIsLoading(true)
     const prepData = {

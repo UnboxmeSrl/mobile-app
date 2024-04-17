@@ -222,6 +222,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   ratingContainer: {
+    alignItems: 'center',
     flexDirection: 'row',
     marginTop: verticalScale(9),
   },

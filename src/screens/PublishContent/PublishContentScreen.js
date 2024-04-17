@@ -171,7 +171,7 @@ const PublishContentScreen = () => {
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Time</Text>
             <Text style={styles.timeText}>
-              {`${timeFrame?.Start}.${timeFrame?.Minute_Start} - ${timeFrame?.End}.${timeFrame?.Minute_End}`}{' '}
+              {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
             </Text>
           </View>
         </View>
