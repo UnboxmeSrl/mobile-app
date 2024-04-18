@@ -6,6 +6,7 @@ import { IMAGES } from '../../../assets/images'
 import { CustomButton, CustomHeader } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
 import { useAuthInterestTopics } from './hooks'
+import { hasNotch } from '../../../utils'
 
 const AuthInterestTopicsScreen = () => {
   const {
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   loaderContainer: {
     flex: 1,

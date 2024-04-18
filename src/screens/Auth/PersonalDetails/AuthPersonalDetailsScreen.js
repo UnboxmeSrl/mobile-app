@@ -8,6 +8,7 @@ import { IMAGES } from '../../../assets/images'
 import { CustomButton, CustomHeader, CustomTextInput } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
 import useAuthPersonalDetails from './hooks/useAuthPersonalDetails'
+import { hasNotch } from '../../../utils'
 
 const AuthPersonalDetailsScreen = () => {
   const {
@@ -128,6 +129,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
 })

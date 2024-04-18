@@ -17,7 +17,7 @@ import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useYourSchedule } from './hooks'
-import { checkAction, checkActionName } from '../../utils'
+import { checkAction, checkActionName, hasNotch } from '../../utils'
 import { ContentStatusModal } from '../../components'
 
 const YourScheduleScreen = () => {
@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   nameLocationMainRow: {
     alignItems: 'flex-start',

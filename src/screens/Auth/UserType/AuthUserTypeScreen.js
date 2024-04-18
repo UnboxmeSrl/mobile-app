@@ -5,6 +5,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { COLORS, FONTS } from '../../../constants'
 import { useAuthUserType } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
+import { hasNotch } from '../../../utils'
 
 const AuthUserTypeScreen = () => {
   const { isBtnDisabled, userTypeList, selectedUserType, setSelectedUserType, handleBackPress, handleNextPress } =
@@ -75,6 +76,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
 })

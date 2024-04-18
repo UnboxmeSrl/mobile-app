@@ -1,4 +1,5 @@
 import { IMAGES } from '../assets/images'
+import DeviceInfo from 'react-native-device-info'
 
 export const checkActionName = (actionName) => {
   if (actionName) {
@@ -132,3 +133,5 @@ export const checkContentStatus = (statusName) => {
       }
   }
 }
+
+export const hasNotch = !DeviceInfo.hasNotch()

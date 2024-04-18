@@ -3,14 +3,13 @@ import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, Touch
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useRestaurantDetails } from './hooks'
 import { ServiceCard } from './ServiceCard'
+import { hasNotch } from '../../utils'
 
 const RestaurantDetails = () => {
   const {
@@ -271,7 +270,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   previewText: {
     color: COLORS.achromaticBlack,

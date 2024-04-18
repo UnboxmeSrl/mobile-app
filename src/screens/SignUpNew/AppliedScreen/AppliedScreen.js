@@ -8,6 +8,7 @@ import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 
 import { useApplied } from './hooks'
+import { hasNotch } from '../../../utils'
 
 const AppliedScreen = () => {
   const { handleGuestPress } = useApplied()
@@ -121,6 +122,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   viewForMargin: {
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
 })

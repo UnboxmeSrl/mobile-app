@@ -17,6 +17,8 @@ import { ThemeProvider } from '@components/ThemeProvider'
 import NavigationContainer from '@nav/NavigationContainer'
 import { persistor, store } from '@redux/store'
 import i18n from '@services/i18n'
+import DeviceInfo from 'react-native-device-info'
+import { verticalScale } from 'react-native-size-matters'
 
 //
 // const db = firestore()

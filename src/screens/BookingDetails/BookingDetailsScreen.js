@@ -20,6 +20,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import { useBookingDetails } from './hooks'
+import { hasNotch } from '../../utils'
 
 const BookingDetailsScreen = () => {
   const {
@@ -365,7 +366,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   nextDatesIcon: {
     height: moderateScale(20),

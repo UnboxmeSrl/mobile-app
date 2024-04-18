@@ -6,6 +6,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { useSettings } from './hooks'
 import { scale, verticalScale } from 'react-native-size-matters'
 import { moderateScale } from 'react-native-size-matters'
+import { hasNotch } from '../../utils'
 
 const SettingsNew = () => {
   const { versionName, isDeleting, isLoading, handleDeleteAccount, handleLogout } = useSettings()
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   btnContainer: {
     alignItems: 'center',

@@ -8,6 +8,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import useCities from './hooks/useCities'
+import { hasNotch } from '../../utils'
 
 const CitiesScreen = () => {
   const { isLoading, locationData, refreshing, onRefresh } = useCities()
@@ -71,6 +72,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
 })

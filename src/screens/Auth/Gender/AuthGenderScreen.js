@@ -5,6 +5,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { CustomButton, CustomHeader } from '../../../components'
 import { useAuthGender } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
+import { hasNotch } from '../../../utils'
 
 const AuthGenderScreen = () => {
   const { isLoading, genderList, selectedGender, isBtnDisabled, setSelectedGender, handleBackPress, handleNextPress } =
@@ -90,6 +91,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
 })

@@ -8,6 +8,7 @@ import { verticalScale } from 'react-native-size-matters'
 import { IMAGES } from '../../../assets/images'
 import { useAuthDateOfBirth } from './hooks'
 import DatePicker from 'react-native-date-picker'
+import { hasNotch } from '../../../utils'
 
 const AuthDateOfBirthScreen = () => {
   const {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   calenderIcon: {
     height: verticalScale(18.42),

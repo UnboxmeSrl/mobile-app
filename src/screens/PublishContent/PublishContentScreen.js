@@ -17,6 +17,7 @@ import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import FastImage from 'react-native-fast-image'
 import { ContentStatusModal } from '../../components'
+import { hasNotch } from '../../utils'
 
 const PublishContentScreen = () => {
   const {
@@ -401,7 +402,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   headerContainer: {
     alignItems: 'center',

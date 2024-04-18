@@ -14,12 +14,15 @@ import HomeStack from './HomeStack'
 import ScheduleStack from './ScheduleStack'
 import ProfileStack from './ProfileStack'
 import { COLORS } from '../constants'
+import DeviceInfo from 'react-native-device-info'
+import { verticalScale } from 'react-native-size-matters'
 
 export default createBottomTabNavigator(
   {
     [SCREEN_NAMES.Home]: {
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
+          console.log('DeviceInfo.hasNotch()', DeviceInfo.hasNotch())
           return (
             <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
               <TabBarIcon focused={focused} icon={IMAGES.home} />
@@ -81,6 +84,7 @@ export default createBottomTabNavigator(
         borderTopRightRadius: 24,
         borderTopWidth: 0,
         height: 56,
+        marginBottom: !DeviceInfo.hasNotch() ? verticalScale(20) : 0,
       },
     },
   }

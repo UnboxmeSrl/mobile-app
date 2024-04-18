@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   },
 
   amenityText: {
+    marginLeft: scale(5),
     color: COLORS.greyFont,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),

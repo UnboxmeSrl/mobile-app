@@ -7,6 +7,7 @@ import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useBookingOnApproval } from './hooks'
+import { hasNotch } from '../../utils'
 
 const BookingOnApprovalScreen = () => {
   const {
@@ -211,7 +212,8 @@ const styles = StyleSheet.create({
     width: '95%',
   },
   locationContainer: {
-    width: '90%',
+    width: '100%',
+    paddingRight: scale(90),
   },
   locationImage: {
     borderRadius: moderateScale(67),
@@ -238,7 +240,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   nameLocationMainRow: {
     alignItems: 'center',

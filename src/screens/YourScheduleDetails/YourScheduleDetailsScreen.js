@@ -3,13 +3,12 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useYourScheduleDetails } from './hooks'
 import { CustomModal } from '../../components'
+import { hasNotch } from '../../utils'
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -332,12 +331,13 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   locationTextContainer: {
-    width: '90%',
+    width: '100%',
+    paddingRight: scale(50),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   nameLocationMainRow: {
     alignItems: 'center',

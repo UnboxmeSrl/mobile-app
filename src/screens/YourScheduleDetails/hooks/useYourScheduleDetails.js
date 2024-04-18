@@ -10,6 +10,10 @@ import { Alert } from 'react-native'
 import { setBookings, setCanceledBookings } from '../../../redux/slices/restaurantSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
+// import moment from 'moment'
+// import 'moment-timezone'
+// import { getTimeZone } from 'react-native-localize'
+
 const useYourScheduleDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
   const bookingDetails = useNavigationParam('bookingDetails')
@@ -38,6 +42,47 @@ const useYourScheduleDetails = () => {
   }
 
   const dispatch = useDispatch()
+
+  // const serverData = {
+  //   Start: '08',
+  //   Minute_Start: '42',
+  //   End: '22',
+  //   Minute_End: '00',
+  //   // Additional data from server...
+  // }
+
+  // // Function to convert server time to user's timezone
+  // const convertTimeToUserTimezone = (serverData, serverTimezone, userTimezone) => {
+  //   // Combine start and end times from the server data
+  //   const startTime = `${serverData.Start}:${serverData.Minute_Start}`
+  //   const endTime = `${serverData.End}:${serverData.Minute_End}`
+
+  //   // Create moment objects for the starting and ending times
+  //   // Assuming server times are in UTC
+  //   const startMoment = moment.tz(startTime, 'HH:mm', serverTimezone)
+  //   const endMoment = moment.tz(endTime, 'HH:mm', serverTimezone)
+
+  //   // Convert the UTC times to the user's timezone
+  //   const startUserTime = startMoment.tz(userTimezone)
+  //   const endUserTime = endMoment.tz(userTimezone)
+
+  //   return {
+  //     startUserTime: startUserTime.format('HH:mm'), // Format the time as HH:mm
+  //     endUserTime: endUserTime.format('HH:mm'), // Format the time as HH:mm
+  //   }
+  // }
+
+  // // Define the server timezone (e.g., a timezone in Europe)
+  // const serverTimezone = 'UTC' // Example timezone
+
+  // // Get the user's timezone (you can retrieve this from device settings)
+  // const userTimezone = getTimeZone() // Example timezone
+
+  // // Convert the server times to the user's timezone
+  // const userTimes = convertTimeToUserTimezone(serverData, serverTimezone, userTimezone)
+
+  // console.log('User Start Time:', userTimes.startUserTime)
+  // console.log('User End Time:', userTimes.endUserTime)
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.Schedule)

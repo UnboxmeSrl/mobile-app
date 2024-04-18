@@ -17,6 +17,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useRestaurants } from './hooks'
 import { RestaurantCard } from './RestaurantCard'
+import { hasNotch } from '../../utils'
 
 const RestaurantsScreen = () => {
   const {
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   restaurantsFlatlistContainer: {
     flex: 1,

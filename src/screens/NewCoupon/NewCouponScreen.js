@@ -7,6 +7,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useNewCoupon } from './hooks'
 import FastImage from 'react-native-fast-image'
+import { hasNotch } from '../../utils'
 
 const NewCouponScreen = () => {
   const {
@@ -260,7 +261,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.lightNewPrimary40,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   mainInnerView: {
     alignSelf: 'center',

@@ -10,6 +10,7 @@ import { SignInWithEmail } from '../../components'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useCallback } from 'react'
 import { MODAL_NAMES } from '../../constants/navigation'
+import { hasNotch } from '../../utils'
 
 const SignUpNew = () => {
   const { handleSignInPress, handleCreateAnAccountPress, handleGuestPress } = useSignUp()
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(210),
   },
   viewForMargin: {
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   backgroundStyle: {
     height: '100%',

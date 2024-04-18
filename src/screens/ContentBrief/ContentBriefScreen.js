@@ -8,6 +8,7 @@ import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 
 import { useContentBrief } from './hooks'
+import { hasNotch } from '../../utils'
 
 const ContentBriefScreen = () => {
   const {
@@ -57,12 +58,12 @@ const ContentBriefScreen = () => {
             )
           }}
         />
-
+        {/* 
         <View style={styles.labelContainer}>
           <Text style={styles.labelText}>Hashtags</Text>
         </View>
 
-        {/* <FlatList
+        <FlatList
           data={[0, 1, 2, 3]}
           numColumns={2}
           keyExtractor={(_, index) => index.toString()}
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   openCouponBtnContainer: {
     alignItems: 'center',

@@ -5,6 +5,7 @@ import { moderateScale, verticalScale } from 'react-native-size-matters'
 import { FONTS } from '../../../constants/fonts'
 import { COLORS } from '../../../constants/colors'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { hasNotch } from '../../../utils'
 
 const FifthOnboarding = () => {
   return (
@@ -26,7 +27,7 @@ export default FifthOnboarding
 
 const styles = StyleSheet.create({
   mainContainer: {
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,

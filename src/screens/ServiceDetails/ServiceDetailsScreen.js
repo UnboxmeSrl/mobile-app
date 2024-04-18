@@ -18,7 +18,7 @@ import { CommonHeader } from '../../components'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { checkAction } from '../../utils'
+import { checkAction, hasNotch } from '../../utils'
 import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
@@ -563,7 +563,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   mainSocialMediaContainer: {
     flex: 1,

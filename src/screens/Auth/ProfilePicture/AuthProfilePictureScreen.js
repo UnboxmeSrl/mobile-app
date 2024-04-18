@@ -6,6 +6,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { IMAGES } from '../../../assets/images'
 import { useAuthProfilePicture } from './hooks'
+import { hasNotch } from '../../../utils'
 
 const AuthProfilePictureScreen = () => {
   const {
@@ -125,6 +126,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
 })

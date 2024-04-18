@@ -6,6 +6,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { useAuthCodeFromFriend } from './hooks'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { hasNotch } from '../../../utils'
 
 const AuthCodeFromFriendScreen = () => {
   const {
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,
