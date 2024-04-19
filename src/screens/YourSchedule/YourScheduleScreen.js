@@ -12,13 +12,12 @@ import {
 } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../assets/images'
+import { ContentStatusModal } from '../../components'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
+import { commonStyle } from '../../utils'
 import { useYourSchedule } from './hooks'
-import { checkAction, checkActionName, hasNotch } from '../../utils'
-import { ContentStatusModal } from '../../components'
 
 const YourScheduleScreen = () => {
   const {
@@ -473,7 +472,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   nameLocationMainRow: {
     alignItems: 'flex-start',

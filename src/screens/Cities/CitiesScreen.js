@@ -1,14 +1,12 @@
 import React from 'react'
 import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../assets/images'
 import LocationsTile from '../../components/LocationsTile/LocationsTile'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import useCities from './hooks/useCities'
-import { hasNotch } from '../../utils'
+import { commonStyle } from '../../utils'
 
 const CitiesScreen = () => {
   const { isLoading, locationData, refreshing, onRefresh } = useCities()
@@ -72,6 +70,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
 })

@@ -1,3 +1,4 @@
+import { Categories } from '@components/Categories'
 import React from 'react'
 import {
   ActivityIndicator,
@@ -10,14 +11,12 @@ import {
   View,
 } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import { Categories } from '@components/Categories'
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
+import { commonStyle } from '../../utils'
 import { useRestaurants } from './hooks'
 import { RestaurantCard } from './RestaurantCard'
-import { hasNotch } from '../../utils'
 
 const RestaurantsScreen = () => {
   const {
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   restaurantsFlatlistContainer: {
     flex: 1,

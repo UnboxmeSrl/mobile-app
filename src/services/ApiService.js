@@ -29,9 +29,10 @@ export default {
 
   post: async (url, data) => {
     const options = {
-      // headers: {
-      //   // 'Content-Type': 'multipart/form-data',
-      // },
+      headers: {
+        // 'Content-Type': 'multipart/form-data',
+        // Accept: 'application/json',
+      },
     }
     const response = await axios.post(url, data, options).catch((err) => {
       showToastError(err)

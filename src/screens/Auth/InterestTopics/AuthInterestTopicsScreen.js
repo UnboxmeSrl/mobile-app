@@ -1,12 +1,11 @@
 import React from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../../assets/images'
 import { CustomButton, CustomHeader } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
 import { useAuthInterestTopics } from './hooks'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthInterestTopicsScreen = () => {
   const {
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   loaderContainer: {
     flex: 1,

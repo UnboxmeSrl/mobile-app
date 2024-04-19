@@ -7,6 +7,7 @@ import {
   // getTimeFrames,
   showToastError,
 } from '../../../services'
+import { setTimeFrameData } from '../../../redux/slices'
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector((state) => state.restaurantSlice.timeFrameData)
@@ -218,6 +219,13 @@ const useBookingDetails = () => {
     console.log('month: ' + month)
     setCurrentMonth(month)
   }, [startDate])
+
+  useEffect(() => {
+    return () => {
+      console.log('❎')
+      dispatch(setTimeFrameData([]))
+    }
+  }, [])
 
   return {
     currentDate,

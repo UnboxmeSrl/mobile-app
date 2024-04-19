@@ -2,13 +2,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { CustomButton, CustomHeader } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { moderateScale, scale } from 'react-native-size-matters'
 import { verticalScale } from 'react-native-size-matters'
 import { IMAGES } from '../../../assets/images'
 import { useAuthDateOfBirth } from './hooks'
 import DatePicker from 'react-native-date-picker'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthDateOfBirthScreen = () => {
   const {
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   calenderIcon: {
     height: verticalScale(18.42),

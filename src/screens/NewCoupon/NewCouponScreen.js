@@ -1,13 +1,12 @@
 import React from 'react'
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
 import { useNewCoupon } from './hooks'
 import FastImage from 'react-native-fast-image'
-import { hasNotch } from '../../utils'
+import { commonStyle } from '../../utils'
 
 const NewCouponScreen = () => {
   const {
@@ -261,7 +260,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.lightNewPrimary40,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   mainInnerView: {
     alignSelf: 'center',

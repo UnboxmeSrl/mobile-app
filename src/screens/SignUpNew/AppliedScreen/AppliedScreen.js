@@ -1,14 +1,11 @@
 import React from 'react'
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../../assets/images'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
-
+import { commonStyle } from '../../../utils'
 import { useApplied } from './hooks'
-import { hasNotch } from '../../../utils'
 
 const AppliedScreen = () => {
   const { handleGuestPress } = useApplied()
@@ -122,6 +119,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   viewForMargin: {
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
 })

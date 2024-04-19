@@ -13,14 +13,11 @@ import {
 import CalendarStrip from 'react-native-calendar-strip'
 // import DeviceInfo from 'react-native-device-info'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-
 import { IMAGES } from '../../assets/images'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-
 import { useBookingDetails } from './hooks'
-import { hasNotch } from '../../utils'
+import { commonStyle } from '../../utils'
 
 const BookingDetailsScreen = () => {
   const {
@@ -366,7 +363,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   nextDatesIcon: {
     height: moderateScale(20),

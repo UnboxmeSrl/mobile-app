@@ -1,23 +1,12 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native'
 import React from 'react'
-import { usePublishContent } from './hooks'
-import { IMAGES } from '../../assets/images'
-import { COLORS, FONTS } from '../../constants'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { IMAGES } from '../../assets/images'
 import { ContentStatusModal } from '../../components'
-import { hasNotch } from '../../utils'
+import { COLORS, FONTS } from '../../constants'
+import { commonStyle } from '../../utils'
+import { usePublishContent } from './hooks'
 
 const PublishContentScreen = () => {
   const {
@@ -402,7 +391,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   headerContainer: {
     alignItems: 'center',

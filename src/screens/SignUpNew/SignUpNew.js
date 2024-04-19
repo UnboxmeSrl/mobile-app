@@ -1,16 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { BackHandler, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { IMAGES } from '../../assets/images'
+import { SignInWithEmail } from '../../components'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { useSignUp } from './hooks'
-import { SignInWithEmail } from '../../components'
-import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
-import { useCallback } from 'react'
 import { MODAL_NAMES } from '../../constants/navigation'
-import { hasNotch } from '../../utils'
+import { commonStyle } from '../../utils'
+import { useSignUp } from './hooks'
 
 const SignUpNew = () => {
   const { handleSignInPress, handleCreateAnAccountPress, handleGuestPress } = useSignUp()
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(210),
   },
   viewForMargin: {
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   backgroundStyle: {
     height: '100%',

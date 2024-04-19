@@ -1,5 +1,8 @@
+import { Platform } from 'react-native'
 import { IMAGES } from '../assets/images'
 import DeviceInfo from 'react-native-device-info'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { verticalScale } from 'react-native-size-matters'
 
 export const checkActionName = (actionName) => {
   if (actionName) {
@@ -135,3 +138,11 @@ export const checkContentStatus = (statusName) => {
 }
 
 export const hasNotch = !DeviceInfo.hasNotch()
+export const isIos = Platform.OS === 'ios'
+export const isAndroid = Platform.OS === 'android'
+
+export const commonStyle = {
+  containerPaddingTop: {
+    paddingTop: getStatusBarHeight() + (isIos && hasNotch && verticalScale(15)),
+  },
+}

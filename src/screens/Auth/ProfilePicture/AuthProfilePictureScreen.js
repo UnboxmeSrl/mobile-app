@@ -2,11 +2,10 @@ import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react
 import React from 'react'
 import { CustomButton, CustomHeader, PickerModal } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { IMAGES } from '../../../assets/images'
 import { useAuthProfilePicture } from './hooks'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthProfilePictureScreen = () => {
   const {
@@ -126,6 +125,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
 })

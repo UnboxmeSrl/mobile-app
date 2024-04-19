@@ -21,6 +21,8 @@ import ReadMore from '../../components/Elements/ReadMore'
 import perfectSize from '../../utils/responsiveSize'
 import { colors } from '../../utils/theme'
 import { COLORS } from '../../constants'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { isAndroid } from '../../utils'
 
 export const ProfileScreenPresenter = ({
   isAuthenticated,
@@ -135,8 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     // rowGap: perfectSize(8),
-    marginTop: perfectSize(8),
-    paddingBottom: perfectSize(8),
+    // marginTop: perfectSize(8),
     backgroundColor: colors.light,
   },
   content: {
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: perfectSize(16),
+    paddingTop: isAndroid ? getStatusBarHeight() : 0,
   },
   headerTitle: {
     fontSize: perfectSize(18),

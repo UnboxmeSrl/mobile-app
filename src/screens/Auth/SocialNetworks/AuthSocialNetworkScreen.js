@@ -3,12 +3,11 @@
 import React, { useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../../assets/images'
 import { CustomButton, CustomHeader, SocialMediaSheet } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
 import { useAuthSocialNetwork } from './hooks'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthSocialNetworkScreen = () => {
   const {
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,

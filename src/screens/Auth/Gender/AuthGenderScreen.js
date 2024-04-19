@@ -1,11 +1,10 @@
 import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS } from '../../../constants'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { CustomButton, CustomHeader } from '../../../components'
 import { useAuthGender } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthGenderScreen = () => {
   const { isLoading, genderList, selectedGender, isBtnDisabled, setSelectedGender, handleBackPress, handleNextPress } =
@@ -91,6 +90,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
 })

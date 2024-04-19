@@ -4,25 +4,21 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { CouponsScreen } from '@screens/Coupons'
 import { PrizesScreen } from '@screens/Prizes'
 import { ProfileScreen } from '@screens/Profile'
-
 import { TabBarIcon } from '@components/TabBarIcon'
 import { SCREEN_NAMES } from '@const/navigation'
-
 import { IMAGES } from '../assets/images'
-
 import HomeStack from './HomeStack'
 import ScheduleStack from './ScheduleStack'
 import ProfileStack from './ProfileStack'
 import { COLORS } from '../constants'
-import DeviceInfo from 'react-native-device-info'
 import { verticalScale } from 'react-native-size-matters'
+import { hasNotch } from '../utils'
 
 export default createBottomTabNavigator(
   {
     [SCREEN_NAMES.Home]: {
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
-          console.log('DeviceInfo.hasNotch()', DeviceInfo.hasNotch())
           return (
             <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
               <TabBarIcon focused={focused} icon={IMAGES.home} />
@@ -84,7 +80,7 @@ export default createBottomTabNavigator(
         borderTopRightRadius: 24,
         borderTopWidth: 0,
         height: 56,
-        marginBottom: !DeviceInfo.hasNotch() ? verticalScale(20) : 0,
+        marginBottom: hasNotch ? verticalScale(10) : 0,
       },
     },
   }

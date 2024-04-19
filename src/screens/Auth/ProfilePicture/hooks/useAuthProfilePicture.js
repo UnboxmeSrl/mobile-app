@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { SCREEN_NAMES } from '../../../../constants/navigation'
 import { navigate } from '../../../../services'
-import { checkPermission, openCamera, openGallery } from '../../../../utils'
+import { checkPermission, isAndroid, isIos, openCamera, openGallery } from '../../../../utils'
 import { PERMISSIONS } from 'react-native-permissions'
 import { Platform } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,8 +12,6 @@ const useAuthProfilePicture = () => {
   const userDetails = useSelector((state) => state.authSlice.authData)
   const [profilePicData, setProfilePicData] = useState(userDetails?.profilePictures ?? [(1, 2, 3, 4)])
   const profilePicUploadRef = useRef()
-  const isIos = Platform.OS === 'ios'
-  const isAndroid = Platform.OS === 'android'
   const formData = new FormData()
   const androidVersion = Platform.Version
   const [pictureIndex, setPictureIndex] = useState()

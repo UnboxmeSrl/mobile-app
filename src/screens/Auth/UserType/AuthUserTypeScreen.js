@@ -1,11 +1,10 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { CustomButton, CustomHeader } from '../../../components'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { COLORS, FONTS } from '../../../constants'
 import { useAuthUserType } from './hooks'
 import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthUserTypeScreen = () => {
   const { isBtnDisabled, userTypeList, selectedUserType, setSelectedUserType, handleBackPress, handleNextPress } =
@@ -76,6 +75,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
 })

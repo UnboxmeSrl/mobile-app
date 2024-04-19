@@ -14,7 +14,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../assets/images'
 import { COLORS, FONTS } from '../../constants'
 import { useArchive } from './hooks'
-import { hasNotch } from '../../utils'
+import { commonStyle } from '../../utils'
 
 const ArchiveScreen = () => {
   const { isLoading, refreshing, onRefresh, canceledBookings, handleBackPress } = useArchive()
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   headerContainer: {
     alignItems: 'center',

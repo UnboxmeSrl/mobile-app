@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React from 'react'
+import { ActivityIndicator, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { CommonHeader, CustomButton } from '../../components'
 import { COLORS, FONTS } from '../../constants'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { commonStyle } from '../../utils'
 import { useSettings } from './hooks'
-import { scale, verticalScale } from 'react-native-size-matters'
-import { moderateScale } from 'react-native-size-matters'
-import { hasNotch } from '../../utils'
 
 const SettingsNew = () => {
   const { versionName, isDeleting, isLoading, handleDeleteAccount, handleLogout } = useSettings()
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   btnContainer: {
     alignItems: 'center',

@@ -12,13 +12,12 @@ import {
 } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../assets/images'
 import { CommonHeader } from '../../components'
 import { CustomCarousel } from '../../components/CustomCarousel'
 import { COLORS } from '../../constants/colors'
 import { FONTS } from '../../constants/fonts'
-import { checkAction, hasNotch } from '../../utils'
+import { checkAction, commonStyle } from '../../utils'
 import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
@@ -563,7 +562,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   mainSocialMediaContainer: {
     flex: 1,

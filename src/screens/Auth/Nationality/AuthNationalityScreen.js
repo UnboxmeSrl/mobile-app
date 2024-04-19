@@ -3,12 +3,11 @@ import React from 'react'
 import { useAuthNationality } from './hooks'
 import { CustomButton, CustomHeader } from '../../../components'
 import { COLORS, FONTS } from '../../../constants'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { IMAGES } from '../../../assets/images'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import CountryPicker from 'react-native-country-picker-modal'
 import CountryFlag from 'react-native-country-flag'
-import { hasNotch } from '../../../utils'
+import { commonStyle } from '../../../utils'
 
 const AuthNationalityScreen = () => {
   const { isBtnDisabled, country, handleNextPress, handleBackPress, onSelect } = useAuthNationality()
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    paddingTop: getStatusBarHeight() + (hasNotch && verticalScale(15)),
+    ...commonStyle.containerPaddingTop,
   },
   countryContainer: {
     marginTop: verticalScale(15),
