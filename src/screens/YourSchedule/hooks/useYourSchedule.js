@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { navigate } from '@services'
-
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setBookings } from '../../../redux/slices/restaurantSlice'
 import { getBookingForContentList, getBookings } from '../../../services'

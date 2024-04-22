@@ -31,7 +31,6 @@ export const OtherSingUpOptionsScreen = () => {
   }
 
   const openCreatePasswordSheet = () => {
-    console.log('rtesting')
     ref?.current?.close()
     createPasswordRef?.current?.open()
   }

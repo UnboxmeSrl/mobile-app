@@ -381,7 +381,8 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
   },
   locationTextContainer: {
-    width: '80%',
+    width: '100%',
+    paddingRight: scale(80),
   },
   nameLocationMainRow: {
     alignItems: 'center',

@@ -26,7 +26,6 @@ const useRestaurantDetails = () => {
       restaurant_id: restaurantDetails?.id,
     }
     const res = await getServices(prepData)
-    console.log('res', res)
     setServices(res)
     setIsLoading(false)
   }
@@ -45,7 +44,6 @@ const useRestaurantDetails = () => {
   }
 
   const onCategoryChange = (serviceCategoryId) => {
-    console.log('Category change', serviceCategoryId)
     setFilter(serviceCategoryId)
   }
 
@@ -73,9 +71,7 @@ const useRestaurantDetails = () => {
   }, [])
 
   useEffect(() => {
-    console.log('Length', services?.length)
     if (isFocused) {
-      console.log('testiiiii')
       getServicesData()
     }
   }, [isFocused, filter])

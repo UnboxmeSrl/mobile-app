@@ -7,7 +7,6 @@ const useFirstWellcome = () => {
   const dispatch = useDispatch()
   const handleGuestPress = () => {
     // navigate(STACK_NAMES.BottomStack)
-    console.log('press')
     dispatch(updateUserCount(2))
   }
 

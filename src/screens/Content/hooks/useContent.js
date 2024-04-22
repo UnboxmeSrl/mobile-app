@@ -26,7 +26,6 @@ const useContent = () => {
   const [diaryItems, setDiaryItems] = useState([])
   const [isDataFetching, setIsDataFetching] = useState(false)
   const actions = checkAction(actionNumId, socialActions)
-  console.log('diary items', diaryItems)
 
   const dispatch = useDispatch()
 

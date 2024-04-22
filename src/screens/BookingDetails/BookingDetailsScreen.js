@@ -143,7 +143,6 @@ const BookingDetailsScreen = () => {
                   renderItem={({ item, index }) => {
                     let isSelected = item?.id === selectedTimeFame?.id
                     if (!selectedTimeFame?.id && index === 0) {
-                      console.log('selectedTimeFrame:', selectedTimeFame, index)
                       isSelected = true
                       setSelectedTimeFame(item)
                     }

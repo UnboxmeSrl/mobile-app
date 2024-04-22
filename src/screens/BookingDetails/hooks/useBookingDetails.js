@@ -222,7 +222,6 @@ const useBookingDetails = () => {
 
   useEffect(() => {
     return () => {
-      console.log('❎')
       dispatch(setTimeFrameData([]))
     }
   }, [])

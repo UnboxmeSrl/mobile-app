@@ -17,10 +17,10 @@ export const store = configureStore({
     immutableCheck: { warnAfter: 128 },
     // serializableCheck: { warnAfter: 128 },
     // immutableCheck: false,
-    // serializableCheck: false,
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, REGISTER],
-    },
+    serializableCheck: false,
+    // serializableCheck: {
+    //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, REGISTER],
+    // },
   }),
   reducer: persistedReducer,
 })

@@ -125,10 +125,6 @@ const useRestaurants = () => {
     getCategoriesData()
   }, [])
 
-  useEffect(() => {
-    console.log('Focused')
-  }, [isFocused])
-
   return {
     categories,
     categoriesIds,

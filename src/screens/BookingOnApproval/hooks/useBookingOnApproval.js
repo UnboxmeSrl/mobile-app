@@ -1,6 +1,6 @@
 import { navigate } from '@services'
 import { useEffect, useState } from 'react'
-import { useNavigationParam } from 'react-navigation-hooks'
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setContentList } from '../../../redux/slices'
@@ -14,6 +14,7 @@ const useBookingOnApproval = () => {
   const [currentWeekDay, setCurrentWeekDay] = useState('')
   const [currentDate, setCurrentDate] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const navigation = useNavigation()
   const timeFrame = bookingDetails?._timeframes_turbo
   const approvalStageValue = bookingDetails?.Approved
     ? 'success'
@@ -39,8 +40,9 @@ const useBookingOnApproval = () => {
     const contentListRes = await getBookingForContentList(newParams)
     dispatch(setContentList(contentListRes))
     setIsLoading(false)
-    navigate({
+    navigation.navigate({
       params: {
+        selectedTab: 1,
         isFromBookingDetails: true,
       },
       routeName: SCREEN_NAMES.Schedule,
