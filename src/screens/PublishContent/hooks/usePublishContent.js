@@ -112,6 +112,7 @@ const usePublishContent = () => {
     setLink,
     contentDetails,
     updatedContentDetails,
+    actionNumId,
     actionName,
     icon,
     bookingDate,

@@ -164,12 +164,16 @@ const YourScheduleScreen = () => {
                         <Text style={styles.serviceRequestedText}>{item?._offers_turbo?.Offer_Name}</Text>
                       </View>
                       <View style={styles.timeReelsContainer}>
-                        <View style={styles.timeContainer}>
-                          <Text style={styles.timeTitleText}>Time</Text>
-                          <Text
-                            style={styles.timeText}
-                          >{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
-                        </View>
+                        {actionNumId !== 9 ? (
+                          <View style={styles.timeContainer}>
+                            <Text style={styles.timeTitleText}>Time</Text>
+                            <Text
+                              style={styles.timeText}
+                            >{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                          </View>
+                        ) : (
+                          <View style={styles.timeContainer} />
+                        )}
 
                         {/* {actionNumId == 6 && item?.diary_action_turbo_id === 0 ? (
                           <View style={styles.reelsContainer}>

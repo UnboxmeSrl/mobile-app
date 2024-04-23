@@ -8,10 +8,13 @@ import {
   showToastError,
 } from '../../../services'
 import { setTimeFrameData } from '../../../redux/slices'
+import { useNavigationParam } from 'react-navigation-hooks'
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector((state) => state.restaurantSlice.timeFrameData)
   const loginData = useSelector((state) => state.authSlice.loginData)
+  const actionNumId = useNavigationParam('actionNumId')
+  const influencerCount = useNavigationParam('influencerCount')
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -94,8 +97,11 @@ const useBookingDetails = () => {
       events_id: 0,
       offers_turbo_id: serviceDetails?.id,
       restaurant_id: restaurantDetails?.id,
-      timeframes_id: selectedTimeFame?.id,
+      timeframes_id: selectedTimeFame?.id ?? 0,
       user_turbo_id: loginData?.id,
+    }
+    if (actionNumId === 9) {
+      prepData['additional_influencer'] = influencerCount
     }
     console.log('prepData: ', prepData)
     const res = await addRestaurantBooking(prepData)
@@ -108,6 +114,7 @@ const useBookingDetails = () => {
         routeName: SCREEN_NAMES.BookingOnApprovalScreen,
       })
     } else {
+      console.log('res: ', JSON.stringify(res))
       const error = {
         message: res?.data,
       }
@@ -191,7 +198,7 @@ const useBookingDetails = () => {
     })
     console.log('filteredTimeData2: ' + JSON.stringify(updatedData))
     const resu = updatedData?.forEach((t) => {
-      const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
+      const filteredRes = t?.weekdays?.filter((wt) => wt?.day === weekDay)
       if (filteredRes.length > 0) {
         setWeekDayWiseTimeSlots(updatedData)
       } else {
@@ -227,6 +234,7 @@ const useBookingDetails = () => {
   }, [])
 
   return {
+    actionNumId,
     currentDate,
     currentMonth,
     currentWeekDay,

@@ -15,6 +15,7 @@ const PublishContentScreen = () => {
     approvalStage,
     contentDetails,
     updatedContentDetails,
+    actionNumId,
     actionName,
     icon,
     bookingDate,
@@ -61,8 +62,8 @@ const PublishContentScreen = () => {
               />
             </View>
             <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>{` ${
-                actionName === 'Story' ? `3 X ${actionName}` : `Full ${actionName}`
+              <Text style={styles.socialMediaNameText}>{`${
+                actionName === 'Story' ? `3 X ${actionName}` : `${actionName}`
               }`}</Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
@@ -158,12 +159,14 @@ const PublishContentScreen = () => {
             <Text style={styles.timeTitleText}>Date</Text>
             <Text style={styles.timeText}>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
-          <View style={styles.timeContainer}>
-            <Text style={styles.timeTitleText}>Time</Text>
-            <Text style={styles.timeText}>
-              {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
-            </Text>
-          </View>
+          {actionNumId !== 9 && (
+            <View style={styles.timeContainer}>
+              <Text style={styles.timeTitleText}>Time</Text>
+              <Text style={styles.timeText}>
+                {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+              </Text>
+            </View>
+          )}
         </View>
 
         <View>
@@ -438,7 +441,7 @@ const styles = StyleSheet.create({
   },
   socialMediaNameContainer: {
     marginLeft: scale(15),
-    width: '45%',
+    width: '50%',
   },
   socialMediaNameText: {
     color: COLORS.black,

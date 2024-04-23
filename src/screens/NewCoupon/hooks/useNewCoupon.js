@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SCREEN_NAMES } from '../../../constants/navigation'
 import { setRestaurantDetails } from '../../../redux/slices/restaurantSlice'
 import { checkAction, checkActionName } from '../../../utils'
+import { IMAGES } from '../../../assets/images'
 
 const useNewCoupon = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -24,6 +25,30 @@ const useNewCoupon = () => {
     actionName = bookingDetails?._diary_action_turbo?.action_for_others
   } else if (bookingDetails?.diary_action_turbo_id) {
     actionName = bookingDetails?._diary_action_turbo?.action
+  }
+
+  let amenityDetails = {}
+
+  if (actionNumId === 7) {
+    amenityDetails = {
+      amenityName: `${bookingDetails?._actions_turbo?.Beauty} X Treatment`,
+      amenityIcon: IMAGES.beauty,
+      amenityDescription: 'at your choice',
+    }
+  } else if (actionNumId === 8) {
+    amenityDetails = {
+      amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
+      amenityIcon: IMAGES.gym,
+      amenityDescription: 'at your choice',
+    }
+  } else if (actionNumId === 9) {
+    amenityDetails = {
+      amenityName: `${bookingDetails?._actions_turbo?.Accomodation} x Days (${
+        bookingDetails?._actions_turbo?.Accomodation - 1
+      } nights)`,
+      amenityIcon: IMAGES.resort,
+      amenityDescription: 'at your choice',
+    }
   }
 
   const handleBackPress = () => {
@@ -56,6 +81,8 @@ const useNewCoupon = () => {
   }
 
   return {
+    amenityDetails,
+    actionNumId,
     actionName,
     bookingDate,
     bookingDetails,

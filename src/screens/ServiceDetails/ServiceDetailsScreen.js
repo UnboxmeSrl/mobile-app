@@ -22,6 +22,8 @@ import { useServiceDetails } from './hooks'
 
 const ServiceDetails = () => {
   const {
+    actionNumId,
+    amenityDetails,
     socialActions,
     diaryItems,
     // services,
@@ -37,6 +39,9 @@ const ServiceDetails = () => {
     // onCategoryChange,
     // handleBackPress,
     handleBookPress,
+    influencerCount,
+    handleInfluencerPlus,
+    handleInfluencerMinus,
   } = useServiceDetails()
 
   // console.log('Service Details: ' + JSON.stringify(serviceDetails))
@@ -83,65 +88,218 @@ const ServiceDetails = () => {
             </View>
           </View>
 
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
-              <View style={styles.amenityIconContainer}>
-                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-              </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                <Text style={styles.amenitiesDescription}>at your choice</Text>
-              </View>
+          {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
+            <View style={styles.specialAmenity}>
+              <>
+                <View
+                  style={[
+                    styles.amenityIconContainer,
+                    styles.firstAmenityMainContainer,
+                    styles.specialAmenitiesIconContainer,
+                  ]}
+                >
+                  <Image source={amenityDetails?.amenityIcon} style={styles.amenityBigIcon} />
+                </View>
+                <View style={[styles.amenityMainContainer, styles.specialAmenitiesMainContainer]}>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text style={styles.amenitiesTitle}>{amenityDetails?.amenityName}</Text>
+                    <Text style={styles.amenitiesDescription}>{amenityDetails?.amenityDescription}</Text>
+                  </View>
+                </View>
+              </>
             </View>
+          ) : (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                  <Text style={styles.amenitiesDescription}>at your choice</Text>
+                </View>
+              </View>
 
-            <View style={styles.amenityMainContainer}>
-              <View style={styles.amenityIconContainer}>
-                <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                  <Text style={styles.amenitiesDescription}>at your choice</Text>
+                </View>
               </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                <Text style={styles.amenitiesDescription}>at your choice</Text>
-              </View>
-            </View>
 
-            <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text
-                  style={[styles.amenitiesTitle, styles.friendAmentityText]}
-                >{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
-                <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+              <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text
+                    style={[styles.amenitiesTitle, styles.friendAmenityText]}
+                  >{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
+                  <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+                </View>
               </View>
-            </View>
-          </ScrollView>
+            </ScrollView>
+          )}
 
           <View style={styles.divider} />
 
-          <View style={styles.contentRequiredRow}>
-            <View style={styles.contentRequiredContainer}>
-              <Text style={styles.contentRequiredText}>Content required</Text>
-            </View>
-            <View style={styles.deadlineContainer}>
-              <Image source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
-              <Text
-                style={styles.deadlineText}
-              >{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
-            </View>
-          </View>
+          {actionNumId === 9 ? (
+            <>
+              <View style={styles.villaDescriptionContainer}>
+                <Text style={styles.villaDescription}>{`${serviceDetails?.Description}`}</Text>
+              </View>
+              <View style={styles.villaActionsMainContainer}>
+                <FlatList
+                  showsVerticalScrollIndicator={false}
+                  data={serviceDetails?._actions_turbo?.actions_turbo_id}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <View style={styles.villaActionContainer}>
+                        <View style={styles.villaActionIconContainer}>
+                          <FastImage
+                            resizeMode="contain"
+                            source={{
+                              priority: FastImage.priority.high,
+                              uri: item?.Action_icon?.url,
+                            }}
+                            style={styles.villaActionIcon}
+                          />
+                        </View>
+                        <View style={styles.villaActionNameDescriptionContainer}>
+                          <View style={styles.socialMediaTitleContainer}>
+                            <Text style={styles.socialMediaTitle}>{`${item?.Action_Name}`}</Text>
+                            <View style={styles.ratingsContainer}>
+                              <Text style={styles.ratingsText}>120</Text>
+                              <Image source={IMAGES.star} style={styles.ratingIcon} />
+                            </View>
+                          </View>
+                          <View style={styles.socialMediaDescriptionContainer}>
+                            <Text style={styles.socialMediaDescriptionText}>{`${item?.Descrizione}`}</Text>
+                          </View>
+                        </View>
+                      </View>
+                    )
+                  }}
+                />
+              </View>
+              <View style={styles.comingWithInfluencerTextContainer}>
+                <Text style={styles.comingWithInfluencerText}>Coming with an influencer friend?</Text>
+              </View>
 
-          <View style={styles.flatlistContainer}>
-            <FlatList
-              data={[serviceDetails]}
-              keyExtractor={(_, index) => index.toString()}
-              renderItem={({ item, index }) => {
-                const actionNumId = item?._actions_turbo?.action_num_id
-                // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-                const actions = checkAction(actionNumId, socialActions)
-                // console.log('icon', icon, actionNumId)
-                return (
-                  <View>
-                    {actionNumId === 3 ? (
-                      diaryItems?.map((diaryItem, innerIndex) => (
-                        <View key={innerIndex}>
+              <View style={styles.influencerFriendAddContainer}>
+                <TouchableOpacity onPress={handleInfluencerMinus} disabled={influencerCount <= 1}>
+                  <Image
+                    source={influencerCount > 1 ? IMAGES.minusEnabled : IMAGES.minusDisabled}
+                    style={styles.plusMinusIcon}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.influencerText}>{`${influencerCount} Influencer`}</Text>
+                <TouchableOpacity onPress={handleInfluencerPlus}>
+                  <Image source={IMAGES.plusEnabled} style={styles.plusMinusIcon} />
+                </TouchableOpacity>
+              </View>
+            </>
+          ) : (
+            <>
+              <View style={styles.contentRequiredRow}>
+                <View style={styles.contentRequiredContainer}>
+                  <Text style={styles.contentRequiredText}>Content required</Text>
+                </View>
+                <View style={styles.deadlineContainer}>
+                  <Image source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
+                  <Text
+                    style={styles.deadlineText}
+                  >{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
+                </View>
+              </View>
+              <View style={styles.flatlistContainer}>
+                <FlatList
+                  data={[serviceDetails]}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item, index }) => {
+                    const actionNumId = item?._actions_turbo?.action_num_id
+                    // const diaryItems = ['TikTok Diary', 'Instagram Diary']
+                    const actions = checkAction(actionNumId, socialActions)
+                    // console.log('icon', icon, actionNumId)
+                    return (
+                      <View>
+                        {actionNumId === 3 ? (
+                          diaryItems?.map((diaryItem, innerIndex) => (
+                            <View key={innerIndex}>
+                              <View style={styles.mainSocialItemContainer}>
+                                <View style={styles.socialMediaImageContainer}>
+                                  <FastImage
+                                    resizeMode="contain"
+                                    source={{
+                                      priority: FastImage.priority.high,
+                                      uri: item?._actions_turbo?.Action_icon?.url,
+                                    }}
+                                    style={styles.socialMediaImage}
+                                  />
+                                  {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
+                                </View>
+                                <View style={styles.socialMediaTitleDescriptionContainer}>
+                                  <View style={styles.socialMediaTitleContainer}>
+                                    <Text style={styles.socialMediaTitle}>{diaryItem?.action}</Text>
+                                    <View style={styles.ratingsContainer}>
+                                      <Text style={styles.ratingsText}>60</Text>
+                                      <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                    </View>
+                                  </View>
+                                  <View style={styles.socialMediaDescriptionContainer}>
+                                    <Text style={styles.socialMediaDescriptionText}>
+                                      {`${item?._actions_turbo?.Descrizione}`}
+                                    </Text>
+                                  </View>
+                                </View>
+                              </View>
+                              {innerIndex == 0 && (
+                                <View style={styles.orContainer}>
+                                  <View style={styles.orDivider} />
+                                  <Text style={styles.orText}>Or</Text>
+                                  <View style={styles.orDivider} />
+                                </View>
+                              )}
+                            </View>
+                          ))
+                        ) : actionNumId === 6 ? (
+                          actions?.duo_actions?.map((innerItem, innerIndex) => (
+                            <View key={innerIndex}>
+                              <View style={styles.mainSocialItemContainer} key={innerIndex}>
+                                <View style={styles.socialMediaImageContainer}>
+                                  <FastImage
+                                    resizeMode="contain"
+                                    source={{
+                                      priority: FastImage.priority.high,
+                                      uri: innerItem?.Action_icon?.url,
+                                    }}
+                                    style={styles.socialMediaImage}
+                                  />
+                                  {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
+                                </View>
+                                <View style={styles.socialMediaTitleDescriptionContainer}>
+                                  <View style={styles.socialMediaTitleContainer}>
+                                    <Text style={styles.socialMediaTitle}>{innerItem?.Action_Name}</Text>
+                                    <View style={styles.ratingsContainer}>
+                                      <Text style={styles.ratingsText}>60</Text>
+                                      <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                    </View>
+                                  </View>
+                                  <View style={styles.socialMediaDescriptionContainer}>
+                                    <Text style={styles.socialMediaDescriptionText}>{`${innerItem?.Descrizione}`}</Text>
+                                  </View>
+                                </View>
+                              </View>
+                              {innerIndex == 0 && (
+                                <View style={styles.orContainer}>
+                                  <View style={styles.orDivider} />
+                                  <Text style={styles.orText}>Or</Text>
+                                  <View style={styles.orDivider} />
+                                </View>
+                              )}
+                            </View>
+                          ))
+                        ) : (
                           <View style={styles.mainSocialItemContainer}>
                             <View style={styles.socialMediaImageContainer}>
                               <FastImage
@@ -156,7 +314,7 @@ const ServiceDetails = () => {
                             </View>
                             <View style={styles.socialMediaTitleDescriptionContainer}>
                               <View style={styles.socialMediaTitleContainer}>
-                                <Text style={styles.socialMediaTitle}>{diaryItem?.action}</Text>
+                                <Text style={styles.socialMediaTitle}>{item?._actions_turbo?.Action_Name} video</Text>
                                 <View style={styles.ratingsContainer}>
                                   <Text style={styles.ratingsText}>60</Text>
                                   <Image source={IMAGES.star} style={styles.ratingIcon} />
@@ -169,86 +327,14 @@ const ServiceDetails = () => {
                               </View>
                             </View>
                           </View>
-                          {innerIndex == 0 && (
-                            <View style={styles.orContainer}>
-                              <View style={styles.orDivider} />
-                              <Text style={styles.orText}>Or</Text>
-                              <View style={styles.orDivider} />
-                            </View>
-                          )}
-                        </View>
-                      ))
-                    ) : actionNumId === 6 ? (
-                      actions?.duo_actions?.map((innerItem, innerIndex) => (
-                        <View key={innerIndex}>
-                          <View style={styles.mainSocialItemContainer} key={innerIndex}>
-                            <View style={styles.socialMediaImageContainer}>
-                              <FastImage
-                                resizeMode="contain"
-                                source={{
-                                  priority: FastImage.priority.high,
-                                  uri: innerItem?.Action_icon?.url,
-                                }}
-                                style={styles.socialMediaImage}
-                              />
-                              {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
-                            </View>
-                            <View style={styles.socialMediaTitleDescriptionContainer}>
-                              <View style={styles.socialMediaTitleContainer}>
-                                <Text style={styles.socialMediaTitle}>{innerItem?.Action_Name}</Text>
-                                <View style={styles.ratingsContainer}>
-                                  <Text style={styles.ratingsText}>60</Text>
-                                  <Image source={IMAGES.star} style={styles.ratingIcon} />
-                                </View>
-                              </View>
-                              <View style={styles.socialMediaDescriptionContainer}>
-                                <Text style={styles.socialMediaDescriptionText}>{`${innerItem?.Descrizione}`}</Text>
-                              </View>
-                            </View>
-                          </View>
-                          {innerIndex == 0 && (
-                            <View style={styles.orContainer}>
-                              <View style={styles.orDivider} />
-                              <Text style={styles.orText}>Or</Text>
-                              <View style={styles.orDivider} />
-                            </View>
-                          )}
-                        </View>
-                      ))
-                    ) : (
-                      <View style={styles.mainSocialItemContainer}>
-                        <View style={styles.socialMediaImageContainer}>
-                          <FastImage
-                            resizeMode="contain"
-                            source={{
-                              priority: FastImage.priority.high,
-                              uri: item?._actions_turbo?.Action_icon?.url,
-                            }}
-                            style={styles.socialMediaImage}
-                          />
-                          {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
-                        </View>
-                        <View style={styles.socialMediaTitleDescriptionContainer}>
-                          <View style={styles.socialMediaTitleContainer}>
-                            <Text style={styles.socialMediaTitle}>{item?._actions_turbo?.Action_Name} video</Text>
-                            <View style={styles.ratingsContainer}>
-                              <Text style={styles.ratingsText}>60</Text>
-                              <Image source={IMAGES.star} style={styles.ratingIcon} />
-                            </View>
-                          </View>
-                          <View style={styles.socialMediaDescriptionContainer}>
-                            <Text style={styles.socialMediaDescriptionText}>
-                              {`${item?._actions_turbo?.Descrizione}`}
-                            </Text>
-                          </View>
-                        </View>
+                        )}
                       </View>
-                    )}
-                  </View>
-                )
-              }}
-            />
-          </View>
+                    )
+                  }}
+                />
+              </View>
+            </>
+          )}
 
           {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
@@ -271,6 +357,81 @@ const ServiceDetails = () => {
 }
 
 const styles = StyleSheet.create({
+  villaDescription: {
+    color: COLORS.davyGrey,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(15),
+  },
+  villaDescriptionContainer: {
+    alignSelf: 'center',
+    width: '85%',
+    marginBottom: verticalScale(10),
+  },
+  villaActionsMainContainer: {
+    backgroundColor: COLORS.lightNewPrimary40,
+    alignSelf: 'center',
+    width: '90%',
+    borderRadius: moderateScale(16),
+    borderWidth: moderateScale(1),
+    borderColor: COLORS.newPrimary,
+    paddingBottom: verticalScale(10),
+    marginVertical: verticalScale(20),
+  },
+  villaActionContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: scale(20),
+    marginTop: verticalScale(20),
+  },
+  villaActionIconContainer: {
+    marginTop: verticalScale(10),
+  },
+  villaActionIcon: {
+    height: moderateScale(30),
+    width: moderateScale(30),
+  },
+  villaActionNameDescriptionContainer: {
+    width: '85%',
+    marginLeft: scale(20),
+    justifyContent: 'center',
+  },
+  comingWithInfluencerTextContainer: {
+    alignSelf: 'center',
+  },
+  comingWithInfluencerText: {
+    color: COLORS.davyGrey,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+  },
+  influencerFriendAddContainer: {
+    height: verticalScale(55),
+    width: '90%',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.cultured,
+    borderRadius: moderateScale(18),
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(20),
+    marginTop: verticalScale(20),
+  },
+  influencerText: {
+    color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(16),
+  },
+  plusMinusIcon: {
+    height: moderateScale(28),
+    width: moderateScale(28),
+  },
+  specialAmenity: {
+    flexDirection: 'row',
+  },
+  specialAmenitiesMainContainer: {
+    marginLeft: scale(5),
+  },
+  specialAmenitiesIconContainer: {
+    marginTop: verticalScale(10),
+  },
   firstAmenityMainContainer: {
     marginLeft: scale(20),
   },
@@ -282,7 +443,7 @@ const styles = StyleSheet.create({
   friendAmenityTitle: {
     textAlign: 'center',
   },
-  friendAmentityText: {
+  friendAmenityText: {
     textAlign: 'center',
   },
   friendAmenityContainer: {
@@ -408,14 +569,15 @@ const styles = StyleSheet.create({
     height: verticalScale(45),
     flexDirection: 'row',
     borderRadius: moderateScale(16),
-    borderWidth: moderateScale(1),
+    // borderWidth: moderateScale(1),
     marginTop: verticalScale(10),
     // marginLeft: scale(10),
     paddingHorizontal: scale(10),
     marginHorizontal: scale(5),
-    borderColor: COLORS.gainsboro,
+    // borderColor: COLORS.gainsboro,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: COLORS.cultured,
   },
   amenityIconContainer: {
     marginRight: scale(10),
@@ -425,6 +587,10 @@ const styles = StyleSheet.create({
   amenityIcon: {
     height: moderateScale(20),
     width: moderateScale(20),
+  },
+  amenityBigIcon: {
+    height: moderateScale(48),
+    width: moderateScale(48),
   },
   amenityTitleDescriptionContainer: {
     // width: '60%',
@@ -444,6 +610,7 @@ const styles = StyleSheet.create({
     tintColor: COLORS.newPrimary,
     height: moderateScale(11.56),
     width: moderateScale(12),
+    marginLeft: scale(10),
   },
   ratingsText: {
     color: COLORS.newPrimary,

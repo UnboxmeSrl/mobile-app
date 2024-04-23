@@ -145,6 +145,7 @@ export default {
       skip: 'Skip',
     },
     loginTitle: 'Login',
+    registerTitle: 'Register',
     logout: 'Logout',
     narration: 'Narration',
     next: 'Next',
@@ -202,8 +203,7 @@ export default {
       title: 'Questionnaire',
       typeCreams: 'Type down the creams you are using:',
     },
-    registerOrLogin:
-      'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
+    registerOrLogin: 'Register or login into your account to able to book through Claris.',
     requiredMedia: 'Required media',
     resetPassword: 'Reset password',
     review: {

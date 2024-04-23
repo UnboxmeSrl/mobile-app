@@ -28,6 +28,7 @@ export const LoginGuest = () => {
         <Subtitle tKey={'wantUseAll'} />
         <Text tKey={'registerOrLogin'} />
         <Button onPress={navigateToLogin} tKey={'loginTitle'} />
+        <Button onPress={navigateToLogin} tKey={'registerTitle'} />
       </Wrapper>
     </SafeAreaView>
   )

@@ -9,6 +9,7 @@ import { cancelBooking, getAllCanceledBookings, getBookings } from '../../../ser
 import { Alert } from 'react-native'
 import { setBookings, setCanceledBookings } from '../../../redux/slices/restaurantSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { IMAGES } from '../../../assets/images'
 
 // import moment from 'moment'
 // import 'moment-timezone'
@@ -39,6 +40,30 @@ const useYourScheduleDetails = () => {
     actionName = bookingDetails?._diary_action_turbo?.action_for_others
   } else if (bookingDetails?.diary_action_turbo_id) {
     actionName = bookingDetails?._diary_action_turbo?.action
+  }
+
+  let amenityDetails = {}
+
+  if (actionNumId === 7) {
+    amenityDetails = {
+      amenityName: `${bookingDetails?._actions_turbo?.Beauty} X Treatment`,
+      amenityIcon: IMAGES.beauty,
+      amenityDescription: 'at your choice',
+    }
+  } else if (actionNumId === 8) {
+    amenityDetails = {
+      amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
+      amenityIcon: IMAGES.gym,
+      amenityDescription: 'at your choice',
+    }
+  } else if (actionNumId === 9) {
+    amenityDetails = {
+      amenityName: `${bookingDetails?._actions_turbo?.Accomodation} x Days (${
+        bookingDetails?._actions_turbo?.Accomodation - 1
+      } nights)`,
+      amenityIcon: IMAGES.resort,
+      amenityDescription: 'at your choice',
+    }
   }
 
   const dispatch = useDispatch()
@@ -144,7 +169,9 @@ const useYourScheduleDetails = () => {
   }, [])
 
   return {
+    actionNumId,
     actionName,
+    amenityDetails,
     approvalStage,
     bookingDetails,
     currentDate,

@@ -62,4 +62,5 @@ export const COLORS = {
   lightNewPrimary: '#FFEFF2',
   lightNewPrimary40: '#FFEFF240',
   lightNewPrimaryA6: '#FFEFF2A6',
+  davyGrey: '#5E5E5E',
 }

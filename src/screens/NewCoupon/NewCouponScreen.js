@@ -10,6 +10,8 @@ import { commonStyle } from '../../utils'
 
 const NewCouponScreen = () => {
   const {
+    amenityDetails,
+    actionNumId,
     actionName,
     icon,
     timeFrame,
@@ -62,32 +64,80 @@ const NewCouponScreen = () => {
         <View style={styles.rightCutter} />
         <View style={styles.divider} />
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.amenitiesContainer}>
-          <View style={styles.amenityContainer}>
-            <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-            <Image source={IMAGES.drinks} style={styles.amenityIcon} />
+        {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
+          <View style={styles.specialAmenity}>
+            <>
+              <View
+                style={[
+                  styles.amenityIconContainer,
+                  styles.firstAmenityMainContainer,
+                  styles.specialAmenitiesIconContainer,
+                ]}
+              >
+                <Image source={amenityDetails?.amenityIcon} style={styles.amenityBigIcon} />
+              </View>
+              <View style={[styles.amenityMainContainer, styles.specialAmenitiesMainContainer]}>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text style={styles.amenitiesTitle}>{amenityDetails?.amenityName}</Text>
+                  <Text style={styles.amenitiesDescription}>{amenityDetails?.amenityDescription}</Text>
+                </View>
+              </View>
+            </>
           </View>
-          <View style={styles.amenityContainer}>
-            <Text style={styles.amenityTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-            <Image source={IMAGES.meals} style={styles.amenityIcon} />
+        ) : (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
+              <View style={styles.amenityIconContainer}>
+                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text style={styles.amenitiesTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                <Text style={styles.amenitiesDescription}>at your choice</Text>
+              </View>
+            </View>
+
+            <View style={styles.amenityMainContainer}>
+              <View style={styles.amenityIconContainer}>
+                <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text style={styles.amenitiesTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                <Text style={styles.amenitiesDescription}>at your choice</Text>
+              </View>
+            </View>
+
+            <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text
+                  style={[styles.amenitiesTitle, styles.friendAmenityText]}
+                >{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
+                <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+              </View>
+            </View>
+          </ScrollView>
+        )}
+
+        {actionNumId === 9 && (
+          <View style={styles.comingWithInfluencerTextContainer}>
+            <Text
+              style={styles.comingWithInfluencerText}
+            >{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
           </View>
-          <View style={styles.amenityContainer}>
-            <Text style={styles.amenityTitle}>{` ${bookingDetails?._actions_turbo?.Extra_People} X Persons`}</Text>
-            <Image source={IMAGES.extraPerson} style={styles.extraPersonIcon} />
-          </View>
-        </ScrollView>
+        )}
 
         <View style={styles.dateTimeContainer}>
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Date</Text>
             <Text style={styles.timeText}>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
-          <View style={styles.timeContainer}>
-            <Text style={styles.timeTitleText}>Time</Text>
-            <Text style={styles.timeText}>
-              {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
-            </Text>
-          </View>
+          {actionNumId !== 9 && (
+            <View style={styles.timeContainer}>
+              <Text style={styles.timeTitleText}>Time</Text>
+              <Text style={styles.timeText}>
+                {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+              </Text>
+            </View>
+          )}
         </View>
 
         <View style={styles.tiktokContainer}>
@@ -137,28 +187,73 @@ const NewCouponScreen = () => {
 export default NewCouponScreen
 
 const styles = StyleSheet.create({
-  amenitiesContainer: {
+  specialAmenity: {
+    flexDirection: 'row',
+  },
+  specialAmenitiesMainContainer: {
+    marginLeft: scale(5),
+  },
+  specialAmenitiesIconContainer: {
     marginTop: verticalScale(10),
   },
-  amenityContainer: {
-    alignItems: 'center',
-    backgroundColor: COLORS.lightNewPrimaryA6,
-    borderRadius: moderateScale(10),
-    flexDirection: 'row',
-    height: verticalScale(38),
+  firstAmenityMainContainer: {
+    marginLeft: scale(20),
+  },
+  friendAmenityTitle: {
+    textAlign: 'center',
+  },
+  friendAmenityText: {
+    textAlign: 'center',
+  },
+  friendAmenityContainer: {
     justifyContent: 'center',
-    marginLeft: scale(10),
-    width: scale(125),
+    marginRight: scale(30),
+  },
+  amenityMainContainer: {
+    height: verticalScale(45),
+    flexDirection: 'row',
+    borderRadius: moderateScale(16),
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(10),
+    marginHorizontal: scale(5),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.cultured,
+  },
+  amenityIconContainer: {
+    marginRight: scale(10),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   amenityIcon: {
-    height: verticalScale(23),
-    marginLeft: scale(15),
-    width: scale(23),
+    height: moderateScale(20),
+    width: moderateScale(20),
   },
-  amenityTitle: {
-    color: COLORS.achromaticBlack,
+  amenityBigIcon: {
+    height: moderateScale(48),
+    width: moderateScale(48),
+  },
+  amenityTitleDescriptionContainer: {
+    justifyContent: 'center',
+  },
+  amenitiesTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(12),
+  },
+  amenitiesDescription: {
+    color: COLORS.greyFont,
     fontFamily: FONTS.quicksand,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(11),
+  },
+  comingWithInfluencerTextContainer: {
+    alignSelf: 'center',
+    marginTop: verticalScale(15),
+  },
+  comingWithInfluencerText: {
+    color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(16),
   },
   backIcon: {
     height: moderateScale(30),

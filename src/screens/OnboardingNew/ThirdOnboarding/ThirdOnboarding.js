@@ -13,7 +13,7 @@ const ThirdOnboarding = () => {
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>
             {`Find `}
-            <Text style={styles.colorChangeText}>{`Restaurants, Beauty saloonsl, Sport lessons `}</Text>
+            <Text style={styles.colorChangeText}>{`Restaurants, Beauty saloons, Sport lessons `}</Text>
             {`and much more!`}
           </Text>
         </View>

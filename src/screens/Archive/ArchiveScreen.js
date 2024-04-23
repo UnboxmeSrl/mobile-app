@@ -47,6 +47,7 @@ const ArchiveScreen = () => {
             const month = myDate.toLocaleString('en-US', { month: 'long' })
             const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
             const timeFrame = item?._timeframes_turbo
+            const actionNumId = item?._actions_turbo?.action_num_id
             return (
               <View style={styles.cardContainer}>
                 <View style={styles.cardContentContainer}>
@@ -57,13 +58,17 @@ const ArchiveScreen = () => {
                   </View>
 
                   <View style={styles.timeServiceContainer}>
-                    <View style={styles.timeContainer}>
-                      <Text style={styles.timeTitleText}>Time</Text>
-                      <Text style={styles.timeText}>
-                        {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
-                      </Text>
-                    </View>
-                    <View style={styles.divider} />
+                    {actionNumId !== 9 && (
+                      <>
+                        <View style={styles.timeContainer}>
+                          <Text style={styles.timeTitleText}>Time</Text>
+                          <Text style={styles.timeText}>
+                            {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+                          </Text>
+                        </View>
+                        <View style={styles.divider} />
+                      </>
+                    )}
                     <View style={styles.serviceRequestedContainer}>
                       <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
                       <Text style={styles.serviceRequestedText} numberOfLines={1} ellipsizeMode="tail">

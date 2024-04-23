@@ -10,6 +10,7 @@ import { commonStyle } from '../../utils'
 
 const BookingOnApprovalScreen = () => {
   const {
+    actionNumId,
     bookingDetails,
     approvalStage,
     currentDate,
@@ -26,6 +27,8 @@ const BookingOnApprovalScreen = () => {
       : approvalStage === 'success'
       ? IMAGES.approvalSuccess
       : IMAGES.approvalReject
+
+  console.log('ActionNumId: ' + actionNumId)
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -117,9 +120,13 @@ const BookingOnApprovalScreen = () => {
           </View>
           <View style={styles.timeContainer}>
             <Text style={styles.selectedDateTitleText}>Selected Date</Text>
-            <Text
-              style={styles.selectedDateWithTimeText}
-            >{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+            {actionNumId !== 9 ? (
+              <Text
+                style={styles.selectedDateWithTimeText}
+              >{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+            ) : (
+              <Text style={styles.selectedDateWithTimeText}>{`${currentWeekDay}`}</Text>
+            )}
           </View>
         </View>
 

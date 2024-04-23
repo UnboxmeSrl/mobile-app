@@ -10,6 +10,7 @@ import { selectCategoryById } from '../../../redux/modules/categories'
 import { setServices, setTimeFrameData } from '../../../redux/slices'
 import { getDiaryActions, getTimeFrames } from '../../../services'
 import { getServiceCategories, getServiceDealsLeft } from '../../../services/LocationsService'
+import { IMAGES } from '../../../assets/images'
 
 const useServiceDetails = () => {
   const loginData = useSelector((state) => state.authSlice.loginData)
@@ -24,8 +25,33 @@ const useServiceDetails = () => {
   const [dealsLeft, setDealsLeft] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [isBookBtnPressed, setIsBookBtnPressed] = useState(false)
+  const [influencerCount, setInfluencerCount] = useState(1)
+  const actionNumId = serviceDetails?._actions_turbo?.action_num_id
   const isFocused = useIsFocused()
   const dispatch = useDispatch()
+  let amenityDetails = {}
+
+  if (actionNumId === 7) {
+    amenityDetails = {
+      amenityName: `${serviceDetails?._actions_turbo?.Beauty} X Treatment`,
+      amenityIcon: IMAGES.beauty,
+      amenityDescription: 'at your choice',
+    }
+  } else if (actionNumId === 8) {
+    amenityDetails = {
+      amenityName: `${serviceDetails?._actions_turbo?.Gym} X Pass`,
+      amenityIcon: IMAGES.gym,
+      amenityDescription: 'at your choice',
+    }
+  } else if (actionNumId === 9) {
+    amenityDetails = {
+      amenityName: `${serviceDetails?._actions_turbo?.Accomodation} x Days (${
+        serviceDetails?._actions_turbo?.Accomodation - 1
+      } nights)`,
+      amenityIcon: IMAGES.resort,
+      amenityDescription: 'at your choice',
+    }
+  }
 
   const getServiceDealsLeftData = async () => {
     const prepData = {
@@ -84,8 +110,17 @@ const useServiceDetails = () => {
     setIsBookBtnPressed(true)
     if (loginData?.id) {
       if (loginData?.UserStatus === 'approved') {
-        setIsBookBtnPressed(false)
-        navigate(SCREEN_NAMES.BookingDetails)
+        // This setTimeout is important because till that time timeframe data is settled in redux so don't remove it.
+        setTimeout(() => {
+          setIsBookBtnPressed(false)
+          navigate({
+            params: {
+              actionNumId: actionNumId,
+              influencerCount: influencerCount,
+            },
+            routeName: SCREEN_NAMES.BookingDetails,
+          })
+        }, 1000)
       } else {
         Toast.show({
           text1: 'Your Account is not yet approved',
@@ -103,20 +138,32 @@ const useServiceDetails = () => {
     }
   }
 
+  const handleInfluencerPlus = () => {
+    setInfluencerCount(influencerCount + 1)
+  }
+
+  const handleInfluencerMinus = () => {
+    if (influencerCount > 1) {
+      setInfluencerCount(influencerCount - 1)
+    }
+  }
+
   useEffect(() => {
     // getServiceCategoriesData()
     // getServicesData()
     getDiaryActionsData()
-    getTimeFrameData()
   }, [])
 
   useEffect(() => {
     if (isFocused) {
       getServiceDealsLeftData()
+      getTimeFrameData()
     }
   }, [isFocused])
 
   return {
+    actionNumId,
+    amenityDetails,
     socialActions,
     categoriesIds,
     dealsLeft,
@@ -131,6 +178,9 @@ const useServiceDetails = () => {
     serviceCategories,
     serviceDetails,
     setIsImageLoading,
+    influencerCount,
+    handleInfluencerPlus,
+    handleInfluencerMinus,
   }
 }
 
