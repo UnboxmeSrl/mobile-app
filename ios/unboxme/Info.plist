@@ -83,19 +83,20 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>This app requires to access Apple Music</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires to access your camera</string>
+	<string>We are required to access your camera to capture your image and use as profile picture</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need to access your Location to send you proper notifications</string>
+	<string>
+	We need to access your location to find a proper place and calculate the distance</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need to access your Location to send you proper notifications</string>
+	<string>We need to access your location to find a proper place and calculate the distance</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires to access Microphone</string>
 	<key>NSMotionUsageDescription</key>
 	<string>This app requires to access Motion</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app requires to access your Photo Library</string>
+	<string>We are required to access your photo library to upload your profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library for content uploading</string>
+	<string>We are required to access your photo library to upload your profile picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>
