@@ -31,7 +31,9 @@ const ArchiveScreen = () => {
           />
         </TouchableOpacity>
         <View style={styles.headerTitleContainer}>
-          <Text style={styles.headerTitleText}>Archive</Text>
+          <Text allowFontScaling={false} style={styles.headerTitleText}>
+            Archive
+          </Text>
         </View>
       </View>
       {isLoading ? (
@@ -47,7 +49,9 @@ const ArchiveScreen = () => {
           }
           ListEmptyComponent={
             <View style={styles.emptyComponentContainer}>
-              <Text style={styles.emptyComponentText}>No Data Found.</Text>
+              <Text allowFontScaling={false} style={styles.emptyComponentText}>
+                No Data Found.
+              </Text>
             </View>
           }
           renderItem={({item, index}) => {
@@ -60,11 +64,19 @@ const ArchiveScreen = () => {
               <View style={styles.cardContainer}>
                 <View style={styles.cardContentContainer}>
                   <View style={styles.dateContainer}>
-                    <Text style={styles.selectedDateMonthText}>{month}</Text>
-                    <Text style={styles.selectedDateNumberText}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.selectedDateMonthText}>
+                      {month}
+                    </Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.selectedDateNumberText}>
                       {myDate?.getDate()}
                     </Text>
-                    <Text style={styles.selectedDateDayText}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.selectedDateDayText}>
                       {weekDay?.slice(0, 3)}
                     </Text>
                   </View>
@@ -73,8 +85,14 @@ const ArchiveScreen = () => {
                     {actionNumId !== 9 && (
                       <>
                         <View style={styles.timeContainer}>
-                          <Text style={styles.timeTitleText}>Time</Text>
-                          <Text style={styles.timeText}>
+                          <Text
+                            allowFontScaling={false}
+                            style={styles.timeTitleText}>
+                            Time
+                          </Text>
+                          <Text
+                            allowFontScaling={false}
+                            style={styles.timeText}>
                             {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
                           </Text>
                         </View>
@@ -82,10 +100,13 @@ const ArchiveScreen = () => {
                       </>
                     )}
                     <View style={styles.serviceRequestedContainer}>
-                      <Text style={styles.serviceRequestedTitleText}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.serviceRequestedTitleText}>
                         Service Requested
                       </Text>
                       <Text
+                        allowFontScaling={false}
                         style={styles.serviceRequestedText}
                         numberOfLines={1}
                         ellipsizeMode="tail">

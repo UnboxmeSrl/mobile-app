@@ -28,10 +28,14 @@ const CustomModal = ({
         <View style={styles.modalContent}>
           <View style={styles.titleDescriptionContainer}>
             <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>{title}</Text>
+              <Text allowFontScaling={false} style={styles.titleText}>
+                {title}
+              </Text>
             </View>
             <View style={styles.descriptionContainer}>
-              <Text style={styles.descriptionText}>{description}</Text>
+              <Text allowFontScaling={false} style={styles.descriptionText}>
+                {description}
+              </Text>
             </View>
           </View>
 
@@ -44,13 +48,17 @@ const CustomModal = ({
               <TouchableOpacity
                 onPress={handlePositiveBtnPress}
                 style={styles.yesBtnContainer}>
-                <Text style={styles.yesBtnText}>Yes</Text>
+                <Text allowFontScaling={false} style={styles.yesBtnText}>
+                  Yes
+                </Text>
               </TouchableOpacity>
             )}
             <TouchableOpacity
               onPress={handleNegativeBtnPress}
               style={styles.noBtnContainer}>
-              <Text style={styles.noBtnText}>No</Text>
+              <Text allowFontScaling={false} style={styles.noBtnText}>
+                No
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

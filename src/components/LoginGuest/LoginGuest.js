@@ -10,8 +10,10 @@ const LoginGuest = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Text
+        allowFontScaling={false}
         style={styles.titleText}>{`Want to use all the functionality?`}</Text>
       <Text
+        allowFontScaling={false}
         style={
           styles.descriptionText
         }>{`Register or login into your account to able to book through Claris.`}</Text>

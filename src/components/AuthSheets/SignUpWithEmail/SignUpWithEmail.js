@@ -38,14 +38,16 @@ const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
 
         {error?.message && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{error?.message}</Text>
+            <Text allowFontScaling={false} style={styles.errorText}>
+              {error?.message}
+            </Text>
           </View>
         )}
 
         {isSendPress && (
           <>
             <View style={styles.codeDescriptionContainer}>
-              <Text style={styles.codeDescriptionText}>
+              <Text allowFontScaling={false} style={styles.codeDescriptionText}>
                 We just sent you a temporary login code. Please check your
                 inbox.
               </Text>

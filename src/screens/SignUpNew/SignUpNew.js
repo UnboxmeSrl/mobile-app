@@ -57,6 +57,7 @@ const SignUpNew = () => {
         <View style={styles.viewForMargin}>
           <View style={styles.titleContainer}>
             <Text
+              allowFontScaling={false}
               style={
                 styles.titleText
               }>{`Travel by pre-arranged collabs in tropical paradises `}</Text>
@@ -68,23 +69,29 @@ const SignUpNew = () => {
             onPress={navigateToEmailModal}
             style={styles.signInBtnContainer}
             activeOpacity={0.7}>
-            <Text style={styles.signInBtnText}>Sign In</Text>
+            <Text allowFontScaling={false} style={styles.signInBtnText}>
+              Sign In
+            </Text>
           </TouchableOpacity>
           {/* <TouchableOpacity onPress={handleSignInPress} style={styles.signInBtnContainer} activeOpacity={0.7}>
-            <Text style={styles.signInBtnText}>Sign In</Text>
+            <Text allowFontScaling={false}  style={styles.signInBtnText}>Sign In</Text>
           </TouchableOpacity> */}
 
           <TouchableOpacity
             onPress={handleCreateAnAccountPress}
             style={styles.signUpBtnContainer}
             activeOpacity={0.7}>
-            <Text style={styles.signUpBtnText}>Create an account</Text>
+            <Text allowFontScaling={false} style={styles.signUpBtnText}>
+              Create an account
+            </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.orContainer}>
           <View style={styles.orDivider} />
-          <Text style={styles.orText}>Or</Text>
+          <Text allowFontScaling={false} style={styles.orText}>
+            Or
+          </Text>
           <View style={styles.orDivider} />
         </View>
 
@@ -92,17 +99,25 @@ const SignUpNew = () => {
           onPress={handleGuestPress}
           style={styles.guestBtnContainer}
           activeOpacity={0.7}>
-          <Text style={styles.guestBtnText}>Continue as Guest</Text>
+          <Text allowFontScaling={false} style={styles.guestBtnText}>
+            Continue as Guest
+          </Text>
         </TouchableOpacity>
 
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
             {`By signing up, you `}
-            <Text style={styles.changedText}>{`agree`}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.changedText}>{`agree`}</Text>
             {` to Claris’s`}
-            <Text style={styles.changedText}>{` Terms of Use `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.changedText}>{` Terms of Use `}</Text>
             {`and `}
-            <Text style={styles.changedText}>{` Privacy Policy. `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.changedText}>{` Privacy Policy. `}</Text>
           </Text>
         </View>
         <SignInWithEmail

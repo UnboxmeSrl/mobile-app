@@ -27,7 +27,9 @@ const LocationsTile = ({item}) => {
         source={{uri: item?.City?.url}}
         style={styles.imageContainerStyle}>
         <TouchableOpacity onPress={handleBtnPress} style={styles.btnContainer}>
-          <Text style={styles.btnText}>{`${item?.CityName}`}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.btnText}>{`${item?.CityName}`}</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>

@@ -29,12 +29,15 @@ const AppliedScreen = () => {
             />
           </View>
           <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>{`You have applied! `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.titleText}>{`You have applied! `}</Text>
           </View>
         </View>
 
         <View style={styles.descriptionContainer}>
           <Text
+            allowFontScaling={false}
             style={
               styles.descriptionText
             }>{`Within 24H you will receive a response on your email `}</Text>
@@ -42,7 +45,9 @@ const AppliedScreen = () => {
 
         <TouchableOpacity style={styles.queryContainer}>
           <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
-          <Text style={styles.queryText}>Questions? Send us a message</Text>
+          <Text allowFontScaling={false} style={styles.queryText}>
+            Questions? Send us a message
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -50,7 +55,9 @@ const AppliedScreen = () => {
           onPress={handleGuestPress}
           style={styles.guestBtnContainer}>
           <Image source={IMAGES.addUser} style={styles.addUserIcon} />
-          <Text style={styles.guestBtnText}>Continue as Guest</Text>
+          <Text allowFontScaling={false} style={styles.guestBtnText}>
+            Continue as Guest
+          </Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>

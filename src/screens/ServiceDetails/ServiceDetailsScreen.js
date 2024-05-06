@@ -14,7 +14,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
-import {CommonHeader, CustomCarousel} from '../../components';
+import {CustomCarousel} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {checkAction} from '../../utils';
 import {useServiceDetails} from './hooks';
@@ -57,7 +57,9 @@ const ServiceDetails = () => {
           />
         </TouchableOpacity>
         <View style={styles.headerTitleContainer}>
-          <Text style={styles.headerTitleText}>{`Deals`}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.headerTitleText}>{`Deals`}</Text>
         </View>
       </View>
       {isLoading ? (
@@ -100,12 +102,15 @@ const ServiceDetails = () => {
               />
               {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
               <Text
+                allowFontScaling={false}
                 style={
                   styles.titleText
                 }>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
             </View>
             <View style={styles.dealLeftContainer}>
-              <Text style={styles.dealLeftText}>{`${dealsLeft}`}</Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.dealLeftText}>{`${dealsLeft}`}</Text>
             </View>
           </View>
 
@@ -129,10 +134,14 @@ const ServiceDetails = () => {
                     styles.specialAmenitiesMainContainer,
                   ]}>
                   <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text style={styles.amenitiesTitle}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
                       {amenityDetails?.amenityName}
                     </Text>
-                    <Text style={styles.amenitiesDescription}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesDescription}>
                       {amenityDetails?.amenityDescription}
                     </Text>
                   </View>
@@ -151,10 +160,13 @@ const ServiceDetails = () => {
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.amenitiesTitle
                     }>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text style={styles.amenitiesDescription}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.amenitiesDescription}>
                     at your choice
                   </Text>
                 </View>
@@ -169,10 +181,13 @@ const ServiceDetails = () => {
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.amenitiesTitle
                     }>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text style={styles.amenitiesDescription}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.amenitiesDescription}>
                     at your choice
                   </Text>
                 </View>
@@ -185,11 +200,13 @@ const ServiceDetails = () => {
                 ]}>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.amenitiesTitle,
                       styles.friendAmenityText,
                     ]}>{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.amenitiesDescription,
                       styles.friendAmenityTitle,
@@ -207,6 +224,7 @@ const ServiceDetails = () => {
             <>
               <View style={styles.villaDescriptionContainer}>
                 <Text
+                  allowFontScaling={false}
                   style={
                     styles.villaDescription
                   }>{`${serviceDetails?.Description}`}</Text>
@@ -232,11 +250,16 @@ const ServiceDetails = () => {
                           style={styles.villaActionNameDescriptionContainer}>
                           <View style={styles.socialMediaTitleContainer}>
                             <Text
+                              allowFontScaling={false}
                               style={
                                 styles.socialMediaTitle
                               }>{`${item?.Action_Name}`}</Text>
                             <View style={styles.ratingsContainer}>
-                              <Text style={styles.ratingsText}>120</Text>
+                              <Text
+                                allowFontScaling={false}
+                                style={styles.ratingsText}>
+                                120
+                              </Text>
                               <Image
                                 source={IMAGES.star}
                                 style={styles.ratingIcon}
@@ -245,6 +268,7 @@ const ServiceDetails = () => {
                           </View>
                           <View style={styles.socialMediaDescriptionContainer}>
                             <Text
+                              allowFontScaling={false}
                               style={
                                 styles.socialMediaDescriptionText
                               }>{`${item?.Descrizione}`}</Text>
@@ -256,7 +280,9 @@ const ServiceDetails = () => {
                 />
               </View>
               <View style={styles.comingWithInfluencerTextContainer}>
-                <Text style={styles.comingWithInfluencerText}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.comingWithInfluencerText}>
                   Coming with an influencer friend?
                 </Text>
               </View>
@@ -275,6 +301,7 @@ const ServiceDetails = () => {
                   />
                 </TouchableOpacity>
                 <Text
+                  allowFontScaling={false}
                   style={
                     styles.influencerText
                   }>{`${influencerCount} Influencer`}</Text>
@@ -290,7 +317,9 @@ const ServiceDetails = () => {
             <>
               <View style={styles.contentRequiredRow}>
                 <View style={styles.contentRequiredContainer}>
-                  <Text style={styles.contentRequiredText}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.contentRequiredText}>
                     Content required
                   </Text>
                 </View>
@@ -300,6 +329,7 @@ const ServiceDetails = () => {
                     style={styles.timeCircleIcon}
                   />
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.deadlineText
                     }>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
@@ -338,11 +368,17 @@ const ServiceDetails = () => {
                                   }>
                                   <View
                                     style={styles.socialMediaTitleContainer}>
-                                    <Text style={styles.socialMediaTitle}>
+                                    <Text
+                                      allowFontScaling={false}
+                                      style={styles.socialMediaTitle}>
                                       {diaryItem?.action}
                                     </Text>
                                     <View style={styles.ratingsContainer}>
-                                      <Text style={styles.ratingsText}>60</Text>
+                                      <Text
+                                        allowFontScaling={false}
+                                        style={styles.ratingsText}>
+                                        60
+                                      </Text>
                                       <Image
                                         source={IMAGES.star}
                                         style={styles.ratingIcon}
@@ -354,16 +390,21 @@ const ServiceDetails = () => {
                                       styles.socialMediaDescriptionContainer
                                     }>
                                     <Text
+                                      allowFontScaling={false}
                                       style={styles.socialMediaDescriptionText}>
                                       {`${item?._actions_turbo?.Descrizione}`}
                                     </Text>
                                   </View>
                                 </View>
                               </View>
-                              {innerIndex == 0 && (
+                              {innerIndex === 0 && (
                                 <View style={styles.orContainer}>
                                   <View style={styles.orDivider} />
-                                  <Text style={styles.orText}>Or</Text>
+                                  <Text
+                                    allowFontScaling={false}
+                                    style={styles.orText}>
+                                    Or
+                                  </Text>
                                   <View style={styles.orDivider} />
                                 </View>
                               )}
@@ -392,11 +433,17 @@ const ServiceDetails = () => {
                                   }>
                                   <View
                                     style={styles.socialMediaTitleContainer}>
-                                    <Text style={styles.socialMediaTitle}>
+                                    <Text
+                                      allowFontScaling={false}
+                                      style={styles.socialMediaTitle}>
                                       {innerItem?.Action_Name}
                                     </Text>
                                     <View style={styles.ratingsContainer}>
-                                      <Text style={styles.ratingsText}>60</Text>
+                                      <Text
+                                        allowFontScaling={false}
+                                        style={styles.ratingsText}>
+                                        60
+                                      </Text>
                                       <Image
                                         source={IMAGES.star}
                                         style={styles.ratingIcon}
@@ -408,16 +455,21 @@ const ServiceDetails = () => {
                                       styles.socialMediaDescriptionContainer
                                     }>
                                     <Text
+                                      allowFontScaling={false}
                                       style={
                                         styles.socialMediaDescriptionText
                                       }>{`${innerItem?.Descrizione}`}</Text>
                                   </View>
                                 </View>
                               </View>
-                              {innerIndex == 0 && (
+                              {innerIndex === 0 && (
                                 <View style={styles.orContainer}>
                                   <View style={styles.orDivider} />
-                                  <Text style={styles.orText}>Or</Text>
+                                  <Text
+                                    allowFontScaling={false}
+                                    style={styles.orText}>
+                                    Or
+                                  </Text>
                                   <View style={styles.orDivider} />
                                 </View>
                               )}
@@ -441,11 +493,17 @@ const ServiceDetails = () => {
                                 styles.socialMediaTitleDescriptionContainer
                               }>
                               <View style={styles.socialMediaTitleContainer}>
-                                <Text style={styles.socialMediaTitle}>
+                                <Text
+                                  allowFontScaling={false}
+                                  style={styles.socialMediaTitle}>
                                   {item?._actions_turbo?.Action_Name} video
                                 </Text>
                                 <View style={styles.ratingsContainer}>
-                                  <Text style={styles.ratingsText}>60</Text>
+                                  <Text
+                                    allowFontScaling={false}
+                                    style={styles.ratingsText}>
+                                    60
+                                  </Text>
                                   <Image
                                     source={IMAGES.star}
                                     style={styles.ratingIcon}
@@ -454,7 +512,9 @@ const ServiceDetails = () => {
                               </View>
                               <View
                                 style={styles.socialMediaDescriptionContainer}>
-                                <Text style={styles.socialMediaDescriptionText}>
+                                <Text
+                                  allowFontScaling={false}
+                                  style={styles.socialMediaDescriptionText}>
                                   {`${item?._actions_turbo?.Descrizione}`}
                                 </Text>
                               </View>
@@ -470,7 +530,7 @@ const ServiceDetails = () => {
           )}
 
           {/* <TouchableOpacity style={styles.howItWorksContainer}>
-            <Text style={styles.socialMediaTitleText}>How it works </Text>
+            <Text allowFontScaling={false}  style={styles.socialMediaTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity> */}
 
@@ -482,7 +542,9 @@ const ServiceDetails = () => {
               {isBookBtnPressed ? (
                 <ActivityIndicator size={30} color={COLORS.black22} />
               ) : (
-                <Text style={styles.bookBtnText}>Book Now</Text>
+                <Text allowFontScaling={false} style={styles.bookBtnText}>
+                  Book Now
+                </Text>
               )}
             </TouchableOpacity>
           </View>

@@ -14,14 +14,17 @@ const SecondOnboarding = () => {
       />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`With pre-planned collab, you `}
-            <Text style={styles.colorChangeText}>{`only need to Book `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`only need to Book `}</Text>
             {`!`}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
           <Text
+            allowFontScaling={false}
             style={
               styles.descriptionText
             }>{`Exchange exposure for services effortlessly`}</Text>

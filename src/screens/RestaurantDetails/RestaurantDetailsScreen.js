@@ -60,7 +60,7 @@ const RestaurantDetails = () => {
             />
           ) : (
             <View style={styles.emptyImages}>
-              <Text style={styles.emptyImagesText}>
+              <Text allowFontScaling={false} style={styles.emptyImagesText}>
                 Images are not available for this restaurant.
               </Text>
             </View>
@@ -81,13 +81,15 @@ const RestaurantDetails = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.restaurantDetailsContainer}>
-          <Text style={styles.restaurantNameText}>
+          <Text allowFontScaling={false} style={styles.restaurantNameText}>
             {restaurantDetails?.Name}
           </Text>
           {restaurantDetails?.Adress && (
             <TouchableOpacity
               onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}>
-              <Text style={styles.restaurantAddressText}>
+              <Text
+                allowFontScaling={false}
+                style={styles.restaurantAddressText}>
                 {restaurantDetails?.Adress}
               </Text>
             </TouchableOpacity>
@@ -100,7 +102,7 @@ const RestaurantDetails = () => {
               <View style={styles.commonSocialLinksImageContainer}>
                 <Image resizeMode="contain" source={IMAGES.tiktokNew} style={styles.commonStyleForIcon} />
               </View>
-              <Text style={styles.commonStyleSocialLinkText}>TikTok</Text>
+              <Text allowFontScaling={false}  style={styles.commonStyleSocialLinkText}>TikTok</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handleRedirection(restaurantDetails?.Instagram)}
@@ -109,7 +111,7 @@ const RestaurantDetails = () => {
               <View style={styles.commonSocialLinksImageContainer}>
                 <Image resizeMode="contain" source={IMAGES.insta} style={styles.commonStyleForIcon} />
               </View>
-              <Text style={styles.commonStyleSocialLinkText}>Instagram</Text>
+              <Text allowFontScaling={false}  style={styles.commonStyleSocialLinkText}>Instagram</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}
@@ -118,29 +120,35 @@ const RestaurantDetails = () => {
               <View style={styles.commonSocialLinksImageContainer}>
                 <Image resizeMode="contain" source={IMAGES.internet} style={styles.commonStyleForIcon} />
               </View>
-              <Text style={styles.commonStyleSocialLinkText}>Website</Text>
+              <Text allowFontScaling={false}  style={styles.commonStyleSocialLinkText}>Website</Text>
             </TouchableOpacity>
           </View> */}
           {!!restaurantDetails?.About && (
             <View style={styles.aboutTitleContainer}>
-              <Text style={styles.aboutTitleText}>About</Text>
-              <Text style={styles.aboutDescriptionText}>
+              <Text allowFontScaling={false} style={styles.aboutTitleText}>
+                About
+              </Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.aboutDescriptionText}>
                 {restaurantDetails?.About}
               </Text>
             </View>
           )}
 
-          {/* <Text style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
+          {/* <Text allowFontScaling={false}  style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
           {/* <TouchableOpacity style={styles.howItWorksContainer}>
-            <Text style={styles.aboutTitleText}>How it works </Text>
+            <Text allowFontScaling={false}  style={styles.aboutTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
 
           <View style={styles.previewTextContainer}>
-            <Text style={styles.previewText}>Preview available timeframes </Text>
+            <Text allowFontScaling={false}  style={styles.previewText}>Preview available timeframes </Text>
           </View> */}
           <View style={styles.chooseServiceContainer}>
-            <Text style={styles.previewText}>Choose Service</Text>
+            <Text allowFontScaling={false} style={styles.previewText}>
+              Choose Service
+            </Text>
           </View>
 
           {/* <Categories
@@ -161,7 +169,9 @@ const RestaurantDetails = () => {
                 !isLoading &&
                 services?.length === 0 && (
                   <View style={styles.listEmptyContainer}>
-                    <Text style={styles.listEmptyText}>No data found.</Text>
+                    <Text allowFontScaling={false} style={styles.listEmptyText}>
+                      No data found.
+                    </Text>
                   </View>
                 )
               }

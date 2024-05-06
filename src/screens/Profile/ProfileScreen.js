@@ -89,8 +89,12 @@ const ProfileScreen = () => {
                     />
                   </View>
                   <View>
-                    <Text style={styles.title}>{user?.name}</Text>
-                    <Text style={styles.from}>From {user?.City}</Text>
+                    <Text allowFontScaling={false} style={styles.title}>
+                      {user?.name}
+                    </Text>
+                    <Text allowFontScaling={false} style={styles.from}>
+                      From {user?.City}
+                    </Text>
                   </View>
                   <View style={styles.socialGrid}>
                     <Pressable>
@@ -130,7 +134,7 @@ const ProfileScreen = () => {
                     desc={user?.bio}
                   />
                 ) : (
-                  <Text>N/A</Text>
+                  <Text allowFontScaling={false}>N/A</Text>
                 )}
               </Stack>
               <Stack style={styles.stackItem}>

@@ -25,10 +25,14 @@ const CustomHeader = ({title, step, handleBackPress}) => {
         />
       </TouchableOpacity>
       <View style={styles.headerTitleContainer}>
-        <Text style={styles.headerTitleText}>{title}</Text>
+        <Text allowFontScaling={false} style={styles.headerTitleText}>
+          {title}
+        </Text>
       </View>
       <View style={{}}>
-        <Text style={styles.progressText}>{`${step}/11`}</Text>
+        <Text
+          allowFontScaling={false}
+          style={styles.progressText}>{`${step}/11`}</Text>
       </View>
     </View>
   );

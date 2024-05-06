@@ -6,7 +6,9 @@ import {COLORS, FONTS} from '../../../constants';
 const CustomTitle = ({title}) => {
   return (
     <View style={styles.titleContainer}>
-      <Text style={styles.titleText}>{title}</Text>
+      <Text allowFontScaling={false} style={styles.titleText}>
+        {title}
+      </Text>
     </View>
   );
 };

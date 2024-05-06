@@ -57,7 +57,9 @@ const PublishContentScreen = () => {
             />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitleText}>Publish Content</Text>
+            <Text allowFontScaling={false} style={styles.headerTitleText}>
+              Publish Content
+            </Text>
           </View>
         </View>
 
@@ -81,11 +83,15 @@ const PublishContentScreen = () => {
               />
             </View>
             <View style={styles.socialMediaNameContainer}>
-              <Text style={styles.socialMediaNameText}>{`${
+              <Text
+                allowFontScaling={false}
+                style={styles.socialMediaNameText}>{`${
                 actionName === 'Story' ? `3 X ${actionName}` : `${actionName}`
               }`}</Text>
               <View style={styles.ratingContainer}>
-                <Text style={styles.ratingUsersText}>240</Text>
+                <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                  240
+                </Text>
                 <Image
                   source={IMAGES.ratingStar}
                   style={styles.ratingIconImage}
@@ -98,6 +104,7 @@ const PublishContentScreen = () => {
                   style={styles.infoIcon}
                 />
                 <Text
+                  allowFontScaling={false}
                   style={
                     styles.deadLineText
                   }>{`${contentDetails?._actions_turbo?.Days_deadline} Days left`}</Text>
@@ -115,7 +122,7 @@ const PublishContentScreen = () => {
                   : approvalStage === 'Missed Deadline' && { backgroundColor: COLORS.paleRose },
               ]}
             >
-              <Text
+              <Text allowFontScaling={false} 
                 style={[
                   styles.onApprovalText,
                   approvalStage === 'Pending'
@@ -133,7 +140,9 @@ const PublishContentScreen = () => {
           {actionName !== 'Story' && (
             <>
               <View style={styles.linkUploadDescriptionContainer}>
-                <Text style={styles.linkUploadDescriptionText}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.linkUploadDescriptionText}>
                   Enter the link to your content and sent to review
                 </Text>
                 <View style={styles.linkUploadTextInputMainContainer}>
@@ -146,6 +155,7 @@ const PublishContentScreen = () => {
                   </View>
                   <View style={styles.linkUploadTextInputContainer}>
                     <TextInput
+                      allowFontScaling={false}
                       placeholder="Paste content link here"
                       placeholderTextColor={COLORS.newPrimary}
                       style={styles.linkUploadTextInput}
@@ -158,7 +168,9 @@ const PublishContentScreen = () => {
               <TouchableOpacity
                 style={styles.readContentBriefContainer}
                 onPress={handleContentBriefPress}>
-                <Text style={styles.contentBriefTitleText}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.contentBriefTitleText}>
                   Read Content Brief & Tags
                 </Text>
                 <Image
@@ -172,7 +184,11 @@ const PublishContentScreen = () => {
         </View>
         <View>
           <View style={styles.bookingDetailsTitleContainer}>
-            <Text style={styles.bookingDetailsTitleText}>Booking Details:</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.bookingDetailsTitleText}>
+              Booking Details:
+            </Text>
           </View>
         </View>
 
@@ -188,11 +204,11 @@ const PublishContentScreen = () => {
             />
           </View>
           <View style={styles.locationNameContainer}>
-            <Text style={styles.locationNameText}>
+            <Text allowFontScaling={false} style={styles.locationNameText}>
               {contentDetails?._restaurant_turbo?.Name}
             </Text>
             <View style={styles.locationTextContainer}>
-              <Text style={styles.locationText}>
+              <Text allowFontScaling={false} style={styles.locationText}>
                 {contentDetails?._restaurant_turbo?.Adress}
               </Text>
             </View>
@@ -200,24 +216,31 @@ const PublishContentScreen = () => {
         </View>
         <View style={styles.serviceBoxContainer}>
           <View style={styles.serviceContainer}>
-            <Text style={styles.serviceTitleText}>Service</Text>
-            <Text style={styles.serviceNameText}>
+            <Text allowFontScaling={false} style={styles.serviceTitleText}>
+              Service
+            </Text>
+            <Text allowFontScaling={false} style={styles.serviceNameText}>
               {contentDetails?._offers_turbo?.Offer_Name}
             </Text>
           </View>
         </View>
         <View style={styles.dateTimeContainer}>
           <View style={styles.timeContainer}>
-            <Text style={styles.timeTitleText}>Date</Text>
+            <Text allowFontScaling={false} style={styles.timeTitleText}>
+              Date
+            </Text>
             <Text
+              allowFontScaling={false}
               style={
                 styles.timeText
               }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
           {actionNumId !== 9 && (
             <View style={styles.timeContainer}>
-              <Text style={styles.timeTitleText}>Time</Text>
-              <Text style={styles.timeText}>
+              <Text allowFontScaling={false} style={styles.timeTitleText}>
+                Time
+              </Text>
+              <Text allowFontScaling={false} style={styles.timeText}>
                 {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
               </Text>
             </View>
@@ -226,14 +249,16 @@ const PublishContentScreen = () => {
 
         <View>
           <View style={styles.contentDetailsContainer}>
-            <Text style={styles.contentDetailsText}>Content details :</Text>
+            <Text allowFontScaling={false} style={styles.contentDetailsText}>
+              Content details :
+            </Text>
           </View>
         </View>
         <View style={styles.redirectsContainer}>
           <TouchableOpacity
             style={styles.contentBriefContainer}
             onPress={handleContentBriefPress}>
-            <Text style={styles.socialMediaTitleText}>
+            <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
               Content Brief & Tags
             </Text>
             <Image
@@ -244,7 +269,9 @@ const PublishContentScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.howItWorksContainer}>
-            <Text style={styles.socialMediaTitleText}>How it works </Text>
+            <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
+              How it works{' '}
+            </Text>
             <Image
               resizeMode="contain"
               source={IMAGES.back}
@@ -261,7 +288,9 @@ const PublishContentScreen = () => {
             <TouchableOpacity
               onPress={handleSendToReviewBtnPress}
               style={styles.sendToReviewBtnContainer}>
-              <Text style={styles.sendToReviewBtnText}>Send to review</Text>
+              <Text allowFontScaling={false} style={styles.sendToReviewBtnText}>
+                Send to review
+              </Text>
             </TouchableOpacity>
           )}
         </View>

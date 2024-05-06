@@ -45,7 +45,7 @@ const ContentScreen = () => {
             />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.chooseVideoTitleText}>
+            <Text allowFontScaling={false} style={styles.chooseVideoTitleText}>
               Choose a video to publish
             </Text>
           </View>
@@ -83,11 +83,16 @@ const ContentScreen = () => {
                     </View>
                     <View style={styles.socialMediaNameContainer}>
                       <Text
+                        allowFontScaling={false}
                         style={
                           styles.socialMediaNameText
                         }>{`${item?.action}`}</Text>
                       <View style={styles.ratingContainer}>
-                        <Text style={styles.ratingUsersText}>240</Text>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.ratingUsersText}>
+                          240
+                        </Text>
                         <Image
                           source={IMAGES.ratingStar}
                           style={styles.ratingIconImage}
@@ -96,7 +101,9 @@ const ContentScreen = () => {
                     </View>
                   </View>
                   <View style={styles.descriptionContainer}>
-                    <Text style={styles.descriptionText}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.descriptionText}>
                       {`A ${item?.action} fully dedicated to your experience at the Restaurant`}
                     </Text>
                   </View>
@@ -132,11 +139,16 @@ const ContentScreen = () => {
                     </View>
                     <View style={styles.socialMediaNameContainer}>
                       <Text
+                        allowFontScaling={false}
                         style={
                           styles.socialMediaNameText
                         }>{`${item?.Action_Name}`}</Text>
                       <View style={styles.ratingContainer}>
-                        <Text style={styles.ratingUsersText}>240</Text>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.ratingUsersText}>
+                          240
+                        </Text>
                         <Image
                           source={IMAGES.ratingStar}
                           style={styles.ratingIconImage}
@@ -145,7 +157,9 @@ const ContentScreen = () => {
                     </View>
                   </View>
                   <View style={styles.descriptionContainer}>
-                    <Text style={styles.descriptionText}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.descriptionText}>
                       {`A ${item?.Action_Name} fully dedicated to your experience at the Restaurant`}
                     </Text>
                   </View>
@@ -165,7 +179,9 @@ const ContentScreen = () => {
               <TouchableOpacity
                 onPress={handleNextPress}
                 style={styles.nextBtnContainer}>
-                <Text style={styles.nextBtnText}>Next </Text>
+                <Text allowFontScaling={false} style={styles.nextBtnText}>
+                  Next{' '}
+                </Text>
               </TouchableOpacity>
             )}
           </View>

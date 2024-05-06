@@ -37,7 +37,9 @@ const SignInWithEmail = React.forwardRef(
           />
           {isError && (
             <View style={styles.errorContainer}>
-              <Text style={styles.errorText}>Something went wrong.</Text>
+              <Text allowFontScaling={false} style={styles.errorText}>
+                Something went wrong.
+              </Text>
             </View>
           )}
           <View style={styles.btnContainer}>
@@ -49,7 +51,9 @@ const SignInWithEmail = React.forwardRef(
             />
           </View>
           <TouchableOpacity>
-            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+            <Text allowFontScaling={false} style={styles.forgotPasswordText}>
+              Forgot your password?
+            </Text>
           </TouchableOpacity>
         </View>
       </BottomSheet>

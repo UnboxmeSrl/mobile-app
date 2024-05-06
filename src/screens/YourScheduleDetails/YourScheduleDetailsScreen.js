@@ -52,7 +52,9 @@ const YourScheduleDetailsScreen = () => {
             />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitleText}>Booking</Text>
+            <Text allowFontScaling={false} style={styles.headerTitleText}>
+              Booking
+            </Text>
           </View>
         </View>
 
@@ -69,11 +71,13 @@ const YourScheduleDetailsScreen = () => {
               />
             </View>
             <View style={styles.restaurantNameContainer}>
-              <Text style={styles.restaurantNameText}>
+              <Text allowFontScaling={false} style={styles.restaurantNameText}>
                 {bookingDetails?._offers_turbo?.Offer_Name}
               </Text>
               <View style={styles.ratingContainer}>
-                <Text style={styles.ratingUsersText}>240</Text>
+                <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                  240
+                </Text>
                 <Image
                   source={IMAGES.ratingStar}
                   style={styles.ratingIconImage}
@@ -89,7 +93,7 @@ const YourScheduleDetailsScreen = () => {
                   ? {backgroundColor: COLORS.mayGreen}
                   : {backgroundColor: COLORS.tartOrange},
               ]}>
-              <Text style={styles.onApprovalText}>{`${
+              <Text allowFontScaling={false} style={styles.onApprovalText}>{`${
                 approvalStage === 'pending'
                   ? `On Approval`
                   : approvalStage === 'success'
@@ -119,10 +123,14 @@ const YourScheduleDetailsScreen = () => {
                     styles.specialAmenitiesMainContainer,
                   ]}>
                   <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text style={styles.amenitiesTitle}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
                       {amenityDetails?.amenityName}
                     </Text>
-                    <Text style={styles.amenitiesDescription}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesDescription}>
                       {amenityDetails?.amenityDescription}
                     </Text>
                   </View>
@@ -141,10 +149,13 @@ const YourScheduleDetailsScreen = () => {
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.amenitiesTitle
                     }>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text style={styles.amenitiesDescription}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.amenitiesDescription}>
                     at your choice
                   </Text>
                 </View>
@@ -159,10 +170,13 @@ const YourScheduleDetailsScreen = () => {
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.amenitiesTitle
                     }>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text style={styles.amenitiesDescription}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.amenitiesDescription}>
                     at your choice
                   </Text>
                 </View>
@@ -175,11 +189,13 @@ const YourScheduleDetailsScreen = () => {
                 ]}>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.amenitiesTitle,
                       styles.friendAmenityText,
                     ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.amenitiesDescription,
                       styles.friendAmenityTitle,
@@ -194,6 +210,7 @@ const YourScheduleDetailsScreen = () => {
           {actionNumId === 9 && (
             <View style={styles.comingWithInfluencerTextContainer}>
               <Text
+                allowFontScaling={false}
                 style={
                   styles.comingWithInfluencerText
                 }>{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
@@ -212,11 +229,11 @@ const YourScheduleDetailsScreen = () => {
               />
             </View>
             <View style={styles.locationNameContainer}>
-              <Text style={styles.locationNameText}>
+              <Text allowFontScaling={false} style={styles.locationNameText}>
                 {bookingDetails?._restaurant_turbo?.Name}
               </Text>
               <View style={styles.locationTextContainer}>
-                <Text style={styles.locationText}>
+                <Text allowFontScaling={false} style={styles.locationText}>
                   {bookingDetails?._restaurant_turbo?.Adress}
                 </Text>
               </View>
@@ -225,20 +242,32 @@ const YourScheduleDetailsScreen = () => {
 
           <View style={styles.selectedDateMainContainer}>
             <View style={styles.selectedDateContainer}>
-              <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
-              <Text style={styles.selectedDateMonthText}>
+              <Text
+                allowFontScaling={false}
+                style={styles.selectedDateNumberText}>
+                {currentDate}
+              </Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.selectedDateMonthText}>
                 {currentMonth?.slice(0, 3)}
               </Text>
             </View>
             <View style={styles.timeContainer}>
-              <Text style={styles.selectedDateTitleText}>Selected Date</Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.selectedDateTitleText}>
+                Selected Date
+              </Text>
               {actionNumId !== 9 ? (
                 <Text
+                  allowFontScaling={false}
                   style={
                     styles.selectedDateWithTimeText
                   }>{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
               ) : (
                 <Text
+                  allowFontScaling={false}
                   style={
                     styles.selectedDateWithTimeText
                   }>{`${currentWeekDay}`}</Text>
@@ -247,20 +276,26 @@ const YourScheduleDetailsScreen = () => {
             <TouchableOpacity
               style={styles.removeBtnContainer}
               onPress={handleAlertVisible}>
-              <Text style={styles.removeBtnText}>Cancel</Text>
+              <Text allowFontScaling={false} style={styles.removeBtnText}>
+                Cancel
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View>
           <View style={styles.actionRequestedContainer}>
-            <Text style={styles.actionRequestedText}>Action Requested:</Text>
+            <Text allowFontScaling={false} style={styles.actionRequestedText}>
+              Action Requested:
+            </Text>
           </View>
         </View>
 
         <View style={styles.timeReelsContainer}>
           <View style={styles.tiktokContainer}>
-            <Text style={styles.tiktokTitleText}>Content Type</Text>
+            <Text allowFontScaling={false} style={styles.tiktokTitleText}>
+              Content Type
+            </Text>
             <View style={styles.tiktokIconTextContainer}>
               <FastImage
                 resizeMode="contain"
@@ -271,11 +306,15 @@ const YourScheduleDetailsScreen = () => {
                 style={styles.tiktokIcon}
               />
               {/* <Image resizeMode="cover" source={icon} style={styles.tiktokIcon} /> */}
-              <Text style={styles.tiktokDesctiption}>{`${actionName}`}</Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.tiktokDesctiption}>{`${actionName}`}</Text>
             </View>
           </View>
           <View style={styles.deadlineTimeContainer}>
-            <Text style={styles.timeTitleText}>Deadline</Text>
+            <Text allowFontScaling={false} style={styles.timeTitleText}>
+              Deadline
+            </Text>
             <View style={styles.infoContainer}>
               <Image
                 resizeMode="contain"
@@ -283,6 +322,7 @@ const YourScheduleDetailsScreen = () => {
                 style={styles.infoIcon}
               />
               <Text
+                allowFontScaling={false}
                 style={
                   styles.timeText
                 }>{`${bookingDetails?._actions_turbo?.Days_deadline} days after booking`}</Text>
@@ -292,14 +332,16 @@ const YourScheduleDetailsScreen = () => {
 
         <View>
           <View style={styles.contentDetailsContainer}>
-            <Text style={styles.contentDetailsText}>Content details :</Text>
+            <Text allowFontScaling={false} style={styles.contentDetailsText}>
+              Content details :
+            </Text>
           </View>
         </View>
         <View style={styles.redirectsContainer}>
           <TouchableOpacity
             style={styles.contentBriefContainer}
             onPress={handleContentBriefPress}>
-            <Text style={styles.socialMediaTitleText}>
+            <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
               Content Brief & Tags
             </Text>
             <Image
@@ -310,7 +352,9 @@ const YourScheduleDetailsScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.howItWorksContainer}>
-            <Text style={styles.socialMediaTitleText}>How it works </Text>
+            <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
+              How it works{' '}
+            </Text>
             <Image
               resizeMode="contain"
               source={IMAGES.back}
@@ -327,7 +371,9 @@ const YourScheduleDetailsScreen = () => {
               !bookingDetails?.Approved && styles.disabledBtnContainer,
             ]}
             disabled={!bookingDetails?.Approved}>
-            <Text style={styles.openCouponBtnText}>Open Coupon </Text>
+            <Text allowFontScaling={false} style={styles.openCouponBtnText}>
+              Open Coupon{' '}
+            </Text>
           </TouchableOpacity>
         </View>
 

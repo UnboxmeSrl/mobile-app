@@ -19,7 +19,9 @@ const CommonHeader = ({title}) => {
         />
       </TouchableOpacity>
       <View style={styles.headerTitleContainer}>
-        <Text style={styles.headerTitleText}>{title}</Text>
+        <Text allowFontScaling={false} style={styles.headerTitleText}>
+          {title}
+        </Text>
       </View>
     </View>
   );

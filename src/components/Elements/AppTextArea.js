@@ -23,6 +23,7 @@ const AppTextArea = (
     <View style={[styles.appInput, style]}>
       {label && <AppText style={styles.label}>{label}</AppText>}
       <TextInput
+        allowFontScaling={false}
         ref={ref}
         autoCapitalize={autoCapitalize}
         editable={!isDisabled}

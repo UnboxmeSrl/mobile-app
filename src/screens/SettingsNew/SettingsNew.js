@@ -36,6 +36,7 @@ const SettingsNew = () => {
             <ActivityIndicator size={30} color={COLORS.black22} />
           ) : (
             <Text
+              allowFontScaling={false}
               style={[styles.btnText, isDeleting && styles.disabledBtnText]}>
               Delete Account
             </Text>
@@ -50,7 +51,9 @@ const SettingsNew = () => {
       />
 
       <View style={styles.versionContainer}>
-        <Text style={styles.versionText}>{versionName}</Text>
+        <Text allowFontScaling={false} style={styles.versionText}>
+          {versionName}
+        </Text>
       </View>
     </SafeAreaView>
   );

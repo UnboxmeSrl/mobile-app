@@ -24,11 +24,15 @@ const OtherSignUpOptionsScreen = () => {
     <SafeAreaView style={[styles.mainContainer]}>
       <CommonHeader title={'Sign Up'} />
       <View style={styles.titleDescriptionContainer}>
-        <Text style={styles.descriptionText}>
+        <Text allowFontScaling={false} style={styles.descriptionText}>
           {`Create your account to be able to be selected into the `}
-          <Text style={styles.innerText}>{`Claris community`}</Text>.
+          <Text
+            allowFontScaling={false}
+            style={styles.innerText}>{`Claris community`}</Text>
+          .
         </Text>
         <Text
+          allowFontScaling={false}
           style={
             styles.descriptionSecond
           }>{`The community accepts both influencers and models of all genders.`}</Text>
@@ -37,17 +41,25 @@ const OtherSignUpOptionsScreen = () => {
         <TouchableOpacity
           onPress={navigateToEmailModal}
           style={styles.signUpBtnContainer}>
-          <Text style={styles.signUpBtnText}>{`Sign up with email`}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.signUpBtnText}>{`Sign up with email`}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>
+        <Text allowFontScaling={false} style={styles.descriptionText}>
           {`By signing up, you `}
-          <Text style={styles.changedText}>{`agree`}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.changedText}>{`agree`}</Text>
           {` to Claris’s`}
-          <Text style={styles.changedText}>{` Terms of Use `}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.changedText}>{` Terms of Use `}</Text>
           {`and `}
-          <Text style={styles.changedText}>{` Privacy Policy. `}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.changedText}>{` Privacy Policy. `}</Text>
         </Text>
       </View>
       <SignUpWithEmail ref={ref} closeSignUpSheet={closeSignUpSheet} />

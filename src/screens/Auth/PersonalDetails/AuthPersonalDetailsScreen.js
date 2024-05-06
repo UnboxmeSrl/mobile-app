@@ -64,7 +64,9 @@ const AuthPersonalDetailsScreen = () => {
                   <TouchableOpacity
                     onPress={onOpen}
                     style={styles.countryCodeInnerContainer}>
-                    <Text style={styles.countryCallingCodeText}>{`+${
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.countryCallingCodeText}>{`+${
                       country?.callingCode?.[0] ?? '21'
                     }`}</Text>
                     <Image
@@ -82,6 +84,7 @@ const AuthPersonalDetailsScreen = () => {
               isFocused && styles.phoneNumberTextInputContainerWithFocus,
             ]}>
             <TextInput
+              allowFontScaling={false}
               placeholder={'Phone number'}
               value={phoneNumber}
               onChangeText={val => {

@@ -54,6 +54,7 @@ const AuthGenderScreen = () => {
                       isSelected && styles.genderContainerWithSelection,
                     ]}>
                     <Text
+                      allowFontScaling={false}
                       style={[
                         styles.genderText,
                         isSelected && styles.genderTextWithSelection,

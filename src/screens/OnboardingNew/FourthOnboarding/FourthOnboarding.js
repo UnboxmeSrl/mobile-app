@@ -14,15 +14,20 @@ const FourthOnboarding = () => {
       />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Design and incredible adventure with `}
-            <Text style={styles.colorChangeText}>{`influencer Villas`}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`influencer Villas`}</Text>
             {`, and `}
-            <Text style={styles.colorChangeText}>{`Hotels`}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`Hotels`}</Text>
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
           <Text
+            allowFontScaling={false}
             style={
               styles.descriptionText
             }>{`Design your entire holiday with Claris and become an aknowledged travel influencer `}</Text>

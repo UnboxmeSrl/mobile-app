@@ -40,7 +40,9 @@ const YourScheduleScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.yourScheduleTextContainer}>
-          <Text style={styles.dateSelectTitleText}>Your Schedule</Text>
+          <Text allowFontScaling={false} style={styles.dateSelectTitleText}>
+            Your Schedule
+          </Text>
         </View>
         <TouchableOpacity onPress={handleArchivePress}>
           <Image
@@ -57,6 +59,7 @@ const YourScheduleScreen = () => {
           onPress={() => setSelectedTab(1)}
           style={[styles.tab, selectedTab === 1 && styles.selectedTab]}>
           <Text
+            allowFontScaling={false}
             style={[
               styles.selectionTabText,
               selectedTab === 1 && styles.selectedTabText,
@@ -68,6 +71,7 @@ const YourScheduleScreen = () => {
           onPress={() => setSelectedTab(2)}
           style={[styles.tab, selectedTab === 2 && styles.selectedTab]}>
           <Text
+            allowFontScaling={false}
             style={[
               styles.selectionTabText,
               selectedTab === 2 && styles.selectedTabText,
@@ -94,7 +98,9 @@ const YourScheduleScreen = () => {
             }
             ListEmptyComponent={
               <View style={styles.listEmptyContainer}>
-                <Text style={styles.listEmptyText}>No bookings are there.</Text>
+                <Text allowFontScaling={false} style={styles.listEmptyText}>
+                  No bookings are there.
+                </Text>
               </View>
             }
             renderItem={({item, index}) => {
@@ -157,6 +163,7 @@ const YourScheduleScreen = () => {
                       ]}
                     />
                     <Text
+                      allowFontScaling={false}
                       style={[
                         styles.approvalStatusText,
                         approvalStatus === 'Pending'
@@ -190,36 +197,53 @@ const YourScheduleScreen = () => {
                                 backgroundColor: COLORS.seaShellRed,
                               },
                         ]}>
-                        <Text style={styles.selectedDateMonthText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.selectedDateMonthText}>
                           {month}
                         </Text>
-                        <Text style={styles.selectedDateNumberText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.selectedDateNumberText}>
                           {myDate?.getDate()}
                         </Text>
-                        <Text style={styles.selectedDateDayText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.selectedDateDayText}>
                           {weekDay?.slice(0, 3)}
                         </Text>
                       </View>
                     </View>
                     <View style={styles.locationTimeMainContainer}>
                       <View style={styles.locationNameContainer}>
-                        <Text style={styles.locationNameText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.locationNameText}>
                           {item?._restaurant_turbo?.Name}
                         </Text>
                       </View>
                       <View style={styles.serviceRequestedContainer}>
-                        <Text style={styles.serviceRequestedTitleText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.serviceRequestedTitleText}>
                           Service Requested
                         </Text>
-                        <Text style={styles.serviceRequestedText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.serviceRequestedText}>
                           {item?._offers_turbo?.Offer_Name}
                         </Text>
                       </View>
                       <View style={styles.timeReelsContainer}>
                         {actionNumId !== 9 ? (
                           <View style={styles.timeContainer}>
-                            <Text style={styles.timeTitleText}>Time</Text>
                             <Text
+                              allowFontScaling={false}
+                              style={styles.timeTitleText}>
+                              Time
+                            </Text>
+                            <Text
+                              allowFontScaling={false}
                               style={
                                 styles.timeText
                               }>{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
@@ -230,7 +254,7 @@ const YourScheduleScreen = () => {
 
                         {/* {actionNumId == 6 && item?.diary_action_turbo_id === 0 ? (
                           <View style={styles.reelsContainer}>
-                            <Text style={styles.reelsTitleText}>{`${actionName}`}</Text>
+                            <Text allowFontScaling={false}  style={styles.reelsTitleText}>{`${actionName}`}</Text>
                             <View style={styles.tiktokReelsIconsContainer}>
                               <Image resizeMode="cover" source={IMAGES.tiktokWithoutBg} style={styles.reelIcon} />
                               <Image resizeMode="cover" source={IMAGES.reel} style={styles.reelIcon} />
@@ -238,7 +262,11 @@ const YourScheduleScreen = () => {
                           </View>
                         ) : ( */}
                         <View style={styles.storyContainer}>
-                          <Text style={styles.storyText}>{actionName}</Text>
+                          <Text
+                            allowFontScaling={false}
+                            style={styles.storyText}>
+                            {actionName}
+                          </Text>
                           <View style={styles.storyIconContainer}>
                             <FastImage
                               resizeMode="contain"
@@ -272,7 +300,7 @@ const YourScheduleScreen = () => {
             }
             ListEmptyComponent={
               <View style={styles.listEmptyContainer}>
-                <Text style={styles.listEmptyText}>
+                <Text allowFontScaling={false} style={styles.listEmptyText}>
                   No content uploaded yet.
                 </Text>
               </View>
@@ -301,7 +329,11 @@ const YourScheduleScreen = () => {
                     <View style={contentStyles.ratingSocialMediaMainContainer}>
                       <View style={contentStyles.ratingSocialMediaContainer}>
                         <View style={contentStyles.ratingContainer}>
-                          <Text style={contentStyles.ratingUsersText}>240</Text>
+                          <Text
+                            allowFontScaling={false}
+                            style={contentStyles.ratingUsersText}>
+                            240
+                          </Text>
                           <Image
                             source={IMAGES.ratingStar}
                             style={contentStyles.ratingIconImage}
@@ -319,6 +351,7 @@ const YourScheduleScreen = () => {
                         />
                         {/* <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} /> */}
                         <Text
+                          allowFontScaling={false}
                           style={
                             contentStyles.socialMediaNameText
                           }>{`${actionName}`}</Text>
@@ -345,7 +378,9 @@ const YourScheduleScreen = () => {
                                 width: '100%',
                               },
                             ]}>
-                            <Text style={contentStyles.deadLineTitleText}>
+                            <Text
+                              allowFontScaling={false}
+                              style={contentStyles.deadLineTitleText}>
                               Deadline:
                             </Text>
                           </View>
@@ -365,6 +400,7 @@ const YourScheduleScreen = () => {
                                     },
                               ]}>
                               <Text
+                                allowFontScaling={false}
                                 style={[
                                   contentStyles.contentApprovalStatusText,
                                   contentApprovalStatus === 'To Publish'
@@ -394,6 +430,7 @@ const YourScheduleScreen = () => {
                               style={contentStyles.infoIcon}
                             />
                             <Text
+                              allowFontScaling={false}
                               style={
                                 contentStyles.deadLineText
                               }>{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
@@ -415,12 +452,14 @@ const YourScheduleScreen = () => {
                           </View>
                           <View style={contentStyles.locationNameContainer}>
                             <Text
+                              allowFontScaling={false}
                               style={contentStyles.locationNameText}
                               numberOfLines={1}>
                               {item?._restaurant_turbo?.Name}
                             </Text>
                             <View style={contentStyles.locationTextContainer}>
                               <Text
+                                allowFontScaling={false}
                                 style={contentStyles.locationText}
                                 numberOfLines={2}>
                                 {item?._restaurant_turbo?.Adress}

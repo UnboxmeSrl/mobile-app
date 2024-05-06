@@ -53,7 +53,9 @@ const AuthProfilePictureScreen = () => {
                 ) : (
                   <>
                     <Image source={IMAGES.gallery} style={styles.galleryIcon} />
-                    <Text style={styles.uploadText}>Upload</Text>
+                    <Text allowFontScaling={false} style={styles.uploadText}>
+                      Upload
+                    </Text>
                   </>
                 )}
               </TouchableOpacity>
@@ -61,10 +63,12 @@ const AuthProfilePictureScreen = () => {
           }}
         />
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Add photos of you</Text>
+          <Text allowFontScaling={false} style={styles.titleText}>
+            Add photos of you
+          </Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
             Please make sure your photo clearly shows your face
           </Text>
         </View>

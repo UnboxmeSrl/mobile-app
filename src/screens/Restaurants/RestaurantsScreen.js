@@ -43,7 +43,9 @@ const RestaurantsScreen = () => {
           source={IMAGES.locationNew}
           style={styles.locationIcon}
         />
-        <Text style={styles.locationFont}>{cityData?.CityName}</Text>
+        <Text allowFontScaling={false} style={styles.locationFont}>
+          {cityData?.CityName}
+        </Text>
       </TouchableOpacity>
       <Categories
         categories={categories}
@@ -68,7 +70,9 @@ const RestaurantsScreen = () => {
                 !isLoading &&
                 restaurantsData?.length === 0 && (
                   <View style={styles.listEmptyContainer}>
-                    <Text style={styles.listEmptyText}>No data found.</Text>
+                    <Text allowFontScaling={false} style={styles.listEmptyText}>
+                      No data found.
+                    </Text>
                   </View>
                 )
               }

@@ -14,9 +14,10 @@ const ThirdOnboarding = () => {
       />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Find `}
             <Text
+              allowFontScaling={false}
               style={
                 styles.colorChangeText
               }>{`Restaurants, Beauty saloons, Sport lessons `}</Text>
@@ -25,6 +26,7 @@ const ThirdOnboarding = () => {
         </View>
         <View style={styles.descriptionContainer}>
           <Text
+            allowFontScaling={false}
             style={
               styles.descriptionText
             }>{`An ever growing list with ever growing surprises `}</Text>

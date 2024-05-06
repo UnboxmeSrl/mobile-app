@@ -10,9 +10,11 @@ const FifthOnboarding = () => {
     <View style={styles.mainContainer}>
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Climb your path to `}
-            <Text style={styles.colorChangeText}>{`Legendary level  `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`Legendary level  `}</Text>
           </Text>
         </View>
       </View>

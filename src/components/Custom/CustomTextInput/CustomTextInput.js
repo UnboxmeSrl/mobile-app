@@ -30,6 +30,7 @@ const CustomTextInput = ({
       ]}>
       <View style={styles.textInputContainer}>
         <TextInput
+          allowFontScaling={false}
           value={value}
           onChangeText={val => {
             handleOnChangeText(val);

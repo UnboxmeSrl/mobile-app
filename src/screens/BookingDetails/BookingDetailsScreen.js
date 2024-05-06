@@ -48,8 +48,8 @@ const BookingDetailsScreen = () => {
   //     return (
   //       <TouchableOpacity onPress={() => setSelectedDate(date)}>
   //         <View>
-  //           {/* <Text style={{ color: 'black' }}>{date.format('dd')}</Text>
-  //           <Text style={dateStyle}>{date.format('D')}</Text> */}
+  //           {/* <Text allowFontScaling={false}  style={{ color: 'black' }}>{date.format('dd')}</Text>
+  //           <Text allowFontScaling={false}  style={dateStyle}>{date.format('D')}</Text> */}
   //         </View>
   //       </TouchableOpacity>
   //     )
@@ -78,16 +78,20 @@ const BookingDetailsScreen = () => {
                 </TouchableOpacity>
 
                 <View>
-                  <Text style={styles.dateSelectTitleText}>Select a Date</Text>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.dateSelectTitleText}>
+                    Select a Date
+                  </Text>
                 </View>
 
                 <View style={styles.calendarContainer}>
                   {/* This need to remove in future */}
                   {/* <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                    <Text>{DeviceInfo.getBrand()}</Text>
-                    <Text> {DeviceInfo.getBuildNumber()}</Text>
-                    <Text> {DeviceInfo.getSystemVersion()}</Text>
-                    <Text> {DeviceInfo.getModel()}</Text>
+                    <Text allowFontScaling={false} >{DeviceInfo.getBrand()}</Text>
+                    <Text allowFontScaling={false} > {DeviceInfo.getBuildNumber()}</Text>
+                    <Text allowFontScaling={false} > {DeviceInfo.getSystemVersion()}</Text>
+                    <Text allowFontScaling={false} > {DeviceInfo.getModel()}</Text>
                   </View> */}
                   {/* only above one line and style={{ alignItems: 'center' }} */}
                   <Image
@@ -101,7 +105,11 @@ const BookingDetailsScreen = () => {
               <View style={styles.calendarMainContainer}>
                 <View style={styles.dateHeader}>
                   <View>
-                    <Text style={styles.selectedMonthName}>{currentMonth}</Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.selectedMonthName}>
+                      {currentMonth}
+                    </Text>
                   </View>
                   <View style={styles.previousNextIconsContainer}>
                     <TouchableOpacity onPress={showPreviousWeek}>
@@ -148,7 +156,9 @@ const BookingDetailsScreen = () => {
               {actionNumId !== 9 && (
                 <>
                   <View style={styles.availableHoursTitleContainer}>
-                    <Text style={styles.availableHoursTitleText}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.availableHoursTitleText}>
                       Available Hours
                     </Text>
                   </View>
@@ -156,7 +166,9 @@ const BookingDetailsScreen = () => {
                   <View style={styles.timeSlotsMainContainer}>
                     {weekDayWiseTimeSlots.length === 0 && (
                       <View style={styles.listEmptyContainer}>
-                        <Text style={styles.listEmptyText}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.listEmptyText}>
                           Not available on this day.
                         </Text>
                       </View>
@@ -190,6 +202,7 @@ const BookingDetailsScreen = () => {
                                 style={styles.timeCircleIcon}
                               />
                               <Text
+                                allowFontScaling={false}
                                 style={
                                   styles.timingText
                                 }>{`${item?.Start}:${item?.Minute_Start} - ${item?.End}:${item?.Minute_End}`}</Text>
@@ -202,7 +215,7 @@ const BookingDetailsScreen = () => {
                     <FlatList
                       ListEmptyComponent={
                         <View style={styles.listEmptyContainer}>
-                          <Text style={styles.listEmptyText}>
+                          <Text allowFontScaling={false}  style={styles.listEmptyText}>
                             Not available on this day.
                           </Text>
                         </View>
@@ -236,7 +249,7 @@ const BookingDetailsScreen = () => {
                                 source={IMAGES.timeCircle}
                                 style={styles.timeCircleIcon}
                               />
-                              <Text
+                              <Text allowFontScaling={false} 
                                 style={
                                   styles.timingText
                                 }>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
@@ -249,12 +262,15 @@ const BookingDetailsScreen = () => {
                 </>
               )}
               <View style={styles.sendMessageTitleContainer}>
-                <Text style={styles.sendMessageTitleText}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.sendMessageTitleText}>
                   Send Message (Optional)
                 </Text>
               </View>
               <View style={styles.sendMessageTextContainer}>
                 <TextInput
+                  allowFontScaling={false}
                   numberOfLines={2}
                   placeholderTextColor={COLORS.gray}
                   style={styles.sendMessageTextInput}
@@ -265,24 +281,32 @@ const BookingDetailsScreen = () => {
 
               <View style={styles.selectedDateMainContainer}>
                 <View style={styles.selectedDateContainer}>
-                  <Text style={styles.selectedDateNumberText}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.selectedDateNumberText}>
                     {currentDate}
                   </Text>
-                  <Text style={styles.selectedDateMonthText}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.selectedDateMonthText}>
                     {currentMonth?.slice(0, 3)}
                   </Text>
                 </View>
                 <View style={styles.timeContainer}>
-                  <Text style={styles.selectedDateTitleText}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.selectedDateTitleText}>
                     Selected Date
                   </Text>
                   {actionNumId !== 9 && selectedTimeFame?.Start ? (
                     <Text
+                      allowFontScaling={false}
                       style={
                         styles.selectedDateWithTimeText
                       }>{`${currentWeekDay},  ${selectedTimeFame?.Start}:${selectedTimeFame?.Minute_Start} - ${selectedTimeFame?.End}:${selectedTimeFame?.Minute_End}`}</Text>
                   ) : (
                     <Text
+                      allowFontScaling={false}
                       style={
                         styles.selectedDateWithTimeText
                       }>{`${currentWeekDay}`}</Text>
@@ -299,7 +323,9 @@ const BookingDetailsScreen = () => {
                   <TouchableOpacity
                     onPress={handleRemoveBtnPress}
                     style={styles.removeBtnContainer}>
-                    <Text style={styles.removeBtnText}>Remove</Text>
+                    <Text allowFontScaling={false} style={styles.removeBtnText}>
+                      Remove
+                    </Text>
                   </TouchableOpacity>
                 )}
               </View>
@@ -322,7 +348,9 @@ const BookingDetailsScreen = () => {
                     backgroundColor: COLORS.newPrimary,
                   },
                 ]}>
-                <Text style={styles.bookBtnText}>Confirm</Text>
+                <Text allowFontScaling={false} style={styles.bookBtnText}>
+                  Confirm
+                </Text>
               </TouchableOpacity>
             )}
           </View>

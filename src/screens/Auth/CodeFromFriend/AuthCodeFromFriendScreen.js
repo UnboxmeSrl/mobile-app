@@ -47,7 +47,7 @@ const AuthCodeFromFriendScreen = () => {
           handleBackPress={handleBackPress}
         />
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
             If you came at the invitation of another user and they gave you
             their promo code, then enter it here!
           </Text>
@@ -61,6 +61,7 @@ const AuthCodeFromFriendScreen = () => {
               isError && styles.codeContainerWithError,
             ]}>
             <TextInput
+              allowFontScaling={false}
               ref={code1Ref}
               value={codeLetter1}
               maxLength={1}
@@ -85,6 +86,7 @@ const AuthCodeFromFriendScreen = () => {
               isError && styles.codeContainerWithError,
             ]}>
             <TextInput
+              allowFontScaling={false}
               ref={code2Ref}
               value={codeLetter2}
               maxLength={1}
@@ -109,6 +111,7 @@ const AuthCodeFromFriendScreen = () => {
               isError && styles.codeContainerWithError,
             ]}>
             <TextInput
+              allowFontScaling={false}
               ref={code3Ref}
               value={codeLetter3}
               maxLength={1}
@@ -133,6 +136,7 @@ const AuthCodeFromFriendScreen = () => {
               isError && styles.codeContainerWithError,
             ]}>
             <TextInput
+              allowFontScaling={false}
               ref={code4Ref}
               value={codeLetter4}
               maxLength={1}
@@ -157,6 +161,7 @@ const AuthCodeFromFriendScreen = () => {
               isError && styles.codeContainerWithError,
             ]}>
             <TextInput
+              allowFontScaling={false}
               ref={code5Ref}
               value={codeLetter5}
               maxLength={1}
@@ -172,7 +177,7 @@ const AuthCodeFromFriendScreen = () => {
         </View>
         {isError && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>
+            <Text allowFontScaling={false} style={styles.errorText}>
               * Your code is unvalid. Please check it.
             </Text>
           </View>
@@ -182,7 +187,9 @@ const AuthCodeFromFriendScreen = () => {
           onPress={handleSkipPress}
           activeOpacity={0.5}
           style={styles.skipContainer}>
-          <Text style={styles.skipText}>Skip</Text>
+          <Text allowFontScaling={false} style={styles.skipText}>
+            Skip
+          </Text>
         </TouchableOpacity>
 
         <View style={styles.btnContainer}>

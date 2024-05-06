@@ -46,12 +46,12 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
     //   <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
     //     <View style={styles.mainContainer}>
     //       <View style={styles.ratingsContainer}>
-    //         <Text style={styles.ratingsText}>+250</Text>
+    //         <Text allowFontScaling={false}  style={styles.ratingsText}>+250</Text>
     //         <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
     //       </View>
     //       {(item?.Influencer || item?.Model) && (
     //         <View style={styles.forModelsContainer}>
-    //           <Text style={styles.forModelsText}>
+    //           <Text allowFontScaling={false}  style={styles.forModelsText}>
     //             For {item?.Influencer && 'Influencer'}
     //             {item?.Model && ' Models'}
     //           </Text>
@@ -59,7 +59,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
     //       )}
     //     </View>
     //     <View style={styles.nameContainer}>
-    //       <Text style={styles.restaurantNameText}>{item?.Offer_Name}</Text>
+    //       <Text allowFontScaling={false}  style={styles.restaurantNameText}>{item?.Offer_Name}</Text>
     //     </View>
     //   </ImageBackground>
     // </TouchableOpacity>
@@ -80,7 +80,9 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
             resizeMode="cover"
           />
           <View style={styles.dealTimerContainer}>
-            <Text style={styles.dealTimeLeftText}>{`${deals} deal left`}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.dealTimeLeftText}>{`${deals} deal left`}</Text>
           </View>
         </ImageBackground>
       </View>
@@ -95,18 +97,23 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
             style={styles.socialIcon}
           />
           {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
-          <Text style={styles.titleText} numberOfLines={2}>
+          <Text
+            allowFontScaling={false}
+            style={styles.titleText}
+            numberOfLines={2}>
             {item?._actions_turbo?.Action_Name}
           </Text>
         </View>
         <View style={styles.ratingsContainer}>
-          <Text style={styles.ratingsText}>60</Text>
+          <Text allowFontScaling={false} style={styles.ratingsText}>
+            60
+          </Text>
           <Image source={IMAGES.star} style={styles.ratingIcon} />
         </View>
       </View>
       {/* 
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>To publish with 24 hours</Text>
+        <Text allowFontScaling={false}  style={styles.descriptionText}>To publish with 24 hours</Text>
       </View> */}
 
       {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
@@ -129,7 +136,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
                 styles.specialAmenitiesMainContainer,
               ]}>
               <View style={styles.amenityTitleDescriptionContainer}>
-                <Text style={styles.amenitiesTitle}>
+                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
                   {amenityDetails?.amenityName}
                 </Text>
               </View>
@@ -148,6 +155,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
             </View>
             <View style={styles.amenityTitleDescriptionContainer}>
               <Text
+                allowFontScaling={false}
                 style={
                   styles.amenitiesTitle
                 }>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
@@ -163,6 +171,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
             </View>
             <View style={styles.amenityTitleDescriptionContainer}>
               <Text
+                allowFontScaling={false}
                 style={
                   styles.amenitiesTitle
                 }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
@@ -175,12 +184,12 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
               styles.friendAmenityContainer,
             ]}>
             <View style={styles.amenityTitleDescriptionContainer}>
-              <Text
+              <Text allowFontScaling={false} 
                 style={[
                   styles.amenitiesTitle,
                   styles.friendAmenityText,
                 ]}>{`+${item?._actions_turbo?.Extra_People}`}</Text>
-              <Text
+              <Text allowFontScaling={false} 
                 style={[
                   styles.amenitiesDescription,
                   styles.friendAmenityTitle,
@@ -195,14 +204,14 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
       {/* <View style={styles.amenitiesMainContainer}>
         <View style={styles.amenitiesContainer}>
           <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-          <Text
+          <Text allowFontScaling={false} 
             style={
               styles.amenityText
             }>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
         </View>
         <View style={styles.amenitiesContainer}>
           <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
-          <Text
+          <Text allowFontScaling={false} 
             style={
               styles.amenityText
             }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>

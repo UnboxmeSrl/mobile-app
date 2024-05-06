@@ -4,7 +4,7 @@ import {COLORS} from '../../constants';
 
 function AppText({style, children, ...rest}) {
   return (
-    <Text style={[styles.text, style]} {...rest}>
+    <Text allowFontScaling={false} style={[styles.text, style]} {...rest}>
       {children}
     </Text>
   );

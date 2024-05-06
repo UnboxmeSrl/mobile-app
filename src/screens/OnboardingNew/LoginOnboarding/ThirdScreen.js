@@ -9,9 +9,11 @@ const ThirdScreen = () => {
     <View>
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Publish your content `}
-            <Text style={styles.colorChangeText}>{`by the deadline  `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`by the deadline  `}</Text>
           </Text>
         </View>
       </View>
@@ -21,9 +23,11 @@ const ThirdScreen = () => {
         resizeMode={'contain'}
       />
       <View style={styles.belowDescriptionContainer}>
-        <Text style={styles.belowDescriptionText}>
+        <Text allowFontScaling={false} style={styles.belowDescriptionText}>
           {`Show your coupon to the staff, to unlock the `}
-          <Text style={styles.boldedText}>{`free service`}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.boldedText}>{`free service`}</Text>
         </Text>
       </View>
     </View>

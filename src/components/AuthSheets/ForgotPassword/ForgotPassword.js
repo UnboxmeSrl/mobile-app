@@ -14,7 +14,7 @@ const ForgotPassword = React.forwardRef(({}, ref) => {
       <View style={styles.mainContainer}>
         <CustomTitle title={'Forgot password'} />
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
             Please enter the email address or phone number you signed up with.
           </Text>
         </View>

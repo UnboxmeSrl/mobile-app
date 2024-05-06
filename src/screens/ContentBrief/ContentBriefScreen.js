@@ -43,19 +43,23 @@ const ContentBriefScreen = () => {
             />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitleText}>Content Brief</Text>
+            <Text allowFontScaling={false} style={styles.headerTitleText}>
+              Content Brief
+            </Text>
           </View>
         </View>
         {bookingDetails?._restaurant_turbo?.About?.length > 0 && (
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>
+            <Text allowFontScaling={false} style={styles.descriptionText}>
               {bookingDetails?._restaurant_turbo?.About}
             </Text>
           </View>
         )}
 
         <View style={styles.labelContainer}>
-          <Text style={styles.labelText}>Tags</Text>
+          <Text allowFontScaling={false} style={styles.labelText}>
+            Tags
+          </Text>
         </View>
 
         <FlatList
@@ -65,7 +69,7 @@ const ContentBriefScreen = () => {
           renderItem={({item, index}) => {
             return (
               <View style={styles.tagContainer}>
-                <Text style={styles.tagText}>
+                <Text allowFontScaling={false} style={styles.tagText}>
                   {bookingDetails?._restaurant_turbo?.Tags}
                 </Text>
                 <TouchableOpacity
@@ -84,7 +88,7 @@ const ContentBriefScreen = () => {
         />
         {/* 
         <View style={styles.labelContainer}>
-          <Text style={styles.labelText}>Hashtags</Text>
+          <Text allowFontScaling={false}  style={styles.labelText}>Hashtags</Text>
         </View>
 
         <FlatList
@@ -94,7 +98,7 @@ const ContentBriefScreen = () => {
           renderItem={({ item, index }) => {
             return (
               <View style={styles.tagContainer}>
-                <Text style={styles.tagText}>#Woweffect</Text>
+                <Text allowFontScaling={false}  style={styles.tagText}>#Woweffect</Text>
                 <TouchableOpacity>
                   <Image resizeMode="cover" source={IMAGES.copy} style={styles.copyIcon} />
                 </TouchableOpacity>
@@ -115,9 +119,13 @@ const ContentBriefScreen = () => {
             />
           </View>
           <View style={styles.socialMediaNameContainer}>
-            <Text style={styles.socialMediaNameText}>{actionName}</Text>
+            <Text allowFontScaling={false} style={styles.socialMediaNameText}>
+              {actionName}
+            </Text>
             <View style={styles.ratingContainer}>
-              <Text style={styles.ratingUsersText}>240</Text>
+              <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                240
+              </Text>
               <Image
                 source={IMAGES.ratingStar}
                 style={styles.ratingIconImage}
@@ -126,13 +134,17 @@ const ContentBriefScreen = () => {
           </View>
         </View>
         <View style={styles.socialMediaDescriptionContainer}>
-          <Text style={styles.socialMediaDescriptionText}>
+          <Text
+            allowFontScaling={false}
+            style={styles.socialMediaDescriptionText}>
             {bookingDetails?._actions_turbo?.Descrizione}{' '}
           </Text>
         </View>
         <TouchableOpacity style={styles.queryContainer}>
           <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
-          <Text style={styles.queryText}>Questions? Send us a message</Text>
+          <Text allowFontScaling={false} style={styles.queryText}>
+            Questions? Send us a message
+          </Text>
         </TouchableOpacity>
 
         <View style={styles.openCouponBtnMainContainer}>
@@ -143,7 +155,9 @@ const ContentBriefScreen = () => {
               styles.openCouponBtnContainer,
               !bookingDetails?.Approved && styles.disabledBtnContainer,
             ]}>
-            <Text style={styles.openCouponBtnText}>Open Coupon</Text>
+            <Text allowFontScaling={false} style={styles.openCouponBtnText}>
+              Open Coupon
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

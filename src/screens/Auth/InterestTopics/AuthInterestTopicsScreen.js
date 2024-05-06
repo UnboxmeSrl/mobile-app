@@ -61,6 +61,7 @@ const AuthInterestTopicsScreen = () => {
                     <Image source={IMAGES.plus} style={styles.plusIcon} />
                   )}
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.topicText,
                       isSelected && styles.topicTextWithSelection,
@@ -78,7 +79,7 @@ const AuthInterestTopicsScreen = () => {
             })}
           </View>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>
+            <Text allowFontScaling={false} style={styles.descriptionText}>
               Let the venues owners know about your topics
             </Text>
           </View>

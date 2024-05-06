@@ -57,11 +57,15 @@ const ContentStatusModal = ({
               />
             </View>
             <View style={styles.statusTextContainer}>
-              <Text style={styles.statusText}>{title}</Text>
+              <Text allowFontScaling={false} style={styles.statusText}>
+                {title}
+              </Text>
             </View>
           </View>
           <View style={styles.ratingContainer}>
-            <Text style={styles.ratingUsersText}>240</Text>
+            <Text allowFontScaling={false} style={styles.ratingUsersText}>
+              240
+            </Text>
             <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
           </View>
 
@@ -100,7 +104,9 @@ const ContentStatusModal = ({
                 />
               </View>
               <View style={styles.socialMediaNameContainer}>
-                <Text style={styles.socialMediaNameText}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.socialMediaNameText}>
                   {` ${
                     contentDetails?._actions_turbo?.Action_Name === 'Story'
                       ? `3 X ${actionName}`
@@ -122,6 +128,7 @@ const ContentStatusModal = ({
                       },
                 ]}>
                 <Text
+                  allowFontScaling={false}
                   style={[
                     styles.onApprovalText,
                     approvalStage === 'To Publish'
@@ -149,11 +156,13 @@ const ContentStatusModal = ({
                   />
                 </View>
                 <View style={styles.locationNameContainer}>
-                  <Text style={styles.locationNameText}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.locationNameText}>
                     {contentDetails?._restaurant_turbo?.Name}
                   </Text>
                   <View style={styles.locationTextContainer}>
-                    <Text style={styles.locationText}>
+                    <Text allowFontScaling={false} style={styles.locationText}>
                       {contentDetails?._restaurant_turbo?.Adress}
                     </Text>
                   </View>
@@ -162,6 +171,7 @@ const ContentStatusModal = ({
             )}
             <View style={styles.boxDescriptionContainer}>
               <Text
+                allowFontScaling={false}
                 style={[
                   styles.boxDescription,
                   approvalStage === 'To Publish'
@@ -180,7 +190,9 @@ const ContentStatusModal = ({
           </View>
           <TouchableOpacity style={styles.queryContainer}>
             <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
-            <Text style={styles.queryText}>Send us a message</Text>
+            <Text allowFontScaling={false} style={styles.queryText}>
+              Send us a message
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.okayBtnMainContainer}>
@@ -192,7 +204,9 @@ const ContentStatusModal = ({
               <TouchableOpacity
                 onPress={handlePositiveBtnPress}
                 style={styles.okayBtnContainer}>
-                <Text style={styles.okayBtnText}>Okay</Text>
+                <Text allowFontScaling={false} style={styles.okayBtnText}>
+                  Okay
+                </Text>
               </TouchableOpacity>
             )}
           </View>

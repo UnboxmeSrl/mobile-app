@@ -61,7 +61,7 @@ const BookingOnApprovalScreen = () => {
           />
         </View>
         <View style={styles.pendingTextContainer}>
-          <Text style={styles.pendingText}>
+          <Text allowFontScaling={false} style={styles.pendingText}>
             Your booking is on
             {` ${
               approvalStage === 'pending'
@@ -103,11 +103,13 @@ const BookingOnApprovalScreen = () => {
             />
           </View>
           <View style={styles.restaurantNameContainer}>
-            <Text style={styles.restaurantNameText}>
+            <Text allowFontScaling={false} style={styles.restaurantNameText}>
               {bookingDetails?._offers_turbo?.Offer_Name}
             </Text>
             <View style={styles.ratingContainer}>
-              <Text style={styles.ratingUsersText}>240</Text>
+              <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                240
+              </Text>
               <Image
                 source={IMAGES.ratingStar}
                 style={styles.ratingIconImage}
@@ -123,7 +125,7 @@ const BookingOnApprovalScreen = () => {
                 ? {backgroundColor: COLORS.mayGreen}
                 : {backgroundColor: COLORS.tartOrange},
             ]}>
-            <Text style={styles.onApprovalText}>{`${
+            <Text allowFontScaling={false} style={styles.onApprovalText}>{`${
               approvalStage === 'pending'
                 ? `On Approval`
                 : approvalStage === 'success'
@@ -145,11 +147,14 @@ const BookingOnApprovalScreen = () => {
             />
           </View>
           <View style={styles.locationNameContainer}>
-            <Text style={styles.locationNameText}>
+            <Text allowFontScaling={false} style={styles.locationNameText}>
               {bookingDetails?._restaurant_turbo?.Name}
             </Text>
             <View style={styles.locationContainer}>
-              <Text style={styles.locationText} numberOfLines={4}>
+              <Text
+                allowFontScaling={false}
+                style={styles.locationText}
+                numberOfLines={4}>
                 {bookingDetails?._restaurant_turbo?.Adress}
               </Text>
             </View>
@@ -158,20 +163,28 @@ const BookingOnApprovalScreen = () => {
 
         <View style={styles.selectedDateMainContainer}>
           <View style={styles.selectedDateContainer}>
-            <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
-            <Text style={styles.selectedDateMonthText}>
+            <Text
+              allowFontScaling={false}
+              style={styles.selectedDateNumberText}>
+              {currentDate}
+            </Text>
+            <Text allowFontScaling={false} style={styles.selectedDateMonthText}>
               {currentMonth?.slice(0, 3)}
             </Text>
           </View>
           <View style={styles.timeContainer}>
-            <Text style={styles.selectedDateTitleText}>Selected Date</Text>
+            <Text allowFontScaling={false} style={styles.selectedDateTitleText}>
+              Selected Date
+            </Text>
             {actionNumId !== 9 ? (
               <Text
+                allowFontScaling={false}
                 style={
                   styles.selectedDateWithTimeText
                 }>{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
             ) : (
               <Text
+                allowFontScaling={false}
                 style={
                   styles.selectedDateWithTimeText
                 }>{`${currentWeekDay}`}</Text>
@@ -181,7 +194,7 @@ const BookingOnApprovalScreen = () => {
 
         {approvalStage === 'pending' && (
           <View style={styles.lastDescriptionContainer}>
-            <Text style={styles.descriptionText}>
+            <Text allowFontScaling={false} style={styles.descriptionText}>
               The owner has received your request and we are waiting for
               confirmation. Write in Chat fo questions.
             </Text>
@@ -189,7 +202,9 @@ const BookingOnApprovalScreen = () => {
         )}
       </View>
       <TouchableOpacity style={styles.howItWorksContainer}>
-        <Text style={styles.socialMediaTitleText}>Check brief </Text>
+        <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
+          Check brief{' '}
+        </Text>
         <Image
           resizeMode="cover"
           source={IMAGES.back}
@@ -206,7 +221,9 @@ const BookingOnApprovalScreen = () => {
           <TouchableOpacity
             onPress={handleGoToSchedulePress}
             style={styles.goToScheduleBtnContainer}>
-            <Text style={styles.goToScheduleBtnText}>Go to schedule </Text>
+            <Text allowFontScaling={false} style={styles.goToScheduleBtnText}>
+              Go to schedule{' '}
+            </Text>
           </TouchableOpacity>
         )}
       </View>

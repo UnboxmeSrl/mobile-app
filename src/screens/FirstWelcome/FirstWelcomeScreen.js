@@ -66,8 +66,10 @@ const FirstWelcomeScreen = () => {
             {/* <Hobbies interest_topics="Music" style={[styles.badge, styles.ml8]} titleStyle={styles.badgeTitle} /> */}
           </View>
         </View>
-        <Text style={styles.title}>You have been accepted !</Text>
-        <Text style={styles.desc}>
+        <Text allowFontScaling={false} style={styles.title}>
+          You have been accepted !
+        </Text>
+        <Text allowFontScaling={false} style={styles.desc}>
           Congratulations your account has been accepted into Claris!
         </Text>
       </View>

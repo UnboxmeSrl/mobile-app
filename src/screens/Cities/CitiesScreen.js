@@ -39,7 +39,9 @@ const CitiesScreen = () => {
                 />
               </View>
               <View style={styles.chooseLocationTitleContainer}>
-                <Text style={styles.chooseLocationTitleText}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.chooseLocationTitleText}>
                   Choose location
                 </Text>
               </View>

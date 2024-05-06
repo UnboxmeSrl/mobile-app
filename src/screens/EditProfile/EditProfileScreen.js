@@ -119,7 +119,9 @@ const EditProfileScreen = () => {
                           style={styles.flagIcon}
                         />
                       )}
-                      <Text style={styles.countryText}>{`${
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.countryText}>{`${
                         country?.name ?? 'Country'
                       }`}</Text>
                     </View>

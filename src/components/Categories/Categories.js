@@ -20,6 +20,7 @@ const Categories = ({categories, selectedIndex, onCategoryChange}) => {
                 isSelected && {backgroundColor: COLORS.newPrimary},
               ]}>
               <Text
+                allowFontScaling={false}
                 style={[
                   styles.categoryName,
                   isSelected && {

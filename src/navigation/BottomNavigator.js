@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import {COLORS, SCREEN_NAMES, STACK_NAMES} from '../constants';
 import {verticalScale} from 'react-native-size-matters';
 import {TabBarIcon} from '../components';
@@ -21,14 +20,8 @@ const BottomTabNavigator = () => {
         headerShown: false,
         tabBarActiveTintColor: COLORS.newPrimary,
         tabBarInactiveTintColor: COLORS.white,
-        style: {
-          backgroundColor: COLORS.white,
-          borderTopLeftRadius: 24,
-          borderTopRightRadius: 24,
-          borderTopWidth: 0,
-          height: 56,
-          marginBottom: hasNotch ? verticalScale(10) : 0,
-        },
+        tabBarAllowFontScaling: false,
+        style: styles.globalTabBarStyle,
       }}>
       <BottomTabs.Screen
         name={SCREEN_NAMES.Home}
@@ -86,6 +79,14 @@ const BottomTabNavigator = () => {
 export default BottomTabNavigator;
 
 const styles = StyleSheet.create({
+  globalTabBarStyle: {
+    backgroundColor: COLORS.white,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    borderTopWidth: 0,
+    height: 56,
+    marginBottom: hasNotch ? verticalScale(10) : 0,
+  },
   activeTabStyle: {
     alignItems: 'center',
     borderTopColor: COLORS.newPrimary,

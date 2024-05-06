@@ -48,7 +48,9 @@ const NewCouponScreen = () => {
             />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitleText}>Coupon</Text>
+            <Text allowFontScaling={false} style={styles.headerTitleText}>
+              Coupon
+            </Text>
           </View>
         </View>
 
@@ -67,10 +69,14 @@ const NewCouponScreen = () => {
               <Image source={IMAGES.testImage} style={styles.userImage} />
             )}
             <View style={styles.userFullNameContainer}>
-              <Text style={styles.fullNameText}>{loginData?.name}</Text>
+              <Text allowFontScaling={false} style={styles.fullNameText}>
+                {loginData?.name}
+              </Text>
             </View>
             <View>
-              <Text style={styles.userNameText}>{`@${loginData?.name}`}</Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.userNameText}>{`@${loginData?.name}`}</Text>
             </View>
           </View>
           {/* <View style={styles.leftCutter} /> */}
@@ -97,10 +103,14 @@ const NewCouponScreen = () => {
                     styles.specialAmenitiesMainContainer,
                   ]}>
                   <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text style={styles.amenitiesTitle}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
                       {amenityDetails?.amenityName}
                     </Text>
-                    <Text style={styles.amenitiesDescription}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesDescription}>
                       {amenityDetails?.amenityDescription}
                     </Text>
                   </View>
@@ -119,10 +129,13 @@ const NewCouponScreen = () => {
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.amenitiesTitle
                     }>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text style={styles.amenitiesDescription}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.amenitiesDescription}>
                     at your choice
                   </Text>
                 </View>
@@ -137,10 +150,13 @@ const NewCouponScreen = () => {
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={
                       styles.amenitiesTitle
                     }>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text style={styles.amenitiesDescription}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.amenitiesDescription}>
                     at your choice
                   </Text>
                 </View>
@@ -153,11 +169,13 @@ const NewCouponScreen = () => {
                 ]}>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.amenitiesTitle,
                       styles.friendAmenityText,
                     ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.amenitiesDescription,
                       styles.friendAmenityTitle,
@@ -172,6 +190,7 @@ const NewCouponScreen = () => {
           {actionNumId === 9 && (
             <View style={styles.comingWithInfluencerTextContainer}>
               <Text
+                allowFontScaling={false}
                 style={
                   styles.comingWithInfluencerText
                 }>{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
@@ -180,16 +199,21 @@ const NewCouponScreen = () => {
 
           <View style={styles.dateTimeContainer}>
             <View style={styles.timeContainer}>
-              <Text style={styles.timeTitleText}>Date</Text>
+              <Text allowFontScaling={false} style={styles.timeTitleText}>
+                Date
+              </Text>
               <Text
+                allowFontScaling={false}
                 style={
                   styles.timeText
                 }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
             </View>
             {actionNumId !== 9 && (
               <View style={styles.timeContainer}>
-                <Text style={styles.timeTitleText}>Time</Text>
-                <Text style={styles.timeText}>
+                <Text allowFontScaling={false} style={styles.timeTitleText}>
+                  Time
+                </Text>
+                <Text allowFontScaling={false} style={styles.timeText}>
                   {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
                 </Text>
               </View>
@@ -197,7 +221,9 @@ const NewCouponScreen = () => {
           </View>
 
           <View style={styles.tiktokContainer}>
-            <Text style={styles.tiktokTitleText}>Content Type</Text>
+            <Text allowFontScaling={false} style={styles.tiktokTitleText}>
+              Content Type
+            </Text>
             <View style={styles.tiktokIconTextContainer}>
               <FastImage
                 resizeMode="contain"
@@ -205,18 +231,24 @@ const NewCouponScreen = () => {
                 style={styles.contentTypeImage}
               />
               {/* <Image resizeMode="cover" source={icon} style={styles.contentTypeImage} /> */}
-              <Text style={styles.tiktokDescription}>{actionName}</Text>
+              <Text allowFontScaling={false} style={styles.tiktokDescription}>
+                {actionName}
+              </Text>
             </View>
           </View>
 
           <View style={styles.placeContainer}>
-            <Text style={styles.tiktokTitleText}>Place</Text>
+            <Text allowFontScaling={false} style={styles.tiktokTitleText}>
+              Place
+            </Text>
             <TouchableOpacity
               style={styles.restaurantRedirectContainer}
               onPress={() =>
                 handleRestaurantRedirect(bookingDetails?._restaurant_turbo)
               }>
-              <Text style={styles.socialMediaTitleText}>
+              <Text
+                allowFontScaling={false}
+                style={styles.socialMediaTitleText}>
                 {`${bookingDetails?._restaurant_turbo?.Name}`}{' '}
               </Text>
               <Image
@@ -229,7 +261,11 @@ const NewCouponScreen = () => {
             <TouchableOpacity
               style={styles.contentBriefContainer}
               onPress={handleContentBriefPress}>
-              <Text style={styles.socialMediaTitleText}>Content brief </Text>
+              <Text
+                allowFontScaling={false}
+                style={styles.socialMediaTitleText}>
+                Content brief{' '}
+              </Text>
               <Image
                 resizeMode="contain"
                 source={IMAGES.back}
@@ -240,7 +276,7 @@ const NewCouponScreen = () => {
         </View>
 
         <View style={styles.viewDescriptionContainer}>
-          <Text style={styles.viewDescriptionText}>
+          <Text allowFontScaling={false} style={styles.viewDescriptionText}>
             * Show the present coupon to the restaurant staff to claim your deal
           </Text>
         </View>
@@ -248,7 +284,9 @@ const NewCouponScreen = () => {
           <TouchableOpacity
             onPress={handleGoToContentPress}
             style={styles.goToContentBtnContainer}>
-            <Text style={styles.goToContentBtnText}>Go to Content</Text>
+            <Text allowFontScaling={false} style={styles.goToContentBtnText}>
+              Go to Content
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

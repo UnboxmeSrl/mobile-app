@@ -14,8 +14,10 @@ const RejectedScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
         <Image source={IMAGES.rejected} style={styles.image} />
-        <Text style={styles.title}>You have not been approved</Text>
-        <Text style={styles.desc}>
+        <Text allowFontScaling={false} style={styles.title}>
+          You have not been approved
+        </Text>
+        <Text allowFontScaling={false} style={styles.desc}>
           We are sorry but for some reasons we are not able to include you in
           Claris for now! Don’t give up though you may have the potential!
         </Text>

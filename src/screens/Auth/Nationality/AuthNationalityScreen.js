@@ -48,7 +48,7 @@ const AuthNationalityScreen = () => {
                     resizeMode={'contain'}
                   />
                 )}
-                <Text style={styles.countryText}>{`${
+                <Text allowFontScaling={false} style={styles.countryText}>{`${
                   country?.name ?? 'Country'
                 }`}</Text>
               </View>

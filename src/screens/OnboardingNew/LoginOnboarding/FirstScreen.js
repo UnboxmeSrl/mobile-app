@@ -14,14 +14,17 @@ const FirstScreen = () => {
       />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Book `}
-            <Text style={styles.colorChangeText}>{`your Deals `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`your Deals `}</Text>
             {`in advance`}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
           <Text
+            allowFontScaling={false}
             style={
               styles.descriptionText
             }>{`Only Reel and Tiktok requests will require approvation `}</Text>

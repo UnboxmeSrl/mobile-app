@@ -24,7 +24,9 @@ const CustomButton = ({
         {isLoading ? (
           <ActivityIndicator size={30} color={COLORS.black22} />
         ) : (
-          <Text style={[styles.btnText, disabled && styles.disabledBtnText]}>
+          <Text
+            allowFontScaling={false}
+            style={[styles.btnText, disabled && styles.disabledBtnText]}>
             {' '}
             {title}
           </Text>

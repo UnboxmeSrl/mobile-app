@@ -14,19 +14,24 @@ const FirstOnboarding = () => {
       />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Collaborate with the `}
-            <Text style={styles.colorChangeText}>{`Top places `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`Top places `}</Text>
             {`of Bali`}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
             {`A top selection of places ready for `}
             <Text
+              allowFontScaling={false}
               style={styles.colorChangeText}>{`professional creators `}</Text>
             {`and`}
-            <Text style={styles.colorChangeText}>{` models `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{` models `}</Text>
             {`only `}
           </Text>
         </View>

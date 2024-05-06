@@ -42,6 +42,7 @@ const AuthUserTypeScreen = () => {
                   isSelected && styles.userTypeContainerWithSelection,
                 ]}>
                 <Text
+                  allowFontScaling={false}
                   style={[
                     styles.userTypeText,
                     isSelected && styles.userTypeTextWithSelection,

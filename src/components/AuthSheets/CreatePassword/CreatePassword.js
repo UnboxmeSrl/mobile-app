@@ -35,7 +35,9 @@ const CreatePassword = React.forwardRef(({}, ref) => {
         />
         {error?.message && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{error?.message}</Text>
+            <Text allowFontScaling={false} style={styles.errorText}>
+              {error?.message}
+            </Text>
           </View>
         )}
 

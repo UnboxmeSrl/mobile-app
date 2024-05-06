@@ -42,7 +42,7 @@ const AuthSocialNetworkScreen = () => {
         handleBackPress={handleBackPress}
       />
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>
+        <Text allowFontScaling={false} style={styles.descriptionText}>
           Register your social networks
         </Text>
       </View>
@@ -63,6 +63,7 @@ const AuthSocialNetworkScreen = () => {
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.tiktok} style={styles.socialMediaIcon} />
             <Text
+              allowFontScaling={false}
               style={[
                 styles.socialMediaNameText,
                 {
@@ -104,6 +105,7 @@ const AuthSocialNetworkScreen = () => {
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
             <Text
+              allowFontScaling={false}
               style={[
                 styles.socialMediaNameText,
                 {
@@ -133,7 +135,7 @@ const AuthSocialNetworkScreen = () => {
         </TouchableOpacity>
       </View>
       {/* <View style={styles.socialMediaDescriptionContainer}>
-        <Text style={styles.socialMediaDescriptionText}>
+        <Text allowFontScaling={false}  style={styles.socialMediaDescriptionText}>
           connect Instagram business account to get the Pro-influ checkmark on your profile
         </Text>
       </View>
@@ -142,7 +144,7 @@ const AuthSocialNetworkScreen = () => {
         <TouchableOpacity style={styles.instaBusinessItem} activeOpacity={0.5}>
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
-            <Text style={styles.instaBusinessText}>Instagram account</Text>
+            <Text allowFontScaling={false}  style={styles.instaBusinessText}>Instagram account</Text>
           </View>
           <View style={styles.loginIntoIconContainer}>
             <Image source={IMAGES.loginInto} style={[styles.loginIntoIcon, styles.instaBusinessLoginIntoIcon]} />

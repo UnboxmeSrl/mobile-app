@@ -40,7 +40,9 @@ const AuthAgencyScreen = () => {
           ) : (
             <View style={styles.roundedView} />
           )}
-          <Text style={styles.textStyle}>I am a freelances</Text>
+          <Text allowFontScaling={false} style={styles.textStyle}>
+            I am a freelances
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -51,7 +53,9 @@ const AuthAgencyScreen = () => {
           ) : (
             <View style={styles.roundedView} />
           )}
-          <Text style={styles.textStyle}>I work with Agency</Text>
+          <Text allowFontScaling={false} style={styles.textStyle}>
+            I work with Agency
+          </Text>
         </TouchableOpacity>
       </View>
 

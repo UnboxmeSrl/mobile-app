@@ -15,7 +15,9 @@ const SocialMediaSheet = React.forwardRef(
         <View style={styles.mainContainer}>
           <CustomTitle title={`${title}`} />
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>{`${description}`}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.descriptionText}>{`${description}`}</Text>
           </View>
           <View style={styles.fieldContainer}>
             <CustomTextInput
@@ -29,6 +31,7 @@ const SocialMediaSheet = React.forwardRef(
           <View style={styles.belowContainer}>
             <View style={styles.descriptionContainer}>
               <Text
+                allowFontScaling={false}
                 style={
                   styles.descriptionText
                 }>{`And send us a message to prove you’re the account owner`}</Text>

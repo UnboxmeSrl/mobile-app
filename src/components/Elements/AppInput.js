@@ -31,6 +31,7 @@ const AppInput = (
         {icon && <Icon name={icon} style={styles.icon} />}
         {img && <Image source={img} style={styles.img} />}
         <TextInput
+          allowFontScaling={false}
           autoCapitalize={autoCapitalize}
           editable={!isDisabled}
           numberOfLines={1}

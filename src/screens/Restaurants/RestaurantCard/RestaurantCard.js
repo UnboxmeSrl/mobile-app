@@ -29,12 +29,12 @@ const RestaurantCard = ({item}) => {
         />
         <View style={styles.mainContainer}>
           {/* <View style={styles.ratingsContainer}>
-            <Text style={styles.ratingsText}>+250</Text>
+            <Text allowFontScaling={false}  style={styles.ratingsText}>+250</Text>
             <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
           </View> */}
           {(item?.Influencer || item?.Model) && (
             <View style={styles.forModelsContainer}>
-              <Text style={styles.forModelsText}>
+              <Text allowFontScaling={false} style={styles.forModelsText}>
                 For {item?.Influencer && 'Influencer'}
                 {item?.Model && ' Models'}
               </Text>
@@ -42,9 +42,11 @@ const RestaurantCard = ({item}) => {
           )}
         </View>
         <View style={styles.nameLocationContainer}>
-          <Text style={styles.restaurantNameText}>{item?.Name}</Text>
+          <Text allowFontScaling={false} style={styles.restaurantNameText}>
+            {item?.Name}
+          </Text>
           {!!item.distance && (
-            <Text style={styles.distanceText}>
+            <Text allowFontScaling={false} style={styles.distanceText}>
               {item.distance.toFixed(2)} km from here
             </Text>
           )}

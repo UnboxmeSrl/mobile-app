@@ -14,16 +14,20 @@ const SecondScreen = () => {
       />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>
+          <Text allowFontScaling={false} style={styles.titleText}>
             {`Show the `}
-            <Text style={styles.colorChangeText}>{`coupon `}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.colorChangeText}>{`coupon `}</Text>
             {`at the venue`}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
             {`Show your coupon to the staff, to unlock the `}
-            <Text style={styles.boldedText}>{`free service`}</Text>
+            <Text
+              allowFontScaling={false}
+              style={styles.boldedText}>{`free service`}</Text>
           </Text>
         </View>
       </View>

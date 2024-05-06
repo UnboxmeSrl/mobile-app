@@ -37,7 +37,7 @@ const AuthDateOfBirthScreen = () => {
         onPress={() => setIsDatePickerOpen(true)}
         style={styles.dateContainer}
         activeOpacity={0.5}>
-        <Text style={styles.dateText}>
+        <Text allowFontScaling={false} style={styles.dateText}>
           {`${
             selectedDate
               ? `${
