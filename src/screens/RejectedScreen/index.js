@@ -1,1 +1,1 @@
-export { default as RejectedScreen } from './RejectedScreen'
+export {default as RejectedScreen} from './RejectedScreen';

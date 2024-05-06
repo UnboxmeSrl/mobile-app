@@ -9,4 +9,4 @@ export const geolocationSetting = {
   distanceFilter: 0,
   forceRequestLocation: true,
   showLocationDialog: true,
-}
+};

@@ -1,32 +1,32 @@
-import { useEffect, useState } from 'react'
-import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { navigate } from '../../../../services'
-import { useDispatch, useSelector } from 'react-redux'
-import { setAuthData, setSignUpProcessStage } from '../../../../redux/slices'
-import { useNavigation } from 'react-navigation-hooks'
+import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {SCREEN_NAMES} from '../../../../constants';
+import {navigate} from '../../../../services';
+import {setAuthData, setSignUpProcessStage} from '../../../../redux';
+import {useNavigation} from '@react-navigation/native';
 
 const useAuthCity = () => {
-  const userDetails = useSelector((state) => state.authSlice.authData)
-  const [city, setCity] = useState(userDetails?.city ?? '')
-  const dispatch = useDispatch()
-  const [isBtnDisabled, setIsBtnDisabled] = useState(true)
-  const navigation = useNavigation()
+  const userDetails = useSelector(state => state.authSlice.authData);
+  const [city, setCity] = useState(userDetails?.city ?? '');
+  const dispatch = useDispatch();
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  const navigation = useNavigation();
 
   const handleBackPress = () => {
-    navigation.replace(SCREEN_NAMES.AuthNationalityScreen)
-  }
+    navigation.replace(SCREEN_NAMES.AuthNationalityScreen);
+  };
 
   const handleNextPress = () => {
-    dispatch(setAuthData({ city: city }))
-    dispatch(setSignUpProcessStage(6))
-    navigate(SCREEN_NAMES.AuthAgencyScreen)
-  }
+    dispatch(setAuthData({city: city}));
+    dispatch(setSignUpProcessStage(6));
+    navigate(SCREEN_NAMES.AuthAgencyScreen);
+  };
 
   useEffect(() => {
     if (city) {
-      setIsBtnDisabled(false)
+      setIsBtnDisabled(false);
     }
-  }, [city])
+  }, [city]);
 
   return {
     isBtnDisabled,
@@ -34,7 +34,7 @@ const useAuthCity = () => {
     setCity,
     handleBackPress,
     handleNextPress,
-  }
-}
+  };
+};
 
-export default useAuthCity
+export default useAuthCity;

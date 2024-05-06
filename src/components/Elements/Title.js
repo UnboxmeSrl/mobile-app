@@ -1,11 +1,10 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import perfectSize from '../../utils/responsiveSize'
-import { colors } from '../../utils/theme'
-import AppText from './AppText'
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import AppText from './AppText';
+import {colors, perfectSize} from '../../utils';
 
-function Title({ style, title }) {
-  return <AppText style={[styles.text, style]}>{title}</AppText>
+function Title({style, title}) {
+  return <AppText style={[styles.text, style]}>{title}</AppText>;
 }
 
 const styles = StyleSheet.create({
@@ -17,5 +16,5 @@ const styles = StyleSheet.create({
     marginVertical: perfectSize(16),
     textTransform: 'capitalize',
   },
-})
-export default Title
+});
+export default Title;

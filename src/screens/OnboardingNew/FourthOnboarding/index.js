@@ -1,1 +1,1 @@
-export { default as FourthOnboarding } from './FourthOnboarding'
+export {default as FourthOnboarding} from './FourthOnboarding';

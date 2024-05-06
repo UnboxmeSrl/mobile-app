@@ -1,54 +1,74 @@
-import React from 'react'
-import { Pressable, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import perfectSize from '../../utils/responsiveSize'
-import { colors } from '../../utils/theme'
-import AppText from '../Elements/AppText'
+import React from 'react';
+import {Pressable, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {COLORS} from '../../constants';
+import {perfectSize} from '../../utils';
+import AppText from './AppText';
 
-const Badge = ({ title, style, titleStyle, iconStyle, icon, onPress, variant = 'success' }) => {
+const Badge = ({
+  title,
+  style,
+  titleStyle,
+  iconStyle,
+  icon,
+  onPress,
+  variant = 'success',
+}) => {
   const getBadgeStyle = () => {
     if (variant === 'success') {
-      return styles.badgeSuccess
+      return styles.badgeSuccess;
     } else if (variant === 'primary') {
-      return styles.badgePrimary
+      return styles.badgePrimary;
     } else if (variant === 'light') {
-      return styles.badgeLight
+      return styles.badgeLight;
     }
     // Add more variants as needed
-  }
+  };
 
   const getTitleStyle = () => {
     if (variant === 'success') {
-      return styles.titleSuccess
+      return styles.titleSuccess;
     } else if (variant === 'primary') {
-      return styles.titlePrimary
+      return styles.titlePrimary;
     } else if (variant === 'light') {
-      return styles.titleLight
+      return styles.titleLight;
     }
     // Add more variants as needed
-  }
-
+  };
   const getIconStyle = () => {
     if (variant === 'success') {
-      return styles.iconSuccess
+      return styles.iconSuccess;
     } else if (variant === 'primary') {
-      return styles.iconPrimary
+      return styles.iconPrimary;
     } else if (variant === 'light') {
-      return styles.iconLight
+      return styles.iconLight;
     }
     // Add more variants as needed
-  }
+  };
 
   return (
     <Pressable
-      style={({ pressed }) => [styles.btnStyle, getBadgeStyle(), style, { opacity: pressed ? 0.8 : 1 }]}
-      onPress={onPress}
-    >
-      {!!icon && <Icon name={icon} style={[getIconStyle(), styles.iconStyle, iconStyle]} />}
-      {!!title && <AppText style={[getTitleStyle(), styles.titleStyle, titleStyle]}>{title}</AppText>}
+      style={({pressed}) => [
+        styles.btnStyle,
+        getBadgeStyle(),
+        style,
+        {opacity: pressed ? 0.8 : 1},
+      ]}
+      onPress={onPress}>
+      {!!icon && (
+        <Icon
+          name={icon}
+          style={[getIconStyle(), styles.iconStyle, iconStyle]}
+        />
+      )}
+      {!!title && (
+        <AppText style={[getTitleStyle(), styles.titleStyle, titleStyle]}>
+          {title}
+        </AppText>
+      )}
     </Pressable>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   //-------- App Button --------//
@@ -63,13 +83,13 @@ const styles = StyleSheet.create({
     // columnGap: perfectSize(12),
   },
   badgeSuccess: {
-    backgroundColor: colors.successLight,
+    backgroundColor: COLORS.successLight,
   },
   badgePrimary: {
-    backgroundColor: colors.primaryLight,
+    backgroundColor: COLORS.celticLight,
   },
   badgeLight: {
-    backgroundColor: colors.light,
+    backgroundColor: COLORS.cultured,
   },
   titleStyle: {
     fontSize: perfectSize(12),
@@ -77,27 +97,27 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   titleSuccess: {
-    color: colors.success,
+    color: COLORS.micGreen,
   },
   titlePrimary: {
-    color: colors.primary,
+    color: COLORS.celticBlue,
   },
   titleLight: {
-    color: colors.infoLight,
+    color: COLORS.darkSilver,
   },
   iconStyle: {
     fontSize: perfectSize(22),
     marginRight: perfectSize(8),
   },
   iconSuccess: {
-    color: colors.success,
+    color: COLORS.micGreen,
   },
   iconPrimary: {
-    color: colors.primary,
+    color: COLORS.celticBlue,
   },
   iconLight: {
-    color: colors.infoLight,
+    color: COLORS.darkSilver,
   },
-})
+});
 
-export default Badge
+export default Badge;

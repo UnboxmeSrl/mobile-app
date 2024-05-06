@@ -1,37 +1,60 @@
-import { ActivityIndicator, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import React from 'react'
-import { IMAGES } from '../../assets/images'
-import FastImage from 'react-native-fast-image'
-import { checkAction, checkActionName, checkContentStatus } from '../../utils'
+import React from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {COLORS, FONTS} from '../../constants';
+import {checkAction, checkActionName, checkContentStatus} from '../../utils';
 
-const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegativeBtnPress, handlePositiveBtnPress }) => {
-  const approvalStage = contentDetails?._content_status_turbo?.name
-  let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0
-  let icon = checkAction(actionNumId)?.action_icon
-  let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0
+const ContentStatusModal = ({
+  visible,
+  isLoading,
+  contentDetails,
+  handleNegativeBtnPress,
+  handlePositiveBtnPress,
+}) => {
+  const approvalStage = contentDetails?._content_status_turbo?.name;
+  let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0;
+  let icon = checkAction(actionNumId)?.action_icon;
+  let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0;
   if (contentDetails?.diary_action_turbo_id) {
-    actionName = contentDetails?._diary_action_turbo?.action_for_others
+    actionName = contentDetails?._diary_action_turbo?.action_for_others;
     if (actionNumId === 3) {
-      actionName = contentDetails?._diary_action_turbo?.action
+      actionName = contentDetails?._diary_action_turbo?.action;
     }
-    icon = checkActionName(actionName)
+    icon = checkActionName(actionName);
   }
 
-  const { title, description, statusIcon } = checkContentStatus(approvalStage)
+  const {title, description, statusIcon} = checkContentStatus(approvalStage);
   return (
-    <Modal animationType="slide" onRequestClose={handleNegativeBtnPress} transparent visible={visible}>
+    <Modal
+      animationType="slide"
+      onRequestClose={handleNegativeBtnPress}
+      transparent
+      visible={visible}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <TouchableOpacity style={styles.closeIconContainer} onPress={handleNegativeBtnPress}>
+          <TouchableOpacity
+            style={styles.closeIconContainer}
+            onPress={handleNegativeBtnPress}>
             <Image source={IMAGES.close} style={styles.closeIcon} />
           </TouchableOpacity>
 
           <View style={styles.statusIconTextContainer}>
             <View>
-              <Image resizeMode="cover" source={statusIcon} style={styles.approvalIcon} />
+              <Image
+                resizeMode="cover"
+                source={statusIcon}
+                style={styles.approvalIcon}
+              />
             </View>
             <View style={styles.statusTextContainer}>
               <Text style={styles.statusText}>{title}</Text>
@@ -46,17 +69,25 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
             style={[
               styles.onApprovalItemsMainContainer,
               approvalStage === 'To Publish'
-                ? { backgroundColor: COLORS.cornSilk, borderColor: COLORS.americanYellow }
+                ? {
+                    backgroundColor: COLORS.cornSilk,
+                    borderColor: COLORS.americanYellow,
+                  }
                 : approvalStage === 'Rejected'
-                ? { backgroundColor: COLORS.seaShellRed, borderColor: COLORS.follyRed }
+                ? {
+                    backgroundColor: COLORS.seaShellRed,
+                    borderColor: COLORS.follyRed,
+                  }
                 : approvalStage === 'Under Review'
-                ? { backgroundColor: COLORS.azureishWhite, borderColor: COLORS.hanBlue }
+                ? {
+                    backgroundColor: COLORS.azureishWhite,
+                    borderColor: COLORS.hanBlue,
+                  }
                 : approvalStage === 'Missed Deadline' && {
                     backgroundColor: COLORS.paleRose,
                     borderColor: COLORS.byzantine,
                   },
-            ]}
-          >
+            ]}>
             <View style={styles.socialMediaDetailsMainRow}>
               <View style={styles.socialMediaImageContainer}>
                 <FastImage
@@ -71,7 +102,9 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
               <View style={styles.socialMediaNameContainer}>
                 <Text style={styles.socialMediaNameText}>
                   {` ${
-                    contentDetails?._actions_turbo?.Action_Name === 'Story' ? `3 X ${actionName}` : `Full ${actionName}`
+                    contentDetails?._actions_turbo?.Action_Name === 'Story'
+                      ? `3 X ${actionName}`
+                      : `Full ${actionName}`
                   }`}
                 </Text>
               </View>
@@ -79,26 +112,28 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
                 style={[
                   styles.onApprovalTextContainer,
                   approvalStage === 'To Publish'
-                    ? { backgroundColor: COLORS.cornSilk }
+                    ? {backgroundColor: COLORS.cornSilk}
                     : approvalStage === 'Rejected'
-                    ? { backgroundColor: COLORS.seaShellRed }
+                    ? {backgroundColor: COLORS.seaShellRed}
                     : approvalStage === 'Under Review'
-                    ? { backgroundColor: COLORS.azureishWhite }
-                    : approvalStage === 'Missed Deadline' && { backgroundColor: COLORS.paleRose },
-                ]}
-              >
+                    ? {backgroundColor: COLORS.azureishWhite}
+                    : approvalStage === 'Missed Deadline' && {
+                        backgroundColor: COLORS.paleRose,
+                      },
+                ]}>
                 <Text
                   style={[
                     styles.onApprovalText,
                     approvalStage === 'To Publish'
-                      ? { color: COLORS.americanYellow }
+                      ? {color: COLORS.americanYellow}
                       : approvalStage === 'Rejected'
-                      ? { color: COLORS.error }
+                      ? {color: COLORS.error}
                       : approvalStage === 'Under Review'
-                      ? { color: COLORS.celticBlue }
-                      : approvalStage === 'Missed Deadline' && { color: COLORS.redViolet },
-                  ]}
-                >{`${approvalStage}`}</Text>
+                      ? {color: COLORS.celticBlue}
+                      : approvalStage === 'Missed Deadline' && {
+                          color: COLORS.redViolet,
+                        },
+                  ]}>{`${approvalStage}`}</Text>
               </View>
             </View>
             {approvalStage === 'Approved' && (
@@ -106,14 +141,21 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
                 <View style={styles.locationImageContainer}>
                   <FastImage
                     resizeMode="cover"
-                    source={{ priority: FastImage.priority.high, uri: contentDetails?._restaurant_turbo?.Cover?.url }}
+                    source={{
+                      priority: FastImage.priority.high,
+                      uri: contentDetails?._restaurant_turbo?.Cover?.url,
+                    }}
                     style={styles.locationImage}
                   />
                 </View>
                 <View style={styles.locationNameContainer}>
-                  <Text style={styles.locationNameText}>{contentDetails?._restaurant_turbo?.Name}</Text>
+                  <Text style={styles.locationNameText}>
+                    {contentDetails?._restaurant_turbo?.Name}
+                  </Text>
                   <View style={styles.locationTextContainer}>
-                    <Text style={styles.locationText}>{contentDetails?._restaurant_turbo?.Adress}</Text>
+                    <Text style={styles.locationText}>
+                      {contentDetails?._restaurant_turbo?.Adress}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -123,14 +165,15 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
                 style={[
                   styles.boxDescription,
                   approvalStage === 'To Publish'
-                    ? { color: COLORS.americanYellow }
+                    ? {color: COLORS.americanYellow}
                     : approvalStage === 'Rejected'
-                    ? { color: COLORS.error }
+                    ? {color: COLORS.error}
                     : approvalStage === 'Under Review'
-                    ? { color: COLORS.celticBlue }
-                    : approvalStage === 'Missed Deadline' && { color: COLORS.redViolet },
-                ]}
-              >
+                    ? {color: COLORS.celticBlue}
+                    : approvalStage === 'Missed Deadline' && {
+                        color: COLORS.redViolet,
+                      },
+                ]}>
                 {description}
               </Text>
             </View>
@@ -146,7 +189,9 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
                 <ActivityIndicator color={COLORS.black22} size={30} />
               </View>
             ) : (
-              <TouchableOpacity onPress={handlePositiveBtnPress} style={styles.okayBtnContainer}>
+              <TouchableOpacity
+                onPress={handlePositiveBtnPress}
+                style={styles.okayBtnContainer}>
                 <Text style={styles.okayBtnText}>Okay</Text>
               </TouchableOpacity>
             )}
@@ -154,10 +199,10 @@ const ContentStatusModal = ({ visible, isLoading, contentDetails, handleNegative
         </View>
       </View>
     </Modal>
-  )
-}
+  );
+};
 
-export default ContentStatusModal
+export default ContentStatusModal;
 
 const styles = StyleSheet.create({
   boxDescriptionContainer: {
@@ -343,4 +388,4 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18),
     fontWeight: '600',
   },
-})
+});

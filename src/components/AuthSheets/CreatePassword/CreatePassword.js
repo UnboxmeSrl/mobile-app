@@ -1,11 +1,10 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { BottomSheet } from '../../BottomSheet'
-import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
-import { useCreatePassword } from './hooks'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {BottomSheet} from '../../BottomSheet';
+import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
+import {useCreatePassword} from './hooks';
+import {COLORS, FONTS} from '../../../constants';
 
 const CreatePassword = React.forwardRef(({}, ref) => {
   const {
@@ -16,7 +15,7 @@ const CreatePassword = React.forwardRef(({}, ref) => {
     confirmPassword,
     setConfirmPassword,
     handleCreatePasswordPress,
-  } = useCreatePassword()
+  } = useCreatePassword();
 
   return (
     <BottomSheet ref={ref}>
@@ -49,10 +48,10 @@ const CreatePassword = React.forwardRef(({}, ref) => {
         </View>
       </View>
     </BottomSheet>
-  )
-})
+  );
+});
 
-export default CreatePassword
+export default CreatePassword;
 
 const styles = StyleSheet.create({
   errorText: {
@@ -88,4 +87,4 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     marginTop: verticalScale(24),
   },
-})
+});

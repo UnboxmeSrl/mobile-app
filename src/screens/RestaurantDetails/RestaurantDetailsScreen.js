@@ -1,14 +1,22 @@
-import React from 'react'
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { CustomCarousel } from '../../components/CustomCarousel'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { commonStyle } from '../../utils'
-import { useRestaurantDetails } from './hooks'
-import { ServiceCard } from './ServiceCard'
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {CustomCarousel} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {useRestaurantDetails} from './hooks';
+import {ServiceCard} from './ServiceCard';
 
 const RestaurantDetails = () => {
   const {
@@ -23,48 +31,65 @@ const RestaurantDetails = () => {
     // onCategoryChange,
     handleBackPress,
     handleRedirection,
-  } = useRestaurantDetails()
+  } = useRestaurantDetails();
   // console.log('Restaurant Details', JSON.stringify(restaurantDetails))
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <ScrollView>
         <View>
           {restaurantDetails?.GalleryRestaurant ? (
             <CustomCarousel
-              Component={({ item, index }) => {
+              Component={({item, index}) => {
                 return (
                   <>
                     {isImageLoading && <View style={styles.imageLoader} />}
                     <FastImage
                       onLoadEnd={() => setIsImageLoading(false)}
                       resizeMode="cover"
-                      source={{ priority: FastImage.priority.high, uri: item?.url }}
+                      source={{
+                        priority: FastImage.priority.high,
+                        uri: item?.url,
+                      }}
                       style={[styles.imageStyle]}
                     />
                   </>
-                )
+                );
               }}
               data={restaurantDetails?.GalleryRestaurant}
             />
           ) : (
             <View style={styles.emptyImages}>
-              <Text style={styles.emptyImagesText}>Images are not available for this restaurant.</Text>
+              <Text style={styles.emptyImagesText}>
+                Images are not available for this restaurant.
+              </Text>
             </View>
           )}
-          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backIconContainer}>
             <Image
               resizeMode="cover"
               source={IMAGES.back}
-              style={[styles.backIcon, !restaurantDetails?.GalleryRestaurant && { tintColor: COLORS.black }]}
+              style={[
+                styles.backIcon,
+                !restaurantDetails?.GalleryRestaurant && {
+                  tintColor: COLORS.black,
+                },
+              ]}
             />
           </TouchableOpacity>
         </View>
         <View style={styles.restaurantDetailsContainer}>
-          <Text style={styles.restaurantNameText}>{restaurantDetails?.Name}</Text>
+          <Text style={styles.restaurantNameText}>
+            {restaurantDetails?.Name}
+          </Text>
           {restaurantDetails?.Adress && (
-            <TouchableOpacity onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}>
-              <Text style={styles.restaurantAddressText}>{restaurantDetails?.Adress}</Text>
+            <TouchableOpacity
+              onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}>
+              <Text style={styles.restaurantAddressText}>
+                {restaurantDetails?.Adress}
+              </Text>
             </TouchableOpacity>
           )}
           {/* <View style={styles.socialLinksContainer}>
@@ -99,7 +124,9 @@ const RestaurantDetails = () => {
           {!!restaurantDetails?.About && (
             <View style={styles.aboutTitleContainer}>
               <Text style={styles.aboutTitleText}>About</Text>
-              <Text style={styles.aboutDescriptionText}>{restaurantDetails?.About}</Text>
+              <Text style={styles.aboutDescriptionText}>
+                {restaurantDetails?.About}
+              </Text>
             </View>
           )}
 
@@ -122,7 +149,8 @@ const RestaurantDetails = () => {
             customCategories={serviceCategories}
             onPress={onCategoryChange}
           /> */}
-
+        </View>
+        <View style={styles.serviceCardsContainer}>
           {isLoading ? (
             <View style={styles.loaderContainer}>
               <ActivityIndicator color={COLORS.newPrimary} size={20} />
@@ -140,20 +168,31 @@ const RestaurantDetails = () => {
               data={services}
               horizontal
               keyExtractor={(_, index) => index.toString()}
-              renderItem={({ item, index }) => {
-                const deals = item?.Deal_limit - item?.deal_done
-                return <ServiceCard index={index} item={item} deals={deals} restaurantDetails={restaurantDetails} />
+              renderItem={({item, index}) => {
+                const deals = item?.Deal_limit - item?.deal_done;
+                return (
+                  <ServiceCard
+                    index={index}
+                    item={item}
+                    deals={deals}
+                    actionNumId={item?._actions_turbo?.action_num_id}
+                    restaurantDetails={restaurantDetails}
+                  />
+                );
               }}
               showsHorizontalScrollIndicator={false}
             />
           )}
         </View>
       </ScrollView>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
+  serviceCardsContainer: {
+    paddingLeft: scale(10),
+  },
   loaderContainer: {
     marginTop: '25%',
     alignItems: 'center',
@@ -270,7 +309,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    ...commonStyle.containerPaddingTop,
   },
   previewText: {
     color: COLORS.achromaticBlack,
@@ -298,7 +336,7 @@ const styles = StyleSheet.create({
     height: verticalScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: scale(25),
   },
   socialLinksContainer: {
@@ -306,6 +344,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: verticalScale(20),
   },
-})
+});
 
-export default RestaurantDetails
+export default RestaurantDetails;

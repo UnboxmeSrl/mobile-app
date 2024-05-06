@@ -1,30 +1,39 @@
-import React, { useCallback, useEffect, useRef } from 'react'
-import { BackHandler, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
-import { IMAGES } from '../../assets/images'
-import { SignInWithEmail } from '../../components'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { MODAL_NAMES } from '../../constants/navigation'
-import { commonStyle } from '../../utils'
-import { useSignUp } from './hooks'
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {
+  BackHandler,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {SignInWithEmail} from '../../components';
+import {COLORS, FONTS, MODAL_NAMES} from '../../constants';
+import {commonStyle} from '../../utils';
+import {useSignUp} from './hooks';
 
 const SignUpNew = () => {
-  const { handleSignInPress, handleCreateAnAccountPress, handleGuestPress } = useSignUp()
-  const { navigate } = useNavigation()
-  const isFromBookRedirected = useNavigationParam('isFromBookRedirected')
+  const route = useRoute();
+  const {handleSignInPress, handleCreateAnAccountPress, handleGuestPress} =
+    useSignUp();
+  const {navigate} = useNavigation();
+  const isFromBookRedirected = route.params?.isFromBookRedirected;
   const navigateToWebview = useCallback(
-    (uri) => {
-      navigate({ params: { uri }, routeName: MODAL_NAMES.WebView })
+    uri => {
+      navigate({params: {uri}, routeName: MODAL_NAMES.WebView});
     },
-    [navigate]
-  )
-  const navigateToTerms = () => navigateToWebview('https://www.joinclaris.com/terms-of-service/')
-  const navigateToPrivacy = () => navigateToWebview(' https://www.joinclaris.com/privacy-policy')
-  const bottomSheetRef = useRef()
+    [navigate],
+  );
+  const navigateToTerms = () =>
+    navigateToWebview('https://www.joinclaris.com/terms-of-service/');
+  const navigateToPrivacy = () =>
+    navigateToWebview(' https://www.joinclaris.com/privacy-policy');
+  const bottomSheetRef = useRef();
   const navigateToEmailModal = () => {
-    bottomSheetRef?.current?.open()
+    bottomSheetRef?.current?.open();
     // ✅ ✅ ✅ ✅ Updated this but this code is for future reference
     // navigate({
     //   params: {
@@ -32,29 +41,43 @@ const SignUpNew = () => {
     //   },
     //   routeName: MODAL_NAMES.SignInEmail,
     // })
-  }
+  };
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-    return () => backHandler.remove()
-  }, [])
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => true,
+    );
+    return () => backHandler.remove();
+  }, []);
   return (
     <View style={styles.mainContainer}>
-      <ImageBackground source={IMAGES.authBackground} style={styles.backgroundStyle}>
+      <ImageBackground
+        source={IMAGES.authBackground}
+        style={styles.backgroundStyle}>
         <View style={styles.viewForMargin}>
           <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>{`Travel by pre-arranged collabs in tropical paradises `}</Text>
+            <Text
+              style={
+                styles.titleText
+              }>{`Travel by pre-arranged collabs in tropical paradises `}</Text>
           </View>
         </View>
 
         <View style={styles.authButtonsContainer}>
-          <TouchableOpacity onPress={navigateToEmailModal} style={styles.signInBtnContainer} activeOpacity={0.7}>
+          <TouchableOpacity
+            onPress={navigateToEmailModal}
+            style={styles.signInBtnContainer}
+            activeOpacity={0.7}>
             <Text style={styles.signInBtnText}>Sign In</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity onPress={handleSignInPress} style={styles.signInBtnContainer} activeOpacity={0.7}>
             <Text style={styles.signInBtnText}>Sign In</Text>
           </TouchableOpacity> */}
 
-          <TouchableOpacity onPress={handleCreateAnAccountPress} style={styles.signUpBtnContainer} activeOpacity={0.7}>
+          <TouchableOpacity
+            onPress={handleCreateAnAccountPress}
+            style={styles.signUpBtnContainer}
+            activeOpacity={0.7}>
             <Text style={styles.signUpBtnText}>Create an account</Text>
           </TouchableOpacity>
         </View>
@@ -65,7 +88,10 @@ const SignUpNew = () => {
           <View style={styles.orDivider} />
         </View>
 
-        <TouchableOpacity onPress={handleGuestPress} style={styles.guestBtnContainer} activeOpacity={0.7}>
+        <TouchableOpacity
+          onPress={handleGuestPress}
+          style={styles.guestBtnContainer}
+          activeOpacity={0.7}>
           <Text style={styles.guestBtnText}>Continue as Guest</Text>
         </TouchableOpacity>
 
@@ -79,13 +105,16 @@ const SignUpNew = () => {
             <Text style={styles.changedText}>{` Privacy Policy. `}</Text>
           </Text>
         </View>
-        <SignInWithEmail isFromBookRedirected={isFromBookRedirected} ref={bottomSheetRef} />
+        <SignInWithEmail
+          isFromBookRedirected={isFromBookRedirected}
+          ref={bottomSheetRef}
+        />
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
-export default SignUpNew
+export default SignUpNew;
 
 const styles = StyleSheet.create({
   authButtonsContainer: {
@@ -195,4 +224,4 @@ const styles = StyleSheet.create({
   changedText: {
     fontFamily: FONTS.quicksandBold,
   },
-})
+});

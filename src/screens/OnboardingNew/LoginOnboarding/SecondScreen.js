@@ -1,8 +1,8 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../../assets/images'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { COLORS, FONTS } from '../../../constants'
+import {Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import {IMAGES} from '../../../assets';
 
 const SecondScreen = () => {
   return (
@@ -28,10 +28,10 @@ const SecondScreen = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default SecondScreen
+export default SecondScreen;
 
 const styles = StyleSheet.create({
   descriptionText: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     color: COLORS.white,
     textAlign: 'center',
-    fontSize: moderateScale(32),
+    fontSize: moderateScale(30),
   },
   titleContainer: {
     width: '90%',
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
     height: verticalScale(370),
     width: '100%',
   },
-})
+});

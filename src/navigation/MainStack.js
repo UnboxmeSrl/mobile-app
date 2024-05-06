@@ -1,142 +1,159 @@
-import createNativeStackNavigator from 'react-native-screens/createNativeStackNavigator'
-import { createStackNavigator } from 'react-navigation-stack'
-import { last, length, prop, slice } from 'ramda'
-import BottomNavigator from 'src/navigation/BottomNavigator'
-import { MODALS } from 'src/navigation/modals'
-import pushScreens from 'src/navigation/pushScreens'
-import { makeStack, STACK_SUFFIX } from 'src/services/routing'
-
-import { COLORS } from '@const'
-import { IS_IOS } from '@const/common'
-import { MAIN_NAVIGATOR, STACK_NAMES } from '@const/navigation'
-
+import {createStackNavigator} from '@react-navigation/stack';
+import {SCREEN_NAMES, STACK_NAMES} from '../constants';
+import {Splash} from '../components';
+import BottomTabNavigator from './BottomNavigator';
 import {
-  cardOverlay,
-  cardStyleInterpolator,
-  gestureResponseDistance,
-  getCardStyle,
-  getRadius,
-  getTopOffset,
-  ModalSlideFromBottomIOS,
-  rootScreensNavigationOptions,
-} from './utils'
+  AppliedScreen,
+  AuthAgencyScreen,
+  AuthCityScreen,
+  AuthCodeFromFriendScreen,
+  AuthDateOfBirthScreen,
+  AuthGenderScreen,
+  AuthInterestTopicsScreen,
+  AuthNationalityScreen,
+  AuthPersonalDetailsScreen,
+  AuthProfilePictureScreen,
+  AuthSocialNetworkScreen,
+  AuthUserTypeScreen,
+  BookingDetailsScreen,
+  BookingOnApprovalScreen,
+  ContentBriefScreen,
+  ContentScreen,
+  EditProfileScreen,
+  FirstWelcomeScreen,
+  NewCouponScreen,
+  OnboardingNew,
+  OtherSignUpOptionsScreen,
+  PublishContentScreen,
+  RejectedScreen,
+  ServiceDetails,
+  SettingsNew,
+  SignUpNew,
+  YourScheduleDetailsScreen,
+} from '../screens';
 
-let insertedKey = 0
+const StackMain = createStackNavigator();
 
-// This is topmost navigator contain only native navigator and modal screens. Can be Native for IOS but must be JS for android
-const createMainNavigator = IS_IOS ? createNativeStackNavigator : createStackNavigator
+const MainStack = () => {
+  return (
+    <StackMain.Navigator
+      initialRouteName={SCREEN_NAMES.Splash}
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <StackMain.Screen name={SCREEN_NAMES.Splash} component={Splash} />
+      <StackMain.Screen
+        name={STACK_NAMES.BottomStack}
+        component={BottomTabNavigator}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.ServiceDetails}
+        component={ServiceDetails}
+      />
+      <StackMain.Screen name={SCREEN_NAMES.SignUpNew} component={SignUpNew} />
+      <StackMain.Screen
+        name={SCREEN_NAMES.BookingDetails}
+        component={BookingDetailsScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.BookingOnApprovalScreen}
+        component={BookingOnApprovalScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.ContentScreen}
+        component={ContentScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.ContentBriefScreen}
+        component={ContentBriefScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.NewCouponScreen}
+        component={NewCouponScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.YourScheduleDetailsScreen}
+        component={YourScheduleDetailsScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.PublishContentScreen}
+        component={PublishContentScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.SettingsNew}
+        component={SettingsNew}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.EditProfile}
+        component={EditProfileScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.FirstWelcomeScreen}
+        component={FirstWelcomeScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AppliedScreen}
+        component={AppliedScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.RejectedScreen}
+        component={RejectedScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.OnboardingNew}
+        component={OnboardingNew}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.OtherSignUp}
+        component={OtherSignUpOptionsScreen}
+      />
 
-const nativeStackPushRoutesFactory = (mainRouteName, mainRouteConfig) => {
-  const navigator = createNativeStackNavigator(
-    { ...pushScreens, [mainRouteName]: mainRouteConfig },
-    {
-      defaultNavigationOptions: ({ theme }) => ({
-        cardShadowEnabled: false,
-        cardStyle: {
-          backgroundColor: theme === 'dark' ? COLORS.background : COLORS.white,
-        },
-        stackAnimation: 'slide_from_right',
-      }),
-      headerMode: 'none',
-      initialRouteName: STACK_NAMES.BottomStack,
-    }
-  )
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthPersonalDetailsScreen}
+        component={AuthPersonalDetailsScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthGenderScreen}
+        component={AuthGenderScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthDateOfBirthScreen}
+        component={AuthDateOfBirthScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthNationalityScreen}
+        component={AuthNationalityScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthCityScreen}
+        component={AuthCityScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthAgencyScreen}
+        component={AuthAgencyScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthInterestTopicsScreen}
+        component={AuthInterestTopicsScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthProfilePictureScreen}
+        component={AuthProfilePictureScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthCodeFromFriendScreen}
+        component={AuthCodeFromFriendScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthUserTypeScreen}
+        component={AuthUserTypeScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.AuthSocialNetworkScreen}
+        component={AuthSocialNetworkScreen}
+      />
+    </StackMain.Navigator>
+  );
+};
 
-  const router = prop('router', navigator)
-  const oldGetStateForAction = prop('getStateForAction', router)
-
-  router.getStateForAction = (action, state) => {
-    if (action.type === 'Custom/INSERT_ONE_BELOW') {
-      const nextLastIndexInStack = length(state.routes)
-      const lastScreen = last(state.routes)
-      const otherScreens = slice(0, length(state.routes) - 1, state.routes)
-
-      const newState = {
-        ...state,
-        index: nextLastIndexInStack,
-        isTransitioning: true,
-        routes: [
-          ...otherScreens,
-          {
-            key: `inserted-${insertedKey}`,
-            routeName: action.routeName,
-          },
-          lastScreen,
-        ],
-      }
-
-      insertedKey += 1
-
-      return newState
-    }
-
-    return oldGetStateForAction(action, state)
-  }
-
-  return navigator
-}
-
-const wrapIntoPushStackNavigators = (routeConfigMap) =>
-  Object.keys(routeConfigMap).reduce((prev, curr) => {
-    prev[curr + STACK_SUFFIX] = {
-      path: '',
-      screen: nativeStackPushRoutesFactory(curr, routeConfigMap[curr]),
-    }
-    return prev
-  }, {})
-
-const wrappedModals = Object.keys(MODALS).reduce(
-  (prev, curr) => ({
-    [curr]: {
-      navigationOptions: {
-        cardOverlay,
-        cardOverlayEnabled: !IS_IOS,
-        cardStyle: getCardStyle(curr),
-        cardStyleInterpolator,
-        cornerRadius: getRadius(curr),
-        gestureEnabled: true,
-        gestureResponseDistance,
-        topOffset: IS_IOS && getTopOffset(curr),
-      },
-      screen: MODALS[curr],
-      ...(typeof MODALS[curr] === 'object' ? MODALS[curr] : {}),
-    },
-    ...prev,
-  }),
-  {}
-)
-
-const RootStack = makeStack(
-  createMainNavigator(
-    {
-      [MAIN_NAVIGATOR]: {
-        path: '',
-        screen: createNativeStackNavigator(
-          {
-            ...wrapIntoPushStackNavigators({
-              [STACK_NAMES.BottomStack]: {
-                path: '',
-                screen: BottomNavigator,
-              },
-            }),
-          },
-          {
-            headerMode: 'none',
-          }
-        ),
-      },
-      ...wrappedModals,
-    },
-    {
-      defaultNavigationOptions: {
-        customStack: true,
-        ...rootScreensNavigationOptions,
-        ...ModalSlideFromBottomIOS,
-      },
-      headerMode: 'none',
-      mode: 'modal',
-    }
-  )
-)
-
-export default RootStack
+export default MainStack;

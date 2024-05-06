@@ -1,43 +1,40 @@
-import React from 'react'
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import React from 'react';
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {useDispatch} from 'react-redux';
+import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
+import {setCity} from '../../redux/slices';
+import {useNavigation} from '@react-navigation/native';
 
-import { navigate } from '@services'
-
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { SCREEN_NAMES } from '../../constants/navigation'
-import { useDispatch } from 'react-redux'
-import { setCity } from '../../redux/slices'
-import { useNavigation } from 'react-navigation-hooks'
-
-const LocationsTile = ({ item }) => {
-  const navigation = useNavigation()
-  const dispatch = useDispatch()
+const LocationsTile = ({item}) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const handleBtnPress = () => {
-    dispatch(setCity(item))
-    navigation.replace({
-      params: { cityData: item },
-      routeName: SCREEN_NAMES.Restaurants,
-    })
-  }
+    dispatch(setCity(item));
+    navigation.replace(SCREEN_NAMES.Restaurants, {cityData: item});
+  };
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
         imageStyle={styles.imageStyle}
         resizeMode="cover"
-        source={{ uri: item?.City?.url }}
-        style={styles.imageContainerStyle}
-      >
+        source={{uri: item?.City?.url}}
+        style={styles.imageContainerStyle}>
         <TouchableOpacity onPress={handleBtnPress} style={styles.btnContainer}>
           <Text style={styles.btnText}>{`${item?.CityName}`}</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
-export default LocationsTile
+export default LocationsTile;
 
 const styles = StyleSheet.create({
   btnContainer: {
@@ -52,6 +49,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontFamily: FONTS.quicksandMedium,
+    color: COLORS.black,
     fontSize: moderateScale(12),
   },
   imageContainerStyle: {
@@ -71,4 +69,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(16),
     width: '100%',
   },
-})
+});

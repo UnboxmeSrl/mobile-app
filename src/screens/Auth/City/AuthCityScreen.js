@@ -1,25 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { CustomButton, CustomHeader, CustomTextInput } from '../../../components'
-import { COLORS } from '../../../constants'
-import { useAuthCity } from './hooks'
-import { verticalScale } from 'react-native-size-matters'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {verticalScale} from 'react-native-size-matters';
+import {CustomButton, CustomHeader, CustomTextInput} from '../../../components';
+import {COLORS} from '../../../constants';
+import {useAuthCity} from './hooks';
 
 const AuthCityScreen = () => {
-  const { isBtnDisabled, city, setCity, handleBackPress, handleNextPress } = useAuthCity()
+  const {isBtnDisabled, city, setCity, handleBackPress, handleNextPress} =
+    useAuthCity();
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <CustomHeader title={'City'} step={5} handleBackPress={handleBackPress} />
-      <CustomTextInput placeholder={'City'} value={city} handleOnChangeText={setCity} />
+      <CustomTextInput
+        placeholder={'City'}
+        value={city}
+        handleOnChangeText={setCity}
+      />
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+        <CustomButton
+          title={'Next'}
+          handlePress={handleNextPress}
+          disabled={isBtnDisabled}
+        />
       </View>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthCityScreen
+export default AuthCityScreen;
 
 const styles = StyleSheet.create({
   btnContainer: {
@@ -28,6 +36,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

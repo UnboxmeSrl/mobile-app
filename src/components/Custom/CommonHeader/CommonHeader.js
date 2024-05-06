@@ -1,25 +1,31 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS, FONTS } from '../../../constants'
-import { IMAGES } from '../../../assets/images'
-import { useNavigation } from 'react-navigation-hooks'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {useNavigation} from '@react-navigation/native';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
 
-const CommonHeader = ({ title }) => {
-  const navigation = useNavigation()
+const CommonHeader = ({title}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.pop()} style={styles.backIconContainer}>
-        <Image resizeMode="cover" source={IMAGES.arrowLeft} style={styles.backIcon} />
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backIconContainer}>
+        <Image
+          resizeMode="cover"
+          source={IMAGES.arrowLeft}
+          style={styles.backIcon}
+        />
       </TouchableOpacity>
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitleText}>{title}</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default CommonHeader
+export default CommonHeader;
 
 const styles = StyleSheet.create({
   progressText: {
@@ -40,8 +46,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: '53%',
-    marginTop: verticalScale(20),
-    marginBottom: verticalScale(10),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
     justifyContent: 'space-between',
     marginHorizontal: scale(20),
   },
@@ -53,4 +59,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(20),
   },
-})
+});

@@ -1,12 +1,29 @@
-import React from 'react'
-import { ActivityIndicator, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
+import React from 'react';
+import {
+  ActivityIndicator,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../constants';
 
-const CustomModal = ({ visible, title, description, isLoading, handleNegativeBtnPress, handlePositiveBtnPress }) => {
+const CustomModal = ({
+  visible,
+  title,
+  description,
+  isLoading,
+  handleNegativeBtnPress,
+  handlePositiveBtnPress,
+}) => {
   return (
-    <Modal animationType="slide" onRequestClose={handleNegativeBtnPress} transparent visible={visible}>
+    <Modal
+      animationType="slide"
+      onRequestClose={handleNegativeBtnPress}
+      transparent
+      visible={visible}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <View style={styles.titleDescriptionContainer}>
@@ -24,19 +41,23 @@ const CustomModal = ({ visible, title, description, isLoading, handleNegativeBtn
                 <ActivityIndicator color={COLORS.newPrimary} size={20} />
               </View>
             ) : (
-              <TouchableOpacity onPress={handlePositiveBtnPress} style={styles.yesBtnContainer}>
+              <TouchableOpacity
+                onPress={handlePositiveBtnPress}
+                style={styles.yesBtnContainer}>
                 <Text style={styles.yesBtnText}>Yes</Text>
               </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={handleNegativeBtnPress} style={styles.noBtnContainer}>
+            <TouchableOpacity
+              onPress={handleNegativeBtnPress}
+              style={styles.noBtnContainer}>
               <Text style={styles.noBtnText}>No</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
     </Modal>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   titleDescriptionContainer: {
@@ -112,6 +133,6 @@ const styles = StyleSheet.create({
     height: verticalScale(148),
     width: scale(270),
   },
-})
+});
 
-export default CustomModal
+export default CustomModal;

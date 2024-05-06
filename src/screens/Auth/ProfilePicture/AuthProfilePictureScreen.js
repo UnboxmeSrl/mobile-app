@@ -1,11 +1,18 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { CustomButton, CustomHeader, PickerModal } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { useAuthProfilePicture } from './hooks'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {CustomButton, CustomHeader} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthProfilePicture} from './hooks';
 
 const AuthProfilePictureScreen = () => {
   const {
@@ -17,25 +24,32 @@ const AuthProfilePictureScreen = () => {
     handleGalleryPress,
     handleBackPress,
     handleNextPress,
-  } = useAuthProfilePicture()
+  } = useAuthProfilePicture();
   // console.log('profilePicData in AuthProfilepICSCREEN', profilePicData)
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'Profile picture'} step={9} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'Profile picture'}
+        step={9}
+        handleBackPress={handleBackPress}
+      />
       <View style={styles.imageUploadMainContainer}>
         <FlatList
           data={profilePicData}
           numColumns={2}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item, index }) => {
+          renderItem={({item, index}) => {
             return (
               <TouchableOpacity
                 onPress={() => handleGalleryPress(index)}
                 style={styles.imageUploadContainer}
-                activeOpacity={0.4}
-              >
+                activeOpacity={0.4}>
                 {item?.fileName ? (
-                  <Image source={{ uri: item?.uri }} style={styles.actualUploadedPicture} resizeMode={'cover'} />
+                  <Image
+                    source={{uri: item?.uri}}
+                    style={styles.actualUploadedPicture}
+                    resizeMode={'cover'}
+                  />
                 ) : (
                   <>
                     <Image source={IMAGES.gallery} style={styles.galleryIcon} />
@@ -43,18 +57,24 @@ const AuthProfilePictureScreen = () => {
                   </>
                 )}
               </TouchableOpacity>
-            )
+            );
           }}
         />
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Add photos of you</Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>Please make sure your photo clearly shows your face</Text>
+          <Text style={styles.descriptionText}>
+            Please make sure your photo clearly shows your face
+          </Text>
         </View>
       </View>
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+        <CustomButton
+          title={'Next'}
+          handlePress={handleNextPress}
+          disabled={isBtnDisabled}
+        />
       </View>
 
       {/* <PickerModal
@@ -62,11 +82,11 @@ const AuthProfilePictureScreen = () => {
         handleCameraPress={handleCameraPress}
         handleGalleryPress={handleGalleryPress}
       /> */}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthProfilePictureScreen
+export default AuthProfilePictureScreen;
 
 const styles = StyleSheet.create({
   actualUploadedPicture: {
@@ -125,6 +145,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

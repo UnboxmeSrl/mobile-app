@@ -1,10 +1,9 @@
-import React, { ReactNode } from 'react'
-import { StyleSheet, View } from 'react-native'
-import perfectSize from '../../utils/responsiveSize'
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
-const HStack = ({ style, children }) => {
-  return <View style={[styles.hStack, style]}>{children}</View>
-}
+const HStack = ({style, children}) => {
+  return <View style={[styles.hStack, style]}>{children}</View>;
+};
 
 const styles = StyleSheet.create({
   hStack: {
@@ -12,8 +11,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // columnGap: perfectSize(16),
   },
-})
+});
 
-export default HStack
+export default HStack;

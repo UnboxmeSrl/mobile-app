@@ -1,24 +1,23 @@
-import React from 'react'
+import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
   Image,
   Platform,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { CommonHeader } from '../../components'
-import { CustomCarousel } from '../../components/CustomCarousel'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { checkAction, commonStyle } from '../../utils'
-import { useServiceDetails } from './hooks'
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {CommonHeader, CustomCarousel} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {checkAction} from '../../utils';
+import {useServiceDetails} from './hooks';
 
 const ServiceDetails = () => {
   const {
@@ -37,37 +36,53 @@ const ServiceDetails = () => {
     // filter,
     // serviceCategories,
     // onCategoryChange,
-    // handleBackPress,
+    handleBackPress,
     handleBookPress,
     influencerCount,
     handleInfluencerPlus,
     handleInfluencerMinus,
-  } = useServiceDetails()
+  } = useServiceDetails();
 
   // console.log('Service Details: ' + JSON.stringify(serviceDetails))
   return (
-    <View style={styles.mainContainer}>
-      <CommonHeader title={'Deals'} />
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          onPress={handleBackPress}
+          style={styles.backIconContainer}>
+          <Image
+            resizeMode="cover"
+            source={IMAGES.arrowLeft}
+            style={styles.backIcon}
+          />
+        </TouchableOpacity>
+        <View style={styles.headerTitleContainer}>
+          <Text style={styles.headerTitleText}>{`Deals`}</Text>
+        </View>
+      </View>
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator color={COLORS.newPrimary} size={30} />
         </View>
       ) : (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={{flex: 1}}>
           <View>
             <CustomCarousel
-              Component={({ item, index }) => {
+              Component={({item, index}) => {
                 return (
                   <>
                     {isImageLoading && <View style={styles.imageLoader} />}
                     <FastImage
                       onLoadEnd={() => setIsImageLoading(false)}
                       resizeMode="cover"
-                      source={{ priority: FastImage.priority.high, uri: item?.url }}
+                      source={{
+                        priority: FastImage.priority.high,
+                        uri: item?.url,
+                      }}
                       style={styles.imageStyle}
                     />
                   </>
-                )
+                );
               }}
               data={[serviceDetails?.Offer_Cover]}
             />
@@ -77,11 +92,17 @@ const ServiceDetails = () => {
             <View style={styles.itemTitleIconContainer}>
               <FastImage
                 resizeMode="contain"
-                source={{ priority: FastImage.priority.high, uri: serviceDetails?._actions_turbo?.Action_icon?.url }}
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: serviceDetails?._actions_turbo?.Action_icon?.url,
+                }}
                 style={styles.socialIcon}
               />
               {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
-              <Text style={styles.titleText}>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
+              <Text
+                style={
+                  styles.titleText
+                }>{`${serviceDetails?._actions_turbo?.Action_Name}`}</Text>
             </View>
             <View style={styles.dealLeftContainer}>
               <Text style={styles.dealLeftText}>{`${dealsLeft}`}</Text>
@@ -96,46 +117,85 @@ const ServiceDetails = () => {
                     styles.amenityIconContainer,
                     styles.firstAmenityMainContainer,
                     styles.specialAmenitiesIconContainer,
-                  ]}
-                >
-                  <Image source={amenityDetails?.amenityIcon} style={styles.amenityBigIcon} />
+                  ]}>
+                  <Image
+                    source={amenityDetails?.amenityIcon}
+                    style={styles.amenityBigIcon}
+                  />
                 </View>
-                <View style={[styles.amenityMainContainer, styles.specialAmenitiesMainContainer]}>
+                <View
+                  style={[
+                    styles.amenityMainContainer,
+                    styles.specialAmenitiesMainContainer,
+                  ]}>
                   <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text style={styles.amenitiesTitle}>{amenityDetails?.amenityName}</Text>
-                    <Text style={styles.amenitiesDescription}>{amenityDetails?.amenityDescription}</Text>
+                    <Text style={styles.amenitiesTitle}>
+                      {amenityDetails?.amenityName}
+                    </Text>
+                    <Text style={styles.amenitiesDescription}>
+                      {amenityDetails?.amenityDescription}
+                    </Text>
                   </View>
                 </View>
               </>
             </View>
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.firstAmenityMainContainer,
+                ]}>
                 <View style={styles.amenityIconContainer}>
                   <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text style={styles.amenitiesDescription}>at your choice</Text>
+                  <Text
+                    style={
+                      styles.amenitiesTitle
+                    }>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                  <Text style={styles.amenitiesDescription}>
+                    at your choice
+                  </Text>
                 </View>
               </View>
 
               <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+                  <Image
+                    source={IMAGES.clinkingGlasses}
+                    style={styles.amenityIcon}
+                  />
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text style={styles.amenitiesTitle}>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text style={styles.amenitiesDescription}>at your choice</Text>
+                  <Text
+                    style={
+                      styles.amenitiesTitle
+                    }>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                  <Text style={styles.amenitiesDescription}>
+                    at your choice
+                  </Text>
                 </View>
               </View>
 
-              <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.friendAmenityContainer,
+                ]}>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
-                    style={[styles.amenitiesTitle, styles.friendAmenityText]}
-                  >{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
-                  <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+                    style={[
+                      styles.amenitiesTitle,
+                      styles.friendAmenityText,
+                    ]}>{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
+                  <Text
+                    style={[
+                      styles.amenitiesDescription,
+                      styles.friendAmenityTitle,
+                    ]}>
+                    Friend
+                  </Text>
                 </View>
               </View>
             </ScrollView>
@@ -146,13 +206,16 @@ const ServiceDetails = () => {
           {actionNumId === 9 ? (
             <>
               <View style={styles.villaDescriptionContainer}>
-                <Text style={styles.villaDescription}>{`${serviceDetails?.Description}`}</Text>
+                <Text
+                  style={
+                    styles.villaDescription
+                  }>{`${serviceDetails?.Description}`}</Text>
               </View>
               <View style={styles.villaActionsMainContainer}>
                 <FlatList
                   showsVerticalScrollIndicator={false}
                   data={serviceDetails?._actions_turbo?.actions_turbo_id}
-                  renderItem={({ item, index }) => {
+                  renderItem={({item, index}) => {
                     return (
                       <View style={styles.villaActionContainer}>
                         <View style={styles.villaActionIconContainer}>
@@ -165,37 +228,61 @@ const ServiceDetails = () => {
                             style={styles.villaActionIcon}
                           />
                         </View>
-                        <View style={styles.villaActionNameDescriptionContainer}>
+                        <View
+                          style={styles.villaActionNameDescriptionContainer}>
                           <View style={styles.socialMediaTitleContainer}>
-                            <Text style={styles.socialMediaTitle}>{`${item?.Action_Name}`}</Text>
+                            <Text
+                              style={
+                                styles.socialMediaTitle
+                              }>{`${item?.Action_Name}`}</Text>
                             <View style={styles.ratingsContainer}>
                               <Text style={styles.ratingsText}>120</Text>
-                              <Image source={IMAGES.star} style={styles.ratingIcon} />
+                              <Image
+                                source={IMAGES.star}
+                                style={styles.ratingIcon}
+                              />
                             </View>
                           </View>
                           <View style={styles.socialMediaDescriptionContainer}>
-                            <Text style={styles.socialMediaDescriptionText}>{`${item?.Descrizione}`}</Text>
+                            <Text
+                              style={
+                                styles.socialMediaDescriptionText
+                              }>{`${item?.Descrizione}`}</Text>
                           </View>
                         </View>
                       </View>
-                    )
+                    );
                   }}
                 />
               </View>
               <View style={styles.comingWithInfluencerTextContainer}>
-                <Text style={styles.comingWithInfluencerText}>Coming with an influencer friend?</Text>
+                <Text style={styles.comingWithInfluencerText}>
+                  Coming with an influencer friend?
+                </Text>
               </View>
 
               <View style={styles.influencerFriendAddContainer}>
-                <TouchableOpacity onPress={handleInfluencerMinus} disabled={influencerCount <= 1}>
+                <TouchableOpacity
+                  onPress={handleInfluencerMinus}
+                  disabled={influencerCount <= 1}>
                   <Image
-                    source={influencerCount > 1 ? IMAGES.minusEnabled : IMAGES.minusDisabled}
+                    source={
+                      influencerCount > 1
+                        ? IMAGES.minusEnabled
+                        : IMAGES.minusDisabled
+                    }
                     style={styles.plusMinusIcon}
                   />
                 </TouchableOpacity>
-                <Text style={styles.influencerText}>{`${influencerCount} Influencer`}</Text>
+                <Text
+                  style={
+                    styles.influencerText
+                  }>{`${influencerCount} Influencer`}</Text>
                 <TouchableOpacity onPress={handleInfluencerPlus}>
-                  <Image source={IMAGES.plusEnabled} style={styles.plusMinusIcon} />
+                  <Image
+                    source={IMAGES.plusEnabled}
+                    style={styles.plusMinusIcon}
+                  />
                 </TouchableOpacity>
               </View>
             </>
@@ -203,23 +290,29 @@ const ServiceDetails = () => {
             <>
               <View style={styles.contentRequiredRow}>
                 <View style={styles.contentRequiredContainer}>
-                  <Text style={styles.contentRequiredText}>Content required</Text>
+                  <Text style={styles.contentRequiredText}>
+                    Content required
+                  </Text>
                 </View>
                 <View style={styles.deadlineContainer}>
-                  <Image source={IMAGES.timeCircle} style={styles.timeCircleIcon} />
+                  <Image
+                    source={IMAGES.timeCircle}
+                    style={styles.timeCircleIcon}
+                  />
                   <Text
-                    style={styles.deadlineText}
-                  >{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
+                    style={
+                      styles.deadlineText
+                    }>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
                 </View>
               </View>
               <View style={styles.flatlistContainer}>
                 <FlatList
                   data={[serviceDetails]}
                   keyExtractor={(_, index) => index.toString()}
-                  renderItem={({ item, index }) => {
-                    const actionNumId = item?._actions_turbo?.action_num_id
+                  renderItem={({item, index}) => {
+                    const actionNumId = item?._actions_turbo?.action_num_id;
                     // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-                    const actions = checkAction(actionNumId, socialActions)
+                    const actions = checkAction(actionNumId, socialActions);
                     // console.log('icon', icon, actionNumId)
                     return (
                       <View>
@@ -232,22 +325,36 @@ const ServiceDetails = () => {
                                     resizeMode="contain"
                                     source={{
                                       priority: FastImage.priority.high,
-                                      uri: item?._actions_turbo?.Action_icon?.url,
+                                      uri: item?._actions_turbo?.Action_icon
+                                        ?.url,
                                     }}
                                     style={styles.socialMediaImage}
                                   />
                                   {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                                 </View>
-                                <View style={styles.socialMediaTitleDescriptionContainer}>
-                                  <View style={styles.socialMediaTitleContainer}>
-                                    <Text style={styles.socialMediaTitle}>{diaryItem?.action}</Text>
+                                <View
+                                  style={
+                                    styles.socialMediaTitleDescriptionContainer
+                                  }>
+                                  <View
+                                    style={styles.socialMediaTitleContainer}>
+                                    <Text style={styles.socialMediaTitle}>
+                                      {diaryItem?.action}
+                                    </Text>
                                     <View style={styles.ratingsContainer}>
                                       <Text style={styles.ratingsText}>60</Text>
-                                      <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                      <Image
+                                        source={IMAGES.star}
+                                        style={styles.ratingIcon}
+                                      />
                                     </View>
                                   </View>
-                                  <View style={styles.socialMediaDescriptionContainer}>
-                                    <Text style={styles.socialMediaDescriptionText}>
+                                  <View
+                                    style={
+                                      styles.socialMediaDescriptionContainer
+                                    }>
+                                    <Text
+                                      style={styles.socialMediaDescriptionText}>
                                       {`${item?._actions_turbo?.Descrizione}`}
                                     </Text>
                                   </View>
@@ -265,7 +372,9 @@ const ServiceDetails = () => {
                         ) : actionNumId === 6 ? (
                           actions?.duo_actions?.map((innerItem, innerIndex) => (
                             <View key={innerIndex}>
-                              <View style={styles.mainSocialItemContainer} key={innerIndex}>
+                              <View
+                                style={styles.mainSocialItemContainer}
+                                key={innerIndex}>
                                 <View style={styles.socialMediaImageContainer}>
                                   <FastImage
                                     resizeMode="contain"
@@ -277,16 +386,31 @@ const ServiceDetails = () => {
                                   />
                                   {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                                 </View>
-                                <View style={styles.socialMediaTitleDescriptionContainer}>
-                                  <View style={styles.socialMediaTitleContainer}>
-                                    <Text style={styles.socialMediaTitle}>{innerItem?.Action_Name}</Text>
+                                <View
+                                  style={
+                                    styles.socialMediaTitleDescriptionContainer
+                                  }>
+                                  <View
+                                    style={styles.socialMediaTitleContainer}>
+                                    <Text style={styles.socialMediaTitle}>
+                                      {innerItem?.Action_Name}
+                                    </Text>
                                     <View style={styles.ratingsContainer}>
                                       <Text style={styles.ratingsText}>60</Text>
-                                      <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                      <Image
+                                        source={IMAGES.star}
+                                        style={styles.ratingIcon}
+                                      />
                                     </View>
                                   </View>
-                                  <View style={styles.socialMediaDescriptionContainer}>
-                                    <Text style={styles.socialMediaDescriptionText}>{`${innerItem?.Descrizione}`}</Text>
+                                  <View
+                                    style={
+                                      styles.socialMediaDescriptionContainer
+                                    }>
+                                    <Text
+                                      style={
+                                        styles.socialMediaDescriptionText
+                                      }>{`${innerItem?.Descrizione}`}</Text>
                                   </View>
                                 </View>
                               </View>
@@ -312,15 +436,24 @@ const ServiceDetails = () => {
                               />
                               {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                             </View>
-                            <View style={styles.socialMediaTitleDescriptionContainer}>
+                            <View
+                              style={
+                                styles.socialMediaTitleDescriptionContainer
+                              }>
                               <View style={styles.socialMediaTitleContainer}>
-                                <Text style={styles.socialMediaTitle}>{item?._actions_turbo?.Action_Name} video</Text>
+                                <Text style={styles.socialMediaTitle}>
+                                  {item?._actions_turbo?.Action_Name} video
+                                </Text>
                                 <View style={styles.ratingsContainer}>
                                   <Text style={styles.ratingsText}>60</Text>
-                                  <Image source={IMAGES.star} style={styles.ratingIcon} />
+                                  <Image
+                                    source={IMAGES.star}
+                                    style={styles.ratingIcon}
+                                  />
                                 </View>
                               </View>
-                              <View style={styles.socialMediaDescriptionContainer}>
+                              <View
+                                style={styles.socialMediaDescriptionContainer}>
                                 <Text style={styles.socialMediaDescriptionText}>
                                   {`${item?._actions_turbo?.Descrizione}`}
                                 </Text>
@@ -329,7 +462,7 @@ const ServiceDetails = () => {
                           </View>
                         )}
                       </View>
-                    )
+                    );
                   }}
                 />
               </View>
@@ -342,7 +475,10 @@ const ServiceDetails = () => {
           </TouchableOpacity> */}
 
           <View style={styles.bookBtnMainContainer}>
-            <TouchableOpacity onPress={handleBookPress} style={styles.bookBtnContainer} disabled={isBookBtnPressed}>
+            <TouchableOpacity
+              onPress={handleBookPress}
+              style={styles.bookBtnContainer}
+              disabled={isBookBtnPressed}>
               {isBookBtnPressed ? (
                 <ActivityIndicator size={30} color={COLORS.black22} />
               ) : (
@@ -352,9 +488,9 @@ const ServiceDetails = () => {
           </View>
         </ScrollView>
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   villaDescription: {
@@ -729,7 +865,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   mainSocialMediaContainer: {
     flex: 1,
@@ -799,7 +934,6 @@ const styles = StyleSheet.create({
     height: verticalScale(105),
     justifyContent: 'center',
     marginLeft: scale(10),
-    width: '100%',
     width: scale(163.5),
   },
   restaurantNameText: {
@@ -812,7 +946,7 @@ const styles = StyleSheet.create({
     height: moderateScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   serviceDetailsContainer: {
@@ -854,7 +988,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: scale(10),
     marginTop: verticalScale(15),
-    width: '100%',
     width: scale(163.5),
   },
   storyTitleText: {
@@ -888,6 +1021,31 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
     marginTop: verticalScale(9),
   },
-})
+  backIcon: {
+    height: moderateScale(24),
+    tintColor: COLORS.achromaticBlack,
+    width: moderateScale(24),
+  },
+  backIconContainer: {
+    alignItems: 'flex-end',
+  },
+  headerContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '53%',
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
+    justifyContent: 'space-between',
+    marginHorizontal: scale(20),
+  },
+  headerTitleContainer: {
+    marginTop: verticalScale(-5),
+  },
+  headerTitleText: {
+    color: COLORS.achromaticBlack,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(20),
+  },
+});
 
-export default ServiceDetails
+export default ServiceDetails;

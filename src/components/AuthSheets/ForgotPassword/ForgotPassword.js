@@ -1,21 +1,22 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { BottomSheet } from '../../BottomSheet'
-import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
-import { useForgotPassword } from './hooks'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {BottomSheet} from '../../BottomSheet';
+import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
+import {useForgotPassword} from './hooks';
+import {COLORS, FONTS} from '../../../constants';
 
 const ForgotPassword = React.forwardRef(({}, ref) => {
-  const { email, setEmail, isSendPress } = useForgotPassword()
+  const {email, setEmail, isSendPress} = useForgotPassword();
 
   return (
     <BottomSheet ref={ref}>
       <View style={styles.mainContainer}>
         <CustomTitle title={'Forgot password'} />
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>Please enter the email address or phone number you signed up with.</Text>
+          <Text style={styles.descriptionText}>
+            Please enter the email address or phone number you signed up with.
+          </Text>
         </View>
         <View style={styles.emailContainer}>
           <CustomTextInput
@@ -31,10 +32,10 @@ const ForgotPassword = React.forwardRef(({}, ref) => {
         </View>
       </View>
     </BottomSheet>
-  )
-})
+  );
+});
 
-export default ForgotPassword
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -60,4 +61,4 @@ const styles = StyleSheet.create({
   btnContainer: {
     marginTop: '30%',
   },
-})
+});

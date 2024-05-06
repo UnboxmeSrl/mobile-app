@@ -1,8 +1,8 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../../assets/images'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { COLORS, FONTS } from '../../../constants'
+import {Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import {IMAGES} from '../../../assets';
 
 const FirstScreen = () => {
   return (
@@ -21,14 +21,17 @@ const FirstScreen = () => {
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>{`Only Reel and Tiktok requests will require approvation `}</Text>
+          <Text
+            style={
+              styles.descriptionText
+            }>{`Only Reel and Tiktok requests will require approvation `}</Text>
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default FirstScreen
+export default FirstScreen;
 
 const styles = StyleSheet.create({
   descriptionText: {
@@ -62,4 +65,4 @@ const styles = StyleSheet.create({
     height: verticalScale(370),
     width: '100%',
   },
-})
+});

@@ -1,1 +1,1 @@
-export { default as useAuthAgency } from './useAuthAgency'
+export {default as useAuthAgency} from './useAuthAgency';

@@ -1,17 +1,24 @@
-import React from 'react'
-import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import LocationsTile from '../../components/LocationsTile/LocationsTile'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import useCities from './hooks/useCities'
-import { commonStyle } from '../../utils'
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  RefreshControl,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {LocationsTile} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {useCities} from './hooks';
 
 const CitiesScreen = () => {
-  const { isLoading, locationData, refreshing, onRefresh } = useCities()
+  const {isLoading, locationData, refreshing, onRefresh} = useCities();
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator color={COLORS.newPrimary} size={20} />
@@ -19,29 +26,37 @@ const CitiesScreen = () => {
       ) : (
         <FlatList
           showsVerticalScrollIndicator={false}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           ListHeaderComponent={
             <>
               <View style={styles.logoContainer}>
-                <Image resizeMode="contain" source={IMAGES.claris} style={styles.logoImage} />
+                <Image
+                  resizeMode="contain"
+                  source={IMAGES.claris}
+                  style={styles.logoImage}
+                />
               </View>
               <View style={styles.chooseLocationTitleContainer}>
-                <Text style={styles.chooseLocationTitleText}>Choose location</Text>
+                <Text style={styles.chooseLocationTitleText}>
+                  Choose location
+                </Text>
               </View>
             </>
           }
           data={locationData}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => {
-            return <LocationsTile item={item} />
+          renderItem={({item}) => {
+            return <LocationsTile item={item} />;
           }}
         />
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default CitiesScreen
+export default CitiesScreen;
 
 const styles = StyleSheet.create({
   chooseLocationTitleContainer: {
@@ -49,6 +64,7 @@ const styles = StyleSheet.create({
     marginLeft: scale(16),
   },
   chooseLocationTitleText: {
+    color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(20),
   },
@@ -70,6 +86,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

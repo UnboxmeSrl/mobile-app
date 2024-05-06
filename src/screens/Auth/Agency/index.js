@@ -1,1 +1,1 @@
-export { default as AuthAgencyScreen } from './AuthAgencyScreen'
+export {default as AuthAgencyScreen} from './AuthAgencyScreen';

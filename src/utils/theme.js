@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 export const colors = {
   primary: '#1E60DD',
   primaryLight: '#1E60DD0D',
@@ -12,4 +11,4 @@ export const colors = {
   danger: '#FF385C',
   dangerLight: '#FF385C0A',
   slate1: '#B0B0B0',
-}
+};

@@ -1,12 +1,19 @@
-import React from 'react'
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import FastImage from 'react-native-fast-image'
-import { IMAGES } from '../../assets/images'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { useContentBrief } from './hooks'
-import { commonStyle } from '../../utils'
+import React from 'react';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {COLORS, FONTS} from '../../constants';
+import {useContentBrief} from './hooks';
 
 const ContentBriefScreen = () => {
   const {
@@ -18,14 +25,22 @@ const ContentBriefScreen = () => {
     handleBackPress,
     handleTagCopyPress,
     handleOpenCouponPress,
-  } = useContentBrief()
+  } = useContentBrief();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.mainScrollView}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backIconContainer}>
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
             <Text style={styles.headerTitleText}>Content Brief</Text>
@@ -33,7 +48,9 @@ const ContentBriefScreen = () => {
         </View>
         {bookingDetails?._restaurant_turbo?.About?.length > 0 && (
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>{bookingDetails?._restaurant_turbo?.About}</Text>
+            <Text style={styles.descriptionText}>
+              {bookingDetails?._restaurant_turbo?.About}
+            </Text>
           </View>
         )}
 
@@ -45,15 +62,24 @@ const ContentBriefScreen = () => {
           data={[0, 1]}
           numColumns={2}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item, index }) => {
+          renderItem={({item, index}) => {
             return (
               <View style={styles.tagContainer}>
-                <Text style={styles.tagText}>{bookingDetails?._restaurant_turbo?.Tags}</Text>
-                <TouchableOpacity onPress={() => handleTagCopyPress(bookingDetails?._restaurant_turbo?.Tags)}>
-                  <Image resizeMode="contain" source={IMAGES.copy} style={styles.copyIcon} />
+                <Text style={styles.tagText}>
+                  {bookingDetails?._restaurant_turbo?.Tags}
+                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    handleTagCopyPress(bookingDetails?._restaurant_turbo?.Tags)
+                  }>
+                  <Image
+                    resizeMode="contain"
+                    source={IMAGES.copy}
+                    style={styles.copyIcon}
+                  />
                 </TouchableOpacity>
               </View>
-            )
+            );
           }}
         />
         {/* 
@@ -92,12 +118,17 @@ const ContentBriefScreen = () => {
             <Text style={styles.socialMediaNameText}>{actionName}</Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.ratingUsersText}>240</Text>
-              <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+              <Image
+                source={IMAGES.ratingStar}
+                style={styles.ratingIconImage}
+              />
             </View>
           </View>
         </View>
         <View style={styles.socialMediaDescriptionContainer}>
-          <Text style={styles.socialMediaDescriptionText}>{bookingDetails?._actions_turbo?.Descrizione} </Text>
+          <Text style={styles.socialMediaDescriptionText}>
+            {bookingDetails?._actions_turbo?.Descrizione}{' '}
+          </Text>
         </View>
         <TouchableOpacity style={styles.queryContainer}>
           <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
@@ -108,19 +139,24 @@ const ContentBriefScreen = () => {
           <TouchableOpacity
             onPress={handleOpenCouponPress}
             disabled={!bookingDetails?.Approved}
-            style={[styles.openCouponBtnContainer, !bookingDetails?.Approved && styles.disabledBtnContainer]}
-          >
+            style={[
+              styles.openCouponBtnContainer,
+              !bookingDetails?.Approved && styles.disabledBtnContainer,
+            ]}>
             <Text style={styles.openCouponBtnText}>Open Coupon</Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </ScrollView>
-  )
-}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default ContentBriefScreen
+export default ContentBriefScreen;
 
 const styles = StyleSheet.create({
+  mainScrollView: {
+    backgroundColor: COLORS.white,
+  },
   backIcon: {
     height: moderateScale(30),
     tintColor: COLORS.achromaticBlack,
@@ -155,7 +191,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     alignItems: 'center',
@@ -182,7 +219,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   openCouponBtnContainer: {
     alignItems: 'center',
@@ -290,4 +326,4 @@ const styles = StyleSheet.create({
     height: moderateScale(67),
     width: moderateScale(67),
   },
-})
+});

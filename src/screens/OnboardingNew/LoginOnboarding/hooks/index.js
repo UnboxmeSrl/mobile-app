@@ -1,1 +1,1 @@
-export { default as useLoginOnboarding } from './useLoginOnboarding'
+export {default as useLoginOnboarding} from './useLoginOnboarding';

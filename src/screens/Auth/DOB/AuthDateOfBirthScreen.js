@@ -1,13 +1,18 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { CustomButton, CustomHeader } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import { moderateScale, scale } from 'react-native-size-matters'
-import { verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { useAuthDateOfBirth } from './hooks'
-import DatePicker from 'react-native-date-picker'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import DatePicker from 'react-native-date-picker';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {CustomButton, CustomHeader} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthDateOfBirth} from './hooks';
 
 const AuthDateOfBirthScreen = () => {
   const {
@@ -19,17 +24,30 @@ const AuthDateOfBirthScreen = () => {
     setSelectedDate,
     handleBackPress,
     handleNextPress,
-  } = useAuthDateOfBirth()
+  } = useAuthDateOfBirth();
 
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'Date of birth'} step={3} handleBackPress={handleBackPress} />
-      <TouchableOpacity onPress={() => setIsDatePickerOpen(true)} style={styles.dateContainer} activeOpacity={0.5}>
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'Date of birth'}
+        step={3}
+        handleBackPress={handleBackPress}
+      />
+      <TouchableOpacity
+        onPress={() => setIsDatePickerOpen(true)}
+        style={styles.dateContainer}
+        activeOpacity={0.5}>
         <Text style={styles.dateText}>
           {`${
             selectedDate
-              ? `${selectedDate.getDate() < 10 ? `0${selectedDate.getDate()}` : selectedDate.getDate()}/${
-                  selectedDate.getMonth() + 1 < 10 ? `0${selectedDate.getMonth() + 1}` : selectedDate.getMonth() + 1
+              ? `${
+                  selectedDate.getDate() < 10
+                    ? `0${selectedDate.getDate()}`
+                    : selectedDate.getDate()
+                }/${
+                  selectedDate.getMonth() + 1 < 10
+                    ? `0${selectedDate.getMonth() + 1}`
+                    : selectedDate.getMonth() + 1
                 }/${selectedDate.getFullYear()}`
               : 'DD/MM/YYYY'
           }`}
@@ -41,22 +59,26 @@ const AuthDateOfBirthScreen = () => {
         modal
         mode={'date'}
         onCancel={() => {
-          setIsDatePickerOpen(false)
+          setIsDatePickerOpen(false);
         }}
-        onConfirm={(date) => {
-          setIsDatePickerOpen(false)
-          setSelectedDate(date)
+        onConfirm={date => {
+          setIsDatePickerOpen(false);
+          setSelectedDate(date);
         }}
         open={isDatePickerOpen}
       />
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+        <CustomButton
+          title={'Next'}
+          handlePress={handleNextPress}
+          disabled={isBtnDisabled}
+        />
       </View>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthDateOfBirthScreen
+export default AuthDateOfBirthScreen;
 
 const styles = StyleSheet.create({
   btnContainer: {
@@ -84,11 +106,10 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   calenderIcon: {
     height: verticalScale(18.42),
     width: scale(18),
     tintColor: COLORS.achromaticBlack,
   },
-})
+});

@@ -1,42 +1,48 @@
-import { getBuildNumber, getVersion } from 'react-native-device-info'
-import { deleteUserAccount, logger, reset, showToastSuccess } from '../../../services'
-import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useState } from 'react'
-import { MAIN_NAVIGATOR } from '../../../constants/navigation'
-import { persistor, store } from '../../../redux/store'
-import { resetContentSlice, resetLocationSlice, resetLogin, resetRestaurantSlice, setCity } from '../../../redux/slices'
-import { Alert } from 'react-native'
+import {useNavigation} from '@react-navigation/native';
+import {useCallback, useState} from 'react';
+import {Alert} from 'react-native';
+import {getBuildNumber, getVersion} from 'react-native-device-info';
+import {useDispatch, useSelector} from 'react-redux';
+import {SCREEN_NAMES} from '../../../constants';
+import {
+  persistor,
+  resetContentSlice,
+  resetLogin,
+  resetRestaurantSlice,
+  setCity,
+} from '../../../redux';
+import {deleteUserAccount, showToastSuccess} from '../../../services';
 
 const useSettings = () => {
-  const loginData = useSelector((state) => state.authSlice.loginData)
-  const version = getVersion()
-  const buildNumber = getBuildNumber()
-  const dispatch = useDispatch()
-  const versionName = `${version} (${buildNumber})`
-  const [isLoading, setIsLoading] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const navigation = useNavigation();
+  const loginData = useSelector(state => state.authSlice.loginData);
+  const version = getVersion();
+  const buildNumber = getBuildNumber();
+  const dispatch = useDispatch();
+  const versionName = `${version} (${buildNumber})`;
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const logout = async () => {
     try {
-      setIsLoading(true)
-      await persistor.purge()
-      dispatch(resetRestaurantSlice())
-      dispatch(resetContentSlice())
+      setIsLoading(true);
+      await persistor.purge();
+      dispatch(resetRestaurantSlice());
+      dispatch(resetContentSlice());
       // dispatch(resetServiceSlice())
-      setIsLoading(false)
-      reset(MAIN_NAVIGATOR)
-      dispatch(resetLogin())
-      dispatch(setCity({}))
+      setIsLoading(false);
+      //TODO: Change this when your navigation is completed
+      navigation.reset({index: 0, routes: [{name: SCREEN_NAMES.SignUpNew}]});
+      dispatch(resetLogin());
+      dispatch(setCity({}));
       // store.dispatch({
       //   type: 'RESET_STATE',
       // })
 
-      showToastSuccess("You've been logged out")
-      logger.info('Logout succeeded')
-    } catch (error) {
-      logger.error('Logout error', { error })
-    }
-  }
+      showToastSuccess("You've been logged out");
+    } catch (error) {}
+  };
 
   const handleLogout = useCallback(async () => {
     Alert.alert('Confirmation', 'Are you sure you want to log out?', [
@@ -47,37 +53,41 @@ const useSettings = () => {
       },
       {
         onPress: () => {
-          logout()
+          logout();
         },
         text: 'Logout',
       },
-    ])
-  }, [logout])
+    ]);
+  }, [logout]);
 
   const handleDeleteAccount = async () => {
-    Alert.alert('Confirmation', 'Are you sure you want to delete your account?', [
-      {
-        onPress: () => {},
-        style: 'cancel',
-        text: 'Cancel',
-      },
-      {
-        onPress: async () => {
-          setIsDeleting(true)
-          const prepUrl = `/${loginData?.id}`
-          const res = await deleteUserAccount(prepUrl)
-          //TODO: Enable below if you need in future (satyam)
-          // reset(MAIN_NAVIGATOR)
-          dispatch(resetLogin())
-          dispatch(setCity({}))
-          await persistor.purge()
-          showToastSuccess(res)
-          setIsDeleting(false)
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to delete your account?',
+      [
+        {
+          onPress: () => {},
+          style: 'cancel',
+          text: 'Cancel',
         },
-        text: 'Delete',
-      },
-    ])
-  }
+        {
+          onPress: async () => {
+            setIsDeleting(true);
+            const prepUrl = `/${loginData?.id}`;
+            const res = await deleteUserAccount(prepUrl);
+            //TODO: Enable below if you need in future (satyam)
+            // reset(MAIN_NAVIGATOR)
+            dispatch(resetLogin());
+            dispatch(setCity({}));
+            await persistor.purge();
+            showToastSuccess(res);
+            setIsDeleting(false);
+          },
+          text: 'Delete',
+        },
+      ],
+    );
+  };
 
   return {
     versionName,
@@ -85,7 +95,7 @@ const useSettings = () => {
     isLoading,
     handleLogout,
     handleDeleteAccount,
-  }
-}
+  };
+};
 
-export default useSettings
+export default useSettings;

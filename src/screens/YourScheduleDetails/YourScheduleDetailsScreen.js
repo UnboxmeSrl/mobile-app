@@ -1,13 +1,19 @@
-import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { CustomModal } from '../../components'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { commonStyle } from '../../utils'
-import { useYourScheduleDetails } from './hooks'
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {CustomModal} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {useYourScheduleDetails} from './hooks';
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -28,14 +34,22 @@ const YourScheduleDetailsScreen = () => {
     handleOpenCouponPress,
     handleContentBriefPress,
     handlePositiveBtnPress,
-  } = useYourScheduleDetails()
+  } = useYourScheduleDetails();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.mainScrollView}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backIconContainer}>
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
             <Text style={styles.headerTitleText}>Booking</Text>
@@ -47,27 +61,34 @@ const YourScheduleDetailsScreen = () => {
             <View style={styles.restaurantImageContainer}>
               <FastImage
                 resizeMode="cover"
-                source={{ priority: FastImage.priority.high, uri: bookingDetails?._offers_turbo?.Offer_Cover?.url }}
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: bookingDetails?._offers_turbo?.Offer_Cover?.url,
+                }}
                 style={styles.serviceImage}
               />
             </View>
             <View style={styles.restaurantNameContainer}>
-              <Text style={styles.restaurantNameText}>{bookingDetails?._offers_turbo?.Offer_Name}</Text>
+              <Text style={styles.restaurantNameText}>
+                {bookingDetails?._offers_turbo?.Offer_Name}
+              </Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
-                <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                <Image
+                  source={IMAGES.ratingStar}
+                  style={styles.ratingIconImage}
+                />
               </View>
             </View>
             <View
               style={[
                 styles.onApprovalTextContainer,
                 approvalStage === 'pending'
-                  ? { backgroundColor: COLORS.americanYellow, width: scale(90) }
+                  ? {backgroundColor: COLORS.americanYellow, width: scale(90)}
                   : approvalStage === 'success'
-                  ? { backgroundColor: COLORS.mayGreen }
-                  : { backgroundColor: COLORS.tartOrange },
-              ]}
-            >
+                  ? {backgroundColor: COLORS.mayGreen}
+                  : {backgroundColor: COLORS.tartOrange},
+              ]}>
               <Text style={styles.onApprovalText}>{`${
                 approvalStage === 'pending'
                   ? `On Approval`
@@ -86,46 +107,85 @@ const YourScheduleDetailsScreen = () => {
                     styles.amenityIconContainer,
                     styles.firstAmenityMainContainer,
                     styles.specialAmenitiesIconContainer,
-                  ]}
-                >
-                  <Image source={amenityDetails?.amenityIcon} style={styles.amenityBigIcon} />
+                  ]}>
+                  <Image
+                    source={amenityDetails?.amenityIcon}
+                    style={styles.amenityBigIcon}
+                  />
                 </View>
-                <View style={[styles.amenityMainContainer, styles.specialAmenitiesMainContainer]}>
+                <View
+                  style={[
+                    styles.amenityMainContainer,
+                    styles.specialAmenitiesMainContainer,
+                  ]}>
                   <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text style={styles.amenitiesTitle}>{amenityDetails?.amenityName}</Text>
-                    <Text style={styles.amenitiesDescription}>{amenityDetails?.amenityDescription}</Text>
+                    <Text style={styles.amenitiesTitle}>
+                      {amenityDetails?.amenityName}
+                    </Text>
+                    <Text style={styles.amenitiesDescription}>
+                      {amenityDetails?.amenityDescription}
+                    </Text>
                   </View>
                 </View>
               </>
             </View>
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.firstAmenityMainContainer,
+                ]}>
                 <View style={styles.amenityIconContainer}>
                   <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text style={styles.amenitiesTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text style={styles.amenitiesDescription}>at your choice</Text>
+                  <Text
+                    style={
+                      styles.amenitiesTitle
+                    }>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                  <Text style={styles.amenitiesDescription}>
+                    at your choice
+                  </Text>
                 </View>
               </View>
 
               <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+                  <Image
+                    source={IMAGES.clinkingGlasses}
+                    style={styles.amenityIcon}
+                  />
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text style={styles.amenitiesTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text style={styles.amenitiesDescription}>at your choice</Text>
+                  <Text
+                    style={
+                      styles.amenitiesTitle
+                    }>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                  <Text style={styles.amenitiesDescription}>
+                    at your choice
+                  </Text>
                 </View>
               </View>
 
-              <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.friendAmenityContainer,
+                ]}>
                 <View style={styles.amenityTitleDescriptionContainer}>
                   <Text
-                    style={[styles.amenitiesTitle, styles.friendAmenityText]}
-                  >{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
-                  <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
+                    style={[
+                      styles.amenitiesTitle,
+                      styles.friendAmenityText,
+                    ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
+                  <Text
+                    style={[
+                      styles.amenitiesDescription,
+                      styles.friendAmenityTitle,
+                    ]}>
+                    Friend
+                  </Text>
                 </View>
               </View>
             </ScrollView>
@@ -134,8 +194,9 @@ const YourScheduleDetailsScreen = () => {
           {actionNumId === 9 && (
             <View style={styles.comingWithInfluencerTextContainer}>
               <Text
-                style={styles.comingWithInfluencerText}
-              >{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
+                style={
+                  styles.comingWithInfluencerText
+                }>{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
             </View>
           )}
 
@@ -143,14 +204,21 @@ const YourScheduleDetailsScreen = () => {
             <View style={styles.locationImageContainer}>
               <FastImage
                 resizeMode="cover"
-                source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: bookingDetails?._restaurant_turbo?.Cover?.url,
+                }}
                 style={styles.locationImage}
               />
             </View>
             <View style={styles.locationNameContainer}>
-              <Text style={styles.locationNameText}>{bookingDetails?._restaurant_turbo?.Name}</Text>
+              <Text style={styles.locationNameText}>
+                {bookingDetails?._restaurant_turbo?.Name}
+              </Text>
               <View style={styles.locationTextContainer}>
-                <Text style={styles.locationText}>{bookingDetails?._restaurant_turbo?.Adress}</Text>
+                <Text style={styles.locationText}>
+                  {bookingDetails?._restaurant_turbo?.Adress}
+                </Text>
               </View>
             </View>
           </View>
@@ -158,19 +226,27 @@ const YourScheduleDetailsScreen = () => {
           <View style={styles.selectedDateMainContainer}>
             <View style={styles.selectedDateContainer}>
               <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
-              <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
+              <Text style={styles.selectedDateMonthText}>
+                {currentMonth?.slice(0, 3)}
+              </Text>
             </View>
             <View style={styles.timeContainer}>
               <Text style={styles.selectedDateTitleText}>Selected Date</Text>
               {actionNumId !== 9 ? (
                 <Text
-                  style={styles.selectedDateWithTimeText}
-                >{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                  style={
+                    styles.selectedDateWithTimeText
+                  }>{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
               ) : (
-                <Text style={styles.selectedDateWithTimeText}>{`${currentWeekDay}`}</Text>
+                <Text
+                  style={
+                    styles.selectedDateWithTimeText
+                  }>{`${currentWeekDay}`}</Text>
               )}
             </View>
-            <TouchableOpacity style={styles.removeBtnContainer} onPress={handleAlertVisible}>
+            <TouchableOpacity
+              style={styles.removeBtnContainer}
+              onPress={handleAlertVisible}>
               <Text style={styles.removeBtnText}>Cancel</Text>
             </TouchableOpacity>
           </View>
@@ -201,10 +277,15 @@ const YourScheduleDetailsScreen = () => {
           <View style={styles.deadlineTimeContainer}>
             <Text style={styles.timeTitleText}>Deadline</Text>
             <View style={styles.infoContainer}>
-              <Image resizeMode="contain" source={IMAGES.info} style={styles.infoIcon} />
+              <Image
+                resizeMode="contain"
+                source={IMAGES.info}
+                style={styles.infoIcon}
+              />
               <Text
-                style={styles.timeText}
-              >{`${bookingDetails?._actions_turbo?.Days_deadline} days after booking`}</Text>
+                style={
+                  styles.timeText
+                }>{`${bookingDetails?._actions_turbo?.Days_deadline} days after booking`}</Text>
             </View>
           </View>
         </View>
@@ -215,42 +296,60 @@ const YourScheduleDetailsScreen = () => {
           </View>
         </View>
         <View style={styles.redirectsContainer}>
-          <TouchableOpacity style={styles.contentBriefContainer} onPress={handleContentBriefPress}>
-            <Text style={styles.socialMediaTitleText}>Content Brief & Tags</Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+          <TouchableOpacity
+            style={styles.contentBriefContainer}
+            onPress={handleContentBriefPress}>
+            <Text style={styles.socialMediaTitleText}>
+              Content Brief & Tags
+            </Text>
+            <Image
+              resizeMode="contain"
+              source={IMAGES.back}
+              style={styles.rightIcon}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+            <Image
+              resizeMode="contain"
+              source={IMAGES.back}
+              style={styles.rightIcon}
+            />
           </TouchableOpacity>
         </View>
 
         <View style={styles.openCouponBtnMainContainer}>
           <TouchableOpacity
             onPress={handleOpenCouponPress}
-            style={[styles.openCouponBtnContainer, !bookingDetails?.Approved && styles.disabledBtnContainer]}
-            disabled={!bookingDetails?.Approved}
-          >
+            style={[
+              styles.openCouponBtnContainer,
+              !bookingDetails?.Approved && styles.disabledBtnContainer,
+            ]}
+            disabled={!bookingDetails?.Approved}>
             <Text style={styles.openCouponBtnText}>Open Coupon </Text>
           </TouchableOpacity>
         </View>
-      </View>
-      <CustomModal
-        visible={isAlertVisible}
-        title={'Cancel booking'}
-        description={'Do you really want to cancel the booking?'}
-        handlePositiveBtnPress={handlePositiveBtnPress}
-        handleNegativeBtnPress={handleAlertVisible}
-        isLoading={isDeleting}
-      />
-    </ScrollView>
-  )
-}
 
-export default YourScheduleDetailsScreen
+        <CustomModal
+          visible={isAlertVisible}
+          title={'Cancel booking'}
+          description={'Do you really want to cancel the booking?'}
+          handlePositiveBtnPress={handlePositiveBtnPress}
+          handleNegativeBtnPress={handleAlertVisible}
+          isLoading={isDeleting}
+        />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default YourScheduleDetailsScreen;
 
 const styles = StyleSheet.create({
+  mainScrollView: {
+    backgroundColor: COLORS.white,
+  },
   specialAmenity: {
     flexDirection: 'row',
   },
@@ -373,7 +472,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     alignItems: 'center',
@@ -431,7 +531,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   nameLocationMainRow: {
     alignItems: 'center',
@@ -528,7 +627,7 @@ const styles = StyleSheet.create({
     height: moderateScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   selectedDateContainer: {
@@ -634,4 +733,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
   },
-})
+});

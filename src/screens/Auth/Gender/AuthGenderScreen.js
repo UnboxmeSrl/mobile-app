@@ -1,21 +1,42 @@
-import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { COLORS, FONTS } from '../../../constants'
-import { CustomButton, CustomHeader } from '../../../components'
-import { useAuthGender } from './hooks'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {CustomButton, CustomHeader} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthGender} from './hooks';
 
 const AuthGenderScreen = () => {
-  const { isLoading, genderList, selectedGender, isBtnDisabled, setSelectedGender, handleBackPress, handleNextPress } =
-    useAuthGender()
+  const {
+    isLoading,
+    genderList,
+    selectedGender,
+    isBtnDisabled,
+    setSelectedGender,
+    handleBackPress,
+    handleNextPress,
+  } = useAuthGender();
 
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'Gender'} step={2} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'Gender'}
+        step={2}
+        handleBackPress={handleBackPress}
+      />
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size={moderateScale(20)} color={COLORS.newPrimary} />
+          <ActivityIndicator
+            size={moderateScale(20)}
+            color={COLORS.newPrimary}
+          />
         </View>
       ) : (
         <>
@@ -23,31 +44,39 @@ const AuthGenderScreen = () => {
             <FlatList
               data={genderList}
               keyExtractor={(_, index) => index.toString()}
-              renderItem={({ item, index }) => {
-                const isSelected = selectedGender?.id === item?.id
+              renderItem={({item, index}) => {
+                const isSelected = selectedGender?.id === item?.id;
                 return (
                   <TouchableOpacity
                     onPress={() => setSelectedGender(item)}
-                    style={[styles.genderContainer, isSelected && styles.genderContainerWithSelection]}
-                  >
+                    style={[
+                      styles.genderContainer,
+                      isSelected && styles.genderContainerWithSelection,
+                    ]}>
                     <Text
-                      style={[styles.genderText, isSelected && styles.genderTextWithSelection]}
-                    >{`${item?.Sex}`}</Text>
+                      style={[
+                        styles.genderText,
+                        isSelected && styles.genderTextWithSelection,
+                      ]}>{`${item?.Sex}`}</Text>
                   </TouchableOpacity>
-                )
+                );
               }}
             />
           </View>
           <View style={styles.btnContainer}>
-            <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+            <CustomButton
+              title={'Next'}
+              handlePress={handleNextPress}
+              disabled={isBtnDisabled}
+            />
           </View>
         </>
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthGenderScreen
+export default AuthGenderScreen;
 
 const styles = StyleSheet.create({
   loaderContainer: {
@@ -90,6 +119,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

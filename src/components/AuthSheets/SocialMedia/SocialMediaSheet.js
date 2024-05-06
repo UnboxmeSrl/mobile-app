@@ -1,13 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { BottomSheet } from '../../BottomSheet'
-import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
+import {COLORS, FONTS} from '../../../constants';
+import {BottomSheet} from '../../BottomSheet';
 
 const SocialMediaSheet = React.forwardRef(
-  ({ title, description, placeholder, field, onChangeText, handlePress }, ref) => {
+  (
+    {title, description, placeholder, field, onChangeText, handlePress},
+    ref,
+  ) => {
     return (
       <BottomSheet ref={ref}>
         <View style={styles.mainContainer}>
@@ -26,17 +28,20 @@ const SocialMediaSheet = React.forwardRef(
 
           <View style={styles.belowContainer}>
             <View style={styles.descriptionContainer}>
-              <Text style={styles.descriptionText}>{`And send us a message to prove you’re the account owner`}</Text>
+              <Text
+                style={
+                  styles.descriptionText
+                }>{`And send us a message to prove you’re the account owner`}</Text>
             </View>
             <CustomButton title={'Add'} handlePress={handlePress} />
           </View>
         </View>
       </BottomSheet>
-    )
-  }
-)
+    );
+  },
+);
 
-export default SocialMediaSheet
+export default SocialMediaSheet;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -62,4 +67,4 @@ const styles = StyleSheet.create({
   belowContainer: {
     marginTop: '30%',
   },
-})
+});

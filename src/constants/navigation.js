@@ -1,9 +1,11 @@
-import { COLORS } from '@const'
-export const MAIN_NAVIGATOR = 'mainNavigator'
+import {COLORS} from './colors';
+export const MAIN_NAVIGATOR = 'mainNavigator';
 
 export const STACK_NAMES = {
   BottomStack: 'BottomStack',
-}
+  ProfileStack: 'ProfileStack',
+  AuthStack: 'AuthStack',
+};
 export const MODAL_NAMES = {
   AuthPhone: 'AuthPhone',
   Box: 'Box',
@@ -21,7 +23,7 @@ export const MODAL_NAMES = {
   Timeslots: 'Timeslots',
   WebView: 'WebView',
   YourRating: 'YourRating',
-}
+};
 export const SCREEN_NAMES = {
   ArchiveScreen: 'ArchiveScreen',
   AddCode: 'AddCode',
@@ -76,22 +78,23 @@ export const SCREEN_NAMES = {
   SignUpNew: 'SignUpNew',
   LoginOnboarding: 'LoginOnboarding',
   SettingsNew: 'SettingsNew',
-}
-export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
+  Splash: 'Splash',
+};
+export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack;
 export const COMMON_STATUS_BAR = {
   backgroundColor: 'transparent',
   translucent: true,
-}
+};
 export const LIGHT_STATUS_BAR = {
   ...COMMON_STATUS_BAR,
   barStyle: 'light-content',
-}
+};
 export const DARK_STATUS_BAR = {
   ...COMMON_STATUS_BAR,
   barStyle: 'dark-content',
-}
+};
 
 export const tabBarOptions = {
   activeTintColor: COLORS.primary,
   inactiveTintColor: 'gray',
-}
+};

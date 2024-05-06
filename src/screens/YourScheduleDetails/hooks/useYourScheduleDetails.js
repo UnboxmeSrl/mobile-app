@@ -1,61 +1,63 @@
-import { useEffect, useState } from 'react'
-import { useNavigationParam } from 'react-navigation-hooks'
-
-import { navigate } from '@services'
-
-import { SCREEN_NAMES } from '../../../constants/navigation'
-import { checkAction, checkActionName } from '../../../utils'
-import { cancelBooking, getAllCanceledBookings, getBookings } from '../../../services'
-import { Alert } from 'react-native'
-import { setBookings, setCanceledBookings } from '../../../redux/slices/restaurantSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { IMAGES } from '../../../assets/images'
+import {useRoute} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
+import {Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {IMAGES} from '../../../assets';
+import {SCREEN_NAMES} from '../../../constants';
+import {setBookings, setCanceledBookings} from '../../../redux';
+import {
+  cancelBooking,
+  getAllCanceledBookings,
+  getBookings,
+  navigate,
+} from '../../../services';
 
 // import moment from 'moment'
 // import 'moment-timezone'
 // import { getTimeZone } from 'react-native-localize'
 
 const useYourScheduleDetails = () => {
-  const loginData = useSelector((state) => state.authSlice.loginData)
-  const bookingDetails = useNavigationParam('bookingDetails')
+  const loginData = useSelector(state => state.authSlice.loginData);
+  const route = useRoute();
+  const bookingDetails = route.params?.bookingDetails;
   const approvalStageValue = bookingDetails?.Approved
     ? 'success'
     : bookingDetails?.Rejectedstatus
     ? 'reject'
-    : 'pending'
-  const [approvalStage, setApprovalStage] = useState(approvalStageValue)
-  const [currentMonth, setCurrentMonth] = useState('')
-  const [currentWeekDay, setCurrentWeekDay] = useState('')
-  const [currentDate, setCurrentDate] = useState('')
-  const [isAlertVisible, setIsAlertVisible] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const timeFrame = bookingDetails?._timeframes_turbo
+    : 'pending';
+  const [approvalStage, setApprovalStage] = useState(approvalStageValue);
+  const [currentMonth, setCurrentMonth] = useState('');
+  const [currentWeekDay, setCurrentWeekDay] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const timeFrame = bookingDetails?._timeframes_turbo;
 
-  let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0
-  let icon = bookingDetails?._actions_turbo?.Action_icon?.url
-  let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0
+  let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
+  let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
+  let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0;
 
   if (actionNumId === 6) {
-    icon = bookingDetails?._diary_action_turbo?.action_icon?.url
-    actionName = bookingDetails?._diary_action_turbo?.action_for_others
+    icon = bookingDetails?._diary_action_turbo?.action_icon?.url;
+    actionName = bookingDetails?._diary_action_turbo?.action_for_others;
   } else if (bookingDetails?.diary_action_turbo_id) {
-    actionName = bookingDetails?._diary_action_turbo?.action
+    actionName = bookingDetails?._diary_action_turbo?.action;
   }
 
-  let amenityDetails = {}
+  let amenityDetails = {};
 
   if (actionNumId === 7) {
     amenityDetails = {
       amenityName: `${bookingDetails?._actions_turbo?.Beauty} X Treatment`,
       amenityIcon: IMAGES.beauty,
       amenityDescription: 'at your choice',
-    }
+    };
   } else if (actionNumId === 8) {
     amenityDetails = {
       amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,
       amenityDescription: 'at your choice',
-    }
+    };
   } else if (actionNumId === 9) {
     amenityDetails = {
       amenityName: `${bookingDetails?._actions_turbo?.Accomodation} x Days (${
@@ -63,10 +65,10 @@ const useYourScheduleDetails = () => {
       } nights)`,
       amenityIcon: IMAGES.resort,
       amenityDescription: 'at your choice',
-    }
+    };
   }
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // const serverData = {
   //   Start: '08',
@@ -110,63 +112,57 @@ const useYourScheduleDetails = () => {
   // console.log('User End Time:', userTimes.endUserTime)
 
   const handleBackPress = () => {
-    navigate(SCREEN_NAMES.Schedule)
-  }
+    navigate(SCREEN_NAMES.Schedule);
+  };
 
   const handleContentBriefPress = () => {
-    navigate({
-      params: {
-        bookingDetails: bookingDetails,
-      },
-      routeName: SCREEN_NAMES.ContentBriefScreen,
-    })
-  }
+    navigate(SCREEN_NAMES.ContentBriefScreen, {
+      bookingDetails: bookingDetails,
+    });
+  };
 
   const handleOpenCouponPress = () => {
-    navigate({
-      params: {
-        bookingDetails: bookingDetails,
-      },
-      routeName: SCREEN_NAMES.NewCouponScreen,
-    })
-  }
+    navigate(SCREEN_NAMES.NewCouponScreen, {
+      bookingDetails: bookingDetails,
+    });
+  };
 
   const handleAlertVisible = () => {
-    setIsAlertVisible(!isAlertVisible)
-  }
+    setIsAlertVisible(!isAlertVisible);
+  };
 
   const handlePositiveBtnPress = async () => {
-    setIsDeleting(true)
-    const params = `/${bookingDetails?.id}`
-    const res = await cancelBooking(params)
+    setIsDeleting(true);
+    const params = `/${bookingDetails?.id}`;
+    const res = await cancelBooking(params);
     if (res?.id) {
-      const params = `/${loginData?.id}`
-      const bookingRes = await getBookings(params)
+      const params = `/${loginData?.id}`;
+      const bookingRes = await getBookings(params);
       if (bookingRes?.length > 0) {
-        dispatch(setBookings(bookingRes))
+        dispatch(setBookings(bookingRes));
       }
 
-      const canceledBookingRes = await getAllCanceledBookings(params)
+      const canceledBookingRes = await getAllCanceledBookings(params);
       if (canceledBookingRes?.length > 0) {
-        dispatch(setCanceledBookings(canceledBookingRes))
+        dispatch(setCanceledBookings(canceledBookingRes));
       }
 
-      setIsDeleting(false)
-      setIsAlertVisible(false)
-      navigate(SCREEN_NAMES.ArchiveScreen)
+      setIsDeleting(false);
+      setIsAlertVisible(false);
+      navigate(SCREEN_NAMES.ArchiveScreen);
     } else {
-      Alert.alert('Something went wrong')
+      Alert.alert('Something went wrong');
     }
-  }
+  };
 
   useEffect(() => {
-    const myDate = new Date(bookingDetails?.BookingDay)
-    const month = myDate.toLocaleString('en-US', { month: 'long' })
-    setCurrentMonth(month)
-    const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
-    setCurrentWeekDay(weekDay)
-    setCurrentDate(myDate.getDate())
-  }, [])
+    const myDate = new Date(bookingDetails?.BookingDay);
+    const month = myDate.toLocaleString('en-US', {month: 'long'});
+    setCurrentMonth(month);
+    const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+    setCurrentWeekDay(weekDay);
+    setCurrentDate(myDate.getDate());
+  }, []);
 
   return {
     actionNumId,
@@ -186,7 +182,7 @@ const useYourScheduleDetails = () => {
     handlePositiveBtnPress,
     icon,
     timeFrame,
-  }
-}
+  };
+};
 
-export default useYourScheduleDetails
+export default useYourScheduleDetails;

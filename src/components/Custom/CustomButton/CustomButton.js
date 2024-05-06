@@ -1,28 +1,40 @@
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React from 'react';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
 
-const CustomButton = ({ title, handlePress, disabled = false, isLoading = false }) => {
+const CustomButton = ({
+  title,
+  handlePress,
+  disabled = false,
+  isLoading = false,
+}) => {
   return (
     <View style={styles.btnMainContainer}>
       <TouchableOpacity
         disabled={disabled}
         onPress={handlePress}
-        style={[styles.btnContainer, disabled && styles.disabledBtnContainer]}
-      >
+        style={[styles.btnContainer, disabled && styles.disabledBtnContainer]}>
         {isLoading ? (
           <ActivityIndicator size={30} color={COLORS.black22} />
         ) : (
-          <Text style={[styles.btnText, disabled && styles.disabledBtnText]}> {title}</Text>
+          <Text style={[styles.btnText, disabled && styles.disabledBtnText]}>
+            {' '}
+            {title}
+          </Text>
         )}
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default CustomButton;
 
 const styles = StyleSheet.create({
   disabledBtnText: {
@@ -49,4 +61,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
   },
-})
+});

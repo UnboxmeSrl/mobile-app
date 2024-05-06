@@ -1,11 +1,17 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { CustomButton, CustomHeader, CustomTextInput } from '../../../components'
-import { useAuthAgency } from './hooks'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS, FONTS } from '../../../constants'
-import { IMAGES } from '../../../assets/images'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {CustomButton, CustomHeader, CustomTextInput} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthAgency} from './hooks';
 
 const AuthAgencyScreen = () => {
   const {
@@ -16,13 +22,19 @@ const AuthAgencyScreen = () => {
     setAgencyName,
     handleBackPress,
     handleNextPress,
-  } = useAuthAgency()
+  } = useAuthAgency();
 
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'your Agency'} step={6} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'your Agency'}
+        step={6}
+        handleBackPress={handleBackPress}
+      />
       <View style={styles.OptionsMainContainer}>
-        <TouchableOpacity onPress={() => setSelectedValue(1)} style={styles.freelancerContainer}>
+        <TouchableOpacity
+          onPress={() => setSelectedValue(1)}
+          style={styles.freelancerContainer}>
           {selectedValue === 1 ? (
             <Image source={IMAGES.checkMark} style={styles.checkMarkIcon} />
           ) : (
@@ -31,7 +43,9 @@ const AuthAgencyScreen = () => {
           <Text style={styles.textStyle}>I am a freelances</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setSelectedValue(2)} style={styles.agencyContainer}>
+        <TouchableOpacity
+          onPress={() => setSelectedValue(2)}
+          style={styles.agencyContainer}>
           {selectedValue === 2 ? (
             <Image source={IMAGES.checkMark} style={styles.checkMarkIcon} />
           ) : (
@@ -42,17 +56,25 @@ const AuthAgencyScreen = () => {
       </View>
 
       {selectedValue === 2 && (
-        <CustomTextInput placeholder={'your Agency'} value={agencyName} handleOnChangeText={setAgencyName} />
+        <CustomTextInput
+          placeholder={'your Agency'}
+          value={agencyName}
+          handleOnChangeText={setAgencyName}
+        />
       )}
 
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+        <CustomButton
+          title={'Next'}
+          handlePress={handleNextPress}
+          disabled={isBtnDisabled}
+        />
       </View>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthAgencyScreen
+export default AuthAgencyScreen;
 
 const styles = StyleSheet.create({
   btnContainer: {
@@ -93,6 +115,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

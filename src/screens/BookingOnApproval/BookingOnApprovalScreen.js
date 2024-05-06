@@ -1,12 +1,19 @@
-import React from 'react'
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { useBookingOnApproval } from './hooks'
-import { commonStyle } from '../../utils'
+import React from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {COLORS, FONTS} from '../../constants';
+import {useBookingOnApproval} from './hooks';
 
 const BookingOnApprovalScreen = () => {
   const {
@@ -20,33 +27,49 @@ const BookingOnApprovalScreen = () => {
     isLoading,
     handleBackPress,
     handleGoToSchedulePress,
-  } = useBookingOnApproval()
+  } = useBookingOnApproval();
   const approvalIcon =
     approvalStage === 'pending'
       ? IMAGES.approvalPending
       : approvalStage === 'success'
       ? IMAGES.approvalSuccess
-      : IMAGES.approvalReject
+      : IMAGES.approvalReject;
 
-  console.log('ActionNumId: ' + actionNumId)
+  console.log('ActionNumId: ' + actionNumId);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.mainScrollView}>
+      <SafeAreaView style={styles.mainContainer}>
         <View style={styles.headerContainer}>
           <TouchableOpacity onPress={handleBackPress}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
       <View style={styles.pendingIconTextContainer}>
         <View>
-          <Image resizeMode="cover" source={approvalIcon} style={styles.approvalIcon} />
+          <Image
+            resizeMode="cover"
+            source={approvalIcon}
+            style={styles.approvalIcon}
+          />
         </View>
         <View style={styles.pendingTextContainer}>
           <Text style={styles.pendingText}>
             Your booking is on
-            {` ${approvalStage === 'pending' ? `approval` : approvalStage === 'success' ? `approved` : `rejected`}`}
+            {` ${
+              approvalStage === 'pending'
+                ? `approval`
+                : approvalStage === 'success'
+                ? `approved`
+                : `rejected`
+            }`}
           </Text>
         </View>
       </View>
@@ -54,37 +77,52 @@ const BookingOnApprovalScreen = () => {
         style={[
           styles.onApprovalItemsMainContainer,
           approvalStage === 'pending'
-            ? { backgroundColor: COLORS.cornSilk, borderColor: COLORS.americanYellow }
+            ? {
+                backgroundColor: COLORS.cornSilk,
+                borderColor: COLORS.americanYellow,
+              }
             : approvalStage === 'success'
-            ? { backgroundColor: COLORS.honeyDewGreen, borderColor: COLORS.mayGreen }
-            : { backgroundColor: COLORS.seaShellRed, borderColor: COLORS.follyRed },
-        ]}
-      >
+            ? {
+                backgroundColor: COLORS.honeyDewGreen,
+                borderColor: COLORS.mayGreen,
+              }
+            : {
+                backgroundColor: COLORS.seaShellRed,
+                borderColor: COLORS.follyRed,
+              },
+        ]}>
         <View style={styles.restaurantDetailsMainRow}>
           <View style={styles.restaurantImageContainer}>
             <FastImage
               resizeMode="cover"
-              source={{ priority: FastImage.priority.high, uri: bookingDetails?._offers_turbo?.Offer_Cover?.url }}
+              source={{
+                priority: FastImage.priority.high,
+                uri: bookingDetails?._offers_turbo?.Offer_Cover?.url,
+              }}
               style={styles.serviceImage}
             />
           </View>
           <View style={styles.restaurantNameContainer}>
-            <Text style={styles.restaurantNameText}>{bookingDetails?._offers_turbo?.Offer_Name}</Text>
+            <Text style={styles.restaurantNameText}>
+              {bookingDetails?._offers_turbo?.Offer_Name}
+            </Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.ratingUsersText}>240</Text>
-              <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+              <Image
+                source={IMAGES.ratingStar}
+                style={styles.ratingIconImage}
+              />
             </View>
           </View>
           <View
             style={[
               styles.onApprovalTextContainer,
               approvalStage === 'pending'
-                ? { backgroundColor: COLORS.americanYellow }
+                ? {backgroundColor: COLORS.americanYellow}
                 : approvalStage === 'success'
-                ? { backgroundColor: COLORS.mayGreen }
-                : { backgroundColor: COLORS.tartOrange },
-            ]}
-          >
+                ? {backgroundColor: COLORS.mayGreen}
+                : {backgroundColor: COLORS.tartOrange},
+            ]}>
             <Text style={styles.onApprovalText}>{`${
               approvalStage === 'pending'
                 ? `On Approval`
@@ -99,12 +137,17 @@ const BookingOnApprovalScreen = () => {
           <View style={styles.locationImageContainer}>
             <FastImage
               resizeMode="cover"
-              source={{ priority: FastImage.priority.high, uri: bookingDetails?._restaurant_turbo?.Cover?.url }}
+              source={{
+                priority: FastImage.priority.high,
+                uri: bookingDetails?._restaurant_turbo?.Cover?.url,
+              }}
               style={styles.locationImage}
             />
           </View>
           <View style={styles.locationNameContainer}>
-            <Text style={styles.locationNameText}>{bookingDetails?._restaurant_turbo?.Name}</Text>
+            <Text style={styles.locationNameText}>
+              {bookingDetails?._restaurant_turbo?.Name}
+            </Text>
             <View style={styles.locationContainer}>
               <Text style={styles.locationText} numberOfLines={4}>
                 {bookingDetails?._restaurant_turbo?.Adress}
@@ -116,16 +159,22 @@ const BookingOnApprovalScreen = () => {
         <View style={styles.selectedDateMainContainer}>
           <View style={styles.selectedDateContainer}>
             <Text style={styles.selectedDateNumberText}>{currentDate}</Text>
-            <Text style={styles.selectedDateMonthText}>{currentMonth?.slice(0, 3)}</Text>
+            <Text style={styles.selectedDateMonthText}>
+              {currentMonth?.slice(0, 3)}
+            </Text>
           </View>
           <View style={styles.timeContainer}>
             <Text style={styles.selectedDateTitleText}>Selected Date</Text>
             {actionNumId !== 9 ? (
               <Text
-                style={styles.selectedDateWithTimeText}
-              >{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                style={
+                  styles.selectedDateWithTimeText
+                }>{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
             ) : (
-              <Text style={styles.selectedDateWithTimeText}>{`${currentWeekDay}`}</Text>
+              <Text
+                style={
+                  styles.selectedDateWithTimeText
+                }>{`${currentWeekDay}`}</Text>
             )}
           </View>
         </View>
@@ -133,14 +182,19 @@ const BookingOnApprovalScreen = () => {
         {approvalStage === 'pending' && (
           <View style={styles.lastDescriptionContainer}>
             <Text style={styles.descriptionText}>
-              The owner has received your request and we are waiting for confirmation. Write in Chat fo questions.
+              The owner has received your request and we are waiting for
+              confirmation. Write in Chat fo questions.
             </Text>
           </View>
         )}
       </View>
       <TouchableOpacity style={styles.howItWorksContainer}>
         <Text style={styles.socialMediaTitleText}>Check brief </Text>
-        <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
+        <Image
+          resizeMode="cover"
+          source={IMAGES.back}
+          style={styles.rightIcon}
+        />
       </TouchableOpacity>
 
       <View style={styles.goToScheduleBtnMainContainer}>
@@ -149,18 +203,23 @@ const BookingOnApprovalScreen = () => {
             <ActivityIndicator color={COLORS.black22} size={30} />
           </View>
         ) : (
-          <TouchableOpacity onPress={handleGoToSchedulePress} style={styles.goToScheduleBtnContainer}>
+          <TouchableOpacity
+            onPress={handleGoToSchedulePress}
+            style={styles.goToScheduleBtnContainer}>
             <Text style={styles.goToScheduleBtnText}>Go to schedule </Text>
           </TouchableOpacity>
         )}
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default BookingOnApprovalScreen
+export default BookingOnApprovalScreen;
 
 const styles = StyleSheet.create({
+  mainScrollView: {
+    backgroundColor: COLORS.white,
+  },
   approvalIcon: {
     height: moderateScale(40),
     width: moderateScale(40),
@@ -246,7 +305,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   nameLocationMainRow: {
     alignItems: 'center',
@@ -326,7 +384,7 @@ const styles = StyleSheet.create({
     height: moderateScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   selectedDateContainer: {
@@ -387,4 +445,4 @@ const styles = StyleSheet.create({
     paddingLeft: scale(10),
     width: '60%',
   },
-})
+});

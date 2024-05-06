@@ -1,20 +1,32 @@
-import React, { useMemo } from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getDistance } from 'geolib'
+import React from 'react';
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
+import {useRestaurantCard} from './hooks';
 
-import { IMAGES } from '../../../assets/images'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-
-import { useRestaurantCard } from './hooks'
-
-const RestaurantCard = ({ item }) => {
-  const { handleCardPress } = useRestaurantCard()
+const RestaurantCard = ({item}) => {
+  const {handleCardPress} = useRestaurantCard();
   return (
-    <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
-      <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
-        <Image resizeMode="cover" source={IMAGES.overlay} style={styles.itemImage} />
+    <TouchableOpacity
+      onPress={() => handleCardPress(item)}
+      style={styles.listItem}>
+      <ImageBackground
+        resizeMode="cover"
+        source={{uri: item?.Cover?.url}}
+        style={styles.itemImage}>
+        <Image
+          resizeMode="cover"
+          source={IMAGES.overlay}
+          style={styles.itemImage}
+        />
         <View style={styles.mainContainer}>
           {/* <View style={styles.ratingsContainer}>
             <Text style={styles.ratingsText}>+250</Text>
@@ -31,14 +43,18 @@ const RestaurantCard = ({ item }) => {
         </View>
         <View style={styles.nameLocationContainer}>
           <Text style={styles.restaurantNameText}>{item?.Name}</Text>
-          {!!item.distance && <Text style={styles.distanceText}>{item.distance.toFixed(2)} km from here</Text>}
+          {!!item.distance && (
+            <Text style={styles.distanceText}>
+              {item.distance.toFixed(2)} km from here
+            </Text>
+          )}
         </View>
       </ImageBackground>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default RestaurantCard
+export default RestaurantCard;
 
 const styles = StyleSheet.create({
   distanceText: {
@@ -104,4 +120,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(15),
   },
-})
+});

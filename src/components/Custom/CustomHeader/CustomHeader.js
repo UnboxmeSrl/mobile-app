@@ -1,26 +1,28 @@
-import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { useNavigation } from 'react-navigation-hooks'
+import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
+import {useNavigation} from '@react-navigation/native';
 
-import { IMAGES } from '../../../assets/images'
-import { COLORS, FONTS } from '../../../constants'
-
-const CustomHeader = ({ title, step, handleBackPress }) => {
-  const navigation = useNavigation()
+const CustomHeader = ({title, step, handleBackPress}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
         onPress={() => {
           if (handleBackPress) {
-            handleBackPress()
+            handleBackPress();
           } else {
-            navigation.pop()
+            navigation.pop();
           }
         }}
-        style={styles.backIconContainer}
-      >
-        <Image resizeMode="cover" source={IMAGES.arrowLeft} style={styles.backIcon} />
+        style={styles.backIconContainer}>
+        <Image
+          resizeMode="cover"
+          source={IMAGES.arrowLeft}
+          style={styles.backIcon}
+        />
       </TouchableOpacity>
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitleText}>{title}</Text>
@@ -29,10 +31,10 @@ const CustomHeader = ({ title, step, handleBackPress }) => {
         <Text style={styles.progressText}>{`${step}/11`}</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default CustomHeader
+export default CustomHeader;
 
 const styles = StyleSheet.create({
   backIcon: {
@@ -48,7 +50,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: scale(20),
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     marginTop: verticalScale(-5),
@@ -64,4 +67,4 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     textAlign: 'center',
   },
-})
+});

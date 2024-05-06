@@ -1,14 +1,14 @@
-import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
-import perfectSize from '../../utils/responsiveSize'
+import React from 'react';
+import {Image, StyleSheet, View} from 'react-native';
+import {perfectSize} from '../../utils';
 
-const Avatar = ({ img, style }) => {
+const Avatar = ({img, style}) => {
   return (
     <View style={[styles.avatar, style]}>
-      <Image source={img} alt="user iamge" style={styles.img} />
+      <Image source={img} alt="user image" style={styles.img} />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   avatar: {
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-})
+});
 
-export default Avatar
+export default Avatar;

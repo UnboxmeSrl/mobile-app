@@ -1,1 +1,1 @@
-export { default as FirstOnboarding } from './FirstOnboarding'
+export {default as FirstOnboarding} from './FirstOnboarding';

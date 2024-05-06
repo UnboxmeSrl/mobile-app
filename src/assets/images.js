@@ -85,7 +85,6 @@ export const IMAGES = {
   locationNew: require('./images/location-new.png'),
   clinkingGlasses: require('./images/clinking-glasses.png'),
   instagramReels: require('./images/instagram-reels.png'),
-  locationNew: require('./images/location-new.png'),
   mapsNew: require('./images/maps-new.png'),
   mealDish: require('./images/meal-dish.png'),
   storyIcon: require('./images/story-icon.png'),
@@ -126,4 +125,5 @@ export const IMAGES = {
   plusDisabled: require('./images/plus-disabled.png'),
   minusDisabled: require('./images/minus-disabled.png'),
   minusEnabled: require('./images/minus-enabled.png'),
-}
+  clarisLogo: require('./images/claris-logo.png'),
+};

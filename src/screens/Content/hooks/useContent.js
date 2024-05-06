@@ -1,81 +1,79 @@
-import { useEffect, useState } from 'react'
-import { Alert } from 'react-native'
-import { useNavigationParam } from 'react-navigation-hooks'
-import { useDispatch, useSelector } from 'react-redux'
-import { navigate } from '@services'
-import { SCREEN_NAMES } from '../../../constants/navigation'
-import { setBookings } from '../../../redux/slices/restaurantSlice'
+import {useEffect, useState} from 'react';
+import {Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {SCREEN_NAMES} from '../../../constants';
+import {setBookings, setContentList} from '../../../redux';
 import {
   getBookingForContentList,
   getBookings,
   getDiaryActions,
-  updateAction,
+  navigate,
   updateActionDiary,
-} from '../../../services'
-import { setContentList } from '../../../redux/slices'
-import { checkAction } from '../../../utils'
+} from '../../../services';
+import {checkAction} from '../../../utils';
+import {useRoute} from '@react-navigation/native';
 
 const useContent = () => {
-  const loginData = useSelector((state) => state.authSlice.loginData)
-  const socialActions = useSelector((state) => state.restaurantSlice.socialActions)
-  const [selectedApp, setSelectedApp] = useState(0)
-  const bookingDetails = useNavigationParam('bookingDetails')
-  const actionName = useNavigationParam('actionName')
-  const actionNumId = useNavigationParam('actionNumId')
-  const [isLoading, setIsLoading] = useState(false)
-  const [diaryItems, setDiaryItems] = useState([])
-  const [isDataFetching, setIsDataFetching] = useState(false)
-  const actions = checkAction(actionNumId, socialActions)
+  const loginData = useSelector(state => state.authSlice.loginData);
+  const socialActions = useSelector(
+    state => state.restaurantSlice.socialActions,
+  );
+  const route = useRoute();
+  const [selectedApp, setSelectedApp] = useState(0);
+  const bookingDetails = route.params?.bookingDetails;
+  const actionName = route.params?.actionName;
+  const actionNumId = route.params?.actionNumId;
+  const [isLoading, setIsLoading] = useState(false);
+  const [diaryItems, setDiaryItems] = useState([]);
+  const [isDataFetching, setIsDataFetching] = useState(false);
+  const actions = checkAction(actionNumId, socialActions);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const getDiaryActionsData = async () => {
-    setIsDataFetching(true)
-    const res = await getDiaryActions()
-    setDiaryItems(res)
-    setIsDataFetching(false)
-  }
+    setIsDataFetching(true);
+    const res = await getDiaryActions();
+    setDiaryItems(res);
+    setIsDataFetching(false);
+  };
 
   const handleBackPress = () => {
-    navigate(SCREEN_NAMES.Schedule)
-  }
+    navigate(SCREEN_NAMES.Schedule);
+  };
 
   const handleNextPress = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     /* Here, 
             reel=1 for reel
             reel=2 for tiktok 
     */
-    const params = `/${bookingDetails?.id}`
+    const params = `/${bookingDetails?.id}`;
 
     const prepData = {
       diary_action_turbo_id: diaryItems?.[selectedApp]?.id,
-    }
-    const res = await updateActionDiary(params, prepData)
-    console.log('update Diary Result: ', res)
+    };
+    const res = await updateActionDiary(params, prepData);
+    console.log('update Diary Result: ', res);
     if (res?.id) {
-      const params = `/${loginData?.id}`
-      const bookingRes = await getBookings(params)
-      dispatch(setBookings(bookingRes))
-      const newParams = `/${loginData?.id}`
-      const contentListRes = await getBookingForContentList(newParams)
-      dispatch(setContentList(contentListRes))
-      navigate({
-        params: {
-          bookingDetails: res,
-        },
-        routeName: SCREEN_NAMES.ContentBriefScreen,
-      })
+      const params = `/${loginData?.id}`;
+      const bookingRes = await getBookings(params);
+      dispatch(setBookings(bookingRes));
+      const newParams = `/${loginData?.id}`;
+      const contentListRes = await getBookingForContentList(newParams);
+      dispatch(setContentList(contentListRes));
+      navigate(SCREEN_NAMES.ContentBriefScreen, {
+        bookingDetails: res,
+      });
     } else {
-      Alert.alert('Something went wrong')
+      Alert.alert('Something went wrong');
     }
 
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    getDiaryActionsData()
-  }, [])
+    getDiaryActionsData();
+  }, []);
 
   return {
     actions,
@@ -87,7 +85,7 @@ const useContent = () => {
     handleNextPress,
     selectedApp,
     setSelectedApp,
-  }
-}
+  };
+};
 
-export default useContent
+export default useContent;

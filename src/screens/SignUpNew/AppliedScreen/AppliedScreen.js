@@ -1,23 +1,31 @@
-import React from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { commonStyle } from '../../../utils'
-import { useApplied } from './hooks'
+import React from 'react';
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {useApplied} from './hooks';
+import {COLORS, FONTS} from '../../../constants';
+import {IMAGES} from '../../../assets';
+import {commonStyle} from '../../../utils';
 
 const AppliedScreen = () => {
-  const { handleGuestPress } = useApplied()
+  const {handleGuestPress} = useApplied();
   return (
     <View style={styles.mainContainer}>
-      <ImageBackground source={IMAGES.appliedScreenBackground} style={styles.backgroundStyle}>
+      <ImageBackground
+        source={IMAGES.appliedScreenBackground}
+        style={styles.backgroundStyle}>
         <View style={styles.viewForMargin}>
-          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: verticalScale(40), width: '95%' }}>
+          <View style={styles.appLogoContainer}>
             <Image
               resizeMode={'contain'}
               source={IMAGES.appLogo}
-              style={{ height: verticalScale(118), width: scale(99) }}
+              style={styles.appLogoImage}
             />
           </View>
           <View style={styles.titleContainer}>
@@ -26,7 +34,10 @@ const AppliedScreen = () => {
         </View>
 
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>{`Within 24H you will receive a response on your email `}</Text>
+          <Text
+            style={
+              styles.descriptionText
+            }>{`Within 24H you will receive a response on your email `}</Text>
         </View>
 
         <TouchableOpacity style={styles.queryContainer}>
@@ -34,18 +45,31 @@ const AppliedScreen = () => {
           <Text style={styles.queryText}>Questions? Send us a message</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.7} onPress={handleGuestPress} style={styles.guestBtnContainer}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={handleGuestPress}
+          style={styles.guestBtnContainer}>
           <Image source={IMAGES.addUser} style={styles.addUserIcon} />
           <Text style={styles.guestBtnText}>Continue as Guest</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
-export default AppliedScreen
+export default AppliedScreen;
 
 const styles = StyleSheet.create({
+  appLogoImage: {
+    height: verticalScale(118),
+    width: scale(99),
+  },
+  appLogoContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: verticalScale(40),
+    width: '95%',
+  },
   addUserIcon: {
     height: moderateScale(19),
     marginRight: scale(5),
@@ -121,4 +145,4 @@ const styles = StyleSheet.create({
   viewForMargin: {
     ...commonStyle.containerPaddingTop,
   },
-})
+});

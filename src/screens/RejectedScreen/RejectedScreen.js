@@ -1,17 +1,14 @@
-import React from 'react'
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import { verticalScale } from 'react-native-size-matters'
-
-import { IMAGES } from '../../assets/images'
-import AppButton from '../../components/Buttons'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import perfectSize from '../../utils/responsiveSize'
-
-import { useReject } from './hooks'
+import React from 'react';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {verticalScale} from 'react-native-size-matters';
+import {useReject} from './hooks';
+import {IMAGES} from '../../assets';
+import {AppButton} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {perfectSize} from '../../utils';
 
 const RejectedScreen = () => {
-  const { handleGuestPress } = useReject()
+  const {handleGuestPress} = useReject();
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -19,8 +16,8 @@ const RejectedScreen = () => {
         <Image source={IMAGES.rejected} style={styles.image} />
         <Text style={styles.title}>You have not been approved</Text>
         <Text style={styles.desc}>
-          We are sorry but for some reasons we are not able to include you in Claris for now! Don’t give up though you
-          may have the potential!
+          We are sorry but for some reasons we are not able to include you in
+          Claris for now! Don’t give up though you may have the potential!
         </Text>
       </View>
       <AppButton
@@ -30,10 +27,10 @@ const RejectedScreen = () => {
         title="Continue as a guest"
       />
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default RejectedScreen
+export default RejectedScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -86,4 +83,4 @@ const styles = StyleSheet.create({
     textTransform: 'none',
     letterSpacing: 0.36,
   },
-})
+});

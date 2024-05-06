@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://xbut-eryu-hhsg.f2.xano.io'
+export const BASE_URL = 'https://xbut-eryu-hhsg.f2.xano.io';
 
 export const Api = {
   LOCATIONS: {
@@ -43,4 +43,4 @@ export const Api = {
   SIGN_UP_WITH_PHONE: {
     GET_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/number`,
   },
-}
+};

@@ -1,1 +1,1 @@
-export { default as useReject } from './useReject'
+export {default as useReject} from './useReject';

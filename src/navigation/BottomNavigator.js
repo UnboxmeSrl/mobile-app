@@ -1,90 +1,89 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { CouponsScreen } from '@screens/Coupons'
-import { PrizesScreen } from '@screens/Prizes'
-import { ProfileScreen } from '@screens/Profile'
-import { TabBarIcon } from '@components/TabBarIcon'
-import { SCREEN_NAMES } from '@const/navigation'
-import { IMAGES } from '../assets/images'
-import HomeStack from './HomeStack'
-import ScheduleStack from './ScheduleStack'
-import ProfileStack from './ProfileStack'
-import { COLORS } from '../constants'
-import { verticalScale } from 'react-native-size-matters'
-import { hasNotch } from '../utils'
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-export default createBottomTabNavigator(
-  {
-    [SCREEN_NAMES.Home]: {
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => {
-          return (
-            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
-              <TabBarIcon focused={focused} icon={IMAGES.home} />
-            </View>
-          )
-        },
-      },
-      screen: HomeStack,
-    },
-    [SCREEN_NAMES.Schedule]: {
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => {
-          return (
-            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
-              <TabBarIcon focused={focused} icon={IMAGES.calender} />
-            </View>
-          )
-        },
-      },
-      screen: ScheduleStack,
-    },
-    // [SCREEN_NAMES.Prizes]: {
-    //   navigationOptions: {
-    //     tabBarIcon: ({ focused }) => {
-    //       return (
-    //         <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
-    //           <TabBarIcon focused={focused} icon={IMAGES.bell} />
-    //         </View>
-    //       )
-    //     },
-    //   },
-    //   screen: PrizesScreen,
-    // },
-    [SCREEN_NAMES.Profile]: {
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => {
-          return (
-            <View style={focused ? styles.activeTabStyle : styles.inActiveTabStyle}>
-              <TabBarIcon focused={focused} icon={IMAGES.user} />
-            </View>
-          )
-        },
-      },
-      screen: ProfileStack,
-    },
-  },
-  {
-    initialRouteName: SCREEN_NAMES.Home,
-    // tabBarComponent: (props) => (
-    //   <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
-    // ),
+import {COLORS, SCREEN_NAMES, STACK_NAMES} from '../constants';
+import {verticalScale} from 'react-native-size-matters';
+import {TabBarIcon} from '../components';
+import {IMAGES} from '../assets';
+import {hasNotch} from '../utils';
+import HomeStack from './HomeStack';
+import ScheduleStack from './ScheduleStack';
+import ProfileStack from './ProfileStack';
 
-    tabBarOptions: {
-      activeTintColor: COLORS.newPrimary,
-      inactiveTintColor: COLORS.white,
-      style: {
-        backgroundColor: COLORS.white,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-        borderTopWidth: 0,
-        height: 56,
-        marginBottom: hasNotch ? verticalScale(10) : 0,
-      },
-    },
-  }
-)
+const BottomTabs = createBottomTabNavigator();
+
+const BottomTabNavigator = () => {
+  return (
+    <BottomTabs.Navigator
+      initialRouteName={SCREEN_NAMES.Home}
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: COLORS.newPrimary,
+        tabBarInactiveTintColor: COLORS.white,
+        style: {
+          backgroundColor: COLORS.white,
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+          borderTopWidth: 0,
+          height: 56,
+          marginBottom: hasNotch ? verticalScale(10) : 0,
+        },
+      }}>
+      <BottomTabs.Screen
+        name={SCREEN_NAMES.Home}
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                style={
+                  focused ? styles.activeTabStyle : styles.inActiveTabStyle
+                }>
+                <TabBarIcon focused={focused} icon={IMAGES.home} />
+              </View>
+            );
+          },
+        }}
+      />
+      <BottomTabs.Screen
+        name={SCREEN_NAMES.Schedule}
+        component={ScheduleStack}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                style={
+                  focused ? styles.activeTabStyle : styles.inActiveTabStyle
+                }>
+                <TabBarIcon focused={focused} icon={IMAGES.calender} />
+              </View>
+            );
+          },
+        }}
+      />
+      <BottomTabs.Screen
+        name={STACK_NAMES.ProfileStack}
+        component={ProfileStack}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                style={
+                  focused ? styles.activeTabStyle : styles.inActiveTabStyle
+                }>
+                <TabBarIcon focused={focused} icon={IMAGES.user} />
+              </View>
+            );
+          },
+        }}
+      />
+    </BottomTabs.Navigator>
+  );
+};
+
+export default BottomTabNavigator;
 
 const styles = StyleSheet.create({
   activeTabStyle: {
@@ -102,4 +101,4 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 73,
   },
-})
+});

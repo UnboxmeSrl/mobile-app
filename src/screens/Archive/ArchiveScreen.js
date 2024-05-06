@@ -1,28 +1,34 @@
-import React from 'react'
+import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import { IMAGES } from '../../assets/images'
-import { COLORS, FONTS } from '../../constants'
-import { useArchive } from './hooks'
-import { commonStyle } from '../../utils'
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {COLORS, FONTS} from '../../constants';
+import {useArchive} from './hooks';
 
 const ArchiveScreen = () => {
-  const { isLoading, refreshing, onRefresh, canceledBookings, handleBackPress } = useArchive()
+  const {isLoading, refreshing, onRefresh, canceledBookings, handleBackPress} =
+    useArchive();
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-          <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+        <TouchableOpacity
+          onPress={handleBackPress}
+          style={styles.backIconContainer}>
+          <Image
+            resizeMode="cover"
+            source={IMAGES.back}
+            style={styles.backIcon}
+          />
         </TouchableOpacity>
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitleText}>Archive</Text>
@@ -36,25 +42,31 @@ const ArchiveScreen = () => {
         <FlatList
           data={canceledBookings}
           keyExtractor={(_, index) => index.toString()}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           ListEmptyComponent={
             <View style={styles.emptyComponentContainer}>
               <Text style={styles.emptyComponentText}>No Data Found.</Text>
             </View>
           }
-          renderItem={({ item, index }) => {
-            const myDate = new Date(item?.BookingDay)
-            const month = myDate.toLocaleString('en-US', { month: 'long' })
-            const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
-            const timeFrame = item?._timeframes_turbo
-            const actionNumId = item?._actions_turbo?.action_num_id
+          renderItem={({item, index}) => {
+            const myDate = new Date(item?.BookingDay);
+            const month = myDate.toLocaleString('en-US', {month: 'long'});
+            const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+            const timeFrame = item?._timeframes_turbo;
+            const actionNumId = item?._actions_turbo?.action_num_id;
             return (
               <View style={styles.cardContainer}>
                 <View style={styles.cardContentContainer}>
                   <View style={styles.dateContainer}>
                     <Text style={styles.selectedDateMonthText}>{month}</Text>
-                    <Text style={styles.selectedDateNumberText}>{myDate?.getDate()}</Text>
-                    <Text style={styles.selectedDateDayText}>{weekDay?.slice(0, 3)}</Text>
+                    <Text style={styles.selectedDateNumberText}>
+                      {myDate?.getDate()}
+                    </Text>
+                    <Text style={styles.selectedDateDayText}>
+                      {weekDay?.slice(0, 3)}
+                    </Text>
                   </View>
 
                   <View style={styles.timeServiceContainer}>
@@ -70,8 +82,13 @@ const ArchiveScreen = () => {
                       </>
                     )}
                     <View style={styles.serviceRequestedContainer}>
-                      <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
-                      <Text style={styles.serviceRequestedText} numberOfLines={1} ellipsizeMode="tail">
+                      <Text style={styles.serviceRequestedTitleText}>
+                        Service Requested
+                      </Text>
+                      <Text
+                        style={styles.serviceRequestedText}
+                        numberOfLines={1}
+                        ellipsizeMode="tail">
                         {item?._offers_turbo?.Offer_Name}
                       </Text>
                     </View>
@@ -81,15 +98,15 @@ const ArchiveScreen = () => {
                   </View> */}
                 </View>
               </View>
-            )
+            );
           }}
         />
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default ArchiveScreen
+export default ArchiveScreen;
 
 const styles = StyleSheet.create({
   cardContentContainer: {
@@ -152,12 +169,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     alignItems: 'center',
@@ -179,7 +196,7 @@ const styles = StyleSheet.create({
     height: moderateScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   selectedDateDayText: {
@@ -232,4 +249,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
   },
-})
+});

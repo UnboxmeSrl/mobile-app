@@ -1,12 +1,20 @@
-import React from 'react'
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import FastImage from 'react-native-fast-image'
-import { IMAGES } from '../../assets/images'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { useContent } from './hooks'
-import { commonStyle } from '../../utils'
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {COLORS, FONTS} from '../../constants';
+import {useContent} from './hooks';
 
 const ContentScreen = () => {
   const {
@@ -19,17 +27,27 @@ const ContentScreen = () => {
     setSelectedApp,
     handleBackPress,
     handleNextPress,
-  } = useContent()
+  } = useContent();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.mainScrollView}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backIconContainer}>
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
-            <Text style={styles.chooseVideoTitleText}>Choose a video to publish</Text>
+            <Text style={styles.chooseVideoTitleText}>
+              Choose a video to publish
+            </Text>
           </View>
         </View>
 
@@ -41,15 +59,17 @@ const ContentScreen = () => {
           <FlatList
             data={diaryItems}
             keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => {
+            renderItem={({item, index}) => {
               return (
                 <TouchableOpacity
                   onPress={() => setSelectedApp(index)}
                   style={[
                     styles.cardContainer,
-                    selectedApp === index && { borderColor: COLORS.newPrimary, borderWidth: 1 },
-                  ]}
-                >
+                    selectedApp === index && {
+                      borderColor: COLORS.newPrimary,
+                      borderWidth: 1,
+                    },
+                  ]}>
                   <View style={styles.socialMediaMainDetailsContainer}>
                     <View style={styles.socialMediaImageContainer}>
                       <FastImage
@@ -62,10 +82,16 @@ const ContentScreen = () => {
                       />
                     </View>
                     <View style={styles.socialMediaNameContainer}>
-                      <Text style={styles.socialMediaNameText}>{`${item?.action}`}</Text>
+                      <Text
+                        style={
+                          styles.socialMediaNameText
+                        }>{`${item?.action}`}</Text>
                       <View style={styles.ratingContainer}>
                         <Text style={styles.ratingUsersText}>240</Text>
-                        <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                        <Image
+                          source={IMAGES.ratingStar}
+                          style={styles.ratingIconImage}
+                        />
                       </View>
                     </View>
                   </View>
@@ -75,19 +101,24 @@ const ContentScreen = () => {
                     </Text>
                   </View>
                 </TouchableOpacity>
-              )
+              );
             }}
           />
         ) : (
           <FlatList
             data={actions?.duo_actions}
             keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => {
+            renderItem={({item, index}) => {
               return (
                 <TouchableOpacity
                   onPress={() => setSelectedApp(index)}
-                  style={[styles.cardContainer, selectedApp === index && { borderColor: COLORS.black, borderWidth: 1 }]}
-                >
+                  style={[
+                    styles.cardContainer,
+                    selectedApp === index && {
+                      borderColor: COLORS.black,
+                      borderWidth: 1,
+                    },
+                  ]}>
                   <View style={styles.socialMediaMainDetailsContainer}>
                     <View style={styles.socialMediaImageContainer}>
                       <FastImage
@@ -100,10 +131,16 @@ const ContentScreen = () => {
                       />
                     </View>
                     <View style={styles.socialMediaNameContainer}>
-                      <Text style={styles.socialMediaNameText}>{`${item?.Action_Name}`}</Text>
+                      <Text
+                        style={
+                          styles.socialMediaNameText
+                        }>{`${item?.Action_Name}`}</Text>
                       <View style={styles.ratingContainer}>
                         <Text style={styles.ratingUsersText}>240</Text>
-                        <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                        <Image
+                          source={IMAGES.ratingStar}
+                          style={styles.ratingIconImage}
+                        />
                       </View>
                     </View>
                   </View>
@@ -113,7 +150,7 @@ const ContentScreen = () => {
                     </Text>
                   </View>
                 </TouchableOpacity>
-              )
+              );
             }}
           />
         )}
@@ -125,20 +162,25 @@ const ContentScreen = () => {
                 <ActivityIndicator color={COLORS.black22} size={30} />
               </View>
             ) : (
-              <TouchableOpacity onPress={handleNextPress} style={styles.nextBtnContainer}>
+              <TouchableOpacity
+                onPress={handleNextPress}
+                style={styles.nextBtnContainer}>
                 <Text style={styles.nextBtnText}>Next </Text>
               </TouchableOpacity>
             )}
           </View>
         )}
-      </View>
-    </ScrollView>
-  )
-}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default ContentScreen
+export default ContentScreen;
 
 const styles = StyleSheet.create({
+  mainScrollView: {
+    backgroundColor: COLORS.white,
+  },
   backIcon: {
     height: moderateScale(30),
     tintColor: COLORS.achromaticBlack,
@@ -180,7 +222,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     alignItems: 'center',
@@ -196,7 +239,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   nextBtnContainer: {
     alignItems: 'center',
@@ -277,4 +319,4 @@ const styles = StyleSheet.create({
     marginLeft: scale(13),
     width: scale(68),
   },
-})
+});

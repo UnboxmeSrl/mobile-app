@@ -1,27 +1,63 @@
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+def node_require(script)
+  # Resolve script with node to allow for hoisting
+  require Pod::Executable.execute_command('node', ['-p',
+    "require.resolve(
+     '#{script}',
+      {paths: [process.argv[1]]},
+    )", __dir__]).strip
+end
 
-platform :ios, '12.0'
-permissions_path = '../node_modules/react-native-permissions/ios'
+node_require('react-native/scripts/react_native_pods.rb')
+node_require('react-native-permissions/scripts/setup.rb')
 
-target 'unboxme' do
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
+
+
+setup_permissions([
+    "Camera",
+    "MediaLibrary",
+    "Microphone",
+    "Motion",
+    "Notifications",
+    "PhotoLibrary",
+    "PhotoLibraryAddOnly"
+  ])
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
+
+target 'mobileApp' do
   config = use_native_modules!
-  rn_maps_path = '../node_modules/react-native-maps'
-  use_react_native!(:path => config["reactNativePath"])
 
-#   use_flipper!({ 'Flipper' => '0.74.0' })
-  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-  pod 'react-native-google-maps', :path => rn_maps_path
-  pod 'PanModal', '~> 1.2.7'
-  pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
-  pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
-  
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+
+  target 'mobileAppTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
   post_install do |installer|
-    flipper_post_install(installer)
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
+    )
   end
 end
 
 target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignalXCFramework', '>= 3.0', '< 4.0'
+  pod 'OneSignalXCFramework', '>= 5.0.0', '< 6.0'
 end
+
+
+require_relative '../node_modules/react-native-permissions/scripts/setup'

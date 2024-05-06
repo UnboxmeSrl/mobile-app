@@ -1,44 +1,68 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { CustomButton, CustomHeader } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import { useAuthUserType } from './hooks'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {CustomButton, CustomHeader} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthUserType} from './hooks';
 
 const AuthUserTypeScreen = () => {
-  const { isBtnDisabled, userTypeList, selectedUserType, setSelectedUserType, handleBackPress, handleNextPress } =
-    useAuthUserType()
+  const {
+    isBtnDisabled,
+    userTypeList,
+    selectedUserType,
+    setSelectedUserType,
+    handleBackPress,
+    handleNextPress,
+  } = useAuthUserType();
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'What are you?'} step={7} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'What are you?'}
+        step={7}
+        handleBackPress={handleBackPress}
+      />
       <View style={styles.userTypeFlatlistContainer}>
         <FlatList
           data={userTypeList}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            const isSelected = selectedUserType?.id === item?.id
+          renderItem={({item, index}) => {
+            const isSelected = selectedUserType?.id === item?.id;
             return (
               <TouchableOpacity
                 onPress={() => setSelectedUserType(item)}
-                style={[styles.userTypeContainer, isSelected && styles.userTypeContainerWithSelection]}
-              >
+                style={[
+                  styles.userTypeContainer,
+                  isSelected && styles.userTypeContainerWithSelection,
+                ]}>
                 <Text
-                  style={[styles.userTypeText, isSelected && styles.userTypeTextWithSelection]}
-                >{`${item?.name}`}</Text>
+                  style={[
+                    styles.userTypeText,
+                    isSelected && styles.userTypeTextWithSelection,
+                  ]}>{`${item?.name}`}</Text>
               </TouchableOpacity>
-            )
+            );
           }}
         />
       </View>
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+        <CustomButton
+          title={'Next'}
+          handlePress={handleNextPress}
+          disabled={isBtnDisabled}
+        />
       </View>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthUserTypeScreen
+export default AuthUserTypeScreen;
 
 const styles = StyleSheet.create({
   userTypeFlatlistContainer: {
@@ -75,6 +99,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

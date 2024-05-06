@@ -1,14 +1,17 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../../assets/images'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../../constants/fonts'
-import { COLORS } from '../../../constants/colors'
+import {Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import {IMAGES} from '../../../assets';
 
 const FirstOnboarding = () => {
   return (
     <View>
-      <Image source={IMAGES.onboarding.onboardingGroupImages} style={styles.imageStyle} resizeMode={'cover'} />
+      <Image
+        source={IMAGES.onboarding.onboardingGroupImages}
+        style={styles.imageStyle}
+        resizeMode={'cover'}
+      />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>
@@ -20,7 +23,8 @@ const FirstOnboarding = () => {
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
             {`A top selection of places ready for `}
-            <Text style={styles.colorChangeText}>{`professional creators `}</Text>
+            <Text
+              style={styles.colorChangeText}>{`professional creators `}</Text>
             {`and`}
             <Text style={styles.colorChangeText}>{` models `}</Text>
             {`only `}
@@ -28,10 +32,10 @@ const FirstOnboarding = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default FirstOnboarding
+export default FirstOnboarding;
 
 const styles = StyleSheet.create({
   descriptionText: {
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     color: COLORS.white,
     textAlign: 'center',
-    fontSize: moderateScale(32),
+    fontSize: moderateScale(30),
   },
   titleContainer: {
     width: '90%',
@@ -66,4 +70,4 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-})
+});

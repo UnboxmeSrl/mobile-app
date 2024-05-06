@@ -1,11 +1,10 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import perfectSize from '../../utils/responsiveSize'
-import { colors } from '../../utils/theme'
-import AppText from './AppText'
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import AppText from './AppText';
+import {colors, perfectSize} from '../../utils';
 
-function Label({ style, title }) {
-  return <AppText style={[styles.text, style]}>{title}</AppText>
+function Label({style, title}) {
+  return <AppText style={[styles.text, style]}>{title}</AppText>;
 }
 
 const styles = StyleSheet.create({
@@ -15,5 +14,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.infoLight,
   },
-})
-export default Label
+});
+export default Label;

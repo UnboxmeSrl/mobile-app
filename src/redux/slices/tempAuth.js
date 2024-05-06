@@ -1,6 +1,5 @@
-import { createDraftSafeSelector, createSlice, isRejected } from '@reduxjs/toolkit'
-
-import { sliceNames } from '../../constants'
+import {createSlice} from '@reduxjs/toolkit';
+import {sliceNames} from '../../constants';
 
 const initialState = {
   data: {
@@ -8,7 +7,7 @@ const initialState = {
     isApproved: false,
     isPending: false,
   },
-}
+};
 
 const tempAuthSlice = createSlice({
   initialState: initialState,
@@ -18,15 +17,15 @@ const tempAuthSlice = createSlice({
       state.data = {
         ...state.data,
         ...actions?.payload,
-      }
+      };
     },
   },
-})
+});
 
-export const { setTempAuthData } = tempAuthSlice.actions
+export const {setTempAuthData} = tempAuthSlice.actions;
 
-export default tempAuthSlice.reducer
+export default tempAuthSlice.reducer;
 
-export const userRejected = (state) => state.tempAuth.data.isRejected
-export const isApproved = (state) => state.tempAuth.data.isApproved
-export const isPending = (state) => state.tempAuth.data.isPending
+export const userRejected = state => state.tempAuth.data.isRejected;
+export const isApproved = state => state.tempAuth.data.isApproved;
+export const isPending = state => state.tempAuth.data.isPending;

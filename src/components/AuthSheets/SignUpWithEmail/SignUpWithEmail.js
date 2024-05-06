@@ -1,15 +1,12 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {BottomSheet} from '../../BottomSheet';
+import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
+import {useSignUpWithEmail} from './hooks';
+import {COLORS, FONTS} from '../../../constants';
 
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { BottomSheet } from '../../BottomSheet'
-import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
-
-import { useSignUpWithEmail } from './hooks'
-
-const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
+const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
   const {
     email,
     setEmail,
@@ -21,15 +18,14 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
     setIsSendPress,
     handleSignUpPress,
     handleSignUpPressAfterCodeSend,
-  } = useSignUpWithEmail(closeSignUpSheet)
+  } = useSignUpWithEmail(closeSignUpSheet);
 
   return (
     <BottomSheet
       onClose={() => {
-        setIsSendPress(false)
+        setIsSendPress(false);
       }}
-      ref={ref}
-    >
+      ref={ref}>
       <View style={styles.mainContainer}>
         <CustomTitle title={'Enter your email'} />
         <CustomTextInput
@@ -50,7 +46,8 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
           <>
             <View style={styles.codeDescriptionContainer}>
               <Text style={styles.codeDescriptionText}>
-                We just sent you a temporary login code. Please check your inbox.
+                We just sent you a temporary login code. Please check your
+                inbox.
               </Text>
             </View>
             <CustomTextInput
@@ -64,15 +61,17 @@ const SignUpWithEmail = React.forwardRef(({ closeSignUpSheet }, ref) => {
 
         <CustomButton
           disabled={isBtnDisabled}
-          handlePress={isSendPress ? handleSignUpPressAfterCodeSend : handleSignUpPress}
+          handlePress={
+            isSendPress ? handleSignUpPressAfterCodeSend : handleSignUpPress
+          }
           title={isSendPress ? 'Verify Otp' : 'Send a message'}
         />
       </View>
     </BottomSheet>
-  )
-})
+  );
+});
 
-export default SignUpWithEmail
+export default SignUpWithEmail;
 
 const styles = StyleSheet.create({
   errorText: {
@@ -105,4 +104,4 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     marginTop: verticalScale(24),
   },
-})
+});

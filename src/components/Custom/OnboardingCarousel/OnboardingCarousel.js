@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
-import { moderateScale } from 'react-native-size-matters'
-import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { COLORS } from '../../../constants/colors'
+import React, {useEffect, useRef} from 'react';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {COLORS} from '../../../constants';
 
-const SLIDER_WIDTH = Dimensions.get('screen').width
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH)
+const SLIDER_WIDTH = Dimensions.get('screen').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 
-const OnboardingCarousel = ({ data, Component, activeIndex, setActiveIndex }) => {
-  const carouselRef = useRef(null)
+const OnboardingCarousel = ({data, Component, activeIndex, setActiveIndex}) => {
+  const carouselRef = useRef(null);
 
   useEffect(() => {
-    carouselRef.current.snapToItem(activeIndex, true)
-  }, [activeIndex])
+    carouselRef.current.snapToItem(activeIndex, true);
+  }, [activeIndex]);
 
   return (
     <View style={styles.headerCarouselContainer}>
@@ -23,7 +23,7 @@ const OnboardingCarousel = ({ data, Component, activeIndex, setActiveIndex }) =>
         itemWidth={ITEM_WIDTH}
         layout="default"
         layoutCardOffset={9}
-        onSnapToItem={(index) => setActiveIndex(index)}
+        onSnapToItem={index => setActiveIndex(index)}
         ref={carouselRef}
         renderItem={Component}
         sliderWidth={SLIDER_WIDTH}
@@ -42,10 +42,10 @@ const OnboardingCarousel = ({ data, Component, activeIndex, setActiveIndex }) =>
         tappableDots={true}
       />
     </View>
-  )
-}
+  );
+};
 
-export default OnboardingCarousel
+export default OnboardingCarousel;
 
 const styles = StyleSheet.create({
   headerCarouselContainer: {
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     width: moderateScale(10),
   },
   headerDotContainer: {
-    marginTop: -20,
+    marginTop: -30,
   },
-})
+});

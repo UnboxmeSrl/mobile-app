@@ -1,9 +1,15 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
-import React, { useState } from 'react'
-import { IMAGES } from '../../../assets/images'
-import { FONTS } from '../../../constants/fonts'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { COLORS } from '../../../constants/colors'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import React, {useState} from 'react';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import {IMAGES} from '../../../assets';
 
 const CustomTextInput = ({
   placeholder,
@@ -13,16 +19,20 @@ const CustomTextInput = ({
   keyboardType = 'default',
   isSecureTextInput = false,
 }) => {
-  const [isFocused, setIsFocused] = useState()
-  const [isSecureText, setIsSecureText] = useState(isSecureTextInput)
+  const [isFocused, setIsFocused] = useState();
+  const [isSecureText, setIsSecureText] = useState(isSecureTextInput);
 
   return (
-    <View style={[styles.textInputContainerStyleWithoutFocus, isFocused && styles.textInputContainerWithFocus]}>
+    <View
+      style={[
+        styles.textInputContainerStyleWithoutFocus,
+        isFocused && styles.textInputContainerWithFocus,
+      ]}>
       <View style={styles.textInputContainer}>
         <TextInput
           value={value}
-          onChangeText={(val) => {
-            handleOnChangeText(val)
+          onChangeText={val => {
+            handleOnChangeText(val);
           }}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -32,15 +42,15 @@ const CustomTextInput = ({
           placeholderTextColor={COLORS.grey}
           keyboardType={keyboardType}
           secureTextEntry={isSecureText}
+          returnKeyType="next"
         />
       </View>
       {isRemoveTextIconVisible && value?.length > 0 && (
         <TouchableOpacity
           style={styles.iconContainer}
           onPress={() => {
-            handleOnChangeText('')
-          }}
-        >
+            handleOnChangeText('');
+          }}>
           <Image source={IMAGES.closeSquare} style={styles.closeIcon} />
         </TouchableOpacity>
       )}
@@ -48,17 +58,19 @@ const CustomTextInput = ({
         <TouchableOpacity
           style={styles.iconContainer}
           onPress={() => {
-            setIsSecureText(!isSecureText)
-          }}
-        >
-          <Image source={isSecureText ? IMAGES.passwordHide : IMAGES.passwordEye} style={styles.passwordEyeIcon} />
+            setIsSecureText(!isSecureText);
+          }}>
+          <Image
+            source={isSecureText ? IMAGES.passwordHide : IMAGES.passwordEye}
+            style={styles.passwordEyeIcon}
+          />
         </TouchableOpacity>
       )}
     </View>
-  )
-}
+  );
+};
 
-export default CustomTextInput
+export default CustomTextInput;
 
 const styles = StyleSheet.create({
   iconContainer: {
@@ -93,8 +105,9 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginLeft: scale(10),
+    color: COLORS.black,
     fontFamily: FONTS.quicksand,
     fontWeight: '600',
     fontSize: moderateScale(14),
   },
-})
+});

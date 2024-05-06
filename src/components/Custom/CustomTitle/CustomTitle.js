@@ -1,18 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { moderateScale, scale } from 'react-native-size-matters'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {moderateScale, scale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
 
-const CustomTitle = ({ title }) => {
+const CustomTitle = ({title}) => {
   return (
     <View style={styles.titleContainer}>
       <Text style={styles.titleText}>{title}</Text>
     </View>
-  )
-}
+  );
+};
 
-export default CustomTitle
+export default CustomTitle;
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -23,4 +22,4 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
     color: COLORS.achromaticBlack,
   },
-})
+});

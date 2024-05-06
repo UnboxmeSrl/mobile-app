@@ -1,49 +1,61 @@
-import { Categories } from '@components/Categories'
-import React from 'react'
+// import { Categories } from '@components/Categories'
+import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { commonStyle } from '../../utils'
-import { useRestaurants } from './hooks'
-import { RestaurantCard } from './RestaurantCard'
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {Categories} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {useRestaurants} from './hooks';
+import {RestaurantCard} from './RestaurantCard';
 
 const RestaurantsScreen = () => {
   const {
     isLoading,
     cityData,
     categories,
+    selectedIndex,
     filter,
     refreshing,
     onRefresh,
-    categoriesIds,
+    // categoriesIds,
     restaurantsData,
     onCategoryChange,
     handleLocationPress,
-  } = useRestaurants()
+  } = useRestaurants();
 
   return (
-    <View style={styles.mainContainer}>
-      <TouchableOpacity onPress={handleLocationPress} style={styles.selectedLocation}>
-        <Image resizeMode="contain" source={IMAGES.locationNew} style={styles.locationIcon} />
+    <SafeAreaView style={styles.mainContainer}>
+      <TouchableOpacity
+        onPress={handleLocationPress}
+        style={styles.selectedLocation}>
+        <Image
+          resizeMode="contain"
+          source={IMAGES.locationNew}
+          style={styles.locationIcon}
+        />
         <Text style={styles.locationFont}>{cityData?.CityName}</Text>
       </TouchableOpacity>
       <Categories
+        categories={categories}
+        selectedIndex={selectedIndex}
+        onCategoryChange={onCategoryChange}
+      />
+      {/* <Categories
         categoriesIds={categoriesIds}
         category={filter}
         customCategories={categories}
         onPress={onCategoryChange}
-      />
+      /> */}
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator color={COLORS.newPrimary} size={20} />
@@ -68,20 +80,22 @@ const RestaurantsScreen = () => {
                 offset: verticalScale(200) * index,
               })}
               keyExtractor={(_, index) => index.toString()}
-              refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} />}
-              renderItem={({ item, index }) => {
-                return <RestaurantCard index={index} item={item} />
+              refreshControl={
+                <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+              }
+              renderItem={({item, index}) => {
+                return <RestaurantCard index={index} item={item} />;
               }}
               showsVerticalScrollIndicator={false}
             />
           </View>
         </>
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default RestaurantsScreen
+export default RestaurantsScreen;
 
 const styles = StyleSheet.create({
   itemImage: {
@@ -123,7 +137,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   restaurantsFlatlistContainer: {
     flex: 1,
@@ -143,4 +156,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(25),
     width: '90%',
   },
-})
+});

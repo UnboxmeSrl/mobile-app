@@ -1,8 +1,8 @@
-import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { COLORS, FONTS } from '../../../constants'
+import React from 'react';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import {IMAGES} from '../../../assets';
 
 const ThirdScreen = () => {
   return (
@@ -27,10 +27,10 @@ const ThirdScreen = () => {
         </Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default ThirdScreen
+export default ThirdScreen;
 
 const styles = StyleSheet.create({
   colorChangeText: {
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
     width: '85%',
     alignSelf: 'center',
   },
-})
+});

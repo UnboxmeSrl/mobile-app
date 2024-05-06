@@ -1,16 +1,24 @@
-import React from 'react'
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import CountryPicker from 'react-native-country-picker-modal'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { CustomButton, CustomHeader, CustomTextInput } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import useAuthPersonalDetails from './hooks/useAuthPersonalDetails'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import CountryPicker from 'react-native-country-picker-modal';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets/images';
+import {CustomButton, CustomHeader, CustomTextInput} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthPersonalDetails} from './hooks';
 
 const AuthPersonalDetailsScreen = () => {
   const {
+    isBtnDisabled,
     name,
     setName,
     surname,
@@ -24,38 +32,62 @@ const AuthPersonalDetailsScreen = () => {
     country,
     onSelect,
     handleNextPress,
-  } = useAuthPersonalDetails()
+  } = useAuthPersonalDetails();
 
   return (
-    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <CustomHeader title={'personal details'} step={1} />
-        <CustomTextInput placeholder={'Name'} value={name} handleOnChangeText={setName} />
-        <CustomTextInput placeholder={'Surname'} value={surname} handleOnChangeText={setSurname} />
-        <CustomTextInput placeholder={'Nickname'} value={nickName} handleOnChangeText={setNickName} />
+        <CustomTextInput
+          placeholder={'Name'}
+          value={name}
+          handleOnChangeText={setName}
+        />
+        <CustomTextInput
+          placeholder={'Surname'}
+          value={surname}
+          handleOnChangeText={setSurname}
+        />
+        <CustomTextInput
+          placeholder={'Nickname'}
+          value={nickName}
+          handleOnChangeText={setNickName}
+        />
         <View style={styles.phoneNumberMainContainer}>
           <View style={styles.countryCodeContainer}>
             <CountryPicker
               onSelect={onSelect}
               withFilter={true}
               withCallingCode={true}
-              renderFlagButton={({ onOpen }) => {
+              renderFlagButton={({onOpen}) => {
                 return (
-                  <TouchableOpacity onPress={onOpen} style={styles.countryCodeInnerContainer}>
-                    <Text>{`+${country?.callingCode?.[0] ?? '21'}`}</Text>
-                    <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
+                  <TouchableOpacity
+                    onPress={onOpen}
+                    style={styles.countryCodeInnerContainer}>
+                    <Text style={styles.countryCallingCodeText}>{`+${
+                      country?.callingCode?.[0] ?? '21'
+                    }`}</Text>
+                    <Image
+                      source={IMAGES.downArrow}
+                      style={styles.downArrowIcon}
+                    />
                   </TouchableOpacity>
-                )
+                );
               }}
             />
           </View>
           <View
-            style={[styles.phoneNumberTextInputContainer, isFocused && styles.phoneNumberTextInputContainerWithFocus]}
-          >
+            style={[
+              styles.phoneNumberTextInputContainer,
+              isFocused && styles.phoneNumberTextInputContainerWithFocus,
+            ]}>
             <TextInput
               placeholder={'Phone number'}
               value={phoneNumber}
-              onChangeText={(val) => setPhoneNumber(val)}
+              onChangeText={val => {
+                const strippedInput = val.replace(/\D/g, '');
+                setPhoneNumber(strippedInput.trim());
+              }}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               style={styles.phoneNumberTextInput}
@@ -63,17 +95,27 @@ const AuthPersonalDetailsScreen = () => {
             />
           </View>
         </View>
-      </View>
-      <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} />
-      </View>
-    </KeyboardAwareScrollView>
-  )
-}
 
-export default AuthPersonalDetailsScreen
+        <View style={styles.btnContainer}>
+          <CustomButton
+            title={'Next'}
+            handlePress={handleNextPress}
+            disabled={isBtnDisabled}
+          />
+        </View>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default AuthPersonalDetailsScreen;
 
 const styles = StyleSheet.create({
+  countryCallingCodeText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(12),
+  },
   countryCodeInnerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -117,6 +159,7 @@ const styles = StyleSheet.create({
   phoneNumberTextInput: {
     marginLeft: scale(10),
     fontFamily: FONTS.quicksand,
+    color: COLORS.black,
     fontWeight: '600',
     fontSize: moderateScale(14),
     width: '100%',
@@ -128,6 +171,5 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
-})
+});

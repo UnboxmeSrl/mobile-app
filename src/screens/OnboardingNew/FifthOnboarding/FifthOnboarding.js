@@ -1,10 +1,9 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../../assets/images'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../../constants/fonts'
-import { COLORS } from '../../../constants/colors'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
+import {commonStyle} from '../../../utils';
 
 const FifthOnboarding = () => {
   return (
@@ -17,12 +16,16 @@ const FifthOnboarding = () => {
           </Text>
         </View>
       </View>
-      <Image source={IMAGES.onboarding.onboardingFifth} style={styles.imageStyle} resizeMode={'contain'} />
+      <Image
+        source={IMAGES.onboarding.onboardingFifth}
+        style={styles.imageStyle}
+        resizeMode={'contain'}
+      />
     </View>
-  )
-}
+  );
+};
 
-export default FifthOnboarding
+export default FifthOnboarding;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     color: COLORS.white,
     textAlign: 'center',
-    fontSize: moderateScale(32),
+    fontSize: moderateScale(30),
   },
   titleContainer: {
     width: '90%',
@@ -60,4 +63,4 @@ const styles = StyleSheet.create({
     height: verticalScale(410),
     width: '100%',
   },
-})
+});

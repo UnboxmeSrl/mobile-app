@@ -1,31 +1,40 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { IMAGES } from '../../../assets/images'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import { FONTS } from '../../../constants/fonts'
-import { COLORS } from '../../../constants/colors'
+import React from 'react';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
 
 const ThirdOnboarding = () => {
   return (
     <View>
-      <Image source={IMAGES.onboarding.onboardingThirdImage} style={styles.imageStyle} resizeMode={'cover'} />
+      <Image
+        source={IMAGES.onboarding.onboardingThirdImage}
+        style={styles.imageStyle}
+        resizeMode={'cover'}
+      />
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>
             {`Find `}
-            <Text style={styles.colorChangeText}>{`Restaurants, Beauty saloons, Sport lessons `}</Text>
+            <Text
+              style={
+                styles.colorChangeText
+              }>{`Restaurants, Beauty saloons, Sport lessons `}</Text>
             {`and much more!`}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>{`An ever growing list with ever growing surprises `}</Text>
+          <Text
+            style={
+              styles.descriptionText
+            }>{`An ever growing list with ever growing surprises `}</Text>
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default ThirdOnboarding
+export default ThirdOnboarding;
 
 const styles = StyleSheet.create({
   descriptionText: {
@@ -59,4 +68,4 @@ const styles = StyleSheet.create({
     height: verticalScale(410),
     width: '100%',
   },
-})
+});

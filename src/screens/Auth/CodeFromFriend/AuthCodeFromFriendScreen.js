@@ -1,11 +1,17 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { CustomButton, CustomHeader } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { useAuthCodeFromFriend } from './hooks'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {CustomButton, CustomHeader} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthCodeFromFriend} from './hooks';
 
 const AuthCodeFromFriendScreen = () => {
   const {
@@ -30,15 +36,20 @@ const AuthCodeFromFriendScreen = () => {
     handleSkipPress,
     handleBackPress,
     handleNextPress,
-  } = useAuthCodeFromFriend()
+  } = useAuthCodeFromFriend();
 
   return (
-    <KeyboardAwareScrollView>
-      <View style={styles.mainContainer}>
-        <CustomHeader title={'Code from friend'} step={10} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <KeyboardAwareScrollView>
+        <CustomHeader
+          title={'Code from friend'}
+          step={10}
+          handleBackPress={handleBackPress}
+        />
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            If you came at the invitation of another user and they gave you their promo code, then enter it here!
+            If you came at the invitation of another user and they gave you
+            their promo code, then enter it here!
           </Text>
         </View>
 
@@ -48,16 +59,15 @@ const AuthCodeFromFriendScreen = () => {
               styles.codeContainer,
               focusedTextInput === 1 && styles.codeContainerWithFocus,
               isError && styles.codeContainerWithError,
-            ]}
-          >
+            ]}>
             <TextInput
               ref={code1Ref}
               value={codeLetter1}
               maxLength={1}
-              onChangeText={(val) => {
-                setCodeLetter1(val)
+              onChangeText={val => {
+                setCodeLetter1(val);
                 if (val) {
-                  code2Ref?.current?.focus()
+                  code2Ref?.current?.focus();
                 }
               }}
               onFocus={() => setFocusedTextInput(1)}
@@ -73,16 +83,15 @@ const AuthCodeFromFriendScreen = () => {
               styles.codeContainer,
               focusedTextInput === 2 && styles.codeContainerWithFocus,
               isError && styles.codeContainerWithError,
-            ]}
-          >
+            ]}>
             <TextInput
               ref={code2Ref}
               value={codeLetter2}
               maxLength={1}
-              onChangeText={(val) => {
-                setCodeLetter2(val)
+              onChangeText={val => {
+                setCodeLetter2(val);
                 if (val) {
-                  code3Ref?.current?.focus()
+                  code3Ref?.current?.focus();
                 }
               }}
               onFocus={() => setFocusedTextInput(2)}
@@ -98,16 +107,15 @@ const AuthCodeFromFriendScreen = () => {
               styles.codeContainer,
               focusedTextInput === 3 && styles.codeContainerWithFocus,
               isError && styles.codeContainerWithError,
-            ]}
-          >
+            ]}>
             <TextInput
               ref={code3Ref}
               value={codeLetter3}
               maxLength={1}
-              onChangeText={(val) => {
-                setCodeLetter3(val)
+              onChangeText={val => {
+                setCodeLetter3(val);
                 if (val) {
-                  code4Ref?.current?.focus()
+                  code4Ref?.current?.focus();
                 }
               }}
               onFocus={() => setFocusedTextInput(3)}
@@ -123,16 +131,15 @@ const AuthCodeFromFriendScreen = () => {
               styles.codeContainer,
               focusedTextInput === 4 && styles.codeContainerWithFocus,
               isError && styles.codeContainerWithError,
-            ]}
-          >
+            ]}>
             <TextInput
               ref={code4Ref}
               value={codeLetter4}
               maxLength={1}
-              onChangeText={(val) => {
-                setCodeLetter4(val)
+              onChangeText={val => {
+                setCodeLetter4(val);
                 if (val) {
-                  code5Ref?.current?.focus()
+                  code5Ref?.current?.focus();
                 }
               }}
               onFocus={() => setFocusedTextInput(4)}
@@ -148,13 +155,12 @@ const AuthCodeFromFriendScreen = () => {
               styles.codeContainer,
               focusedTextInput === 5 && styles.codeContainerWithFocus,
               isError && styles.codeContainerWithError,
-            ]}
-          >
+            ]}>
             <TextInput
               ref={code5Ref}
               value={codeLetter5}
               maxLength={1}
-              onChangeText={(val) => setCodeLetter5(val)}
+              onChangeText={val => setCodeLetter5(val)}
               onFocus={() => setFocusedTextInput(5)}
               style={[
                 styles.codeText,
@@ -166,23 +172,28 @@ const AuthCodeFromFriendScreen = () => {
         </View>
         {isError && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>* Your code is unvalid. Please check it.</Text>
+            <Text style={styles.errorText}>
+              * Your code is unvalid. Please check it.
+            </Text>
           </View>
         )}
 
-        <TouchableOpacity onPress={handleSkipPress} activeOpacity={0.5} style={styles.skipContainer}>
+        <TouchableOpacity
+          onPress={handleSkipPress}
+          activeOpacity={0.5}
+          style={styles.skipContainer}>
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
 
         <View style={styles.btnContainer}>
           <CustomButton title={'Next'} handlePress={handleNextPress} />
         </View>
-      </View>
-    </KeyboardAwareScrollView>
-  )
-}
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default AuthCodeFromFriendScreen
+export default AuthCodeFromFriendScreen;
 
 const styles = StyleSheet.create({
   skipText: {
@@ -227,7 +238,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,
@@ -262,4 +272,4 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(24),
     width: '87%',
   },
-})
+});

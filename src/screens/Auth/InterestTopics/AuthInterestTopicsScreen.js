@@ -1,11 +1,18 @@
-import React from 'react'
-import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { CustomButton, CustomHeader } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import { useAuthInterestTopics } from './hooks'
-import { commonStyle } from '../../../utils'
+import React from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {CustomButton, CustomHeader} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthInterestTopics} from './hooks';
 
 const AuthInterestTopicsScreen = () => {
   const {
@@ -16,51 +23,79 @@ const AuthInterestTopicsScreen = () => {
     handleInterestSelect,
     handleBackPress,
     handleNextPress,
-  } = useAuthInterestTopics()
+  } = useAuthInterestTopics();
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'Interests & Topics'} step={8} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'Interests & Topics'}
+        step={8}
+        handleBackPress={handleBackPress}
+      />
       {isLoading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size={moderateScale(20)} color={COLORS.newPrimary} />
+          <ActivityIndicator
+            size={moderateScale(20)}
+            color={COLORS.newPrimary}
+          />
         </View>
       ) : (
         <>
           <View style={styles.interestTopicsMainContainer}>
             {interestTopicsList?.map((item, index) => {
-              let isSelected = false
-              const filteredRes = selectedInterests?.filter((si) => si?.id === item?.id)
+              let isSelected = false;
+              const filteredRes = selectedInterests?.filter(
+                si => si?.id === item?.id,
+              );
               if (filteredRes.length > 0) {
-                isSelected = true
+                isSelected = true;
               }
               return (
                 <TouchableOpacity
                   onPress={() => handleInterestSelect(item)}
-                  style={[styles.topicContainer, isSelected && styles.topicContainerWithSelection]}
-                  key={index}
-                >
-                  {!isSelected && <Image source={IMAGES.plus} style={styles.plusIcon} />}
-                  <Text style={[styles.topicText, isSelected && styles.topicTextWithSelection]}>
+                  style={[
+                    styles.topicContainer,
+                    isSelected && styles.topicContainerWithSelection,
+                  ]}
+                  key={index}>
+                  {!isSelected && (
+                    <Image source={IMAGES.plus} style={styles.plusIcon} />
+                  )}
+                  <Text
+                    style={[
+                      styles.topicText,
+                      isSelected && styles.topicTextWithSelection,
+                    ]}>
                     {item?.interest_topics}
                   </Text>
-                  {isSelected && <Image source={IMAGES.checkRight} style={styles.checkIcon} />}
+                  {isSelected && (
+                    <Image
+                      source={IMAGES.checkRight}
+                      style={styles.checkIcon}
+                    />
+                  )}
                 </TouchableOpacity>
-              )
+              );
             })}
           </View>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>Let the venues owners know about your topics</Text>
+            <Text style={styles.descriptionText}>
+              Let the venues owners know about your topics
+            </Text>
           </View>
           <View style={styles.btnContainer}>
-            <CustomButton title={'Next'} handlePress={handleNextPress} disabled={isBtnDisabled} />
+            <CustomButton
+              title={'Next'}
+              handlePress={handleNextPress}
+              disabled={isBtnDisabled}
+            />
           </View>
         </>
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthInterestTopicsScreen
+export default AuthInterestTopicsScreen;
 
 const styles = StyleSheet.create({
   descriptionText: {
@@ -123,7 +158,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   loaderContainer: {
     flex: 1,
@@ -131,4 +165,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});

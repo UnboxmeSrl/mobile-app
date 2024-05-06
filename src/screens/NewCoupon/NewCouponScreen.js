@@ -1,12 +1,18 @@
-import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { useNewCoupon } from './hooks'
-import FastImage from 'react-native-fast-image'
-import { commonStyle } from '../../utils'
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {COLORS, FONTS} from '../../constants';
+import {useNewCoupon} from './hooks';
 
 const NewCouponScreen = () => {
   const {
@@ -24,167 +30,233 @@ const NewCouponScreen = () => {
     handleGoToContentPress,
     handleContentBriefPress,
     handleRestaurantRedirect,
-  } = useNewCoupon()
+  } = useNewCoupon();
 
   return (
-    <ScrollView alwaysBounceVertical={false} showsVerticalScrollIndicator={false} style={styles.mainContainer}>
-      <View>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView
+        alwaysBounceVertical={false}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backIconContainer}>
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
             <Text style={styles.headerTitleText}>Coupon</Text>
           </View>
         </View>
-      </View>
 
-      <View style={styles.mainInnerView}>
-        <View style={styles.userDetailsContainer}>
-          {loginData?.Profile_pic ? (
-            <FastImage
-              resizeMode="cover"
-              source={{
-                priority: FastImage.priority.high,
-                uri: loginData?.Profile_pic?.url,
-              }}
-              style={styles.userImage}
-            />
+        <View style={styles.mainInnerView}>
+          <View style={styles.userDetailsContainer}>
+            {loginData?.Profile_pic ? (
+              <FastImage
+                resizeMode="cover"
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: loginData?.Profile_pic?.url,
+                }}
+                style={styles.userImage}
+              />
+            ) : (
+              <Image source={IMAGES.testImage} style={styles.userImage} />
+            )}
+            <View style={styles.userFullNameContainer}>
+              <Text style={styles.fullNameText}>{loginData?.name}</Text>
+            </View>
+            <View>
+              <Text style={styles.userNameText}>{`@${loginData?.name}`}</Text>
+            </View>
+          </View>
+          {/* <View style={styles.leftCutter} /> */}
+          {/* <View style={styles.rightCutter} /> */}
+          <View style={styles.divider} />
+
+          {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
+            <View style={styles.specialAmenity}>
+              <>
+                <View
+                  style={[
+                    styles.amenityIconContainer,
+                    styles.firstAmenityMainContainer,
+                    styles.specialAmenitiesIconContainer,
+                  ]}>
+                  <Image
+                    source={amenityDetails?.amenityIcon}
+                    style={styles.amenityBigIcon}
+                  />
+                </View>
+                <View
+                  style={[
+                    styles.amenityMainContainer,
+                    styles.specialAmenitiesMainContainer,
+                  ]}>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text style={styles.amenitiesTitle}>
+                      {amenityDetails?.amenityName}
+                    </Text>
+                    <Text style={styles.amenitiesDescription}>
+                      {amenityDetails?.amenityDescription}
+                    </Text>
+                  </View>
+                </View>
+              </>
+            </View>
           ) : (
-            <Image source={IMAGES.testImage} style={styles.userImage} />
-          )}
-          <View style={styles.userFullNameContainer}>
-            <Text style={styles.fullNameText}>{loginData?.name}</Text>
-          </View>
-          <View>
-            <Text style={styles.userNameText}>{`@${loginData?.name}`}</Text>
-          </View>
-        </View>
-        <View style={styles.leftCutter} />
-        <View style={styles.rightCutter} />
-        <View style={styles.divider} />
-
-        {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
-          <View style={styles.specialAmenity}>
-            <>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View
                 style={[
-                  styles.amenityIconContainer,
+                  styles.amenityMainContainer,
                   styles.firstAmenityMainContainer,
-                  styles.specialAmenitiesIconContainer,
-                ]}
-              >
-                <Image source={amenityDetails?.amenityIcon} style={styles.amenityBigIcon} />
-              </View>
-              <View style={[styles.amenityMainContainer, styles.specialAmenitiesMainContainer]}>
+                ]}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+                </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text style={styles.amenitiesTitle}>{amenityDetails?.amenityName}</Text>
-                  <Text style={styles.amenitiesDescription}>{amenityDetails?.amenityDescription}</Text>
+                  <Text
+                    style={
+                      styles.amenitiesTitle
+                    }>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
+                  <Text style={styles.amenitiesDescription}>
+                    at your choice
+                  </Text>
                 </View>
               </View>
-            </>
-          </View>
-        ) : (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={[styles.amenityMainContainer, styles.firstAmenityMainContainer]}>
-              <View style={styles.amenityIconContainer}>
-                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-              </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text style={styles.amenitiesTitle}>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                <Text style={styles.amenitiesDescription}>at your choice</Text>
-              </View>
-            </View>
 
-            <View style={styles.amenityMainContainer}>
-              <View style={styles.amenityIconContainer}>
-                <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image
+                    source={IMAGES.clinkingGlasses}
+                    style={styles.amenityIcon}
+                  />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text
+                    style={
+                      styles.amenitiesTitle
+                    }>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                  <Text style={styles.amenitiesDescription}>
+                    at your choice
+                  </Text>
+                </View>
               </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text style={styles.amenitiesTitle}>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                <Text style={styles.amenitiesDescription}>at your choice</Text>
+
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.friendAmenityContainer,
+                ]}>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text
+                    style={[
+                      styles.amenitiesTitle,
+                      styles.friendAmenityText,
+                    ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
+                  <Text
+                    style={[
+                      styles.amenitiesDescription,
+                      styles.friendAmenityTitle,
+                    ]}>
+                    Friend
+                  </Text>
+                </View>
               </View>
-            </View>
+            </ScrollView>
+          )}
 
-            <View style={[styles.amenityMainContainer, styles.friendAmenityContainer]}>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text
-                  style={[styles.amenitiesTitle, styles.friendAmenityText]}
-                >{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
-                <Text style={[styles.amenitiesDescription, styles.friendAmenityTitle]}>Friend</Text>
-              </View>
-            </View>
-          </ScrollView>
-        )}
-
-        {actionNumId === 9 && (
-          <View style={styles.comingWithInfluencerTextContainer}>
-            <Text
-              style={styles.comingWithInfluencerText}
-            >{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
-          </View>
-        )}
-
-        <View style={styles.dateTimeContainer}>
-          <View style={styles.timeContainer}>
-            <Text style={styles.timeTitleText}>Date</Text>
-            <Text style={styles.timeText}>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
-          </View>
-          {actionNumId !== 9 && (
-            <View style={styles.timeContainer}>
-              <Text style={styles.timeTitleText}>Time</Text>
-              <Text style={styles.timeText}>
-                {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
-              </Text>
+          {actionNumId === 9 && (
+            <View style={styles.comingWithInfluencerTextContainer}>
+              <Text
+                style={
+                  styles.comingWithInfluencerText
+                }>{`Coming with ${bookingDetails?.additional_influencer} influencer friends.`}</Text>
             </View>
           )}
-        </View>
 
-        <View style={styles.tiktokContainer}>
-          <Text style={styles.tiktokTitleText}>Content Type</Text>
-          <View style={styles.tiktokIconTextContainer}>
-            <FastImage
-              resizeMode="contain"
-              source={{ priority: FastImage.priority.high, uri: icon }}
-              style={styles.contentTypeImage}
-            />
-            {/* <Image resizeMode="cover" source={icon} style={styles.contentTypeImage} /> */}
-            <Text style={styles.tiktokDescription}>{actionName}</Text>
+          <View style={styles.dateTimeContainer}>
+            <View style={styles.timeContainer}>
+              <Text style={styles.timeTitleText}>Date</Text>
+              <Text
+                style={
+                  styles.timeText
+                }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
+            </View>
+            {actionNumId !== 9 && (
+              <View style={styles.timeContainer}>
+                <Text style={styles.timeTitleText}>Time</Text>
+                <Text style={styles.timeText}>
+                  {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+                </Text>
+              </View>
+            )}
+          </View>
+
+          <View style={styles.tiktokContainer}>
+            <Text style={styles.tiktokTitleText}>Content Type</Text>
+            <View style={styles.tiktokIconTextContainer}>
+              <FastImage
+                resizeMode="contain"
+                source={{priority: FastImage.priority.high, uri: icon}}
+                style={styles.contentTypeImage}
+              />
+              {/* <Image resizeMode="cover" source={icon} style={styles.contentTypeImage} /> */}
+              <Text style={styles.tiktokDescription}>{actionName}</Text>
+            </View>
+          </View>
+
+          <View style={styles.placeContainer}>
+            <Text style={styles.tiktokTitleText}>Place</Text>
+            <TouchableOpacity
+              style={styles.restaurantRedirectContainer}
+              onPress={() =>
+                handleRestaurantRedirect(bookingDetails?._restaurant_turbo)
+              }>
+              <Text style={styles.socialMediaTitleText}>
+                {`${bookingDetails?._restaurant_turbo?.Name}`}{' '}
+              </Text>
+              <Image
+                resizeMode="contain"
+                source={IMAGES.back}
+                style={styles.rightIcon}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.contentBriefContainer}
+              onPress={handleContentBriefPress}>
+              <Text style={styles.socialMediaTitleText}>Content brief </Text>
+              <Image
+                resizeMode="contain"
+                source={IMAGES.back}
+                style={styles.rightIcon}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
-        <View style={styles.placeContainer}>
-          <Text style={styles.tiktokTitleText}>Place</Text>
+        <View style={styles.viewDescriptionContainer}>
+          <Text style={styles.viewDescriptionText}>
+            * Show the present coupon to the restaurant staff to claim your deal
+          </Text>
+        </View>
+        <View style={styles.goToContentBtnMainContainer}>
           <TouchableOpacity
-            style={styles.restaurantRedirectContainer}
-            onPress={() => handleRestaurantRedirect(bookingDetails?._restaurant_turbo)}
-          >
-            <Text style={styles.socialMediaTitleText}>{`${bookingDetails?._restaurant_turbo?.Name}`} </Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.contentBriefContainer} onPress={handleContentBriefPress}>
-            <Text style={styles.socialMediaTitleText}>Content brief </Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+            onPress={handleGoToContentPress}
+            style={styles.goToContentBtnContainer}>
+            <Text style={styles.goToContentBtnText}>Go to Content</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-      <View style={styles.viewDescriptionContainer}>
-        <Text style={styles.viewDescriptionText}>
-          * Show the present coupon to the restaurant staff to claim your deal
-        </Text>
-      </View>
-      <View style={styles.goToContentBtnMainContainer}>
-        <TouchableOpacity onPress={handleGoToContentPress} style={styles.goToContentBtnContainer}>
-          <Text style={styles.goToContentBtnText}>Go to Content</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
-  )
-}
-
-export default NewCouponScreen
+export default NewCouponScreen;
 
 const styles = StyleSheet.create({
   specialAmenity: {
@@ -325,7 +397,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     alignItems: 'center',
@@ -354,8 +427,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.lightNewPrimary40,
-    ...commonStyle.containerPaddingTop,
+    backgroundColor: COLORS.lightNewPrimaryA6,
   },
   mainInnerView: {
     alignSelf: 'center',
@@ -390,7 +462,7 @@ const styles = StyleSheet.create({
     marginRight: scale(20),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   socialMediaTitleText: {
@@ -469,4 +541,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
   },
-})
+});

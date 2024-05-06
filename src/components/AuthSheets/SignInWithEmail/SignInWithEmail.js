@@ -1,61 +1,75 @@
-import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {BottomSheet} from '../../BottomSheet';
+import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
+import {COLORS, FONTS} from '../../../constants';
+import {useSignInWithEmail} from './hooks';
 
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-import { BottomSheet } from '../../BottomSheet'
-import { CustomButton, CustomTextInput, CustomTitle } from '../../Custom'
+const SignInWithEmail = React.forwardRef(
+  ({isFromBookRedirected = false}, ref) => {
+    const {
+      email,
+      setEmail,
+      isError,
+      loading,
+      password,
+      setPassword,
+      handleLoginPress,
+    } = useSignInWithEmail(isFromBookRedirected);
 
-import useSignInWithEmail from './hooks/useSignInWithEmail'
-
-const SignInWithEmail = React.forwardRef(({ isFromBookRedirected = false }, ref) => {
-  const { email, setEmail, isError, loading, password, setPassword, handleLoginPress } =
-    useSignInWithEmail(isFromBookRedirected)
-
-  return (
-    <BottomSheet ref={ref}>
-      <View style={styles.mainContainer}>
-        <CustomTitle title={'Enter your email'} />
-        <CustomTextInput
-          handleOnChangeText={setEmail}
-          isRemoveTextIconVisible={true}
-          keyboardType="email-address"
-          placeholder={'Ex: Chakir@gmail.com'}
-          value={email}
-        />
-        <CustomTextInput
-          handleOnChangeText={setPassword}
-          isSecureTextInput={true}
-          placeholder={'Password'}
-          value={password}
-        />
-        {isError && (
-          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: verticalScale(10) }}>
-            <Text style={{ color: COLORS.error, fontFamily: FONTS.quicksand, fontSize: moderateScale(14) }}>
-              Something went wrong.
-            </Text>
-          </View>
-        )}
-        <View style={styles.btnContainer}>
-          <CustomButton
-            disabled={loading}
-            handlePress={() => handleLoginPress(ref)}
-            isLoading={loading}
-            title={'Login'}
+    return (
+      <BottomSheet ref={ref}>
+        <View style={styles.mainContainer}>
+          <CustomTitle title={'Enter your email'} />
+          <CustomTextInput
+            handleOnChangeText={setEmail}
+            isRemoveTextIconVisible={true}
+            keyboardType="email-address"
+            placeholder={'Ex: Chakir@gmail.com'}
+            value={email}
           />
+          <CustomTextInput
+            handleOnChangeText={setPassword}
+            isSecureTextInput={true}
+            placeholder={'Password'}
+            value={password}
+          />
+          {isError && (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>Something went wrong.</Text>
+            </View>
+          )}
+          <View style={styles.btnContainer}>
+            <CustomButton
+              disabled={loading}
+              handlePress={() => handleLoginPress(ref)}
+              isLoading={loading}
+              title={'Login'}
+            />
+          </View>
+          <TouchableOpacity>
+            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-        </TouchableOpacity>
-      </View>
-    </BottomSheet>
-  )
-})
+      </BottomSheet>
+    );
+  },
+);
 
-export default SignInWithEmail
+export default SignInWithEmail;
 
 const styles = StyleSheet.create({
+  errorText: {
+    color: COLORS.error,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+  },
+  errorContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: verticalScale(10),
+  },
   btnContainer: {
     marginTop: verticalScale(70),
   },
@@ -70,4 +84,4 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: verticalScale(24),
   },
-})
+});

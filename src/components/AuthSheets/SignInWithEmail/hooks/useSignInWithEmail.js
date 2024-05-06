@@ -1,74 +1,79 @@
-import { useEffect, useState } from 'react'
-import OneSignal from 'react-native-onesignal'
-import { useNavigation } from 'react-navigation-hooks'
-import { useDispatch, useSelector } from 'react-redux'
+import {useEffect, useState} from 'react';
+// import OneSignal from 'react-native-onesignal'
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {SCREEN_NAMES, STACK_NAMES} from '../../../../constants';
+import {
+  setBookings,
+  setCity,
+  setLoginData,
+  setOnboardingData,
+} from '../../../../redux';
+import {getBookings, userLogin} from '../../../../services';
 
-import { SCREEN_NAMES } from '../../../../constants/navigation'
-import { setIsFirstTimeLogin, setLoginData, setOnboardingData } from '../../../../redux/slices/authSlice'
-import { setBookings } from '../../../../redux/slices/restaurantSlice'
-import { setTempAuthData } from '../../../../redux/slices/tempAuth'
-import { showToastError, userLogin } from '../../../../services'
-import { getBookings } from '../../../../services/RestaurantService'
-import { setCity } from '../../../../redux/slices'
+const useSignInWithEmail = isFromBookRedirected => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const navigation = useNavigation();
+  const serviceDetails = useSelector(
+    state => state.restaurantSlice.serviceDetails,
+  );
+  const dispatch = useDispatch();
 
-const useSignInWithEmail = (isFromBookRedirected) => {
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
-  const [loading, setLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const { navigate } = useNavigation()
-  const serviceDetails = useSelector((state) => state.restaurantSlice.serviceDetails)
-  const dispatch = useDispatch()
-
-  const handleLoginPress = async (ref) => {
-    // navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
+  const handleLoginPress = async ref => {
+    // navigation.navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
     try {
-      setLoading(true)
-      const prepData = { email, password }
-      const res = await userLogin(prepData)
-      console.log(res, 'res')
-      setLoading(false)
-      dispatch(setCity({}))
+      setLoading(true);
+      const prepData = {email, password};
+      const res = await userLogin(prepData);
+      console.log(res, 'res');
+      setLoading(false);
+      dispatch(setCity({}));
       if (res?.UserStatus === 'approved') {
-        OneSignal.setExternalUserId(res?.id?.toString())
-        dispatch(setLoginData(res))
-        const params = `/${res?.id}`
-        const bookingRes = await getBookings(params)
-        dispatch(setBookings(bookingRes))
+        //TODO: Please enable this when you install onesignal
+        // OneSignal.setExternalUserId(res?.id?.toString())
+        dispatch(setLoginData(res));
+        const params = `/${res?.id}`;
+        const bookingRes = await getBookings(params);
+        dispatch(setBookings(bookingRes));
 
         // console.log('isFirstTimeLogin', isFirstTimeLogin)
         if (res?.firstVisit === 1) {
           // dispatch(setIsFirstTimeLogin(false))
-          navigate(SCREEN_NAMES.FirstWelcomeScreen)
+          navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
         } else if (serviceDetails?.id && isFromBookRedirected) {
-          navigate(SCREEN_NAMES.ServiceDetails)
+          navigation.replace(SCREEN_NAMES.ServiceDetails, {
+            isFromBookRedirected: isFromBookRedirected,
+          });
         } else {
-          navigate(SCREEN_NAMES.Cities)
+          navigation.replace(STACK_NAMES.BottomStack);
         }
 
-        ref?.current?.close()
+        ref?.current?.close();
       } else if (res?.UserStatus === '' || res?.UserStatus === 'onapproval') {
-        dispatch(setOnboardingData(true))
-        navigate(SCREEN_NAMES.AppliedScreen)
-        ref?.current?.close()
+        dispatch(setOnboardingData(true));
+        navigation.replace(SCREEN_NAMES.AppliedScreen);
+        ref?.current?.close();
       } else if (res?.UserStatus === 'rejected') {
-        dispatch(setOnboardingData(true))
-        navigate(SCREEN_NAMES.RejectedScreen)
-        ref?.current?.close()
+        dispatch(setOnboardingData(true));
+        navigation.navigate(SCREEN_NAMES.RejectedScreen);
+        ref?.current?.close();
       } else {
-        setIsError(true)
+        setIsError(true);
       }
     } catch (err) {
-      setLoading(false)
-      setIsError(true)
+      setLoading(false);
+      setIsError(true);
     }
-  }
+  };
 
   useEffect(() => {
     if (isError) {
-      setIsError(false)
+      setIsError(false);
     }
-  }, [email, password])
+  }, [email, password]);
 
   return {
     email,
@@ -78,7 +83,7 @@ const useSignInWithEmail = (isFromBookRedirected) => {
     password,
     setEmail,
     setPassword,
-  }
-}
+  };
+};
 
-export default useSignInWithEmail
+export default useSignInWithEmail;

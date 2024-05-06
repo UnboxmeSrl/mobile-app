@@ -1,16 +1,15 @@
-import React, { useRef, useState } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
-import Carousel, { Pagination } from 'react-native-snap-carousel'
+import React, {useRef, useState} from 'react';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {COLORS} from '../../constants';
 
-import { COLORS } from '../../constants/colors'
+const SLIDER_WIDTH = Dimensions.get('screen').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 
-const SLIDER_WIDTH = Dimensions.get('screen').width
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH)
-
-const CustomCarousel = ({ data, Component }) => {
-  const [index, setIndex] = useState(0)
-  const isCarousel = useRef(null)
+const CustomCarousel = ({data, Component}) => {
+  const [index, setIndex] = useState(0);
+  const isCarousel = useRef(null);
 
   return (
     <View style={styles.headerCarouselContainer}>
@@ -21,7 +20,7 @@ const CustomCarousel = ({ data, Component }) => {
         itemWidth={ITEM_WIDTH}
         layout="default"
         layoutCardOffset={9}
-        onSnapToItem={(index) => setIndex(index)}
+        onSnapToItem={index => setIndex(index)}
         ref={isCarousel}
         renderItem={Component}
         sliderWidth={SLIDER_WIDTH}
@@ -40,10 +39,10 @@ const CustomCarousel = ({ data, Component }) => {
         tappableDots={true}
       />
     </View>
-  )
-}
+  );
+};
 
-export default CustomCarousel
+export default CustomCarousel;
 
 const styles = StyleSheet.create({
   headerCarouselContainer: {
@@ -59,4 +58,4 @@ const styles = StyleSheet.create({
   headerDotContainer: {
     marginTop: verticalScale(-50),
   },
-})
+});

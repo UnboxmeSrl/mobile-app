@@ -1,13 +1,21 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
-/* eslint-disable react/jsx-sort-props */
-import React, { useState } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../../assets/images'
-import { CustomButton, CustomHeader, SocialMediaSheet } from '../../../components'
-import { COLORS, FONTS } from '../../../constants'
-import { useAuthSocialNetwork } from './hooks'
-import { commonStyle } from '../../../utils'
+import React, {useState} from 'react';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {
+  CustomButton,
+  CustomHeader,
+  SocialMediaSheet,
+} from '../../../components';
+import {COLORS, FONTS} from '../../../constants';
+import {useAuthSocialNetwork} from './hooks';
 
 const AuthSocialNetworkScreen = () => {
   const {
@@ -23,14 +31,20 @@ const AuthSocialNetworkScreen = () => {
     handleOnInstaPress,
     handleBackPress,
     handleNextPress,
-  } = useAuthSocialNetwork()
-  const [tiktokInputValue, setTiktokInputValue] = useState('')
-  const [instaUserNameValue, setInstaUserNameValue] = useState('')
+  } = useAuthSocialNetwork();
+  const [tiktokInputValue, setTiktokInputValue] = useState('');
+  const [instaUserNameValue, setInstaUserNameValue] = useState('');
   return (
-    <View style={styles.mainContainer}>
-      <CustomHeader title={'Social networks'} step={11} handleBackPress={handleBackPress} />
+    <SafeAreaView style={styles.mainContainer}>
+      <CustomHeader
+        title={'Social networks'}
+        step={11}
+        handleBackPress={handleBackPress}
+      />
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>Register your social networks</Text>
+        <Text style={styles.descriptionText}>
+          Register your social networks
+        </Text>
       </View>
 
       <View style={styles.socialMediaMainContainer}>
@@ -38,18 +52,24 @@ const AuthSocialNetworkScreen = () => {
           onPress={handleOnTikTokPress}
           style={[
             styles.socialMediaItem,
-            { backgroundColor: tiktokInputValue.trim() !== '' ? COLORS.newPrimary : COLORS.lightNewPrimaryA6 },
+            {
+              backgroundColor:
+                tiktokInputValue.trim() !== ''
+                  ? COLORS.newPrimary
+                  : COLORS.lightNewPrimaryA6,
+            },
           ]}
-          activeOpacity={0.5}
-        >
+          activeOpacity={0.5}>
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.tiktok} style={styles.socialMediaIcon} />
             <Text
               style={[
                 styles.socialMediaNameText,
-                { color: tiktokInputValue.trim() !== '' ? COLORS.white : COLORS.gray },
-              ]}
-            >
+                {
+                  color:
+                    tiktokInputValue.trim() !== '' ? COLORS.white : COLORS.gray,
+                },
+              ]}>
               Tik tok account
             </Text>
           </View>
@@ -58,7 +78,12 @@ const AuthSocialNetworkScreen = () => {
               source={IMAGES.loginInto}
               style={[
                 styles.loginIntoIcon,
-                { tintColor: tiktokInputValue.trim() !== '' ? COLORS.white : COLORS.black },
+                {
+                  tintColor:
+                    tiktokInputValue.trim() !== ''
+                      ? COLORS.white
+                      : COLORS.black,
+                },
               ]}
             />
           </View>
@@ -68,18 +93,26 @@ const AuthSocialNetworkScreen = () => {
           onPress={handleOnInstaPress}
           style={[
             styles.socialMediaItem,
-            { backgroundColor: instaUserNameValue.trim() !== '' ? COLORS.newPrimary : COLORS.lightNewPrimaryA6 },
+            {
+              backgroundColor:
+                instaUserNameValue.trim() !== ''
+                  ? COLORS.newPrimary
+                  : COLORS.lightNewPrimaryA6,
+            },
           ]}
-          activeOpacity={0.5}
-        >
+          activeOpacity={0.5}>
           <View style={styles.socialMediaNameIconContainer}>
             <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
             <Text
               style={[
                 styles.socialMediaNameText,
-                { color: instaUserNameValue.trim() !== '' ? COLORS.white : COLORS.gray },
-              ]}
-            >
+                {
+                  color:
+                    instaUserNameValue.trim() !== ''
+                      ? COLORS.white
+                      : COLORS.gray,
+                },
+              ]}>
               Instagram account
             </Text>
           </View>
@@ -88,7 +121,12 @@ const AuthSocialNetworkScreen = () => {
               source={IMAGES.loginInto}
               style={[
                 styles.loginIntoIcon,
-                { tintColor: instaUserNameValue.trim() !== '' ? COLORS.white : COLORS.black },
+                {
+                  tintColor:
+                    instaUserNameValue.trim() !== ''
+                      ? COLORS.white
+                      : COLORS.black,
+                },
               ]}
             />
           </View>
@@ -113,7 +151,12 @@ const AuthSocialNetworkScreen = () => {
       </View> */}
 
       <View style={styles.btnContainer}>
-        <CustomButton title={'Next'} handlePress={handleNextPress} isLoading={isLoading} disabled={isLoading} />
+        <CustomButton
+          title={'Next'}
+          handlePress={handleNextPress}
+          isLoading={isLoading}
+          disabled={isLoading}
+        />
       </View>
 
       <SocialMediaSheet
@@ -123,9 +166,9 @@ const AuthSocialNetworkScreen = () => {
         placeholder={'your tiktok username'}
         field={tiktokUserName}
         // onChangeText={setTiktokUserName}
-        onChangeText={(value) => {
-          setTiktokUserName(value)
-          setTiktokInputValue(value) // Update input value for TikTok
+        onChangeText={value => {
+          setTiktokUserName(value);
+          setTiktokInputValue(value); // Update input value for TikTok
         }}
         handlePress={() => tiktokSheetRef?.current?.close()}
       />
@@ -137,17 +180,17 @@ const AuthSocialNetworkScreen = () => {
         placeholder={'your Instagram username'}
         field={instaUserName}
         // onChangeText={setInstaUserName}
-        onChangeText={(value) => {
-          setInstaUserName(value)
-          setInstaUserNameValue(value) // Update input value for TikTok
+        onChangeText={value => {
+          setInstaUserName(value);
+          setInstaUserNameValue(value); // Update input value for TikTok
         }}
         handlePress={() => instaSheetRef?.current?.close()}
       />
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default AuthSocialNetworkScreen
+export default AuthSocialNetworkScreen;
 
 const styles = StyleSheet.create({
   btnContainer: {
@@ -202,7 +245,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,
@@ -239,4 +281,4 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     marginLeft: scale(16),
   },
-})
+});

@@ -1,23 +1,22 @@
-import React from 'react'
+import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
   Image,
   Platform,
   RefreshControl,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { ContentStatusModal } from '../../components'
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { commonStyle } from '../../utils'
-import { useYourSchedule } from './hooks'
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets';
+import {ContentStatusModal} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {useYourSchedule} from './hooks';
 
 const YourScheduleScreen = () => {
   const {
@@ -35,16 +34,20 @@ const YourScheduleScreen = () => {
     handleCardPress,
     handleContentCardPress,
     handleArchivePress,
-  } = useYourSchedule()
+  } = useYourSchedule();
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.yourScheduleTextContainer}>
           <Text style={styles.dateSelectTitleText}>Your Schedule</Text>
         </View>
         <TouchableOpacity onPress={handleArchivePress}>
-          <Image resizeMode="contain" source={IMAGES.swap} style={styles.calenderIcon} />
+          <Image
+            resizeMode="contain"
+            source={IMAGES.swap}
+            style={styles.calenderIcon}
+          />
         </TouchableOpacity>
       </View>
 
@@ -52,15 +55,25 @@ const YourScheduleScreen = () => {
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() => setSelectedTab(1)}
-          style={[styles.tab, selectedTab === 1 && styles.selectedTab]}
-        >
-          <Text style={[styles.selectionTabText, selectedTab === 1 && styles.selectedTabText]}>Booking</Text>
+          style={[styles.tab, selectedTab === 1 && styles.selectedTab]}>
+          <Text
+            style={[
+              styles.selectionTabText,
+              selectedTab === 1 && styles.selectedTabText,
+            ]}>
+            Booking
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setSelectedTab(2)}
-          style={[styles.tab, selectedTab === 2 && styles.selectedTab]}
-        >
-          <Text style={[styles.selectionTabText, selectedTab === 2 && styles.selectedTabText]}>Content</Text>
+          style={[styles.tab, selectedTab === 2 && styles.selectedTab]}>
+          <Text
+            style={[
+              styles.selectionTabText,
+              selectedTab === 2 && styles.selectedTabText,
+            ]}>
+            Content
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -73,62 +86,85 @@ const YourScheduleScreen = () => {
           <FlatList
             data={bookings}
             keyExtractor={(_, index) => index.toString()}
-            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onBookingRefresh} />}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onBookingRefresh}
+              />
+            }
             ListEmptyComponent={
               <View style={styles.listEmptyContainer}>
                 <Text style={styles.listEmptyText}>No bookings are there.</Text>
               </View>
             }
-            renderItem={({ item, index }) => {
-              const myDate = new Date(item?.BookingDay)
-              const month = myDate.toLocaleString('en-US', { month: 'long' })
-              const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
-              const timeFrame = item?._timeframes_turbo
-              const approvalStatus = item?.Approved ? 'Accepted' : item?.Rejectedstatus ? 'Rejected' : 'Pending'
-              let actionNumId = item?._actions_turbo?.action_num_id ?? 0
-              let icon = item?._actions_turbo?.Action_icon?.url
-              let actionName = item?._actions_turbo?.Action_Name ?? 0
+            renderItem={({item, index}) => {
+              const myDate = new Date(item?.BookingDay);
+              const month = myDate.toLocaleString('en-US', {month: 'long'});
+              const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+              const timeFrame = item?._timeframes_turbo;
+              const approvalStatus = item?.Approved
+                ? 'Accepted'
+                : item?.Rejectedstatus
+                ? 'Rejected'
+                : 'Pending';
+              let actionNumId = item?._actions_turbo?.action_num_id ?? 0;
+              let icon = item?._actions_turbo?.Action_icon?.url;
+              let actionName = item?._actions_turbo?.Action_Name ?? 0;
 
               if (actionNumId === 6 && item?._diary_action_turbo?.id) {
-                icon = item?._diary_action_turbo?.action_icon?.url
-                actionName = item?._diary_action_turbo?.action_for_others
+                icon = item?._diary_action_turbo?.action_icon?.url;
+                actionName = item?._diary_action_turbo?.action_for_others;
               } else if (item?.diary_action_turbo_id) {
-                actionName = item?._diary_action_turbo?.action
+                actionName = item?._diary_action_turbo?.action;
               }
 
               return (
                 <TouchableOpacity
-                  onPress={() => handleCardPress(item, approvalStatus, actionName, actionNumId)}
-                  style={styles.cardContainer}
-                >
+                  onPress={() =>
+                    handleCardPress(
+                      item,
+                      approvalStatus,
+                      actionName,
+                      actionNumId,
+                    )
+                  }
+                  style={styles.cardContainer}>
                   <View
                     style={[
                       styles.approvalStatusContainer,
                       approvalStatus === 'Pending'
-                        ? { backgroundColor: COLORS.cornSilk }
-                        : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
-                    ]}
-                  >
+                        ? {backgroundColor: COLORS.cornSilk}
+                        : approvalStatus === 'Rejected' && {
+                            backgroundColor: COLORS.seaShellRed,
+                          },
+                    ]}>
                     <Image
                       resizeMode="cover"
                       source={
-                        item?.Approved ? IMAGES.check : item?.Rejectedstatus ? IMAGES.reject : IMAGES.pendingClock
+                        item?.Approved
+                          ? IMAGES.check
+                          : item?.Rejectedstatus
+                          ? IMAGES.reject
+                          : IMAGES.pendingClock
                       }
                       style={[
                         styles.approvalIcon,
                         approvalStatus === 'Pending'
-                          ? { tintColor: COLORS.americanYellow }
-                          : approvalStatus === 'Rejected' && { tintColor: COLORS.error },
+                          ? {tintColor: COLORS.americanYellow}
+                          : approvalStatus === 'Rejected' && {
+                              tintColor: COLORS.error,
+                            },
                       ]}
                     />
                     <Text
                       style={[
                         styles.approvalStatusText,
                         approvalStatus === 'Pending'
-                          ? { color: COLORS.americanYellow }
-                          : approvalStatus === 'Rejected' && { color: COLORS.error },
-                      ]}
-                    >
+                          ? {color: COLORS.americanYellow}
+                          : approvalStatus === 'Rejected' && {
+                              color: COLORS.error,
+                            },
+                      ]}>
                       {approvalStatus}
                     </Text>
                   </View>
@@ -138,7 +174,10 @@ const YourScheduleScreen = () => {
                       <View style={styles.locationImageContainer}>
                         <FastImage
                           resizeMode="cover"
-                          source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
+                          source={{
+                            priority: FastImage.priority.high,
+                            uri: item?._restaurant_turbo?.Cover?.url,
+                          }}
                           style={styles.locationImage}
                         />
                       </View>
@@ -146,30 +185,44 @@ const YourScheduleScreen = () => {
                         style={[
                           styles.dateContainer,
                           approvalStatus === 'Pending'
-                            ? { backgroundColor: COLORS.cornSilk }
-                            : approvalStatus === 'Rejected' && { backgroundColor: COLORS.seaShellRed },
-                        ]}
-                      >
-                        <Text style={styles.selectedDateMonthText}>{month}</Text>
-                        <Text style={styles.selectedDateNumberText}>{myDate?.getDate()}</Text>
-                        <Text style={styles.selectedDateDayText}>{weekDay?.slice(0, 3)}</Text>
+                            ? {backgroundColor: COLORS.cornSilk}
+                            : approvalStatus === 'Rejected' && {
+                                backgroundColor: COLORS.seaShellRed,
+                              },
+                        ]}>
+                        <Text style={styles.selectedDateMonthText}>
+                          {month}
+                        </Text>
+                        <Text style={styles.selectedDateNumberText}>
+                          {myDate?.getDate()}
+                        </Text>
+                        <Text style={styles.selectedDateDayText}>
+                          {weekDay?.slice(0, 3)}
+                        </Text>
                       </View>
                     </View>
                     <View style={styles.locationTimeMainContainer}>
                       <View style={styles.locationNameContainer}>
-                        <Text style={styles.locationNameText}>{item?._restaurant_turbo?.Name}</Text>
+                        <Text style={styles.locationNameText}>
+                          {item?._restaurant_turbo?.Name}
+                        </Text>
                       </View>
                       <View style={styles.serviceRequestedContainer}>
-                        <Text style={styles.serviceRequestedTitleText}>Service Requested</Text>
-                        <Text style={styles.serviceRequestedText}>{item?._offers_turbo?.Offer_Name}</Text>
+                        <Text style={styles.serviceRequestedTitleText}>
+                          Service Requested
+                        </Text>
+                        <Text style={styles.serviceRequestedText}>
+                          {item?._offers_turbo?.Offer_Name}
+                        </Text>
                       </View>
                       <View style={styles.timeReelsContainer}>
                         {actionNumId !== 9 ? (
                           <View style={styles.timeContainer}>
                             <Text style={styles.timeTitleText}>Time</Text>
                             <Text
-                              style={styles.timeText}
-                            >{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                              style={
+                                styles.timeText
+                              }>{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
                           </View>
                         ) : (
                           <View style={styles.timeContainer} />
@@ -203,7 +256,7 @@ const YourScheduleScreen = () => {
                     </View>
                   </View>
                 </TouchableOpacity>
-              )
+              );
             }}
           />
         )) ||
@@ -211,36 +264,48 @@ const YourScheduleScreen = () => {
           <FlatList
             data={contentList}
             keyExtractor={(_, index) => index.toString()}
-            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onContentRefresh} />}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onContentRefresh}
+              />
+            }
             ListEmptyComponent={
               <View style={styles.listEmptyContainer}>
-                <Text style={styles.listEmptyText}>No content uploaded yet.</Text>
+                <Text style={styles.listEmptyText}>
+                  No content uploaded yet.
+                </Text>
               </View>
             }
-            renderItem={({ item, index }) => {
-              let actionNumId = item?._actions_turbo?.action_num_id ?? 0
-              let icon = item?._actions_turbo?.Action_icon?.url
-              let actionName = item?._actions_turbo?.Action_Name ?? 0
+            renderItem={({item, index}) => {
+              let actionNumId = item?._actions_turbo?.action_num_id ?? 0;
+              let icon = item?._actions_turbo?.Action_icon?.url;
+              let actionName = item?._actions_turbo?.Action_Name ?? 0;
 
               if (actionNumId === 6 && item?._diary_action_turbo?.id) {
-                icon = item?._diary_action_turbo?.action_icon?.url
-                actionName = item?._diary_action_turbo?.action_for_others
+                icon = item?._diary_action_turbo?.action_icon?.url;
+                actionName = item?._diary_action_turbo?.action_for_others;
               } else if (item?.diary_action_turbo_id) {
-                actionName = item?._diary_action_turbo?.action
+                actionName = item?._diary_action_turbo?.action;
               }
 
-              let contentApprovalStatus = item?.content_status_turbo_id
+              let contentApprovalStatus = item?.content_status_turbo_id;
               if (item?.content_status_turbo_id) {
-                contentApprovalStatus = item?._content_status_turbo?.name
+                contentApprovalStatus = item?._content_status_turbo?.name;
               }
               return (
-                <TouchableOpacity style={contentStyles.cardContainer} onPress={() => handleContentCardPress(item)}>
+                <TouchableOpacity
+                  style={contentStyles.cardContainer}
+                  onPress={() => handleContentCardPress(item)}>
                   <View style={contentStyles.cardContentContainer}>
                     <View style={contentStyles.ratingSocialMediaMainContainer}>
                       <View style={contentStyles.ratingSocialMediaContainer}>
                         <View style={contentStyles.ratingContainer}>
                           <Text style={contentStyles.ratingUsersText}>240</Text>
-                          <Image source={IMAGES.ratingStar} style={contentStyles.ratingIconImage} />
+                          <Image
+                            source={IMAGES.ratingStar}
+                            style={contentStyles.ratingIconImage}
+                          />
                         </View>
                       </View>
                       <View style={contentStyles.socialMediaIconNameContainer}>
@@ -253,57 +318,66 @@ const YourScheduleScreen = () => {
                           style={contentStyles.socialMediaIcon}
                         />
                         {/* <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} /> */}
-                        <Text style={contentStyles.socialMediaNameText}>{`${actionName}`}</Text>
+                        <Text
+                          style={
+                            contentStyles.socialMediaNameText
+                          }>{`${actionName}`}</Text>
                       </View>
                     </View>
 
                     <View
                       style={[
                         contentStyles.deadLineLocationContainer,
-                        item?.content_status_turbo_id !== 0 && styles.underReviewContainer,
-                      ]}
-                    >
+                        item?.content_status_turbo_id !== 0 &&
+                          styles.underReviewContainer,
+                      ]}>
                       <View style={contentStyles.deadLineContainer}>
                         <View style={contentStyles.deadLineMainRow}>
                           <View
                             style={[
                               contentStyles.deadLineTitleTextContainer,
                               (contentApprovalStatus === 'Under Review' ||
-                                contentApprovalStatus === 'Missed Deadline') && {
+                                contentApprovalStatus ===
+                                  'Missed Deadline') && {
                                 width: '52%',
                               },
-                              item?.content_status_turbo_id === 0 && { width: '100%' },
-                            ]}
-                          >
-                            <Text style={contentStyles.deadLineTitleText}>Deadline:</Text>
+                              item?.content_status_turbo_id === 0 && {
+                                width: '100%',
+                              },
+                            ]}>
+                            <Text style={contentStyles.deadLineTitleText}>
+                              Deadline:
+                            </Text>
                           </View>
                           {item?.content_status_turbo_id > 0 && (
                             <View
                               style={[
                                 contentStyles.contentApprovalStatusContainer,
                                 contentApprovalStatus === 'To Publish'
-                                  ? { backgroundColor: COLORS.cornSilk }
+                                  ? {backgroundColor: COLORS.cornSilk}
                                   : contentApprovalStatus === 'Rejected'
-                                  ? { backgroundColor: COLORS.seaShellRed }
+                                  ? {backgroundColor: COLORS.seaShellRed}
                                   : contentApprovalStatus === 'Under Review'
-                                  ? { backgroundColor: COLORS.azureishWhite }
-                                  : contentApprovalStatus === 'Missed Deadline' && {
+                                  ? {backgroundColor: COLORS.azureishWhite}
+                                  : contentApprovalStatus ===
+                                      'Missed Deadline' && {
                                       backgroundColor: COLORS.paleRose,
                                     },
-                              ]}
-                            >
+                              ]}>
                               <Text
                                 style={[
                                   contentStyles.contentApprovalStatusText,
                                   contentApprovalStatus === 'To Publish'
-                                    ? { color: COLORS.americanYellow }
+                                    ? {color: COLORS.americanYellow}
                                     : contentApprovalStatus === 'Rejected'
-                                    ? { color: COLORS.error }
+                                    ? {color: COLORS.error}
                                     : contentApprovalStatus === 'Under Review'
-                                    ? { color: COLORS.celticBlue }
-                                    : contentApprovalStatus === 'Missed Deadline' && { color: COLORS.redViolet },
-                                ]}
-                              >
+                                    ? {color: COLORS.celticBlue}
+                                    : contentApprovalStatus ===
+                                        'Missed Deadline' && {
+                                        color: COLORS.redViolet,
+                                      },
+                                ]}>
                                 {contentApprovalStatus}
                               </Text>
                             </View>
@@ -314,10 +388,15 @@ const YourScheduleScreen = () => {
                         </View>
                         {item?.content_status_turbo_id === 0 && (
                           <View style={contentStyles.infoContainer}>
-                            <Image resizeMode="contain" source={IMAGES.info} style={contentStyles.infoIcon} />
+                            <Image
+                              resizeMode="contain"
+                              source={IMAGES.info}
+                              style={contentStyles.infoIcon}
+                            />
                             <Text
-                              style={contentStyles.deadLineText}
-                            >{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
+                              style={
+                                contentStyles.deadLineText
+                              }>{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
                           </View>
                         )}
                       </View>
@@ -327,29 +406,40 @@ const YourScheduleScreen = () => {
                           <View style={contentStyles.locationImageContainer}>
                             <FastImage
                               resizeMode="cover"
-                              source={{ priority: FastImage.priority.high, uri: item?._restaurant_turbo?.Cover?.url }}
+                              source={{
+                                priority: FastImage.priority.high,
+                                uri: item?._restaurant_turbo?.Cover?.url,
+                              }}
                               style={contentStyles.locationImage}
                             />
                           </View>
                           <View style={contentStyles.locationNameContainer}>
-                            <Text style={contentStyles.locationNameText} numberOfLines={1}>
+                            <Text
+                              style={contentStyles.locationNameText}
+                              numberOfLines={1}>
                               {item?._restaurant_turbo?.Name}
                             </Text>
                             <View style={contentStyles.locationTextContainer}>
-                              <Text style={contentStyles.locationText} numberOfLines={2}>
+                              <Text
+                                style={contentStyles.locationText}
+                                numberOfLines={2}>
                                 {item?._restaurant_turbo?.Adress}
                               </Text>
                             </View>
                           </View>
                         </View>
                         <View style={contentStyles.rightIconContainer}>
-                          <Image resizeMode="contain" source={IMAGES.back} style={contentStyles.rightIcon} />
+                          <Image
+                            resizeMode="contain"
+                            source={IMAGES.back}
+                            style={contentStyles.rightIcon}
+                          />
                         </View>
                       </View>
                     </View>
                   </View>
                 </TouchableOpacity>
-              )
+              );
             }}
           />
         ))
@@ -363,11 +453,11 @@ const YourScheduleScreen = () => {
           handlePositiveBtnPress={handleContentModalOpenClose}
         />
       )}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default YourScheduleScreen
+export default YourScheduleScreen;
 
 const styles = StyleSheet.create({
   underReviewContainer: {
@@ -448,7 +538,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
     width: '100%',
   },
   loaderContainer: {
@@ -476,7 +567,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   nameLocationMainRow: {
     alignItems: 'flex-start',
@@ -622,7 +712,7 @@ const styles = StyleSheet.create({
     paddingLeft: scale(30),
     width: '90%',
   },
-})
+});
 
 const contentStyles = StyleSheet.create({
   contentApprovalIcon: {
@@ -667,11 +757,11 @@ const contentStyles = StyleSheet.create({
     marginTop: verticalScale(16),
     // paddingBottom: verticalScale(15),
     width: '95%',
-    ...Platform.select({
-      ios: {
-        height: verticalScale(120),
-      },
-    }),
+    // ...Platform.select({
+    //   ios: {
+    //     height: verticalScale(120),
+    //   },
+    // }),
     // height: verticalScale(132),
   },
   socialMediaIconNameContainer: {
@@ -730,7 +820,7 @@ const contentStyles = StyleSheet.create({
     height: moderateScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   socialMediaNameText: {
@@ -833,4 +923,4 @@ const contentStyles = StyleSheet.create({
     // backgroundColor: COLORS.isabelLine,
     backgroundColor: COLORS.lightNewPrimary40,
   },
-})
+});

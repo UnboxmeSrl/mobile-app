@@ -1,12 +1,21 @@
-import React from 'react'
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
-import { IMAGES } from '../../assets/images'
-import { ContentStatusModal } from '../../components'
-import { COLORS, FONTS } from '../../constants'
-import { commonStyle } from '../../utils'
-import { usePublishContent } from './hooks'
+import React from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../assets/images';
+import {ContentStatusModal} from '../../components';
+import {COLORS, FONTS} from '../../constants';
+import {usePublishContent} from './hooks';
 
 const PublishContentScreen = () => {
   const {
@@ -30,14 +39,22 @@ const PublishContentScreen = () => {
     handleContentBriefPress,
     handleEditPress,
     handleBackPress,
-  } = usePublishContent()
+  } = usePublishContent();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.mainScrollView}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={handleBackPress} style={styles.backIconContainer}>
-            <Image resizeMode="cover" source={IMAGES.back} style={styles.backIcon} />
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backIconContainer}>
+            <Image
+              resizeMode="cover"
+              source={IMAGES.back}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
           <View style={styles.headerTitleContainer}>
             <Text style={styles.headerTitleText}>Publish Content</Text>
@@ -47,7 +64,9 @@ const PublishContentScreen = () => {
         <View style={styles.onApprovalItemsMainContainer}>
           <View style={styles.socialMediaDetailsMainRow}>
             {actionName !== 'Story' && (
-              <TouchableOpacity style={styles.editIconContainer} onPress={handleEditPress}>
+              <TouchableOpacity
+                style={styles.editIconContainer}
+                onPress={handleEditPress}>
                 <Image source={IMAGES.edit} style={styles.editIcon} />
               </TouchableOpacity>
             )}
@@ -67,11 +86,21 @@ const PublishContentScreen = () => {
               }`}</Text>
               <View style={styles.ratingContainer}>
                 <Text style={styles.ratingUsersText}>240</Text>
-                <Image source={IMAGES.ratingStar} style={styles.ratingIconImage} />
+                <Image
+                  source={IMAGES.ratingStar}
+                  style={styles.ratingIconImage}
+                />
               </View>
               <View style={styles.infoContainer}>
-                <Image resizeMode="contain" source={IMAGES.info} style={styles.infoIcon} />
-                <Text style={styles.deadLineText}>{`${contentDetails?._actions_turbo?.Days_deadline} Days left`}</Text>
+                <Image
+                  resizeMode="contain"
+                  source={IMAGES.info}
+                  style={styles.infoIcon}
+                />
+                <Text
+                  style={
+                    styles.deadLineText
+                  }>{`${contentDetails?._actions_turbo?.Days_deadline} Days left`}</Text>
               </View>
             </View>
             {/* <View
@@ -104,10 +133,16 @@ const PublishContentScreen = () => {
           {actionName !== 'Story' && (
             <>
               <View style={styles.linkUploadDescriptionContainer}>
-                <Text style={styles.linkUploadDescriptionText}>Enter the link to your content and sent to review</Text>
+                <Text style={styles.linkUploadDescriptionText}>
+                  Enter the link to your content and sent to review
+                </Text>
                 <View style={styles.linkUploadTextInputMainContainer}>
                   <View style={styles.linkUploadIconContainer}>
-                    <Image source={IMAGES.link} style={styles.linkUploadIcon} resizeMode="contain" />
+                    <Image
+                      source={IMAGES.link}
+                      style={styles.linkUploadIcon}
+                      resizeMode="contain"
+                    />
                   </View>
                   <View style={styles.linkUploadTextInputContainer}>
                     <TextInput
@@ -115,14 +150,22 @@ const PublishContentScreen = () => {
                       placeholderTextColor={COLORS.newPrimary}
                       style={styles.linkUploadTextInput}
                       value={link}
-                      onChangeText={(val) => setLink(val)}
+                      onChangeText={val => setLink(val)}
                     />
                   </View>
                 </View>
               </View>
-              <TouchableOpacity style={styles.readContentBriefContainer} onPress={handleContentBriefPress}>
-                <Text style={styles.contentBriefTitleText}>Read Content Brief & Tags</Text>
-                <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+              <TouchableOpacity
+                style={styles.readContentBriefContainer}
+                onPress={handleContentBriefPress}>
+                <Text style={styles.contentBriefTitleText}>
+                  Read Content Brief & Tags
+                </Text>
+                <Image
+                  resizeMode="contain"
+                  source={IMAGES.back}
+                  style={styles.rightIcon}
+                />
               </TouchableOpacity>
             </>
           )}
@@ -137,27 +180,39 @@ const PublishContentScreen = () => {
           <View style={styles.locationImageContainer}>
             <FastImage
               resizeMode="cover"
-              source={{ priority: FastImage.priority.high, uri: contentDetails?._restaurant_turbo?.Cover?.url }}
+              source={{
+                priority: FastImage.priority.high,
+                uri: contentDetails?._restaurant_turbo?.Cover?.url,
+              }}
               style={styles.locationImage}
             />
           </View>
           <View style={styles.locationNameContainer}>
-            <Text style={styles.locationNameText}>{contentDetails?._restaurant_turbo?.Name}</Text>
+            <Text style={styles.locationNameText}>
+              {contentDetails?._restaurant_turbo?.Name}
+            </Text>
             <View style={styles.locationTextContainer}>
-              <Text style={styles.locationText}>{contentDetails?._restaurant_turbo?.Adress}</Text>
+              <Text style={styles.locationText}>
+                {contentDetails?._restaurant_turbo?.Adress}
+              </Text>
             </View>
           </View>
         </View>
         <View style={styles.serviceBoxContainer}>
           <View style={styles.serviceContainer}>
             <Text style={styles.serviceTitleText}>Service</Text>
-            <Text style={styles.serviceNameText}>{contentDetails?._offers_turbo?.Offer_Name}</Text>
+            <Text style={styles.serviceNameText}>
+              {contentDetails?._offers_turbo?.Offer_Name}
+            </Text>
           </View>
         </View>
         <View style={styles.dateTimeContainer}>
           <View style={styles.timeContainer}>
             <Text style={styles.timeTitleText}>Date</Text>
-            <Text style={styles.timeText}>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
+            <Text
+              style={
+                styles.timeText
+              }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
           {actionNumId !== 9 && (
             <View style={styles.timeContainer}>
@@ -175,44 +230,61 @@ const PublishContentScreen = () => {
           </View>
         </View>
         <View style={styles.redirectsContainer}>
-          <TouchableOpacity style={styles.contentBriefContainer} onPress={handleContentBriefPress}>
-            <Text style={styles.socialMediaTitleText}>Content Brief & Tags</Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+          <TouchableOpacity
+            style={styles.contentBriefContainer}
+            onPress={handleContentBriefPress}>
+            <Text style={styles.socialMediaTitleText}>
+              Content Brief & Tags
+            </Text>
+            <Image
+              resizeMode="contain"
+              source={IMAGES.back}
+              style={styles.rightIcon}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.howItWorksContainer}>
             <Text style={styles.socialMediaTitleText}>How it works </Text>
-            <Image resizeMode="contain" source={IMAGES.back} style={styles.rightIcon} />
+            <Image
+              resizeMode="contain"
+              source={IMAGES.back}
+              style={styles.rightIcon}
+            />
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.sendToReviewBtnMainContainer}>
-        {isSendToReview ? (
-          <View style={styles.sendToReviewBtnContainer}>
-            <ActivityIndicator color={COLORS.black22} size={30} />
-          </View>
-        ) : (
-          <TouchableOpacity onPress={handleSendToReviewBtnPress} style={styles.sendToReviewBtnContainer}>
-            <Text style={styles.sendToReviewBtnText}>Send to review</Text>
-          </TouchableOpacity>
+        <View style={styles.sendToReviewBtnMainContainer}>
+          {isSendToReview ? (
+            <View style={styles.sendToReviewBtnContainer}>
+              <ActivityIndicator color={COLORS.black22} size={30} />
+            </View>
+          ) : (
+            <TouchableOpacity
+              onPress={handleSendToReviewBtnPress}
+              style={styles.sendToReviewBtnContainer}>
+              <Text style={styles.sendToReviewBtnText}>Send to review</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+        {isContentStatusModalVisible && (
+          <ContentStatusModal
+            visible={isContentStatusModalVisible}
+            isLoading={isLoading}
+            contentDetails={updatedContentDetails}
+            handleNegativeBtnPress={handleContentModalOpenClose}
+            handlePositiveBtnPress={handlePositiveBtnPress}
+          />
         )}
-      </View>
-      {isContentStatusModalVisible && (
-        <ContentStatusModal
-          visible={isContentStatusModalVisible}
-          isLoading={isLoading}
-          contentDetails={updatedContentDetails}
-          handleNegativeBtnPress={handleContentModalOpenClose}
-          handlePositiveBtnPress={handlePositiveBtnPress}
-        />
-      )}
-    </ScrollView>
-  )
-}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default PublishContentScreen
+export default PublishContentScreen;
 
 const styles = StyleSheet.create({
+  mainScrollView: {
+    backgroundColor: COLORS.white,
+  },
   editIcon: {
     tintColor: COLORS.newPrimary,
     height: moderateScale(16),
@@ -395,12 +467,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
-    ...commonStyle.containerPaddingTop,
   },
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(20),
   },
   headerTitleContainer: {
     alignItems: 'center',
@@ -451,7 +523,7 @@ const styles = StyleSheet.create({
   rightIcon: {
     height: moderateScale(25),
     tintColor: COLORS.black,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
     width: moderateScale(25),
   },
   ratingContainer: {
@@ -521,4 +593,4 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
   },
-})
+});

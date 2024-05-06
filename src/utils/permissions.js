@@ -1,26 +1,26 @@
-import { Alert } from 'react-native'
-import { check, openSettings, request, RESULTS } from 'react-native-permissions'
+import {Alert} from 'react-native';
+import {check, openSettings, request, RESULTS} from 'react-native-permissions';
 
-export const checkPermission = async (permission) => {
+export const checkPermission = async permission => {
   const res = await check(permission)
-    .then(async (result) => {
+    .then(async result => {
       switch (result) {
         case RESULTS.UNAVAILABLE:
-          console.log('result Unavailable', result)
-          return false
+          console.log('result Unavailable', result);
+          return false;
 
         case RESULTS.DENIED:
-          console.log('result denied', result)
-          const reqRes = await requestPermission(permission)
-          return reqRes
+          console.log('result denied', result);
+          const reqRes = await requestPermission(permission);
+          return reqRes;
 
         case RESULTS.LIMITED:
-          console.log('result limited', result)
-          return true
+          console.log('result limited', result);
+          return true;
 
         case RESULTS.GRANTED:
-          console.log('result granted', result)
-          return true
+          console.log('result granted', result);
+          return true;
 
         case RESULTS.BLOCKED:
           Alert.alert(
@@ -29,43 +29,46 @@ export const checkPermission = async (permission) => {
             [
               {
                 text: 'Open Settings',
-                onPress: () => openSettings().catch(() => console.warn('cannot open settings')),
+                onPress: () =>
+                  openSettings().catch(() =>
+                    console.warn('cannot open settings'),
+                  ),
               },
               {
                 text: 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
               },
-            ]
-          )
-          return false
+            ],
+          );
+          return false;
       }
     })
-    .catch((error) => {
-      console.log(error)
-    })
-  return res
-}
+    .catch(error => {
+      console.log(error);
+    });
+  return res;
+};
 
-export const requestPermission = async (permission) => {
+export const requestPermission = async permission => {
   const res = await request(permission)
-    .then((result) => {
+    .then(result => {
       switch (result) {
         case RESULTS.UNAVAILABLE:
-          console.log('result Unavailable', result)
-          return false
+          console.log('result Unavailable', result);
+          return false;
 
         case RESULTS.DENIED:
-          console.log('result denied', result)
-          return false
+          console.log('result denied', result);
+          return false;
 
         case RESULTS.LIMITED:
-          console.log('result Limited', result)
-          return true
+          console.log('result Limited', result);
+          return true;
 
         case RESULTS.GRANTED:
-          console.log('result granted', result)
-          return true
+          console.log('result granted', result);
+          return true;
 
         case RESULTS.BLOCKED:
           Alert.alert(
@@ -74,20 +77,23 @@ export const requestPermission = async (permission) => {
             [
               {
                 text: 'Open Settings',
-                onPress: () => openSettings().catch(() => console.warn('cannot open settings')),
+                onPress: () =>
+                  openSettings().catch(() =>
+                    console.warn('cannot open settings'),
+                  ),
               },
               {
                 text: 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
               },
-            ]
-          )
-          return false
+            ],
+          );
+          return false;
       }
     })
-    .catch((error) => {
-      console.log(error)
-    })
-  return res
-}
+    .catch(error => {
+      console.log(error);
+    });
+  return res;
+};

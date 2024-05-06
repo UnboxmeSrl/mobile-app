@@ -63,4 +63,8 @@ export const COLORS = {
   lightNewPrimary40: '#FFEFF240',
   lightNewPrimaryA6: '#FFEFF2A6',
   davyGrey: '#5E5E5E',
-}
+  successLight: '#3794350F',
+  dangerLight: '#FF385C0A',
+  slate1: '#B0B0B0',
+  celticLight: '#1E60DD0D',
+};
