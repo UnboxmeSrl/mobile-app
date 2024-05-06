@@ -47,7 +47,7 @@ const ProfileScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       {/* <FormTask /> */}
       {isAuthenticated ? (
-        <View style={{flex: 1}}>
+        <View style={styles.mainSubContainer}>
           <View style={styles.infoGrid}>
             <Stack>
               <View style={styles.topHeader}>
@@ -163,6 +163,9 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
+  mainSubContainer: {
+    flex: 1,
+  },
   avatarScrollView: {
     flex: 1,
   },

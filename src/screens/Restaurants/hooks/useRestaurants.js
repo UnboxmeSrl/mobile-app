@@ -108,12 +108,14 @@ const useRestaurants = () => {
   const getCategoriesData = async () => {
     setIsLoading(true);
     const res = await getCategories();
-    const addAllCategory = [
-      {CategoryName: 'All categories', id: 0},
-      ...res?.data,
-    ];
+    if (res?.length > 0) {
+      const addAllCategory = [
+        {CategoryName: 'All categories', id: 0},
+        ...res?.data,
+      ];
 
-    setCategories(addAllCategory);
+      setCategories(addAllCategory);
+    }
     setIsLoading(false);
   };
 

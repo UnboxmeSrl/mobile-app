@@ -22,7 +22,6 @@ const FirstWelcomeScreen = () => {
               {user?.Profile_pic?.url ? (
                 <FastImage
                   resizeMode="cover"
-                  tintColor={COLORS.newPrimary}
                   source={{
                     priority: FastImage.priority.high,
                     uri: user?.Profile_pic?.url,

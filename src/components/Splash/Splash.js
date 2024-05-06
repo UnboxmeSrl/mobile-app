@@ -25,10 +25,11 @@ import {
   selectIsPending,
   selectIsRejected,
   selectOnBordingData,
+  setLoginData,
   setSocialActions,
   updateLoginData,
 } from '../../redux';
-import {getAllActions, getProfile} from '../../services';
+import {getAllActions, getProfile, getUserApprovalStatus} from '../../services';
 import {checkSignUpProgress} from '../../utils';
 
 const delay = 500;
@@ -36,10 +37,12 @@ const delay = 500;
 const Splash = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const loginData = useSelector(state => state.authSlice.loginData);
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
   const [fadeOut, setFadeOut] = useState(false);
   const [show, setShow] = useState(true);
+  const [isUserApprovalApiCalled, setIsUserApprovalApiCalled] = useState(false);
   // const fadeAnim = useRef(new Animated.Value(1)).current;
   const ref = createRef();
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -55,7 +58,7 @@ const Splash = () => {
   const signUpProcessStage = useSelector(
     state => state.authSlice.signUpProcessStage,
   );
-  const LoginDetail = useSelector(state => state.authSlice.loginData);
+
   /* const authData = useSelector((state) => state.authSlice.authData) */
   // console.log(
   //   'isAuthenticated',
@@ -69,10 +72,14 @@ const Splash = () => {
   //   signUpProcessStage
   // )
 
-  const handleGetProfileData = useCallback(async () => {
-    const res = await getProfile();
+  const getUserApprovalStatusData = async () => {
+    const userId = `/${loginData?.id}`;
+    const res = await getUserApprovalStatus(userId);
     dispatch(updateLoginData(res));
-  }, [dispatch]);
+    setTimeout(() => {
+      setIsUserApprovalApiCalled(true);
+    }, 1000);
+  };
 
   const getAllSocialActions = async () => {
     const res = await getAllActions();
@@ -80,47 +87,38 @@ const Splash = () => {
   };
 
   useEffect(() => {
-    if (
-      LoginDetail &&
-      (LoginDetail?.UserStatus === '' ||
-        LoginDetail?.UserStatus === 'onapproval')
-    ) {
-      const timeout = setTimeout(() => {
-        handleGetProfileData();
-        // will call after every 2 minutes
-      }, 1000 * 60 * 2);
-      return () => {
-        if (timeout) clearTimeout(timeout);
-      };
-    }
-  }, [handleGetProfileData, LoginDetail]);
-  /* console.log('userStatus details', signUpProcessStage, approvedUser, firstVisit, LoginDetail) */
+    getUserApprovalStatusData();
+  }, []);
+
   useEffect(() => {
-    setTimeout(() => {
-      if (!hideOnBoarding) {
-        console.log('hideOnBoarding');
-        navigation.replace(SCREEN_NAMES.OnboardingNew);
-      } else if (isAuthenticated && isApplied) {
-        console.log('isApplied');
-        navigation.replace(SCREEN_NAMES.AppliedScreen);
-      } else if (isAuthenticated && firstVisit && approvedUser) {
-        console.log('firstVisit');
-        navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
-      } else if (isAuthenticated && approvedUser) {
-        console.log('approvedUser');
-        navigation.replace(STACK_NAMES.BottomStack);
-      } else if (rejectedUser && isAuthenticated) {
-        console.log('rejectedUser');
-        navigation.replace(SCREEN_NAMES.RejectedScreen);
-      } else if (isSignUpProcessStarted) {
-        console.log('isSignUpProcessStarted');
-        // checkSignUpProgress(signUpProcessStage);
-        navigation.replace(SCREEN_NAMES.SignUpNew);
-      } else {
-        navigation.replace(SCREEN_NAMES.SignUpNew);
-      }
-    }, 100);
+    if (isUserApprovalApiCalled) {
+      setTimeout(() => {
+        if (!hideOnBoarding) {
+          console.log('hideOnBoarding');
+          navigation.replace(SCREEN_NAMES.OnboardingNew);
+        } else if (isAuthenticated && isApplied) {
+          console.log('isApplied');
+          navigation.replace(SCREEN_NAMES.AppliedScreen);
+        } else if (isAuthenticated && firstVisit && approvedUser) {
+          console.log('firstVisit');
+          navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
+        } else if (isAuthenticated && approvedUser) {
+          console.log('approvedUser');
+          navigation.replace(STACK_NAMES.BottomStack);
+        } else if (rejectedUser && isAuthenticated) {
+          console.log('rejectedUser');
+          navigation.replace(SCREEN_NAMES.RejectedScreen);
+        } else if (isSignUpProcessStarted) {
+          console.log('isSignUpProcessStarted');
+          // checkSignUpProgress(signUpProcessStage);
+          navigation.replace(SCREEN_NAMES.SignUpNew);
+        } else {
+          navigation.replace(SCREEN_NAMES.SignUpNew);
+        }
+      }, 100);
+    }
   }, [
+    isUserApprovalApiCalled,
     hideOnBoarding,
     isAuthenticated,
     isApplied,
@@ -167,9 +165,6 @@ const Splash = () => {
         style={styles.clarisLogo}
       />
     </View>
-    // <Wrapper height={windowHeight} style={{ opacity: fadeAnim }} width={windowWidth}>
-    //  <LottieView ref={ref} source={require('src/assets/splash.json')} />
-    // </Wrapper>
   );
 };
 

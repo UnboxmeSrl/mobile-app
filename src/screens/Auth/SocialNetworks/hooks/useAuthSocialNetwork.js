@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../../constants';
@@ -7,16 +7,13 @@ import {resetAuthData, setAuthData, setLoginData} from '../../../../redux';
 
 const useAuthSocialNetwork = () => {
   const userDetails = useSelector(state => state.authSlice.authData);
-  const [tiktokUserName, setTiktokUserName] = useState();
-  const [instaUserName, setInstaUserName] = useState();
+  const [tiktokUserName, setTiktokUserName] = useState('');
+  const [instaUserName, setInstaUserName] = useState('');
   const [isLoading, setIsLoading] = useState();
   const tiktokSheetRef = useRef();
   const instaSheetRef = useRef();
   const dispatch = useDispatch();
-  const [
-    isBtnDisabled,
-    // setIsBtnDisabled
-  ] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   const formData = new FormData();
   const navigation = useNavigation();
@@ -35,6 +32,7 @@ const useAuthSocialNetwork = () => {
 
   const handleNextPress = async () => {
     setIsLoading(true);
+    setIsBtnDisabled(true);
     dispatch(setAuthData({instaUserName, tiktokUserName}));
 
     // User Type (Model, Influencer, Both)
@@ -116,6 +114,7 @@ const useAuthSocialNetwork = () => {
 
     // console.log('🟩 Form Data', JSON.stringify(formData))
     const res = await userSignUp(formData);
+    setIsBtnDisabled(false);
     // console.log('🚀 ~ handleNextPress ~ res:', res.data)
     if (res?.id) {
       console.log('🟩 Success Data', JSON.stringify(res));
@@ -131,6 +130,13 @@ const useAuthSocialNetwork = () => {
     }
   };
 
+  useEffect(() => {
+    if (tiktokUserName.trim().length > 0 || instaUserName.trim().length > 0) {
+      setIsBtnDisabled(false);
+    } else {
+      setIsBtnDisabled(true);
+    }
+  }, [tiktokUserName, instaUserName]);
   // navigate(SCREEN_NAMES.AuthInterestTopicsScreen)
 
   return {

@@ -38,7 +38,7 @@ const AuthNationalityScreen = () => {
               onPress={() => onOpen()}
               style={styles.countryContainer}
               activeOpacity={0.5}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={styles.innerCountryContainer}>
                 {country?.cca2 ? (
                   <CountryFlag isoCode={country?.cca2 ?? 'de'} size={25} />
                 ) : (
@@ -71,6 +71,10 @@ const AuthNationalityScreen = () => {
 export default AuthNationalityScreen;
 
 const styles = StyleSheet.create({
+  innerCountryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   btnContainer: {
     marginTop: verticalScale(170),
   },

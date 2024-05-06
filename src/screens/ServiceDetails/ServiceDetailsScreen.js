@@ -67,7 +67,7 @@ const ServiceDetails = () => {
           <ActivityIndicator color={COLORS.newPrimary} size={30} />
         </View>
       ) : (
-        <ScrollView style={{flex: 1}}>
+        <ScrollView style={styles.mainScrollView}>
           <View>
             <CustomCarousel
               Component={({item, index}) => {
@@ -555,6 +555,9 @@ const ServiceDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  mainScrollView: {
+    flex: 1,
+  },
   villaDescription: {
     color: COLORS.davyGrey,
     fontFamily: FONTS.quicksand,

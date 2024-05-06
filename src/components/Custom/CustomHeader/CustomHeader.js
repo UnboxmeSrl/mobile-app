@@ -29,7 +29,7 @@ const CustomHeader = ({title, step, handleBackPress}) => {
           {title}
         </Text>
       </View>
-      <View style={{}}>
+      <View>
         <Text
           allowFontScaling={false}
           style={styles.progressText}>{`${step}/11`}</Text>

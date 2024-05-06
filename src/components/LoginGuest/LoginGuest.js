@@ -18,7 +18,7 @@ const LoginGuest = () => {
           styles.descriptionText
         }>{`Register or login into your account to able to book through Claris.`}</Text>
       <CustomButton title={'Login'} handlePress={navigateToLogin} />
-      <View style={{marginTop: verticalScale(-40)}}>
+      <View style={styles.registerBtnContainer}>
         <CustomButton title={'Register'} handlePress={navigateToLogin} />
       </View>
     </SafeAreaView>
@@ -28,6 +28,9 @@ const LoginGuest = () => {
 export default LoginGuest;
 
 const styles = StyleSheet.create({
+  registerBtnContainer: {
+    marginTop: verticalScale(-40),
+  },
   descriptionText: {
     marginTop: verticalScale(10),
     textAlign: 'center',

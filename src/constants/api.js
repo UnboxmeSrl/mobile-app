@@ -11,6 +11,7 @@ export const Api = {
     RESTAURANTS: `${BASE_URL}/api:WVfdccpj/restaurant`,
   },
   PROFILE: {
+    GET_USER_APPROVAL_STATUS: `${BASE_URL}/api:bwh6Xc5O/getUserStatus`,
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
     GET_INTEREST_TOPICS: `${BASE_URL}/api:bwh6Xc5O/interest_topics`,
     GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo_profile`,

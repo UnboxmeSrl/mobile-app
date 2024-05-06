@@ -42,20 +42,6 @@ const BookingDetailsScreen = () => {
     handleRemoveBtnPress,
   } = useBookingDetails();
 
-  //   const renderDate = (date) => {
-  //     const isAvailable = isDateAvailable(date)
-  //     const dateStyle = isAvailable ? { color: 'black' } : { color: 'gray' }
-  //     return (
-  //       <TouchableOpacity onPress={() => setSelectedDate(date)}>
-  //         <View>
-  //           {/* <Text allowFontScaling={false}  style={{ color: 'black' }}>{date.format('dd')}</Text>
-  //           <Text allowFontScaling={false}  style={dateStyle}>{date.format('D')}</Text> */}
-  //         </View>
-  //       </TouchableOpacity>
-  //     )
-  //   }
-  console.log('WeekDayWiseTimeSlots', weekDayWiseTimeSlots);
-
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}

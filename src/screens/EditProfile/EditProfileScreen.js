@@ -106,7 +106,7 @@ const EditProfileScreen = () => {
                     activeOpacity={0.5}
                     onPress={() => onOpen()}
                     style={styles.countryContainer}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.innerCountryContainer}>
                       {country?.cca2 ? (
                         <CountryFlag
                           isoCode={country?.cca2 ?? 'de'}
@@ -293,6 +293,10 @@ const EditProfileScreen = () => {
 export default EditProfileScreen;
 
 const styles = StyleSheet.create({
+  innerCountryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   avatarContainer: {
     flex: 1,
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
@@ -10,6 +10,16 @@ const SocialMediaSheet = React.forwardRef(
     {title, description, placeholder, field, onChangeText, handlePress},
     ref,
   ) => {
+    const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+
+    useEffect(() => {
+      if (field?.trim()?.length > 2) {
+        setIsBtnDisabled(false);
+      } else {
+        setIsBtnDisabled(true);
+      }
+    }, [field]);
+
     return (
       <BottomSheet ref={ref}>
         <View style={styles.mainContainer}>
@@ -36,7 +46,11 @@ const SocialMediaSheet = React.forwardRef(
                   styles.descriptionText
                 }>{`And send us a message to prove you’re the account owner`}</Text>
             </View>
-            <CustomButton title={'Add'} handlePress={handlePress} />
+            <CustomButton
+              title={'Add'}
+              handlePress={handlePress}
+              disabled={isBtnDisabled}
+            />
           </View>
         </View>
       </BottomSheet>

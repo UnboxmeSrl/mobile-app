@@ -1,10 +1,43 @@
-import {STACK_NAMES} from '../../../../constants';
-import {navigate} from '../../../../services';
+import {useNavigation} from '@react-navigation/native';
+import {useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {SCREEN_NAMES, STACK_NAMES} from '../../../../constants';
+import {updateLoginData} from '../../../../redux';
+import {getUserApprovalStatus, navigate} from '../../../../services';
 
 const useApplied = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const loginData = useSelector(state => state.authSlice.loginData);
+
   const handleGuestPress = () => {
     navigate(STACK_NAMES.BottomStack);
   };
+
+  const getUserApprovalStatusData = useCallback(async () => {
+    const userId = `/${loginData?.id}`;
+    const res = await getUserApprovalStatus(userId);
+    dispatch(updateLoginData(res));
+  }, [dispatch, loginData?.id]);
+
+  useEffect(() => {
+    if (
+      loginData &&
+      (loginData?.UserStatus === '' || loginData?.UserStatus === 'onapproval')
+    ) {
+      const timeout = setTimeout(() => {
+        getUserApprovalStatusData();
+        // will call after every 2 minutes
+      }, 10000);
+      return () => {
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+      };
+    } else if (loginData?.UserStatus === 'approved') {
+      navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
+    }
+  }, [getUserApprovalStatusData, loginData, navigation]);
 
   return {
     handleGuestPress,

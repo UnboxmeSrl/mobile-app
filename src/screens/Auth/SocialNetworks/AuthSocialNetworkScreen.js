@@ -34,6 +34,7 @@ const AuthSocialNetworkScreen = () => {
   } = useAuthSocialNetwork();
   const [tiktokInputValue, setTiktokInputValue] = useState('');
   const [instaUserNameValue, setInstaUserNameValue] = useState('');
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <CustomHeader
@@ -157,7 +158,7 @@ const AuthSocialNetworkScreen = () => {
           title={'Next'}
           handlePress={handleNextPress}
           isLoading={isLoading}
-          disabled={isLoading}
+          disabled={isBtnDisabled}
         />
       </View>
 

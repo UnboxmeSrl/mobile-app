@@ -1,6 +1,16 @@
 import {Api} from '../constants';
 import Fetch from './ApiService';
 
+export const getUserApprovalStatus = async userId => {
+  try {
+    const url = Api.PROFILE.GET_USER_APPROVAL_STATUS + userId;
+    const response = await Fetch.get(url, {axiosSecure: true});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getGenderList = async () => {
   try {
     const url = Api.PROFILE.GET_GENDER_LIST;
@@ -59,6 +69,7 @@ export const getInterestTopics = async () => {
     console.log(error);
   }
 };
+
 export const updateProfile = async ({formData, userID}) => {
   try {
     if (userID) {
