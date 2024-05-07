@@ -1,5 +1,7 @@
 PODS:
   - boost (1.83.0)
+  - BVLinearGradient (2.8.3):
+    - React-Core
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.0)
   - fmt (9.1.0)
@@ -1022,6 +1024,8 @@ PODS:
     - React (< 1.0.0, >= 0.13.0)
   - react-native-safe-area-context (4.9.0):
     - React-Core
+  - react-native-simple-gradient-progressbar-view (0.2.0):
+    - React-Core
   - React-nativeconfig (0.74.0)
   - React-NativeModulesApple (0.74.0):
     - glog
@@ -1338,6 +1342,7 @@ PODS:
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
+  - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
@@ -1376,6 +1381,7 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-simple-gradient-progressbar-view (from `../node_modules/react-native-simple-gradient-progressbar-view`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -1421,6 +1427,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
+  BVLinearGradient:
+    :path: "../node_modules/react-native-linear-gradient"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -1492,6 +1500,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-onesignal"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-simple-gradient-progressbar-view:
+    :path: "../node_modules/react-native-simple-gradient-progressbar-view"
   React-nativeconfig:
     :path: "../node_modules/react-native/ReactCommon"
   React-NativeModulesApple:
@@ -1561,6 +1571,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
+  BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   FBLazyVector: 026c8f4ae67b06e088ae01baa2271ef8a26c0e8c
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
@@ -1598,6 +1609,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: c3afe5472ef870d98a4b28415fc0b928161ee5f7
   react-native-onesignal: 2db3d8baa6ae3adc637cde65d1373c6f8b138e78
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
+  react-native-simple-gradient-progressbar-view: 7f0f242fe65573201ab16bc9d4a600c6152c92dc
   React-nativeconfig: 951ec32f632e81cbd7d40aebb3211313251c092e
   React-NativeModulesApple: 0b3a42ca90069119ef79d8b2327d01441d71abd4
   React-perflogger: 271f1111779fef70f9502d1d38da5132e5585230

@@ -67,4 +67,7 @@ export const COLORS = {
   dangerLight: '#FF385C0A',
   slate1: '#B0B0B0',
   celticLight: '#1E60DD0D',
+  crayola: '#FFDD65',
+  red: '#FF0000',
+  tickleMePink: '#FF87B2',
 };

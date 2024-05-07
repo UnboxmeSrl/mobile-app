@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   avatar: {
     height: perfectSize(91),
     width: perfectSize(91),
-    borderRadius: perfectSize(273),
+    borderRadius: perfectSize(15),
     backgroundColor: '#DBC0DD',
     overflow: 'hidden',
   },

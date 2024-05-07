@@ -1,11 +1,13 @@
 import React from 'react';
 import {
   Image,
+  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -24,25 +26,24 @@ import {
   Stack,
   Title,
 } from '../../components';
-import {COLORS} from '../../constants';
+import {COLORS, FONTS} from '../../constants';
 import {colors, perfectSize} from '../../utils';
 import {useProfile} from './hooks';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
+import {IMAGES} from '../../assets';
+import LinearGradient from 'react-native-linear-gradient';
 
 const ProfileScreen = () => {
-  // const disapatch = useDispatch()
-  const {user, isAuthenticated, navigateToSettings, navigateToEditProfile} =
-    useProfile();
+  const {
+    user,
+    isInstaAccount,
+    isTiktokAccount,
+    isAuthenticated,
+    navigateToSettings,
+    navigateToEditProfile,
+  } = useProfile();
 
-  // const handleGetProfileData = useCallback(async () => {
-  //   if (user?.id) {
-  //     const res = await getProfile(user?.id)
-  //     disapatch(setproFileData(res.data))
-  //   }
-  // }, [disapatch])
-  // // console.log('user', user?.Profile_pic)
-  // useEffect(() => {
-  //   handleGetProfileData()
-  // }, [handleGetProfileData])
   return (
     <SafeAreaView style={styles.mainContainer}>
       {/* <FormTask /> */}
@@ -53,10 +54,16 @@ const ProfileScreen = () => {
               <View style={styles.topHeader}>
                 <AppText style={styles.headerTitle}>Profile</AppText>
                 <View style={styles.badges}>
-                  <Pressable style={styles.xpBadge}>
-                    <Ionicons name="star" style={styles.badgeIcon} />
-                    <AppText style={styles.badgeTitle}>240 xp</AppText>
-                  </Pressable>
+                  <TouchableOpacity
+                    onPress={navigateToEditProfile}
+                    style={styles.btnGrid}
+                    activeOpacity={0.7}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.editProfileBtnText}>
+                      Edit Profile
+                    </Text>
+                  </TouchableOpacity>
                   <Pressable
                     onPress={navigateToSettings}
                     style={[styles.xpBadge, styles.settBadge]}>
@@ -71,22 +78,43 @@ const ProfileScreen = () => {
             <ScrollView
               style={styles.avatarScrollView}
               showsVerticalScrollIndicator={false}>
-              <Stack style={styles.content}>
+              <View style={styles.content}>
                 <View style={styles.header}>
-                  <View style={styles.avatarGrid}>
-                    <Avatar
-                      img={
-                        user?.Profile_pic?.url
-                          ? {uri: user?.Profile_pic?.url}
-                          : userImg
-                      }
-                      style={styles.avatar}
-                    />
-                    <Badge
+                  <View style={styles.profilePicMainContainer}>
+                    <Pressable style={styles.instagramContainer}>
+                      <Ionicons
+                        name="logo-instagram"
+                        style={[
+                          styles.socialIcon,
+                          isInstaAccount && styles.enabledSocialIcon,
+                        ]}
+                      />
+                    </Pressable>
+                    <View style={styles.avatarGrid}>
+                      <Avatar
+                        img={
+                          user?.Profile_pic?.url
+                            ? {uri: user?.Profile_pic?.url}
+                            : userImg
+                        }
+                        style={styles.avatar}
+                      />
+                      {/* <Badge
                       style={styles.badge}
                       title="0 Missed bookings"
                       variant="success"
-                    />
+                    /> */}
+                    </View>
+                    <Pressable style={styles.tiktokContainer}>
+                      {/* <Image source={tiktok} style={styles.socialImg} /> */}
+                      <Ionicons
+                        name="logo-tiktok"
+                        style={[
+                          styles.socialIcon,
+                          isTiktokAccount && styles.enabledSocialIcon,
+                        ]}
+                      />
+                    </Pressable>
                   </View>
                   <View>
                     <Text allowFontScaling={false} style={styles.title}>
@@ -96,60 +124,92 @@ const ProfileScreen = () => {
                       From {user?.City}
                     </Text>
                   </View>
-                  <View style={styles.socialGrid}>
-                    <Pressable>
-                      <Ionicons
-                        name="logo-instagram"
-                        style={styles.socialIcon}
-                      />
-                    </Pressable>
-                    <Divider style={styles.divider} />
-                    <Pressable>
-                      <Image source={tiktok} style={styles.socialImg} />
-                      {/* <Ionicons name="logo-tiktok" style={styles.socialIcon} /> */}
-                    </Pressable>
+                </View>
+
+                <View style={styles.levelXpContainer}>
+                  <View style={styles.levelContainer}>
+                    <Text allowFontScaling={false} style={styles.levelText}>
+                      {`LEVEL 5`}
+                    </Text>
                   </View>
-                  <View style={styles.btnGrid}>
-                    <AppButton
-                      img={edit}
-                      labelStyle={styles.btnLabel}
-                      onPress={navigateToEditProfile}
-                      style={styles.btn}
-                      title="Edit Profile"
-                      variant="outline"
-                    />
+                  <View style={styles.xpContainer}>
+                    <View style={styles.xpInnerContainer}>
+                      <Ionicons name="star" style={styles.badgeIcon} />
+                      <AppText style={styles.badgeTitle}>240 xp</AppText>
+                    </View>
                   </View>
                 </View>
-                {/* need to change this */}
-              </Stack>
-              <Stack style={styles.stackItem}>
-                <Title title="Bio" />
-                {user?.bio ? (
-                  <ReadMore
-                    // desc="✋ Hi! I'm Alex, a software engineer by day 💻, and a literature-loving artist by night 🎨.
-                    //   Positive vibes only! Let's connect ✋ Hi! I'm Alex, a software engineer by day 💻, and a
-                    //   literature-loving artist by night 🎨. Positive vibes only! Let's connect connect ✋ Hi! I'm Alex, a
-                    //   software engineer by day 💻, and a literature-loving artist by night 🎨. Positive vibes only! Let's
-                    //   connect"
-                    desc={user?.bio}
+                <View style={styles.profileProgressBarContainer}>
+                  <SimpleGradientProgressbarView
+                    style={styles.profileProgressBar}
+                    fromColor={COLORS.crayola}
+                    toColor={COLORS.red}
+                    progress={0.5}
+                    cornerRadius={5.0}
                   />
-                ) : (
-                  <Text allowFontScaling={false}>N/A</Text>
-                )}
-              </Stack>
-              <Stack style={styles.stackItem}>
-                <Title title="Interests" />
-                <View style={styles.hobbies}>
-                  {user?.user_interest_topics_turbo_id?.map((item, ind) => (
-                    <Hobbies
-                      key={ind}
-                      {...item}
-                      showIcons={true}
-                      style={styles.hobbiesBadge}
-                    />
-                  ))}
                 </View>
-              </Stack>
+
+                <View style={styles.invitationDescriptionContainer}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.invitationDescription}>
+                    Share your code invitation code with friends!{' '}
+                  </Text>
+                </View>
+
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.shareGradientView}
+                  colors={[COLORS.newPrimary, COLORS.tickleMePink]}>
+                  <View style={styles.shareXpContainer}>
+                    <Ionicons name="star" style={styles.shareXpStarIcon} />
+                    <AppText style={styles.shareXpText}>240 xp</AppText>
+                  </View>
+                  <View style={styles.profileCodeContainer}>
+                    <Text allowFontScaling={false} style={styles.profileCode}>
+                      {`HANNAHXDT50`}
+                    </Text>
+                  </View>
+                  <View style={styles.divider} />
+                  <TouchableOpacity
+                    style={styles.shareIconContainer}
+                    hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
+                    activeOpacity={0.7}>
+                    <Image source={IMAGES.share} style={styles.shareIcon} />
+                  </TouchableOpacity>
+                </LinearGradient>
+
+                <View style={styles.stackItem}>
+                  <Title title="Bio" />
+                  {user?.bio ? (
+                    <ReadMore
+                      // desc="✋ Hi! I'm Alex, a software engineer by day 💻, and a literature-loving artist by night 🎨.
+                      //   Positive vibes only! Let's connect ✋ Hi! I'm Alex, a software engineer by day 💻, and a
+                      //   literature-loving artist by night 🎨. Positive vibes only! Let's connect connect ✋ Hi! I'm Alex, a
+                      //   software engineer by day 💻, and a literature-loving artist by night 🎨. Positive vibes only! Let's
+                      //   connect"
+                      desc={user?.bio}
+                    />
+                  ) : (
+                    <Text allowFontScaling={false}>N/A</Text>
+                  )}
+                </View>
+
+                <View style={styles.stackItem}>
+                  <Title title="Interests" />
+                  <View style={styles.hobbies}>
+                    {user?.user_interest_topics_turbo_id?.map((item, ind) => (
+                      <Hobbies
+                        key={ind}
+                        {...item}
+                        showIcons={true}
+                        style={styles.hobbiesBadge}
+                      />
+                    ))}
+                  </View>
+                </View>
+              </View>
             </ScrollView>
           </View>
         </View>
@@ -163,7 +223,133 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
+  enabledSocialIcon: {
+    color: COLORS.black,
+  },
+  shareIcon: {
+    height: moderateScale(20),
+    width: moderateScale(20),
+  },
+  shareIconContainer: {
+    width: scale(50),
+  },
+  profileCode: {
+    fontFamily: FONTS.quicksandBold,
+    fontSize: perfectSize(14),
+    color: colors.white,
+    marginLeft: scale(10),
+  },
+  profileCodeContainer: {
+    width: scale(178),
+    alignItems: 'center',
+  },
+  shareXpText: {
+    fontFamily: FONTS.quicksandBold,
+    fontSize: perfectSize(14),
+    color: colors.white,
+    marginLeft: scale(10),
+  },
+  shareXpStarIcon: {
+    fontSize: perfectSize(18),
+    ...Platform.select({
+      android: {
+        marginTop: verticalScale(2),
+      },
+    }),
+    color: colors.white,
+  },
+  shareXpContainer: {
+    width: scale(50),
+    flexDirection: 'row',
+    marginLeft: scale(20),
+  },
+  shareGradientView: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: moderateScale(15),
+    alignItems: 'center',
+    height: verticalScale(48),
+    marginTop: verticalScale(20),
+  },
+  invitationDescription: {
+    color: COLORS.davyGrey,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(12),
+  },
+  invitationDescriptionContainer: {
+    marginTop: verticalScale(20),
+    marginLeft: scale(5),
+  },
+  xpInnerContainer: {
+    flexDirection: 'row',
+  },
+  xpContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.cultured,
+    height: verticalScale(35),
+    width: scale(120),
+    borderRadius: moderateScale(34),
+    borderColor: COLORS.newPrimary,
+    borderWidth: moderateScale(2),
+  },
+  levelText: {
+    color: COLORS.newPrimary,
+    textAlign: 'center',
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+  },
+  levelContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.cultured,
+    height: verticalScale(35),
+    width: scale(120),
+    borderRadius: moderateScale(34),
+  },
+  levelXpContainer: {
+    backgroundColor: COLORS.white,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: verticalScale(10),
+  },
+  tiktokContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  instagramContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profilePicMainContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+  },
+  profileProgressBarContainer: {
+    flex: 1,
+    marginTop: verticalScale(10),
+    height: verticalScale(20),
+    backgroundColor: COLORS.cultured,
+    borderRadius: moderateScale(5),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profileProgressBar: {
+    width: '97%',
+    height: verticalScale(14),
+    marginVertical: verticalScale(20),
+  },
+
+  editProfileBtnText: {
+    color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(12),
+  },
   mainSubContainer: {
+    backgroundColor: COLORS.white,
     flex: 1,
   },
   avatarScrollView: {
@@ -178,13 +364,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     // rowGap: perfectSize(8),
     // marginTop: perfectSize(8),
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
   },
   content: {
+    width: '100%',
+    backgroundColor: COLORS.white,
+    paddingVertical: perfectSize(16),
+    paddingHorizontal: perfectSize(24),
     marginBottom: perfectSize(8),
   },
   stackItem: {
-    marginBottom: perfectSize(8),
+    marginVertical: perfectSize(18),
   },
   topHeader: {
     flexDirection: 'row',
@@ -213,8 +403,9 @@ const styles = StyleSheet.create({
     color: colors.danger,
   },
   badgeTitle: {
+    fontFamily: FONTS.quicksandMedium,
     fontSize: perfectSize(14),
-    color: colors.info,
+    color: colors.danger,
     marginLeft: perfectSize(4),
   },
   settBadgeIcon: {
@@ -230,6 +421,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
+    borderWidth: moderateScale(4),
+    borderColor: COLORS.newPrimary,
     height: perfectSize(140),
     width: perfectSize(140),
   },
@@ -263,7 +456,7 @@ const styles = StyleSheet.create({
     marginTop: perfectSize(16),
   },
   socialIcon: {
-    fontSize: perfectSize(26),
+    fontSize: perfectSize(24),
     color: colors.slate1,
   },
   socialImg: {
@@ -272,18 +465,23 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   divider: {
-    height: perfectSize(34),
-    width: 1,
-    marginHorizontal: perfectSize(16),
+    height: perfectSize(38),
+    width: scale(2),
+    backgroundColor: COLORS.white,
+    marginRight: perfectSize(20),
   },
   stack: {
     flexDirection: 'column',
     alignItems: 'center',
   },
   btnGrid: {
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: perfectSize(16),
+    height: verticalScale(30),
+    width: scale(80),
+    borderRadius: moderateScale(8),
+    borderColor: COLORS.newPrimary,
+    borderWidth: moderateScale(1),
   },
   btn: {
     flex: 1,
