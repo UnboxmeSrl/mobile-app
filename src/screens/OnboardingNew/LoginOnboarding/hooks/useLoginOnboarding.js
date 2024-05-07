@@ -1,16 +1,19 @@
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {SCREEN_NAMES} from '../../../../constants';
-import {navigate} from '../../../../services';
+import {setVisitCount} from '../../../../redux';
 import FirstScreen from '../FirstScreen';
 import SecondScreen from '../SecondScreen';
 import ThirdScreen from '../ThirdScreen';
 
 const useLoginOnboarding = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
   const isFromBookRedirected = route.params?.isFromBookRedirected;
+  const dispatch = useDispatch();
   const carouselItems = [
     {
       id: 1,
@@ -30,9 +33,11 @@ const useLoginOnboarding = () => {
     setActiveIndex(activeIndex => activeIndex + 1);
     if (activeIndex > 1) {
       if (isFromBookRedirected) {
-        navigate(SCREEN_NAMES.ServiceDetails);
+        navigation.replace(SCREEN_NAMES.ServiceDetails);
       } else {
-        navigate(SCREEN_NAMES.Cities);
+        // dispatch(updateUserCount(3));
+        dispatch(setVisitCount());
+        navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
       }
     }
   };

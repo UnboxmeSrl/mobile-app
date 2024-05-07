@@ -27,7 +27,7 @@ const useApplied = () => {
     ) {
       const timeout = setTimeout(() => {
         getUserApprovalStatusData();
-        // will call after every 2 minutes
+        // will call after every 10 Seconds
       }, 10000);
       return () => {
         if (timeout) {
@@ -35,9 +35,9 @@ const useApplied = () => {
         }
       };
     } else if (loginData?.UserStatus === 'approved') {
-      navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
+      navigation.replace(SCREEN_NAMES.LoginOnboarding);
     }
-  }, [getUserApprovalStatusData, loginData, navigation]);
+  }, [loginData]);
 
   return {
     handleGuestPress,

@@ -21,6 +21,7 @@ import {
   ContentScreen,
   EditProfileScreen,
   FirstWelcomeScreen,
+  LoginOnboarding,
   NewCouponScreen,
   OnboardingNew,
   OtherSignUpOptionsScreen,
@@ -151,6 +152,10 @@ const MainStack = () => {
       <StackMain.Screen
         name={SCREEN_NAMES.AuthSocialNetworkScreen}
         component={AuthSocialNetworkScreen}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.LoginOnboarding}
+        component={LoginOnboarding}
       />
     </StackMain.Navigator>
   );

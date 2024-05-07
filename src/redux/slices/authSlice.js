@@ -10,6 +10,7 @@ const initialState = {
   onboardingData: false,
   profileData: {},
   signUpProcessStage: 0,
+  visitCount: 1,
 };
 
 const AuthSlice = createSlice({
@@ -55,11 +56,16 @@ const AuthSlice = createSlice({
     setproFileData: (state, {payload}) => {
       state.profileData = payload;
     },
+    setVisitCount: state => {
+      state.visitCount += 1;
+    },
     updateUserCount: (state, {payload}) => {
       console.log('setPayload outer');
       if (payload && state.loginData?.id) {
         console.log('setPayload');
-        state.loginData.firstVisit = payload;
+        console.log('firstVisit Before: ', state.loginData.firstVisit, payload);
+        state.loginData.firstVisit += payload;
+        console.log('firstVisit After: ', state.loginData.firstVisit);
       }
     },
   },
@@ -70,6 +76,7 @@ export const {
   setAuthData,
   setLoginData,
   setIsApplied,
+  setVisitCount,
   setIsFirstTimeLogin,
   setIsSignUpProcessStarted,
   setSignUpProcessStage,
@@ -104,3 +111,5 @@ export const selectIsPending = createDraftSafeSelector(
   [selectIsApproved, selectIsRejected],
   (approved, rejected) => !approved && !rejected,
 );
+
+export const selectVisitCount = state => state.authSlice.visitCount === 1;

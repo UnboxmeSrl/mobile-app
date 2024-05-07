@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {SCREEN_NAMES, STACK_NAMES} from '../../../../constants';
 import {
+  selectVisitCount,
   setBookings,
   setCity,
   setLoginData,
@@ -16,6 +17,7 @@ const useSignInWithEmail = isFromBookRedirected => {
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const isFirstLogin = useSelector(selectVisitCount);
   const navigation = useNavigation();
   const serviceDetails = useSelector(
     state => state.restaurantSlice.serviceDetails,
@@ -40,9 +42,9 @@ const useSignInWithEmail = isFromBookRedirected => {
         dispatch(setBookings(bookingRes));
 
         // console.log('isFirstTimeLogin', isFirstTimeLogin)
-        if (res?.firstVisit === 1) {
+        if (isFirstLogin) {
           // dispatch(setIsFirstTimeLogin(false))
-          navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
+          navigation.replace(SCREEN_NAMES.LoginOnboarding);
         } else if (serviceDetails?.id && isFromBookRedirected) {
           navigation.replace(SCREEN_NAMES.ServiceDetails, {
             isFromBookRedirected: isFromBookRedirected,

@@ -1,17 +1,5 @@
-import React, {
-  createRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import {
-  Animated,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import React, {createRef, useEffect, useState} from 'react';
+import {Image, StyleSheet, useWindowDimensions, View} from 'react-native';
 // import SplashScreen from 'react-native-splash-screen';
 import {useNavigation} from '@react-navigation/native';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -21,16 +9,14 @@ import {COLORS, SCREEN_NAMES, STACK_NAMES} from '../../constants';
 import {
   selectIsApproved,
   selectIsAuthenticated,
-  selectIsFirstVisit,
   selectIsPending,
   selectIsRejected,
   selectOnBordingData,
-  setLoginData,
+  selectVisitCount,
   setSocialActions,
   updateLoginData,
 } from '../../redux';
-import {getAllActions, getProfile, getUserApprovalStatus} from '../../services';
-import {checkSignUpProgress} from '../../utils';
+import {getAllActions, getUserApprovalStatus} from '../../services';
 
 const delay = 500;
 
@@ -51,7 +37,7 @@ const Splash = () => {
   const isApplied = useSelector(selectIsPending);
   const rejectedUser = useSelector(selectIsRejected);
   const approvedUser = useSelector(selectIsApproved);
-  const firstVisit = useSelector(selectIsFirstVisit);
+  const isFirstLogin = useSelector(selectVisitCount);
   const isSignUpProcessStarted = useSelector(
     state => state.authSlice.isSignUpProcessStarted,
   );
@@ -67,10 +53,11 @@ const Splash = () => {
   //   isApplied,
   //   rejectedUser,
   //   approvedUser,
-  //   firstVisit,
   //   isSignUpProcessStarted,
   //   signUpProcessStage
   // )
+
+  console.log('isFirstVisit', isFirstLogin);
 
   const getUserApprovalStatusData = async () => {
     const userId = `/${loginData?.id}`;
@@ -99,9 +86,9 @@ const Splash = () => {
         } else if (isAuthenticated && isApplied) {
           console.log('isApplied');
           navigation.replace(SCREEN_NAMES.AppliedScreen);
-        } else if (isAuthenticated && firstVisit && approvedUser) {
-          console.log('firstVisit');
-          navigation.replace(SCREEN_NAMES.FirstWelcomeScreen);
+        } else if (isAuthenticated && isFirstLogin && approvedUser) {
+          console.log('isFirstLogin');
+          navigation.replace(SCREEN_NAMES.LoginOnboarding);
         } else if (isAuthenticated && approvedUser) {
           console.log('approvedUser');
           navigation.replace(STACK_NAMES.BottomStack);
@@ -125,7 +112,7 @@ const Splash = () => {
     approvedUser,
     isSignUpProcessStarted,
     signUpProcessStage,
-    firstVisit,
+    isFirstLogin,
     rejectedUser,
   ]);
   useEffect(() => {
