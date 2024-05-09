@@ -148,8 +148,10 @@ const usePublishContent = () => {
       const res = await openCamera();
       console.log('test', res?.assets[0]);
       if (res?.assets?.length > 0) {
-        setContentPhotos(res?.assets[0]);
-        setPicturesForValidation(res?.assets[0]);
+        const updatedData = [...contentPhotos];
+        updatedData[pictureIndex] = res?.assets[0];
+        setContentPhotos([...updatedData]);
+        setPicturesForValidation([...picturesForValidation, res?.assets[0]]);
       }
     }
     contentUploadRef.current.close();

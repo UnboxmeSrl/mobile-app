@@ -51,26 +51,30 @@ const Splash = () => {
   );
 
   /* const authData = useSelector((state) => state.authSlice.authData) */
-  // console.log(
-  //   'isAuthenticated',
-  //   isAuthenticated,
-  //   hideOnBoarding,
-  //   isApplied,
-  //   rejectedUser,
-  //   approvedUser,
-  //   isSignUpProcessStarted,
-  //   signUpProcessStage
-  // )
+  console.log(
+    'isAuthenticated',
+    isAuthenticated,
+    hideOnBoarding,
+    isApplied,
+    rejectedUser,
+    approvedUser,
+    isSignUpProcessStarted,
+    signUpProcessStage,
+  );
 
   console.log('isFirstVisit', isFirstLogin);
 
   const getUserApprovalStatusData = async () => {
-    const userId = `/${loginData?.id}`;
-    const res = await getUserApprovalStatus(userId);
-    dispatch(updateLoginData(res));
-    setTimeout(() => {
+    if (loginData?.id) {
+      const userId = `/${loginData?.id}`;
+      const res = await getUserApprovalStatus(userId);
+      dispatch(updateLoginData(res));
+      setTimeout(() => {
+        setIsUserApprovalApiCalled(true);
+      }, 1000);
+    } else {
       setIsUserApprovalApiCalled(true);
-    }, 1000);
+    }
   };
 
   const getExperienceLevelsData = async () => {
