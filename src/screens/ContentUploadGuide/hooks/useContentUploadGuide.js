@@ -1,13 +1,10 @@
-import Clipboard from '@react-native-clipboard/clipboard';
-import {SCREEN_NAMES} from '../../../constants';
-import {navigate, showToastSuccess} from '../../../services';
 import {useRoute} from '@react-navigation/native';
+import {SCREEN_NAMES} from '../../../constants';
+import {navigate} from '../../../services';
 
-const useContentBrief = () => {
+const useContentUploadGuide = () => {
   const route = useRoute();
   const bookingDetails = route.params?.bookingDetails;
-  const isReel = bookingDetails?.reel === '1';
-  console.log('isReel', isReel, bookingDetails);
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
@@ -20,11 +17,6 @@ const useContentBrief = () => {
     actionName = bookingDetails?._diary_action_turbo?.action;
   }
 
-  const handleTagCopyPress = copyText => {
-    Clipboard.setString(copyText);
-    showToastSuccess('Text copied successfully!');
-  };
-
   const handleOpenCouponPress = () => {
     navigate(SCREEN_NAMES.NewCouponScreen, {
       bookingDetails: bookingDetails,
@@ -32,19 +24,18 @@ const useContentBrief = () => {
   };
 
   const handleBackPress = () => {
-    navigate(SCREEN_NAMES.YourScheduleScreen);
+    navigate(SCREEN_NAMES.YourScheduleDetailsScreen, {
+      bookingDetails: bookingDetails,
+    });
   };
 
   return {
-    actionNumId,
+    icon,
     actionName,
     bookingDetails,
-    handleBackPress,
     handleOpenCouponPress,
-    icon,
-    isReel,
-    handleTagCopyPress,
+    handleBackPress,
   };
 };
 
-export default useContentBrief;
+export default useContentUploadGuide;

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   yesBtnText: {
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(16),
-    color: COLORS.dark,
+    color: COLORS.newPrimary,
   },
   noBtnContainer: {
     width: '50%',
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   noBtnText: {
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(16),
-    color: COLORS.dark,
+    color: COLORS.newPrimary,
   },
   modalContainer: {
     alignItems: 'center',
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     borderRadius: moderateScale(10),
     height: verticalScale(148),
     width: scale(270),

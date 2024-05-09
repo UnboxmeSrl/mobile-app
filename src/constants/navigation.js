@@ -79,6 +79,7 @@ export const SCREEN_NAMES = {
   LoginOnboarding: 'LoginOnboarding',
   SettingsNew: 'SettingsNew',
   Splash: 'Splash',
+  ContentUploadGuide: 'ContentUploadGuide',
 };
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack;
 export const COMMON_STATUS_BAR = {

@@ -125,6 +125,12 @@ const useYourSchedule = () => {
     }
   }, [selectedTab]);
 
+  useEffect(() => {
+    if (selectedTabFromRoute) {
+      setSelectedTab(selectedTabFromRoute);
+    }
+  }, [selectedTabFromRoute]);
+
   return {
     bookings,
     contentList,

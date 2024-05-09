@@ -14,6 +14,7 @@ export const getBookingForContentList = async params => {
 export const updateContentUrl = async (params, data) => {
   try {
     const url = Api.CONTENT.UPDATE_CONTENT_URL + params;
+    console.log('url: ' + url);
     const response = await Fetch.put(url, data);
     return response;
   } catch (error) {

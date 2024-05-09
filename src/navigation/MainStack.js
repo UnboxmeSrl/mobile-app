@@ -19,6 +19,7 @@ import {
   BookingOnApprovalScreen,
   ContentBriefScreen,
   ContentScreen,
+  ContentUploadGuide,
   EditProfileScreen,
   FirstWelcomeScreen,
   LoginOnboarding,
@@ -156,6 +157,10 @@ const MainStack = () => {
       <StackMain.Screen
         name={SCREEN_NAMES.LoginOnboarding}
         component={LoginOnboarding}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.ContentUploadGuide}
+        component={ContentUploadGuide}
       />
     </StackMain.Navigator>
   );

@@ -121,6 +121,12 @@ const useYourScheduleDetails = () => {
     });
   };
 
+  const handleSwipeSuccess = () => {
+    navigate(SCREEN_NAMES.ContentUploadGuide, {
+      bookingDetails: bookingDetails,
+    });
+  };
+
   const handleOpenCouponPress = () => {
     navigate(SCREEN_NAMES.NewCouponScreen, {
       bookingDetails: bookingDetails,
@@ -175,6 +181,7 @@ const useYourScheduleDetails = () => {
     currentWeekDay,
     isAlertVisible,
     isDeleting,
+    handleSwipeSuccess,
     handleAlertVisible,
     handleBackPress,
     handleOpenCouponPress,

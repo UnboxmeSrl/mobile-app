@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  FlatList,
   Image,
   SafeAreaView,
   ScrollView,
@@ -13,7 +14,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets/images';
-import {ContentStatusModal} from '../../components';
+import {ContentStatusModal, PickerModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {usePublishContent} from './hooks';
 
@@ -22,7 +23,9 @@ const PublishContentScreen = () => {
     link,
     setLink,
     approvalStage,
+    contentPhotos,
     contentDetails,
+    contentUploadRef,
     updatedContentDetails,
     actionNumId,
     actionName,
@@ -37,6 +40,9 @@ const PublishContentScreen = () => {
     handleSendToReviewBtnPress,
     handlePositiveBtnPress,
     handleContentBriefPress,
+    handleContentUpload,
+    handleCameraPress,
+    handleGalleryPress,
     handleEditPress,
     handleBackPress,
   } = usePublishContent();
@@ -182,6 +188,44 @@ const PublishContentScreen = () => {
             </>
           )}
         </View>
+        <View style={styles.imageUploadMainContainer}>
+          <Text allowFontScaling={false} style={styles.uploadPictureTitle}>
+            Upload 3 pictures at the venue
+          </Text>
+          <FlatList
+            data={contentPhotos}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => handleContentUpload(index)}
+                  style={styles.imageUploadContainer}
+                  activeOpacity={0.4}>
+                  {item?.fileName ? (
+                    <Image
+                      source={{uri: item?.uri}}
+                      style={styles.actualUploadedPicture}
+                      resizeMode={'cover'}
+                    />
+                  ) : (
+                    <>
+                      <Image
+                        source={IMAGES.gallery}
+                        style={styles.galleryIcon}
+                      />
+                      <Text allowFontScaling={false} style={styles.uploadText}>
+                        Upload
+                      </Text>
+                    </>
+                  )}
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
+
         <View>
           <View style={styles.bookingDetailsTitleContainer}>
             <Text
@@ -303,6 +347,11 @@ const PublishContentScreen = () => {
             handlePositiveBtnPress={handlePositiveBtnPress}
           />
         )}
+        <PickerModal
+          ref={contentUploadRef}
+          handleCameraPress={handleCameraPress}
+          handleGalleryPress={handleGalleryPress}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -311,6 +360,45 @@ const PublishContentScreen = () => {
 export default PublishContentScreen;
 
 const styles = StyleSheet.create({
+  uploadPictureTitle: {
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+    color: COLORS.black,
+    marginTop: verticalScale(25),
+    marginBottom: verticalScale(15.72),
+  },
+  imageUploadMainContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageUploadContainer: {
+    width: scale(100),
+    height: verticalScale(100),
+    backgroundColor: COLORS.cultured,
+    borderWidth: moderateScale(0.98),
+    borderRadius: moderateScale(16),
+    borderStyle: 'dashed',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: verticalScale(10),
+    marginHorizontal: scale(5),
+  },
+  actualUploadedPicture: {
+    width: scale(100),
+    height: verticalScale(100),
+    borderRadius: moderateScale(16),
+  },
+  galleryIcon: {
+    height: moderateScale(21.62),
+    width: moderateScale(21.62),
+  },
+  uploadText: {
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+    color: COLORS.darkSilver,
+    marginTop: verticalScale(15.72),
+  },
+
   mainScrollView: {
     backgroundColor: COLORS.white,
   },

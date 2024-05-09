@@ -14,6 +14,7 @@ import {IMAGES} from '../../assets';
 import {CustomModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
+import SwipeButton from 'rn-swipe-button';
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -31,6 +32,7 @@ const YourScheduleDetailsScreen = () => {
     isDeleting,
     handleAlertVisible,
     handleBackPress,
+    handleSwipeSuccess,
     handleOpenCouponPress,
     handleContentBriefPress,
     handlePositiveBtnPress,
@@ -353,7 +355,7 @@ const YourScheduleDetailsScreen = () => {
 
           <TouchableOpacity style={styles.howItWorksContainer}>
             <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
-              How it works{' '}
+              How it works
             </Text>
             <Image
               resizeMode="contain"
@@ -363,7 +365,32 @@ const YourScheduleDetailsScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.openCouponBtnMainContainer}>
+        <SwipeButton
+          containerStyles={swipeButtonStyles.swipeBtnMainContainer}
+          height={verticalScale(60)}
+          width={'90%'}
+          shouldResetAfterSuccess={true}
+          disabled={!bookingDetails?.Approved}
+          onSwipeSuccess={handleSwipeSuccess}
+          railStyles={swipeButtonStyles.swipeBtnRail}
+          railBackgroundColor={COLORS.newPrimary}
+          railFillBackgroundColor={COLORS.newPrimary}
+          thumbIconBackgroundColor={COLORS.newPrimary}
+          thumbIconComponent={() => (
+            <Image
+              source={IMAGES.swipeButton}
+              style={swipeButtonStyles.swipeBtnIcon}
+            />
+          )}
+          // thumbIconImageSource={IMAGES.swipeButton}
+          thumbIconStyles={swipeButtonStyles.swipeThumbIcon}
+          // thumbIconWidth={100}
+          title={'Check in Now'}
+          titleColor={COLORS.white}
+          titleStyles={swipeButtonStyles.swipeBtnTitle}
+        />
+
+        {/* <View style={styles.openCouponBtnMainContainer}>
           <TouchableOpacity
             onPress={handleOpenCouponPress}
             style={[
@@ -372,10 +399,10 @@ const YourScheduleDetailsScreen = () => {
             ]}
             disabled={!bookingDetails?.Approved}>
             <Text allowFontScaling={false} style={styles.openCouponBtnText}>
-              Open Coupon{' '}
+              Open Coupon
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <CustomModal
           visible={isAlertVisible}
@@ -778,5 +805,30 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
+  },
+});
+
+const swipeButtonStyles = StyleSheet.create({
+  swipeBtnRail: {
+    borderColor: COLORS.newPrimary,
+  },
+  swipeBtnTitle: {
+    color: COLORS.white,
+    fontFamily: FONTS.quicksandBold,
+  },
+  swipeThumbIcon: {
+    borderRadius: moderateScale(24),
+    borderWidth: 0,
+  },
+  swipeBtnIcon: {
+    height: moderateScale(52),
+    width: moderateScale(52),
+  },
+  swipeBtnMainContainer: {
+    alignSelf: 'center',
+    borderRadius: moderateScale(24),
+    marginTop: verticalScale(30),
+    borderWidth: 0,
+    marginBottom: verticalScale(30),
   },
 });

@@ -145,6 +145,7 @@ export const checkContentStatus = statusName => {
 export const hasNotch = !DeviceInfo.hasNotch();
 export const isIos = Platform.OS === 'ios';
 export const isAndroid = Platform.OS === 'android';
+export const platformVersion = Platform.Version;
 
 export const commonStyle = {
   containerPaddingTop: {

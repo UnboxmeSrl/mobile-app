@@ -70,7 +70,9 @@ const useNewCoupon = () => {
   };
 
   const handleGoToContentPress = () => {
-    navigate(SCREEN_NAMES.YourScheduleScreen);
+    navigate(SCREEN_NAMES.YourScheduleScreen, {
+      selectedTab: 2,
+    });
   };
 
   return {

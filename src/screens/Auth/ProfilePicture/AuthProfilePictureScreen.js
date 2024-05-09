@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../../assets';
-import {CustomButton, CustomHeader} from '../../../components';
+import {CustomButton, CustomHeader, PickerModal} from '../../../components';
 import {COLORS, FONTS} from '../../../constants';
 import {useAuthProfilePicture} from './hooks';
 
@@ -25,7 +25,7 @@ const AuthProfilePictureScreen = () => {
     handleBackPress,
     handleNextPress,
   } = useAuthProfilePicture();
-  // console.log('profilePicData in AuthProfilepICSCREEN', profilePicData)
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <CustomHeader
@@ -41,7 +41,7 @@ const AuthProfilePictureScreen = () => {
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
-                onPress={() => handleGalleryPress(index)}
+                onPress={() => handleProfilePicture(index)}
                 style={styles.imageUploadContainer}
                 activeOpacity={0.4}>
                 {item?.fileName ? (
@@ -81,11 +81,11 @@ const AuthProfilePictureScreen = () => {
         />
       </View>
 
-      {/* <PickerModal
+      <PickerModal
         ref={profilePicUploadRef}
         handleCameraPress={handleCameraPress}
         handleGalleryPress={handleGalleryPress}
-      /> */}
+      />
     </SafeAreaView>
   );
 };

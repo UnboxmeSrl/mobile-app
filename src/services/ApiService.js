@@ -70,16 +70,22 @@ export default {
 
   put: async (url, data) => {
     let response;
+    const options = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
     if (data === '') {
       // console.log(url)
       response = await axios.put(url).catch(err => {
         showToastError(err);
       });
     } else {
-      // console.log(url, data)
-      response = await axios.put(url, data).catch(err => {
+      console.log(url, data);
+      response = await axios.put(url, data, options).catch(err => {
         showToastError(err);
       });
+      console.log('Response: ' + response);
     }
 
     return response?.data;

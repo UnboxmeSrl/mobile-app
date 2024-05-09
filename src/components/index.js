@@ -11,3 +11,4 @@ export * from './Categories';
 export * from './Elements';
 export * from './Buttons';
 export * from './LoginGuest';
+export * from './ImagePickerModal';

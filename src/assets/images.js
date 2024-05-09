@@ -127,4 +127,5 @@ export const IMAGES = {
   minusEnabled: require('./images/minus-enabled.png'),
   clarisLogo: require('./images/claris-logo.png'),
   share: require('./images/share.png'),
+  swipeButton: require('./images/swipe-button.png'),
 };
