@@ -258,7 +258,7 @@ const ServiceDetails = () => {
                               <Text
                                 allowFontScaling={false}
                                 style={styles.ratingsText}>
-                                120
+                                {item?.Credits}
                               </Text>
                               <Image
                                 source={IMAGES.star}
@@ -377,7 +377,7 @@ const ServiceDetails = () => {
                                       <Text
                                         allowFontScaling={false}
                                         style={styles.ratingsText}>
-                                        60
+                                        {item?.Credits}
                                       </Text>
                                       <Image
                                         source={IMAGES.star}
@@ -442,7 +442,7 @@ const ServiceDetails = () => {
                                       <Text
                                         allowFontScaling={false}
                                         style={styles.ratingsText}>
-                                        60
+                                        {item?.Credits}
                                       </Text>
                                       <Image
                                         source={IMAGES.star}
@@ -502,7 +502,7 @@ const ServiceDetails = () => {
                                   <Text
                                     allowFontScaling={false}
                                     style={styles.ratingsText}>
-                                    60
+                                    {item?.Credits}
                                   </Text>
                                   <Image
                                     source={IMAGES.star}

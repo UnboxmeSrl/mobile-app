@@ -106,7 +106,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
         </View>
         <View style={styles.ratingsContainer}>
           <Text allowFontScaling={false} style={styles.ratingsText}>
-            60
+            {item?.Credits}
           </Text>
           <Image source={IMAGES.star} style={styles.ratingIcon} />
         </View>
@@ -345,12 +345,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginTop: verticalScale(10),
+    // marginTop: verticalScale(10),
   },
   titleText: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(15),
+    fontSize: moderateScale(14),
   },
   socialIcon: {
     height: moderateScale(25),
@@ -360,12 +360,12 @@ const styles = StyleSheet.create({
   itemTitleIconContainer: {
     width: '60%',
     alignItems: 'center',
-    height: verticalScale(25),
+    height: verticalScale(35),
     borderRadius: moderateScale(20),
     flexDirection: 'row',
     marginLeft: scale(5),
     marginRight: scale(20),
-    marginTop: verticalScale(10),
+    // marginTop: verticalScale(10),
   },
   titleRatingMainRow: {
     flexDirection: 'row',

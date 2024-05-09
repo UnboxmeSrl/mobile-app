@@ -76,6 +76,7 @@ const useContent = () => {
   }, []);
 
   return {
+    bookingDetails,
     actions,
     isLoading,
     isDataFetching,

@@ -4,7 +4,8 @@ import Fetch from './ApiService';
 export const getUserApprovalStatus = async userId => {
   try {
     const url = Api.PROFILE.GET_USER_APPROVAL_STATUS + userId;
-    const response = await Fetch.get(url, {axiosSecure: true});
+    console.log('URL:', url);
+    const response = await Fetch.get(url);
     return response;
   } catch (error) {
     console.log(error);
@@ -14,6 +15,16 @@ export const getUserApprovalStatus = async userId => {
 export const getGenderList = async () => {
   try {
     const url = Api.PROFILE.GET_GENDER_LIST;
+    const response = await Fetch.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getExperienceLevels = async () => {
+  try {
+    const url = Api.PROFILE.GET_EXPERIENCE_LEVELS;
     const response = await Fetch.get(url);
     return response;
   } catch (error) {
@@ -86,7 +97,7 @@ export const updateProfile = async ({formData, userID}) => {
 export const getProfile = async () => {
   try {
     const url = Api.PROFILE.GET_USER_PROFILE;
-    const response = await Fetch.get(url, {axiosSecure: true});
+    const response = await Fetch.get(url);
     return response?.data;
   } catch (error) {
     console.log(error);
@@ -97,19 +108,19 @@ export const deleteUserAccount = async userId => {
   try {
     const url = Api.PROFILE.DELETE_USER_ACCOUNT + userId;
     console.log('url:', url);
-    const response = await Fetch.delete(url, {axiosSecure: true});
+    const response = await Fetch.delete(url);
     console.log('delete response', response);
     return response?.data;
   } catch (error) {
     console.log(error);
   }
 };
-// export const getProfile = async (id) => {
+// export const getUserProfile = async id => {
 //   try {
-//     const url = `${Api.PROFILE.GET_USER_PROFILE}/${id}`
-//     const response = await Fetch.get(url)
-//     return response
+//     const url = `${Api.PROFILE.GET_USER_PROFILE}/${id}`;
+//     const response = await Fetch.get(url);
+//     return response;
 //   } catch (error) {
-//     console.log(error)
+//     console.log(error);
 //   }
-// }
+// };

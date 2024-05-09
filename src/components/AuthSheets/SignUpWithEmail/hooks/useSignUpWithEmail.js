@@ -29,7 +29,7 @@ const useSignUpWithEmail = closeSignUpSheet => {
       dispatch(setAuthData({email}));
       const res = await getOtp(data);
       console.log('getOtp Response', res);
-      if (res.success) {
+      if (res?.success) {
         setIsSendPress(true);
       } else {
         const errorObj = res;

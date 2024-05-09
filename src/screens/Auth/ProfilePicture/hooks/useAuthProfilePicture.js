@@ -45,12 +45,14 @@ const useAuthProfilePicture = () => {
     if (isGranted) {
       const res = await openCamera();
       console.log('test', res?.assets[0]);
-      if (res?.assets?.length > 0) setProfilePicData(res?.assets[0]);
+      if (res?.assets?.length > 0) {
+        setProfilePicData(res?.assets[0]);
+      }
     }
     profilePicUploadRef.current.close();
   };
 
-  const handleGalleryPress = async (pictureIndex = 0) => {
+  const handleGalleryPress = async () => {
     const permission = isIos
       ? PERMISSIONS.IOS.PHOTO_LIBRARY
       : isAndroid &&
@@ -67,7 +69,7 @@ const useAuthProfilePicture = () => {
         setProfilePicData([...updatedData]);
       }
     }
-    // profilePicUploadRef.current.close()
+    profilePicUploadRef.current.close();
   };
 
   const handleBackPress = () => {

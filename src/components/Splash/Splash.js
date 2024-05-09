@@ -13,10 +13,15 @@ import {
   selectIsRejected,
   selectOnBordingData,
   selectVisitCount,
+  setExperienceLevels,
   setSocialActions,
   updateLoginData,
 } from '../../redux';
-import {getAllActions, getUserApprovalStatus} from '../../services';
+import {
+  getAllActions,
+  getExperienceLevels,
+  getUserApprovalStatus,
+} from '../../services';
 
 const delay = 500;
 
@@ -68,6 +73,13 @@ const Splash = () => {
     }, 1000);
   };
 
+  const getExperienceLevelsData = async () => {
+    const res = await getExperienceLevels();
+    if (res?.length > 0) {
+      dispatch(setExperienceLevels(res));
+    }
+  };
+
   const getAllSocialActions = async () => {
     const res = await getAllActions();
     dispatch(setSocialActions(res));
@@ -75,6 +87,7 @@ const Splash = () => {
 
   useEffect(() => {
     getUserApprovalStatusData();
+    getExperienceLevelsData();
   }, []);
 
   useEffect(() => {

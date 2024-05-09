@@ -5,6 +5,7 @@ import restaurantSlice from './slices/restaurantSlice';
 import contentSlice from './slices/contentSlice';
 import serviceSlice from './slices/serviceSlice';
 import locationSlice from './slices/locationSlice';
+import generalSlice from './slices/generalSlice';
 
 const rootReducer = combineReducers({
   authSlice: authSlice,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   contentSlice: contentSlice,
   serviceSlice: serviceSlice,
   locationSlice: locationSlice,
+  generalSlice: generalSlice,
 });
 
 export default rootReducer;

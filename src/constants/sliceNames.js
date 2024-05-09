@@ -5,4 +5,5 @@ export const sliceNames = {
   contentSlice: 'ContentSlice',
   serviceSlice: 'ServiceSlice',
   locationSlice: 'LocationSlice',
-}
+  generalSlice: 'GeneralSlice',
+};

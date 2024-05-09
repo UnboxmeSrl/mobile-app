@@ -96,7 +96,7 @@ const PublishContentScreen = () => {
               }`}</Text>
               <View style={styles.ratingContainer}>
                 <Text allowFontScaling={false} style={styles.ratingUsersText}>
-                  240
+                  {contentDetails?._offers_turbo?.Credits}
                 </Text>
                 <Image
                   source={IMAGES.ratingStar}

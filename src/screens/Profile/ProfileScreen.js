@@ -37,11 +37,13 @@ import LinearGradient from 'react-native-linear-gradient';
 const ProfileScreen = () => {
   const {
     user,
+    level,
     isInstaAccount,
     isTiktokAccount,
     isAuthenticated,
     navigateToSettings,
     navigateToEditProfile,
+    handleSharePromoCode,
   } = useProfile();
 
   return (
@@ -129,13 +131,15 @@ const ProfileScreen = () => {
                 <View style={styles.levelXpContainer}>
                   <View style={styles.levelContainer}>
                     <Text allowFontScaling={false} style={styles.levelText}>
-                      {`LEVEL 5`}
+                      {`LEVEL ${level}`}
                     </Text>
                   </View>
                   <View style={styles.xpContainer}>
                     <View style={styles.xpInnerContainer}>
                       <Ionicons name="star" style={styles.badgeIcon} />
-                      <AppText style={styles.badgeTitle}>240 xp</AppText>
+                      <AppText style={styles.badgeTitle}>
+                        {`${user?.xp}`} xp
+                      </AppText>
                     </View>
                   </View>
                 </View>
@@ -144,7 +148,7 @@ const ProfileScreen = () => {
                     style={styles.profileProgressBar}
                     fromColor={COLORS.crayola}
                     toColor={COLORS.red}
-                    progress={0.5}
+                    progress={level / 10}
                     cornerRadius={5.0}
                   />
                 </View>
@@ -153,7 +157,7 @@ const ProfileScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.invitationDescription}>
-                    Share your code invitation code with friends!{' '}
+                    Share your code invitation code with friends!
                   </Text>
                 </View>
 
@@ -164,17 +168,21 @@ const ProfileScreen = () => {
                   colors={[COLORS.newPrimary, COLORS.tickleMePink]}>
                   <View style={styles.shareXpContainer}>
                     <Ionicons name="star" style={styles.shareXpStarIcon} />
-                    <AppText style={styles.shareXpText}>240 xp</AppText>
+                    <AppText style={styles.shareXpText}>100 xp</AppText>
                   </View>
                   <View style={styles.profileCodeContainer}>
-                    <Text allowFontScaling={false} style={styles.profileCode}>
-                      {`HANNAHXDT50`}
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.profileCode}
+                      selectable>
+                      {`${user?.promocode}`}
                     </Text>
                   </View>
                   <View style={styles.divider} />
                   <TouchableOpacity
                     style={styles.shareIconContainer}
                     hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
+                    onPress={handleSharePromoCode}
                     activeOpacity={0.7}>
                     <Image source={IMAGES.share} style={styles.shareIcon} />
                   </TouchableOpacity>
@@ -235,7 +243,7 @@ const styles = StyleSheet.create({
   },
   profileCode: {
     fontFamily: FONTS.quicksandBold,
-    fontSize: perfectSize(14),
+    fontSize: perfectSize(18),
     color: colors.white,
     marginLeft: scale(10),
   },

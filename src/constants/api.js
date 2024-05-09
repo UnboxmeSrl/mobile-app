@@ -21,6 +21,7 @@ export const Api = {
     USER_PROFILE_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_user_turbo`,
     USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/user/signup`,
     DELETE_USER_ACCOUNT: `${BASE_URL}/api:bwh6Xc5O/delete_account`,
+    GET_EXPERIENCE_LEVELS: `${BASE_URL}/api:bwh6Xc5O/experience_levels`,
   },
   RESTAURANTS: {
     ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,

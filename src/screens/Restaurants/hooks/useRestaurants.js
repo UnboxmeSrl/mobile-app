@@ -108,7 +108,8 @@ const useRestaurants = () => {
   const getCategoriesData = async () => {
     setIsLoading(true);
     const res = await getCategories();
-    if (res?.length > 0) {
+    console.log('res: ' + JSON.stringify(res));
+    if (res?.data?.length > 0) {
       const addAllCategory = [
         {CategoryName: 'All categories', id: 0},
         ...res?.data,

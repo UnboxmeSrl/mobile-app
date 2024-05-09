@@ -78,7 +78,7 @@ const YourScheduleDetailsScreen = () => {
               </Text>
               <View style={styles.ratingContainer}>
                 <Text allowFontScaling={false} style={styles.ratingUsersText}>
-                  240
+                  {bookingDetails?._offers_turbo?.Credits}
                 </Text>
                 <Image
                   source={IMAGES.ratingStar}

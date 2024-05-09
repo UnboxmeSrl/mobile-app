@@ -73,6 +73,7 @@ const useAuthSocialNetwork = () => {
     formData.append('City', userDetails?.city);
     formData.append('Agency', userDetails?.agencyData?.hasAgency);
     formData.append('Freelance', userDetails?.agencyData?.freelance);
+    formData.append('promocode', userDetails?.codeFromFriend);
     const profilePicData = userDetails?.profilePictures?.[0];
     if (profilePicData && profilePicData?.uri) {
       formData.append('profileImage', {

@@ -18,6 +18,7 @@ import {useContent} from './hooks';
 
 const ContentScreen = () => {
   const {
+    bookingDetails,
     actions,
     isLoading,
     isDataFetching,
@@ -91,7 +92,7 @@ const ContentScreen = () => {
                         <Text
                           allowFontScaling={false}
                           style={styles.ratingUsersText}>
-                          240
+                          {bookingDetails?._offers_turbo?.Credits}
                         </Text>
                         <Image
                           source={IMAGES.ratingStar}
@@ -147,7 +148,7 @@ const ContentScreen = () => {
                         <Text
                           allowFontScaling={false}
                           style={styles.ratingUsersText}>
-                          240
+                          {bookingDetails?._offers_turbo?.Credits}
                         </Text>
                         <Image
                           source={IMAGES.ratingStar}

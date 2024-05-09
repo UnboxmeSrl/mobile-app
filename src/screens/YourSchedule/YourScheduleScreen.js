@@ -332,7 +332,7 @@ const YourScheduleScreen = () => {
                           <Text
                             allowFontScaling={false}
                             style={contentStyles.ratingUsersText}>
-                            240
+                            {item?._offers_turbo?.Credits}
                           </Text>
                           <Image
                             source={IMAGES.ratingStar}
