@@ -11,6 +11,7 @@ import {
   setOnboardingData,
 } from '../../../../redux';
 import {getBookings, userLogin} from '../../../../services';
+import {OneSignal} from 'react-native-onesignal';
 
 const useSignInWithEmail = isFromBookRedirected => {
   const [email, setEmail] = useState();
@@ -35,7 +36,7 @@ const useSignInWithEmail = isFromBookRedirected => {
       dispatch(setCity({}));
       if (res?.UserStatus === 'approved') {
         //TODO: Please enable this when you install onesignal
-        // OneSignal.setExternalUserId(res?.id?.toString())
+        OneSignal.login(res?.id?.toString());
         dispatch(setLoginData(res));
         const params = `/${res?.id}`;
         const bookingRes = await getBookings(params);

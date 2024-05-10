@@ -12,6 +12,7 @@ import {
   setCity,
 } from '../../../redux';
 import {deleteUserAccount, showToastSuccess} from '../../../services';
+import {OneSignal} from 'react-native-onesignal';
 
 const useSettings = () => {
   const navigation = useNavigation();
@@ -27,6 +28,7 @@ const useSettings = () => {
   const logout = async () => {
     try {
       setIsLoading(true);
+      OneSignal.logout();
       await persistor.purge();
       dispatch(resetRestaurantSlice());
       dispatch(resetContentSlice());
@@ -73,6 +75,7 @@ const useSettings = () => {
         {
           onPress: async () => {
             setIsDeleting(true);
+            OneSignal.logout();
             const prepUrl = `/${loginData?.id}`;
             const res = await deleteUserAccount(prepUrl);
             //TODO: Enable below if you need in future (satyam)

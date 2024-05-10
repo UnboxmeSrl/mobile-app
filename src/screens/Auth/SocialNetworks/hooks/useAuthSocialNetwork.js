@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../../constants';
 import {navigate, showToastError, userSignUp} from '../../../../services';
 import {resetAuthData, setAuthData, setLoginData} from '../../../../redux';
+import {OneSignal} from 'react-native-onesignal';
 
 const useAuthSocialNetwork = () => {
   const userDetails = useSelector(state => state.authSlice.authData);
@@ -118,6 +119,8 @@ const useAuthSocialNetwork = () => {
     setIsBtnDisabled(false);
     // console.log('🚀 ~ handleNextPress ~ res:', res.data)
     if (res?.id) {
+      // OneSignal.setExternalUserId(res?.id?.toString());
+      OneSignal.login(res?.id?.toString());
       console.log('🟩 Success Data', JSON.stringify(res));
       dispatch(resetAuthData());
       // dispatch(setproFileData(res.data))
