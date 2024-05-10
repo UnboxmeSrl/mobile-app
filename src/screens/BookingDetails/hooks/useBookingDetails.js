@@ -31,6 +31,7 @@ const useBookingDetails = () => {
   const [selectedTimeFame, setSelectedTimeFame] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isDatesLoading, setIsDatesLoading] = useState(true);
+  const [isLatestWeek, setIsLatestWeek] = useState(true);
   const serviceDetails = useSelector(
     state => state.restaurantSlice.serviceDetails,
   );
@@ -38,7 +39,48 @@ const useBookingDetails = () => {
     state => state.restaurantSlice.restaurantDetails,
   );
 
+  // console.log(
+  //   'All dates:',
+  //   startDate,
+  //   '#',
+  //   selectedDate,
+  //   '#',
+  //   endDate,
+  //   '#',
+  //   currentDate,
+  //   '#',
+  //   currentWeekDay,
+  //   '#',
+  //   currentMonth,
+  // );
+
+  const getDateWeek = date => {
+    const currentDate = typeof date === 'object' ? date : new Date();
+    const januaryFirst = new Date(currentDate.getFullYear(), 0, 1);
+    const daysToNextMonday =
+      januaryFirst.getDay() === 1 ? 0 : (7 - januaryFirst.getDay()) % 7;
+    const nextMonday = new Date(
+      currentDate.getFullYear(),
+      0,
+      januaryFirst.getDate() + daysToNextMonday,
+    );
+
+    return currentDate < nextMonday
+      ? 52
+      : currentDate > nextMonday
+      ? Math.ceil((currentDate - nextMonday) / (24 * 3600 * 1000) / 7)
+      : 1;
+  };
+
+  // console.log(
+  //   'Week number of ' + currentDate + ' is : ' + getDateWeek(currentDate),
+  //   getDateWeek(startDate),
+  // );
+
   const showNextWeek = () => {
+    if (isLatestWeek) {
+      setIsLatestWeek(false);
+    }
     const newStartDate = new Date(startDate);
     newStartDate.setDate(startDate.getDate() + 7);
     const newEndDate = new Date(newStartDate);
@@ -48,12 +90,17 @@ const useBookingDetails = () => {
   };
 
   const showPreviousWeek = () => {
-    const newStartDate = new Date(startDate);
-    newStartDate.setDate(startDate.getDate() - 7);
-    const newEndDate = new Date(newStartDate);
-    newEndDate.setDate(newEndDate.getDate() + 6);
-    setStartDate(newStartDate);
-    setEndDate(newEndDate);
+    if (getDateWeek(startDate) <= getDateWeek(currentDate)) {
+      return;
+    }
+    if (startDate >= currentDate) {
+      const newStartDate = new Date(startDate);
+      newStartDate.setDate(startDate.getDate() - 7);
+      const newEndDate = new Date(newStartDate);
+      newEndDate.setDate(newEndDate.getDate() + 6);
+      setStartDate(newStartDate);
+      setEndDate(newEndDate);
+    }
   };
 
   const isDateAvailable = date => {
@@ -66,74 +113,84 @@ const useBookingDetails = () => {
   };
 
   const handleConfirmBtnPress = async () => {
-    setIsLoading(true);
-    const currentBookingDateTime = new Date(selectedDate);
-    const bookingTimeStamp = currentBookingDateTime.valueOf();
-    const formattedDate = `${currentBookingDateTime.getFullYear()}-${
-      currentBookingDateTime.getMonth() + 1 < 10
-        ? `0${currentBookingDateTime.getMonth() + 1}`
-        : currentBookingDateTime.getMonth() + 1
-    }-${
-      currentBookingDateTime.getDate() < 10
-        ? `0${currentBookingDateTime.getDate()}`
-        : currentBookingDateTime.getDate()
-    }`;
-
-    const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
-    const isApproved =
-      actionNumId === 1 || actionNumId === 2 || actionNumId === 3;
-    console.log(
-      ' conditionCheck',
-      currentBookingDateTime,
-      formattedDate,
-      serviceDetails?.actions_turbo_id,
-    );
-    const prepData = {
-      ApprovalStatus: false,
-      Approved: isApproved,
-      BookingDay: formattedDate,
-      BookingTimestamp: bookingTimeStamp,
-      BoxVisibility: 'true',
-      CouponStatus: 'true',
-      HourEnd: null,
-      HourStart: '',
-      Instagram_Status: '',
-      Instructions: '',
-      LinkAzione: '',
-      MinuteEnd: '',
-      MinuteStart: null,
-      OfferVIsibility: false,
-      Rejectedstatus: false,
-      Submitbutton_: 'false',
-      Title: '',
-      action_status_turbo_id: 0,
-      actions_turbo_id: serviceDetails?.actions_turbo_id,
-      booking_status_id: 0,
-      deal_scheme_id: 0,
-      events_id: 0,
-      offers_turbo_id: serviceDetails?.id,
-      restaurant_id: restaurantDetails?.id,
-      timeframes_id: selectedTimeFame?.id ?? 0,
-      user_turbo_id: loginData?.id,
-    };
-    if (actionNumId === 9) {
-      prepData['additional_influencer'] = influencerCount;
-    }
-    console.log('prepData: ', prepData);
-    const res = await addRestaurantBooking(prepData);
-    if (res?.status === 200) {
-      console.log('Booking Details:', res);
-      navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
-        bookingDetails: res?.data,
-      });
+    if (isLatestWeek) {
+      if (new Date(selectedDate).getDate() <= new Date().getDate()) {
+        const error = {
+          message: 'Please select the latest date',
+        };
+        showToastError(error);
+        return;
+      }
     } else {
-      console.log('res: ', JSON.stringify(res));
-      const error = {
-        message: res?.data,
+      setIsLoading(true);
+      const currentBookingDateTime = new Date(selectedDate);
+      const bookingTimeStamp = currentBookingDateTime.valueOf();
+      const formattedDate = `${currentBookingDateTime.getFullYear()}-${
+        currentBookingDateTime.getMonth() + 1 < 10
+          ? `0${currentBookingDateTime.getMonth() + 1}`
+          : currentBookingDateTime.getMonth() + 1
+      }-${
+        currentBookingDateTime.getDate() < 10
+          ? `0${currentBookingDateTime.getDate()}`
+          : currentBookingDateTime.getDate()
+      }`;
+
+      const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
+      const isApproved =
+        actionNumId === 1 || actionNumId === 2 || actionNumId === 3;
+      console.log(
+        ' conditionCheck',
+        currentBookingDateTime,
+        formattedDate,
+        serviceDetails?.actions_turbo_id,
+      );
+      const prepData = {
+        ApprovalStatus: false,
+        Approved: isApproved,
+        BookingDay: formattedDate,
+        BookingTimestamp: bookingTimeStamp,
+        BoxVisibility: 'true',
+        CouponStatus: 'true',
+        HourEnd: null,
+        HourStart: '',
+        Instagram_Status: '',
+        Instructions: '',
+        LinkAzione: '',
+        MinuteEnd: '',
+        MinuteStart: null,
+        OfferVIsibility: false,
+        Rejectedstatus: false,
+        Submitbutton_: 'false',
+        Title: '',
+        action_status_turbo_id: 0,
+        actions_turbo_id: serviceDetails?.actions_turbo_id,
+        booking_status_id: 0,
+        deal_scheme_id: 0,
+        events_id: 0,
+        offers_turbo_id: serviceDetails?.id,
+        restaurant_id: restaurantDetails?.id,
+        timeframes_id: selectedTimeFame?.id ?? 0,
+        user_turbo_id: loginData?.id,
       };
-      showToastError(error);
+      if (actionNumId === 9) {
+        prepData['additional_influencer'] = influencerCount;
+      }
+      console.log('prepData: ', prepData);
+      const res = await addRestaurantBooking(prepData);
+      if (res?.status === 200) {
+        console.log('Booking Details:', res);
+        navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
+          bookingDetails: res?.data,
+        });
+      } else {
+        console.log('res: ', JSON.stringify(res));
+        const error = {
+          message: res?.data,
+        };
+        showToastError(error);
+      }
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const handleRemoveBtnPress = () => {
@@ -273,6 +330,12 @@ const useBookingDetails = () => {
   }, [startDate]);
 
   useEffect(() => {
+    if (getDateWeek(startDate) <= getDateWeek(currentDate)) {
+      setIsLatestWeek(true);
+    }
+  }, [startDate]);
+
+  useEffect(() => {
     return () => {
       dispatch(setTimeFrameData([]));
     };
@@ -288,6 +351,7 @@ const useBookingDetails = () => {
     handleBackPress,
     handleConfirmBtnPress,
     handleRemoveBtnPress,
+    isLatestWeek,
     isLoading,
     isDateAvailable,
     isDatesLoading,

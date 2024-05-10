@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  FlatList,
   Image,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -13,6 +11,7 @@ import {
 } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
 // import DeviceInfo from 'react-native-device-info'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
@@ -31,6 +30,7 @@ const BookingDetailsScreen = () => {
     endDate,
     selectedDate,
     currentMonth,
+    isLatestWeek,
     isLoading,
     // isDateAvailable,
     isDatesLoading,
@@ -43,7 +43,7 @@ const BookingDetailsScreen = () => {
   } = useBookingDetails();
 
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       style={styles.mainScrollView}>
       {isDatesLoading ? (
@@ -98,11 +98,16 @@ const BookingDetailsScreen = () => {
                     </Text>
                   </View>
                   <View style={styles.previousNextIconsContainer}>
-                    <TouchableOpacity onPress={showPreviousWeek}>
+                    <TouchableOpacity
+                      onPress={showPreviousWeek}
+                      disabled={isLatestWeek}>
                       <Image
                         resizeMode="cover"
                         source={IMAGES.back}
-                        style={styles.previousDatesIcon}
+                        style={[
+                          styles.previousDatesIcon,
+                          isLatestWeek && styles.disabledPreviousWeek,
+                        ]}
                       />
                     </TouchableOpacity>
 
@@ -342,13 +347,16 @@ const BookingDetailsScreen = () => {
           </View>
         </>
       )}
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
 export default BookingDetailsScreen;
 
 const styles = StyleSheet.create({
+  disabledPreviousWeek: {
+    tintColor: COLORS.grey,
+  },
   timeSlotsMainContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

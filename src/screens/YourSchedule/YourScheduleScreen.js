@@ -652,7 +652,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(20),
     borderWidth: 0,
     height: verticalScale(32),
-    marginLeft: scale(3),
+    marginHorizontal: scale(3),
     width: scale(162),
   },
   selectedTabText: {
