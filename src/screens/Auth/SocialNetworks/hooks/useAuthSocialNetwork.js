@@ -34,8 +34,7 @@ const useAuthSocialNetwork = () => {
   const handleNextPress = async () => {
     setIsLoading(true);
     setIsBtnDisabled(true);
-    dispatch(setAuthData({instaUserName, tiktokUserName}));
-
+    // dispatch(setAuthData({instaUserName, tiktokUserName}));
     // User Type (Model, Influencer, Both)
     const isBothUserType = !!userDetails?.userType?.data;
 
@@ -90,9 +89,9 @@ const useAuthSocialNetwork = () => {
       });
     }
 
-    formData.append('Tiktok_account', userDetails?.tiktokUserName || '');
+    formData.append('Tiktok_account', userDetails?.tiktokUserName ?? '');
     formData.append('TikTok', userDetails?.tiktokUserName ? 'true' : 'false');
-    formData.append('IG_account', userDetails?.instaUserName || '');
+    formData.append('IG_account', userDetails?.instaUserName ?? '');
     formData.append('IG', userDetails?.instaUserName ? 'true' : 'false');
     formData.append('telegram_id', 0);
     isBothUserType
@@ -105,16 +104,7 @@ const useAuthSocialNetwork = () => {
       formData.append('user_interest_topics_turbo_id[]', item?.id),
     );
 
-    //  formData.append('money_give', parseFloat(add))
-    //  formData.append('money_request', parseFloat(ask))
-    //  if (selectedSneakers?.length > 0) {
-    //    selectedSneakers?.map((item) => formData.append('id_closet_to[]', item?.id))
-    //  }
-    //  if (myOfferedList?.length > 0) {
-    //    myOfferedList?.map((item) => formData.append('id_closet_from[]', item?.id))
-    //  }
-
-    // console.log('🟩 Form Data', JSON.stringify(formData))
+    // console.log('🟩 Form Data', JSON.stringify(formData));
     const res = await userSignUp(formData);
     setIsBtnDisabled(false);
     // console.log('🚀 ~ handleNextPress ~ res:', res.data)
@@ -141,10 +131,10 @@ const useAuthSocialNetwork = () => {
       setIsBtnDisabled(true);
     }
   }, [tiktokUserName, instaUserName]);
-  // navigate(SCREEN_NAMES.AuthInterestTopicsScreen)
 
   return {
     isLoading,
+    dispatch,
     handleBackPress,
     handleOnInstaPress,
     handleNextPress,

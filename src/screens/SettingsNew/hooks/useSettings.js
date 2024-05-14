@@ -85,6 +85,10 @@ const useSettings = () => {
             await persistor.purge();
             showToastSuccess(res);
             setIsDeleting(false);
+            navigation.reset({
+              index: 0,
+              routes: [{name: SCREEN_NAMES.SignUpNew}],
+            });
           },
           text: 'Delete',
         },

@@ -114,73 +114,98 @@ const useBookingDetails = () => {
 
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
+    const today = new Date();
+    const todayUtcTime = today.getTime();
     const currentBookingDateTime = new Date(selectedDate);
-    const bookingTimeStamp = currentBookingDateTime.valueOf();
-    const formattedDate = `${currentBookingDateTime.getFullYear()}-${
-      currentBookingDateTime.getMonth() + 1 < 10
-        ? `0${currentBookingDateTime.getMonth() + 1}`
-        : currentBookingDateTime.getMonth() + 1
-    }-${
-      currentBookingDateTime.getDate() < 10
-        ? `0${currentBookingDateTime.getDate()}`
-        : currentBookingDateTime.getDate()
-    }`;
+    const parsedHours = parseInt(selectedTimeFame?.Start);
+    const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
+    currentBookingDateTime.setHours(parsedHours, parsedMinutes);
+    const after24Hours =
+      todayUtcTime +
+      1 * (restaurantDetails?.booking_buffer_time ?? 24) * 60 * 60 * 1000;
 
-    const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
-    const isApproved =
-      actionNumId === 1 || actionNumId === 2 || actionNumId === 3;
-    console.log(
-      ' conditionCheck',
-      currentBookingDateTime,
-      formattedDate,
-      serviceDetails?.actions_turbo_id,
-    );
-    const prepData = {
-      ApprovalStatus: false,
-      Approved: isApproved,
-      BookingDay: formattedDate,
-      BookingTimestamp: bookingTimeStamp,
-      BoxVisibility: 'true',
-      CouponStatus: 'true',
-      HourEnd: null,
-      HourStart: '',
-      Instagram_Status: '',
-      Instructions: '',
-      LinkAzione: '',
-      MinuteEnd: '',
-      MinuteStart: null,
-      OfferVIsibility: false,
-      Rejectedstatus: false,
-      Submitbutton_: 'false',
-      Title: '',
-      action_status_turbo_id: 0,
-      actions_turbo_id: serviceDetails?.actions_turbo_id,
-      booking_status_id: 0,
-      deal_scheme_id: 0,
-      events_id: 0,
-      offers_turbo_id: serviceDetails?.id,
-      restaurant_id: restaurantDetails?.id,
-      timeframes_id: selectedTimeFame?.id ?? 0,
-      user_turbo_id: loginData?.id,
-    };
-    if (actionNumId === 9) {
-      prepData['additional_influencer'] = influencerCount;
-    }
-    console.log('prepData: ', prepData);
-    const res = await addRestaurantBooking(prepData);
-    if (res?.status === 200) {
-      console.log('Booking Details:', res);
-      navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
-        bookingDetails: res?.data,
-      });
+    // console.log(
+    //   'Todays UTC Time: ' + after24Hours,
+    //   currentBookingDateTime.getTime(),
+    //   selectedDate,
+    //   currentBookingDateTime,
+    // );
+
+    if (currentBookingDateTime.getTime() >= after24Hours) {
+      const bookingTimeStamp = currentBookingDateTime.valueOf();
+      const formattedDate = `${currentBookingDateTime.getFullYear()}-${
+        currentBookingDateTime.getMonth() + 1 < 10
+          ? `0${currentBookingDateTime.getMonth() + 1}`
+          : currentBookingDateTime.getMonth() + 1
+      }-${
+        currentBookingDateTime.getDate() < 10
+          ? `0${currentBookingDateTime.getDate()}`
+          : currentBookingDateTime.getDate()
+      }`;
+
+      const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
+      const isApproved =
+        actionNumId === 1 || actionNumId === 2 || actionNumId === 3;
+      console.log(
+        ' conditionCheck',
+        currentBookingDateTime,
+        formattedDate,
+        serviceDetails?.actions_turbo_id,
+      );
+      const prepData = {
+        ApprovalStatus: false,
+        Approved: isApproved,
+        BookingDay: formattedDate,
+        BookingTimestamp: bookingTimeStamp,
+        BoxVisibility: 'true',
+        CouponStatus: 'true',
+        HourEnd: null,
+        HourStart: '',
+        Instagram_Status: '',
+        Instructions: '',
+        LinkAzione: '',
+        MinuteEnd: '',
+        MinuteStart: null,
+        OfferVIsibility: false,
+        Rejectedstatus: false,
+        Submitbutton_: 'false',
+        Title: '',
+        action_status_turbo_id: 0,
+        actions_turbo_id: serviceDetails?.actions_turbo_id,
+        booking_status_id: 0,
+        deal_scheme_id: 0,
+        events_id: 0,
+        offers_turbo_id: serviceDetails?.id,
+        restaurant_id: restaurantDetails?.id,
+        timeframes_id: selectedTimeFame?.id ?? 0,
+        user_turbo_id: loginData?.id,
+      };
+      if (actionNumId === 9) {
+        prepData['additional_influencer'] = influencerCount;
+      }
+      console.log('prepData: ', prepData);
+      const res = await addRestaurantBooking(prepData);
+      if (res?.status === 200) {
+        console.log('Booking Details:', res);
+        navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
+          bookingDetails: res?.data,
+        });
+      } else {
+        console.log('res: ', JSON.stringify(res));
+        const error = {
+          message: res?.data,
+        };
+        showToastError(error);
+      }
+      setIsLoading(false);
     } else {
-      console.log('res: ', JSON.stringify(res));
       const error = {
-        message: res?.data,
+        message: 'You can only book booking which starts 24 hours later.',
       };
       showToastError(error);
+      setIsLoading(false);
+      return;
     }
-    setIsLoading(false);
   };
 
   const handleRemoveBtnPress = () => {

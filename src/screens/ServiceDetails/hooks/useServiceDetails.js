@@ -1,16 +1,16 @@
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import Toast from 'react-native-toast-message';
 import {useDispatch, useSelector} from 'react-redux';
-import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
+import {IMAGES} from '../../../assets';
+import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
+import {setTimeFrameData} from '../../../redux';
 import {
   getDiaryActions,
   getServiceDealsLeft,
   getTimeFrames,
   navigate,
 } from '../../../services';
-import {IMAGES} from '../../../assets';
-import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
-import {setTimeFrameData} from '../../../redux';
 
 const useServiceDetails = () => {
   const route = useRoute();

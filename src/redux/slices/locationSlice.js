@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { sliceNames } from '../../constants'
+import {createSlice} from '@reduxjs/toolkit';
+import {sliceNames} from '../../constants';
 
 const initialState = {
   city: {},
-}
+};
 
 const LocationSlice = createSlice({
   initialState: initialState,
   name: sliceNames.locationSlice,
   reducers: {
     setCity: (state, actions) => {
-      state.city = actions?.payload
+      state.city = actions?.payload;
     },
     resetLocationSlice: (state, actions) => {
-      state.city = {}
+      state.city = {};
     },
   },
-})
+});
 
-export const { setCity, resetLocationSlice } = LocationSlice.actions
+export const {setCity, resetLocationSlice} = LocationSlice.actions;
 
-export default LocationSlice.reducer
+export default LocationSlice.reducer;

@@ -125,6 +125,8 @@ const BookingDetailsScreen = () => {
                   dateNameStyle={styles.dateNameStyle}
                   dateNumberStyle={styles.dateNumberStyle}
                   datesBlacklist={datesBlacklistFunc}
+                  disabledDateNameStyle={styles.disabledDateNameStyle}
+                  disabledDateNumberStyle={styles.disabledDateNumberStyle}
                   endDate={endDate}
                   highlightDateContainerStyle={styles.highlightedDateContainer}
                   highlightDateNameStyle={styles.highlightDateNameStyle}
@@ -354,6 +356,12 @@ const BookingDetailsScreen = () => {
 export default BookingDetailsScreen;
 
 const styles = StyleSheet.create({
+  disabledDateNumberStyle: {
+    color: COLORS.davyGrey,
+  },
+  disabledDateNameStyle: {
+    color: COLORS.davyGrey,
+  },
   disabledPreviousWeek: {
     tintColor: COLORS.grey,
   },

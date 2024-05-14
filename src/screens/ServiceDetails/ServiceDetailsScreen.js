@@ -67,7 +67,9 @@ const ServiceDetails = () => {
           <ActivityIndicator color={COLORS.newPrimary} size={30} />
         </View>
       ) : (
-        <ScrollView style={styles.mainScrollView}>
+        <ScrollView
+          style={styles.mainScrollView}
+          showsVerticalScrollIndicator={false}>
           <View>
             <CustomCarousel
               Component={({item, index}) => {
@@ -335,6 +337,21 @@ const ServiceDetails = () => {
                     }>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
                 </View>
               </View>
+              {actionNumId === 3 && (
+                <View style={styles.WhatIsDiaryContainer}>
+                  <Text allowFontScaling={false} style={styles.whatIsDiaryText}>
+                    What is a Diary?
+                  </Text>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.whatIsDiaryAnswer}>
+                    A “Diary” is a video where the experience at the venue is
+                    inserted in a daily vlog or a compilation video with similar
+                    content, instead of a fully dedicated Reel/Tiktok, like “a
+                    day in my life” or “best places I visited in Bali”
+                  </Text>
+                </View>
+              )}
               <View style={styles.flatlistContainer}>
                 <FlatList
                   data={[serviceDetails]}
@@ -555,6 +572,25 @@ const ServiceDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  whatIsDiaryAnswer: {
+    color: COLORS.davyGrey,
+    textAlign: 'justify',
+    lineHeight: verticalScale(20),
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(15),
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(20),
+  },
+  whatIsDiaryText: {
+    color: COLORS.blackRaw,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(18),
+  },
+  WhatIsDiaryContainer: {
+    marginTop: verticalScale(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   mainScrollView: {
     flex: 1,
   },

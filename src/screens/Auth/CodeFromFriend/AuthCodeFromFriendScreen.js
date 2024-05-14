@@ -90,6 +90,11 @@ const AuthCodeFromFriendScreen = () => {
               ref={code2Ref}
               value={codeLetter2}
               maxLength={1}
+              onKeyPress={e => {
+                if (e.nativeEvent.key === 'Backspace') {
+                  code1Ref.current?.focus();
+                }
+              }}
               onChangeText={val => {
                 setCodeLetter2(val);
                 if (val) {
@@ -115,6 +120,11 @@ const AuthCodeFromFriendScreen = () => {
               ref={code3Ref}
               value={codeLetter3}
               maxLength={1}
+              onKeyPress={e => {
+                if (e.nativeEvent.key === 'Backspace') {
+                  code2Ref.current?.focus();
+                }
+              }}
               onChangeText={val => {
                 setCodeLetter3(val);
                 if (val) {
@@ -140,6 +150,11 @@ const AuthCodeFromFriendScreen = () => {
               ref={code4Ref}
               value={codeLetter4}
               maxLength={1}
+              onKeyPress={e => {
+                if (e.nativeEvent.key === 'Backspace') {
+                  code3Ref.current?.focus();
+                }
+              }}
               onChangeText={val => {
                 setCodeLetter4(val);
                 if (val) {
@@ -165,6 +180,11 @@ const AuthCodeFromFriendScreen = () => {
               ref={code5Ref}
               value={codeLetter5}
               maxLength={1}
+              onKeyPress={e => {
+                if (e.nativeEvent.key === 'Backspace') {
+                  code4Ref.current?.focus();
+                }
+              }}
               onChangeText={val => setCodeLetter5(val)}
               onFocus={() => setFocusedTextInput(5)}
               style={[

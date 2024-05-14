@@ -12,7 +12,7 @@ import {
   navigate,
   showToastError,
 } from '../../../services';
-import {Share} from 'react-native';
+import {Linking, Share} from 'react-native';
 
 const useProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
@@ -31,6 +31,12 @@ const useProfile = () => {
 
   const navigateToEditProfile = () => {
     navigate(SCREEN_NAMES.EditProfile);
+  };
+
+  const handleOpenLink = (schema, url) => {
+    Linking.openURL(schema).catch(() => {
+      Linking.openURL(url);
+    });
   };
 
   // const handleGetProfileData = useCallback(async () => {
@@ -91,6 +97,7 @@ const useProfile = () => {
     isInstaAccount,
     isTiktokAccount,
     isAuthenticated,
+    handleOpenLink,
     navigateToSettings,
     navigateToEditProfile,
     handleSharePromoCode,

@@ -1,15 +1,14 @@
+import React, {useState} from 'react';
 import {
+  Image,
   StyleSheet,
-  Text,
-  View,
   TextInput,
   TouchableOpacity,
-  Image,
+  View,
 } from 'react-native';
-import React, {useState} from 'react';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import {COLORS, FONTS} from '../../../constants';
 import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
 
 const CustomTextInput = ({
   placeholder,

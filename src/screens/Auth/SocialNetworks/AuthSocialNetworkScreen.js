@@ -16,10 +16,12 @@ import {
 } from '../../../components';
 import {COLORS, FONTS} from '../../../constants';
 import {useAuthSocialNetwork} from './hooks';
+import {setAuthData} from '../../../redux';
 
 const AuthSocialNetworkScreen = () => {
   const {
     isLoading,
+    dispatch,
     isBtnDisabled,
     tiktokUserName,
     setTiktokUserName,
@@ -173,21 +175,31 @@ const AuthSocialNetworkScreen = () => {
           setTiktokUserName(value);
           setTiktokInputValue(value); // Update input value for TikTok
         }}
-        handlePress={() => tiktokSheetRef?.current?.close()}
+        handlePress={() => {
+          dispatch(setAuthData({tiktokUserName}));
+          setTimeout(() => {
+            tiktokSheetRef?.current?.close();
+          }, 1000);
+        }}
       />
 
       <SocialMediaSheet
         ref={instaSheetRef}
         title={'Connect Instagram account'}
-        description={'Enter your tiktok account username'}
-        placeholder={'your Instagram username'}
+        description={'Enter your instagram account username'}
+        placeholder={'your instagram username'}
         field={instaUserName}
         // onChangeText={setInstaUserName}
         onChangeText={value => {
           setInstaUserName(value);
           setInstaUserNameValue(value); // Update input value for TikTok
         }}
-        handlePress={() => instaSheetRef?.current?.close()}
+        handlePress={() => {
+          dispatch(setAuthData({instaUserName}));
+          setTimeout(() => {
+            instaSheetRef?.current?.close();
+          }, 1000);
+        }}
       />
     </SafeAreaView>
   );

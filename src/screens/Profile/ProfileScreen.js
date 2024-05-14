@@ -41,6 +41,7 @@ const ProfileScreen = () => {
     isInstaAccount,
     isTiktokAccount,
     isAuthenticated,
+    handleOpenLink,
     navigateToSettings,
     navigateToEditProfile,
     handleSharePromoCode,
@@ -83,7 +84,14 @@ const ProfileScreen = () => {
               <View style={styles.content}>
                 <View style={styles.header}>
                   <View style={styles.profilePicMainContainer}>
-                    <Pressable style={styles.instagramContainer}>
+                    <Pressable
+                      style={styles.instagramContainer}
+                      onPress={() =>
+                        handleOpenLink(
+                          'instagram://',
+                          'https://www.instagram.com/',
+                        )
+                      }>
                       <Ionicons
                         name="logo-instagram"
                         style={[
@@ -107,7 +115,11 @@ const ProfileScreen = () => {
                       variant="success"
                     /> */}
                     </View>
-                    <Pressable style={styles.tiktokContainer}>
+                    <Pressable
+                      style={styles.tiktokContainer}
+                      onPress={() =>
+                        handleOpenLink('tiktok://', 'https://www.tiktok.com/')
+                      }>
                       {/* <Image source={tiktok} style={styles.socialImg} /> */}
                       <Ionicons
                         name="logo-tiktok"
