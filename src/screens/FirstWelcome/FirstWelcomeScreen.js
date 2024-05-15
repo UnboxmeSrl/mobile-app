@@ -6,13 +6,13 @@ import FastImage from 'react-native-fast-image';
 import {IMAGES} from '../../assets';
 import {AppButton, AppText, Hobbies} from '../../components';
 import {COLORS, FONTS} from '../../constants';
-import {perfectSize} from '../../utils';
+import {perfectSize, xanoImageSize} from '../../utils';
 import {useFirstWelcome} from './hooks';
 
 const FirstWelcomeScreen = () => {
   const {handleGuestPress} = useFirstWelcome();
   const user = useSelector(state => state.authSlice.loginData);
-
+  const profilePicUrl = `${user?.Profile_pic?.url}?tpl=${xanoImageSize}.jpg`;
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
@@ -24,7 +24,7 @@ const FirstWelcomeScreen = () => {
                   resizeMode="cover"
                   source={{
                     priority: FastImage.priority.high,
-                    uri: user?.Profile_pic?.url,
+                    uri: profilePicUrl,
                   }}
                   style={styles.profileImage}
                 />

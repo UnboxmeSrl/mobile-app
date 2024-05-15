@@ -17,6 +17,7 @@ import {IMAGES} from '../../assets';
 import {ContentStatusModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourSchedule} from './hooks';
+import {xanoImageSize} from '../../utils';
 
 const YourScheduleScreen = () => {
   const {
@@ -183,7 +184,7 @@ const YourScheduleScreen = () => {
                           resizeMode="cover"
                           source={{
                             priority: FastImage.priority.high,
-                            uri: item?._restaurant_turbo?.Cover?.url,
+                            uri: `${item?._restaurant_turbo?.Cover?.url}?tpl=${xanoImageSize}.jpg`,
                           }}
                           style={styles.locationImage}
                         />
@@ -445,7 +446,7 @@ const YourScheduleScreen = () => {
                               resizeMode="cover"
                               source={{
                                 priority: FastImage.priority.high,
-                                uri: item?._restaurant_turbo?.Cover?.url,
+                                uri: `${item?._restaurant_turbo?.Cover?.url}?tpl=${xanoImageSize}.jpg`,
                               }}
                               style={contentStyles.locationImage}
                             />

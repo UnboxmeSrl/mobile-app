@@ -27,12 +27,13 @@ import {
   Title,
 } from '../../components';
 import {COLORS, FONTS} from '../../constants';
-import {colors, perfectSize} from '../../utils';
+import {colors, perfectSize, xanoImageSize} from '../../utils';
 import {useProfile} from './hooks';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
 import {IMAGES} from '../../assets';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
 const ProfileScreen = () => {
   const {
@@ -104,7 +105,10 @@ const ProfileScreen = () => {
                       <Avatar
                         img={
                           user?.Profile_pic?.url
-                            ? {uri: user?.Profile_pic?.url}
+                            ? {
+                                priority: FastImage.priority.high,
+                                uri: `${user?.Profile_pic?.url}?tpl=${xanoImageSize}.jpg`,
+                              }
                             : userImg
                         }
                         style={styles.avatar}

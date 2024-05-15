@@ -11,6 +11,7 @@ import {useDispatch} from 'react-redux';
 import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
 import {setCity} from '../../redux/slices';
 import {useNavigation} from '@react-navigation/native';
+import {xanoImageSize} from '../../utils';
 
 const LocationsTile = ({item}) => {
   const navigation = useNavigation();
@@ -19,12 +20,13 @@ const LocationsTile = ({item}) => {
     dispatch(setCity(item));
     navigation.replace(SCREEN_NAMES.Restaurants, {cityData: item});
   };
+  const cityImageUrl = `${item?.City?.url}?tpl=${xanoImageSize}.jpg`;
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
         imageStyle={styles.imageStyle}
         resizeMode="cover"
-        source={{uri: item?.City?.url}}
+        source={{uri: cityImageUrl}}
         style={styles.imageContainerStyle}>
         <TouchableOpacity onPress={handleBtnPress} style={styles.btnContainer}>
           <Text

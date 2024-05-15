@@ -12,7 +12,12 @@ import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
-import {checkAction, checkActionName, checkContentStatus} from '../../utils';
+import {
+  checkAction,
+  checkActionName,
+  checkContentStatus,
+  xanoImageSize,
+} from '../../utils';
 
 const ContentStatusModal = ({
   visible,
@@ -150,7 +155,7 @@ const ContentStatusModal = ({
                     resizeMode="cover"
                     source={{
                       priority: FastImage.priority.high,
-                      uri: contentDetails?._restaurant_turbo?.Cover?.url,
+                      uri: `${contentDetails?._restaurant_turbo?.Cover?.url}?tpl=${xanoImageSize}.jpg`,
                     }}
                     style={styles.locationImage}
                   />

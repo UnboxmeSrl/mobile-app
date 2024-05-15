@@ -16,6 +16,7 @@ import {useNewCoupon} from './hooks';
 
 const NewCouponScreen = () => {
   const {
+    profilePicUrl,
     amenityDetails,
     actionNumId,
     actionName,
@@ -61,7 +62,7 @@ const NewCouponScreen = () => {
                 resizeMode="cover"
                 source={{
                   priority: FastImage.priority.high,
-                  uri: loginData?.Profile_pic?.url,
+                  uri: profilePicUrl,
                 }}
                 style={styles.userImage}
               />

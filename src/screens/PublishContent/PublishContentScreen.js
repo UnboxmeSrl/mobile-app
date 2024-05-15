@@ -17,6 +17,7 @@ import {IMAGES} from '../../assets/images';
 import {ContentStatusModal, PickerModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {usePublishContent} from './hooks';
+import {xanoImageSize} from '../../utils';
 
 const PublishContentScreen = () => {
   const {
@@ -242,7 +243,7 @@ const PublishContentScreen = () => {
               resizeMode="cover"
               source={{
                 priority: FastImage.priority.high,
-                uri: contentDetails?._restaurant_turbo?.Cover?.url,
+                uri: `${contentDetails?._restaurant_turbo?.Cover?.url}?tpl=${xanoImageSize}.jpg`,
               }}
               style={styles.locationImage}
             />

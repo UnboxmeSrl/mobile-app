@@ -67,15 +67,17 @@ const ContentBriefScreen = () => {
           numColumns={2}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({item, index}) => {
+            let tag =
+              index === 1
+                ? '@claris.app'
+                : bookingDetails?._restaurant_turbo?.Tags;
+
             return (
               <View style={styles.tagContainer}>
                 <Text allowFontScaling={false} style={styles.tagText}>
-                  {bookingDetails?._restaurant_turbo?.Tags}
+                  {tag}
                 </Text>
-                <TouchableOpacity
-                  onPress={() =>
-                    handleTagCopyPress(bookingDetails?._restaurant_turbo?.Tags)
-                  }>
+                <TouchableOpacity onPress={() => handleTagCopyPress(tag)}>
                   <Image
                     resizeMode="contain"
                     source={IMAGES.copy}
@@ -137,7 +139,7 @@ const ContentBriefScreen = () => {
           <Text
             allowFontScaling={false}
             style={styles.socialMediaDescriptionText}>
-            {bookingDetails?._actions_turbo?.Descrizione}{' '}
+            {bookingDetails?._actions_turbo?.Descrizione}
           </Text>
         </View>
         <TouchableOpacity style={styles.queryContainer}>

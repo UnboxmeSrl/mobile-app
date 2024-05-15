@@ -14,6 +14,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useBookingOnApproval} from './hooks';
+import {xanoImageSize} from '../../utils';
 
 const BookingOnApprovalScreen = () => {
   const {
@@ -97,7 +98,7 @@ const BookingOnApprovalScreen = () => {
               resizeMode="cover"
               source={{
                 priority: FastImage.priority.high,
-                uri: bookingDetails?._offers_turbo?.Offer_Cover?.url,
+                uri: `${bookingDetails?._offers_turbo?.Offer_Cover?.url}?tpl=${xanoImageSize}.jpg`,
               }}
               style={styles.serviceImage}
             />
@@ -141,7 +142,7 @@ const BookingOnApprovalScreen = () => {
               resizeMode="cover"
               source={{
                 priority: FastImage.priority.high,
-                uri: bookingDetails?._restaurant_turbo?.Cover?.url,
+                uri: `${bookingDetails?._restaurant_turbo?.Cover?.url}?tpl=${xanoImageSize}.jpg`,
               }}
               style={styles.locationImage}
             />

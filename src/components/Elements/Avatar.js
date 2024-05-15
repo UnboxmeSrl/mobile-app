@@ -1,11 +1,17 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {perfectSize} from '../../utils';
 
 const Avatar = ({img, style}) => {
   return (
     <View style={[styles.avatar, style]}>
-      <Image source={img} alt="user image" style={styles.img} />
+      <FastImage
+        source={img}
+        alt="user image"
+        style={styles.img}
+        resizeMode="cover"
+      />
     </View>
   );
 };

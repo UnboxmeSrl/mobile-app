@@ -199,9 +199,18 @@ const useBookingDetails = () => {
       }
       setIsLoading(false);
     } else {
-      const error = {
-        message: 'You can only book booking which starts 24 hours later.',
-      };
+      let error = {};
+      if (restaurantDetails?.booking_buffer_time === 0) {
+        error = {
+          message:
+            'You can only book booking which starts after your current time.',
+        };
+      } else {
+        error = {
+          message: `You can only book booking which starts ${restaurantDetails?.booking_buffer_time} hours later.`,
+        };
+      }
+
       showToastError(error);
       setIsLoading(false);
       return;

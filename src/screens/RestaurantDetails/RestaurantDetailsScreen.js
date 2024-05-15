@@ -17,6 +17,7 @@ import {CustomCarousel} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurantDetails} from './hooks';
 import {ServiceCard} from './ServiceCard';
+import {xanoImageSize} from '../../utils';
 
 const RestaurantDetails = () => {
   const {
@@ -41,6 +42,7 @@ const RestaurantDetails = () => {
           {restaurantDetails?.GalleryRestaurant ? (
             <CustomCarousel
               Component={({item, index}) => {
+                const imageUrl = `${item?.url}?tpl=${xanoImageSize}.jpg`;
                 return (
                   <>
                     {isImageLoading && <View style={styles.imageLoader} />}
@@ -49,7 +51,7 @@ const RestaurantDetails = () => {
                       resizeMode="cover"
                       source={{
                         priority: FastImage.priority.high,
-                        uri: item?.url,
+                        uri: imageUrl,
                       }}
                       style={[styles.imageStyle]}
                     />

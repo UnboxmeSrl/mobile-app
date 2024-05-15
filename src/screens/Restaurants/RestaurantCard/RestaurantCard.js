@@ -11,6 +11,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
 import {useRestaurantCard} from './hooks';
+import {xanoImageSize} from '../../../utils';
 
 const RestaurantCard = ({item}) => {
   const {handleCardPress} = useRestaurantCard();
@@ -20,7 +21,7 @@ const RestaurantCard = ({item}) => {
       style={styles.listItem}>
       <ImageBackground
         resizeMode="cover"
-        source={{uri: item?.Cover?.url}}
+        source={{uri: `${item?.Cover?.url}?tpl=${xanoImageSize}.jpg`}}
         style={styles.itemImage}>
         <Image
           resizeMode="cover"

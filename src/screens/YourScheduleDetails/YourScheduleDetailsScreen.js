@@ -15,6 +15,7 @@ import {CustomModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
 import SwipeButton from 'rn-swipe-button';
+import {xanoImageSize} from '../../utils';
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -67,7 +68,7 @@ const YourScheduleDetailsScreen = () => {
                 resizeMode="cover"
                 source={{
                   priority: FastImage.priority.high,
-                  uri: bookingDetails?._offers_turbo?.Offer_Cover?.url,
+                  uri: `${bookingDetails?._offers_turbo?.Offer_Cover?.url}?tpl=${xanoImageSize}.jpg`,
                 }}
                 style={styles.serviceImage}
               />
@@ -225,7 +226,7 @@ const YourScheduleDetailsScreen = () => {
                 resizeMode="cover"
                 source={{
                   priority: FastImage.priority.high,
-                  uri: bookingDetails?._restaurant_turbo?.Cover?.url,
+                  uri: `${bookingDetails?._restaurant_turbo?.Cover?.url}?tpl=${xanoImageSize}.jpg`,
                 }}
                 style={styles.locationImage}
               />

@@ -4,6 +4,7 @@ import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES} from '../../../constants';
 import {setRestaurantDetails} from '../../../redux';
 import {navigate} from '../../../services';
+import {xanoImageSize} from '../../../utils';
 
 const useNewCoupon = () => {
   const route = useRoute();
@@ -14,6 +15,7 @@ const useNewCoupon = () => {
   const isReel = bookingDetails?.reel === '1';
   const bookingDate = new Date(bookingDetails?.BookingDay);
   const month = bookingDate.toLocaleString('en-US', {month: 'long'});
+  const profilePicUrl = `${loginData?.Profile_pic?.url}?tpl=${xanoImageSize}.jpg`;
   const timeFrame =
     bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo;
 
@@ -76,6 +78,7 @@ const useNewCoupon = () => {
   };
 
   return {
+    profilePicUrl,
     amenityDetails,
     actionNumId,
     actionName,

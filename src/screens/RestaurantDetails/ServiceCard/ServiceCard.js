@@ -14,7 +14,7 @@ import FastImage from 'react-native-fast-image';
 import {useServiceCard} from './hooks';
 import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
-import {perfectSize} from '../../../utils';
+import {perfectSize, xanoImageSize} from '../../../utils';
 
 const ServiceCard = ({item, index, deals, actionNumId}) => {
   const {handleCardPress} = useServiceCard(item);
@@ -72,7 +72,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
         <ImageBackground
           imageStyle={styles.actualPicture}
           resizeMode="cover"
-          source={{uri: item?.Offer_Cover?.url}}
+          source={{uri: `${item?.Offer_Cover?.url}?tpl=${xanoImageSize}.jpg`}}
           style={styles.imageBgContainer}>
           <Image
             source={IMAGES.overlay}

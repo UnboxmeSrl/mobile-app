@@ -16,7 +16,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {CustomCarousel} from '../../components';
 import {COLORS, FONTS} from '../../constants';
-import {checkAction} from '../../utils';
+import {checkAction, xanoImageSize} from '../../utils';
 import {useServiceDetails} from './hooks';
 
 const ServiceDetails = () => {
@@ -73,6 +73,7 @@ const ServiceDetails = () => {
           <View>
             <CustomCarousel
               Component={({item, index}) => {
+                const imageUrl = `${item?.url}?tpl=${xanoImageSize}.jpg`;
                 return (
                   <>
                     {isImageLoading && <View style={styles.imageLoader} />}
@@ -81,7 +82,7 @@ const ServiceDetails = () => {
                       resizeMode="cover"
                       source={{
                         priority: FastImage.priority.high,
-                        uri: item?.url,
+                        uri: imageUrl,
                       }}
                       style={styles.imageStyle}
                     />
