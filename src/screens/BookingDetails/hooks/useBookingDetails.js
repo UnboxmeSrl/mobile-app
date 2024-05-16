@@ -38,6 +38,11 @@ const useBookingDetails = () => {
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
+  const today = new Date();
+  const todayUtcTime = today.getTime();
+  const after24Hours =
+    todayUtcTime +
+    1 * (restaurantDetails?.booking_buffer_time ?? 0) * 60 * 60 * 1000;
 
   // console.log(
   //   'All dates:',
@@ -55,20 +60,20 @@ const useBookingDetails = () => {
   // );
 
   const getDateWeek = date => {
-    const currentDate = typeof date === 'object' ? date : new Date();
-    const januaryFirst = new Date(currentDate.getFullYear(), 0, 1);
+    const currentsDate = typeof date === 'object' ? date : new Date();
+    const januaryFirst = new Date(currentsDate.getFullYear(), 0, 1);
     const daysToNextMonday =
       januaryFirst.getDay() === 1 ? 0 : (7 - januaryFirst.getDay()) % 7;
     const nextMonday = new Date(
-      currentDate.getFullYear(),
+      currentsDate.getFullYear(),
       0,
       januaryFirst.getDate() + daysToNextMonday,
     );
 
-    return currentDate < nextMonday
+    return currentsDate < nextMonday
       ? 52
-      : currentDate > nextMonday
-      ? Math.ceil((currentDate - nextMonday) / (24 * 3600 * 1000) / 7)
+      : currentsDate > nextMonday
+      ? Math.ceil((currentsDate - nextMonday) / (24 * 3600 * 1000) / 7)
       : 1;
   };
 
@@ -114,15 +119,10 @@ const useBookingDetails = () => {
 
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
-    const today = new Date();
-    const todayUtcTime = today.getTime();
     const currentBookingDateTime = new Date(selectedDate);
     const parsedHours = parseInt(selectedTimeFame?.Start);
     const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
     currentBookingDateTime.setHours(parsedHours, parsedMinutes);
-    const after24Hours =
-      todayUtcTime +
-      1 * (restaurantDetails?.booking_buffer_time ?? 24) * 60 * 60 * 1000;
 
     // console.log(
     //   'Todays UTC Time: ' + after24Hours,
@@ -223,47 +223,60 @@ const useBookingDetails = () => {
 
   const datesBlacklistFunc = date => {
     const myDate = new Date(date);
-    const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
-    let outerFilteredRes = [];
-    // console.log('weekDay: ', weekDay);
-    // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
-    const filteredData = timeFrameData?.filter(t => {
-      const weekdays = t?.weekdays;
-      const pauseDays = t?.pause_days;
-      if (pauseDays?.length > 0) {
-        const filteredWeekdays = weekdays.filter(
-          day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
-        );
-        const filteredRes = filteredWeekdays.filter(wt => {
-          return wt?.day === weekDay;
-        });
 
-        outerFilteredRes = filteredRes;
-        // if (filteredRes?.length > 0) {
-        //   return false;
-        // } else {
-        //   return true;
-        // }
-      } else {
-        const filteredRes = weekdays.filter(wt => {
-          console.log('Condition', wt?.day, weekDay, wt?.day === weekDay);
-          return wt?.day === weekDay;
-        });
+    // console.log(
+    //   'My Date UTC & after 24 hours',
+    //   myDate.getTime(),
+    //   after24Hours,
+    //   myDate.getTime() <= after24Hours,
+    // );
 
-        outerFilteredRes = filteredRes;
-        // if (filteredRes?.length > 0) {
-        //   return true;
-        // } else {
-        //   return false;
-        // }
-      }
-    });
-    console.log('outerFilteredRes', JSON.stringify(outerFilteredRes));
-    console.log('filteredData: ' + JSON.stringify(filteredData));
-    if (outerFilteredRes?.length > 0) {
-      return false;
-    } else {
+    if (myDate.getTime() <= after24Hours) {
+      // setSelectedDate(new Date(after24Hours));
       return true;
+    } else {
+      const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+      let outerFilteredRes = [];
+      // console.log('weekDay: ', weekDay);
+      // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
+      const filteredData = timeFrameData?.filter(t => {
+        const weekdays = t?.weekdays;
+        const pauseDays = t?.pause_days;
+        if (pauseDays?.length > 0) {
+          const filteredWeekdays = weekdays.filter(
+            day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
+          );
+          const filteredRes = filteredWeekdays.filter(wt => {
+            return wt?.day === weekDay;
+          });
+
+          outerFilteredRes = filteredRes;
+          // if (filteredRes?.length > 0) {
+          //   return false;
+          // } else {
+          //   return true;
+          // }
+        } else {
+          const filteredRes = weekdays.filter(wt => {
+            // console.log('Condition', wt?.day, weekDay, wt?.day === weekDay);
+            return wt?.day === weekDay;
+          });
+
+          outerFilteredRes = filteredRes;
+          // if (filteredRes?.length > 0) {
+          //   return true;
+          // } else {
+          //   return false;
+          // }
+        }
+      });
+      // console.log('outerFilteredRes', JSON.stringify(outerFilteredRes));
+      console.log('filteredData: ' + JSON.stringify(filteredData));
+      if (outerFilteredRes?.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
     }
   };
 
@@ -331,11 +344,20 @@ const useBookingDetails = () => {
       //   setWeekDayWiseTimeSlots([]);
       // }
     });
+    const chosenDate = new Date(selectedDate);
+    if (chosenDate?.getTime() <= after24Hours) {
+      const newSelectedDate = new Date(after24Hours + 1 * 24 * 60 * 60 * 1000);
+      setSelectedDate(newSelectedDate);
+      setWeekDayWiseTimeSlots([]);
+    }
+  }, [selectedDate]);
 
+  useEffect(() => {
+    setSelectedDate(new Date(after24Hours));
     setTimeout(() => {
       setIsDatesLoading(false);
     }, 2000);
-  }, [selectedDate]);
+  }, []);
 
   useEffect(() => {
     console.log('selected Date:', selectedDate);
@@ -370,6 +392,7 @@ const useBookingDetails = () => {
     currentDate,
     currentMonth,
     currentWeekDay,
+    after24Hours,
     datesBlacklistFunc,
     endDate,
     handleBackPress,

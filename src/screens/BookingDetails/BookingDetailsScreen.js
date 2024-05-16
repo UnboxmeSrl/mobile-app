@@ -23,6 +23,7 @@ const BookingDetailsScreen = () => {
     datesBlacklistFunc,
     currentWeekDay,
     currentDate,
+    after24Hours,
     selectedTimeFame,
     setSelectedTimeFame,
     startDate,
@@ -185,6 +186,7 @@ const BookingDetailsScreen = () => {
                           isShow && (
                             <TouchableOpacity
                               onPress={() => setSelectedTimeFame(item)}
+                              key={index.toString()}
                               style={[
                                 styles.hoursContainer,
                                 isSelected && styles.selectedTimeFrameStyle,
