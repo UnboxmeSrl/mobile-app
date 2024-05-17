@@ -15,10 +15,10 @@ const SecondOnboarding = () => {
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text allowFontScaling={false} style={styles.titleText}>
-            {`With pre-planned collab, you `}
+            {`With pre-planned collabs, you `}
             <Text
               allowFontScaling={false}
-              style={styles.colorChangeText}>{`only need to Book `}</Text>
+              style={styles.colorChangeText}>{`only need to book`}</Text>
             {`!`}
           </Text>
         </View>

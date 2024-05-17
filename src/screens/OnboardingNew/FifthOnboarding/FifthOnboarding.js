@@ -14,7 +14,7 @@ const FifthOnboarding = () => {
             {`Climb your path to `}
             <Text
               allowFontScaling={false}
-              style={styles.colorChangeText}>{`Legendary level  `}</Text>
+              style={styles.colorChangeText}>{`legendary level `}</Text>
           </Text>
         </View>
       </View>

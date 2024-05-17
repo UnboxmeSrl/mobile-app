@@ -18,11 +18,11 @@ const FourthOnboarding = () => {
             {`Design and incredible adventure with `}
             <Text
               allowFontScaling={false}
-              style={styles.colorChangeText}>{`influencer Villas`}</Text>
-            {`, and `}
+              style={styles.colorChangeText}>{`influencer villas`}</Text>
+            {` and `}
             <Text
               allowFontScaling={false}
-              style={styles.colorChangeText}>{`Hotels`}</Text>
+              style={styles.colorChangeText}>{`hotels`}</Text>
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
@@ -30,7 +30,7 @@ const FourthOnboarding = () => {
             allowFontScaling={false}
             style={
               styles.descriptionText
-            }>{`Design your entire holiday with Claris and become an aknowledged travel influencer `}</Text>
+            }>{`Design your entire holiday with Claris and become an acknowledged travel influencer `}</Text>
         </View>
       </View>
     </View>

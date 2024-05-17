@@ -20,7 +20,7 @@ const ThirdOnboarding = () => {
               allowFontScaling={false}
               style={
                 styles.colorChangeText
-              }>{`Restaurants, Beauty saloons, Sport lessons `}</Text>
+              }>{`restaurants, beauty salons, sport lessons `}</Text>
             {`and much more!`}
           </Text>
         </View>

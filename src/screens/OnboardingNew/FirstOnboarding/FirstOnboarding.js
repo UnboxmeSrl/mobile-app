@@ -18,8 +18,8 @@ const FirstOnboarding = () => {
             {`Collaborate with the `}
             <Text
               allowFontScaling={false}
-              style={styles.colorChangeText}>{`Top places `}</Text>
-            {`of Bali`}
+              style={styles.colorChangeText}>{`top places `}</Text>
+            {`in Bali`}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
