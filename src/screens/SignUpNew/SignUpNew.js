@@ -23,7 +23,7 @@ const SignUpNew = () => {
   const isFromBookRedirected = route.params?.isFromBookRedirected;
   const navigateToWebview = useCallback(
     uri => {
-      navigate({params: {uri}, routeName: MODAL_NAMES.WebView});
+      navigate(MODAL_NAMES.WebView, {uri});
     },
     [navigate],
   );

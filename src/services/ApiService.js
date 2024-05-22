@@ -38,6 +38,7 @@ export default {
         'Accept-Language': 'en-US',
       },
     };
+    // console.log('URL: ' + url);
     const response = await axios.get(url, options).catch(err => {
       // showToastError(err);
     });

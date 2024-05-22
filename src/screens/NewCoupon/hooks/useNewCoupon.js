@@ -65,10 +65,13 @@ const useNewCoupon = () => {
   };
 
   const handleRestaurantRedirect = item => {
-    dispatch(setRestaurantDetails(item));
+    const restaurantId = item?.id;
     const cityData = item?._cities;
 
-    navigate(SCREEN_NAMES.RestaurantDetails, {cityData: cityData});
+    navigate(SCREEN_NAMES.RestaurantDetails, {
+      restaurantId: restaurantId,
+      cityData: cityData,
+    });
   };
 
   const handleGoToContentPress = () => {

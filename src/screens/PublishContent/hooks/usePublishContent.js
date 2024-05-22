@@ -13,6 +13,7 @@ import {
   checkAction,
   checkActionName,
   checkPermission,
+  deadlineDaysCount,
   isAndroid,
   isIos,
   openCamera,
@@ -39,8 +40,6 @@ const usePublishContent = () => {
     useState(false);
   const [updatedContentDetails, setUpdatedContentDetails] = useState();
 
-  // console.log('🕉️', contentPhotos);
-
   let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = checkAction(actionNumId)?.action_icon;
   let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0;
@@ -56,6 +55,12 @@ const usePublishContent = () => {
   const timeFrame =
     contentDetails?._timeframes ?? contentDetails?._timeframes_turbo;
   const dispatch = useDispatch();
+
+  // For deadline days of content publish from (current date) to (booking date + deadline days)
+  const deadlineDays = deadlineDaysCount(
+    contentDetails?.BookingDay,
+    contentDetails?._actions_turbo?.Days_deadline,
+  );
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.YourScheduleScreen, {
@@ -187,6 +192,7 @@ const usePublishContent = () => {
   return {
     link,
     setLink,
+    deadlineDays,
     contentPhotos,
     contentDetails,
     contentUploadRef,

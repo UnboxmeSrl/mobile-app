@@ -24,6 +24,7 @@ const PublishContentScreen = () => {
     link,
     setLink,
     approvalStage,
+    deadlineDays,
     contentPhotos,
     contentDetails,
     contentUploadRef,
@@ -110,11 +111,11 @@ const PublishContentScreen = () => {
                   source={IMAGES.info}
                   style={styles.infoIcon}
                 />
-                <Text
-                  allowFontScaling={false}
-                  style={
-                    styles.deadLineText
-                  }>{`${contentDetails?._actions_turbo?.Days_deadline} Days left`}</Text>
+                <Text allowFontScaling={false} style={styles.deadLineText}>
+                  {deadlineDays > 0
+                    ? `${deadlineDays} Days left`
+                    : 'Missed Deadline'}
+                </Text>
               </View>
             </View>
             {/* <View

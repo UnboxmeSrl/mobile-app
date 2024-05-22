@@ -21,6 +21,7 @@ import {RestaurantCard} from './RestaurantCard';
 const RestaurantsScreen = () => {
   const {
     isLoading,
+    isEndLoading,
     cityData,
     categories,
     selectedIndex,
@@ -28,6 +29,7 @@ const RestaurantsScreen = () => {
     refreshing,
     onRefresh,
     // categoriesIds,
+    handleOnReached,
     restaurantsData,
     onCategoryChange,
     handleLocationPress,
@@ -78,6 +80,14 @@ const RestaurantsScreen = () => {
               }
               contentContainerStyle={styles.listMain}
               data={restaurantsData}
+              onEndReached={handleOnReached}
+              ListFooterComponent={
+                isEndLoading && (
+                  <View style={styles.loaderContainer}>
+                    <ActivityIndicator color={COLORS.newPrimary} size={20} />
+                  </View>
+                )
+              }
               getItemLayout={(_, index) => ({
                 index,
                 length: verticalScale(200),

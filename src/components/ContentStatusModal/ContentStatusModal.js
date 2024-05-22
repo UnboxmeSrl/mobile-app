@@ -349,10 +349,9 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
-    width: '40%',
   },
   locationTextContainer: {
-    width: '95%',
+    paddingRight: scale(50),
   },
   nameLocationMainRow: {
     alignItems: 'center',

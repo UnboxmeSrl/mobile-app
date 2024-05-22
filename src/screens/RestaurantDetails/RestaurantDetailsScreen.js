@@ -37,66 +37,71 @@ const RestaurantDetails = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <ScrollView>
-        <View>
-          {restaurantDetails?.GalleryRestaurant ? (
-            <CustomCarousel
-              Component={({item, index}) => {
-                const imageUrl = `${item?.url}?tpl=${xanoImageSize}.jpg`;
-                return (
-                  <>
-                    {isImageLoading && <View style={styles.imageLoader} />}
-                    <FastImage
-                      onLoadEnd={() => setIsImageLoading(false)}
-                      resizeMode="cover"
-                      source={{
-                        priority: FastImage.priority.high,
-                        uri: imageUrl,
-                      }}
-                      style={[styles.imageStyle]}
-                    />
-                  </>
-                );
-              }}
-              data={restaurantDetails?.GalleryRestaurant}
-            />
-          ) : (
-            <View style={styles.emptyImages}>
-              <Text allowFontScaling={false} style={styles.emptyImagesText}>
-                Images are not available for this restaurant.
-              </Text>
-            </View>
-          )}
-          <TouchableOpacity
-            onPress={handleBackPress}
-            style={styles.backIconContainer}>
-            <Image
-              resizeMode="cover"
-              source={IMAGES.back}
-              style={[
-                styles.backIcon,
-                !restaurantDetails?.GalleryRestaurant && {
-                  tintColor: COLORS.black,
-                },
-              ]}
-            />
-          </TouchableOpacity>
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={COLORS.newPrimary} size={20} />
         </View>
-        <View style={styles.restaurantDetailsContainer}>
-          <Text allowFontScaling={false} style={styles.restaurantNameText}>
-            {restaurantDetails?.Name}
-          </Text>
-          {restaurantDetails?.Adress && (
+      ) : (
+        <ScrollView>
+          <View>
+            {restaurantDetails?.GalleryRestaurant ? (
+              <CustomCarousel
+                Component={({item, index}) => {
+                  const imageUrl = `${item?.url}?tpl=${xanoImageSize}.jpg`;
+                  return (
+                    <>
+                      {isImageLoading && <View style={styles.imageLoader} />}
+                      <FastImage
+                        onLoadEnd={() => setIsImageLoading(false)}
+                        resizeMode="cover"
+                        source={{
+                          priority: FastImage.priority.high,
+                          uri: imageUrl,
+                        }}
+                        style={[styles.imageStyle]}
+                      />
+                    </>
+                  );
+                }}
+                data={restaurantDetails?.GalleryRestaurant}
+              />
+            ) : (
+              <View style={styles.emptyImages}>
+                <Text allowFontScaling={false} style={styles.emptyImagesText}>
+                  Images are not available for this restaurant.
+                </Text>
+              </View>
+            )}
             <TouchableOpacity
-              onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}>
-              <Text
-                allowFontScaling={false}
-                style={styles.restaurantAddressText}>
-                {restaurantDetails?.Adress}
-              </Text>
+              onPress={handleBackPress}
+              style={styles.backIconContainer}>
+              <Image
+                resizeMode="cover"
+                source={IMAGES.back}
+                style={[
+                  styles.backIcon,
+                  !restaurantDetails?.GalleryRestaurant && {
+                    tintColor: COLORS.black,
+                  },
+                ]}
+              />
             </TouchableOpacity>
-          )}
-          {/* <View style={styles.socialLinksContainer}>
+          </View>
+          <View style={styles.restaurantDetailsContainer}>
+            <Text allowFontScaling={false} style={styles.restaurantNameText}>
+              {restaurantDetails?.Name}
+            </Text>
+            {restaurantDetails?.Adress && (
+              <TouchableOpacity
+                onPress={() => handleRedirection(restaurantDetails?.Maps_Link)}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.restaurantAddressText}>
+                  {restaurantDetails?.Adress}
+                </Text>
+              </TouchableOpacity>
+            )}
+            {/* <View style={styles.socialLinksContainer}>
             <TouchableOpacity
               onPress={() => handleRedirection(restaurantDetails?.Tiktok)}
               style={styles.commonSocialLinksContainer}
@@ -125,21 +130,21 @@ const RestaurantDetails = () => {
               <Text allowFontScaling={false}  style={styles.commonStyleSocialLinkText}>Website</Text>
             </TouchableOpacity>
           </View> */}
-          {!!restaurantDetails?.About && (
-            <View style={styles.aboutTitleContainer}>
-              <Text allowFontScaling={false} style={styles.aboutTitleText}>
-                About
-              </Text>
-              <Text
-                allowFontScaling={false}
-                style={styles.aboutDescriptionText}>
-                {restaurantDetails?.About}
-              </Text>
-            </View>
-          )}
+            {!!restaurantDetails?.About && (
+              <View style={styles.aboutTitleContainer}>
+                <Text allowFontScaling={false} style={styles.aboutTitleText}>
+                  About
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.aboutDescriptionText}>
+                  {restaurantDetails?.About}
+                </Text>
+              </View>
+            )}
 
-          {/* <Text allowFontScaling={false}  style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
-          {/* <TouchableOpacity style={styles.howItWorksContainer}>
+            {/* <Text allowFontScaling={false}  style={styles.infoText}>5 spots are lefts for other influencers this week</Text> */}
+            {/* <TouchableOpacity style={styles.howItWorksContainer}>
             <Text allowFontScaling={false}  style={styles.aboutTitleText}>How it works </Text>
             <Image resizeMode="cover" source={IMAGES.back} style={styles.rightIcon} />
           </TouchableOpacity>
@@ -147,25 +152,20 @@ const RestaurantDetails = () => {
           <View style={styles.previewTextContainer}>
             <Text allowFontScaling={false}  style={styles.previewText}>Preview available timeframes </Text>
           </View> */}
-          <View style={styles.chooseServiceContainer}>
-            <Text allowFontScaling={false} style={styles.previewText}>
-              Choose Service
-            </Text>
-          </View>
+            <View style={styles.chooseServiceContainer}>
+              <Text allowFontScaling={false} style={styles.previewText}>
+                Choose Service
+              </Text>
+            </View>
 
-          {/* <Categories
+            {/* <Categories
             categoriesIds={categoriesIds}
             category={filter}
             customCategories={serviceCategories}
             onPress={onCategoryChange}
           /> */}
-        </View>
-        <View style={styles.serviceCardsContainer}>
-          {isLoading ? (
-            <View style={styles.loaderContainer}>
-              <ActivityIndicator color={COLORS.newPrimary} size={20} />
-            </View>
-          ) : (
+          </View>
+          <View style={styles.serviceCardsContainer}>
             <FlatList
               ListEmptyComponent={
                 !isLoading &&
@@ -194,9 +194,9 @@ const RestaurantDetails = () => {
               }}
               showsHorizontalScrollIndicator={false}
             />
-          )}
-        </View>
-      </ScrollView>
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

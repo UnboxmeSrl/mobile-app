@@ -4,8 +4,8 @@ export const Api = {
   LOCATIONS: {
     CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/category_venues_turbo`,
     CITIES: `${BASE_URL}/api:WVfdccpj/cities`,
-    CITY_WISE_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/getRestaurantByCity_0`,
-    GET_SERVICES: `${BASE_URL}/api:bwh6Xc5O/getServicesForRestaurant`,
+    CITY_WISE_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/getRestaurantByCity`,
+    GET_RESTAURANT_DETAILS: `${BASE_URL}/api:bwh6Xc5O/get_restaurant_and_service`,
     GET_SERVICE_CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/serviceCategories`,
     GET_SERVICE_DEALS_LEFT: `${BASE_URL}/api:bwh6Xc5O/get_deal_left`,
     RESTAURANTS: `${BASE_URL}/api:WVfdccpj/restaurant`,
@@ -35,7 +35,7 @@ export const Api = {
     GET_ALL_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/actions_turbo`,
   },
   CONTENT: {
-    GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content`,
+    GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content_new`,
     UPDATE_CONTENT_URL: `${BASE_URL}/api:bwh6Xc5O/update_content_url`,
   },
   SIGN_UP_WITH_EMAIL: {

@@ -66,10 +66,7 @@ const ContentScreen = () => {
                   onPress={() => setSelectedApp(index)}
                   style={[
                     styles.cardContainer,
-                    selectedApp === index && {
-                      borderColor: COLORS.newPrimary,
-                      borderWidth: 1,
-                    },
+                    selectedApp === index && styles.selectedAppStyle,
                   ]}>
                   <View style={styles.socialMediaMainDetailsContainer}>
                     <View style={styles.socialMediaImageContainer}>
@@ -114,7 +111,12 @@ const ContentScreen = () => {
           />
         ) : (
           <FlatList
-            data={actions?.duo_actions}
+            // data={[bookingDetails._actions_turbo]}
+            data={
+              actionNumId === 6
+                ? actions?.duo_actions
+                : [bookingDetails._actions_turbo]
+            }
             keyExtractor={(_, index) => index.toString()}
             renderItem={({item, index}) => {
               return (
@@ -122,10 +124,7 @@ const ContentScreen = () => {
                   onPress={() => setSelectedApp(index)}
                   style={[
                     styles.cardContainer,
-                    selectedApp === index && {
-                      borderColor: COLORS.black,
-                      borderWidth: 1,
-                    },
+                    selectedApp === index && styles.selectedAppStyle,
                   ]}>
                   <View style={styles.socialMediaMainDetailsContainer}>
                     <View style={styles.socialMediaImageContainer}>
@@ -195,6 +194,10 @@ const ContentScreen = () => {
 export default ContentScreen;
 
 const styles = StyleSheet.create({
+  selectedAppStyle: {
+    borderColor: COLORS.newPrimary,
+    borderWidth: 1,
+  },
   mainScrollView: {
     backgroundColor: COLORS.white,
   },
@@ -311,7 +314,7 @@ const styles = StyleSheet.create({
   },
   socialMediaNameContainer: {
     marginLeft: scale(20),
-    width: '40%',
+    width: '60%',
   },
   socialMediaNameText: {
     color: COLORS.black,

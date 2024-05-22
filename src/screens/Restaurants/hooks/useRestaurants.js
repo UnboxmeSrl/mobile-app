@@ -7,6 +7,7 @@ import {SCREEN_NAMES} from '../../../constants';
 import {geolocationSetting} from '../../../utils';
 import {getCategories, getRestaurants} from '../../../services';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {setRestaurantDetails} from '../../../redux';
 
 const useRestaurants = () => {
   // const categoriesIds = useSelector(selectCategoryById)
@@ -15,7 +16,10 @@ const useRestaurants = () => {
   // const cityData = useNavigationParam('cityData')
   const cityData = useSelector(state => state.locationSlice.city);
   const [isLoading, setIsLoading] = useState(true);
-  const [restaurantsData, setRestaurantsData] = useState();
+  const [isEndLoading, setIsEndLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [restaurantApiCallData, setRestaurantApiCallData] = useState();
+  const [restaurantsData, setRestaurantsData] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [filter, setFilter] = useState(0);
   const [categories, setCategories] = useState([]);
@@ -27,8 +31,16 @@ const useRestaurants = () => {
   const onRefresh = () => {
     setRefreshing(true);
     getCategoriesData();
-    getRestaurantsData();
+    getInitialRestaurantsData();
     setRefreshing(false);
+  };
+
+  const handleOnReached = () => {
+    if (restaurantApiCallData?.nextPage) {
+      setPage(restaurantApiCallData?.nextPage);
+    } else {
+      setIsEndLoading(false);
+    }
   };
 
   const requestLocationPermission = useCallback(async () => {
@@ -70,22 +82,30 @@ const useRestaurants = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('check useEffect n restarant screen');
-    requestLocationPermission();
-  }, [requestLocationPermission]);
-
-  const getRestaurantsData = async () => {
+  const getInitialRestaurantsData = async () => {
     setIsLoading(true);
     const prepData = {
       category_venue_id: filter,
       city_id: cityData?.id,
+      page: 1,
     };
     const res = await getRestaurants(prepData);
-    setRestaurantsData(res);
+    setRestaurantApiCallData(res);
+    setRestaurantsData(res?.items);
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+  };
+
+  const getRestaurantsData = async () => {
+    const prepData = {
+      category_venue_id: filter,
+      city_id: cityData?.id,
+      page: page,
+    };
+    const res = await getRestaurants(prepData);
+    setRestaurantApiCallData(res);
+    setRestaurantsData([...restaurantsData, ...res?.items]);
   };
 
   const sortedRestaurants = useMemo(
@@ -130,13 +150,31 @@ const useRestaurants = () => {
   };
 
   useEffect(() => {
-    getRestaurantsData();
+    requestLocationPermission();
+  }, [requestLocationPermission]);
+
+  useEffect(() => {
+    if (page > 1) {
+      getRestaurantsData();
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  useEffect(() => {
+    getInitialRestaurantsData();
+    getCategoriesData();
+  }, []);
+
+  useEffect(() => {
+    getInitialRestaurantsData();
   }, [filter]);
 
   useEffect(() => {
-    getCategoriesData();
-  }, []);
+    if (isFocused) {
+      dispatch(setRestaurantDetails({}));
+    }
+  }, [isFocused]);
 
   return {
     categories,
@@ -146,11 +184,14 @@ const useRestaurants = () => {
     filter,
     selectedIndex,
     handleLocationPress,
+    handleOnReached,
     isLoading,
+    isEndLoading,
     onCategoryChange,
     onRefresh,
     refreshing,
-    restaurantsData: sortedRestaurants,
+    // restaurantsData: sortedRestaurants,
+    restaurantsData,
     setFilter,
     userLocation,
   };

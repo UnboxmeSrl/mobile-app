@@ -41,9 +41,9 @@ export const getServiceCategories = async () => {
   }
 };
 
-export const getServices = async data => {
+export const getRestaurantDetails = async data => {
   try {
-    const url = Api.LOCATIONS.GET_SERVICES;
+    const url = Api.LOCATIONS.GET_RESTAURANT_DETAILS;
     const response = await Fetch.post(url, data);
     return response;
   } catch (error) {

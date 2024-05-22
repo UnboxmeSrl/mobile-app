@@ -1,1 +1,1 @@
-export { default as ContentStatusModal } from './ContentStatusModal'
+export {default as ContentStatusModal} from './ContentStatusModal';

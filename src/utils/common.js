@@ -142,6 +142,28 @@ export const checkContentStatus = statusName => {
   }
 };
 
+export const deadlineDaysCount = (bookDate, deadlineDays) => {
+  const currentDate = new Date();
+  const bookingDate = new Date(bookDate);
+  const millisecondsDiff = bookingDate.getTime() - currentDate.getTime();
+  let calculatedDeadlineDays =
+    Math.round(millisecondsDiff / (1000 * 3600 * 24)) + deadlineDays;
+
+  if (calculatedDeadlineDays < 0) {
+    calculatedDeadlineDays = 0;
+  }
+
+  console.log(
+    'Deadline days',
+    currentDate.toDateString(),
+    '---',
+    bookingDate.toDateString(),
+    calculatedDeadlineDays,
+  );
+
+  return calculatedDeadlineDays;
+};
+
 export const hasNotch = !DeviceInfo.hasNotch();
 export const isIos = Platform.OS === 'ios';
 export const isAndroid = Platform.OS === 'android';

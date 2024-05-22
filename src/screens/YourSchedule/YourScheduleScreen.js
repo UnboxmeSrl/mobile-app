@@ -17,7 +17,7 @@ import {IMAGES} from '../../assets';
 import {ContentStatusModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourSchedule} from './hooks';
-import {xanoImageSize} from '../../utils';
+import {deadlineDaysCount, xanoImageSize} from '../../utils';
 
 const YourScheduleScreen = () => {
   const {
@@ -322,6 +322,13 @@ const YourScheduleScreen = () => {
               if (item?.content_status_turbo_id) {
                 contentApprovalStatus = item?._content_status_turbo?.name;
               }
+
+              // For deadline days of content publish from (current date) to (booking date + deadline days)
+              const deadlineDays = deadlineDaysCount(
+                item?.BookingDay,
+                item?._actions_turbo?.Days_deadline,
+              );
+
               return (
                 <TouchableOpacity
                   style={contentStyles.cardContainer}
@@ -432,9 +439,11 @@ const YourScheduleScreen = () => {
                             />
                             <Text
                               allowFontScaling={false}
-                              style={
-                                contentStyles.deadLineText
-                              }>{`${item?._actions_turbo?.Days_deadline} Days left`}</Text>
+                              style={contentStyles.deadLineText}>
+                              {deadlineDays > 0
+                                ? `${deadlineDays} Days left`
+                                : 'Missed Deadline'}
+                            </Text>
                           </View>
                         )}
                       </View>
@@ -914,7 +923,7 @@ const contentStyles = StyleSheet.create({
   infoIcon: {
     height: moderateScale(12),
     width: moderateScale(12),
-    marginTop: verticalScale(5),
+    marginTop: verticalScale(2),
   },
   ratingContainer: {
     flexDirection: 'row',

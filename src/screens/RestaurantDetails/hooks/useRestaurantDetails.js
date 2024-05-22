@@ -3,19 +3,23 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Linking} from 'react-native';
 import {
   getCategories,
+  getRestaurantDetails,
   getServiceCategories,
-  getServices,
   navigate,
 } from '../../../services';
 import {SCREEN_NAMES} from '../../../constants';
 import {useIsFocused, useRoute} from '@react-navigation/native';
+import {setRestaurantDetails} from '../../../redux';
 
 const useRestaurantDetails = () => {
   // const categoriesIds = useSelector(selectCategoryById)
+
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
   const route = useRoute();
+  const restaurantId = route?.params?.restaurantId;
+  console.log('Restaurant Id: ' + restaurantId);
   const [services, setServices] = useState([]);
   const cityData = route.params?.cityData;
   const [isLoading, setIsLoading] = useState(false);
@@ -25,14 +29,15 @@ const useRestaurantDetails = () => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  const getServicesData = async () => {
+  const getRestaurantDetailsData = async () => {
     setIsLoading(true);
     const prepData = {
       category_id: filter,
-      restaurant_id: restaurantDetails?.id,
+      restaurant_id: restaurantId,
     };
-    const res = await getServices(prepData);
-    setServices(res);
+    const res = await getRestaurantDetails(prepData);
+    dispatch(setRestaurantDetails(res?.restaurant));
+    setServices(res?.services);
     setIsLoading(false);
   };
 
@@ -58,11 +63,8 @@ const useRestaurantDetails = () => {
 
   const handleBackPress = () => {
     if (cityData?.id) {
-      navigate({
-        params: {
-          cityData: cityData,
-        },
-        routeName: SCREEN_NAMES.Restaurants,
+      navigate(SCREEN_NAMES.Restaurants, {
+        cityData: cityData,
       });
     } else {
       navigate(SCREEN_NAMES.Restaurants);
@@ -81,7 +83,7 @@ const useRestaurantDetails = () => {
 
   useEffect(() => {
     if (isFocused) {
-      getServicesData();
+      getRestaurantDetailsData();
     }
   }, [isFocused, filter]);
 

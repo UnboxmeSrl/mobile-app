@@ -21,13 +21,23 @@ const useContent = () => {
   const route = useRoute();
   const [selectedApp, setSelectedApp] = useState(0);
   const bookingDetails = route.params?.bookingDetails;
-  const actionName = route.params?.actionName;
+  let actionName = route.params?.actionName;
   const actionNumId = route.params?.actionNumId;
   const [isLoading, setIsLoading] = useState(false);
   const [diaryItems, setDiaryItems] = useState([]);
   const [isDataFetching, setIsDataFetching] = useState(false);
   const actions = checkAction(actionNumId, socialActions);
 
+  let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
+
+  if (actionNumId === 6) {
+    icon = bookingDetails?._diary_action_turbo?.action_icon?.url;
+    actionName = bookingDetails?._diary_action_turbo?.action_for_others;
+  } else if (bookingDetails?.diary_action_turbo_id) {
+    actionName = bookingDetails?._diary_action_turbo?.action;
+  }
+
+  console.log('Booking Details:', actionNumId, bookingDetails);
   const dispatch = useDispatch();
 
   const getDiaryActionsData = async () => {
