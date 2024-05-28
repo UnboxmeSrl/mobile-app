@@ -316,7 +316,7 @@ const PublishContentScreen = () => {
 
           <TouchableOpacity style={styles.howItWorksContainer}>
             <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
-              How it works{' '}
+              How it works
             </Text>
             <Image
               resizeMode="contain"

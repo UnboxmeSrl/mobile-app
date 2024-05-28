@@ -35,6 +35,7 @@ export const COLORS = {
   tartOrange: '#FC4949',
   tertiary: '#FAF4EF',
   veryLight: '#FAF6F5',
+  veryLight02: '#FAF6F529',
   veryLight04: 'rgba(250,246, 245, 0.4)',
   veryLight06: 'rgba(250,246, 245, 0.8)',
   white: '#FFFFFF',
@@ -70,4 +71,6 @@ export const COLORS = {
   crayola: '#FFDD65',
   red: '#FF0000',
   tickleMePink: '#FF87B2',
+  newRedPrimary: '#FF2A43',
+  blueViolet: '#8A3BEE',
 };

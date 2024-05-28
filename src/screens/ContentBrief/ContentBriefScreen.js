@@ -69,7 +69,7 @@ const ContentBriefScreen = () => {
           renderItem={({item, index}) => {
             let tag =
               index === 1
-                ? '@claris.app'
+                ? bookingDetails?._restaurant_turbo?.Tag2
                 : bookingDetails?._restaurant_turbo?.Tags;
 
             return (

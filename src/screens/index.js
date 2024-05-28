@@ -21,3 +21,4 @@ export * from './RejectedScreen';
 export * from './OnboardingNew';
 export * from './OtherSignUpOptions';
 export * from './ContentUploadGuide';
+export * from './Tutorials';

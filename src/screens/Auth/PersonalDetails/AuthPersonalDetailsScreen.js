@@ -86,6 +86,7 @@ const AuthPersonalDetailsScreen = () => {
             <TextInput
               allowFontScaling={false}
               placeholder={'Phone number'}
+              placeholderTextColor={COLORS.grey}
               value={phoneNumber}
               onChangeText={val => {
                 const strippedInput = val.replace(/\D/g, '');

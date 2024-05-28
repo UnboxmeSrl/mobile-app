@@ -124,3 +124,13 @@ export const deleteUserAccount = async userId => {
 //     console.log(error);
 //   }
 // };
+
+export const getTutorialsList = async () => {
+  try {
+    const url = Api.TUTORIALS.GET_TUTORIALS_LIST;
+    const response = await Fetch.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -45,4 +45,7 @@ export const Api = {
   SIGN_UP_WITH_PHONE: {
     GET_OTP: `${BASE_URL}/api:bwh6Xc5O/otp/number`,
   },
+  TUTORIALS: {
+    GET_TUTORIALS_LIST: `${BASE_URL}/api:bwh6Xc5O/tutorials_info`,
+  },
 };

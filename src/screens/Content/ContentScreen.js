@@ -180,7 +180,7 @@ const ContentScreen = () => {
                 onPress={handleNextPress}
                 style={styles.nextBtnContainer}>
                 <Text allowFontScaling={false} style={styles.nextBtnText}>
-                  Next{' '}
+                  Next
                 </Text>
               </TouchableOpacity>
             )}

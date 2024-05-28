@@ -19,6 +19,7 @@ const OnboardingNew = () => {
       navigation.navigate(SCREEN_NAMES.SignUpNew);
     }
   }, [isOnBoarding, navigation]);
+
   return (
     <View style={styles.mainContainer}>
       <OnboardingCarousel

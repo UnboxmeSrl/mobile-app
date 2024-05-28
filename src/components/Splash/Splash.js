@@ -132,6 +132,7 @@ const Splash = () => {
     isFirstLogin,
     rejectedUser,
   ]);
+
   useEffect(() => {
     setTimeout(() => {
       // SplashScreen.hide();

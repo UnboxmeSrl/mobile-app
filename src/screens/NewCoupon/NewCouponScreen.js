@@ -250,7 +250,7 @@ const NewCouponScreen = () => {
               <Text
                 allowFontScaling={false}
                 style={styles.socialMediaTitleText}>
-                {`${bookingDetails?._restaurant_turbo?.Name}`}{' '}
+                {`${bookingDetails?._restaurant_turbo?.Name}`}
               </Text>
               <Image
                 resizeMode="contain"
@@ -265,7 +265,7 @@ const NewCouponScreen = () => {
               <Text
                 allowFontScaling={false}
                 style={styles.socialMediaTitleText}>
-                Content brief{' '}
+                Content brief
               </Text>
               <Image
                 resizeMode="contain"

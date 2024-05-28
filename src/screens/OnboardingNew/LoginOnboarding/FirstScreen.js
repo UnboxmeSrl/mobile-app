@@ -27,7 +27,7 @@ const FirstScreen = () => {
             allowFontScaling={false}
             style={
               styles.descriptionText
-            }>{`Only Reel and Tiktok requests will require approvation `}</Text>
+            }>{`Only Reel and Tiktok requests require approval from the venue `}</Text>
         </View>
       </View>
     </View>

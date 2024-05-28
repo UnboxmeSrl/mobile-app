@@ -31,6 +31,7 @@ import {
   ServiceDetails,
   SettingsNew,
   SignUpNew,
+  TutorialsScreen,
   YourScheduleDetailsScreen,
 } from '../screens';
 
@@ -161,6 +162,10 @@ const MainStack = () => {
       <StackMain.Screen
         name={SCREEN_NAMES.ContentUploadGuide}
         component={ContentUploadGuide}
+      />
+      <StackMain.Screen
+        name={SCREEN_NAMES.TutorialsScreen}
+        component={TutorialsScreen}
       />
     </StackMain.Navigator>
   );

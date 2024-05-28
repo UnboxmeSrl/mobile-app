@@ -27,7 +27,6 @@ const CustomButton = ({
           <Text
             allowFontScaling={false}
             style={[styles.btnText, disabled && styles.disabledBtnText]}>
-            {' '}
             {title}
           </Text>
         )}

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
   },
   descriptionContainer: {
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(5),
     width: '85%',
     alignSelf: 'center',
   },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textsMainContainer: {
-    marginTop: verticalScale(0),
+    marginTop: verticalScale(-15),
   },
   imageStyle: {
     height: verticalScale(410),

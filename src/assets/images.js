@@ -107,4 +107,6 @@ export const IMAGES = {
   clarisLogo: require('./images/claris-logo.png'),
   share: require('./images/share.png'),
   swipeButton: require('./images/swipe-button.png'),
+  followInstagram: require('./images/follow-instagram.png'),
+  playBlack: require('./images/play-black.png'),
 };

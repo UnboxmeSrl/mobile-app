@@ -24,10 +24,10 @@ const SecondScreen = () => {
         </View>
         <View style={styles.descriptionContainer}>
           <Text allowFontScaling={false} style={styles.descriptionText}>
-            {`Show your coupon to the staff, to unlock the `}
+            {`Show your coupon to the staff to unlock the `}
             <Text
               allowFontScaling={false}
-              style={styles.boldedText}>{`free service`}</Text>
+              style={styles.boldedText}>{`free services`}</Text>
           </Text>
         </View>
       </View>

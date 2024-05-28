@@ -141,6 +141,7 @@ const BookingDetailsScreen = () => {
                   showMonth={false}
                   showYear={false}
                   startingDate={startDate}
+                  useIsoWeekday={false}
                   //   renderDate={renderDate}
                 />
               </View>

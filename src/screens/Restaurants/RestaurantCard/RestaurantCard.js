@@ -46,11 +46,11 @@ const RestaurantCard = ({item}) => {
           <Text allowFontScaling={false} style={styles.restaurantNameText}>
             {item?.Name}
           </Text>
-          {!!item.distance && (
+          {/* {!!item.distance && (
             <Text allowFontScaling={false} style={styles.distanceText}>
               {item.distance.toFixed(2)} km from here
             </Text>
-          )}
+          )} */}
         </View>
       </ImageBackground>
     </TouchableOpacity>

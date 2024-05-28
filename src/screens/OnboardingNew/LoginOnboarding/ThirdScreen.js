@@ -24,10 +24,15 @@ const ThirdScreen = () => {
       />
       <View style={styles.belowDescriptionContainer}>
         <Text allowFontScaling={false} style={styles.belowDescriptionText}>
-          {`Show your coupon to the staff, to unlock the `}
-          <Text
-            allowFontScaling={false}
-            style={styles.boldedText}>{`free service`}</Text>
+          {`Respecting the `}
+          <Text allowFontScaling={false} style={styles.colorChangeText}>
+            {`deadline `}
+          </Text>
+          {`will increase your points and make you `}
+          <Text allowFontScaling={false} style={styles.colorChangeText}>
+            {`more desirable `}
+          </Text>
+          {`for top venues `}
         </Text>
       </View>
     </View>
@@ -39,6 +44,7 @@ export default ThirdScreen;
 const styles = StyleSheet.create({
   colorChangeText: {
     color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandMedium,
   },
   titleText: {
     fontFamily: FONTS.quicksandBold,

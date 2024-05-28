@@ -63,13 +63,12 @@ const BookingOnApprovalScreen = () => {
         </View>
         <View style={styles.pendingTextContainer}>
           <Text allowFontScaling={false} style={styles.pendingText}>
-            Your booking is on
             {` ${
               approvalStage === 'pending'
-                ? `approval`
+                ? `Your booking is on approval`
                 : approvalStage === 'success'
-                ? `approved`
-                : `rejected`
+                ? `Your booking was approved`
+                : `Your booking is rejected`
             }`}
           </Text>
         </View>
@@ -204,7 +203,7 @@ const BookingOnApprovalScreen = () => {
       </View>
       <TouchableOpacity style={styles.howItWorksContainer}>
         <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
-          Check brief{' '}
+          Check brief
         </Text>
         <Image
           resizeMode="cover"
@@ -223,7 +222,7 @@ const BookingOnApprovalScreen = () => {
             onPress={handleGoToSchedulePress}
             style={styles.goToScheduleBtnContainer}>
             <Text allowFontScaling={false} style={styles.goToScheduleBtnText}>
-              Go to schedule{' '}
+              Go to schedule
             </Text>
           </TouchableOpacity>
         )}

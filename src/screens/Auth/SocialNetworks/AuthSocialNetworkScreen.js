@@ -195,7 +195,16 @@ const AuthSocialNetworkScreen = () => {
           setInstaUserNameValue(value); // Update input value for TikTok
         }}
         handlePress={() => {
-          dispatch(setAuthData({instaUserName}));
+          let link = instaUserName;
+          if (instaUserName.search('instagram.com') === -1) {
+            // console.log("instaUserName.search('@')", instaUserName.search('@'));
+            if (instaUserName.search('@') !== -1) {
+              link = instaUserName.replace(/@/g, '');
+            }
+            link = 'https://www.instagram.com/' + link;
+          }
+          // console.log('link: ' + link);
+          dispatch(setAuthData({instaUserName: link}));
           setTimeout(() => {
             instaSheetRef?.current?.close();
           }, 1000);

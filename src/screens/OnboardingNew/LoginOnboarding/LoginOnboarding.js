@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.blackRaw,
-    paddingTop: verticalScale(50),
+    paddingTop: verticalScale(30),
   },
   btnText: {
     fontFamily: FONTS.quicksandMedium,

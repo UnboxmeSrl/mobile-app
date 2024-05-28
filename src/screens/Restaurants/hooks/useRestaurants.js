@@ -108,22 +108,22 @@ const useRestaurants = () => {
     setRestaurantsData([...restaurantsData, ...res?.items]);
   };
 
-  const sortedRestaurants = useMemo(
-    () =>
-      (restaurantsData || [])
-        .map(rest => {
-          rest.distance =
-            getDistance(
-              userLocation,
-              {latitude: rest.Latitude, longitude: rest.Longitude} || {},
-            ) / 1000;
-          return rest;
-        })
-        ?.sort((a, b) => {
-          return a.distance - b.distance;
-        }),
-    [restaurantsData, userLocation],
-  );
+  // const sortedRestaurants = useMemo(
+  //   () =>
+  //     (restaurantsData || [])
+  //       .map(rest => {
+  //         rest.distance =
+  //           getDistance(
+  //             userLocation,
+  //             {latitude: rest.Latitude, longitude: rest.Longitude} || {},
+  //           ) / 1000;
+  //         return rest;
+  //       })
+  //       ?.sort((a, b) => {
+  //         return a.distance - b.distance;
+  //       }),
+  //   [restaurantsData, userLocation],
+  // );
 
   const getCategoriesData = async () => {
     setIsLoading(true);
@@ -149,9 +149,9 @@ const useRestaurants = () => {
     setFilter(category?.id);
   };
 
-  useEffect(() => {
-    requestLocationPermission();
-  }, [requestLocationPermission]);
+  // useEffect(() => {
+  //   requestLocationPermission();
+  // }, [requestLocationPermission]);
 
   useEffect(() => {
     if (page > 1) {

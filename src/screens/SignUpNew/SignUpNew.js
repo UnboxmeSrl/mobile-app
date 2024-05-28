@@ -1,7 +1,5 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useCallback, useEffect, useRef} from 'react';
+import React from 'react';
 import {
-  BackHandler,
   ImageBackground,
   StyleSheet,
   Text,
@@ -11,44 +9,21 @@ import {
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {SignInWithEmail} from '../../components';
-import {COLORS, FONTS, MODAL_NAMES} from '../../constants';
+import {COLORS, FONTS} from '../../constants';
 import {commonStyle} from '../../utils';
 import {useSignUp} from './hooks';
 
 const SignUpNew = () => {
-  const route = useRoute();
-  const {handleSignInPress, handleCreateAnAccountPress, handleGuestPress} =
-    useSignUp();
-  const {navigate} = useNavigation();
-  const isFromBookRedirected = route.params?.isFromBookRedirected;
-  const navigateToWebview = useCallback(
-    uri => {
-      navigate(MODAL_NAMES.WebView, {uri});
-    },
-    [navigate],
-  );
-  const navigateToTerms = () =>
-    navigateToWebview('https://www.joinclaris.com/terms-of-service/');
-  const navigateToPrivacy = () =>
-    navigateToWebview(' https://www.joinclaris.com/privacy-policy');
-  const bottomSheetRef = useRef();
-  const navigateToEmailModal = () => {
-    bottomSheetRef?.current?.open();
-    // ✅ ✅ ✅ ✅ Updated this but this code is for future reference
-    // navigate({
-    //   params: {
-    //     isFromBookRedirected: isFromBookRedirected,
-    //   },
-    //   routeName: MODAL_NAMES.SignInEmail,
-    // })
-  };
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => true,
-    );
-    return () => backHandler.remove();
-  }, []);
+  const {
+    bottomSheetRef,
+    isFromBookRedirected,
+    navigateToWebview,
+    navigateToEmailModal,
+    handleSignInPress,
+    handleCreateAnAccountPress,
+    handleGuestPress,
+  } = useSignUp();
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -133,7 +108,7 @@ export default SignUpNew;
 
 const styles = StyleSheet.create({
   authButtonsContainer: {
-    marginTop: verticalScale(210),
+    marginTop: verticalScale(190),
   },
   viewForMargin: {
     ...commonStyle.containerPaddingTop,

@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     width: moderateScale(10),
   },
   headerDotContainer: {
-    marginTop: -30,
+    marginTop: -20,
   },
 });

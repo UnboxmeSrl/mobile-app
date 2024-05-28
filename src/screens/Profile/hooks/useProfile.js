@@ -53,7 +53,7 @@ const useProfile = () => {
   const handleSharePromoCode = async () => {
     try {
       const result = await Share.share({
-        message: `Here a personal invitation for Claris App, an app for free collaborations with local venues. PROMO CODE: ${user?.promocode}`,
+        message: `here is my personal invitation for Claris, an app for selected collabs in the best places of Bali and Milan. Here my promocode: ${user?.promocode} https://apps.apple.com/us/app/claris-app/id6479502678 `,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

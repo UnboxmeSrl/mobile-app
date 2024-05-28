@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES, STACK_NAMES} from '../../../../constants';
 import {updateLoginData} from '../../../../redux';
 import {getUserApprovalStatus, navigate} from '../../../../services';
+import {Linking} from 'react-native';
 
 const useApplied = () => {
   const navigation = useNavigation();
@@ -19,6 +20,14 @@ const useApplied = () => {
     const res = await getUserApprovalStatus(userId);
     dispatch(updateLoginData(res));
   }, [dispatch, loginData?.id]);
+
+  const handleFollowPress = () => {
+    Linking.openURL('https://www.instagram.com/claris.app/');
+  };
+
+  const handleTutorialPress = () => {
+    navigation.navigate(SCREEN_NAMES.TutorialsScreen);
+  };
 
   useEffect(() => {
     if (
@@ -41,6 +50,8 @@ const useApplied = () => {
 
   return {
     handleGuestPress,
+    handleFollowPress,
+    handleTutorialPress,
   };
 };
 

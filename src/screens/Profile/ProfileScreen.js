@@ -173,7 +173,10 @@ const ProfileScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.invitationDescription}>
-                    Share your code invitation code with friends!
+                    Share your invitation code with your friends and go out
+                    together with Claris! With the invitation code they will
+                    have a higher chance of having their account approved and
+                    you'll get extra points as well.
                   </Text>
                 </View>
 

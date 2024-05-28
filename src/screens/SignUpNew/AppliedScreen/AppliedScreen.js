@@ -14,7 +14,8 @@ import {IMAGES} from '../../../assets';
 import {commonStyle} from '../../../utils';
 
 const AppliedScreen = () => {
-  const {handleGuestPress} = useApplied();
+  const {handleGuestPress, handleFollowPress, handleTutorialPress} =
+    useApplied();
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -43,6 +44,29 @@ const AppliedScreen = () => {
             }>{`Within 24H you will receive a response on your email `}</Text>
         </View>
 
+        <TouchableOpacity
+          onPress={handleFollowPress}
+          style={styles.followBtnContainer}
+          activeOpacity={0.7}>
+          <Image
+            source={IMAGES.followInstagram}
+            style={styles.followInstagramIcon}
+          />
+          <Text allowFontScaling={false} style={styles.followBtnText}>
+            Follow us on Instagram
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleTutorialPress}
+          style={styles.tutorialBtnContainer}
+          activeOpacity={0.7}>
+          <Image source={IMAGES.playBlack} style={styles.playIcon} />
+          <Text allowFontScaling={false} style={styles.playBtnText}>
+            Watch tutorials
+          </Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.queryContainer}>
           <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
           <Text allowFontScaling={false} style={styles.queryText}>
@@ -67,6 +91,56 @@ const AppliedScreen = () => {
 export default AppliedScreen;
 
 const styles = StyleSheet.create({
+  playIcon: {
+    height: moderateScale(15),
+    marginRight: scale(15),
+    tintColor: COLORS.black,
+    width: moderateScale(14.25),
+  },
+  playBtnText: {
+    fontFamily: FONTS.quicksandMedium,
+    color: COLORS.black,
+    textAlign: 'center',
+    fontSize: moderateScale(18),
+  },
+  tutorialBtnContainer: {
+    flexDirection: 'row',
+    width: '90%',
+    height: verticalScale(40),
+    marginTop: verticalScale(10),
+    borderColor: COLORS.white,
+    backgroundColor: COLORS.newRedPrimary,
+    borderWidth: moderateScale(1),
+    borderRadius: moderateScale(16),
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  followInstagramIcon: {
+    height: moderateScale(24),
+    marginRight: scale(15),
+    tintColor: COLORS.white,
+    width: moderateScale(24),
+  },
+  followBtnText: {
+    fontFamily: FONTS.quicksandMedium,
+    color: COLORS.white,
+    textAlign: 'center',
+    fontSize: moderateScale(14),
+  },
+  followBtnContainer: {
+    flexDirection: 'row',
+    width: '90%',
+    height: verticalScale(40),
+    marginTop: verticalScale(90),
+    borderColor: COLORS.black,
+    backgroundColor: COLORS.veryLight02,
+    borderWidth: moderateScale(1),
+    borderRadius: moderateScale(16),
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
   appLogoImage: {
     height: verticalScale(118),
     width: scale(99),
@@ -124,7 +198,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginHorizontal: '5%',
-    marginTop: verticalScale(250),
+    marginTop: verticalScale(90),
     width: '90%',
   },
   queryIcon: {
