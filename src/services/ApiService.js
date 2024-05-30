@@ -51,14 +51,15 @@ export default {
     const options = {
       headers: {
         // 'Content-Type': 'multipart/form-data',
-        // Accept: 'application/json',
+        Accept: 'application/json',
       },
     };
+
     const response = await axios.post(url, data, options).catch(err => {
       // showToastError(err);
-      // console.log('🚀 ~ post: ~ error:', JSON.stringify(err))
+      console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
     });
-    // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
+    console.log('🚀 ~ post: ~ response:', JSON.stringify(response));
     return response?.data;
   },
   postMedia: async (url, data) => {

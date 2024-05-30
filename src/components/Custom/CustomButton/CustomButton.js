@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -8,27 +9,35 @@ import {
 import React from 'react';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {COLORS, FONTS} from '../../../constants';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const CustomButton = ({
   title,
   handlePress,
+  image,
+  iconProps,
+  iconStyle,
+  btnStyle,
   disabled = false,
   isLoading = false,
 }) => {
   return (
-    <View style={styles.btnMainContainer}>
+    <View style={[styles.btnMainContainer]}>
       <TouchableOpacity
         disabled={disabled}
         onPress={handlePress}
-        style={[styles.btnContainer, disabled && styles.disabledBtnContainer]}>
+        style={[styles.btnContainer, disabled && styles.disabledBtnContainer, btnStyle]}>
         {isLoading ? (
           <ActivityIndicator size={30} color={COLORS.black22} />
         ) : (
-          <Text
-            allowFontScaling={false}
-            style={[styles.btnText, disabled && styles.disabledBtnText]}>
-            {title}
-          </Text>
+          <>
+            {!!iconProps && <Icon {...iconProps} style={iconStyle}/>}
+            <Text
+              allowFontScaling={false}
+              style={[styles.btnText, disabled && styles.disabledBtnText]}>
+              {title}
+            </Text>
+          </>
         )}
       </TouchableOpacity>
     </View>
