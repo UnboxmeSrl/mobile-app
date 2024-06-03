@@ -36,6 +36,7 @@ const useSignInWithEmail = isFromBookRedirected => {
       dispatch(setCity({}));
       if (res?.UserStatus === 'approved') {
         //TODO: Please enable this when you install onesignal
+        console.log('Login res:', res);
         OneSignal.login(res?.id?.toString());
         dispatch(setLoginData(res));
         const params = `/${res?.id}`;

@@ -22,6 +22,8 @@ import {
   getExperienceLevels,
   getUserApprovalStatus,
 } from '../../services';
+import SplashScreen from 'react-native-splash-screen';
+import {OneSignal} from 'react-native-onesignal';
 
 const delay = 500;
 
@@ -95,6 +97,7 @@ const Splash = () => {
   }, []);
 
   useEffect(() => {
+    SplashScreen.hide();
     if (isUserApprovalApiCalled) {
       setTimeout(() => {
         if (!hideOnBoarding) {
