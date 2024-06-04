@@ -1,4 +1,5 @@
 export const IMAGES = {
+  mapIcon: require('./icons/mapIcon.png'),
   ball: require('./icons/Soccer-Ball.png'),
   microphone: require('./icons/Microphone.png'),
   rejected: require('./icons/rejected.png'),

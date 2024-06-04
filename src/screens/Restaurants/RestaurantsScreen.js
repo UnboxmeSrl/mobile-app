@@ -1,11 +1,12 @@
 // import { Categories } from '@components/Categories'
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,7 +14,7 @@ import {
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
-import {Categories} from '../../components';
+import {AppButton, BottomSheet, Categories} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurants} from './hooks';
 import {RestaurantCard} from './RestaurantCard';
@@ -34,26 +35,56 @@ const RestaurantsScreen = () => {
     onCategoryChange,
     handleLocationPress,
   } = useRestaurants();
+  const [view, setView] = useState('tabs');
+  const bottomSheetRef = useRef();
 
+  const handleBottomSheet = () => {
+    bottomSheetRef?.current?.open();
+  };
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <TouchableOpacity
-        onPress={handleLocationPress}
-        style={styles.selectedLocation}>
-        <Image
-          resizeMode="contain"
-          source={IMAGES.locationNew}
-          style={styles.locationIcon}
+      <View style={styles.btnStack}>
+        <TouchableOpacity
+          onPress={() => setView('tabs')}
+          // onPress={() => setView('tabs')}
+          style={[
+            styles.selectedLocation,
+            {borderColor: view === 'tabs' ? 'red' : 'transparent'},
+          ]}>
+          <Image
+            resizeMode="contain"
+            source={IMAGES.locationNew}
+            style={styles.locationIcon}
+          />
+          <Text allowFontScaling={false} style={styles.locationFont}>
+            {cityData?.CityName}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          // onPress={handleLocationPress}
+          onPress={() => setView('map')}
+          // onPress={handleBottomSheet}
+          style={[
+            styles.selectedLocation,
+            {borderColor: view === 'map' ? 'red' : 'transparent'},
+          ]}>
+          <Image
+            resizeMode="contain"
+            source={IMAGES.mapIcon}
+            style={styles.locationIcon}
+          />
+          <Text allowFontScaling={false} style={styles.locationFont}>
+            Map
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {view === 'tabs' && (
+        <Categories
+          categories={categories}
+          selectedIndex={selectedIndex}
+          onCategoryChange={onCategoryChange}
         />
-        <Text allowFontScaling={false} style={styles.locationFont}>
-          {cityData?.CityName}
-        </Text>
-      </TouchableOpacity>
-      <Categories
-        categories={categories}
-        selectedIndex={selectedIndex}
-        onCategoryChange={onCategoryChange}
-      />
+      )}
       {/* <Categories
         categoriesIds={categoriesIds}
         category={filter}
@@ -66,45 +97,94 @@ const RestaurantsScreen = () => {
         </View>
       ) : (
         <>
-          <View style={styles.restaurantsFlatlistContainer}>
-            <FlatList
-              ListEmptyComponent={
-                !isLoading &&
-                restaurantsData?.length === 0 && (
-                  <View style={styles.listEmptyContainer}>
-                    <Text allowFontScaling={false} style={styles.listEmptyText}>
-                      No data found.
-                    </Text>
-                  </View>
-                )
-              }
-              contentContainerStyle={styles.listMain}
-              data={restaurantsData}
-              onEndReached={handleOnReached}
-              ListFooterComponent={
-                isEndLoading && (
-                  <View style={styles.loaderContainer}>
-                    <ActivityIndicator color={COLORS.newPrimary} size={20} />
-                  </View>
-                )
-              }
-              getItemLayout={(_, index) => ({
-                index,
-                length: verticalScale(200),
-                offset: verticalScale(200) * index,
-              })}
-              keyExtractor={(_, index) => index.toString()}
-              refreshControl={
-                <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
-              }
-              renderItem={({item, index}) => {
-                return <RestaurantCard index={index} item={item} />;
-              }}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
+          {view === 'map' ? (
+            <View style={styles.mapView}>
+              <Text>Map</Text>
+            </View>
+          ) : (
+            <View style={styles.restaurantsFlatlistContainer}>
+              <FlatList
+                ListEmptyComponent={
+                  !isLoading &&
+                  restaurantsData?.length === 0 && (
+                    <View style={styles.listEmptyContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.listEmptyText}>
+                        No data found.
+                      </Text>
+                    </View>
+                  )
+                }
+                contentContainerStyle={styles.listMain}
+                data={restaurantsData}
+                onEndReached={handleOnReached}
+                ListFooterComponent={
+                  isEndLoading && (
+                    <View style={styles.loaderContainer}>
+                      <ActivityIndicator color={COLORS.newPrimary} size={20} />
+                    </View>
+                  )
+                }
+                getItemLayout={(_, index) => ({
+                  index,
+                  length: verticalScale(200),
+                  offset: verticalScale(200) * index,
+                })}
+                keyExtractor={(_, index) => index.toString()}
+                refreshControl={
+                  <RefreshControl
+                    onRefresh={onRefresh}
+                    refreshing={refreshing}
+                  />
+                }
+                renderItem={({item, index}) => {
+                  return <RestaurantCard index={index} item={item} />;
+                }}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          )}
         </>
       )}
+      <BottomSheet ref={bottomSheetRef} height={verticalScale(270)}>
+        <View style={styles.restaurentDetails}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.scrollContainer}>
+            <View style={styles.imgesStack}>
+              <Image
+                source={IMAGES.locationOne}
+                alt="Product Image"
+                style={styles.restaurentImg}
+              />
+              <Image
+                source={IMAGES.locationOne}
+                alt="Product Image"
+                style={styles.restaurentImg}
+              />
+              <Image
+                source={IMAGES.locationOne}
+                alt="Product Image"
+                style={styles.restaurentImg}
+              />
+              <Image
+                source={IMAGES.locationOne}
+                alt="Product Image"
+                style={styles.restaurentImg}
+              />
+            </View>
+          </ScrollView>
+          <View style={styles.item}>
+            <Text style={styles.restaurentName}>Hard Rock Cafe</Text>
+            <Text style={styles.resturantDtl}>
+              Vivamus aliquam nisl eu massa. Vivamus aliquam nisl eu massa.
+            </Text>
+          </View>
+          <AppButton title="Check Details" style={styles.checkBtn} />
+        </View>
+      </BottomSheet>
     </SafeAreaView>
   );
 };
@@ -144,9 +224,9 @@ const styles = StyleSheet.create({
   },
   locationIcon: {
     tintColor: COLORS.newPrimary,
-    height: moderateScale(14),
-    marginRight: scale(11.2),
-    width: moderateScale(18),
+    height: moderateScale(24),
+    marginRight: scale(8),
+    width: moderateScale(24),
   },
   mainContainer: {
     backgroundColor: COLORS.white,
@@ -161,13 +241,63 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // backgroundColor: COLORS.isabelLine,
     backgroundColor: COLORS.lightNewPrimary,
-    borderColor: COLORS.lightGray,
     borderRadius: moderateScale(16),
     flexDirection: 'row',
     height: verticalScale(40),
     justifyContent: 'center',
     marginTop: verticalScale(10),
     paddingHorizontal: scale(25),
-    width: '90%',
+    // width: '90%',
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  // styling
+  btnStack: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(16),
+    columnGap: scale(16),
+    paddingVertical: verticalScale(10),
+  },
+  mapView: {
+    flex: 1,
+    backgroundColor: 'red',
+  },
+  // Bottom Sheet
+  restaurentDetails: {
+    paddingTop: verticalScale(32),
+    paddingBottom: verticalScale(16),
+  },
+  scrollContainer: {
+    marginLeft: verticalScale(16),
+  },
+  imgesStack: {
+    flexDirection: 'row',
+    columnGap: scale(14),
+    justifyContent: 'flex-end',
+  },
+  restaurentImg: {
+    height: moderateScale(74),
+    width: moderateScale(114),
+    borderRadius: moderateScale(8),
+  },
+  item: {
+    padding: scale(16),
+  },
+  restaurentName: {
+    fontSize: moderateScale(20),
+    color: COLORS.black,
+  },
+  resturantDtl: {
+    fontSize: moderateScale(14),
+    color: '#838E9A',
+    marginTop: verticalScale(4),
+  },
+  checkBtn: {
+    height: moderateScale(50),
+    width: '85%',
+    alignSelf: 'center',
   },
 });
