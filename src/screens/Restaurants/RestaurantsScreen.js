@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
-import {Categories} from '../../components';
+import {Categories, CustomTextInput} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurants} from './hooks';
 import {RestaurantCard} from './RestaurantCard';
@@ -23,6 +23,8 @@ const RestaurantsScreen = () => {
     isLoading,
     isEndLoading,
     cityData,
+    search,
+    setSearch,
     categories,
     selectedIndex,
     filter,
@@ -49,6 +51,12 @@ const RestaurantsScreen = () => {
           {cityData?.CityName}
         </Text>
       </TouchableOpacity>
+      <CustomTextInput
+        placeholder={'Search'}
+        value={search}
+        isRemoveTextIconVisible={true}
+        handleOnChangeText={setSearch}
+      />
       <Categories
         categories={categories}
         selectedIndex={selectedIndex}
