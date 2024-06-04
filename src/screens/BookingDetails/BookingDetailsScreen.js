@@ -16,6 +16,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useBookingDetails} from './hooks';
+import {getFormattedDate} from '../../utils';
 
 const BookingDetailsScreen = () => {
   const {
@@ -33,6 +34,11 @@ const BookingDetailsScreen = () => {
     currentMonth,
     isLatestWeek,
     isLoading,
+    isEvent,
+    eventDates,
+    eventTimes,
+    eventSelectedDateIndex,
+    setEventSelectedDateIndex,
     // isDateAvailable,
     isDatesLoading,
     showPreviousWeek,
@@ -136,7 +142,18 @@ const BookingDetailsScreen = () => {
                   iconLeft={IMAGES.back}
                   iconRight={IMAGES.back}
                   iconStyle={styles.calendarStripIcon}
-                  onDateSelected={date => setSelectedDate(date)}
+                  onDateSelected={date => {
+                    setSelectedDate(date);
+                    if (isEvent) {
+                      const myDate = new Date(date);
+                      const onlyDate = getFormattedDate(myDate);
+                      const filteredRes = eventDates.filter((dt, index) => {
+                        if (dt === onlyDate) {
+                          setEventSelectedDateIndex(index);
+                        }
+                      });
+                    }
+                  }}
                   selectedDate={selectedDate}
                   showMonth={false}
                   showYear={false}
@@ -159,7 +176,8 @@ const BookingDetailsScreen = () => {
                   </View>
 
                   <View style={styles.timeSlotsMainContainer}>
-                    {weekDayWiseTimeSlots.length === 0 && (
+                    {((!isEvent && weekDayWiseTimeSlots.length === 0) ||
+                      (isEvent && eventSelectedDateIndex === -1)) && (
                       <View style={styles.listEmptyContainer}>
                         <Text
                           allowFontScaling={false}
@@ -169,6 +187,25 @@ const BookingDetailsScreen = () => {
                       </View>
                     )}
                     {!isDatesLoading &&
+                    isEvent &&
+                    eventSelectedDateIndex !== -1 ? (
+                      <View
+                        style={[
+                          styles.hoursContainer,
+                          styles.selectedTimeFrameStyle,
+                        ]}>
+                        <Image
+                          resizeMode="cover"
+                          source={IMAGES.timeCircle}
+                          style={styles.timeCircleIcon}
+                        />
+                        <Text
+                          allowFontScaling={false}
+                          style={
+                            styles.timingText
+                          }>{`${eventTimes[eventSelectedDateIndex]}`}</Text>
+                      </View>
+                    ) : (
                       weekDayWiseTimeSlots?.map((item, index) => {
                         let isShow = true;
                         let isSelected = item?.id === selectedTimeFame?.id;
@@ -205,7 +242,8 @@ const BookingDetailsScreen = () => {
                             </TouchableOpacity>
                           )
                         );
-                      })}
+                      })
+                    )}
                   </View>
                   {/* {!isDatesLoading && (
                     <FlatList
@@ -294,7 +332,7 @@ const BookingDetailsScreen = () => {
                     style={styles.selectedDateTitleText}>
                     Selected Date
                   </Text>
-                  {actionNumId !== 9 && selectedTimeFame?.Start ? (
+                  {actionNumId !== 9 && !isEvent && selectedTimeFame?.Start ? (
                     <Text
                       allowFontScaling={false}
                       style={
@@ -305,7 +343,11 @@ const BookingDetailsScreen = () => {
                       allowFontScaling={false}
                       style={
                         styles.selectedDateWithTimeText
-                      }>{`${currentWeekDay}`}</Text>
+                      }>{`${currentWeekDay}${
+                      isEvent && eventSelectedDateIndex !== -1
+                        ? `, ${eventTimes[eventSelectedDateIndex]}`
+                        : ``
+                    }`}</Text>
                   )}
                 </View>
                 {actionNumId === 9 ? (
@@ -332,6 +374,20 @@ const BookingDetailsScreen = () => {
               <View style={styles.bookBtnContainer}>
                 <ActivityIndicator color={COLORS.black22} size={30} />
               </View>
+            ) : isEvent ? (
+              <TouchableOpacity
+                disabled={isLoading}
+                onPress={handleConfirmBtnPress}
+                style={[
+                  styles.bookBtnContainer,
+                  {
+                    backgroundColor: COLORS.newPrimary,
+                  },
+                ]}>
+                <Text allowFontScaling={false} style={styles.bookBtnText}>
+                  Confirm
+                </Text>
+              </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 disabled={

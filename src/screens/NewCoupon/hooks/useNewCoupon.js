@@ -16,6 +16,7 @@ const useNewCoupon = () => {
   const bookingDate = new Date(bookingDetails?.BookingDay);
   const month = bookingDate.toLocaleString('en-US', {month: 'long'});
   const profilePicUrl = `${loginData?.Profile_pic?.url}?tpl=${xanoImageSize}.jpg`;
+  const isEvent = bookingDetails?._restaurant_turbo?.is_event;
   const timeFrame =
     bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo;
 
@@ -81,6 +82,7 @@ const useNewCoupon = () => {
   };
 
   return {
+    isEvent,
     profilePicUrl,
     amenityDetails,
     actionNumId,

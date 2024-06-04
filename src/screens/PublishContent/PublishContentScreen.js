@@ -17,13 +17,14 @@ import {IMAGES} from '../../assets/images';
 import {ContentStatusModal, PickerModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {usePublishContent} from './hooks';
-import {xanoImageSize} from '../../utils';
+import {getFormattedTime, xanoImageSize} from '../../utils';
 
 const PublishContentScreen = () => {
   const {
     link,
     setLink,
     approvalStage,
+    isEvent,
     deadlineDays,
     contentPhotos,
     contentDetails,
@@ -287,7 +288,9 @@ const PublishContentScreen = () => {
                 Time
               </Text>
               <Text allowFontScaling={false} style={styles.timeText}>
-                {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+                {isEvent
+                  ? `${getFormattedTime(contentDetails?.booking_time)}`
+                  : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
               </Text>
             </View>
           )}
