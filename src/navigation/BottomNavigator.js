@@ -9,7 +9,6 @@ import {hasNotch} from '../utils';
 import HomeStack from './HomeStack';
 import ScheduleStack from './ScheduleStack';
 import ProfileStack from './ProfileStack';
-import MapScreen from '../screens/MapScreen';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -51,22 +50,6 @@ const BottomTabNavigator = () => {
                   focused ? styles.activeTabStyle : styles.inActiveTabStyle
                 }>
                 <TabBarIcon focused={focused} icon={IMAGES.calender} />
-              </View>
-            );
-          },
-        }}
-      />
-      <BottomTabs.Screen
-        name={SCREEN_NAMES.MapScreen}
-        component={MapScreen}
-        options={{
-          tabBarIcon: ({focused}) => {
-            return (
-              <View
-                style={
-                  focused ? styles.activeTabStyle : styles.inActiveTabStyle
-                }>
-                <TabBarIcon focused={focused} icon={IMAGES.mapsNew} />
               </View>
             );
           },

@@ -18,6 +18,7 @@ import {AppButton, BottomSheet, Categories} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurants} from './hooks';
 import {RestaurantCard} from './RestaurantCard';
+import AppMap from '../../components/AppMap';
 
 const RestaurantsScreen = () => {
   const {
@@ -45,7 +46,7 @@ const RestaurantsScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.btnStack}>
         <TouchableOpacity
-          onPress={() => setView('tabs')}
+          onPress={view === 'map' ? () => setView('tabs') : handleLocationPress}
           // onPress={() => setView('tabs')}
           style={[
             styles.selectedLocation,
@@ -98,9 +99,7 @@ const RestaurantsScreen = () => {
       ) : (
         <>
           {view === 'map' ? (
-            <View style={styles.mapView}>
-              <Text>Map</Text>
-            </View>
+            <AppMap />
           ) : (
             <View style={styles.restaurantsFlatlistContainer}>
               <FlatList
@@ -147,44 +146,6 @@ const RestaurantsScreen = () => {
           )}
         </>
       )}
-      <BottomSheet ref={bottomSheetRef} height={verticalScale(270)}>
-        <View style={styles.restaurentDetails}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.scrollContainer}>
-            <View style={styles.imgesStack}>
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-            </View>
-          </ScrollView>
-          <View style={styles.item}>
-            <Text style={styles.restaurentName}>Hard Rock Cafe</Text>
-            <Text style={styles.resturantDtl}>
-              Vivamus aliquam nisl eu massa. Vivamus aliquam nisl eu massa.
-            </Text>
-          </View>
-          <AppButton title="Check Details" style={styles.checkBtn} />
-        </View>
-      </BottomSheet>
     </SafeAreaView>
   );
 };
@@ -260,10 +221,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(16),
     columnGap: scale(16),
     paddingVertical: verticalScale(10),
-  },
-  mapView: {
-    flex: 1,
-    backgroundColor: 'red',
   },
   // Bottom Sheet
   restaurentDetails: {
