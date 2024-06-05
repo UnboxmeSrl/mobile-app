@@ -1,6 +1,6 @@
 // import { Categories } from '@components/Categories'
 import Mapbox from '@rnmapbox/maps';
-import React, {useRef} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
@@ -8,26 +8,51 @@ import {COLORS} from '../../constants';
 import {AppInput} from '../Elements';
 import {AppButton} from '../Buttons';
 import {BottomSheet} from '../BottomSheet';
+import {useRestaurants} from '../../screens/Restaurants/hooks';
+import {getRestaurantDetails} from '../../services';
+import {xanoImageSize} from '../../utils';
+import {useRestaurantCard} from '../../screens/Restaurants/RestaurantCard/hooks';
 
 Mapbox.setAccessToken(
   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
 );
 const AppMap = () => {
-  const pinCoordinates = [-122.4194, 37.7749];
+  const pinCoordinates = [115.17675225490257, -8.694958547111936];
   const bottomSheetRef = useRef();
+  const [selectedRest, setSelectedRest] = useState(null);
+  const {restaurantsData} = useRestaurants();
+  const {handleCardPress} = useRestaurantCard();
+  const handleBottomSheet = useCallback(async rest => {
+    const prepData = {
+      category_id: 0,
+      restaurant_id: rest?.id,
+    };
+    const res = await getRestaurantDetails(prepData);
+    if (res?.restaurant) {
+      setSelectedRest(res?.restaurant);
+      bottomSheetRef?.current?.open();
+    }
+  }, []);
+  console.log('restaurantsData', restaurantsData);
 
-  const handleBottomSheet = () => {
-    bottomSheetRef?.current?.open();
-  };
   return (
     <View style={styles.mapView}>
-      <Mapbox.MapView style={styles.map}>
+      <Mapbox.MapView
+        style={styles.map}
+        attributionControl={false}
+        attributionEnabled={false}
+        logoEnabled={false}>
         <Mapbox.Camera zoomLevel={14} centerCoordinate={pinCoordinates} />
-        <Mapbox.PointAnnotation
-          id="pin"
-          coordinate={pinCoordinates}
-          onSelected={handleBottomSheet}
-        />
+        {restaurantsData?.map((rest, index) => (
+          <Mapbox.PointAnnotation
+            key={index}
+            id={`pin-${index}`}
+            coordinate={[rest?.Latitude, rest?.Longitude]}
+            onSelected={() => {
+              handleBottomSheet(rest);
+            }}
+          />
+        ))}
       </Mapbox.MapView>
       <AppInput
         placeholder="Search"
@@ -42,35 +67,31 @@ const AppMap = () => {
             showsHorizontalScrollIndicator={false}
             style={styles.scrollContainer}>
             <View style={styles.imgesStack}>
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
-              <Image
-                source={IMAGES.locationOne}
-                alt="Product Image"
-                style={styles.restaurentImg}
-              />
+              {selectedRest?.GalleryRestaurant.map((img, index) => {
+                const imageUrl = `${img?.url}?tpl=${xanoImageSize}.jpg`;
+                return (
+                  <Image
+                    key={index}
+                    source={{uri: imageUrl}}
+                    alt="Product Image"
+                    style={styles.restaurentImg}
+                  />
+                );
+              })}
             </View>
           </ScrollView>
           <View style={styles.item}>
-            <Text style={styles.restaurentName}>Hard Rock Cafe</Text>
+            <Text style={styles.restaurentName}>{selectedRest?.Name}</Text>
+
             <Text style={styles.resturantDtl}>
-              Vivamus aliquam nisl eu massa. Vivamus aliquam nisl eu massa.
+              {selectedRest?.About || 'No details available'}
             </Text>
           </View>
-          <AppButton title="Check Details" style={styles.checkBtn} />
+          <AppButton
+            title="Check Details"
+            style={styles.checkBtn}
+            onPress={() => handleCardPress(selectedRest)}
+          />
         </View>
       </BottomSheet>
     </View>

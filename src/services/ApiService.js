@@ -59,7 +59,6 @@ export default {
       // showToastError(err);
       console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
     });
-    console.log('🚀 ~ post: ~ response:', JSON.stringify(response));
     return response?.data;
   },
   postMedia: async (url, data) => {
@@ -68,10 +67,7 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
     };
-    const response = await axios.put(url, data, options).catch(err => {
-      // showToastError(err);
-    });
-    // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
+    const response = await axios.put(url, data, options).catch(err => {});
     return response?.data;
   },
   postWithMedia: async (url, data) => {
@@ -81,11 +77,7 @@ export default {
       },
     };
     // console.log(url, data)
-    const response = await axios.post(url, data, options).catch(err => {
-      // showToastError(err);
-    });
-    console.log('🚀 ~ post: ~ response:', JSON.stringify(response?.data));
-    // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
+    const response = await axios.post(url, data, options).catch(err => {});
     return response?.data;
   },
 
