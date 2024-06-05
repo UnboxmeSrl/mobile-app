@@ -54,12 +54,12 @@ const AppMap = () => {
           />
         ))}
       </Mapbox.MapView>
-      <AppInput
+      {/* <AppInput
         placeholder="Search"
         img={IMAGES.search}
         style={styles.seacrhWrapper}
         inputStyle={styles.searchInput}
-      />
+      /> */}
       <BottomSheet ref={bottomSheetRef} height={verticalScale(270)}>
         <View style={styles.restaurentDetails}>
           <ScrollView
