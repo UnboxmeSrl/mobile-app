@@ -21,43 +21,57 @@ PODS:
   - libwebp/sharpyuv (1.3.2)
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
-  - OneSignalXCFramework (5.1.6):
-    - OneSignalXCFramework/OneSignalComplete (= 5.1.6)
-  - OneSignalXCFramework/OneSignal (5.1.6):
+  - MapboxCommon (23.9.2)
+  - MapboxCoreMaps (10.17.0):
+    - MapboxCommon (~> 23.9)
+  - MapboxMaps (10.17.0):
+    - MapboxCommon (= 23.9.2)
+    - MapboxCoreMaps (= 10.17.0)
+    - MapboxMobileEvents (= 1.0.10)
+    - Turf (= 2.7.0)
+  - MapboxMobileEvents (1.0.10)
+  - OneSignalXCFramework (5.2.0):
+    - OneSignalXCFramework/OneSignalComplete (= 5.2.0)
+  - OneSignalXCFramework/OneSignal (5.2.0):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalExtension
+    - OneSignalXCFramework/OneSignalLiveActivities
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalOutcomes
     - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalComplete (5.1.6):
+  - OneSignalXCFramework/OneSignalComplete (5.2.0):
     - OneSignalXCFramework/OneSignal
     - OneSignalXCFramework/OneSignalInAppMessages
     - OneSignalXCFramework/OneSignalLocation
-  - OneSignalXCFramework/OneSignalCore (5.1.6)
-  - OneSignalXCFramework/OneSignalExtension (5.1.6):
+  - OneSignalXCFramework/OneSignalCore (5.2.0)
+  - OneSignalXCFramework/OneSignalExtension (5.2.0):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalInAppMessages (5.1.6):
+  - OneSignalXCFramework/OneSignalInAppMessages (5.2.0):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalOutcomes
     - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalLocation (5.1.6):
+  - OneSignalXCFramework/OneSignalLiveActivities (5.2.0):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOSCore
+    - OneSignalXCFramework/OneSignalUser
+  - OneSignalXCFramework/OneSignalLocation (5.2.0):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalNotifications (5.1.6):
+  - OneSignalXCFramework/OneSignalNotifications (5.2.0):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalExtension
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOSCore (5.1.6):
+  - OneSignalXCFramework/OneSignalOSCore (5.2.0):
     - OneSignalXCFramework/OneSignalCore
-  - OneSignalXCFramework/OneSignalOutcomes (5.1.6):
+  - OneSignalXCFramework/OneSignalOutcomes (5.2.0):
     - OneSignalXCFramework/OneSignalCore
-  - OneSignalXCFramework/OneSignalUser (5.1.6):
+  - OneSignalXCFramework/OneSignalUser (5.2.0):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
@@ -994,7 +1008,7 @@ PODS:
     - react-native-config/App (= 1.5.1)
   - react-native-config/App (1.5.1):
     - React-Core
-  - react-native-date-picker (5.0.2):
+  - react-native-date-picker (5.0.4):
     - React-Core
   - react-native-geolocation-service (5.3.1):
     - React
@@ -1019,8 +1033,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-onesignal (5.1.3):
-    - OneSignalXCFramework (= 5.1.6)
+  - react-native-onesignal (5.2.0):
+    - OneSignalXCFramework (= 5.2.0)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-safe-area-context (4.9.0):
     - React-Core
@@ -1260,13 +1274,13 @@ PODS:
     - React-Core
   - RNCMaskedView (0.3.1):
     - React-Core
-  - RNDeviceInfo (10.13.2):
+  - RNDeviceInfo (10.14.0):
     - React-Core
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNGestureHandler (2.16.1):
+  - RNGestureHandler (2.16.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1287,6 +1301,17 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - rnmapbox-maps (10.1.24):
+    - MapboxMaps (~> 10.17.0)
+    - React
+    - React-Core
+    - rnmapbox-maps/DynamicLibrary (= 10.1.24)
+    - Turf
+  - rnmapbox-maps/DynamicLibrary (10.1.24):
+    - MapboxMaps (~> 10.17.0)
+    - React
+    - React-Core
+    - Turf
   - RNPermissions (4.1.5):
     - React-Core
   - RNScreens (3.29.0):
@@ -1338,6 +1363,7 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SocketRocket (0.7.0)
+  - Turf (2.7.0)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1411,6 +1437,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - "rnmapbox-maps (from `../node_modules/@rnmapbox/maps`)"
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -1419,10 +1446,15 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - libwebp
+    - MapboxCommon
+    - MapboxCoreMaps
+    - MapboxMaps
+    - MapboxMobileEvents
     - OneSignalXCFramework
     - SDWebImage
     - SDWebImageWebPCoder
     - SocketRocket
+    - Turf
 
 EXTERNAL SOURCES:
   boost:
@@ -1560,6 +1592,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  rnmapbox-maps:
+    :path: "../node_modules/@rnmapbox/maps"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNScreens:
@@ -1578,7 +1612,11 @@ SPEC CHECKSUMS:
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: 6eae7edb2f563ee41d7c1f91f4f2e57c26d8a5c3
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
-  OneSignalXCFramework: f6533cc1f7a5ddded80ee5fe183901a99ad46f4f
+  MapboxCommon: 768660d6fca8193529ecf82eb6f5f9ae7a5acdf9
+  MapboxCoreMaps: be412ff97b16aa7820922c818115a9a0d8211caa
+  MapboxMaps: 87ef0003e6db46e45e7a16939f29ae87e38e7ce2
+  MapboxMobileEvents: de50b3a4de180dd129c326e09cd12c8adaaa46d6
+  OneSignalXCFramework: bdf74fdc06888f9466dc21e826fe1549ed143095
   RCT-Folly: 045d6ecaa59d826c5736dfba0b2f4083ff8d79df
   RCTDeprecation: 3ca8b6c36bfb302e1895b72cfe7db0de0c92cd47
   RCTRequired: 9fc183af555fd0c89a366c34c1ae70b7e03b1dc5
@@ -1604,10 +1642,10 @@ SPEC CHECKSUMS:
   React-logger: 03f2f7b955cfe24593a2b8c9705c23e142d1ad24
   React-Mapbuffer: 5e05d78fe6505f4a054b86f415733d4ad02dd314
   react-native-config: 86038147314e2e6d10ea9972022aa171e6b1d4d8
-  react-native-date-picker: 90687f1dbd374ff0265dca99d949998364c22fa9
+  react-native-date-picker: 6891317e850deae5b53d51355226e07a495aba61
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-image-picker: c3afe5472ef870d98a4b28415fc0b928161ee5f7
-  react-native-onesignal: 2db3d8baa6ae3adc637cde65d1373c6f8b138e78
+  react-native-onesignal: 8211393e9f200a055fdefbeaaa3322880ed48059
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-simple-gradient-progressbar-view: 7f0f242fe65573201ab16bc9d4a600c6152c92dc
   React-nativeconfig: 951ec32f632e81cbd7d40aebb3211313251c092e
@@ -1636,17 +1674,19 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNCClipboard: 0a720adef5ec193aa0e3de24c3977222c7e52a37
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
-  RNDeviceInfo: 42aadf1282ffa0a88dc38a504a7be145eb010dfa
+  RNDeviceInfo: 59344c19152c4b2b32283005f9737c5c64b42fba
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
-  RNGestureHandler: 2fb2c561d694d6a884850c8507c180a2cc2ed4e9
+  RNGestureHandler: 2282cfbcf86c360d29f44ace393203afd5c6cff7
+  rnmapbox-maps: 8005faa8e35b413ea5f387d8e057e9c2d7bcfbff
   RNPermissions: 3e16511a1c4f98f6cb88d5530ac27a2a054bc352
   RNScreens: 23dad53fc9db1da2c93e647ae33fd7ce2bd49d60
   RNVectorIcons: 2a2f79274248390b80684ea3c4400bd374a15c90
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  Turf: 13d1a92d969ca0311bbc26e8356cca178ce95da2
   Yoga: ff1d575b119f510a5de23c22a794872562078ccf
 
-PODFILE CHECKSUM: 87ead4d4df1bbe3454a52cff860ed606ecf875db
+PODFILE CHECKSUM: 8d2641b3dda792458e2b9ecc18e3595bfcdd4e37
 
 COCOAPODS: 1.15.2
