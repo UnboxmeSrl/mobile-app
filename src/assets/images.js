@@ -111,4 +111,5 @@ export const IMAGES = {
   swipeButton: require('./images/swipe-button.png'),
   followInstagram: require('./images/follow-instagram.png'),
   playBlack: require('./images/play-black.png'),
+  closeNew: require('./images/close-new.png'),
 };

@@ -20,6 +20,7 @@ const useBookingOnApproval = () => {
   const navigation = useNavigation();
   const timeFrame = bookingDetails?._timeframes_turbo;
   const actionNumId = bookingDetails?.actions_turbo?.action_num_id;
+  const isEvent = bookingDetails?._restaurant_turbo?.is_event;
   const approvalStageValue = bookingDetails?.Approved
     ? 'success'
     : bookingDetails?.Rejectedstatus
@@ -64,6 +65,7 @@ const useBookingOnApproval = () => {
     approvalStage,
     bookingDetails,
     isLoading,
+    isEvent,
     currentDate,
     currentMonth,
     currentWeekDay,

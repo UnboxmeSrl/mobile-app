@@ -32,6 +32,7 @@ const useYourScheduleDetails = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const timeFrame = bookingDetails?._timeframes_turbo;
+  const isEvent = bookingDetails?._restaurant_turbo?.is_event;
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
@@ -181,6 +182,7 @@ const useYourScheduleDetails = () => {
     currentWeekDay,
     isAlertVisible,
     isDeleting,
+    isEvent,
     handleSwipeSuccess,
     handleAlertVisible,
     handleBackPress,

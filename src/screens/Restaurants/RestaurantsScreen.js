@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
-import {AppButton, BottomSheet, Categories} from '../../components';
+import {AppButton, BottomSheet, Categories, CustomTextInput} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurants} from './hooks';
 import {RestaurantCard} from './RestaurantCard';
@@ -25,6 +25,8 @@ const RestaurantsScreen = () => {
     isLoading,
     isEndLoading,
     cityData,
+    search,
+    setSearch,
     categories,
     selectedIndex,
     filter,
@@ -81,18 +83,21 @@ const RestaurantsScreen = () => {
         </TouchableOpacity>
       </View>
       {view === 'tabs' && (
-        <Categories
-          categories={categories}
-          selectedIndex={selectedIndex}
-          onCategoryChange={onCategoryChange}
-        />
+      <>
+     
+      <CustomTextInput
+        placeholder={'Search'}
+        value={search}
+        isRemoveTextIconVisible={true}
+        handleOnChangeText={setSearch}
+      />
+      <Categories
+        categories={categories}
+        selectedIndex={selectedIndex}
+        onCategoryChange={onCategoryChange}
+      />
+      </>
       )}
-      {/* <Categories
-        categoriesIds={categoriesIds}
-        category={filter}
-        customCategories={categories}
-        onPress={onCategoryChange}
-      /> */}
       {isLoading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator color={COLORS.newPrimary} size={20} />

@@ -15,6 +15,7 @@ const useRestaurants = () => {
   const isFocused = useIsFocused();
   // const cityData = useNavigationParam('cityData')
   const cityData = useSelector(state => state.locationSlice.city);
+  const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isEndLoading, setIsEndLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -88,6 +89,7 @@ const useRestaurants = () => {
       category_venue_id: filter,
       city_id: cityData?.id,
       page: 1,
+      search: search,
     };
     const res = await getRestaurants(prepData);
     setRestaurantApiCallData(res);
@@ -102,6 +104,7 @@ const useRestaurants = () => {
       category_venue_id: filter,
       city_id: cityData?.id,
       page: page,
+      search: search,
     };
     const res = await getRestaurants(prepData);
     setRestaurantApiCallData(res);
@@ -162,7 +165,18 @@ const useRestaurants = () => {
   }, [page]);
 
   useEffect(() => {
-    getInitialRestaurantsData();
+    if (search?.length > 0) {
+      const timeoutID = setTimeout(() => {
+        getInitialRestaurantsData();
+        console.log('Testing Restaurant data');
+      }, 2000);
+      return () => clearTimeout(timeoutID);
+    } else {
+      getInitialRestaurantsData();
+    }
+  }, [search]);
+
+  useEffect(() => {
     getCategoriesData();
   }, []);
 
@@ -181,6 +195,8 @@ const useRestaurants = () => {
     // categoriesIds,
     // category,
     cityData,
+    search,
+    setSearch,
     filter,
     selectedIndex,
     handleLocationPress,

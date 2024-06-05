@@ -36,6 +36,7 @@ const usePublishContent = () => {
   const [pictureIndex, setPictureIndex] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isSendToReview, setIsSendToReview] = useState(false);
+  const isEvent = contentDetails?._restaurant_turbo?.is_event;
   const [isContentStatusModalVisible, setIsContentStatusModalVisible] =
     useState(false);
   const [updatedContentDetails, setUpdatedContentDetails] = useState();
@@ -200,6 +201,7 @@ const usePublishContent = () => {
     actionNumId,
     actionName,
     icon,
+    isEvent,
     bookingDate,
     month,
     timeFrame,

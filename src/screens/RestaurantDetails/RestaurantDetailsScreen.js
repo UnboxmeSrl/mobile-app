@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   listEmptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: verticalScale(100),
+    marginVertical: verticalScale(100),
     marginLeft: scale(100),
   },
   listEmptyText: {

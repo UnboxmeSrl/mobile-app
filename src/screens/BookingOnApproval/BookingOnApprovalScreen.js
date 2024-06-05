@@ -14,7 +14,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useBookingOnApproval} from './hooks';
-import {xanoImageSize} from '../../utils';
+import {getFormattedTime, xanoImageSize} from '../../utils';
 
 const BookingOnApprovalScreen = () => {
   const {
@@ -26,6 +26,7 @@ const BookingOnApprovalScreen = () => {
     currentWeekDay,
     timeFrame,
     isLoading,
+    isEvent,
     handleBackPress,
     handleGoToSchedulePress,
   } = useBookingOnApproval();
@@ -176,7 +177,7 @@ const BookingOnApprovalScreen = () => {
             <Text allowFontScaling={false} style={styles.selectedDateTitleText}>
               Selected Date
             </Text>
-            {actionNumId !== 9 ? (
+            {actionNumId !== 9 && !isEvent ? (
               <Text
                 allowFontScaling={false}
                 style={
@@ -185,9 +186,11 @@ const BookingOnApprovalScreen = () => {
             ) : (
               <Text
                 allowFontScaling={false}
-                style={
-                  styles.selectedDateWithTimeText
-                }>{`${currentWeekDay}`}</Text>
+                style={styles.selectedDateWithTimeText}>{`${currentWeekDay}${
+                isEvent
+                  ? `, ${getFormattedTime(bookingDetails?.booking_time)}`
+                  : ``
+              } `}</Text>
             )}
           </View>
         </View>

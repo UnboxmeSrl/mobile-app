@@ -13,9 +13,11 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useNewCoupon} from './hooks';
+import {getFormattedTime} from '../../utils';
 
 const NewCouponScreen = () => {
   const {
+    isEvent,
     profilePicUrl,
     amenityDetails,
     actionNumId,
@@ -215,7 +217,9 @@ const NewCouponScreen = () => {
                   Time
                 </Text>
                 <Text allowFontScaling={false} style={styles.timeText}>
-                  {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+                  {isEvent
+                    ? `${getFormattedTime(bookingDetails?.booking_time)}`
+                    : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
                 </Text>
               </View>
             )}

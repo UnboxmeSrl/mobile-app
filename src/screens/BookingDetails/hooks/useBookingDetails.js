@@ -9,6 +9,7 @@ import {
   // getTimeFrames,
   showToastError,
 } from '../../../services';
+import {getFormattedDate, getFormattedTime} from '../../../utils';
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector(
@@ -32,12 +33,16 @@ const useBookingDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDatesLoading, setIsDatesLoading] = useState(true);
   const [isLatestWeek, setIsLatestWeek] = useState(true);
+  const [eventDates, setEventDates] = useState([]);
+  const [eventTimes, setEventTimes] = useState([]);
+  const [eventSelectedDateIndex, setEventSelectedDateIndex] = useState(-1);
   const serviceDetails = useSelector(
     state => state.restaurantSlice.serviceDetails,
   );
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
+  const isEvent = restaurantDetails?.is_event;
   const today = new Date();
   const todayUtcTime = today.getTime();
   const after24Hours =
@@ -120,16 +125,19 @@ const useBookingDetails = () => {
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
     const currentBookingDateTime = new Date(selectedDate);
-    const parsedHours = parseInt(selectedTimeFame?.Start);
-    const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
-    currentBookingDateTime.setHours(parsedHours, parsedMinutes);
+    console.log('Current booking date: ' + currentBookingDateTime);
+    if (!isEvent) {
+      const parsedHours = parseInt(selectedTimeFame?.Start);
+      const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
+      currentBookingDateTime.setHours(parsedHours, parsedMinutes);
+    }
 
-    // console.log(
-    //   'Todays UTC Time: ' + after24Hours,
-    //   currentBookingDateTime.getTime(),
-    //   selectedDate,
-    //   currentBookingDateTime,
-    // );
+    console.log(
+      'Todays UTC Time: ' + after24Hours,
+      currentBookingDateTime.getTime(),
+      selectedDate,
+      currentBookingDateTime,
+    );
 
     if (currentBookingDateTime.getTime() >= after24Hours) {
       const bookingTimeStamp = currentBookingDateTime.valueOf();
@@ -148,6 +156,7 @@ const useBookingDetails = () => {
         actionNumId === 1 || actionNumId === 2 || actionNumId === 3;
       console.log(
         ' conditionCheck',
+        selectedDate,
         currentBookingDateTime,
         formattedDate,
         serviceDetails?.actions_turbo_id,
@@ -173,6 +182,9 @@ const useBookingDetails = () => {
         action_status_turbo_id: 0,
         actions_turbo_id: serviceDetails?.actions_turbo_id,
         booking_status_id: 0,
+        booking_time: isEvent
+          ? restaurantDetails?.event_date_time[eventSelectedDateIndex]
+          : 0,
         deal_scheme_id: 0,
         events_id: 0,
         offers_turbo_id: serviceDetails?.id,
@@ -223,6 +235,25 @@ const useBookingDetails = () => {
 
   const datesBlacklistFunc = date => {
     const myDate = new Date(date);
+    const year = myDate.getFullYear();
+    const month = String(myDate.getMonth() + 1).padStart(2, '0');
+    const day = String(myDate.getDate()).padStart(2, '0');
+    const onlyDate = `${year}-${month}-${day}`;
+    console.log('Blacklist Dates: ' + onlyDate, eventDates);
+
+    if (myDate.getTime() <= after24Hours) {
+      // setSelectedDate(new Date(after24Hours));
+      return true;
+    }
+
+    if (isEvent) {
+      const filteredRes = eventDates.filter(dt => dt === onlyDate);
+      if (filteredRes.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
 
     // console.log(
     //   'My Date UTC & after 24 hours',
@@ -231,52 +262,47 @@ const useBookingDetails = () => {
     //   myDate.getTime() <= after24Hours,
     // );
 
-    if (myDate.getTime() <= after24Hours) {
-      // setSelectedDate(new Date(after24Hours));
-      return true;
-    } else {
-      const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
-      let outerFilteredRes = [];
-      // console.log('weekDay: ', weekDay);
-      // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
-      const filteredData = timeFrameData?.filter(t => {
-        const weekdays = t?.weekdays;
-        const pauseDays = t?.pause_days;
-        if (pauseDays?.length > 0) {
-          const filteredWeekdays = weekdays.filter(
-            day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
-          );
-          const filteredRes = filteredWeekdays.filter(wt => {
-            return wt?.day === weekDay;
-          });
+    const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+    let outerFilteredRes = [];
+    // console.log('weekDay: ', weekDay);
+    // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
+    const filteredData = timeFrameData?.filter(t => {
+      const weekdays = t?.weekdays;
+      const pauseDays = t?.pause_days;
+      if (pauseDays?.length > 0) {
+        const filteredWeekdays = weekdays.filter(
+          day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
+        );
+        const filteredRes = filteredWeekdays.filter(wt => {
+          return wt?.day === weekDay;
+        });
 
-          outerFilteredRes = filteredRes;
-          // if (filteredRes?.length > 0) {
-          //   return false;
-          // } else {
-          //   return true;
-          // }
-        } else {
-          const filteredRes = weekdays.filter(wt => {
-            // console.log('Condition', wt?.day, weekDay, wt?.day === weekDay);
-            return wt?.day === weekDay;
-          });
-
-          outerFilteredRes = filteredRes;
-          // if (filteredRes?.length > 0) {
-          //   return true;
-          // } else {
-          //   return false;
-          // }
-        }
-      });
-      // console.log('outerFilteredRes', JSON.stringify(outerFilteredRes));
-      console.log('filteredData: ' + JSON.stringify(filteredData));
-      if (outerFilteredRes?.length > 0) {
-        return false;
+        outerFilteredRes = filteredRes;
+        // if (filteredRes?.length > 0) {
+        //   return false;
+        // } else {
+        //   return true;
+        // }
       } else {
-        return true;
+        const filteredRes = weekdays.filter(wt => {
+          // console.log('Condition', wt?.day, weekDay, wt?.day === weekDay);
+          return wt?.day === weekDay;
+        });
+
+        outerFilteredRes = filteredRes;
+        // if (filteredRes?.length > 0) {
+        //   return true;
+        // } else {
+        //   return false;
+        // }
       }
+    });
+    // console.log('outerFilteredRes', JSON.stringify(outerFilteredRes));
+    console.log('filteredData: ' + JSON.stringify(filteredData));
+    if (outerFilteredRes?.length > 0) {
+      return false;
+    } else {
+      return true;
     }
   };
 
@@ -382,6 +408,20 @@ const useBookingDetails = () => {
   }, [startDate]);
 
   useEffect(() => {
+    if (isEvent) {
+      const convertedEventDates = restaurantDetails?.event_date_time.map(ts =>
+        getFormattedDate(ts),
+      );
+      const convertedEventTimes = restaurantDetails?.event_date_time.map(ts =>
+        getFormattedTime(ts),
+      );
+
+      setEventDates(convertedEventDates);
+      setEventTimes(convertedEventTimes);
+    }
+  }, [isEvent]);
+
+  useEffect(() => {
     return () => {
       dispatch(setTimeFrameData([]));
     };
@@ -400,6 +440,11 @@ const useBookingDetails = () => {
     handleRemoveBtnPress,
     isLatestWeek,
     isLoading,
+    isEvent,
+    eventDates,
+    eventTimes,
+    eventSelectedDateIndex,
+    setEventSelectedDateIndex,
     isDateAvailable,
     isDatesLoading,
     selectedDate,

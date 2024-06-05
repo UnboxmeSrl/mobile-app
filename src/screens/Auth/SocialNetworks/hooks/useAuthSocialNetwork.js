@@ -5,6 +5,8 @@ import {SCREEN_NAMES} from '../../../../constants';
 import {navigate, showToastError, userSignUp} from '../../../../services';
 import {resetAuthData, setAuthData, setLoginData} from '../../../../redux';
 import {OneSignal} from 'react-native-onesignal';
+import {Platform} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 const useAuthSocialNetwork = () => {
   const userDetails = useSelector(state => state.authSlice.authData);
@@ -62,6 +64,12 @@ const useAuthSocialNetwork = () => {
 
     formData.append('email', userDetails?.email);
     formData.append('password', userDetails?.password);
+    formData.append('os', Platform.OS);
+    formData.append('os_version', DeviceInfo.getSystemVersion());
+    formData.append('app_version', DeviceInfo.getVersion());
+    formData.append('version_code', DeviceInfo.getBuildNumber());
+    formData.append('device_brand_name', DeviceInfo.getBrand());
+    formData.append('device_model_name', DeviceInfo.getModel());
     formData.append('name', userDetails?.name);
     formData.append('surname', userDetails?.surname);
     formData.append('NickName', userDetails?.nickName);

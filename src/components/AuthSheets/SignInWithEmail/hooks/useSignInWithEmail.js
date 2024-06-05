@@ -12,6 +12,8 @@ import {
 } from '../../../../redux';
 import {getBookings, userLogin} from '../../../../services';
 import {OneSignal} from 'react-native-onesignal';
+import DeviceInfo from 'react-native-device-info';
+import {Platform} from 'react-native';
 
 const useSignInWithEmail = isFromBookRedirected => {
   const [email, setEmail] = useState();
@@ -30,13 +32,24 @@ const useSignInWithEmail = isFromBookRedirected => {
     // navigation.navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
     try {
       setLoading(true);
-      const prepData = {email, password};
+      const prepData = {
+        email,
+        password,
+        os: Platform.OS,
+        os_version: DeviceInfo.getSystemVersion(),
+        app_version: DeviceInfo.getVersion(),
+        version_code: DeviceInfo.getBuildNumber(),
+        device_brand_name: DeviceInfo.getBrand(),
+        device_model_name: DeviceInfo.getModel(),
+      };
+      console.log('PRep Data:', prepData);
       const res = await userLogin(prepData);
       console.log(res, 'res');
       setLoading(false);
       dispatch(setCity({}));
       if (res?.UserStatus === 'approved') {
         //TODO: Please enable this when you install onesignal
+        console.log('Login res:', res);
         OneSignal.login(res?.id?.toString());
         dispatch(setLoginData(res));
         const params = `/${res?.id}`;

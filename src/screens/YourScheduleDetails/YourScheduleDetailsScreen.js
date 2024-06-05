@@ -15,7 +15,7 @@ import {CustomModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
 import SwipeButton from 'rn-swipe-button';
-import {xanoImageSize} from '../../utils';
+import {getFormattedTime, xanoImageSize} from '../../utils';
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -31,6 +31,7 @@ const YourScheduleDetailsScreen = () => {
     approvalStage,
     isAlertVisible,
     isDeleting,
+    isEvent,
     handleAlertVisible,
     handleBackPress,
     handleSwipeSuccess,
@@ -271,9 +272,11 @@ const YourScheduleDetailsScreen = () => {
               ) : (
                 <Text
                   allowFontScaling={false}
-                  style={
-                    styles.selectedDateWithTimeText
-                  }>{`${currentWeekDay}`}</Text>
+                  style={styles.selectedDateWithTimeText}>{`${currentWeekDay}${
+                  isEvent
+                    ? `, ${getFormattedTime(bookingDetails?.booking_time)}`
+                    : ``
+                }`}</Text>
               )}
             </View>
             <TouchableOpacity
