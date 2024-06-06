@@ -17,7 +17,7 @@ import {IMAGES} from '../../assets';
 import {ContentStatusModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourSchedule} from './hooks';
-import {deadlineDaysCount, xanoImageSize} from '../../utils';
+import {deadlineDaysCount, getFormattedTime, xanoImageSize} from '../../utils';
 
 const YourScheduleScreen = () => {
   const {
@@ -108,6 +108,7 @@ const YourScheduleScreen = () => {
               const myDate = new Date(item?.BookingDay);
               const month = myDate.toLocaleString('en-US', {month: 'long'});
               const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+              const isEvent = item?._restaurant_turbo?.is_event;
               const timeFrame = item?._timeframes_turbo;
               const approvalStatus = item?.Approved
                 ? 'Accepted'
@@ -245,9 +246,11 @@ const YourScheduleScreen = () => {
                             </Text>
                             <Text
                               allowFontScaling={false}
-                              style={
-                                styles.timeText
-                              }>{`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                              style={styles.timeText}>{`${
+                              isEvent
+                                ? `${getFormattedTime(item?.booking_time)}`
+                                : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`
+                            }`}</Text>
                           </View>
                         ) : (
                           <View style={styles.timeContainer} />

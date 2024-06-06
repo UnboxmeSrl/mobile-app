@@ -15,7 +15,7 @@ const FourthOnboarding = () => {
       <View style={styles.textsMainContainer}>
         <View style={styles.titleContainer}>
           <Text allowFontScaling={false} style={styles.titleText}>
-            {`Design and incredible adventure with `}
+            {`Design an incredible adventure with `}
             <Text
               allowFontScaling={false}
               style={styles.colorChangeText}>{`influencer villas`}</Text>

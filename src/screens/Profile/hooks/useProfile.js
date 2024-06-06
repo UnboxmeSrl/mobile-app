@@ -16,13 +16,13 @@ import {Linking, Share} from 'react-native';
 
 const useProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
+  const experienceLevels = useSelector(selectExperienceLevels);
   const isInstaAccount = user?.IG_account?.length > 0;
   const isTiktokAccount = user?.Tiktok_account?.length > 0;
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isFocused = useIsFocused();
   const xp = user?.xp;
   const [level, setLevel] = useState(1);
-  const experienceLevels = useSelector(selectExperienceLevels);
   const dispatch = useDispatch();
 
   const navigateToSettings = () => {
@@ -85,6 +85,11 @@ const useProfile = () => {
       let calculatedLevel = experienceLevels?.findIndex(
         lvl => xp <= lvl?.experience_point,
       );
+      if (
+        xp > experienceLevels[experienceLevels?.length - 1]?.experience_point
+      ) {
+        calculatedLevel = experienceLevels?.length - 1;
+      }
       if (calculatedLevel !== -1) {
         setLevel(experienceLevels[calculatedLevel]?.level);
       }

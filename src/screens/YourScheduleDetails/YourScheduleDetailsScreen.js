@@ -263,7 +263,7 @@ const YourScheduleDetailsScreen = () => {
                 style={styles.selectedDateTitleText}>
                 Selected Date
               </Text>
-              {actionNumId !== 9 ? (
+              {actionNumId !== 9 && !isEvent ? (
                 <Text
                   allowFontScaling={false}
                   style={
