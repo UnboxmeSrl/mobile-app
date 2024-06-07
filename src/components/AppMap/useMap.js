@@ -15,18 +15,22 @@ import {
 import {Api} from '../../constants';
 import {getNearerRestaurants} from '../../services';
 import {setNearerRestaurants} from '../../redux';
+import {useDispatch} from 'react-redux';
 
 const useMap = () => {
-  const [search, setSearch] = useState('');
-  const handleGetNearerHotels = async currentLocation => {
-    if (currentLocation) {
-      const res = await getNearerRestaurants({...currentLocation});
-      if (res.success) {
-        console.log('nearer Restaurant', res);
-        setNearerRestaurants(res.data);
+  const dispatch = useDispatch();
+  const handleGetNearerHotels = useCallback(
+    async currentLocation => {
+      if (currentLocation) {
+        const res = await getNearerRestaurants({...currentLocation});
+        if (res.success) {
+          console.log('nearer Restaurant', res.data);
+          dispatch(setNearerRestaurants(res.data));
+        }
       }
-    }
-  };
-  return {search, setSearch, handleGetNearerHotels};
+    },
+    [dispatch],
+  );
+  return {handleGetNearerHotels};
 };
 export default useMap;

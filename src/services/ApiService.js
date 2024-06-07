@@ -30,16 +30,17 @@ export default {
   //   return response?.data;
   // },
 
-  get: async url => {
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'Accept-Language': 'en-US',
-      },
+  get: async (url, options = {}) => {
+    options.headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'Accept-Language': 'en-US',
+      ...(options?.headers || {}),
     };
+
     // console.log('URL: ' + url);
     const response = await axios.get(url, options).catch(err => {
+      console.log('error', err);
       // showToastError(err);
     });
     // const response = await axios.get(url, options)

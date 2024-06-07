@@ -18,6 +18,7 @@ const CustomTextInput = ({
   isRemoveTextIconVisible = false,
   keyboardType = 'default',
   isSecureTextInput = false,
+  ...props
 }) => {
   const [isFocused, setIsFocused] = useState();
   const [isSecureText, setIsSecureText] = useState(isSecureTextInput);
@@ -45,6 +46,7 @@ const CustomTextInput = ({
           keyboardType={keyboardType}
           secureTextEntry={isSecureText}
           returnKeyType="next"
+          {...props}
         />
       </View>
       {isRemoveTextIconVisible && value?.length > 0 && (

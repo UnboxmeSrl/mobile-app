@@ -1,45 +1,52 @@
 // import { Categories } from '@components/Categories'
 import Mapbox from '@rnmapbox/maps';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   Image,
-  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import {IMAGES} from '../../assets';
-import {COLORS, FONTS} from '../../constants';
-import {AppInput} from '../Elements';
-import {AppButton} from '../Buttons';
-import {BottomSheet} from '../BottomSheet';
-import {useRestaurants} from '../../screens/Restaurants/hooks';
-import {getRestaurantDetails, navigate} from '../../services';
-import {colors, perfectSize, xanoImageSize} from '../../utils';
-import {useRestaurantCard} from '../../screens/Restaurants/RestaurantCard/hooks';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
-import {CustomTextInput} from '../Custom';
+import {COLORS, FONTS} from '../../constants';
+import {useRestaurantCard} from '../../screens/Restaurants/RestaurantCard/hooks';
+import {useRestaurants} from '../../screens/Restaurants/hooks';
+import {getRestaurantDetails} from '../../services';
+import {xanoImageSize} from '../../utils';
+import {BottomSheet} from '../BottomSheet';
+import {AppButton} from '../Buttons';
+import RestaurantSearchInput from './RestaurantSearchInput';
 import useMap from './useMap';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {
+  selectAllNearbyRestaurants,
+  selecteUserCoords,
+  setSelectedResCoordinates,
+} from '../../redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 Mapbox.setAccessToken(
   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
 );
+// const pinCoordinates = [115.19891456614, -8.4095211510833];
 const AppMap = () => {
-  const pinCoordinates = [-8.400539, 115.209049];
   const bottomSheetRef = useRef();
+  const dispatch = useDispatch();
   const [selectedRest, setSelectedRest] = useState(null);
-  const {restaurantsData} = useRestaurants();
   const {handleCardPress} = useRestaurantCard();
-  const [view, setView] = useState('tabs');
-  const {handleLocationPress, cityData} = useRestaurants();
-  const {search, setSearch, handleGetNearerHotels} = useMap();
+
+  const {requestLocationPermission, cityData} = useRestaurants();
+  const {handleGetNearerHotels} = useMap();
+  // const allNearerRestaurant = useSelector(selectAllNearbyRestaurantsS);
+  const allNearerRestaurant = useSelector(selectAllNearbyRestaurants);
+  const selectedResCoordinates = useSelector(
+    state => state.restaurantSlice.selectedResCoordinates,
+  );
+  const userLocation = useSelector(selecteUserCoords);
+  // const {restaurantsData, setRestaurantsData} = useRestaurants();
   const handleBottomSheet = useCallback(async rest => {
     const prepData = {
       category_id: 0,
@@ -51,22 +58,37 @@ const AppMap = () => {
       bottomSheetRef?.current?.open();
     }
   }, []);
-  console.log('restaurantsData', restaurantsData);
-  // const getCurrentCoordinates = useCallback(async () => {
-  //   const res = handleGetNearerHotels(pinCoordinates);
-  // }, [pinCoordinates, handleGetNearerHotels]);
+  console.log(
+    'restaurantsData',
+    allNearerRestaurant.length,
+    selectedResCoordinates,
+  );
 
-  // useEffect(() => {
-  //   getCurrentCoordinates();
-  // }, [getCurrentCoordinates]);
+  const cameraCoords = useMemo(
+    () => selectedResCoordinates || userLocation,
+    [userLocation, selectedResCoordinates],
+  );
+  const getCurrentCoordinates = useCallback(async () => {
+    if (cameraCoords) {
+      const res = await handleGetNearerHotels({
+        location: {
+          type: 'point',
+          data: {lng: cameraCoords[0], lat: cameraCoords[1]},
+        },
+      });
+    }
+  }, [handleGetNearerHotels, cameraCoords]);
+
   useEffect(() => {
-    handleGetNearerHotels({
-      location: {
-        type: 'point',
-        data: {lng: pinCoordinates[1], lat: pinCoordinates[0]},
-      },
-    });
-  }, [pinCoordinates, handleGetNearerHotels]);
+    getCurrentCoordinates();
+  }, [getCurrentCoordinates]);
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, [requestLocationPermission]);
+  // useEffect(() => {
+  //   handleGetNearerHotels();
+  // }, [pinCoordinates, handleGetNearerHotels]);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.mapView}>
@@ -74,41 +96,23 @@ const AppMap = () => {
           style={styles.map}
           attributionControl={false}
           attributionEnabled={false}
+          scaleBarEnabled={false}
           logoEnabled={false}>
-          <Mapbox.Camera zoomLevel={14} centerCoordinate={pinCoordinates} />
+          {!!cameraCoords && (
+            <Mapbox.Camera zoomLevel={14} centerCoordinate={cameraCoords} />
+          )}
           <>
-            <Mapbox.MarkerView
-              // key={index}
-              // id="pointAnnotation"
-              // id={`pin-${index}`}
-              coordinate={pinCoordinates}
-              style={{backgroundColor: 'yellow'}}>
-              <View style={{width: 30, height: 30}}>
-                <Icon
-                  name="location"
-                  // type="ionicons"
-                  size={30}
-                  style={{position: 'absolute', top: 0, left: -1}}
-                  color={'red'}
-                />
-              </View>
-            </Mapbox.MarkerView>
-            {restaurantsData?.map((rest, index) => {
-              console.log;
-              if (rest?.Latitude && rest?.Longitude) {
-                const coordinate = [rest?.Latitude, rest?.Longitude];
+            {allNearerRestaurant?.map((rest, index) => {
+              console.log('location ', rest.Name);
+              if (rest?.location) {
+                const coordinate = [
+                  rest?.location.data.lng,
+                  rest?.location.data.lat,
+                ];
                 return (
-                  <Mapbox.MarkerView
-                    key={index}
-                    // id="pointAnnotation"
-                    // id={`pin-${index}`}
-                    coordinate={coordinate}
-                    // onSelected={() => {
-                    //   handleBottomSheet(rest);
-                    // }}
-                  >
+                  <Mapbox.MarkerView key={index} coordinate={coordinate}>
                     <Pressable
-                      style={{alignItems: 'center'}}
+                      style={{alignItedfddsms: 'center'}}
                       onPress={() => {
                         handleBottomSheet(rest);
                       }}>
@@ -120,7 +124,7 @@ const AppMap = () => {
                           color={'red'}
                         />
                       </View>
-                      <Text
+                      {/* <Text
                         style={{
                           marginTop: 10,
                           color: 'red',
@@ -132,28 +136,46 @@ const AppMap = () => {
                           paddingHorizontal: 4,
                         }}>
                         {rest?.Name}
-                      </Text>
+                      </Text> */}
                     </Pressable>
                   </Mapbox.MarkerView>
                 );
               }
             })}
           </>
+          {selectedResCoordinates !== null && (
+            <View style={styles.leftBttnsView}>
+              <View style={styles.locateWrapper}>
+                <Icon
+                  onPress={() => dispatch(setSelectedResCoordinates(null))}
+                  name="locate"
+                  color={'rgba(0, 0, 0, 0.45)'}
+                  size={20}
+                />
+              </View>
+            </View>
+          )}
         </Mapbox.MapView>
-        <CustomTextInput
-          style={{position: 'absolute', backgroundColor: 'white'}}
-          placeholder={'Search'}
-          value={search}
-          isRemoveTextIconVisible={true}
-          handleOnChangeText={setSearch}
+
+        <RestaurantSearchInput
+          onPressRestaurant={rest => {
+            console.log('onPressRestaurant', rest);
+            if (rest?.location) {
+              dispatch(
+                setSelectedResCoordinates([
+                  rest?.location?.data?.lng,
+                  rest?.location?.data?.lat,
+                ]),
+              );
+              // handleBottomSheet(rest);
+            }
+            // setSelectedResCoordinates([
+            //   rest.location?.data?.lat,
+            //   rest.location?.data?.lng,
+            // ]);
+          }}
         />
 
-        {/* <AppInput
-        placeholder="Search"
-        img={IMAGES.search}
-        style={styles.seacrhWrapper}
-        inputStyle={styles.searchInput}
-      /> */}
         <BottomSheet ref={bottomSheetRef} height={verticalScale(270)}>
           <View style={styles.restaurentDetails}>
             <ScrollView
@@ -205,6 +227,20 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  locateWrapper: {
+    backgroundColor: '#ffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    width: 36,
+    height: 36,
+  },
+  leftBttnsView: {
+    position: 'absolute',
+    bottom: 20,
+    left: 10,
+    zIndex: 1,
   },
   seacrhWrapper: {
     position: 'absolute',

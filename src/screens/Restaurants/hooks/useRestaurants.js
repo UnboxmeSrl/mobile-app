@@ -1,13 +1,12 @@
-import {getDistance} from 'geolib';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useCallback, useEffect, useState} from 'react';
 import {Alert, PermissionsAndroid, Platform} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
-import {geolocationSetting} from '../../../utils';
+import {setRestaurantDetails, setUserCurrentLocation} from '../../../redux';
 import {getCategories, getRestaurants} from '../../../services';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
-import {setRestaurantDetails} from '../../../redux';
+import {geolocationSetting} from '../../../utils';
 
 const useRestaurants = () => {
   // const categoriesIds = useSelector(selectCategoryById)
@@ -20,10 +19,11 @@ const useRestaurants = () => {
   const [isEndLoading, setIsEndLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [restaurantApiCallData, setRestaurantApiCallData] = useState();
-  const [restaurantsData, setRestaurantsData] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [filter, setFilter] = useState(0);
   const [categories, setCategories] = useState([]);
+
+  const [restaurantsData, setRestaurantsData] = useState([]);
   // const [userLocation, setUserLocation] = useState({});
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
@@ -69,10 +69,10 @@ const useRestaurants = () => {
       Geolocation.getCurrentPosition(
         position => {
           dispatch(
-            setUserLocation({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            }),
+            setUserCurrentLocation([
+              position.coords.longitude,
+              position.coords.latitude,
+            ]),
           );
         },
         err => {
@@ -83,7 +83,7 @@ const useRestaurants = () => {
     } catch (err) {
       Alert.alert('Location Permission', 'Something went wrong!');
     }
-  }, []);
+  }, [dispatch]);
 
   const getInitialRestaurantsData = async () => {
     setIsLoading(true);
@@ -153,10 +153,6 @@ const useRestaurants = () => {
     setFilter(category?.id);
   };
 
-  // useEffect(() => {
-  //   requestLocationPermission();
-  // }, [requestLocationPermission]);
-
   useEffect(() => {
     if (page > 1) {
       getRestaurantsData();
@@ -210,6 +206,8 @@ const useRestaurants = () => {
     // restaurantsData: sortedRestaurants,
     restaurantsData,
     setFilter,
+    setRestaurantsData,
+    requestLocationPermission,
     // userLocation,
   };
 };

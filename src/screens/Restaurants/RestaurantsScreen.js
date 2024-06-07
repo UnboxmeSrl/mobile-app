@@ -54,7 +54,7 @@ const RestaurantsScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.btnStack}>
         <TouchableOpacity
-          onPress={view === 'map' ? () => setView('tabs') : handleLocationPress}
+          onPress={handleLocationPress}
           // onPress={() => setView('tabs')}
           style={[
             styles.selectedLocation,

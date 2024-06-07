@@ -97,7 +97,7 @@ const Splash = () => {
   }, []);
 
   useEffect(() => {
-    SplashScreen.hide();
+    SplashScreen?.hide();
     if (isUserApprovalApiCalled) {
       setTimeout(() => {
         if (!hideOnBoarding) {
