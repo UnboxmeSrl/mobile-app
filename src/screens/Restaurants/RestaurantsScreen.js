@@ -69,7 +69,7 @@ const RestaurantsScreen = () => {
             {cityData?.CityName}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           // onPress={handleLocationPress}
           onPress={() => setView('map')}
           // onPress={handleBottomSheet}
@@ -85,7 +85,7 @@ const RestaurantsScreen = () => {
           <Text allowFontScaling={false} style={styles.locationFont}>
             Map
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       {view === 'tabs' && (
         <>

@@ -13,6 +13,7 @@ import {COLORS, FONTS} from '../../../constants';
 const CustomTextInput = ({
   placeholder,
   value,
+  style,
   handleOnChangeText,
   isRemoveTextIconVisible = false,
   keyboardType = 'default',
@@ -26,6 +27,7 @@ const CustomTextInput = ({
       style={[
         styles.textInputContainerStyleWithoutFocus,
         isFocused && styles.textInputContainerWithFocus,
+        style,
       ]}>
       <View style={styles.textInputContainer}>
         <TextInput
