@@ -10,7 +10,7 @@
     "test": "jest",
     "clean": "cd android && ./gradlew clean",
     "postinstall": "patch-package",
-    "apk" : "cd android && ./gradlew assembleRelease"
+    "apk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -26,6 +26,7 @@
     "geolib": "^3.3.4",
     "i18n-js": "^4.4.3",
     "i18next": "^23.11.2",
+    "lodash": "^4.17.21",
     "patch-package": "^8.0.0",
     "ramda": "^0.29.1",
     "react": "18.2.0",

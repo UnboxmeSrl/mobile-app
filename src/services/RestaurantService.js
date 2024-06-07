@@ -90,3 +90,17 @@ export const getAllActions = async params => {
     console.log(error);
   }
 };
+
+export const getSearchRestaurants = async params => {
+  try {
+    const url = Api.RESTAURANTS.SEARCH_RESTAURANTS;
+    const response = await Fetch.get(url, {params});
+    if (response?.data) {
+      return response.data;
+    }
+    return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

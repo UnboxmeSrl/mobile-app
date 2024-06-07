@@ -27,6 +27,7 @@ import {useNavigation} from '@react-navigation/native';
 import {CustomTextInput} from '../Custom';
 import useMap from './useMap';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import RestaurantSearchInput from './RestaurantSearchInput';
 
 Mapbox.setAccessToken(
   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
@@ -63,36 +64,12 @@ const AppMap = () => {
           logoEnabled={false}>
           <Mapbox.Camera zoomLevel={14} centerCoordinate={pinCoordinates} />
           <>
-            <Mapbox.MarkerView
-              // key={index}
-              // id="pointAnnotation"
-              // id={`pin-${index}`}
-              coordinate={pinCoordinates}
-              style={{backgroundColor: 'yellow'}}>
-              <View style={{width: 30, height: 30}}>
-                <Icon
-                  name="location"
-                  // type="ionicons"
-                  size={30}
-                  style={{position: 'absolute', top: 0, left: -1}}
-                  color={'red'}
-                />
-              </View>
-            </Mapbox.MarkerView>
             {restaurantsData?.map((rest, index) => {
-              console.log;
+              console.log('location ', rest.location);
               if (rest?.Latitude && rest?.Longitude) {
                 const coordinate = [rest?.Latitude, rest?.Longitude];
                 return (
-                  <Mapbox.MarkerView
-                    key={index}
-                    // id="pointAnnotation"
-                    // id={`pin-${index}`}
-                    coordinate={coordinate}
-                    // onSelected={() => {
-                    //   handleBottomSheet(rest);
-                    // }}
-                  >
+                  <Mapbox.MarkerView key={index} coordinate={coordinate}>
                     <Pressable
                       style={{alignItems: 'center'}}
                       onPress={() => {
@@ -126,20 +103,13 @@ const AppMap = () => {
             })}
           </>
         </Mapbox.MapView>
-        <CustomTextInput
-          style={{position: 'absolute', backgroundColor: 'white'}}
-          placeholder={'Search'}
-          value={search}
-          isRemoveTextIconVisible={true}
-          handleOnChangeText={setSearch}
+
+        <RestaurantSearchInput
+          onPressRestaurant={rest => {
+            console.log('onPressRestaurant', rest);
+          }}
         />
 
-        {/* <AppInput
-        placeholder="Search"
-        img={IMAGES.search}
-        style={styles.seacrhWrapper}
-        inputStyle={styles.searchInput}
-      /> */}
         <BottomSheet ref={bottomSheetRef} height={verticalScale(270)}>
           <View style={styles.restaurentDetails}>
             <ScrollView
