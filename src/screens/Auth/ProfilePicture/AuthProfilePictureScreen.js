@@ -25,12 +25,12 @@ const AuthProfilePictureScreen = () => {
     handleBackPress,
     handleNextPress,
   } = useAuthProfilePicture();
-
+  // console.log('profilePicDatass', profilePicData);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <CustomHeader
         title={'Profile picture'}
-        step={9}
+        step={2}
         handleBackPress={handleBackPress}
       />
       <View style={styles.imageUploadMainContainer}>

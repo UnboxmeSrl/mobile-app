@@ -10,7 +10,7 @@
     "test": "jest",
     "clean": "cd android && ./gradlew clean",
     "postinstall": "patch-package",
-    "apk" : "cd android && ./gradlew assembleRelease"
+    "apk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -51,6 +51,7 @@
     "react-native-raw-bottom-sheet": "^3.0.0",
     "react-native-safe-area-context": "4.9.0",
     "react-native-screens": "3.29.0",
+    "react-native-select-dropdown": "^4.0.1",
     "react-native-simple-gradient-progressbar-view": "^0.2.0",
     "react-native-size-matters": "^0.4.2",
     "react-native-snap-carousel": "^3.9.1",

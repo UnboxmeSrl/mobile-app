@@ -15,6 +15,7 @@ const CustomTextInput = ({
   value,
   handleOnChangeText,
   isRemoveTextIconVisible = false,
+  handleReset,
   keyboardType = 'default',
   isSecureTextInput = false,
 }) => {
@@ -46,11 +47,7 @@ const CustomTextInput = ({
         />
       </View>
       {isRemoveTextIconVisible && value?.length > 0 && (
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => {
-            handleOnChangeText('');
-          }}>
+        <TouchableOpacity style={styles.iconContainer} onPress={handleReset}>
           <Image source={IMAGES.closeSquare} style={styles.closeIcon} />
         </TouchableOpacity>
       )}

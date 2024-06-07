@@ -2,7 +2,14 @@ import {useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {REGEX} from '../../../../constants';
 import {setAuthData} from '../../../../redux';
-import {getOtp, showToastError, verifyOtp} from '../../../../services';
+import {
+  getOtp,
+  showToastError,
+  showToastSuccess,
+  verifyOtp,
+} from '../../../../services';
+import Toast from 'react-native-toast-message';
+import {Alert} from 'react-native';
 
 const useSignUpWithEmail = closeSignUpSheet => {
   const [email, setEmail] = useState();
@@ -31,6 +38,12 @@ const useSignUpWithEmail = closeSignUpSheet => {
       console.log('getOtp Response', res);
       if (res?.success) {
         setIsSendPress(true);
+        showToastSuccess("We've sent you a verification code.");
+        // Alert.alert("We've sent you a verification code.");
+        // Toast.show({
+        //   text1: "We've sent you a verification code.",
+        //   type: 'error',
+        // });
       } else {
         const errorObj = res;
         setError(errorObj);
@@ -42,7 +55,11 @@ const useSignUpWithEmail = closeSignUpSheet => {
       setError(errorObj);
     }
   };
-
+  const handleReset = () => {
+    setIsSendPress(false);
+    setVerificationCode('');
+    setEmail('');
+  };
   const handleSignUpPressAfterCodeSend = async () => {
     const body = {
       code: verificationCode,
@@ -77,6 +94,7 @@ const useSignUpWithEmail = closeSignUpSheet => {
     createPasswordRef,
     handleSignUpPress,
     handleSignUpPressAfterCodeSend,
+    handleReset,
   };
 };
 

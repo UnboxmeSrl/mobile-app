@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
+import Toast from 'react-native-toast-message';
 
 const BottomSheet = React.forwardRef(
   ({children, onClose, height = verticalScale(450)}, ref) => {
@@ -16,6 +17,7 @@ const BottomSheet = React.forwardRef(
         onClose={onClose}
         ref={ref}>
         {children}
+        <Toast ref={Toast.setRef} topOffset={50} />
       </RBSheet>
     );
   },

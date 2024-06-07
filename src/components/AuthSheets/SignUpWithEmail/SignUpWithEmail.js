@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {BottomSheet} from '../../BottomSheet';
 import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
@@ -18,6 +18,7 @@ const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
     setIsSendPress,
     handleSignUpPress,
     handleSignUpPressAfterCodeSend,
+    handleReset,
   } = useSignUpWithEmail(closeSignUpSheet);
 
   return (
@@ -32,6 +33,7 @@ const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
           handleOnChangeText={setEmail}
           isRemoveTextIconVisible={true}
           keyboardType="email-address"
+          handleReset={handleReset}
           placeholder={'Ex: Chakir@gmail.com'}
           value={email}
         />
@@ -51,6 +53,9 @@ const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
                 We just sent you a temporary login code. Please check your
                 inbox.
               </Text>
+              <Pressable onPress={handleSignUpPress}>
+                <Text allowFontScaling={false}>Resend OTP</Text>
+              </Pressable>
             </View>
             <CustomTextInput
               handleOnChangeText={setVerificationCode}

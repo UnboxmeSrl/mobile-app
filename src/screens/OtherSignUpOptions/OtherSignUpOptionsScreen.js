@@ -91,12 +91,13 @@ const styles = StyleSheet.create({
     height: verticalScale(44),
     justifyContent: 'center',
     width: '100%',
-    marginTop: '130%',
+    marginTop: '50%',
   },
   signUpBtnMainContainer: {
     marginTop: verticalScale(14),
     padding: moderateScale(24),
     width: '100%',
+    backgroundColor: COLORS.yankeesBlue,
   },
   signUpBtnText: {
     color: COLORS.black22,

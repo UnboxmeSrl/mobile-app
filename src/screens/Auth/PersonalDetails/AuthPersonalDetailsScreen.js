@@ -15,6 +15,9 @@ import {IMAGES} from '../../../assets/images';
 import {CustomButton, CustomHeader, CustomTextInput} from '../../../components';
 import {COLORS, FONTS} from '../../../constants';
 import {useAuthPersonalDetails} from './hooks';
+import CountryFlag from 'react-native-country-flag';
+import AppSelect from '../../../components/Elements/AppSelect';
+import DatePicker from 'react-native-date-picker';
 
 const AuthPersonalDetailsScreen = () => {
   const {
@@ -32,6 +35,17 @@ const AuthPersonalDetailsScreen = () => {
     country,
     onSelect,
     handleNextPress,
+    isDatePickerOpen,
+    setIsDatePickerOpen,
+    selectedDate,
+    setSelectedDate,
+    setCity,
+    city,
+    onSelectNationality,
+    nationality,
+    genderList,
+    selectedGender,
+    setSelectedGender,
   } = useAuthPersonalDetails();
 
   return (
@@ -52,6 +66,63 @@ const AuthPersonalDetailsScreen = () => {
           placeholder={'Nickname'}
           value={nickName}
           handleOnChangeText={setNickName}
+        />
+        <CustomTextInput
+          placeholder={'City'}
+          value={city}
+          handleOnChangeText={setCity}
+        />
+        <View
+          style={{
+            padding: verticalScale(16),
+          }}>
+          <AppSelect
+            data={
+              genderList.map(data => {
+                return {
+                  id: data.id,
+                  name: data.Sex,
+                };
+              }) || []
+            }
+            setSelectedValue={setSelectedGender}
+            selectedValue={selectedGender}
+            placeholder={'select your gender'}
+          />
+        </View>
+        <CountryPicker
+          onSelect={onSelectNationality}
+          containerButtonStyle={styles.countryContainer}
+          withEmoji={true}
+          withFlagButton={true}
+          withFilter={true}
+          renderFlagButton={({onOpen}) => {
+            return (
+              <TouchableOpacity
+                onPress={() => onOpen()}
+                style={styles.countryContainer}
+                activeOpacity={0.5}>
+                <View style={styles.innerCountryContainer}>
+                  {nationality?.cca2 ? (
+                    <CountryFlag
+                      isoCode={nationality?.cca2 ?? 'de'}
+                      size={25}
+                    />
+                  ) : (
+                    <Image
+                      source={IMAGES.sampleFlag}
+                      style={styles.flagIcon}
+                      resizeMode={'contain'}
+                    />
+                  )}
+                  <Text allowFontScaling={false} style={styles.countryText}>{`${
+                    nationality?.name ?? 'Country'
+                  }`}</Text>
+                </View>
+                <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
+              </TouchableOpacity>
+            );
+          }}
         />
         <View style={styles.phoneNumberMainContainer}>
           <View style={styles.countryCodeContainer}>
@@ -78,6 +149,7 @@ const AuthPersonalDetailsScreen = () => {
               }}
             />
           </View>
+
           <View
             style={[
               styles.phoneNumberTextInputContainer,
@@ -99,7 +171,42 @@ const AuthPersonalDetailsScreen = () => {
             />
           </View>
         </View>
-
+        <View>
+          <TouchableOpacity
+            onPress={() => setIsDatePickerOpen(true)}
+            style={styles.dateContainer}
+            activeOpacity={0.5}>
+            <Text allowFontScaling={false} style={styles.dateText}>
+              {`${
+                selectedDate
+                  ? `${
+                      selectedDate.getDate() < 10
+                        ? `0${selectedDate.getDate()}`
+                        : selectedDate.getDate()
+                    }/${
+                      selectedDate.getMonth() + 1 < 10
+                        ? `0${selectedDate.getMonth() + 1}`
+                        : selectedDate.getMonth() + 1
+                    }/${selectedDate.getFullYear()}`
+                  : 'DD/MM/YYYY'
+              }`}
+            </Text>
+            <Image source={IMAGES.calender} style={styles.calenderIcon} />
+          </TouchableOpacity>
+          <DatePicker
+            date={selectedDate ?? new Date()}
+            modal
+            mode={'date'}
+            onCancel={() => {
+              setIsDatePickerOpen(false);
+            }}
+            onConfirm={date => {
+              setIsDatePickerOpen(false);
+              setSelectedDate(date);
+            }}
+            open={isDatePickerOpen}
+          />
+        </View>
         <View style={styles.btnContainer}>
           <CustomButton
             title={'Next'}
@@ -175,5 +282,49 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.white,
     flex: 1,
+  },
+  countryContainer: {
+    marginTop: verticalScale(15),
+    height: verticalScale(48),
+    paddingHorizontal: scale(15),
+    width: '85%',
+    alignSelf: 'center',
+    borderWidth: moderateScale(1),
+    borderColor: COLORS.gainsboro,
+    borderRadius: moderateScale(10),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  countryText: {
+    fontFamily: FONTS.quicksand,
+    textAlign: 'center',
+    color: COLORS.gray,
+    fontSize: moderateScale(14),
+    marginLeft: scale(10),
+  },
+  dateText: {
+    fontFamily: FONTS.quicksand,
+    textAlign: 'center',
+    color: COLORS.gray,
+    fontSize: moderateScale(14),
+  },
+  dateContainer: {
+    marginTop: verticalScale(15),
+    height: verticalScale(48),
+    paddingHorizontal: scale(15),
+    width: '85%',
+    alignSelf: 'center',
+    borderWidth: moderateScale(1),
+    borderColor: COLORS.gainsboro,
+    borderRadius: moderateScale(10),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  calenderIcon: {
+    height: verticalScale(18.42),
+    width: scale(18),
+    tintColor: COLORS.achromaticBlack,
   },
 });

@@ -46,7 +46,7 @@ const useAuthProfilePicture = () => {
       const res = await openCamera();
       console.log('test', res?.assets[0]);
       if (res?.assets?.length > 0) {
-        setProfilePicData(res?.assets[0]);
+        setProfilePicData(res?.assets);
       }
     }
     profilePicUploadRef.current.close();
@@ -73,13 +73,13 @@ const useAuthProfilePicture = () => {
   };
 
   const handleBackPress = () => {
-    navigation.replace(SCREEN_NAMES.AuthInterestTopicsScreen);
+    navigation.replace(SCREEN_NAMES.AuthPersonalDetailsScreen);
   };
 
   const handleNextPress = () => {
     dispatch(setAuthData({profilePictures: profilePicData}));
     dispatch(setSignUpProcessStage(10));
-    navigate(SCREEN_NAMES.AuthCodeFromFriendScreen);
+    navigate(SCREEN_NAMES.AuthAgencyScreen);
   };
 
   useEffect(() => {

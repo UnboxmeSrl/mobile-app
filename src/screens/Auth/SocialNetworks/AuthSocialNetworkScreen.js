@@ -41,7 +41,7 @@ const AuthSocialNetworkScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <CustomHeader
         title={'Social networks'}
-        step={11}
+        step={5}
         handleBackPress={handleBackPress}
       />
       <View style={styles.descriptionContainer}>
@@ -137,23 +137,6 @@ const AuthSocialNetworkScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      {/* <View style={styles.socialMediaDescriptionContainer}>
-        <Text allowFontScaling={false}  style={styles.socialMediaDescriptionText}>
-          connect Instagram business account to get the Pro-influ checkmark on your profile
-        </Text>
-      </View>
-
-      <View style={styles.instaBusinessMainContainer}>
-        <TouchableOpacity style={styles.instaBusinessItem} activeOpacity={0.5}>
-          <View style={styles.socialMediaNameIconContainer}>
-            <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
-            <Text allowFontScaling={false}  style={styles.instaBusinessText}>Instagram account</Text>
-          </View>
-          <View style={styles.loginIntoIconContainer}>
-            <Image source={IMAGES.loginInto} style={[styles.loginIntoIcon, styles.instaBusinessLoginIntoIcon]} />
-          </View>
-        </TouchableOpacity>
-      </View> */}
 
       <View style={styles.btnContainer}>
         <CustomButton
