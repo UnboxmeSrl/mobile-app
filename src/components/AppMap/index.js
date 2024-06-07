@@ -1,6 +1,6 @@
 // import { Categories } from '@components/Categories'
 import Mapbox from '@rnmapbox/maps';
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Image,
   Platform,
@@ -32,14 +32,14 @@ Mapbox.setAccessToken(
   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
 );
 const AppMap = () => {
-  const pinCoordinates = [115.17675225490257, -8.694958547111936];
+  const pinCoordinates = [-8.400539, 115.209049];
   const bottomSheetRef = useRef();
   const [selectedRest, setSelectedRest] = useState(null);
   const {restaurantsData} = useRestaurants();
   const {handleCardPress} = useRestaurantCard();
   const [view, setView] = useState('tabs');
   const {handleLocationPress, cityData} = useRestaurants();
-  const {search, setSearch} = useMap();
+  const {search, setSearch, handleGetNearerHotels} = useMap();
   const handleBottomSheet = useCallback(async rest => {
     const prepData = {
       category_id: 0,
@@ -52,7 +52,21 @@ const AppMap = () => {
     }
   }, []);
   console.log('restaurantsData', restaurantsData);
-  const navigation = useNavigation();
+  // const getCurrentCoordinates = useCallback(async () => {
+  //   const res = handleGetNearerHotels(pinCoordinates);
+  // }, [pinCoordinates, handleGetNearerHotels]);
+
+  // useEffect(() => {
+  //   getCurrentCoordinates();
+  // }, [getCurrentCoordinates]);
+  useEffect(() => {
+    handleGetNearerHotels({
+      location: {
+        type: 'point',
+        data: {lng: pinCoordinates[1], lat: pinCoordinates[0]},
+      },
+    });
+  }, [pinCoordinates, handleGetNearerHotels]);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.mapView}>

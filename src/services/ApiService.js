@@ -56,6 +56,7 @@ export default {
     };
 
     const response = await axios.post(url, data, options).catch(err => {
+      console.log('response_POST', response);
       // showToastError(err);
       console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
     });

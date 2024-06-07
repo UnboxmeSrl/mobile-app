@@ -12,14 +12,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {Api} from '../../constants';
+import {getNearerRestaurants} from '../../services';
+import {setNearerRestaurants} from '../../redux';
 
-Mapbox.setAccessToken(
-  'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
-);
 const useMap = () => {
   const [search, setSearch] = useState('');
-
-  return {search, setSearch};
+  const handleGetNearerHotels = async currentLocation => {
+    if (currentLocation) {
+      const res = await getNearerRestaurants({...currentLocation});
+      if (res.success) {
+        console.log('nearer Restaurant', res);
+        setNearerRestaurants(res.data);
+      }
+    }
+  };
+  return {search, setSearch, handleGetNearerHotels};
 };
-
 export default useMap;

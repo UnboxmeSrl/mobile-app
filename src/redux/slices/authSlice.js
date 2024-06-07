@@ -11,6 +11,7 @@ const initialState = {
   profileData: {},
   signUpProcessStage: 0,
   visitCount: 1,
+  userLocation: [],
 };
 
 const AuthSlice = createSlice({
@@ -68,6 +69,9 @@ const AuthSlice = createSlice({
         console.log('firstVisit After: ', state.loginData.firstVisit);
       }
     },
+    userCurrentLocation: (state, {payload}) => {
+      state.userLocation = payload;
+    },
   },
 });
 
@@ -85,6 +89,7 @@ export const {
   resetAuthData,
   updateUserCount,
   updateLoginData,
+  userCurrentLocation,
 } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

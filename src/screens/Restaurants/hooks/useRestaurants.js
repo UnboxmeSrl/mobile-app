@@ -24,7 +24,7 @@ const useRestaurants = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [filter, setFilter] = useState(0);
   const [categories, setCategories] = useState([]);
-  const [userLocation, setUserLocation] = useState({});
+  // const [userLocation, setUserLocation] = useState({});
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -68,10 +68,12 @@ const useRestaurants = () => {
       }
       Geolocation.getCurrentPosition(
         position => {
-          setUserLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
+          dispatch(
+            setUserLocation({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            }),
+          );
         },
         err => {
           console.log('err', err);
@@ -137,7 +139,6 @@ const useRestaurants = () => {
         {CategoryName: 'All categories', id: 0},
         ...res?.data,
       ];
-
       setCategories(addAllCategory);
     }
     setIsLoading(false);
@@ -209,7 +210,7 @@ const useRestaurants = () => {
     // restaurantsData: sortedRestaurants,
     restaurantsData,
     setFilter,
-    userLocation,
+    // userLocation,
   };
 };
 
