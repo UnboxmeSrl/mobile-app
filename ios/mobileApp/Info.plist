@@ -45,8 +45,8 @@
 		<string>We need to access your location to find a proper place and calculate the distance
 			calculate the distance to store</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>We need to access your location to find a proper place and calculate the distance
-			calculate the distance to store</string>
+		<string>We need to access your location to find a proper place and calculate the distance to
+			store</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>This app requires to access Microphone</string>
 		<key>NSMotionUsageDescription</key>

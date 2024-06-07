@@ -29,6 +29,7 @@ if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
   use_frameworks! :linkage => linkage.to_sym
 end
+project 'mobileApp.xcodeproj'
 
 target 'mobileApp' do
   config = use_native_modules!
@@ -36,7 +37,8 @@ target 'mobileApp' do
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
-    :app_path => "#{Pod::Config.instance.installation_root}/.."
+    :app_path => "#{Pod::Config.instance.installation_root}/..",
+    :hermes_enabled => false,
   )
 
   target 'mobileAppTests' do
