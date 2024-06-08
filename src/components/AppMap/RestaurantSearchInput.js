@@ -71,6 +71,7 @@ function RestaurantSearchInput({onPressRestaurant = () => {}}) {
   return (
     <View style={styles.container}>
       <CustomTextInput
+        search={true}
         style={styles.input}
         placeholder={'Search by restaurant'}
         value={search}

@@ -34,7 +34,7 @@ const useAuthSocialNetwork = () => {
   };
 
   const handleNextPress = async () => {
-    setIsLoading(true);
+    setIsLoading(false);
     setIsBtnDisabled(true);
     // dispatch(setAuthData({instaUserName, tiktokUserName}));
     // User Type (Model, Influencer, Both)
@@ -82,6 +82,7 @@ const useAuthSocialNetwork = () => {
     formData.append('Agency', userDetails?.agencyData?.hasAgency);
     formData.append('Freelance', userDetails?.agencyData?.freelance);
     formData.append('promocode', userDetails?.codeFromFriend);
+    formData.append('userType_id', '8');
     const profilePicData = userDetails?.profilePictures?.[0];
     if (profilePicData && profilePicData?.uri) {
       formData.append('profileImage', {
@@ -114,6 +115,7 @@ const useAuthSocialNetwork = () => {
 
     // console.log('🟩 Form Data', JSON.stringify(formData));
     const res = await userSignUp(formData);
+    console.log('🟩 Success Data', res);
     setIsBtnDisabled(false);
     // console.log('🚀 ~ handleNextPress ~ res:', res.data)
     if (res?.id) {

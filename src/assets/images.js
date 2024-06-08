@@ -1,4 +1,5 @@
 export const IMAGES = {
+  checkRounded: require('./icons/check-rounded.png'),
   search: require('./icons/search.png'),
   mapIcon: require('./icons/mapIcon.png'),
   ball: require('./icons/Soccer-Ball.png'),

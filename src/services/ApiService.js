@@ -79,7 +79,10 @@ export default {
       },
     };
     // console.log(url, data)
-    const response = await axios.post(url, data, options).catch(err => {});
+    const response = await axios.post(url, data, options).catch(err => {
+      console.log('signupCatchError', err);
+    });
+    console.log('signupResponse', response);
     return response?.data;
   },
 

@@ -20,18 +20,23 @@ const CustomButton = ({
   btnStyle,
   disabled = false,
   isLoading = false,
+  btnWrapper,
 }) => {
   return (
-    <View style={[styles.btnMainContainer]}>
+    <View style={[styles.btnMainContainer, btnWrapper]}>
       <TouchableOpacity
         disabled={disabled}
         onPress={handlePress}
-        style={[styles.btnContainer, disabled && styles.disabledBtnContainer, btnStyle]}>
+        style={[
+          styles.btnContainer,
+          disabled && styles.disabledBtnContainer,
+          btnStyle,
+        ]}>
         {isLoading ? (
           <ActivityIndicator size={30} color={COLORS.black22} />
         ) : (
           <>
-            {!!iconProps && <Icon {...iconProps} style={iconStyle}/>}
+            {!!iconProps && <Icon {...iconProps} style={iconStyle} />}
             <Text
               allowFontScaling={false}
               style={[styles.btnText, disabled && styles.disabledBtnText]}>

@@ -17,8 +17,12 @@ const CustomTextInput = ({
   style,
   handleOnChangeText,
   isRemoveTextIconVisible = false,
+  handleReset,
   keyboardType = 'default',
   isSecureTextInput = false,
+  inputWrapperStyle,
+  inputContainerStyle,
+  search,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState();
@@ -31,13 +35,15 @@ const CustomTextInput = ({
         isFocused && styles.textInputContainerWithFocus,
         style,
       ]}>
-      <View style={styles.textInputContainer}>
-        <Icon
-          name="search1"
-          size={20}
-          color={COLORS.grey}
-          style={{marginLeft: 12}}
-        />
+      <View style={[styles.textInputContainer, inputWrapperStyle]}>
+        {search && (
+          <Icon
+            name="search1"
+            size={20}
+            color={COLORS.grey}
+            style={{marginLeft: 12}}
+          />
+        )}
         <TextInput
           allowFontScaling={false}
           value={value}
@@ -57,11 +63,7 @@ const CustomTextInput = ({
         />
       </View>
       {isRemoveTextIconVisible && value?.length > 0 && (
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => {
-            handleOnChangeText('');
-          }}>
+        <TouchableOpacity style={styles.iconContainer} onPress={handleReset}>
           <Image source={IMAGES.closeSquare} style={styles.closeIcon} />
         </TouchableOpacity>
       )}
