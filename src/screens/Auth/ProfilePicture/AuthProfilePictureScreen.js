@@ -28,59 +28,63 @@ const AuthProfilePictureScreen = () => {
   // console.log('profilePicDatass', profilePicData);
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <CustomHeader
-        title={'Profile picture'}
-        step={2}
-        handleBackPress={handleBackPress}
-      />
-      <View style={styles.imageUploadMainContainer}>
-        <FlatList
-          data={profilePicData}
-          numColumns={2}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableOpacity
-                onPress={() => handleProfilePicture(index)}
-                style={styles.imageUploadContainer}
-                activeOpacity={0.4}>
-                {item?.fileName ? (
-                  <Image
-                    source={{uri: item?.uri}}
-                    style={styles.actualUploadedPicture}
-                    resizeMode={'cover'}
-                  />
-                ) : (
-                  <>
-                    <Image source={IMAGES.gallery} style={styles.galleryIcon} />
-                    <Text allowFontScaling={false} style={styles.uploadText}>
-                      Upload
-                    </Text>
-                  </>
-                )}
-              </TouchableOpacity>
-            );
-          }}
+      <View style={styles.content}>
+        <CustomHeader
+          title={'Profile picture'}
+          step={2}
+          handleBackPress={handleBackPress}
         />
-        <View style={styles.titleContainer}>
-          <Text allowFontScaling={false} style={styles.titleText}>
-            Add photos of you
-          </Text>
+        <View style={styles.imageUploadMainContainer}>
+          <FlatList
+            data={profilePicData}
+            numColumns={2}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => handleProfilePicture(index)}
+                  style={styles.imageUploadContainer}
+                  activeOpacity={0.4}>
+                  {item?.fileName ? (
+                    <Image
+                      source={{uri: item?.uri}}
+                      style={styles.actualUploadedPicture}
+                      resizeMode={'cover'}
+                    />
+                  ) : (
+                    <>
+                      <Image
+                        source={IMAGES.gallery}
+                        style={styles.galleryIcon}
+                      />
+                      <Text allowFontScaling={false} style={styles.uploadText}>
+                        Upload
+                      </Text>
+                    </>
+                  )}
+                </TouchableOpacity>
+              );
+            }}
+          />
+          <View style={styles.titleContainer}>
+            <Text allowFontScaling={false} style={styles.titleText}>
+              Add photos of you
+            </Text>
+          </View>
+          <View style={styles.descriptionContainer}>
+            <Text allowFontScaling={false} style={styles.descriptionText}>
+              Please make sure your photo clearly shows your face
+            </Text>
+          </View>
         </View>
-        <View style={styles.descriptionContainer}>
-          <Text allowFontScaling={false} style={styles.descriptionText}>
-            Please make sure your photo clearly shows your face
-          </Text>
+        <View style={styles.btnContainer}>
+          <CustomButton
+            title={'Next'}
+            handlePress={handleNextPress}
+            disabled={isBtnDisabled}
+          />
         </View>
       </View>
-      <View style={styles.btnContainer}>
-        <CustomButton
-          title={'Next'}
-          handlePress={handleNextPress}
-          disabled={isBtnDisabled}
-        />
-      </View>
-
       <PickerModal
         ref={profilePicUploadRef}
         handleCameraPress={handleCameraPress}
@@ -93,6 +97,15 @@ const AuthProfilePictureScreen = () => {
 export default AuthProfilePictureScreen;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: COLORS.white,
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
   actualUploadedPicture: {
     width: scale(150.04),
     height: verticalScale(150),
@@ -145,9 +158,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: verticalScale(24),
     width: '70%',
-  },
-  mainContainer: {
-    backgroundColor: COLORS.white,
-    flex: 1,
   },
 });

@@ -10,7 +10,12 @@ import {
 } from 'react-native';
 import CountryPicker from 'react-native-country-picker-modal';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {
+  moderateScale,
+  s,
+  scale,
+  verticalScale,
+} from 'react-native-size-matters';
 import {IMAGES} from '../../../assets/images';
 import {CustomButton, CustomHeader, CustomTextInput} from '../../../components';
 import {COLORS, FONTS} from '../../../constants';
@@ -50,32 +55,40 @@ const AuthPersonalDetailsScreen = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <CustomHeader title={'personal details'} step={1} />
-        <CustomTextInput
-          placeholder={'Name'}
-          value={name}
-          handleOnChangeText={setName}
-        />
-        <CustomTextInput
-          placeholder={'Surname'}
-          value={surname}
-          handleOnChangeText={setSurname}
-        />
-        <CustomTextInput
-          placeholder={'Nickname'}
-          value={nickName}
-          handleOnChangeText={setNickName}
-        />
-        <CustomTextInput
-          placeholder={'City'}
-          value={city}
-          handleOnChangeText={setCity}
-        />
-        <View
-          style={{
-            padding: verticalScale(16),
-          }}>
+      <CustomHeader title={'personal details'} step={1} />
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        style={{flex: 1}}>
+        <View style={styles.content}>
+          <CustomTextInput
+            placeholder={'Name'}
+            value={name}
+            handleOnChangeText={setName}
+            inputContainerStyle={styles.cstInputContainer}
+            inputWrapperStyle={styles.cstInputWrapper}
+          />
+          <CustomTextInput
+            placeholder={'Surname'}
+            value={surname}
+            handleOnChangeText={setSurname}
+            inputContainerStyle={styles.cstInputContainer}
+            inputWrapperStyle={styles.cstInputWrapper}
+          />
+          <CustomTextInput
+            placeholder={'Nickname'}
+            value={nickName}
+            handleOnChangeText={setNickName}
+            inputContainerStyle={styles.cstInputContainer}
+            inputWrapperStyle={styles.cstInputWrapper}
+          />
+          <CustomTextInput
+            placeholder={'City'}
+            value={city}
+            handleOnChangeText={setCity}
+            inputContainerStyle={styles.cstInputContainer}
+            inputWrapperStyle={styles.cstInputWrapper}
+          />
+
           <AppSelect
             data={
               genderList.map(data => {
@@ -89,132 +102,137 @@ const AuthPersonalDetailsScreen = () => {
             selectedValue={selectedGender}
             placeholder={'select your gender'}
           />
-        </View>
-        <CountryPicker
-          onSelect={onSelectNationality}
-          containerButtonStyle={styles.countryContainer}
-          withEmoji={true}
-          withFlagButton={true}
-          withFilter={true}
-          renderFlagButton={({onOpen}) => {
-            return (
-              <TouchableOpacity
-                onPress={() => onOpen()}
-                style={styles.countryContainer}
-                activeOpacity={0.5}>
-                <View style={styles.innerCountryContainer}>
-                  {nationality?.cca2 ? (
-                    <CountryFlag
-                      isoCode={nationality?.cca2 ?? 'de'}
-                      size={25}
-                    />
-                  ) : (
-                    <Image
-                      source={IMAGES.sampleFlag}
-                      style={styles.flagIcon}
-                      resizeMode={'contain'}
-                    />
-                  )}
-                  <Text allowFontScaling={false} style={styles.countryText}>{`${
-                    nationality?.name ?? 'Country'
-                  }`}</Text>
-                </View>
-                <Image source={IMAGES.downArrow} style={styles.downArrowIcon} />
-              </TouchableOpacity>
-            );
-          }}
-        />
-        <View style={styles.phoneNumberMainContainer}>
-          <View style={styles.countryCodeContainer}>
-            <CountryPicker
-              onSelect={onSelect}
-              withFilter={true}
-              withCallingCode={true}
-              renderFlagButton={({onOpen}) => {
-                return (
-                  <TouchableOpacity
-                    onPress={onOpen}
-                    style={styles.countryCodeInnerContainer}>
+
+          <CountryPicker
+            onSelect={onSelectNationality}
+            containerButtonStyle={styles.countryContainer}
+            withEmoji={true}
+            withFlagButton={true}
+            withFilter={true}
+            renderFlagButton={({onOpen}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => onOpen()}
+                  style={styles.countryContainer}
+                  activeOpacity={0.5}>
+                  <View style={styles.innerCountryContainer}>
+                    {nationality?.cca2 ? (
+                      <CountryFlag
+                        isoCode={nationality?.cca2 ?? 'de'}
+                        size={20}
+                      />
+                    ) : (
+                      <Image
+                        source={IMAGES.sampleFlag}
+                        style={styles.flagIcon}
+                        resizeMode={'contain'}
+                      />
+                    )}
                     <Text
                       allowFontScaling={false}
-                      style={styles.countryCallingCodeText}>{`+${
-                      country?.callingCode?.[0] ?? '21'
+                      style={styles.countryText}>{`${
+                      nationality?.name ?? 'Country'
                     }`}</Text>
-                    <Image
-                      source={IMAGES.downArrow}
-                      style={styles.downArrowIcon}
-                    />
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          </View>
+                  </View>
+                  <Image
+                    source={IMAGES.downArrow}
+                    style={styles.downArrowIcon}
+                  />
+                </TouchableOpacity>
+              );
+            }}
+          />
+          <View style={styles.phoneNumberMainContainer}>
+            <View style={styles.countryCodeContainer}>
+              <CountryPicker
+                onSelect={onSelect}
+                withFilter={true}
+                withCallingCode={true}
+                renderFlagButton={({onOpen}) => {
+                  return (
+                    <TouchableOpacity
+                      onPress={onOpen}
+                      style={styles.countryCodeInnerContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.countryCallingCodeText}>{`+${
+                        country?.callingCode?.[0] ?? '21'
+                      }`}</Text>
+                      <Image
+                        source={IMAGES.downArrow}
+                        style={styles.downArrowIcon}
+                      />
+                    </TouchableOpacity>
+                  );
+                }}
+              />
+            </View>
 
-          <View
-            style={[
-              styles.phoneNumberTextInputContainer,
-              isFocused && styles.phoneNumberTextInputContainerWithFocus,
-            ]}>
-            <TextInput
-              allowFontScaling={false}
-              placeholder={'Phone number'}
-              placeholderTextColor={COLORS.grey}
-              value={phoneNumber}
-              onChangeText={val => {
-                const strippedInput = val.replace(/\D/g, '');
-                setPhoneNumber(strippedInput.trim());
+            <View
+              style={[
+                styles.phoneNumberTextInputContainer,
+                isFocused && styles.phoneNumberTextInputContainerWithFocus,
+              ]}>
+              <TextInput
+                allowFontScaling={false}
+                placeholder={'Phone number'}
+                placeholderTextColor={COLORS.grey}
+                value={phoneNumber}
+                onChangeText={val => {
+                  const strippedInput = val.replace(/\D/g, '');
+                  setPhoneNumber(strippedInput.trim());
+                }}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                style={styles.phoneNumberTextInput}
+                keyboardType={'number-pad'}
+              />
+            </View>
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={() => setIsDatePickerOpen(true)}
+              style={styles.dateContainer}
+              activeOpacity={0.5}>
+              <Text allowFontScaling={false} style={styles.dateText}>
+                {`${
+                  selectedDate
+                    ? `${
+                        selectedDate.getDate() < 10
+                          ? `0${selectedDate.getDate()}`
+                          : selectedDate.getDate()
+                      }/${
+                        selectedDate.getMonth() + 1 < 10
+                          ? `0${selectedDate.getMonth() + 1}`
+                          : selectedDate.getMonth() + 1
+                      }/${selectedDate.getFullYear()}`
+                    : 'DD/MM/YYYY'
+                }`}
+              </Text>
+              <Image source={IMAGES.calender} style={styles.calenderIcon} />
+            </TouchableOpacity>
+            <DatePicker
+              date={selectedDate ?? new Date()}
+              modal
+              mode={'date'}
+              onCancel={() => {
+                setIsDatePickerOpen(false);
               }}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              style={styles.phoneNumberTextInput}
-              keyboardType={'number-pad'}
+              onConfirm={date => {
+                setIsDatePickerOpen(false);
+                setSelectedDate(date);
+              }}
+              open={isDatePickerOpen}
             />
           </View>
-        </View>
-        <View>
-          <TouchableOpacity
-            onPress={() => setIsDatePickerOpen(true)}
-            style={styles.dateContainer}
-            activeOpacity={0.5}>
-            <Text allowFontScaling={false} style={styles.dateText}>
-              {`${
-                selectedDate
-                  ? `${
-                      selectedDate.getDate() < 10
-                        ? `0${selectedDate.getDate()}`
-                        : selectedDate.getDate()
-                    }/${
-                      selectedDate.getMonth() + 1 < 10
-                        ? `0${selectedDate.getMonth() + 1}`
-                        : selectedDate.getMonth() + 1
-                    }/${selectedDate.getFullYear()}`
-                  : 'DD/MM/YYYY'
-              }`}
-            </Text>
-            <Image source={IMAGES.calender} style={styles.calenderIcon} />
-          </TouchableOpacity>
-          <DatePicker
-            date={selectedDate ?? new Date()}
-            modal
-            mode={'date'}
-            onCancel={() => {
-              setIsDatePickerOpen(false);
-            }}
-            onConfirm={date => {
-              setIsDatePickerOpen(false);
-              setSelectedDate(date);
-            }}
-            open={isDatePickerOpen}
-          />
-        </View>
-        <View style={styles.btnContainer}>
-          <CustomButton
-            title={'Next'}
-            handlePress={handleNextPress}
-            disabled={isBtnDisabled}
-          />
         </View>
       </KeyboardAwareScrollView>
+      <CustomButton
+        title={'Next'}
+        handlePress={handleNextPress}
+        disabled={isBtnDisabled}
+        btnWrapper={styles.btnWrapper}
+      />
     </SafeAreaView>
   );
 };
@@ -222,6 +240,11 @@ const AuthPersonalDetailsScreen = () => {
 export default AuthPersonalDetailsScreen;
 
 const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    padding: verticalScale(14),
+    rowGap: verticalScale(14),
+  },
   countryCallingCodeText: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandMedium,
@@ -231,8 +254,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  btnContainer: {
-    marginTop: verticalScale(70),
+  cstInputContainer: {
+    marginTop: 0,
+    width: '100%',
+  },
+  cstInputWrapper: {
+    width: '100%',
+  },
+  btnWrapper: {
+    marginTop: 0,
   },
   phoneNumberMainContainer: {
     flexDirection: 'row',
@@ -244,7 +274,7 @@ const styles = StyleSheet.create({
     width: scale(11.63),
   },
   countryCodeContainer: {
-    marginTop: verticalScale(15),
+    // marginTop: verticalScale(15),
     height: verticalScale(48),
     width: '20%',
     alignSelf: 'center',
@@ -256,9 +286,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   phoneNumberTextInputContainer: {
-    marginTop: verticalScale(15),
+    // marginTop: verticalScale(15),
     height: verticalScale(48),
-    width: '66%',
+    flex: 1,
+    // width: '66%',
     alignSelf: 'center',
     borderWidth: moderateScale(1),
     borderColor: COLORS.gainsboro,
@@ -284,11 +315,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   countryContainer: {
-    marginTop: verticalScale(15),
     height: verticalScale(48),
     paddingHorizontal: scale(15),
-    width: '85%',
-    alignSelf: 'center',
+    width: '100%',
     borderWidth: moderateScale(1),
     borderColor: COLORS.gainsboro,
     borderRadius: moderateScale(10),
@@ -296,11 +325,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  innerCountryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flagIcon: {
+    width: 28,
+  },
   countryText: {
     fontFamily: FONTS.quicksand,
     textAlign: 'center',
     color: COLORS.gray,
     fontSize: moderateScale(14),
+    lineHeight: moderateScale(18),
     marginLeft: scale(10),
   },
   dateText: {
@@ -310,10 +347,10 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   dateContainer: {
-    marginTop: verticalScale(15),
+    // marginTop: verticalScale(15),
     height: verticalScale(48),
     paddingHorizontal: scale(15),
-    width: '85%',
+    width: '100%',
     alignSelf: 'center',
     borderWidth: moderateScale(1),
     borderColor: COLORS.gainsboro,

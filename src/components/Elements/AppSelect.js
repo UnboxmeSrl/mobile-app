@@ -1,7 +1,9 @@
 import SelectDropdown from 'react-native-select-dropdown';
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Feather';
 import {StyleSheet, Text, View} from 'react-native';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS} from '../../constants';
 
 export default function AppSelect({
   data,
@@ -49,22 +51,24 @@ export default function AppSelect({
 const styles = StyleSheet.create({
   dropdownButtonStyle: {
     width: '100%',
-    height: 50,
-    backgroundColor: '#E9ECEF',
-    borderRadius: 12,
+    height: verticalScale(48),
+    backgroundColor: COLORS.white,
+    borderRadius: moderateScale(10),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 12,
+    borderWidth: moderateScale(1),
+    borderColor: COLORS.gainsboro,
   },
   dropdownButtonTxtStyle: {
     flex: 1,
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#151E26',
+    color: COLORS.gray,
+    fontSize: moderateScale(14),
   },
   dropdownButtonArrowStyle: {
-    fontSize: 28,
+    fontSize: moderateScale(20),
+    color: COLORS.davyGrey,
   },
   dropdownButtonIconStyle: {
     fontSize: 28,
@@ -84,9 +88,8 @@ const styles = StyleSheet.create({
   },
   dropdownItemTxtStyle: {
     flex: 1,
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#151E26',
+    fontSize: moderateScale(14),
+    color: COLORS.dark,
   },
   dropdownItemIconStyle: {
     fontSize: 28,

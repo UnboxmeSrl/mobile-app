@@ -18,6 +18,8 @@ const CustomTextInput = ({
   handleReset,
   keyboardType = 'default',
   isSecureTextInput = false,
+  inputWrapperStyle,
+  inputContainerStyle,
 }) => {
   const [isFocused, setIsFocused] = useState();
   const [isSecureText, setIsSecureText] = useState(isSecureTextInput);
@@ -27,8 +29,9 @@ const CustomTextInput = ({
       style={[
         styles.textInputContainerStyleWithoutFocus,
         isFocused && styles.textInputContainerWithFocus,
+        inputContainerStyle,
       ]}>
-      <View style={styles.textInputContainer}>
+      <View style={[styles.textInputContainer, inputWrapperStyle]}>
         <TextInput
           allowFontScaling={false}
           value={value}
