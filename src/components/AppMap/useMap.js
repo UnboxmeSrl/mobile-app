@@ -23,7 +23,7 @@ const useMap = () => {
     async currentLocation => {
       if (currentLocation) {
         const res = await getNearerRestaurants({...currentLocation});
-        if (res.success) {
+        if (res?.success) {
           console.log('nearer Restaurant', res.data);
           dispatch(setNearerRestaurants(res.data));
         }

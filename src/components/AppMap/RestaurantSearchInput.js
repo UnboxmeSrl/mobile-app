@@ -4,13 +4,10 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import _ from 'lodash';
 import {getSearchRestaurants} from '../../services';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {moderateScale} from 'react-native-size-matters';
+import {COLORS} from '../../constants';
 
 // #region Child Components
-const ListItem = ({text}) => (
-  <View style={styles.item}>
-    <Text style={styles.name}>{text}</Text>
-  </View>
-);
 
 // #endregion Child Components
 
@@ -18,18 +15,32 @@ function RestaurantSearchInput({onPressRestaurant = () => {}}) {
   const [search, setSearch] = useState('');
   const [isSearching, setIsSearching] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
+  console.log('restaurant', restaurants);
+  const ListItem = ({text}) => (
+    <View style={styles.item}>
+      <Text style={styles.name}>{text}</Text>
+    </View>
+  );
 
   const RenderListItem = useCallback(
-    ({item}) => (
-      <TouchableOpacity
-        onPress={() => {
-          onPressRestaurant?.(item);
-          setSearch('');
-          setRestaurants([]);
-        }}>
-        <ListItem text={item.Name} />
-      </TouchableOpacity>
-    ),
+    ({item}) => {
+      const name =
+        item.Name.length > 23 ? item.Name.slice(0, 23) + '...' : item.Name;
+      return (
+        <TouchableOpacity
+          style={styles.itemMain}
+          onPress={() => {
+            onPressRestaurant?.(item);
+            setSearch('');
+            setRestaurants([]);
+          }}>
+          <ListItem text={name} />
+          {!!item.city && (
+            <Text style={{marginRight: 12}}>{item.city?.CityName}</Text>
+          )}
+        </TouchableOpacity>
+      );
+    },
     [onPressRestaurant],
   );
 
@@ -61,7 +72,7 @@ function RestaurantSearchInput({onPressRestaurant = () => {}}) {
     <View style={styles.container}>
       <CustomTextInput
         style={styles.input}
-        placeholder={'Search'}
+        placeholder={'Search by restaurant'}
         value={search}
         isRemoveTextIconVisible
         handleOnChangeText={setSearch}
@@ -73,15 +84,26 @@ function RestaurantSearchInput({onPressRestaurant = () => {}}) {
         </View>
       )}
       {!!search && !isSearching && (
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={restaurants}
-          keyExtractor={item => item.id.toString()}
-          ItemSeparatorComponent={<View style={styles.separator} />}
-          renderItem={RenderListItem}
-          ListEmptyComponent={<ListItem text="No results found" />}
-          style={styles.list}
-        />
+        <View
+          style={[
+            styles.resultWrapper,
+            !restaurants.length && {paddingVertical: 0},
+          ]}>
+          {!!restaurants.length && (
+            <Text style={{marginLeft: moderateScale(12), color: 'black'}}>
+              Did you mean?
+            </Text>
+          )}
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={restaurants}
+            keyExtractor={item => item.id.toString()}
+            // ItemSeparatorComponent={<View style={styles.separator} />}
+            renderItem={RenderListItem}
+            ListEmptyComponent={<ListItem text="No results found" />}
+            style={[styles.list, !restaurants.length && {marginTop: 0}]}
+          />
+        </View>
       )}
     </View>
   );
@@ -95,10 +117,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: moderateScale(14),
+    // backgroundColor: 'yellow',
   },
   list: {
+    flex: 1,
     borderRadius: 10,
-    width: '88%',
+    width: '100%',
     marginTop: 10, // Adjust based on your input's height and margin
     backgroundColor: 'white',
     maxHeight: 300,
@@ -106,16 +131,40 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'white',
+    width: '100%',
   },
   name: {
     color: 'black',
   },
-  item: {
-    padding: 10,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#ccc',
+  resultWrapper: {
+    backgroundColor: 'white',
     width: '100%',
+    marginVertical: moderateScale(12),
+    borderRadius: moderateScale(16),
+    paddingHorizontal: moderateScale(12),
+    paddingVertical: moderateScale(18),
+    // backgroundColor: 'yellow',
   },
+  itemMain: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderRadius: 9,
+    borderColor: '#00000015',
+    marginVertical: 4,
+    // backgroundColor: 'blue',
+  },
+  item: {
+    paddingHorizontal: moderateScale(12),
+    paddingVertical: moderateScale(14),
+    // backgroundColor: 'yellow'
+    // width: '100%',
+    // marginVertical: moderateScale(12),
+  },
+  // separator: {
+  //   height: 1,
+  //   backgroundColor: '#ccc',
+  //   width: '100%',
+  // },
 });

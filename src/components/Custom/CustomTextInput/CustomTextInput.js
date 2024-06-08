@@ -9,6 +9,7 @@ import {
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const CustomTextInput = ({
   placeholder,
@@ -31,6 +32,12 @@ const CustomTextInput = ({
         style,
       ]}>
       <View style={styles.textInputContainer}>
+        <Icon
+          name="search1"
+          size={20}
+          color={COLORS.grey}
+          style={{marginLeft: 12}}
+        />
         <TextInput
           allowFontScaling={false}
           value={value}
@@ -82,6 +89,9 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     width: '90%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    // backgroundColor: 'yellow',
   },
   textInputContainerWithFocus: {
     borderWidth: moderateScale(2),
@@ -108,10 +118,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textInput: {
+    minWidth: moderateScale(200),
+    maxWidth: moderateScale(240),
     marginLeft: scale(10),
     color: COLORS.black,
     fontFamily: FONTS.quicksand,
     fontWeight: '600',
     fontSize: moderateScale(14),
+    // backgroundColor: 'yellow',
   },
 });
