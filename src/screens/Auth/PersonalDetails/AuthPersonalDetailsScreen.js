@@ -55,7 +55,7 @@ const AuthPersonalDetailsScreen = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <CustomHeader title={'personal details'} step={1} />
+      <CustomHeader title={'Personal details'} step={1} />
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{flex: 1}}>
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: verticalScale(14),
     rowGap: verticalScale(14),
-    
+    width: '100%',
   },
   countryCallingCodeText: {
     color: COLORS.black,
@@ -263,7 +263,6 @@ const styles = StyleSheet.create({
   },
   cstInputWrapper: {
     width: '100%',
-  
   },
   btnWrapper: {
     marginTop: 0,
