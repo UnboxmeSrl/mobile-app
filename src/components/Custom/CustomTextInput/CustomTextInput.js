@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   textInputContainerStyleWithoutFocus: {
     marginTop: verticalScale(15),
     height: verticalScale(48),
-    width: '88%',
+    width: '100%',
     alignSelf: 'center',
     borderWidth: moderateScale(1),
     borderColor: COLORS.gainsboro,

@@ -189,6 +189,7 @@ const AuthPersonalDetailsScreen = () => {
               />
             </View>
           </View>
+
           <View>
             <TouchableOpacity
               onPress={() => setIsDatePickerOpen(true)}
@@ -225,6 +226,7 @@ const AuthPersonalDetailsScreen = () => {
               open={isDatePickerOpen}
             />
           </View>
+
         </View>
       </KeyboardAwareScrollView>
       <CustomButton
@@ -244,6 +246,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: verticalScale(14),
     rowGap: verticalScale(14),
+    
   },
   countryCallingCodeText: {
     color: COLORS.black,
@@ -260,6 +263,7 @@ const styles = StyleSheet.create({
   },
   cstInputWrapper: {
     width: '100%',
+  
   },
   btnWrapper: {
     marginTop: 0,
