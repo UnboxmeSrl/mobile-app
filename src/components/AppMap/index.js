@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 // import { Categories } from '@components/Categories'
 import Mapbox from '@rnmapbox/maps';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
@@ -112,14 +113,18 @@ const AppMap = () => {
                 return (
                   <Mapbox.MarkerView key={index} coordinate={coordinate}>
                     <Pressable
-                      style={{alignItedfddsms: 'center'}}
+                      style={{alignItems: 'center'}}
                       onPress={() => {
                         handleBottomSheet(rest);
                       }}>
-                      <View style={{width: 30, height: 30}}>
+                      <View
+                        style={{
+                          width: moderateScale(40),
+                          height: moderateScale(40),
+                        }}>
                         <Icon
                           name="location"
-                          size={30}
+                          size={moderateScale(40)}
                           style={{position: 'absolute', top: 0, left: -1}}
                           color={'red'}
                         />

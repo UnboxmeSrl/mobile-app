@@ -64,29 +64,29 @@ const AuthPersonalDetailsScreen = () => {
             placeholder={'Name'}
             value={name}
             handleOnChangeText={setName}
-            inputContainerStyle={styles.cstInputContainer}
             inputWrapperStyle={styles.cstInputWrapper}
+            style={styles.cstInputContainer}
           />
           <CustomTextInput
             placeholder={'Surname'}
             value={surname}
             handleOnChangeText={setSurname}
-            inputContainerStyle={styles.cstInputContainer}
             inputWrapperStyle={styles.cstInputWrapper}
+            style={styles.cstInputContainer}
           />
           <CustomTextInput
             placeholder={'Nickname'}
             value={nickName}
             handleOnChangeText={setNickName}
-            inputContainerStyle={styles.cstInputContainer}
             inputWrapperStyle={styles.cstInputWrapper}
+            style={styles.cstInputContainer}
           />
           <CustomTextInput
             placeholder={'City'}
             value={city}
             handleOnChangeText={setCity}
-            inputContainerStyle={styles.cstInputContainer}
             inputWrapperStyle={styles.cstInputWrapper}
+            style={styles.cstInputContainer}
           />
 
           <AppSelect
@@ -226,7 +226,6 @@ const AuthPersonalDetailsScreen = () => {
               open={isDatePickerOpen}
             />
           </View>
-
         </View>
       </KeyboardAwareScrollView>
       <CustomButton
@@ -262,6 +261,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cstInputWrapper: {
+    width: '100%',
+  },
+  cstInputFocusStyle: {
     width: '100%',
   },
   btnWrapper: {
