@@ -9,6 +9,7 @@ const initialState = {
   timeFrameData: [],
   socialActions: [],
   allNearerRestaurants: {},
+  allRestaurants: {},
   selectedResCoordinates: null,
 };
 
@@ -43,6 +44,11 @@ const RestaurantSlice = createSlice({
         ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
       };
     },
+    setAllRestaurants: (state, {payload}) => {
+      state.allRestaurants = {
+        ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
+      };
+    },
     setSelectedResCoordinates: (state, {payload}) => {
       state.selectedResCoordinates = payload;
     },
@@ -58,17 +64,22 @@ export const {
   setSocialActions,
   resetRestaurantSlice,
   setNearerRestaurants,
+  setAllRestaurants,
   setSelectedResCoordinates,
 } = RestaurantSlice.actions;
 
 export default RestaurantSlice.reducer;
 
-export const selectAllNearbyRestaurantsState = createDraftSafeSelector(
-  [state => state.restaurantSlice.allNearerRestaurants],
+export const selectAllRestaurantsState = createDraftSafeSelector(
+  [state => state.restaurantSlice.allRestaurants],
   restaurantsObject => restaurantsObject,
 );
-
-export const selectAllNearbyRestaurants = createDraftSafeSelector(
-  [selectAllNearbyRestaurantsState],
-  restaurantsObject => Object.values(restaurantsObject || {}),
+export const selectAllRestaurants = createDraftSafeSelector(
+  [selectAllRestaurantsState],
+  restaurantsData => Object.values(restaurantsData || {}),
 );
+
+// export const selectAllNearbyRestaurants = createDraftSafeSelector(
+//   [selectAllNearbyRestaurantsState],
+//   restaurantsObject => Object.values(restaurantsObject || {}),
+// );

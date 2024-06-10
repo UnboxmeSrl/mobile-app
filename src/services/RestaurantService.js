@@ -99,6 +99,16 @@ export const getNearerRestaurants = async data => {
     console.log(error);
   }
 };
+export const getAllRestaurants = async data => {
+  try {
+    const url = Api.RESTAURANTS.GET_ALL_RESTAURANTS;
+    const response = await Fetch.get(url, data);
+    // console.log('resInGetAllRestaurants', response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getSearchRestaurants = async params => {
   try {

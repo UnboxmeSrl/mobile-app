@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurantCard} from '../../screens/Restaurants/RestaurantCard/hooks';
 import {useRestaurants} from '../../screens/Restaurants/hooks';
-import {getRestaurantDetails} from '../../services';
+import {getAllRestaurants, getRestaurantDetails} from '../../services';
 import {xanoImageSize} from '../../utils';
 import {BottomSheet} from '../BottomSheet';
 import {AppButton} from '../Buttons';
@@ -24,10 +24,12 @@ import RestaurantSearchInput from './RestaurantSearchInput';
 import useMap from './useMap';
 import {
   selectAllNearbyRestaurants,
+  selectAllRestaurants,
   selecteUserCoords,
   setSelectedResCoordinates,
 } from '../../redux';
 import {useDispatch, useSelector} from 'react-redux';
+import {useFocusEffect} from '@react-navigation/native';
 
 Mapbox.setAccessToken(
   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
@@ -40,9 +42,10 @@ const AppMap = () => {
   const {handleCardPress} = useRestaurantCard();
 
   const {requestLocationPermission, cityData} = useRestaurants();
-  const {handleGetNearerHotels} = useMap();
+  const {handleGetNearerRestaurants, handleGetAllRestaurants} = useMap();
+  const allRestaurants = useSelector(selectAllRestaurants);
   // const allNearerRestaurant = useSelector(selectAllNearbyRestaurantsS);
-  const allNearerRestaurant = useSelector(selectAllNearbyRestaurants);
+  // const allNearerRestaurant = useSelector(selectAllNearbyRestaurants);
   const selectedResCoordinates = useSelector(
     state => state.restaurantSlice.selectedResCoordinates,
   );
@@ -59,34 +62,40 @@ const AppMap = () => {
       bottomSheetRef?.current?.open();
     }
   }, []);
-  console.log(
-    'restaurantsData',
-    allNearerRestaurant.length,
-    selectedResCoordinates,
-  );
+  console.log('restaurantsData', allRestaurants.length, selectedResCoordinates);
 
   const cameraCoords = useMemo(
     () => selectedResCoordinates || userLocation,
     [userLocation, selectedResCoordinates],
   );
-  const getCurrentCoordinates = useCallback(async () => {
-    if (cameraCoords) {
-      const res = await handleGetNearerHotels({
-        location: {
-          type: 'point',
-          data: {lng: cameraCoords[0], lat: cameraCoords[1]},
-        },
-      });
-    }
-  }, [handleGetNearerHotels, cameraCoords]);
+  // const getCurrentCoordinates = useCallback(async () => {
+  //   if (cameraCoords) {
+  //     const res = await handleGetNearerRestaurants({
+  //       location: {
+  //         type: 'point',
+  //         data: {lng: cameraCoords[0], lat: cameraCoords[1]},
+  //       },
+  //     });
+  //   }
+  // }, [handleGetNearerRestaurants, cameraCoords]);
 
-  useEffect(() => {
-    getCurrentCoordinates();
-  }, [getCurrentCoordinates]);
+  // useEffect(() => {
+  //   getCurrentCoordinates();
+  // }, [getCurrentCoordinates]);
 
   useEffect(() => {
     requestLocationPermission();
   }, [requestLocationPermission]);
+
+  const getAllRestaurantsHandler = useCallback(async () => {
+    await handleGetAllRestaurants();
+  }, [handleGetAllRestaurants]);
+
+  useFocusEffect(
+    useCallback(() => {
+      getAllRestaurantsHandler();
+    }, [getAllRestaurantsHandler]),
+  );
   // useEffect(() => {
   //   handleGetNearerHotels();
   // }, [pinCoordinates, handleGetNearerHotels]);
@@ -103,8 +112,12 @@ const AppMap = () => {
             <Mapbox.Camera zoomLevel={14} centerCoordinate={cameraCoords} />
           )}
           <>
-            {allNearerRestaurant?.map((rest, index) => {
-              console.log('location ', rest.Name);
+            {allRestaurants?.map((rest, index) => {
+              console.log(
+                'locationInAllRestaurantsMap ',
+                rest.Name,
+                rest.location,
+              );
               if (rest?.location) {
                 const coordinate = [
                   rest?.location.data.lng,

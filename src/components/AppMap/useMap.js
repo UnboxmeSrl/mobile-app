@@ -13,24 +13,31 @@ import {
   View,
 } from 'react-native';
 import {Api} from '../../constants';
-import {getNearerRestaurants} from '../../services';
-import {setNearerRestaurants} from '../../redux';
+import {getAllRestaurants, getNearerRestaurants} from '../../services';
+import {setAllRestaurants, setNearerRestaurants} from '../../redux';
 import {useDispatch} from 'react-redux';
 
 const useMap = () => {
   const dispatch = useDispatch();
-  const handleGetNearerHotels = useCallback(
+  const handleGetNearerRestaurants = useCallback(
     async currentLocation => {
       if (currentLocation) {
         const res = await getNearerRestaurants({...currentLocation});
         if (res?.success) {
-          console.log('nearer Restaurant', res.data);
+          // console.log('nearer Restaurant', res.data);
           dispatch(setNearerRestaurants(res.data));
         }
       }
     },
     [dispatch],
   );
-  return {handleGetNearerHotels};
+  const handleGetAllRestaurants = useCallback(async () => {
+    const res = await getAllRestaurants();
+    if (res?.success) {
+      console.log('all Restaurant', res.data);
+      dispatch(setAllRestaurants(res.data));
+    }
+  }, [dispatch]);
+  return {handleGetNearerRestaurants, handleGetAllRestaurants};
 };
 export default useMap;

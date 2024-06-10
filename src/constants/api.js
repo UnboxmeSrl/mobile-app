@@ -36,6 +36,7 @@ export const Api = {
     UPDATE_ACTION_DIARY: `${BASE_URL}/api:bwh6Xc5O/update_content`,
     GET_ALL_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/actions_turbo`,
     GET_NEARER_RESTAURANT: `${BASE_URL}/api:bwh6Xc5O/influencer/restaurant_turbo/location`,
+    GET_ALL_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/restaurant_turbo_venues/list`,
     SEARCH_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/influencer/restaurant_names`,
   },
   CONTENT: {
