@@ -19,18 +19,18 @@ import {useDispatch} from 'react-redux';
 
 const useMap = () => {
   const dispatch = useDispatch();
-  const handleGetNearerRestaurants = useCallback(
-    async currentLocation => {
-      if (currentLocation) {
-        const res = await getNearerRestaurants({...currentLocation});
-        if (res?.success) {
-          // console.log('nearer Restaurant', res.data);
-          dispatch(setNearerRestaurants(res.data));
-        }
-      }
-    },
-    [dispatch],
-  );
+  // const handleGetNearerRestaurants = useCallback(
+  //   async currentLocation => {
+  //     if (currentLocation) {
+  //       const res = await getNearerRestaurants({...currentLocation});
+  //       if (res?.success) {
+  //         // console.log('nearer Restaurant', res.data);
+  //         dispatch(setNearerRestaurants(res.data));
+  //       }
+  //     }
+  //   },
+  //   [dispatch],
+  // );
   const handleGetAllRestaurants = useCallback(async () => {
     const res = await getAllRestaurants();
     if (res?.success) {
@@ -38,6 +38,6 @@ const useMap = () => {
       dispatch(setAllRestaurants(res.data));
     }
   }, [dispatch]);
-  return {handleGetNearerRestaurants, handleGetAllRestaurants};
+  return {handleGetAllRestaurants};
 };
 export default useMap;

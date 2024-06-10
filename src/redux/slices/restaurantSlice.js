@@ -8,7 +8,7 @@ const initialState = {
   canceledBookings: [],
   timeFrameData: [],
   socialActions: [],
-  allNearerRestaurants: {},
+  // allNearerRestaurants: {},
   allRestaurants: {},
   selectedResCoordinates: null,
 };
@@ -39,11 +39,11 @@ const RestaurantSlice = createSlice({
       state.bookings = [];
       state.canceledBookings = [];
     },
-    setNearerRestaurants: (state, {payload}) => {
-      state.allNearerRestaurants = {
-        ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
-      };
-    },
+    // setNearerRestaurants: (state, {payload}) => {
+    //   state.allNearerRestaurants = {
+    //     ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
+    //   };
+    // },
     setAllRestaurants: (state, {payload}) => {
       state.allRestaurants = {
         ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
@@ -63,7 +63,7 @@ export const {
   setTimeFrameData,
   setSocialActions,
   resetRestaurantSlice,
-  setNearerRestaurants,
+  // setNearerRestaurants,
   setAllRestaurants,
   setSelectedResCoordinates,
 } = RestaurantSlice.actions;
