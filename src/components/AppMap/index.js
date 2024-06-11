@@ -44,6 +44,7 @@ const AppMap = () => {
   const {requestLocationPermission, cityData} = useRestaurants();
   const {handleGetNearerRestaurants, handleGetAllRestaurants} = useMap();
   const allRestaurants = useSelector(selectAllRestaurants);
+  const [showFullText, setShowFullText] = useState(false);
   // const allNearerRestaurant = useSelector(selectAllNearbyRestaurantsS);
   // const allNearerRestaurant = useSelector(selectAllNearbyRestaurants);
   const selectedResCoordinates = useSelector(
@@ -196,31 +197,40 @@ const AppMap = () => {
 
         <BottomSheet ref={bottomSheetRef} height={verticalScale(270)}>
           <View style={styles.restaurentDetails}>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={styles.scrollContainer}>
-              <View style={styles.imgesStack}>
-                {selectedRest?.GalleryRestaurant.map((img, index) => {
-                  const imageUrl = `${img?.url}?tpl=${xanoImageSize}.jpg`;
-                  return (
-                    <Image
-                      key={index}
-                      source={{uri: imageUrl}}
-                      alt="Product Image"
-                      style={styles.restaurentImg}
-                    />
-                  );
-                })}
+            <ScrollView style={{flex: 1}}>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={styles.scrollContainer}>
+                <View style={styles.imgesStack}>
+                  {selectedRest?.GalleryRestaurant.map((img, index) => {
+                    const imageUrl = `${img?.url}?tpl=${xanoImageSize}.jpg`;
+                    return (
+                      <Image
+                        key={index}
+                        source={{uri: imageUrl}}
+                        alt="Product Image"
+                        style={styles.restaurentImg}
+                      />
+                    );
+                  })}
+                </View>
+              </ScrollView>
+              <View style={styles.item}>
+                <Text style={styles.restaurentName}>{selectedRest?.Name}</Text>
+                <Text
+                  style={styles.resturantDtl}
+                  onPress={() => setShowFullText(x => !x)}
+                  numberOfLines={showFullText ? undefined : 2}
+                  ellipsizeMode={
+                    (selectedRest?.About?.length || 0) > 100
+                      ? 'tail'
+                      : undefined
+                  }>
+                  {selectedRest?.About || 'No details available'}
+                </Text>
               </View>
             </ScrollView>
-            <View style={styles.item}>
-              <Text style={styles.restaurentName}>{selectedRest?.Name}</Text>
-
-              <Text style={styles.resturantDtl}>
-                {selectedRest?.About || 'No details available'}
-              </Text>
-            </View>
             <AppButton
               title="Check Details"
               style={styles.checkBtn}
@@ -276,14 +286,17 @@ const styles = StyleSheet.create({
   restaurentDetails: {
     paddingTop: verticalScale(32),
     paddingBottom: verticalScale(16),
+    flex: 1,
   },
   scrollContainer: {
     marginLeft: verticalScale(16),
+    flex: 1,
   },
   imgesStack: {
     flexDirection: 'row',
     columnGap: scale(14),
     justifyContent: 'flex-end',
+    paddingRight: verticalScale(16),
   },
   restaurentImg: {
     height: moderateScale(74),
