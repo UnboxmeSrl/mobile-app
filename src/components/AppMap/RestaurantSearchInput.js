@@ -35,7 +35,7 @@ function RestaurantSearchInput({onPressRestaurant = () => {}}) {
             style={styles.itemMain}
             onPress={() => {
               onPressRestaurant?.(item);
-              setSearch('');
+              setSearch(item.Name);
               setRestaurants([]);
             }}>
             <ListItem text={name} />
@@ -93,6 +93,7 @@ function RestaurantSearchInput({onPressRestaurant = () => {}}) {
         isRemoveTextIconVisible
         handleOnChangeText={setSearch}
         returnKeyType="search"
+        handleReset={() => setSearch('')}
       />
       {/* {isSearching && !!search && (
         <View style={styles.list}>
