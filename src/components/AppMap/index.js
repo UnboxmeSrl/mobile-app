@@ -217,8 +217,11 @@ const AppMap = () => {
                 </View>
               </ScrollView>
               <View style={styles.item}>
-                <Text style={styles.restaurentName}>{selectedRest?.Name}</Text>
+                <Text allowFontScaling={false} style={styles.restaurentName}>
+                  {selectedRest?.Name}
+                </Text>
                 <Text
+                  allowFontScaling={false}
                   style={styles.resturantDtl}
                   onPress={() => setShowFullText(x => !x)}
                   numberOfLines={showFullText ? undefined : 2}
@@ -234,7 +237,10 @@ const AppMap = () => {
             <AppButton
               title="Check Details"
               style={styles.checkBtn}
-              onPress={() => handleCardPress(selectedRest)}
+              onPress={() => {
+                handleCardPress(selectedRest);
+                bottomSheetRef?.current?.close();
+              }}
             />
           </View>
         </BottomSheet>

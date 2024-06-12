@@ -37,8 +37,8 @@ const ForgotPassword = React.forwardRef(({}, ref) => {
             />
           </View>
         </View>
+        <EmailSent ref={emailSentRef} />
       </BottomSheet>
-      <EmailSent ref={emailSentRef} />
     </>
   );
 });

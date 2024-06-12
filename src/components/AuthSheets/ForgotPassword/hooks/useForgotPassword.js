@@ -6,6 +6,7 @@ const useForgotPassword = () => {
   const [isSendPress, setIsSendPress] = useState(false);
   const [loading, setLoading] = useState(false);
   const emailSentRef = useRef();
+
   const handleForgotPassword = async forgotPasswordRef => {
     // forgotPasswordRef.current?.close();
     // emailSentRef.current?.open();
@@ -18,7 +19,7 @@ const useForgotPassword = () => {
         console.log('resOfForgotPassowrd_USE_FORGOT_PASSWORD', res, email);
         setLoading(false);
         if (res.success) {
-          forgotPasswordRef.current?.close();
+          // forgotPasswordRef.current?.close();
           emailSentRef.current?.open();
         }
         return res;

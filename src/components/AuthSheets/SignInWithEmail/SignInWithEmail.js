@@ -1,13 +1,13 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import {useSignUp} from '../../../screens/SignUpNew/hooks';
 import {BottomSheet} from '../../BottomSheet';
 import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
-import {COLORS, FONTS, MODAL_NAMES} from '../../../constants';
-import {useSignInWithEmail} from './hooks';
-import {useNavigation, NavigationProp} from '@react-navigation/native';
-import {useSignUp} from '../../../screens/SignUpNew/hooks';
 import {ForgotPassword} from '../ForgotPassword';
+import {useSignInWithEmail} from './hooks';
 // import NavigationProp from ''
 
 const SignInWithEmail = React.forwardRef(
@@ -35,6 +35,7 @@ const SignInWithEmail = React.forwardRef(
               isRemoveTextIconVisible={true}
               keyboardType="email-address"
               placeholder={'Ex: Chakir@gmail.com'}
+              handleReset={() => setEmail('')}
               value={email}
             />
             <CustomTextInput
@@ -65,8 +66,8 @@ const SignInWithEmail = React.forwardRef(
               </Text>
             </TouchableOpacity>
           </View>
+          <ForgotPassword ref={forgotPasswordRef} />
         </BottomSheet>
-        <ForgotPassword ref={forgotPasswordRef} />
       </>
     );
   },

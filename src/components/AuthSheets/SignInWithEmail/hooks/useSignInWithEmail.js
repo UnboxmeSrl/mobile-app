@@ -85,7 +85,7 @@ const useSignInWithEmail = isFromBookRedirected => {
     }
   };
   const navigateToForgotPasswordModal = bottomSheetRef => {
-    bottomSheetRef?.current?.close();
+    // bottomSheetRef?.current?.close();
     forgotPasswordRef?.current?.open();
   };
 

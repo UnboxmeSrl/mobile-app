@@ -77,7 +77,7 @@ export default OtherSignUpOptionsScreen;
 const styles = StyleSheet.create({
   titleDescriptionContainer: {
     justifyContent: 'center',
-    marginHorizontal: scale(16)
+    marginHorizontal: scale(16),
   },
   mainContainer: {
     flex: 1,

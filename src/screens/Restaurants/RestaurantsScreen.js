@@ -94,6 +94,7 @@ const RestaurantsScreen = () => {
             value={search}
             isRemoveTextIconVisible={true}
             handleOnChangeText={setSearch}
+            handleReset={() => setSearch('')}
           />
           <Categories
             categories={categories}
