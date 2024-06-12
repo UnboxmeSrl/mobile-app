@@ -23,7 +23,7 @@ const useAuthCodeFromFriend = () => {
   const navigation = useNavigation();
 
   const handleBackPress = () => {
-    navigation.replace(SCREEN_NAMES.AuthProfilePictureScreen);
+    navigation.replace(SCREEN_NAMES.AuthAgencyScreen);
   };
 
   const handleNextPress = () => {

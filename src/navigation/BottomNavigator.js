@@ -9,6 +9,7 @@ import {hasNotch} from '../utils';
 import HomeStack from './HomeStack';
 import ScheduleStack from './ScheduleStack';
 import ProfileStack from './ProfileStack';
+import AppMap from '../components/AppMap';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -34,6 +35,22 @@ const BottomTabNavigator = () => {
                   focused ? styles.activeTabStyle : styles.inActiveTabStyle
                 }>
                 <TabBarIcon focused={focused} icon={IMAGES.home} />
+              </View>
+            );
+          },
+        }}
+      />
+      <BottomTabs.Screen
+        name={SCREEN_NAMES.MapScreen}
+        component={AppMap}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                style={
+                  focused ? styles.activeTabStyle : styles.inActiveTabStyle
+                }>
+                <TabBarIcon focused={focused} icon={IMAGES.location} />
               </View>
             );
           },

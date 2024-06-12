@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 // import OneSignal from 'react-native-onesignal'
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -26,6 +26,7 @@ const useSignInWithEmail = isFromBookRedirected => {
     state => state.restaurantSlice.serviceDetails,
   );
   const dispatch = useDispatch();
+  const forgotPasswordRef = useRef();
 
   const handleLoginPress = async ref => {
     // navigation.navigate(SCREEN_NAMES.AuthPersonalDetailsScreen)
@@ -66,7 +67,6 @@ const useSignInWithEmail = isFromBookRedirected => {
         } else {
           navigation.replace(STACK_NAMES.BottomStack);
         }
-
         ref?.current?.close();
       } else if (res?.UserStatus === '' || res?.UserStatus === 'onapproval') {
         dispatch(setOnboardingData(true));
@@ -84,6 +84,10 @@ const useSignInWithEmail = isFromBookRedirected => {
       setIsError(true);
     }
   };
+  const navigateToForgotPasswordModal = bottomSheetRef => {
+    bottomSheetRef?.current?.close();
+    forgotPasswordRef?.current?.open();
+  };
 
   useEffect(() => {
     if (isError) {
@@ -94,6 +98,8 @@ const useSignInWithEmail = isFromBookRedirected => {
   return {
     email,
     handleLoginPress,
+    forgotPasswordRef,
+    navigateToForgotPasswordModal,
     isError,
     loading,
     password,

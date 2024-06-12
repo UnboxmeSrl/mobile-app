@@ -1,49 +1,44 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {BottomSheet} from '../../BottomSheet';
 import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
-import {useForgotPassword} from './hooks';
+import {useEmailSent, useForgotPassword} from './hooks';
 import {COLORS, FONTS} from '../../../constants';
-import {EmailSent} from '../EmailSent';
+import emailSent from '../../../assets/icons/emailSent.png';
 
-const ForgotPassword = React.forwardRef(({}, ref) => {
-  const {email, setEmail, isSendPress, handleForgotPassword, emailSentRef} =
-    useForgotPassword();
+const EmailSent = React.forwardRef(({}, ref) => {
+  const {email, setEmail, isSendPress, emailSentRef, handleGoBack} =
+    useEmailSent();
 
   return (
     <>
       <BottomSheet ref={ref}>
         <View style={styles.mainContainer}>
-          <CustomTitle title={'Forgot password'} />
+          <CustomTitle title={'Email sent to you'} />
           <View style={styles.descriptionContainer}>
             <Text allowFontScaling={false} style={styles.descriptionText}>
-              Please enter the email address or phone number you signed up with.
+              We’ll send you an email with a link to reset your password
             </Text>
           </View>
           <View style={styles.emailContainer}>
-            <CustomTextInput
-              placeholder={'Ex: Chakir@gmail.com'}
-              value={email}
-              handleOnChangeText={setEmail}
-              keyboardType="email-address"
-              isRemoveTextIconVisible={true}
-            />
+            <Image source={emailSent} />
           </View>
-          <View style={styles.btnContainer}>
-            <CustomButton
-              title={'Continue'}
-              handlePress={() => handleForgotPassword(ref)}
-            />
-          </View>
+          <CustomButton
+            btnStyle={{flexDirection: 'row',}}
+            iconProps={{name: 'arrowleft', size: 25}}
+            iconStyle={{position: 'absolute', left: verticalScale(90)}}
+            // image={emailSent}
+            title={'Go Back'}
+            handlePress={() => handleGoBack(ref)}
+          />
         </View>
       </BottomSheet>
-      <EmailSent ref={emailSentRef} />
     </>
   );
 });
 
-export default ForgotPassword;
+export default EmailSent;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -64,9 +59,14 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   emailContainer: {
-    marginTop: verticalScale(32),
+    // marginTop: verticalScale(32),
+    // width: verticalScale(40),
+    // height: verticalScale(40),
+    alignSelf: 'center',
+    // backgroundColor: 'blue',
   },
   btnContainer: {
-    marginTop: '30%',
+    // marginTop: '30%',
+    // backgroundColor: 'green',
   },
 });

@@ -39,123 +39,111 @@ const AuthSocialNetworkScreen = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <CustomHeader
-        title={'Social networks'}
-        step={11}
-        handleBackPress={handleBackPress}
-      />
-      <View style={styles.descriptionContainer}>
-        <Text allowFontScaling={false} style={styles.descriptionText}>
-          Register your social networks
-        </Text>
-      </View>
+      <View style={styles.content}>
+        <CustomHeader
+          title={'Social networks'}
+          step={5}
+          handleBackPress={handleBackPress}
+        />
+        <View style={styles.descriptionContainer}>
+          <Text allowFontScaling={false} style={styles.descriptionText}>
+            Register your social networks
+          </Text>
 
-      <View style={styles.socialMediaMainContainer}>
-        <TouchableOpacity
-          onPress={handleOnTikTokPress}
-          style={[
-            styles.socialMediaItem,
-            {
-              backgroundColor:
-                tiktokInputValue.trim() !== ''
-                  ? COLORS.newPrimary
-                  : COLORS.lightNewPrimaryA6,
-            },
-          ]}
-          activeOpacity={0.5}>
-          <View style={styles.socialMediaNameIconContainer}>
-            <Image source={IMAGES.tiktok} style={styles.socialMediaIcon} />
-            <Text
-              allowFontScaling={false}
+          <View style={styles.socialMediaMainContainer}>
+            <TouchableOpacity
+              onPress={handleOnTikTokPress}
               style={[
-                styles.socialMediaNameText,
+                styles.socialMediaItem,
                 {
-                  color:
-                    tiktokInputValue.trim() !== '' ? COLORS.white : COLORS.gray,
-                },
-              ]}>
-              Tik tok account
-            </Text>
-          </View>
-          <View style={styles.loginIntoIconContainer}>
-            <Image
-              source={IMAGES.loginInto}
-              style={[
-                styles.loginIntoIcon,
-                {
-                  tintColor:
+                  backgroundColor:
                     tiktokInputValue.trim() !== ''
-                      ? COLORS.white
-                      : COLORS.black,
+                      ? COLORS.newPrimary
+                      : COLORS.lightNewPrimaryA6,
                 },
               ]}
-            />
-          </View>
-        </TouchableOpacity>
+              activeOpacity={0.5}>
+              <View style={styles.socialMediaNameIconContainer}>
+                <Image source={IMAGES.tiktok} style={styles.socialMediaIcon} />
+                <Text
+                  allowFontScaling={false}
+                  style={[
+                    styles.socialMediaNameText,
+                    {
+                      color:
+                        tiktokInputValue.trim() !== ''
+                          ? COLORS.white
+                          : COLORS.gray,
+                    },
+                  ]}>
+                  Tik tok account
+                </Text>
+              </View>
+              <View style={styles.loginIntoIconContainer}>
+                <Image
+                  source={IMAGES.loginInto}
+                  style={[
+                    styles.loginIntoIcon,
+                    {
+                      tintColor:
+                        tiktokInputValue.trim() !== ''
+                          ? COLORS.white
+                          : COLORS.black,
+                    },
+                  ]}
+                />
+              </View>
+            </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={handleOnInstaPress}
-          style={[
-            styles.socialMediaItem,
-            {
-              backgroundColor:
-                instaUserNameValue.trim() !== ''
-                  ? COLORS.newPrimary
-                  : COLORS.lightNewPrimaryA6,
-            },
-          ]}
-          activeOpacity={0.5}>
-          <View style={styles.socialMediaNameIconContainer}>
-            <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
-            <Text
-              allowFontScaling={false}
+            <TouchableOpacity
+              onPress={handleOnInstaPress}
               style={[
-                styles.socialMediaNameText,
+                styles.socialMediaItem,
                 {
-                  color:
+                  backgroundColor:
                     instaUserNameValue.trim() !== ''
-                      ? COLORS.white
-                      : COLORS.gray,
-                },
-              ]}>
-              Instagram account
-            </Text>
-          </View>
-          <View style={styles.loginIntoIconContainer}>
-            <Image
-              source={IMAGES.loginInto}
-              style={[
-                styles.loginIntoIcon,
-                {
-                  tintColor:
-                    instaUserNameValue.trim() !== ''
-                      ? COLORS.white
-                      : COLORS.black,
+                      ? COLORS.newPrimary
+                      : COLORS.lightNewPrimaryA6,
                 },
               ]}
-            />
+              activeOpacity={0.5}>
+              <View style={styles.socialMediaNameIconContainer}>
+                <Image
+                  source={IMAGES.instagram}
+                  style={styles.socialMediaIcon}
+                />
+                <Text
+                  allowFontScaling={false}
+                  style={[
+                    styles.socialMediaNameText,
+                    {
+                      color:
+                        instaUserNameValue.trim() !== ''
+                          ? COLORS.white
+                          : COLORS.gray,
+                    },
+                  ]}>
+                  Instagram account
+                </Text>
+              </View>
+              <View style={styles.loginIntoIconContainer}>
+                <Image
+                  source={IMAGES.loginInto}
+                  style={[
+                    styles.loginIntoIcon,
+                    {
+                      tintColor:
+                        instaUserNameValue.trim() !== ''
+                          ? COLORS.white
+                          : COLORS.black,
+                    },
+                  ]}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-      </View>
-      {/* <View style={styles.socialMediaDescriptionContainer}>
-        <Text allowFontScaling={false}  style={styles.socialMediaDescriptionText}>
-          connect Instagram business account to get the Pro-influ checkmark on your profile
-        </Text>
-      </View>
+        </View>
 
-      <View style={styles.instaBusinessMainContainer}>
-        <TouchableOpacity style={styles.instaBusinessItem} activeOpacity={0.5}>
-          <View style={styles.socialMediaNameIconContainer}>
-            <Image source={IMAGES.instagram} style={styles.socialMediaIcon} />
-            <Text allowFontScaling={false}  style={styles.instaBusinessText}>Instagram account</Text>
-          </View>
-          <View style={styles.loginIntoIconContainer}>
-            <Image source={IMAGES.loginInto} style={[styles.loginIntoIcon, styles.instaBusinessLoginIntoIcon]} />
-          </View>
-        </TouchableOpacity>
-      </View> */}
-
-      <View style={styles.btnContainer}>
         <CustomButton
           title={'Next'}
           handlePress={handleNextPress}
@@ -217,8 +205,9 @@ const AuthSocialNetworkScreen = () => {
 export default AuthSocialNetworkScreen;
 
 const styles = StyleSheet.create({
-  btnContainer: {
-    marginTop: verticalScale(140),
+  content: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
   socialMediaMainContainer: {
     marginTop: verticalScale(40),
@@ -278,7 +267,7 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     alignSelf: 'center',
-    width: '87%',
+    width: '100%',
   },
   socialMediaDescriptionText: {
     fontFamily: FONTS.quicksandBold,

@@ -70,6 +70,18 @@ export const userLogin = async data => {
     };
   }
 };
+export const forgotPassword = async data => {
+  try {
+    const url = Api.PROFILE.FORGOT_PASSWORD;
+    const response = await Fetch.post(url, data);
+    console.log('resOfForgotPasswordAPI', response);
+    return response;
+  } catch (error) {
+    return {
+      message: 'Something went wrong',
+    };
+  }
+};
 
 export const getInterestTopics = async () => {
   try {

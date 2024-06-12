@@ -11,6 +11,7 @@ const initialState = {
   profileData: {},
   signUpProcessStage: 0,
   visitCount: 1,
+  userLocation: null,
 };
 
 const AuthSlice = createSlice({
@@ -68,6 +69,9 @@ const AuthSlice = createSlice({
         console.log('firstVisit After: ', state.loginData.firstVisit);
       }
     },
+    setUserCurrentLocation: (state, {payload}) => {
+      state.userLocation = payload;
+    },
   },
 });
 
@@ -85,6 +89,7 @@ export const {
   resetAuthData,
   updateUserCount,
   updateLoginData,
+  setUserCurrentLocation,
 } = AuthSlice.actions;
 
 export default AuthSlice.reducer;
@@ -113,3 +118,5 @@ export const selectIsPending = createDraftSafeSelector(
 );
 
 export const selectVisitCount = state => state.authSlice.visitCount === 1;
+
+export const selecteUserCoords = state => state.authSlice.userLocation;

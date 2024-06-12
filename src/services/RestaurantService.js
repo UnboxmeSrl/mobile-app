@@ -90,3 +90,36 @@ export const getAllActions = async params => {
     console.log(error);
   }
 };
+// export const getNearerRestaurants = async data => {
+//   try {
+//     const url = Api.RESTAURANTS.GET_NEARER_RESTAURANT;
+//     const response = await Fetch.post(url, data);
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+export const getAllRestaurants = async data => {
+  try {
+    const url = Api.RESTAURANTS.GET_ALL_RESTAURANTS;
+    const response = await Fetch.get(url, data);
+    // console.log('resInGetAllRestaurants', response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSearchRestaurants = async params => {
+  try {
+    const url = Api.RESTAURANTS.SEARCH_RESTAURANTS;
+    const response = await Fetch.get(url, {params});
+    if (response?.data) {
+      return response.data;
+    }
+    return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

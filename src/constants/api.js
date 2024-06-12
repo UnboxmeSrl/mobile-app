@@ -10,6 +10,7 @@ export const Api = {
     GET_SERVICE_DEALS_LEFT: `${BASE_URL}/api:bwh6Xc5O/get_deal_left`,
     RESTAURANTS: `${BASE_URL}/api:WVfdccpj/restaurant`,
   },
+
   PROFILE: {
     GET_USER_APPROVAL_STATUS: `${BASE_URL}/api:bwh6Xc5O/getUserStatus`,
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
@@ -17,6 +18,7 @@ export const Api = {
     GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo_profile`,
     // GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo`,
     USER_LOGIN: `${BASE_URL}/api:bwh6Xc5O/user_login`,
+    FORGOT_PASSWORD: `${BASE_URL}/api:bwh6Xc5O/influencer/forgot-password`,
     USER_PROFILE_PIC_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_profile_pic`,
     USER_PROFILE_UPDATE: `${BASE_URL}/api:bwh6Xc5O/update_user_turbo`,
     USER_SIGN_UP: `${BASE_URL}/api:bwh6Xc5O/user/signup`,
@@ -33,6 +35,9 @@ export const Api = {
     UPDATE_ACTION: `${BASE_URL}/api:bwh6Xc5O/update_booking`,
     UPDATE_ACTION_DIARY: `${BASE_URL}/api:bwh6Xc5O/update_content`,
     GET_ALL_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/actions_turbo`,
+    GET_NEARER_RESTAURANT: `${BASE_URL}/api:bwh6Xc5O/influencer/restaurant_turbo/location`,
+    GET_ALL_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/restaurant_turbo_venues/list`,
+    SEARCH_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/influencer/restaurant_names`,
   },
   CONTENT: {
     GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content_new`,

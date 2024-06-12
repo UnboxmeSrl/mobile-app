@@ -43,7 +43,7 @@ const AuthCodeFromFriendScreen = () => {
       <KeyboardAwareScrollView>
         <CustomHeader
           title={'Code from friend'}
-          step={10}
+          step={4}
           handleBackPress={handleBackPress}
         />
         <View style={styles.descriptionContainer}>

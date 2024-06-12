@@ -9,14 +9,20 @@ import {
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const CustomTextInput = ({
   placeholder,
   value,
+  style,
   handleOnChangeText,
   isRemoveTextIconVisible = false,
+  handleReset,
   keyboardType = 'default',
   isSecureTextInput = false,
+  inputWrapperStyle,
+  search,
+  ...props
 }) => {
   const [isFocused, setIsFocused] = useState();
   const [isSecureText, setIsSecureText] = useState(isSecureTextInput);
@@ -26,8 +32,17 @@ const CustomTextInput = ({
       style={[
         styles.textInputContainerStyleWithoutFocus,
         isFocused && styles.textInputContainerWithFocus,
+        style,
       ]}>
-      <View style={styles.textInputContainer}>
+      <View style={[styles.textInputContainer, inputWrapperStyle]}>
+        {search && (
+          <Icon
+            name="search1"
+            size={20}
+            color={COLORS.grey}
+            style={{marginLeft: 12}}
+          />
+        )}
         <TextInput
           allowFontScaling={false}
           value={value}
@@ -43,14 +58,11 @@ const CustomTextInput = ({
           keyboardType={keyboardType}
           secureTextEntry={isSecureText}
           returnKeyType="next"
+          {...props}
         />
       </View>
       {isRemoveTextIconVisible && value?.length > 0 && (
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => {
-            handleOnChangeText('');
-          }}>
+        <TouchableOpacity style={styles.iconContainer} onPress={handleReset}>
           <Image source={IMAGES.closeSquare} style={styles.closeIcon} />
         </TouchableOpacity>
       )}
@@ -78,6 +90,9 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     width: '90%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    // backgroundColor: 'yellow',
   },
   textInputContainerWithFocus: {
     borderWidth: moderateScale(2),
@@ -95,7 +110,7 @@ const styles = StyleSheet.create({
   textInputContainerStyleWithoutFocus: {
     marginTop: verticalScale(15),
     height: verticalScale(48),
-    width: '88%',
+    width: '90%',
     alignSelf: 'center',
     borderWidth: moderateScale(1),
     borderColor: COLORS.gainsboro,
@@ -104,10 +119,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textInput: {
+    minWidth: moderateScale(200),
+    maxWidth: moderateScale(240),
     marginLeft: scale(10),
     color: COLORS.black,
     fontFamily: FONTS.quicksand,
     fontWeight: '600',
     fontSize: moderateScale(14),
+    // backgroundColor: 'yellow',
   },
 });

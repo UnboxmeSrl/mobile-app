@@ -19,7 +19,6 @@ const useRestaurantDetails = () => {
   );
   const route = useRoute();
   const restaurantId = route?.params?.restaurantId;
-  console.log('Restaurant Id: ' + restaurantId);
   const [services, setServices] = useState([]);
   const cityData = route.params?.cityData;
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +27,7 @@ const useRestaurantDetails = () => {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-
+  console.log(filter);
   const getRestaurantDetailsData = async () => {
     setIsLoading(true);
     const prepData = {

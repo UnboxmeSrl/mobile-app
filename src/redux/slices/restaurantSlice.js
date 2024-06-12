@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { sliceNames } from '../../constants'
+import {createDraftSafeSelector, createSlice} from '@reduxjs/toolkit';
+import {sliceNames} from '../../constants';
 
 const initialState = {
   bookings: [],
@@ -8,36 +8,52 @@ const initialState = {
   canceledBookings: [],
   timeFrameData: [],
   socialActions: [],
-}
+  // allNearerRestaurants: {},
+  allRestaurants: {},
+  selectedResCoordinates: null,
+};
 
 const RestaurantSlice = createSlice({
   initialState: initialState,
   name: sliceNames.restaurantSlice,
   reducers: {
     setBookings: (state, actions) => {
-      state.bookings = actions?.payload
+      state.bookings = actions?.payload;
     },
     setRestaurantDetails: (state, actions) => {
-      state.restaurantDetails = actions?.payload
+      state.restaurantDetails = actions?.payload;
     },
     setServiceDetails: (state, actions) => {
-      state.serviceDetails = actions?.payload
+      state.serviceDetails = actions?.payload;
     },
     setCanceledBookings: (state, actions) => {
-      state.canceledBookings = actions?.payload
+      state.canceledBookings = actions?.payload;
     },
     setTimeFrameData: (state, actions) => {
-      state.timeFrameData = actions?.payload
+      state.timeFrameData = actions?.payload;
     },
     setSocialActions: (state, actions) => {
-      state.socialActions = actions.payload
+      state.socialActions = actions.payload;
     },
     resetRestaurantSlice: (state, actions) => {
-      state.bookings = []
-      state.canceledBookings = []
+      state.bookings = [];
+      state.canceledBookings = [];
+    },
+    // setNearerRestaurants: (state, {payload}) => {
+    //   state.allNearerRestaurants = {
+    //     ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
+    //   };
+    // },
+    setAllRestaurants: (state, {payload}) => {
+      state.allRestaurants = {
+        ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
+      };
+    },
+    setSelectedResCoordinates: (state, {payload}) => {
+      state.selectedResCoordinates = payload;
     },
   },
-})
+});
 
 export const {
   setRestaurantDetails,
@@ -47,6 +63,23 @@ export const {
   setTimeFrameData,
   setSocialActions,
   resetRestaurantSlice,
-} = RestaurantSlice.actions
+  // setNearerRestaurants,
+  setAllRestaurants,
+  setSelectedResCoordinates,
+} = RestaurantSlice.actions;
 
-export default RestaurantSlice.reducer
+export default RestaurantSlice.reducer;
+
+export const selectAllRestaurantsState = createDraftSafeSelector(
+  [state => state.restaurantSlice.allRestaurants],
+  restaurantsObject => restaurantsObject,
+);
+export const selectAllRestaurants = createDraftSafeSelector(
+  [selectAllRestaurantsState],
+  restaurantsData => Object.values(restaurantsData || {}),
+);
+
+// export const selectAllNearbyRestaurants = createDraftSafeSelector(
+//   [selectAllNearbyRestaurantsState],
+//   restaurantsObject => Object.values(restaurantsObject || {}),
+// );

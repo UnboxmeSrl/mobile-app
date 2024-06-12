@@ -30,16 +30,17 @@ export default {
   //   return response?.data;
   // },
 
-  get: async url => {
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'Accept-Language': 'en-US',
-      },
+  get: async (url, options = {}) => {
+    options.headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'Accept-Language': 'en-US',
+      ...(options?.headers || {}),
     };
+
     // console.log('URL: ' + url);
     const response = await axios.get(url, options).catch(err => {
+      console.log('error', err);
       // showToastError(err);
     });
     // const response = await axios.get(url, options)
@@ -51,14 +52,15 @@ export default {
     const options = {
       headers: {
         // 'Content-Type': 'multipart/form-data',
-        // Accept: 'application/json',
+        Accept: 'application/json',
       },
     };
+
     const response = await axios.post(url, data, options).catch(err => {
+      console.log('response_POST', response);
       // showToastError(err);
-      // console.log('🚀 ~ post: ~ error:', JSON.stringify(err))
+      console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
     });
-    // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
     return response?.data;
   },
   postMedia: async (url, data) => {
@@ -67,10 +69,7 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
     };
-    const response = await axios.put(url, data, options).catch(err => {
-      // showToastError(err);
-    });
-    // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
+    const response = await axios.put(url, data, options).catch(err => {});
     return response?.data;
   },
   postWithMedia: async (url, data) => {
@@ -81,10 +80,9 @@ export default {
     };
     // console.log(url, data)
     const response = await axios.post(url, data, options).catch(err => {
-      // showToastError(err);
+      console.log('signupCatchError', err);
     });
-    console.log('🚀 ~ post: ~ response:', JSON.stringify(response?.data));
-    // console.log('🚀 ~ post: ~ response:', JSON.stringify(response))
+    console.log('signupResponse', response);
     return response?.data;
   },
 
