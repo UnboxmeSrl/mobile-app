@@ -1,5 +1,6 @@
+import {useRoute} from '@react-navigation/native';
 import {useEffect, useRef, useState} from 'react';
-import Toast from 'react-native-toast-message';
+import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
 import {setContentList} from '../../../redux';
@@ -20,8 +21,6 @@ import {
   openGallery,
   platformVersion,
 } from '../../../utils';
-import {useRoute} from '@react-navigation/native';
-import {PERMISSIONS} from 'react-native-permissions';
 
 const usePublishContent = () => {
   const route = useRoute();
@@ -90,7 +89,7 @@ const usePublishContent = () => {
       showToastError(error);
       setIsSendToReview(false);
       return;
-    } else if (picturesForValidation.length !== 3) {
+    } else if (picturesForValidation?.length < 3) {
       const error = {
         message: 'Please upload 3 pictures of venue',
       };

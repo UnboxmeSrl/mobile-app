@@ -48,10 +48,10 @@ const ContentBriefScreen = () => {
             </Text>
           </View>
         </View>
-        {bookingDetails?._restaurant_turbo?.About?.length > 0 && (
+        {bookingDetails?._restaurant_turbo?.brief?.length > 0 && (
           <View style={styles.descriptionContainer}>
             <Text allowFontScaling={false} style={styles.descriptionText}>
-              {bookingDetails?._restaurant_turbo?.About}
+              {bookingDetails?._restaurant_turbo?.brief}
             </Text>
           </View>
         )}
