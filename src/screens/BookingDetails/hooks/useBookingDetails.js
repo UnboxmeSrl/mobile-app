@@ -241,11 +241,21 @@ const useBookingDetails = () => {
     const onlyDate = `${year}-${month}-${day}`;
     console.log('Blacklist Dates: ' + onlyDate, eventDates);
 
+    // action num id 9 is for villa & for villa we need to enable all the dates after 24 hours
+    if (actionNumId === 9) {
+      if (myDate.getTime() <= after24Hours) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     if (myDate.getTime() <= after24Hours) {
       // setSelectedDate(new Date(after24Hours));
       return true;
     }
 
+    // Event Specific Condition because here time come in UTC format
     if (isEvent) {
       const filteredRes = eventDates.filter(dt => dt === onlyDate);
       if (filteredRes.length > 0) {

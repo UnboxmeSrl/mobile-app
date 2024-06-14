@@ -222,6 +222,13 @@ const ServiceDetails = () => {
           )}
 
           <View style={styles.divider} />
+          {serviceDetails?.at_offer_description && (
+            <View style={styles.beautyDescriptionContainer}>
+              <Text allowFontScaling={false} style={styles.beautyDescription}>
+                {serviceDetails?.at_offer_description}
+              </Text>
+            </View>
+          )}
 
           {actionNumId === 9 ? (
             <>
@@ -237,6 +244,7 @@ const ServiceDetails = () => {
                   showsVerticalScrollIndicator={false}
                   data={serviceDetails?._actions_turbo?.actions_turbo_id}
                   renderItem={({item, index}) => {
+                    console.log(item);
                     return (
                       <View style={styles.villaActionContainer}>
                         <View style={styles.villaActionIconContainer}>
@@ -261,7 +269,7 @@ const ServiceDetails = () => {
                               <Text
                                 allowFontScaling={false}
                                 style={styles.ratingsText}>
-                                {item?.Credits}
+                                {serviceDetails?.Credits}
                               </Text>
                               <Image
                                 source={IMAGES.star}
@@ -573,6 +581,17 @@ const ServiceDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  beautyDescription: {
+    color: COLORS.davyGrey,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+  },
+  beautyDescriptionContainer: {
+    alignSelf: 'center',
+    paddingHorizontal: scale(40),
+    marginBottom: verticalScale(20),
+    marginTop: verticalScale(-10),
+  },
   whatIsDiaryAnswer: {
     color: COLORS.davyGrey,
     textAlign: 'justify',
@@ -856,7 +875,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   ratingsContainer: {
-    width: '15%',
+    width: '20%',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     borderRadius: moderateScale(20),

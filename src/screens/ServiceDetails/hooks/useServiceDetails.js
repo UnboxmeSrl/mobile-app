@@ -44,7 +44,7 @@ const useServiceDetails = () => {
     amenityDetails = {
       amenityName: `${serviceDetails?._actions_turbo?.Beauty} X Treatment`,
       amenityIcon: IMAGES.beauty,
-      amenityDescription: 'at your choice',
+      amenityDescription: serviceDetails?.at_offername,
     };
   } else if (actionNumId === 8) {
     amenityDetails = {

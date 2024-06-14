@@ -338,6 +338,7 @@ const styles = StyleSheet.create({
     color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(14),
+    marginRight: scale(5),
   },
   ratingsContainer: {
     width: '15%',
