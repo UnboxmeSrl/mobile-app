@@ -146,3 +146,13 @@ export const getTutorialsList = async () => {
     console.log(error);
   }
 };
+
+export const saveUserDeviceInfo = async data => {
+  try {
+    const url = Api.PROFILE.SAVE_USER_DEVICE_INFO;
+    const response = await Fetch.post(url, data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

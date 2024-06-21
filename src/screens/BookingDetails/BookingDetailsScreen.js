@@ -28,6 +28,8 @@ const BookingDetailsScreen = () => {
     selectedTimeFame,
     setSelectedTimeFame,
     startDate,
+    ownerMessage,
+    setOwnerMessage,
     weekDayWiseTimeSlots,
     endDate,
     selectedDate,
@@ -39,6 +41,7 @@ const BookingDetailsScreen = () => {
     eventTimes,
     eventSelectedDateIndex,
     setEventSelectedDateIndex,
+    isBookingDateAvailable,
     // isDateAvailable,
     isDatesLoading,
     showPreviousWeek,
@@ -306,6 +309,8 @@ const BookingDetailsScreen = () => {
                 <TextInput
                   allowFontScaling={false}
                   numberOfLines={2}
+                  value={ownerMessage}
+                  onChangeText={text => setOwnerMessage(text)}
                   placeholderTextColor={COLORS.gray}
                   style={styles.sendMessageTextInput}
                   multiline
@@ -376,11 +381,12 @@ const BookingDetailsScreen = () => {
               </View>
             ) : isEvent ? (
               <TouchableOpacity
-                disabled={isLoading}
+                disabled={isLoading || !isBookingDateAvailable}
                 onPress={handleConfirmBtnPress}
                 style={[
                   styles.bookBtnContainer,
-                  {
+
+                  isBookingDateAvailable && {
                     backgroundColor: COLORS.newPrimary,
                   },
                 ]}>

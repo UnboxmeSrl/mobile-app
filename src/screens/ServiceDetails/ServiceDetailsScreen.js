@@ -117,7 +117,14 @@ const ServiceDetails = () => {
             </View>
           </View>
 
-          {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
+          {actionNumId === 7 ||
+          actionNumId === 8 ||
+          actionNumId === 9 ||
+          actionNumId === 10 ||
+          actionNumId === 14 ||
+          actionNumId === 15 ||
+          actionNumId === 16 ||
+          actionNumId === 17 ? (
             <View style={styles.specialAmenity}>
               <>
                 <View

@@ -55,7 +55,7 @@ export default {
         Accept: 'application/json',
       },
     };
-
+    // console.log('POST request:', url, JSON.stringify(data));
     const response = await axios.post(url, data, options).catch(err => {
       console.log('response_POST', response);
       // showToastError(err);

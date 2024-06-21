@@ -40,7 +40,14 @@ const useServiceDetails = () => {
   const dispatch = useDispatch();
   let amenityDetails = {};
 
-  if (actionNumId === 7) {
+  if (
+    actionNumId === 7 ||
+    actionNumId === 10 ||
+    actionNumId === 14 ||
+    actionNumId === 15 ||
+    actionNumId === 16 ||
+    actionNumId === 17
+  ) {
     amenityDetails = {
       amenityName: `${serviceDetails?._actions_turbo?.Beauty} X Treatment`,
       amenityIcon: IMAGES.beauty,

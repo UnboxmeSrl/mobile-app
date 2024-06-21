@@ -1,22 +1,18 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import {I18nextProvider} from 'react-i18next';
 import Config from 'react-native-config';
+import 'react-native-gesture-handler';
 import {OneSignal} from 'react-native-onesignal';
 import Toast from 'react-native-toast-message';
 import {Provider} from 'react-redux';
-import 'react-native-gesture-handler';
 import {PersistGate} from 'redux-persist/integration/react';
 // import {Splash} from '@components/Splash';
 import {NavigationContainer} from '@react-navigation/native';
-import i18n from './services/i18n';
-import {persistor, store} from './redux';
-import {Splash} from './components';
-import {navigationRef} from './services';
-import RootStack from './navigation/MainStack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import MainStack from './navigation/MainStack';
 import {StatusBar} from 'react-native';
-import {COLORS} from './constants';
+import MainStack from './navigation/MainStack';
+import {persistor, store} from './redux';
+import {navigationRef} from './services';
+import i18n from './services/i18n';
 import {isIos} from './utils';
 
 const NAVIGATION_STATE_KEY = `NAVIGATION_STATE_KEY-${1}`;
@@ -54,7 +50,6 @@ const App = () => {
   // OneSignal.setNotificationOpenedHandler(notification => {
   //   console.log('OneSignal: notification opened:', notification);
   // });
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

@@ -82,7 +82,7 @@ const ArchiveScreen = () => {
                   </View>
 
                   <View style={styles.timeServiceContainer}>
-                    {actionNumId !== 9 && (
+                    {actionNumId !== 9 && timeFrame ? (
                       <>
                         <View style={styles.timeContainer}>
                           <Text
@@ -98,6 +98,8 @@ const ArchiveScreen = () => {
                         </View>
                         <View style={styles.divider} />
                       </>
+                    ) : (
+                      <View style={styles.emptyContainerForMarginPurpose} />
                     )}
                     <View style={styles.serviceRequestedContainer}>
                       <Text
@@ -130,6 +132,9 @@ const ArchiveScreen = () => {
 export default ArchiveScreen;
 
 const styles = StyleSheet.create({
+  emptyContainerForMarginPurpose: {
+    marginTop: '15%',
+  },
   cardContentContainer: {
     flexDirection: 'row',
   },

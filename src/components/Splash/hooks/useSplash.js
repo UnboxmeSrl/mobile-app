@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {createRef, useEffect, useState} from 'react';
-import {useWindowDimensions} from 'react-native';
+import {Platform, useWindowDimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   selectIsApproved,
@@ -17,9 +17,11 @@ import {
   getAllActions,
   getExperienceLevels,
   getUserApprovalStatus,
+  saveUserDeviceInfo,
 } from '../../../services';
 import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
 import SplashScreen from 'react-native-splash-screen';
+import DeviceInfo from 'react-native-device-info';
 
 const useSplash = () => {
   const delay = 500;
@@ -82,6 +84,33 @@ const useSplash = () => {
     const res = await getAllActions();
     dispatch(setSocialActions(res));
   };
+
+  const saveUserDeviceInfoData = async () => {
+    const prepData = {
+      user_turbo_id: loginData?.id,
+      os: Platform.OS,
+      os_version: DeviceInfo.getSystemVersion(),
+      app_version: DeviceInfo.getVersion(),
+      version_code: DeviceInfo.getBuildNumber(),
+      device_brand_name: DeviceInfo.getBrand(),
+      device_model_name: DeviceInfo.getModel(),
+    };
+    const res = await saveUserDeviceInfo(prepData);
+
+    if (res?.id) {
+      console.log('Data saved successfully');
+    } else {
+      console.log('Data not saved because some issue.');
+    }
+  };
+
+  useEffect(() => {
+    if (__DEV__) {
+      return;
+    } else if (loginData?.id) {
+      saveUserDeviceInfoData();
+    }
+  }, []);
 
   useEffect(() => {
     getUserApprovalStatusData();

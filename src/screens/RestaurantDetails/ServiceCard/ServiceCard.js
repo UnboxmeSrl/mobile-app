@@ -20,7 +20,14 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
   const {handleCardPress} = useServiceCard(item);
   let amenityDetails = {};
 
-  if (actionNumId === 7) {
+  if (
+    actionNumId === 7 ||
+    actionNumId === 10 ||
+    actionNumId === 14 ||
+    actionNumId === 15 ||
+    actionNumId === 16 ||
+    actionNumId === 17
+  ) {
     amenityDetails = {
       amenityName: `${item?._actions_turbo?.Beauty} X Treatment`,
       amenityIcon: IMAGES.beauty,
@@ -116,7 +123,12 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
         <Text allowFontScaling={false}  style={styles.descriptionText}>To publish with 24 hours</Text>
       </View> */}
 
-      {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
+      {actionNumId === 7 ||
+      actionNumId === 10 ||
+      actionNumId === 14 ||
+      actionNumId === 15 ||
+      actionNumId === 16 ||
+      actionNumId === 17 ? (
         <View style={styles.specialAmenity}>
           <>
             <View

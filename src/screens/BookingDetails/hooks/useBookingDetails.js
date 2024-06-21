@@ -33,9 +33,11 @@ const useBookingDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDatesLoading, setIsDatesLoading] = useState(true);
   const [isLatestWeek, setIsLatestWeek] = useState(true);
+  const [ownerMessage, setOwnerMessage] = useState('');
   const [eventDates, setEventDates] = useState([]);
   const [eventTimes, setEventTimes] = useState([]);
   const [eventSelectedDateIndex, setEventSelectedDateIndex] = useState(-1);
+  const [isBookingDateAvailable, setIsBookingDateAvailable] = useState(false);
   const serviceDetails = useSelector(
     state => state.restaurantSlice.serviceDetails,
   );
@@ -126,9 +128,10 @@ const useBookingDetails = () => {
     setIsLoading(true);
     const currentBookingDateTime = new Date(selectedDate);
     console.log('Current booking date: ' + currentBookingDateTime);
-    if (!isEvent) {
+    if (!isEvent && actionNumId !== 9) {
       const parsedHours = parseInt(selectedTimeFame?.Start);
       const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
+      console.log('ParsedHours: ' + parsedHours, 'Minutes: ' + parsedMinutes);
       currentBookingDateTime.setHours(parsedHours, parsedMinutes);
     }
 
@@ -177,6 +180,7 @@ const useBookingDetails = () => {
         MinuteStart: null,
         OfferVIsibility: false,
         Rejectedstatus: false,
+        message: ownerMessage,
         Submitbutton_: 'false',
         Title: '',
         action_status_turbo_id: 0,
@@ -432,6 +436,19 @@ const useBookingDetails = () => {
   }, [isEvent]);
 
   useEffect(() => {
+    if (isEvent) {
+      setWeekDayWiseTimeSlots([]);
+      const formattedDate = getFormattedDate(selectedDate);
+      const filteredRes = eventDates.filter(ed => ed === formattedDate);
+      if (filteredRes.length > 0) {
+        setIsBookingDateAvailable(true);
+      } else {
+        setIsBookingDateAvailable(false);
+      }
+    }
+  }, [selectedDate]);
+
+  useEffect(() => {
     return () => {
       dispatch(setTimeFrameData([]));
     };
@@ -443,6 +460,8 @@ const useBookingDetails = () => {
     currentMonth,
     currentWeekDay,
     after24Hours,
+    ownerMessage,
+    setOwnerMessage,
     datesBlacklistFunc,
     endDate,
     handleBackPress,
@@ -455,6 +474,7 @@ const useBookingDetails = () => {
     eventTimes,
     eventSelectedDateIndex,
     setEventSelectedDateIndex,
+    isBookingDateAvailable,
     isDateAvailable,
     isDatesLoading,
     selectedDate,
