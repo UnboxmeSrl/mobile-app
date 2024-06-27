@@ -14,6 +14,8 @@ import {getBookings, userLogin} from '../../../../services';
 import {OneSignal} from 'react-native-onesignal';
 import DeviceInfo from 'react-native-device-info';
 import {Platform} from 'react-native';
+import {mixpanel} from '../../../../App';
+import analytics from '@react-native-firebase/analytics';
 
 const useSignInWithEmail = isFromBookRedirected => {
   const [email, setEmail] = useState();
@@ -51,6 +53,15 @@ const useSignInWithEmail = isFromBookRedirected => {
         console.log('Login res:', res);
         OneSignal.login(res?.id?.toString());
         dispatch(setLoginData(res));
+        await mixpanel.identify(res?.id?.toString());
+        mixpanel.getPeople().set('$name', res?.name);
+        mixpanel.getPeople().set('$email', res?.email);
+
+        await analytics().setUserId(res?.id.toString());
+        await analytics().setUserProperties({
+          name: res?.name,
+          email: res?.email,
+        });
         const params = `/${res?.id}`;
         const bookingRes = await getBookings(params);
         dispatch(setBookings(bookingRes));

@@ -106,11 +106,15 @@ const useServiceDetails = () => {
   };
 
   const getTimeFrameData = async () => {
-    const params = `/${restaurantDetails?.id}`;
-    const res = await getTimeFrames(params);
-    setTimeout(() => {
-      dispatch(setTimeFrameData(res));
-    }, 1000);
+    if (serviceDetails?._timeframes_turbo?.id) {
+      dispatch(setTimeFrameData([serviceDetails?._timeframes_turbo]));
+    } else {
+      const params = `/${restaurantDetails?.id}`;
+      const res = await getTimeFrames(params);
+      setTimeout(() => {
+        dispatch(setTimeFrameData(res));
+      }, 1000);
+    }
   };
 
   // const onCategoryChange = (serviceCategoryId) => {

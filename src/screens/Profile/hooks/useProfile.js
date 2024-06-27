@@ -13,6 +13,7 @@ import {
   showToastError,
 } from '../../../services';
 import {Linking, Share} from 'react-native';
+import analytics from '@react-native-firebase/analytics';
 
 const useProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
@@ -52,6 +53,9 @@ const useProfile = () => {
 
   const handleSharePromoCode = async () => {
     try {
+      await analytics().logEvent('share_app_button_press', {
+        button_name: 'Share Promote Code Button Press',
+      });
       const result = await Share.share({
         message: `here is my personal invitation for Claris, an app for selected collabs in the best places of Bali and Milan. Here my promocode: ${user?.promocode} https://apps.apple.com/us/app/claris-app/id6479502678 `,
       });

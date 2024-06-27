@@ -22,6 +22,9 @@ import {
 import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
 import SplashScreen from 'react-native-splash-screen';
 import DeviceInfo from 'react-native-device-info';
+import {mixpanel} from '../../../App';
+import analytics from '@react-native-firebase/analytics';
+import {getFormattedDate, getFormattedTime} from '../../../utils';
 
 const useSplash = () => {
   const delay = 500;
@@ -104,6 +107,24 @@ const useSplash = () => {
     }
   };
 
+  const userAnalysis = async () => {
+    if (loginData?.id) {
+      mixpanel.track('App Opened', {
+        'User Id': loginData?.id,
+        'App open date and time': new Date().toString(),
+        'App open date': getFormattedDate(new Date()),
+        'App open time': getFormattedTime(new Date()),
+      });
+
+      await analytics().logEvent('app_opened', {
+        userId: loginData?.id,
+        appOpenDateAndTime: new Date().toString(),
+        appOpenDate: getFormattedDate(new Date()),
+        appOpenTime: getFormattedTime(new Date()),
+      });
+    }
+  };
+
   useEffect(() => {
     if (__DEV__) {
       return;
@@ -170,6 +191,10 @@ const useSplash = () => {
       }, delay);
     }, 0);
   }, [ref]);
+
+  useEffect(() => {
+    userAnalysis();
+  }, []);
 
   // useEffect(() => {
   //   if (fadeOut) {

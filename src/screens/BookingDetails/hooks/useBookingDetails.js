@@ -1,6 +1,7 @@
 import {useRoute} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {mixpanel} from '../../../App';
 import {SCREEN_NAMES} from '../../../constants';
 import {setTimeFrameData} from '../../../redux';
 import {
@@ -10,6 +11,7 @@ import {
   showToastError,
 } from '../../../services';
 import {getFormattedDate, getFormattedTime} from '../../../utils';
+import analytics from '@react-native-firebase/analytics';
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector(
@@ -203,6 +205,24 @@ const useBookingDetails = () => {
       const res = await addRestaurantBooking(prepData);
       if (res?.status === 200) {
         console.log('Booking Details:', res);
+        mixpanel.track('Booking Made', {
+          'Booking Id': res?.data?.id,
+          'User Id': res?.data?.user_turbo_id,
+          'Venue Id': res?.data?.restaurant_id,
+          'Time Frame Id': res?.data?.timeframes_id,
+          'Booking Date': formattedDate,
+          'Booking Timestamp': bookingTimeStamp,
+        });
+
+        await analytics().logEvent('booking_made', {
+          bookingId: res?.data?.id,
+          userId: res?.data?.user_turbo_id,
+          venueId: res?.data?.restaurant_id,
+          timeFrameId: res?.data?.timeframes_id,
+          bookingDate: formattedDate,
+          bookingTimeStamp: bookingTimeStamp,
+        });
+
         navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
           bookingDetails: res?.data,
         });
