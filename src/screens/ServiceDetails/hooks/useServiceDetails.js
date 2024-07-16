@@ -10,6 +10,7 @@ import {
   getServiceDealsLeft,
   getTimeFrames,
   navigate,
+  showToastError,
 } from '../../../services';
 
 const useServiceDetails = () => {
@@ -27,6 +28,11 @@ const useServiceDetails = () => {
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
+  const userInstagramFollowers = loginData?.instagram_followers;
+  const userTiktokFollowers = loginData?.tiktok_followers;
+  const minInstagramFollowers = restaurantDetails?.min_instagram_followers;
+  const minTiktokFollowers = restaurantDetails?.min_tiktok_followers;
+
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [serviceCategories, setServiceCategories] = useState([]);
   const [diaryItems, setDiaryItems] = useState([]);
@@ -136,14 +142,33 @@ const useServiceDetails = () => {
     setIsBookBtnPressed(true);
     if (loginData?.id) {
       if (loginData?.UserStatus === 'approved') {
-        // This setTimeout is important because till that time timeframe data is settled in redux so don't remove it.
-        setTimeout(() => {
+        console.log(
+          'followers:',
+          userInstagramFollowers,
+          userTiktokFollowers,
+          minInstagramFollowers,
+          minTiktokFollowers,
+        );
+        if (
+          userInstagramFollowers >= minInstagramFollowers &&
+          userTiktokFollowers >= minTiktokFollowers
+        ) {
+          // This setTimeout is important because till that time timeframe data is settled in redux so don't remove it.
+          setTimeout(() => {
+            setIsBookBtnPressed(false);
+            navigate(SCREEN_NAMES.BookingDetails, {
+              actionNumId: actionNumId,
+              influencerCount: influencerCount,
+            });
+          }, 1000);
+        } else {
+          const error = {
+            message: `At least ${minInstagramFollowers} Instagram & ${minTiktokFollowers} Tiktok followers required for this service`,
+            type: 'error',
+          };
+          showToastError(error);
           setIsBookBtnPressed(false);
-          navigate(SCREEN_NAMES.BookingDetails, {
-            actionNumId: actionNumId,
-            influencerCount: influencerCount,
-          });
-        }, 1000);
+        }
       } else {
         Toast.show({
           text1: 'Your Account is not yet approved',

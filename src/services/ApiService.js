@@ -41,7 +41,7 @@ export default {
     // console.log('URL: ' + url);
     const response = await axios.get(url, options).catch(err => {
       console.log('error', err);
-      // showToastError(err);
+      showToastError(err);
     });
     // const response = await axios.get(url, options)
     // console.log('response', response);
@@ -58,7 +58,7 @@ export default {
     // console.log('POST request:', url, JSON.stringify(data));
     const response = await axios.post(url, data, options).catch(err => {
       console.log('response_POST', response);
-      // showToastError(err);
+      showToastError(err);
       console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
     });
     return response?.data;
@@ -96,12 +96,12 @@ export default {
     if (data === '') {
       // console.log(url)
       response = await axios.put(url).catch(err => {
-        // showToastError(err);
+        showToastError(err);
       });
     } else {
       console.log(url, data);
       response = await axios.put(url, data, options).catch(err => {
-        // showToastError(err);
+        showToastError(err);
       });
       // console.log('Response: ' + response);
     }
@@ -111,7 +111,7 @@ export default {
 
   delete: async url => {
     const response = await axios.delete(url).catch(err => {
-      // showToastError(err);
+      showToastError(err);
     });
     return response?.data;
   },
