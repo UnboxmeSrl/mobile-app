@@ -1374,7 +1374,7 @@ PODS:
   - RNFBApp (20.1.0):
     - Firebase/CoreOnly (= 10.27.0)
     - React-Core
-  - RNGestureHandler (2.16.1):
+  - RNGestureHandler (2.17.1):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1805,7 +1805,7 @@ SPEC CHECKSUMS:
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBAnalytics: d5570f8c8259452915cca097d93239a1f631eff8
   RNFBApp: 1ae7462cddf74a49df206d3418bc0170f8fa53e5
-  RNGestureHandler: 230119317016db8480226fe35bfb75d37511d96f
+  RNGestureHandler: fe57e804730a6fb0f45de002df857059c15d5665
   rnmapbox-maps: 8005faa8e35b413ea5f387d8e057e9c2d7bcfbff
   RNPermissions: 3e16511a1c4f98f6cb88d5530ac27a2a054bc352
   RNScreens: 3fff9474dfbbbfa4551a40c8d34de8431ecd1925

@@ -49,9 +49,13 @@ const useBookingDetails = () => {
   const isEvent = restaurantDetails?.is_event;
   const today = new Date();
   const todayUtcTime = today.getTime();
-  const after24Hours =
-    todayUtcTime +
-    1 * (restaurantDetails?.booking_buffer_time ?? 0) * 60 * 60 * 1000;
+  let after24Hours = todayUtcTime;
+
+  if (restaurantDetails?.booking_buffer_time) {
+    after24Hours =
+      todayUtcTime +
+      1 * restaurantDetails?.booking_buffer_time * 60 * 60 * 1000;
+  }
 
   // console.log(
   //   'All dates:',
@@ -85,11 +89,6 @@ const useBookingDetails = () => {
       ? Math.ceil((currentsDate - nextMonday) / (24 * 3600 * 1000) / 7)
       : 1;
   };
-
-  // console.log(
-  //   'Week number of ' + currentDate + ' is : ' + getDateWeek(currentDate),
-  //   getDateWeek(startDate),
-  // );
 
   const showNextWeek = () => {
     if (isLatestWeek) {
@@ -143,6 +142,26 @@ const useBookingDetails = () => {
       selectedDate,
       currentBookingDateTime,
     );
+
+    // console.log(
+    //   'THIS TIME IS:',
+    //   currentBookingDateTime.getTime(),
+    //   restaurantDetails?.event_date_time[eventSelectedDateIndex],
+    // );
+
+    if (
+      isEvent &&
+      currentBookingDateTime.getTime() >
+        restaurantDetails?.event_date_time[eventSelectedDateIndex]
+    ) {
+      const error = {
+        message:
+          'You can only book booking which starts after your current time.',
+      };
+      showToastError(error);
+      setIsLoading(false);
+      return;
+    }
 
     if (currentBookingDateTime.getTime() >= after24Hours) {
       const bookingTimeStamp = currentBookingDateTime.valueOf();
@@ -262,6 +281,7 @@ const useBookingDetails = () => {
     const year = myDate.getFullYear();
     const month = String(myDate.getMonth() + 1).padStart(2, '0');
     const day = String(myDate.getDate()).padStart(2, '0');
+    const myDateUtcTimestamp = myDate.getTime();
     const onlyDate = `${year}-${month}-${day}`;
     console.log('Blacklist Dates: ' + onlyDate, eventDates);
 
@@ -274,27 +294,23 @@ const useBookingDetails = () => {
       }
     }
 
-    if (myDate.getTime() <= after24Hours) {
-      // setSelectedDate(new Date(after24Hours));
-      return true;
-    }
+    // if (myDate.getTime() <= after24Hours) {
+    //   // setSelectedDate(new Date(after24Hours));
+    //   return true;
+    // }
 
     // Event Specific Condition because here time come in UTC format
     if (isEvent) {
       const filteredRes = eventDates.filter(dt => dt === onlyDate);
+      // const filteredRes = restaurantDetails?.event_date_time?.filter(
+      //   dt => dt > myDateUtcTimestamp,
+      // );
       if (filteredRes.length > 0) {
         return false;
       } else {
         return true;
       }
     }
-
-    // console.log(
-    //   'My Date UTC & after 24 hours',
-    //   myDate.getTime(),
-    //   after24Hours,
-    //   myDate.getTime() <= after24Hours,
-    // );
 
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
     let outerFilteredRes = [];
@@ -340,40 +356,6 @@ const useBookingDetails = () => {
     }
   };
 
-  // TODO: Remove below code once you get clearance
-  // const getTimeFrameData = async () => {
-  //   const params = `/${restaurantDetails?.id}`
-  //   const res = await getTimeFrames(params)
-  //   setTimeFrameData(res)
-  //   const myDate = new Date(selectedDate)
-  //   const weekDay = myDate.toLocaleString('en-US', { weekday: 'long' })
-  //   setCurrentWeekDay(weekDay)
-  //   // const filteredData = res?.filter((t) => t._weekdaysturbo?.day === weekDay)
-  //   const filteredData = res?.filter((t) => {
-  //     const filteredRes = t.weekdays?.filter((wt) => wt?.day === weekDay)
-  //     if (filteredRes.length > 0) {
-  //       return true
-  //     } else {
-  //       return false
-  //     }
-  //   })
-  //   filteredData.forEach((item) => {
-  //     const weekdays = item.weekdays
-  //     const pauseDays = item.pause_days
-  //     const filteredWeekdays = weekdays.filter((day) => !pauseDays.some((pauseDay) => pauseDay?.day === day?.day))
-  //     item.weekdays = filteredWeekdays
-  //   })
-  //   console.log('filteredTimeData1: ' + JSON.stringify(filteredData))
-  //   setWeekDayWiseTimeSlots(filteredData)
-  //   setTimeout(() => {
-  //     setIsDatesLoading(false)
-  //   }, 2000)
-  // }
-  // useEffect(() => {
-  //   getTimeFrameData()
-  // }, [])
-  // TODO: Till Here
-
   useEffect(() => {
     setSelectedTimeFame({});
     const myDate = new Date(selectedDate);
@@ -405,10 +387,18 @@ const useBookingDetails = () => {
       // }
     });
     const chosenDate = new Date(selectedDate);
-    if (chosenDate?.getTime() <= after24Hours) {
-      const newSelectedDate = new Date(after24Hours + 1 * 24 * 60 * 60 * 1000);
-      setSelectedDate(newSelectedDate);
-      setWeekDayWiseTimeSlots([]);
+    // if (chosenDate?.getTime() <= after24Hours) {
+    //   const newSelectedDate = new Date(after24Hours);
+    //   setSelectedDate(newSelectedDate);
+    //   setWeekDayWiseTimeSlots([]);
+    // }
+
+    // This is for when user's date and booking date are same then to show event time we have done this.
+    if (isEvent) {
+      eventDates.filter((date, index) => {
+        if (date === getFormattedDate(selectedDate))
+          setEventSelectedDateIndex(index);
+      });
     }
   }, [selectedDate]);
 
