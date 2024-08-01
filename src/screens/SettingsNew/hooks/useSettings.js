@@ -13,6 +13,7 @@ import {
 } from '../../../redux';
 import {deleteUserAccount, showToastSuccess} from '../../../services';
 import {OneSignal} from 'react-native-onesignal';
+import {chatClient} from '../../../App';
 
 const useSettings = () => {
   const navigation = useNavigation();
@@ -34,6 +35,7 @@ const useSettings = () => {
       dispatch(resetContentSlice());
       // dispatch(resetServiceSlice())
       setIsLoading(false);
+      await chatClient.disconnectUser();
       //TODO: Change this when your navigation is completed
       navigation.reset({index: 0, routes: [{name: SCREEN_NAMES.SignUpNew}]});
       dispatch(resetLogin());
@@ -80,6 +82,7 @@ const useSettings = () => {
             const res = await deleteUserAccount(prepUrl);
             //TODO: Enable below if you need in future (satyam)
             // reset(MAIN_NAVIGATOR)
+            await chatClient.disconnectUser();
             dispatch(resetLogin());
             dispatch(setCity({}));
             await persistor.purge();

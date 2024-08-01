@@ -82,6 +82,7 @@ export const SCREEN_NAMES = {
   Splash: 'Splash',
   ContentUploadGuide: 'ContentUploadGuide',
   TutorialsScreen: 'TutorialsScreen',
+  ChatScreen: 'ChatScreen',
 };
 export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack;
 export const COMMON_STATUS_BAR = {

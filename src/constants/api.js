@@ -39,6 +39,7 @@ export const Api = {
     GET_NEARER_RESTAURANT: `${BASE_URL}/api:bwh6Xc5O/influencer/restaurant_turbo/location`,
     GET_ALL_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/restaurant_turbo_venues/list`,
     SEARCH_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/influencer/restaurant_names`,
+    GET_RESTAURANT_OWNERS: `${BASE_URL}/api:bwh6Xc5O/get_restaurant_owners`,
   },
   CONTENT: {
     GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content_new`,

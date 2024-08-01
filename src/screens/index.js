@@ -22,3 +22,4 @@ export * from './OnboardingNew';
 export * from './OtherSignUpOptions';
 export * from './ContentUploadGuide';
 export * from './Tutorials';
+export * from './ChatScreen';

@@ -16,6 +16,8 @@ import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
 import analytics from '@react-native-firebase/analytics';
+import {StreamChat} from 'stream-chat';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
@@ -26,6 +28,9 @@ export const mixpanel = new Mixpanel(
 
 // Initialize Mixpanel
 mixpanel.init();
+
+console.log('STREAM_CHAT_API_KEY: ', Config.STREAM_CHAT_API_KEY);
+export const chatClient = StreamChat.getInstance(Config.STREAM_CHAT_API_KEY);
 
 const App = () => {
   // Firebase config object
@@ -80,36 +85,38 @@ const App = () => {
 
   const routeNameRef = React.useRef();
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <I18nextProvider i18n={i18n}>
-          <NavigationContainer
-            ref={navigationRef}
-            onReady={() => {
-              routeNameRef.current =
-                navigationRef.current.getCurrentRoute().name;
-            }}
-            onStateChange={async () => {
-              const previousRouteName = routeNameRef.current;
-              const currentRouteName =
-                navigationRef.current.getCurrentRoute().name;
-              // console.log('Current route: ' + currentRouteName);
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <I18nextProvider i18n={i18n}>
+            <NavigationContainer
+              ref={navigationRef}
+              onReady={() => {
+                routeNameRef.current =
+                  navigationRef.current.getCurrentRoute().name;
+              }}
+              onStateChange={async () => {
+                const previousRouteName = routeNameRef.current;
+                const currentRouteName =
+                  navigationRef.current.getCurrentRoute().name;
+                // console.log('Current route: ' + currentRouteName);
 
-              if (previousRouteName !== currentRouteName) {
-                await analytics().logScreenView({
-                  screen_name: currentRouteName,
-                  screen_class: currentRouteName,
-                });
-              }
-              routeNameRef.current = currentRouteName;
-            }}>
-            {isIos && <StatusBar translucent barStyle={'dark-content'} />}
-            <MainStack />
-          </NavigationContainer>
-          <Toast ref={Toast.setRef} topOffset={50} />
-        </I18nextProvider>
-      </PersistGate>
-    </Provider>
+                if (previousRouteName !== currentRouteName) {
+                  await analytics().logScreenView({
+                    screen_name: currentRouteName,
+                    screen_class: currentRouteName,
+                  });
+                }
+                routeNameRef.current = currentRouteName;
+              }}>
+              {isIos && <StatusBar translucent barStyle={'dark-content'} />}
+              <MainStack />
+            </NavigationContainer>
+            <Toast ref={Toast.setRef} topOffset={50} />
+          </I18nextProvider>
+        </PersistGate>
+      </Provider>
+    </GestureHandlerRootView>
   );
 };
 

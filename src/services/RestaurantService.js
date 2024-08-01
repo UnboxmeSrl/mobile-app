@@ -123,3 +123,14 @@ export const getSearchRestaurants = async params => {
     return [];
   }
 };
+
+export const getRestaurantOwners = async params => {
+  try {
+    const url = Api.RESTAURANTS.GET_RESTAURANT_OWNERS + params;
+    const response = await Fetch.get(url);
+    // console.log('resInGetAllRestaurants', response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

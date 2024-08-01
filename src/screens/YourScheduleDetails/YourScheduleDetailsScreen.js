@@ -12,10 +12,11 @@ import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {CustomModal} from '../../components';
-import {COLORS, FONTS} from '../../constants';
+import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
 import SwipeButton from 'rn-swipe-button';
 import {getFormattedTime, xanoImageSize} from '../../utils';
+import {navigate} from '../../services';
 
 const YourScheduleDetailsScreen = () => {
   const {
@@ -289,6 +290,25 @@ const YourScheduleDetailsScreen = () => {
           </View>
         </View>
 
+        <View style={styles.needHelpContainer}>
+          <Text allowFontScaling={false} style={styles.contentDetailsText}>
+            Need help ?
+          </Text>
+        </View>
+        <View style={styles.chatWithOwnerBtnMainContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              navigate(SCREEN_NAMES.ChatScreen, {
+                bookingDetails: bookingDetails,
+              })
+            }
+            style={[styles.chatWithOwnerBtnContainer]}>
+            <Text allowFontScaling={false} style={styles.chatWithOwnerBtnText}>
+              Chat with owner
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         <View>
           <View style={styles.actionRequestedContainer}>
             <Text allowFontScaling={false} style={styles.actionRequestedText}>
@@ -394,20 +414,6 @@ const YourScheduleDetailsScreen = () => {
           titleStyles={swipeButtonStyles.swipeBtnTitle}
         />
 
-        {/* <View style={styles.openCouponBtnMainContainer}>
-          <TouchableOpacity
-            onPress={handleOpenCouponPress}
-            style={[
-              styles.openCouponBtnContainer,
-              !bookingDetails?.Approved && styles.disabledBtnContainer,
-            ]}
-            disabled={!bookingDetails?.Approved}>
-            <Text allowFontScaling={false} style={styles.openCouponBtnText}>
-              Open Coupon
-            </Text>
-          </TouchableOpacity>
-        </View> */}
-
         <CustomModal
           visible={isAlertVisible}
           title={'Cancel booking'}
@@ -424,6 +430,10 @@ const YourScheduleDetailsScreen = () => {
 export default YourScheduleDetailsScreen;
 
 const styles = StyleSheet.create({
+  needHelpContainer: {
+    marginLeft: scale(15),
+    marginTop: verticalScale(5),
+  },
   mainScrollView: {
     backgroundColor: COLORS.white,
   },
@@ -633,7 +643,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: scale(62),
   },
-  openCouponBtnContainer: {
+  chatWithOwnerBtnContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(16),
@@ -641,16 +651,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-  openCouponBtnMainContainer: {
-    borderBottomWidth: 0,
-    borderColor: COLORS.whiteShadedTransparent,
-    borderRadius: moderateScale(10),
-    borderWidth: moderateScale(1),
-    marginTop: verticalScale(14),
-    padding: moderateScale(24),
+  chatWithOwnerBtnMainContainer: {
+    marginTop: verticalScale(15),
+    paddingHorizontal: moderateScale(24),
     width: '100%',
   },
-  openCouponBtnText: {
+  chatWithOwnerBtnText: {
     color: COLORS.black22,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(18),
