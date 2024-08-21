@@ -48,6 +48,8 @@ const ProfileScreen = () => {
     handleSharePromoCode,
   } = useProfile();
 
+  console.log('IsAuthenticated in profile: ', isAuthenticated);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       {/* <FormTask /> */}
@@ -170,6 +172,7 @@ const ProfileScreen = () => {
                 </View>
 
                 <View style={styles.invitationDescriptionContainer}>
+                  <Title title="Invitation code" />
                   <Text
                     allowFontScaling={false}
                     style={styles.invitationDescription}>

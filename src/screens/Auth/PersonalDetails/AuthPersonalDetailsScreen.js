@@ -82,7 +82,7 @@ const AuthPersonalDetailsScreen = () => {
             style={styles.cstInputContainer}
           />
           <CustomTextInput
-            placeholder={'City'}
+            placeholder={'City where you are based most of the time'}
             value={city}
             handleOnChangeText={setCity}
             inputWrapperStyle={styles.cstInputWrapper}
@@ -131,7 +131,7 @@ const AuthPersonalDetailsScreen = () => {
                     <Text
                       allowFontScaling={false}
                       style={styles.countryText}>{`${
-                      nationality?.name ?? 'Country'
+                      nationality?.name ?? 'Country of origin'
                     }`}</Text>
                   </View>
                   <Image
@@ -207,7 +207,7 @@ const AuthPersonalDetailsScreen = () => {
                           ? `0${selectedDate.getMonth() + 1}`
                           : selectedDate.getMonth() + 1
                       }/${selectedDate.getFullYear()}`
-                    : 'DD/MM/YYYY'
+                    : 'Birthday'
                 }`}
               </Text>
               <Image source={IMAGES.calender} style={styles.calenderIcon} />

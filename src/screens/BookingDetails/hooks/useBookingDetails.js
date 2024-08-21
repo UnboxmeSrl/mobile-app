@@ -139,6 +139,8 @@ const useBookingDetails = () => {
     console.log(
       'Todays UTC Time: ' + after24Hours,
       currentBookingDateTime.getTime(),
+      isEvent,
+      'AAAAA',
       selectedDate,
       currentBookingDateTime,
     );
@@ -151,7 +153,7 @@ const useBookingDetails = () => {
 
     if (
       isEvent &&
-      currentBookingDateTime.getTime() >
+      new Date().getTime() >
         restaurantDetails?.event_date_time[eventSelectedDateIndex]
     ) {
       const error = {

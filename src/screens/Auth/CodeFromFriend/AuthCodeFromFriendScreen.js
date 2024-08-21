@@ -42,14 +42,14 @@ const AuthCodeFromFriendScreen = () => {
     <SafeAreaView style={styles.mainContainer}>
       <KeyboardAwareScrollView>
         <CustomHeader
-          title={'Code from friend'}
+          title={'Invitation code'}
           step={4}
           handleBackPress={handleBackPress}
         />
         <View style={styles.descriptionContainer}>
           <Text allowFontScaling={false} style={styles.descriptionText}>
-            If you came at the invitation of another user and they gave you
-            their promo code, then enter it here!
+            If you have an invitation code from another user enter it here!
+            Otherwise you can use the skip button below to move forward
           </Text>
         </View>
 

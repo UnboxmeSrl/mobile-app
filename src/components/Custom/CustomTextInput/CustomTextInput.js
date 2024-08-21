@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     minWidth: moderateScale(200),
-    maxWidth: moderateScale(240),
+    maxWidth: moderateScale(350),
     marginLeft: scale(10),
     color: COLORS.black,
     fontFamily: FONTS.quicksand,

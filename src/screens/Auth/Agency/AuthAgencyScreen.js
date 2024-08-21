@@ -45,7 +45,7 @@ const AuthAgencyScreen = () => {
             data={userTypeList || []}
             setSelectedValue={setSelectedUserType}
             selectedValue={selectedUserType}
-            placeholder={'Who you are?'}
+            placeholder={'Are you a model or an influencer?'}
           />
 
           <View style={styles.OptionsMainContainer}>
@@ -61,7 +61,7 @@ const AuthAgencyScreen = () => {
                 <View style={styles.roundedView} />
               )}
               <Text allowFontScaling={false} style={styles.textStyle}>
-                I am a freelances
+                I am a freelancer
               </Text>
             </TouchableOpacity>
 
@@ -77,7 +77,7 @@ const AuthAgencyScreen = () => {
                 <View style={styles.roundedView} />
               )}
               <Text allowFontScaling={false} style={styles.textStyle}>
-                I work with Agency
+                I work with an agency
               </Text>
             </TouchableOpacity>
           </View>
