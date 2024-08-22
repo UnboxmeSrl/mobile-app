@@ -13,7 +13,7 @@ import {
 } from '../../../redux';
 import {deleteUserAccount, showToastSuccess} from '../../../services';
 import {OneSignal} from 'react-native-onesignal';
-import {chatClient} from '../../../App';
+import {chatClient} from '../../../hooks';
 
 const useSettings = () => {
   const navigation = useNavigation();

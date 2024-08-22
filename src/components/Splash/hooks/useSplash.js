@@ -25,6 +25,7 @@ import DeviceInfo from 'react-native-device-info';
 import {mixpanel} from '../../../App';
 import analytics from '@react-native-firebase/analytics';
 import {getFormattedDate, getFormattedTime} from '../../../utils';
+import messaging from '@react-native-firebase/messaging';
 
 const useSplash = () => {
   const delay = 500;
@@ -211,6 +212,25 @@ const useSplash = () => {
   if (!show) {
     return null;
   }
+
+  // TODO: We already taking permission for notifications from one signal so below useEffect code is commented
+
+  // useEffect(() => {
+  //   // Request Push Notification permission from device.
+  //   const requestPermission = async () => {
+  //     const authStatus = await messaging().requestPermission();
+  //     const enabled =
+  //       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+  //       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  //     if (enabled) {
+  //       console.log('Authorization status:', authStatus);
+  //     }
+  //   };
+  //   if (!messaging.AuthorizationStatus.AUTHORIZED) {
+  //     requestPermission();
+  //   }
+  // }, []);
 
   return {
     navigation,

@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
-import {chatClient} from '../../../App';
 import {useRoute} from '@react-navigation/native';
 import {getRestaurantOwners} from '../../../services';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {chatClient} from '../../../hooks';
 
 const useChat = () => {
   const [channel, setChannel] = useState(null);

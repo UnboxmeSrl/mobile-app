@@ -10,10 +10,13 @@ import HomeStack from './HomeStack';
 import ScheduleStack from './ScheduleStack';
 import ProfileStack from './ProfileStack';
 import AppMap from '../components/AppMap';
+import {useChatClient} from '../hooks';
 
 const BottomTabs = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const {clientIsReady} = useChatClient();
+  console.log('Client is ready', clientIsReady);
   return (
     <BottomTabs.Navigator
       initialRouteName={SCREEN_NAMES.Home}

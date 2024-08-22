@@ -1,6 +1,8 @@
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {CitiesScreen, RestaurantDetails, RestaurantsScreen} from '../screens';
 import {SCREEN_NAMES} from '../constants';
+import {useNotification} from '../hooks';
 
 const StackHome = createStackNavigator();
 

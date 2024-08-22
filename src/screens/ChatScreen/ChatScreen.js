@@ -6,9 +6,8 @@ import {useChat} from './hooks';
 import {COLORS} from '../../constants';
 
 const ChatScreen = () => {
-  const {clientIsReady} = useChatClient();
   const {channel, isChannelLoaded} = useChat();
-  console.log('Client Ready', clientIsReady);
+  // console.log('Client Ready', clientIsReady);
   return (
     <SafeAreaView style={styles.container}>
       {isChannelLoaded ? (
