@@ -5,7 +5,11 @@ import Geolocation from 'react-native-geolocation-service';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
 import {setRestaurantDetails, setUserCurrentLocation} from '../../../redux';
-import {getCategories, getRestaurants} from '../../../services';
+import {
+  getCategories,
+  getRestaurants,
+  getSponsoredRestaurants,
+} from '../../../services';
 import {geolocationSetting} from '../../../utils';
 
 const useRestaurants = () => {
@@ -13,6 +17,7 @@ const useRestaurants = () => {
   // const category = useSelector(selectAwardPrizeCategory)
   const isFocused = useIsFocused();
   // const cityData = useNavigationParam('cityData')
+  const loginData = useSelector(state => state.authSlice.loginData);
   const cityData = useSelector(state => state.locationSlice.city);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -85,17 +90,42 @@ const useRestaurants = () => {
     }
   }, [dispatch]);
 
+  // const getInitialSponsoredRestaurantsData = async () => {
+  //   setIsLoading(true);
+  //   const prepData = {
+  //     category_venue_id: filter,
+  //     city_id: cityData?.id,
+  //     search: search,
+  //   };
+  //   const res = await getSponsoredRestaurants(prepData);
+  //   setRestaurantApiCallData(res);
+  //   setRestaurantsData(res?.items);
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  // };
+
   const getInitialRestaurantsData = async () => {
     setIsLoading(true);
+    const sponsoredPrepData = {
+      category_venue_id: filter,
+      city_id: cityData?.id,
+      search: search,
+      user_turbo_id: loginData?.id,
+    };
+    const sponsoredRes = await getSponsoredRestaurants(sponsoredPrepData);
+
     const prepData = {
       category_venue_id: filter,
       city_id: cityData?.id,
       page: 1,
       search: search,
+      sponsored_data: true,
+      user_turbo_id: loginData.id,
     };
     const res = await getRestaurants(prepData);
     setRestaurantApiCallData(res);
-    setRestaurantsData(res?.items);
+    setRestaurantsData([...sponsoredRes, ...res?.items]);
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -107,6 +137,8 @@ const useRestaurants = () => {
       city_id: cityData?.id,
       page: page,
       search: search,
+      sponsored_data: true,
+      user_turbo_id: loginData.id,
     };
     const res = await getRestaurants(prepData);
     setRestaurantApiCallData(res);
