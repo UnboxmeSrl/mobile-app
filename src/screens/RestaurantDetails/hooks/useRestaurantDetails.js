@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Linking} from 'react-native';
 import {
-  getCategories,
   getRestaurantDetails,
   getServiceCategories,
   navigate,
@@ -12,8 +11,6 @@ import {useIsFocused, useRoute} from '@react-navigation/native';
 import {setRestaurantDetails} from '../../../redux';
 
 const useRestaurantDetails = () => {
-  // const categoriesIds = useSelector(selectCategoryById)
-
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
@@ -27,12 +24,14 @@ const useRestaurantDetails = () => {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-  console.log(filter);
+  const loginData = useSelector(state => state.authSlice.loginData);
+
   const getRestaurantDetailsData = async () => {
     setIsLoading(true);
     const prepData = {
       category_id: filter,
       restaurant_id: restaurantId,
+      user_id: loginData?.id,
     };
     const res = await getRestaurantDetails(prepData);
     dispatch(setRestaurantDetails(res?.restaurant));
@@ -88,7 +87,6 @@ const useRestaurantDetails = () => {
 
   return {
     isLoading,
-    // categoriesIds,
     filter,
     isImageLoading,
     setIsImageLoading,
