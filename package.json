@@ -29,7 +29,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@rnmapbox/maps": "^10.1.24",
     "@stream-io/flat-list-mvcp": "^0.10.3",
-    "axios": "^1.6.8",
+    "axios": "^1.7.7",
     "geolib": "^3.3.4",
     "i18n-js": "^4.4.3",
     "i18next": "^23.11.2",
