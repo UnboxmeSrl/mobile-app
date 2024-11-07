@@ -121,7 +121,7 @@ const useRestaurants = () => {
       page: 1,
       search: search,
       sponsored_data: true,
-      user_turbo_id: loginData.id,
+      ...(loginData?.id && {user_turbo_id: loginData.id}),
     };
     const res = await getRestaurants(prepData);
     setRestaurantApiCallData(res);
@@ -138,7 +138,7 @@ const useRestaurants = () => {
       page: page,
       search: search,
       sponsored_data: true,
-      user_turbo_id: loginData.id,
+      ...(loginData?.id && {user_turbo_id: loginData.id}),
     };
     const res = await getRestaurants(prepData);
     setRestaurantApiCallData(res);
