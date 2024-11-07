@@ -67,7 +67,7 @@ const OtherSignUpOptionsScreen = () => {
         </View>
       </View>
       <SignUpWithEmail ref={ref} closeSignUpSheet={closeSignUpSheet} />
-      <CreatePassword ref={createPasswordRef} />
+      {/* <CreatePassword ref={createPasswordRef} /> */}
     </SafeAreaView>
   );
 };

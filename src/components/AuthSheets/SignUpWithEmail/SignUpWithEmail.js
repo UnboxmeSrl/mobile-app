@@ -1,79 +1,85 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
 import {BottomSheet} from '../../BottomSheet';
 import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
-import {useSignUpWithEmail} from './hooks';
-import {COLORS, FONTS} from '../../../constants';
+import {useCreatePassword} from '../CreatePassword/hooks';
+// import {useSignUpWithEmail} from './hooks';
 
 const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
+  // const {
+  //   email,
+  //   setEmail,
+  //   error,
+  //   // verificationCode,
+  //   // setVerificationCode,
+  //   isBtnDisabled,
+  //   // isSendPress,
+  //   setIsSendPress,
+  //   // handleSignUpPress,
+  //   handleSignUpPressAfterCodeSend,
+  //   handleReset,
+  // } = useSignUpWithEmail(closeSignUpSheet);
+
   const {
+    isBtnDisabled: isBtnDisabledPass,
+    error: passError,
+    password,
+    setPassword,
     email,
     setEmail,
-    error,
-    verificationCode,
-    setVerificationCode,
-    isBtnDisabled,
-    isSendPress,
-    setIsSendPress,
-    handleSignUpPress,
-    handleSignUpPressAfterCodeSend,
-    handleReset,
-  } = useSignUpWithEmail(closeSignUpSheet);
+    confirmPassword,
+    setConfirmPassword,
+    handleCreatePasswordPress,
+  } = useCreatePassword();
 
+  const onClickSignup = async () => {
+    const valid = await handleCreatePasswordPress();
+    if (valid) {
+      closeSignUpSheet?.();
+    }
+  };
   return (
     <BottomSheet
       onClose={() => {
-        setIsSendPress(false);
+        // setIsSendPress(false);
       }}
       ref={ref}>
       <View style={styles.mainContainer}>
-        <CustomTitle title={'Enter your email'} />
+        <CustomTitle title={'Sign Up with Email'} />
         <CustomTextInput
           handleOnChangeText={setEmail}
           isRemoveTextIconVisible={true}
           keyboardType="email-address"
-          handleReset={handleReset}
+          handleReset={() => setEmail('')}
           placeholder={'Ex: Chakir@gmail.com'}
           value={email}
         />
 
-        {error?.message && (
+        <CustomTextInput
+          placeholder={'Create a password'}
+          value={password}
+          handleOnChangeText={setPassword}
+          isSecureTextInput={true}
+        />
+        <CustomTextInput
+          placeholder={'Confirm password'}
+          value={confirmPassword}
+          handleOnChangeText={setConfirmPassword}
+          isSecureTextInput={true}
+        />
+        {passError?.message && (
           <View style={styles.errorContainer}>
             <Text allowFontScaling={false} style={styles.errorText}>
-              {error?.message}
+              {passError?.message}
             </Text>
           </View>
         )}
-
-        {isSendPress && (
-          <>
-            <View style={styles.codeDescriptionContainer}>
-              <Text allowFontScaling={false} style={styles.codeDescriptionText}>
-                We just sent you a temporary login code. Please check your
-                inbox.
-              </Text>
-              <Pressable onPress={handleSignUpPress}>
-                <Text style={styles.resendOtp} allowFontScaling={false}>
-                  Resend OTP
-                </Text>
-              </Pressable>
-            </View>
-            <CustomTextInput
-              handleOnChangeText={setVerificationCode}
-              isRemoveTextIconVisible={true}
-              placeholder={'Code'}
-              value={verificationCode}
-            />
-          </>
-        )}
-
         <CustomButton
-          disabled={isBtnDisabled}
-          handlePress={
-            isSendPress ? handleSignUpPressAfterCodeSend : handleSignUpPress
-          }
-          title={isSendPress ? 'Verify Otp' : 'Send a message'}
+          disabled={isBtnDisabledPass}
+          handlePress={onClickSignup}
+          title={'Sign Up'}
         />
       </View>
     </BottomSheet>
