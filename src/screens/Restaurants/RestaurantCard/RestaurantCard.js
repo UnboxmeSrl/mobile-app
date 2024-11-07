@@ -1,26 +1,41 @@
-import React from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react';
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
+import {useRestaurantCard} from './hooks';
+import {xanoImageSize} from '../../../utils';
 
-import { IMAGES } from '../../../assets/images'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
-
-import { useRestaurantCard } from './hooks'
-
-const RestaurantCard = ({ item, index }) => {
-  const { handleCardPress } = useRestaurantCard()
-
+const RestaurantCard = ({item}) => {
+  const {handleCardPress} = useRestaurantCard();
   return (
-    <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
-      <ImageBackground resizeMode="cover" source={{ uri: item?.Cover?.url }} style={styles.itemImage}>
+    <TouchableOpacity
+      onPress={() => handleCardPress(item)}
+      style={styles.listItem}>
+      <ImageBackground
+        resizeMode="cover"
+        source={{uri: `${item?.Cover?.url}?tpl=${xanoImageSize}.jpg`}}
+        style={styles.itemImage}>
+        <Image
+          resizeMode="cover"
+          source={IMAGES.overlay}
+          style={styles.itemImage}
+        />
         <View style={styles.mainContainer}>
-          <View style={styles.ratingsContainer}>
-            <Text style={styles.ratingsText}>+250</Text>
+          {/* <View style={styles.ratingsContainer}>
+            <Text allowFontScaling={false}  style={styles.ratingsText}>+250</Text>
             <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
-          </View>
+          </View> */}
           {(item?.Influencer || item?.Model) && (
             <View style={styles.forModelsContainer}>
-              <Text style={styles.forModelsText}>
+              <Text allowFontScaling={false} style={styles.forModelsText}>
                 For {item?.Influencer && 'Influencer'}
                 {item?.Model && ' Models'}
               </Text>
@@ -28,77 +43,84 @@ const RestaurantCard = ({ item, index }) => {
           )}
         </View>
         <View style={styles.nameLocationContainer}>
-          <Text style={styles.restaurantNameText}>{item?.Name}</Text>
-          <Text style={styles.distanceText}>{item?.distance} from here</Text>
+          <Text allowFontScaling={false} style={styles.restaurantNameText}>
+            {item?.Name}
+          </Text>
+          {/* {!!item.distance && (
+            <Text allowFontScaling={false} style={styles.distanceText}>
+              {item.distance.toFixed(2)} km from here
+            </Text>
+          )} */}
         </View>
       </ImageBackground>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default RestaurantCard
+export default RestaurantCard;
 
 const styles = StyleSheet.create({
   distanceText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   forModelsContainer: {
     backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 20,
-    marginRight: 5,
-    marginTop: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 7,
+    borderRadius: moderateScale(20),
+    marginRight: scale(5),
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(15),
+    paddingVertical: verticalScale(3),
   },
   forModelsText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   itemImage: {
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
     height: '100%',
     overflow: 'hidden',
     width: '100%',
   },
   listItem: {
-    height: 226,
-    marginBottom: 20,
+    height: verticalScale(200),
+    marginBottom: verticalScale(15),
   },
   mainContainer: {
     flexDirection: 'row-reverse',
     width: '100%',
   },
   nameLocationContainer: {
-    bottom: 20,
-    left: 10,
+    bottom: moderateScale(20),
+    left: moderateScale(10),
     position: 'absolute',
   },
   ratingIcon: {
-    height: 12,
-    marginLeft: 2,
-    width: 12,
+    tintColor: COLORS.newPrimary,
+    height: moderateScale(12),
+    marginLeft: scale(2),
+    width: moderateScale(12),
   },
   ratingsContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
     flexDirection: 'row',
-    marginRight: 10,
-    marginTop: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 7,
+    marginRight: scale(10),
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(13),
+    paddingVertical: verticalScale(3),
   },
   ratingsText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   restaurantNameText: {
     color: COLORS.white,
     fontFamily: FONTS.quicksandBold,
-    fontSize: 15,
+    fontSize: moderateScale(15),
   },
-})
+});

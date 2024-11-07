@@ -1,97 +1,451 @@
-import React from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react';
+import {
+  Image,
+  ImageBackground,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import FastImage from 'react-native-fast-image';
+import {useServiceCard} from './hooks';
+import {IMAGES} from '../../../assets';
+import {COLORS, FONTS} from '../../../constants';
+import {perfectSize, xanoImageSize} from '../../../utils';
 
-import { IMAGES } from '../../../assets/images'
-import { COLORS } from '../../../constants/colors'
-import { FONTS } from '../../../constants/fonts'
+const ServiceCard = ({item, index, deals, actionNumId}) => {
+  const {handleCardPress} = useServiceCard(item);
+  let amenityDetails = {};
 
-import { useServiceCard } from './hooks'
-
-const ServiceCard = ({ item, index }) => {
-  const { handleCardPress } = useServiceCard()
+  if (
+    actionNumId === 7 ||
+    actionNumId === 10 ||
+    actionNumId === 14 ||
+    actionNumId === 15 ||
+    actionNumId === 16 ||
+    actionNumId === 17
+  ) {
+    amenityDetails = {
+      amenityName: `${item?._actions_turbo?.Beauty} X Treatment`,
+      amenityIcon: IMAGES.beauty,
+      amenityDescription: 'at your choice',
+    };
+  } else if (actionNumId === 8) {
+    amenityDetails = {
+      amenityName: `${item?._actions_turbo?.Gym} X Pass`,
+      amenityIcon: IMAGES.gym,
+      amenityDescription: 'at your choice',
+    };
+  } else if (actionNumId === 9) {
+    amenityDetails = {
+      amenityName: `${item?._actions_turbo?.Accomodation} x Days (${
+        item?._actions_turbo?.Accomodation - 1
+      } nights)`,
+      amenityIcon: IMAGES.resort,
+      amenityDescription: 'at your choice',
+    };
+  }
   return (
-    <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
-      <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
-        <View style={styles.mainContainer}>
-          <View style={styles.ratingsContainer}>
-            <Text style={styles.ratingsText}>+250</Text>
-            <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
+    // <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
+    //   <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
+    //     <View style={styles.mainContainer}>
+    //       <View style={styles.ratingsContainer}>
+    //         <Text allowFontScaling={false}  style={styles.ratingsText}>+250</Text>
+    //         <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
+    //       </View>
+    //       {(item?.Influencer || item?.Model) && (
+    //         <View style={styles.forModelsContainer}>
+    //           <Text allowFontScaling={false}  style={styles.forModelsText}>
+    //             For {item?.Influencer && 'Influencer'}
+    //             {item?.Model && ' Models'}
+    //           </Text>
+    //         </View>
+    //       )}
+    //     </View>
+    //     <View style={styles.nameContainer}>
+    //       <Text allowFontScaling={false}  style={styles.restaurantNameText}>{item?.Offer_Name}</Text>
+    //     </View>
+    //   </ImageBackground>
+    // </TouchableOpacity>
+
+    <TouchableOpacity
+      activeOpacity={0.6}
+      onPress={() => handleCardPress(item)}
+      style={styles.listItem}>
+      <View style={styles.imageContainer}>
+        <ImageBackground
+          imageStyle={styles.actualPicture}
+          resizeMode="cover"
+          source={{uri: `${item?.Offer_Cover?.url}?tpl=${xanoImageSize}.jpg`}}
+          style={styles.imageBgContainer}>
+          <Image
+            source={IMAGES.overlay}
+            style={styles.itemImage}
+            resizeMode="cover"
+          />
+          <View style={styles.dealTimerContainer}>
+            <Text
+              allowFontScaling={false}
+              style={styles.dealTimeLeftText}>{`${deals} deal left`}</Text>
           </View>
-          {(item?.Influencer || item?.Model) && (
-            <View style={styles.forModelsContainer}>
-              <Text style={styles.forModelsText}>
-                For {item?.Influencer && 'Influencer'}
-                {item?.Model && ' Models'}
+        </ImageBackground>
+      </View>
+      <View style={styles.titleRatingMainRow}>
+        <View style={styles.itemTitleIconContainer}>
+          <FastImage
+            resizeMode="contain"
+            source={{
+              priority: FastImage.priority.high,
+              uri: item?._actions_turbo?.Action_icon?.url,
+            }}
+            style={styles.socialIcon}
+          />
+          {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
+          <Text
+            allowFontScaling={false}
+            style={styles.titleText}
+            numberOfLines={2}>
+            {item?._actions_turbo?.Action_Name}
+          </Text>
+        </View>
+        <View style={styles.ratingsContainer}>
+          <Text allowFontScaling={false} style={styles.ratingsText}>
+            {item?.Credits}
+          </Text>
+          <Image source={IMAGES.star} style={styles.ratingIcon} />
+        </View>
+      </View>
+      {/* 
+      <View style={styles.descriptionContainer}>
+        <Text allowFontScaling={false}  style={styles.descriptionText}>To publish with 24 hours</Text>
+      </View> */}
+
+      {actionNumId === 7 ||
+      actionNumId === 10 ||
+      actionNumId === 14 ||
+      actionNumId === 15 ||
+      actionNumId === 16 ||
+      actionNumId === 17 ? (
+        <View style={styles.specialAmenity}>
+          <>
+            <View
+              style={[
+                styles.amenityIconContainer,
+                styles.firstAmenityMainContainer,
+                styles.specialAmenitiesIconContainer,
+              ]}>
+              <Image
+                source={amenityDetails?.amenityIcon}
+                style={styles.amenityBigIcon}
+              />
+            </View>
+            <View
+              style={[
+                styles.amenityMainContainer,
+                styles.specialAmenitiesMainContainer,
+              ]}>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                  {amenityDetails?.amenityName}
+                </Text>
+              </View>
+            </View>
+          </>
+        </View>
+      ) : (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View
+            style={[
+              styles.amenityMainContainer,
+              styles.firstAmenityMainContainer,
+            ]}>
+            <View style={styles.amenityIconContainer}>
+              <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+            </View>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text
+                allowFontScaling={false}
+                style={
+                  styles.amenitiesTitle
+                }>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
+            </View>
+          </View>
+
+          <View style={styles.amenityMainContainer}>
+            <View style={styles.amenityIconContainer}>
+              <Image
+                source={IMAGES.clinkingGlasses}
+                style={styles.amenityIcon}
+              />
+            </View>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text
+                allowFontScaling={false}
+                style={
+                  styles.amenitiesTitle
+                }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+            </View>
+          </View>
+
+          {/* <View
+            style={[
+              styles.amenityMainContainer,
+              styles.friendAmenityContainer,
+            ]}>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text allowFontScaling={false} 
+                style={[
+                  styles.amenitiesTitle,
+                  styles.friendAmenityText,
+                ]}>{`+${item?._actions_turbo?.Extra_People}`}</Text>
+              <Text allowFontScaling={false} 
+                style={[
+                  styles.amenitiesDescription,
+                  styles.friendAmenityTitle,
+                ]}>
+                Friend
               </Text>
             </View>
-          )}
-        </View>
-        <View style={styles.nameContainer}>
-          <Text style={styles.restaurantNameText}>{item?.Offer_Name}</Text>
-        </View>
-      </ImageBackground>
-    </TouchableOpacity>
-  )
-}
+              </View>*/}
+        </ScrollView>
+      )}
 
-export default ServiceCard
+      {/* <View style={styles.amenitiesMainContainer}>
+        <View style={styles.amenitiesContainer}>
+          <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+          <Text allowFontScaling={false} 
+            style={
+              styles.amenityText
+            }>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
+        </View>
+        <View style={styles.amenitiesContainer}>
+          <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+          <Text allowFontScaling={false} 
+            style={
+              styles.amenityText
+            }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+        </View>
+      </View> */}
+    </TouchableOpacity>
+  );
+};
+
+export default ServiceCard;
 
 const styles = StyleSheet.create({
-  forModelsContainer: {
-    backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 20,
-    marginRight: 5,
-    marginTop: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 7,
+  specialAmenity: {
+    flexDirection: 'row',
+    marginLeft: scale(5),
   },
-  forModelsText: {
-    color: COLORS.white,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+  specialAmenitiesMainContainer: {
+    marginLeft: scale(5),
+    marginTop: verticalScale(10),
   },
-  itemImage: {
-    borderRadius: 20,
-    height: '100%',
-    overflow: 'hidden',
-    width: '100%',
+  specialAmenitiesIconContainer: {
+    marginTop: verticalScale(10),
   },
-  listItem: {
-    height: 226,
-    marginBottom: 20,
+  firstAmenityMainContainer: {
+    marginLeft: scale(10),
   },
-  mainContainer: {
-    flexDirection: 'row-reverse',
-    width: '100%',
+  friendAmenityTitle: {
+    textAlign: 'center',
   },
-  nameContainer: {
-    bottom: 20,
-    left: 10,
-    position: 'absolute',
+  friendAmenityText: {
+    textAlign: 'center',
+  },
+  friendAmenityContainer: {
+    // width: scale(80),
+    justifyContent: 'center',
+    marginRight: scale(30),
+  },
+  amenityMainContainer: {
+    alignSelf: 'center',
+    // width: scale(120),
+    height: verticalScale(30),
+    flexDirection: 'row',
+    borderRadius: moderateScale(16),
+    // borderWidth: moderateScale(1),
+    // marginLeft: scale(10),
+    paddingHorizontal: scale(7),
+    marginHorizontal: scale(5),
+    // borderColor: COLORS.gainsboro,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.cultured,
+  },
+  amenityIconContainer: {
+    marginRight: scale(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  amenityIcon: {
+    height: moderateScale(20),
+    width: moderateScale(20),
+  },
+  amenityBigIcon: {
+    height: moderateScale(40),
+    width: moderateScale(40),
+  },
+  amenityTitleDescriptionContainer: {
+    // width: '60%',
+    justifyContent: 'center',
+  },
+  amenitiesTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(12),
+  },
+  amenitiesDescription: {
+    color: COLORS.greyFont,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(11),
+  },
+
+  // amenitiesMainContainer: {
+  //   flexDirection: 'row',
+  //   flexWrap: 'wrap',
+  //   justifyContent: 'space-evenly',
+  // },
+
+  // amenityText: {
+  //   marginLeft: scale(5),
+  //   color: COLORS.greyFont,
+  //   fontFamily: FONTS.quicksandMedium,
+  //   fontSize: moderateScale(12),
+  // },
+  // amenityIcon: {
+  //   height: moderateScale(22.52),
+  //   width: moderateScale(22.52),
+  // },
+  // amenitiesContainer: {
+  //   // width: scale(100),
+  //   paddingHorizontal: perfectSize(10),
+  //   height: moderateScale(34.64),
+  //   backgroundColor: COLORS.cultured,
+  //   borderRadius: moderateScale(58.03),
+  //   // marginLeft: scale(20),
+  //   marginTop: verticalScale(10),
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'space-evenly',
+  // },
+  descriptionText: {
+    color: COLORS.greyFont,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+  },
+  descriptionContainer: {
+    marginLeft: scale(20),
+    marginTop: verticalScale(10),
   },
   ratingIcon: {
-    height: 12,
-    marginLeft: 2,
-    width: 12,
-  },
-  ratingsContainer: {
-    alignItems: 'center',
-    backgroundColor: COLORS.whiteShadedTransparent,
-    borderRadius: 20,
-    flexDirection: 'row',
-    marginRight: 10,
-    marginTop: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 7,
+    tintColor: COLORS.newPrimary,
+    height: moderateScale(11.56),
+    width: moderateScale(12),
   },
   ratingsText: {
-    color: COLORS.white,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: 12,
+    color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(14),
+    marginRight: scale(5),
   },
-  restaurantNameText: {
-    color: COLORS.white,
-    fontFamily: FONTS.quicksandBold,
-    fontSize: 15,
+  ratingsContainer: {
+    width: '15%',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    // marginTop: verticalScale(10),
   },
-})
+  titleText: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(14),
+  },
+  socialIcon: {
+    height: moderateScale(25),
+    width: moderateScale(25),
+    marginRight: scale(10),
+  },
+  itemTitleIconContainer: {
+    width: '60%',
+    alignItems: 'center',
+    height: verticalScale(35),
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    marginLeft: scale(5),
+    marginRight: scale(20),
+    // marginTop: verticalScale(10),
+  },
+  titleRatingMainRow: {
+    flexDirection: 'row',
+    width: '100%',
+    marginTop: verticalScale(5),
+    justifyContent: 'space-evenly',
+  },
+  actualPicture: {
+    borderRadius: moderateScale(25.3),
+  },
+  imageBgContainer: {
+    width: '98%',
+    height: moderateScale(146.78),
+    alignItems: 'flex-end',
+  },
+  imageContainer: {
+    width: '95%',
+    height: moderateScale(146.78),
+    marginTop: verticalScale(10),
+    marginLeft: '3%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listItem: {
+    backgroundColor: COLORS.white,
+    shadowColor: COLORS.black,
+    shadowOpacity: moderateScale(0.3),
+    shadowRadius: moderateScale(4),
+    elevation: moderateScale(5),
+    width: perfectSize(260),
+    alignSelf: 'center',
+    // alignItems: 'center',
+    height: moderateScale(265),
+    borderRadius: moderateScale(20.79),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
+    marginHorizontal: perfectSize(10),
+  },
+  itemImage: {
+    position: 'absolute',
+    borderRadius: moderateScale(25.3),
+    height: moderateScale(146.78),
+    right: scale(5),
+    overflow: 'hidden',
+    width: '98%',
+  },
+  dealTimerContainer: {
+    width: scale(73),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.white,
+    borderRadius: moderateScale(20),
+    flexDirection: 'row',
+    marginRight: scale(20),
+    marginTop: verticalScale(10),
+    paddingVertical: verticalScale(3),
+  },
+  dealTimeLeftText: {
+    textAlign: 'center',
+    color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(12),
+    ...Platform.select({
+      android: {
+        marginTop: verticalScale(-2.5),
+      },
+    }),
+  },
+});

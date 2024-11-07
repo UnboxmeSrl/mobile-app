@@ -1,10 +1,11 @@
-import { COLORS } from '@const'
-
-export const MAIN_NAVIGATOR = 'mainNavigator'
+import {COLORS} from './colors';
+export const MAIN_NAVIGATOR = 'mainNavigator';
 
 export const STACK_NAMES = {
   BottomStack: 'BottomStack',
-}
+  ProfileStack: 'ProfileStack',
+  AuthStack: 'AuthStack',
+};
 export const MODAL_NAMES = {
   AuthPhone: 'AuthPhone',
   Box: 'Box',
@@ -22,48 +23,82 @@ export const MODAL_NAMES = {
   Timeslots: 'Timeslots',
   WebView: 'WebView',
   YourRating: 'YourRating',
-}
+};
 export const SCREEN_NAMES = {
+  MapScreen: 'Map',
+  ArchiveScreen: 'ArchiveScreen',
   AddCode: 'AddCode',
   AddNewAddress: 'AddNewAddress',
   Addresses: 'Addresses',
   AwardScreen: 'AwardScreen',
+  BookingDetails: 'BookingDetails',
+  BookingOnApprovalScreen: 'BookingOnApprovalScreen',
   BoxBrief: 'BoxBrief',
   BoxBrief2: 'BoxBrief2',
   BoxContentUploadScreen: 'BoxContentUploadScreen',
   Cities: 'Cities',
   ContentApproved: 'ContentApproved',
+  ContentBriefScreen: 'ContentBriefScreen',
+  ContentScreen: 'ContentScreen',
   Coupons: 'Coupons',
   EditProfile: 'EditProfile',
   Home: 'Home',
   Onboarding: 'Onboarding',
+  OnboardingNew: 'OnboardingNew',
   OtherSignUp: 'OtherSignUp',
   Prizes: 'Prizes',
   ProductSelection: 'ProductSelection',
+  PublishContentScreen: 'PublishContentScreen',
   Profile: 'Profile',
+  NewCouponScreen: 'NewCouponScreen',
   Questionnaire: 'Questionnaire',
   RestaurantDetails: 'RestaurantDetails',
   Restaurants: 'Restaurants',
+  Schedule: 'Schedule',
+  ServiceDetails: 'ServiceDetails',
   Settings: 'Settings',
   SignIn: 'SignIn',
   SignUp: 'SignUp',
+  AppliedScreen: 'AppliedScreen',
   Wizard: 'Wizard',
-}
-export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack
+  YourScheduleDetailsScreen: 'YourScheduleDetailsScreen',
+  YourScheduleScreen: 'YourScheduleScreen',
+  AuthPersonalDetailsScreen: 'AuthPersonalDetailsScreen',
+  AuthGenderScreen: 'AuthGenderScreen',
+  AuthDateOfBirthScreen: 'AuthDateOfBirthScreen',
+  AuthNationalityScreen: 'AuthNationalityScreen',
+  AuthCityScreen: 'AuthCityScreen',
+  AuthAgencyScreen: 'AuthAgencyScreen',
+  AuthUserTypeScreen: 'AuthUserTypeScreen',
+  AuthInterestTopicsScreen: 'AuthInterestTopicsScreen',
+  AuthProfilePictureScreen: 'AuthProfilePictureScreen',
+  AuthCodeFromFriendScreen: 'AuthCodeFromFriendScreen',
+  AuthSocialNetworkScreen: 'AuthSocialNetworkScreen',
+  RejectedScreen: 'RejectedScreen',
+  FirstWelcomeScreen: 'FirstWellcomeScreen',
+  SignUpNew: 'SignUpNew',
+  LoginOnboarding: 'LoginOnboarding',
+  SettingsNew: 'SettingsNew',
+  Splash: 'Splash',
+  ContentUploadGuide: 'ContentUploadGuide',
+  TutorialsScreen: 'TutorialsScreen',
+  ChatScreen: 'ChatScreen',
+};
+export const DEFAULT_SCREEN_NAME = STACK_NAMES.BottomStack;
 export const COMMON_STATUS_BAR = {
   backgroundColor: 'transparent',
   translucent: true,
-}
+};
 export const LIGHT_STATUS_BAR = {
   ...COMMON_STATUS_BAR,
   barStyle: 'light-content',
-}
+};
 export const DARK_STATUS_BAR = {
   ...COMMON_STATUS_BAR,
   barStyle: 'dark-content',
-}
+};
 
 export const tabBarOptions = {
   activeTintColor: COLORS.primary,
   inactiveTintColor: 'gray',
-}
+};

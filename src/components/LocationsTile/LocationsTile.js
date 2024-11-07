@@ -1,43 +1,50 @@
-import React from 'react'
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import React from 'react';
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {useDispatch} from 'react-redux';
+import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
+import {setCity} from '../../redux/slices';
+import {useNavigation} from '@react-navigation/native';
+import {xanoImageSize} from '../../utils';
 
-import { navigate } from '@services'
-
-import { COLORS } from '../../constants/colors'
-import { FONTS } from '../../constants/fonts'
-import { SCREEN_NAMES } from '../../constants/navigation'
-
-const LocationsTile = ({ item }) => {
+const LocationsTile = ({item}) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const handleBtnPress = () => {
-    navigate({
-      params: { cityData: item },
-      routeName: SCREEN_NAMES.Restaurants,
-    })
-  }
+    dispatch(setCity(item));
+    navigation.replace(SCREEN_NAMES.Restaurants, {cityData: item});
+  };
+  const cityImageUrl = `${item?.City?.url}?tpl=${xanoImageSize}.jpg`;
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
         imageStyle={styles.imageStyle}
         resizeMode="cover"
-        source={{ uri: item?.City?.url }}
-        style={styles.imageContainerStyle}
-      >
+        source={{uri: cityImageUrl}}
+        style={styles.imageContainerStyle}>
         <TouchableOpacity onPress={handleBtnPress} style={styles.btnContainer}>
-          <Text style={styles.btnText}>{`${item?.CityName}`}</Text>
+          <Text
+            allowFontScaling={false}
+            style={styles.btnText}>{`${item?.CityName}`}</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
-export default LocationsTile
+export default LocationsTile;
 
 const styles = StyleSheet.create({
   btnContainer: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.newPrimary,
     borderRadius: moderateScale(20),
     height: verticalScale(32),
     justifyContent: 'center',
@@ -46,6 +53,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontFamily: FONTS.quicksandMedium,
+    color: COLORS.black,
     fontSize: moderateScale(12),
   },
   imageContainerStyle: {
@@ -65,4 +73,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(16),
     width: '100%',
   },
-})
+});

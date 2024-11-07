@@ -18,6 +18,38 @@
       "sha1": "05d7603ebe9dbdba5cbb9ec75528e0dec7f23184"
     },
     {
+      "path": "src/assets/fonts/Inter-Bold.ttf",
+      "sha1": "47ff07c75746682133b81e7ac0537ce50a4c9916"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Light.ttf",
+      "sha1": "cbb2506d8da21edbb2dc8cfa26e3b42a97d138f8"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Medium.ttf",
+      "sha1": "e76f580811e031813e7150131a0724811cdd737a"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Regular.ttf",
+      "sha1": "cfa780d0b50b2bb7eacb82984f1b18a95aaa40c5"
+    },
+    {
+      "path": "src/assets/fonts/Inter-SemiBold.ttf",
+      "sha1": "5e0c44e57e7e090252d79f622899e67585bb892c"
+    },
+    {
+      "path": "src/assets/fonts/JosefinSans-Bold.ttf",
+      "sha1": "57aae89112d94e577486ffa80b64e6f68efad405"
+    },
+    {
+      "path": "src/assets/fonts/JosefinSans-Regular.ttf",
+      "sha1": "6536e6e113fbc08c6b53ca4ce261015c462c8718"
+    },
+    {
+      "path": "src/assets/fonts/JosefinSans-SemiBold.ttf",
+      "sha1": "776fb7e3dd894383df9468a3b8c16cdc8654d439"
+    },
+    {
       "path": "src/assets/fonts/Quicksand-Bold.ttf",
       "sha1": "07ca4486c80653a7f3abc18145c2f251d5c9989b"
     },

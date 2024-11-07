@@ -1,1 +1,1 @@
-export { default as useServiceCard } from './useServiceCard'
+export {default as useServiceCard} from './useServiceCard';

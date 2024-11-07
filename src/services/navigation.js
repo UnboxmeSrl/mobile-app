@@ -1,89 +1,54 @@
 /* Navigation utils used OUTSIDE <Screen />  */
-import { useMemo } from 'react'
-import { StackActions } from 'react-navigation'
-import { useNavigationState } from 'react-navigation-hooks'
-import { NavigationActions } from '@react-navigation/core'
-import { propOr } from 'ramda'
+import {
+  createNavigationContainerRef,
+  StackActions,
+} from '@react-navigation/native';
 
-let navigator
-
-export function setTopLevelNavigator(navigatorRef) {
-  navigator = navigatorRef
-}
+export const navigationRef = createNavigationContainerRef();
 
 export function navigate(routeName, params, action) {
-  navigator.dispatch(
-    typeof routeName === 'string'
-      ? NavigationActions.navigate({
-          action,
-          params,
-          routeName,
-        })
-      : NavigationActions.navigate(routeName)
-  )
+  typeof routeName === 'string'
+    ? navigationRef.navigate(routeName, params)
+    : navigationRef.navigate(routeName);
 }
 
 export function reset(routeName) {
-  navigator.dispatch(
-    StackActions.reset({
-      actions: [NavigationActions.navigate({ routeName })],
-      index: 0,
-    })
-  )
+  StackActions.reset({
+    actions: [navigationRef.navigate(routeName)],
+    index: 0,
+  });
 }
 
-export function dispatch(action) {
-  navigator.dispatch(action)
-}
-
-export const getCurrentRoute = (nav) => {
+export const getCurrentRoute = nav => {
   if (!nav || !nav.routes) {
-    return null
+    return null;
   }
-  const route = nav.routes[nav.index]
+  const route = nav.routes[nav.index];
 
   if (route.routes) {
-    return getCurrentRoute(route)
+    return getCurrentRoute(route);
   }
-  return route
-}
+  return route;
+};
 
 const getCurrentRouteName = (nav, nestingLevel) => {
   if (!nav || !nav.routes) {
-    return null
+    return null;
   }
-  const route = nav.routes[nav.index]
+  const route = nav.routes[nav.index];
 
   if (route.routes && nestingLevel > 0) {
-    return getCurrentRouteName(route, nestingLevel - 1)
+    return getCurrentRouteName(route, nestingLevel - 1);
   }
-  return route.routeName
-}
+  return route.routeName;
+};
 
-export const useCurrentRouteName = (nestingLevel = Infinity) => {
-  const navState = useNavigationState()
-
-  return useMemo(() => getCurrentRouteName(navState, nestingLevel), [
-    navState,
-    nestingLevel,
-  ])
-}
-
-export const getStackRouterRoot = (nav) => {
+export const getStackRouterRoot = nav => {
   if (nav?.state?.key === 'StackRouterRoot') {
-    return nav
+    return nav;
   } else if (nav && nav.dangerouslyGetParent) {
-    return getStackRouterRoot(nav.dangerouslyGetParent())
+    return getStackRouterRoot(nav.dangerouslyGetParent());
   } else {
-    return nav
+    return nav;
   }
-}
-
-export const getCurrentRootRouteName = (nav) => {
-  const parentNav = getStackRouterRoot(nav)
-  const state = propOr({}, 'state', parentNav)
-  const routes = propOr([], 'routes', state)
-  const index = propOr(0, 'index', state)
-
-  return routes[index]?.routeName
-}
+};

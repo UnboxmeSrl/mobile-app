@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
+    <accessibilityOverrides isEnabled="YES"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleAspectFit" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-AR-5dV">
+                                <rect key="frame" x="-40" y="220" width="498" height="220"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="SplashLogo" highlightedImage="SplashLogo" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xyw-O5-dHV">
+                                        <rect key="frame" x="19" y="14" width="440" height="192"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Xyw-O5-dHV" secondAttribute="height" multiplier="159:89" constant="128.15730337078651" id="Gos-YS-4gm"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="160" id="Ryg-VA-hH8"/>
+                                            <constraint firstAttribute="width" secondItem="Xyw-O5-dHV" secondAttribute="height" multiplier="207:80" id="j7Y-hk-dpX"/>
+                                            <constraint firstAttribute="height" constant="160" id="jx3-7P-3tB"/>
+                                            <constraint firstAttribute="width" constant="414" id="oQQ-3z-uTM"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="uyx-vE-4If"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Xyw-O5-dHV" firstAttribute="centerY" secondItem="IDk-AR-5dV" secondAttribute="centerY" id="9HL-L5-KtF"/>
+                                    <constraint firstItem="Xyw-O5-dHV" firstAttribute="centerY" secondItem="IDk-AR-5dV" secondAttribute="centerY" id="Vcs-9d-RFU"/>
+                                    <constraint firstItem="Xyw-O5-dHV" firstAttribute="centerX" secondItem="IDk-AR-5dV" secondAttribute="centerX" id="cSr-Ia-XcU"/>
+                                    <constraint firstItem="Xyw-O5-dHV" firstAttribute="centerY" secondItem="IDk-AR-5dV" secondAttribute="centerY" id="eks-Ca-4wJ"/>
+                                    <constraint firstItem="Xyw-O5-dHV" firstAttribute="centerX" secondItem="IDk-AR-5dV" secondAttribute="centerX" id="w6K-2P-3sd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="IDk-AR-5dV" secondAttribute="bottom" constant="199" id="YA3-a9-uzD"/>
+                            <constraint firstItem="IDk-AR-5dV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-55.5" id="tQW-ad-OLj"/>
+                            <constraint firstItem="IDk-AR-5dV" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="248" id="uCd-SM-7Tp"/>
+                            <constraint firstItem="IDk-AR-5dV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xch-9w-jmG"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50.399999999999999" y="373.76311844077964"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SplashLogo" width="682.5" height="682.5"/>
+    </resources>
+</document>

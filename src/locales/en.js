@@ -145,6 +145,7 @@ export default {
       skip: 'Skip',
     },
     loginTitle: 'Login',
+    registerTitle: 'Register',
     logout: 'Logout',
     narration: 'Narration',
     next: 'Next',
@@ -202,8 +203,7 @@ export default {
       title: 'Questionnaire',
       typeCreams: 'Type down the creams you are using:',
     },
-    registerOrLogin:
-      'Register or log in to your account to be able to take the boxes, as well as enjoy the benefits of our award system.',
+    registerOrLogin: 'Register or login into your account to able to book through Claris.',
     requiredMedia: 'Required media',
     resetPassword: 'Reset password',
     review: {
@@ -229,12 +229,13 @@ export default {
     signUp: {
       confirmPassword: 'Confirm your password',
       createAccount:
-        'Create your account to be able to get personalized boxes prepared for the needs of your skin, hair and your body',
+        'Unlock the opportunity to be selected as part of the fastest-growing network of travel influencers and models',
       createContent: 'Create an inspiring content related to your products!',
       enterEmail: 'Enter your email address',
       enterPassword: 'Enter your password',
       orLogIn: 'or log in with email or phone number',
       orSignUp: 'or sign up with email or phone number',
+      signUp: 'Sign up',
       signUpWith: 'Continue with {{name}}',
       tellEveryone: 'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
       withEmail: 'Sign up with email',

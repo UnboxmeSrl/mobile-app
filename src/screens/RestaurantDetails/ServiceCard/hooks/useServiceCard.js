@@ -1,20 +1,19 @@
-import { navigate } from '@services'
+import {useDispatch} from 'react-redux';
+import {SCREEN_NAMES} from '../../../../constants';
+import {setServiceDetails} from '../../../../redux';
+import {navigate} from '../../../../services';
 
-import { SCREEN_NAMES } from '../../../../constants/navigation'
-
-const useServiceCard = () => {
-  const handleCardPress = (item) => {
-    navigate({
-      params: {
-        restaurantDetails: item,
-      },
-      routeName: SCREEN_NAMES.RestaurantDetails,
-    })
-  }
+const useServiceCard = item => {
+  const dispatch = useDispatch();
+  console.log('item: ' + JSON.stringify(item));
+  const handleCardPress = item => {
+    dispatch(setServiceDetails(item));
+    navigate(SCREEN_NAMES.ServiceDetails);
+  };
 
   return {
     handleCardPress,
-  }
-}
+  };
+};
 
-export default useServiceCard
+export default useServiceCard;

@@ -1,0 +1,79 @@
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React from 'react';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../../constants';
+import Icon from 'react-native-vector-icons/AntDesign';
+
+const CustomButton = ({
+  title,
+  handlePress,
+  image,
+  iconProps,
+  iconStyle,
+  btnStyle,
+  disabled = false,
+  isLoading = false,
+  btnWrapper,
+}) => {
+  return (
+    <View style={[styles.btnMainContainer, btnWrapper]}>
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={handlePress}
+        style={[
+          styles.btnContainer,
+          disabled && styles.disabledBtnContainer,
+          btnStyle,
+        ]}>
+        {isLoading ? (
+          <ActivityIndicator size={30} color={COLORS.black22} />
+        ) : (
+          <>
+            {!!iconProps && <Icon {...iconProps} style={iconStyle} />}
+            <Text
+              allowFontScaling={false}
+              style={[styles.btnText, disabled && styles.disabledBtnText]}>
+              {title}
+            </Text>
+          </>
+        )}
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default CustomButton;
+
+const styles = StyleSheet.create({
+  disabledBtnText: {
+    color: COLORS.gray,
+  },
+  disabledBtnContainer: {
+    backgroundColor: COLORS.cultured,
+  },
+  btnContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.newPrimary,
+    borderRadius: moderateScale(16),
+    height: verticalScale(40),
+    justifyContent: 'center',
+    width: '100%',
+  },
+  btnMainContainer: {
+    marginTop: verticalScale(14),
+    padding: moderateScale(24),
+    width: '100%',
+  },
+  btnText: {
+    color: COLORS.black22,
+    fontFamily: FONTS.quicksandMedium,
+    fontSize: moderateScale(18),
+  },
+});
