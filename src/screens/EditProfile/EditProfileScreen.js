@@ -43,7 +43,6 @@ const EditProfileScreen = () => {
     profilePicData,
     control,
     handleSubmit,
-    setValue,
     errors,
     interests,
     preIntrest,
@@ -53,8 +52,6 @@ const EditProfileScreen = () => {
     handleIntrest,
     handlePaste,
     handleGalleryPress,
-    handlePermission,
-    getInterestTopics,
   } = useEditProfile();
 
   return (
@@ -82,7 +79,7 @@ const EditProfileScreen = () => {
           <Controller
             control={control}
             name="fullName"
-            render={({value, onBlur, onChange, ref}) => (
+            render={({value, onChange, ref}) => (
               <AppInput
                 errors={errors.fullName?.message}
                 img={user}
@@ -140,7 +137,7 @@ const EditProfileScreen = () => {
           <Controller
             control={control}
             name="biography"
-            render={({value, onBlur, onChange, ref}) => (
+            render={({value, onChange}) => (
               <AppTextArea
                 errors={errors.biography?.message}
                 label="Biography"

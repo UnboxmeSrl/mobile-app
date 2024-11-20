@@ -4,7 +4,11 @@ export default {
     Error: 'Error',
     Success: 'Success',
     addAddress: 'ADD ADDRESS',
-    addresses: { addNewTitle: 'Add new address', pleaseChoose: 'Please choose the address:', title: 'Addresses' },
+    addresses: {
+      addNewTitle: 'Add new address',
+      pleaseChoose: 'Please choose the address:',
+      title: 'Addresses',
+    },
     and: ' and ',
     auth: {
       bySigning: 'By signing up, you agree to UnboxMe’s',
@@ -17,7 +21,8 @@ export default {
       whoops: 'Whooops',
       withPhone: 'Continue with Phone number',
       wrongCode: 'Verification code is invalid or expired',
-      wrongCombination: 'The email and password combination is not correct. Please try again.',
+      wrongCombination:
+        'The email and password combination is not correct. Please try again.',
     },
     authenticity: 'Authenticity',
     availableProducts: 'Available products',
@@ -39,7 +44,8 @@ export default {
       arrived: 'The box has arrived at your Home',
       brandsAndCategories: 'Brands & Categories',
       checkBrief: 'Check brief',
-      checkContent: 'We will try to check everything and get back to you with an answer as soon as possible.',
+      checkContent:
+        'We will try to check everything and get back to you with an answer as soon as possible.',
       checkFeedback: 'Check feedback',
       checkReason: 'Check reason',
       chooseExtra: 'Choose products',
@@ -53,7 +59,8 @@ export default {
         'You need to explain more facts. Don’t use exaggerated terms and emphasis but try to make your narration authentic',
       rejected: 'Sorry but your content was not approved',
       requiredMedia: 'Required Media & Call to actions',
-      sendRating: 'We will send you your rating as soon as we check the result!',
+      sendRating:
+        'We will send you your rating as soon as we check the result!',
       thanks: 'Thanks!',
       underApprovalDescription:
         'Your request is now under approval.\nIn few hours you will receive a response and notification. ',
@@ -85,8 +92,10 @@ export default {
       passwordsDontMatch: "Your passwords don't match",
     },
     experience: {
-      experienced: 'I have experience with video blogging and unboxing products ',
-      limited: 'I have no or limited experience but I would be up in learning how to do video blogging ',
+      experienced:
+        'I have experience with video blogging and unboxing products ',
+      limited:
+        'I have no or limited experience but I would be up in learning how to do video blogging ',
       title: 'Your experience\n' + 'with unboxing\n' + '& storytelling',
       zero: "I never did video blogging and I wouldn't be able to make an unboxing while explaining product properties",
     },
@@ -113,9 +122,11 @@ export default {
         'Apply for the Unboxing \n' +
         'After you have been accepted for the unboxing, you will receive a personilzed box at your home ',
       getFeedback: 'Get feedback and win more!',
-      getFeedbackDesc: 'We will write you a feedback with Extra products to get in the next boxes!',
+      getFeedbackDesc:
+        'We will write you a feedback with Extra products to get in the next boxes!',
       publish: 'Publish!',
-      publishDesc: 'Now that the videos have been approved, publish them respecting tags and given swipeup links! ',
+      publishDesc:
+        'Now that the videos have been approved, publish them respecting tags and given swipeup links! ',
       title: 'How it works?',
       unboxing: 'Unboxing & video upload',
       unboxingDesc:
@@ -195,23 +206,28 @@ export default {
       normal: 'Normal',
       nowWeCanOffer: 'Now we can only offer you personalized boxes',
       oily: 'Oily',
-      pleaseFill: 'Please fill it out so that we can select only the products that suit you and your type of skin.',
-      seemsNotFilled: "It seems you haven't filled out your personal information yet!",
+      pleaseFill:
+        'Please fill it out so that we can select only the products that suit you and your type of skin.',
+      seemsNotFilled:
+        "It seems you haven't filled out your personal information yet!",
       selectBrands: 'Select your\n' + 'favourite brands',
       sensitive: 'Sensitive',
       thankYou: 'Thank you!',
       title: 'Questionnaire',
       typeCreams: 'Type down the creams you are using:',
     },
-    registerOrLogin: 'Register or login into your account to able to book through Claris.',
+    registerOrLogin:
+      'Register or login into your account to able to book through Claris.',
     requiredMedia: 'Required media',
     resetPassword: 'Reset password',
     review: {
-      inReview: 'We are reviewing your account. In the meanwhile follow us on Instagram.',
+      inReview:
+        'We are reviewing your account. In the meanwhile follow us on Instagram.',
       policy: 'Acceptation policy',
       rejected:
         'Sorry we believe your account is not yet fitting with our standards (read more on our acceptation policy)',
-      verified: 'You are accepted! Congratulations your account has been accepted into Unboxme!',
+      verified:
+        'You are accepted! Congratulations your account has been accepted into Unboxme!',
     },
     seeDetails: 'See details',
     selected: 'Selected',
@@ -220,7 +236,9 @@ export default {
     signIn: {
       forgot: 'Forgot password',
       forgotSent: 'Recovery email was sent',
-      getPersonalized: 'Get personalized boxes prepared for\n' + 'the needs of your skin, hair and your body',
+      getPersonalized:
+        'Get personalized boxes prepared for\n' +
+        'the needs of your skin, hair and your body',
       orLogIn: 'or log in with email or phone number',
       pleaseEnter: 'Please enter the email address you signed up with.',
       withEmail: 'Sign in with email',
@@ -237,7 +255,9 @@ export default {
       orSignUp: 'or sign up with email or phone number',
       signUp: 'Sign up',
       signUpWith: 'Continue with {{name}}',
-      tellEveryone: 'Tell everyone about your experience.\n' + 'Unlock new awards and have fun!',
+      tellEveryone:
+        'Tell everyone about your experience.\n' +
+        'Unlock new awards and have fun!',
       withEmail: 'Sign up with email',
       withPhone: 'Sign up with phone number',
     },
@@ -245,7 +265,8 @@ export default {
     tags: 'Tags & Links',
     termsOfUse: 'Terms of Use',
     tiktok: {
-      andSendMessage: 'And send us a message to prove you are the account owner ',
+      andSendMessage:
+        'And send us a message to prove you are the account owner ',
       enter: 'Enter you tik tok account username',
       sendMessage: 'Send a message',
       title: 'Connect Tik Tok account',
@@ -258,8 +279,9 @@ export default {
       connect: 'Connect your\n' + 'social networks',
       dateOfBirth: 'Date of birth',
       genderStep: 'Gender',
-      nameStep: 'We use your data to personalize your experience and boxes. We never share it.',
+      nameStep:
+        'We use your data to personalize your experience and boxes. We never share it.',
     },
     yes: 'Yes',
   },
-}
+};
