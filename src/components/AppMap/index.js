@@ -1,5 +1,4 @@
 /* eslint-disable react-native/no-inline-styles */
-// import { Categories } from '@components/Categories'
 import Mapbox from '@rnmapbox/maps';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
@@ -16,14 +15,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurantCard} from '../../screens/Restaurants/RestaurantCard/hooks';
 import {useRestaurants} from '../../screens/Restaurants/hooks';
-import {getAllRestaurants, getRestaurantDetails} from '../../services';
+import {getRestaurantDetails} from '../../services';
 import {xanoImageSize} from '../../utils';
 import {BottomSheet} from '../BottomSheet';
 import {AppButton} from '../Buttons';
 import RestaurantSearchInput from './RestaurantSearchInput';
 import useMap from './useMap';
 import {
-  selectAllNearbyRestaurants,
   selectAllRestaurants,
   selecteUserCoords,
   setSelectedResCoordinates,
@@ -34,7 +32,6 @@ import {useFocusEffect} from '@react-navigation/native';
 Mapbox.setAccessToken(
   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
 );
-// const pinCoordinates = [115.19891456614, -8.4095211510833];
 const AppMap = () => {
   const bottomSheetRef = useRef();
   const dispatch = useDispatch();
@@ -44,18 +41,18 @@ const AppMap = () => {
   const {requestLocationPermission, cityData} = useRestaurants();
   const {handleGetNearerRestaurants, handleGetAllRestaurants} = useMap();
   const allRestaurants = useSelector(selectAllRestaurants);
+  const loginData = useSelector(state => state.authSlice.loginData);
   const [showFullText, setShowFullText] = useState(false);
-  // const allNearerRestaurant = useSelector(selectAllNearbyRestaurantsS);
-  // const allNearerRestaurant = useSelector(selectAllNearbyRestaurants);
   const selectedResCoordinates = useSelector(
     state => state.restaurantSlice.selectedResCoordinates,
   );
   const userLocation = useSelector(selecteUserCoords);
-  // const {restaurantsData, setRestaurantsData} = useRestaurants();
+
   const handleBottomSheet = useCallback(async rest => {
     const prepData = {
       category_id: 0,
       restaurant_id: rest?.id,
+      user_id: loginData?.id,
     };
     const res = await getRestaurantDetails(prepData);
     if (res?.restaurant) {
@@ -63,26 +60,11 @@ const AppMap = () => {
       bottomSheetRef?.current?.open();
     }
   }, []);
-  console.log('restaurantsData', allRestaurants.length, selectedResCoordinates);
 
   const cameraCoords = useMemo(
     () => selectedResCoordinates || userLocation,
     [userLocation, selectedResCoordinates],
   );
-  // const getCurrentCoordinates = useCallback(async () => {
-  //   if (cameraCoords) {
-  //     const res = await handleGetNearerRestaurants({
-  //       location: {
-  //         type: 'point',
-  //         data: {lng: cameraCoords[0], lat: cameraCoords[1]},
-  //       },
-  //     });
-  //   }
-  // }, [handleGetNearerRestaurants, cameraCoords]);
-
-  // useEffect(() => {
-  //   getCurrentCoordinates();
-  // }, [getCurrentCoordinates]);
 
   useEffect(() => {
     requestLocationPermission();
@@ -97,9 +79,7 @@ const AppMap = () => {
       getAllRestaurantsHandler();
     }, [getAllRestaurantsHandler]),
   );
-  // useEffect(() => {
-  //   handleGetNearerHotels();
-  // }, [pinCoordinates, handleGetNearerHotels]);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.mapView}>
@@ -114,11 +94,6 @@ const AppMap = () => {
           )}
           <>
             {allRestaurants?.map((rest, index) => {
-              console.log(
-                'locationInAllRestaurantsMap ',
-                rest.Name,
-                rest.location,
-              );
               if (rest?.location) {
                 const coordinate = [
                   rest?.location.data.lng,
@@ -143,19 +118,6 @@ const AppMap = () => {
                           color={'red'}
                         />
                       </View>
-                      {/* <Text
-                        style={{
-                          marginTop: 10,
-                          color: 'red',
-                          fontSize: 12,
-                          fontWeight: 'bold',
-                          textAlign: 'center',
-                          backgroundColor: 'black',
-                          padding: 2,
-                          paddingHorizontal: 4,
-                        }}>
-                        {rest?.Name}
-                      </Text> */}
                     </Pressable>
                   </Mapbox.MarkerView>
                 );
@@ -178,7 +140,6 @@ const AppMap = () => {
 
         <RestaurantSearchInput
           onPressRestaurant={rest => {
-            console.log('onPressRestaurant', rest);
             if (rest?.location) {
               dispatch(
                 setSelectedResCoordinates([
@@ -186,12 +147,7 @@ const AppMap = () => {
                   rest?.location?.data?.lat,
                 ]),
               );
-              // handleBottomSheet(rest);
             }
-            // setSelectedResCoordinates([
-            //   rest.location?.data?.lat,
-            //   rest.location?.data?.lng,
-            // ]);
           }}
         />
 

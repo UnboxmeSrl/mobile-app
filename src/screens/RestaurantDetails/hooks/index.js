@@ -1,1 +1,1 @@
-export { default as useRestaurantDetails } from './useRestaurantDetails'
+export {default as useRestaurantDetails} from './useRestaurantDetails';
