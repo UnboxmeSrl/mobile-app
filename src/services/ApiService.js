@@ -11,7 +11,7 @@ export default {
     };
 
     const response = await axios.get(url, options).catch(err => {
-      console.error('error', err);
+      console.error('error', url, err);
       showToastError(err);
     });
     return response?.data;

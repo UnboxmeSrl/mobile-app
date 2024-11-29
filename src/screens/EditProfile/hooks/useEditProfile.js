@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from '../../../services';
 import {checkPermission, openGallery} from '../../../utils';
+import {Image} from 'react-native-compressor';
 
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
@@ -78,10 +79,13 @@ const useEditProfile = () => {
       const res = await openGallery({selectionLimit: 1});
 
       if (res?.assets?.length > 0) {
-        setProfilePicData(res?.assets[0]);
+        const file = res?.assets[0];
+        Image.compress(file.uri).then(compressedURI => {
+          const compressed = {...file, uri: compressedURI};
+          setProfilePicData(compressed);
+        });
       }
     }
-    // profilePicUploadRef.current.close()
   };
 
   const handlePaste = async param => {
@@ -91,12 +95,10 @@ const useEditProfile = () => {
 
   const onSubmit = useCallback(
     async data => {
-      // setLoading(true)
       const topicIds = Object.values({
         ...preIntrest,
         ...selectedIntrest,
       })?.filter(item => item.isChecked);
-      console.log('formData', topicIds);
 
       const formData = new FormData();
       formData.append('bio', data?.biography);
