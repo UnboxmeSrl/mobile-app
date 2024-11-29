@@ -33,8 +33,6 @@ const RestaurantDetails = () => {
     handleBackPress,
     handleRedirection,
   } = useRestaurantDetails();
-  // console.log('Restaurant Details', JSON.stringify(restaurantDetails))
-
   return (
     <SafeAreaView style={styles.mainContainer}>
       {isLoading ? (

@@ -7,7 +7,6 @@ import {setTimeFrameData} from '../../../redux';
 import {
   addRestaurantBooking,
   navigate,
-  // getTimeFrames,
   showToastError,
 } from '../../../services';
 import {getFormattedDate, getFormattedTime} from '../../../utils';
@@ -17,7 +16,6 @@ const useBookingDetails = () => {
   const timeFrameData = useSelector(
     state => state.restaurantSlice.timeFrameData,
   );
-  console.log('timeFrameData', JSON.stringify(timeFrameData));
   const loginData = useSelector(state => state.authSlice.loginData);
   const route = useRoute();
   const actionNumId = route.params?.actionNumId;
@@ -29,7 +27,6 @@ const useBookingDetails = () => {
   const [currentWeekDay, setCurrentWeekDay] = useState('');
   const [currentDate, setCurrentDate] = useState('');
   const dispatch = useDispatch();
-  // const [timeFrameData, setTimeFrameData] = useState([])
   const [weekDayWiseTimeSlots, setWeekDayWiseTimeSlots] = useState([]);
   const [selectedTimeFame, setSelectedTimeFame] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -56,21 +53,6 @@ const useBookingDetails = () => {
       todayUtcTime +
       1 * restaurantDetails?.booking_buffer_time * 60 * 60 * 1000;
   }
-
-  // console.log(
-  //   'All dates:',
-  //   startDate,
-  //   '#',
-  //   selectedDate,
-  //   '#',
-  //   endDate,
-  //   '#',
-  //   currentDate,
-  //   '#',
-  //   currentWeekDay,
-  //   '#',
-  //   currentMonth,
-  // );
 
   const getDateWeek = date => {
     const currentsDate = typeof date === 'object' ? date : new Date();
@@ -136,20 +118,6 @@ const useBookingDetails = () => {
       currentBookingDateTime.setHours(parsedHours, parsedMinutes);
     }
 
-    console.log(
-      'Todays UTC Time: ' + after24Hours,
-      currentBookingDateTime.getTime(),
-      isEvent,
-      'AAAAA',
-      selectedDate,
-      currentBookingDateTime,
-    );
-
-    // console.log(
-    //   'THIS TIME IS:',
-    //   currentBookingDateTime.getTime(),
-    //   restaurantDetails?.event_date_time[eventSelectedDateIndex],
-    // );
 
     if (
       isEvent &&
@@ -283,9 +251,7 @@ const useBookingDetails = () => {
     const year = myDate.getFullYear();
     const month = String(myDate.getMonth() + 1).padStart(2, '0');
     const day = String(myDate.getDate()).padStart(2, '0');
-    const myDateUtcTimestamp = myDate.getTime();
     const onlyDate = `${year}-${month}-${day}`;
-    console.log('Blacklist Dates: ' + onlyDate, eventDates);
 
     // action num id 9 is for villa & for villa we need to enable all the dates after 24 hours
     if (actionNumId === 9) {
@@ -296,17 +262,9 @@ const useBookingDetails = () => {
       }
     }
 
-    // if (myDate.getTime() <= after24Hours) {
-    //   // setSelectedDate(new Date(after24Hours));
-    //   return true;
-    // }
-
     // Event Specific Condition because here time come in UTC format
     if (isEvent) {
       const filteredRes = eventDates.filter(dt => dt === onlyDate);
-      // const filteredRes = restaurantDetails?.event_date_time?.filter(
-      //   dt => dt > myDateUtcTimestamp,
-      // );
       if (filteredRes.length > 0) {
         return false;
       } else {
@@ -316,41 +274,29 @@ const useBookingDetails = () => {
 
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
     let outerFilteredRes = [];
-    // console.log('weekDay: ', weekDay);
-    // const filteredData = timeFrameData?.filter((t) => t._weekdaysturbo?.day === weekDay)
-    const filteredData = timeFrameData?.filter(t => {
+
+    timeFrameData?.forEach(t => {
       const weekdays = t?.weekdays;
       const pauseDays = t?.pause_days;
+
       if (pauseDays?.length > 0) {
         const filteredWeekdays = weekdays.filter(
-          day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
+          weekday =>
+            !pauseDays.some(pauseDay => pauseDay?.day === weekday?.day),
         );
         const filteredRes = filteredWeekdays.filter(wt => {
           return wt?.day === weekDay;
         });
 
-        outerFilteredRes = filteredRes;
-        // if (filteredRes?.length > 0) {
-        //   return false;
-        // } else {
-        //   return true;
-        // }
+        outerFilteredRes = [...outerFilteredRes, ...filteredRes];
       } else {
         const filteredRes = weekdays.filter(wt => {
-          // console.log('Condition', wt?.day, weekDay, wt?.day === weekDay);
           return wt?.day === weekDay;
         });
-
-        outerFilteredRes = filteredRes;
-        // if (filteredRes?.length > 0) {
-        //   return true;
-        // } else {
-        //   return false;
-        // }
+        outerFilteredRes = [...outerFilteredRes, ...filteredRes];
       }
     });
-    // console.log('outerFilteredRes', JSON.stringify(outerFilteredRes));
-    console.log('filteredData: ' + JSON.stringify(filteredData));
+
     if (outerFilteredRes?.length > 0) {
       return false;
     } else {
@@ -362,13 +308,13 @@ const useBookingDetails = () => {
     setSelectedTimeFame({});
     const myDate = new Date(selectedDate);
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
-    console.log('weekDay: ' + weekDay);
+
     setCurrentWeekDay(weekDay);
 
     const updatedData = timeFrameData?.map(item => {
       const weekdays = item?.weekdays;
       const pauseDays = item?.pause_days;
-      console.log('weekdays: ' + weekdays, 'pauseDays: ' + pauseDays);
+
       const filteredWeekdays = weekdays.filter(
         day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
       );
@@ -377,23 +323,14 @@ const useBookingDetails = () => {
         weekdays: filteredWeekdays,
       };
     });
-    console.log('filteredTimeData2: ' + JSON.stringify(updatedData));
-    const resu = updatedData?.forEach(t => {
+
+    updatedData?.forEach(t => {
       const filteredRes = t?.weekdays?.filter(wt => wt?.day === weekDay);
       if (filteredRes.length > 0) {
         setWeekDayWiseTimeSlots(updatedData);
         setSelectedTimeFame(updatedData?.[0]);
       }
-      //  else {
-      //   setWeekDayWiseTimeSlots([]);
-      // }
     });
-    const chosenDate = new Date(selectedDate);
-    // if (chosenDate?.getTime() <= after24Hours) {
-    //   const newSelectedDate = new Date(after24Hours);
-    //   setSelectedDate(newSelectedDate);
-    //   setWeekDayWiseTimeSlots([]);
-    // }
 
     // This is for when user's date and booking date are same then to show event time we have done this.
     if (isEvent) {
@@ -405,17 +342,28 @@ const useBookingDetails = () => {
   }, [selectedDate]);
 
   useEffect(() => {
-    setSelectedDate(new Date(after24Hours));
+    const findClosestAvailableDate = () => {
+      const today = new Date(after24Hours);
+      for (let i = 0; i < 30; i++) {
+        // Check for the next 30 days
+        const checkDate = new Date(today);
+        checkDate.setDate(today.getDate() + i);
+        if (!datesBlacklistFunc(checkDate)) {
+          return checkDate;
+        }
+      }
+      return today; // Default to today if no available date is found
+    };
+
+    setSelectedDate(findClosestAvailableDate());
     setTimeout(() => {
       setIsDatesLoading(false);
     }, 2000);
   }, []);
 
   useEffect(() => {
-    console.log('selected Date:', selectedDate);
     const myDate = new Date(selectedDate);
     const month = myDate.toLocaleString('en-US', {month: 'long'});
-    console.log('month: ' + month);
     setCurrentMonth(month);
     setCurrentDate(myDate.getDate());
   }, [selectedDate]);
@@ -423,7 +371,6 @@ const useBookingDetails = () => {
   useEffect(() => {
     const myDate = new Date(startDate);
     const month = myDate.toLocaleString('en-US', {month: 'long'});
-    console.log('month: ' + month);
     setCurrentMonth(month);
   }, [startDate]);
 
