@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
-// import DeviceInfo from 'react-native-device-info'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
@@ -24,7 +23,6 @@ const BookingDetailsScreen = () => {
     datesBlacklistFunc,
     currentWeekDay,
     currentDate,
-    after24Hours,
     selectedTimeFame,
     setSelectedTimeFame,
     startDate,
@@ -42,7 +40,6 @@ const BookingDetailsScreen = () => {
     eventSelectedDateIndex,
     setEventSelectedDateIndex,
     isBookingDateAvailable,
-    // isDateAvailable,
     isDatesLoading,
     showPreviousWeek,
     showNextWeek,
@@ -82,14 +79,6 @@ const BookingDetailsScreen = () => {
                 </View>
 
                 <View style={styles.calendarContainer}>
-                  {/* This need to remove in future */}
-                  {/* <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                    <Text allowFontScaling={false} >{DeviceInfo.getBrand()}</Text>
-                    <Text allowFontScaling={false} > {DeviceInfo.getBuildNumber()}</Text>
-                    <Text allowFontScaling={false} > {DeviceInfo.getSystemVersion()}</Text>
-                    <Text allowFontScaling={false} > {DeviceInfo.getModel()}</Text>
-                  </View> */}
-                  {/* only above one line and style={{ alignItems: 'center' }} */}
                   <Image
                     resizeMode="cover"
                     source={IMAGES.calender}
@@ -97,7 +86,6 @@ const BookingDetailsScreen = () => {
                   />
                 </View>
               </View>
-              {/* <DateTimePicker display="inline" value={new Date()} /> */}
               <View style={styles.calendarMainContainer}>
                 <View style={styles.dateHeader}>
                   <View>
@@ -134,23 +122,23 @@ const BookingDetailsScreen = () => {
                   calendarHeaderStyle={styles.calendarHeaderStyle}
                   dateNameStyle={styles.dateNameStyle}
                   dateNumberStyle={styles.dateNumberStyle}
-                  datesBlacklist={datesBlacklistFunc}
                   disabledDateNameStyle={styles.disabledDateNameStyle}
                   disabledDateNumberStyle={styles.disabledDateNumberStyle}
-                  endDate={endDate}
                   highlightDateContainerStyle={styles.highlightedDateContainer}
                   highlightDateNameStyle={styles.highlightDateNameStyle}
                   highlightDateNumberStyle={styles.highlightDateNumberStyle}
                   iconContainer={styles.calendarStripIconContainer}
+                  iconStyle={styles.calendarStripIcon}
+                  datesBlacklist={datesBlacklistFunc}
                   iconLeft={IMAGES.back}
                   iconRight={IMAGES.back}
-                  iconStyle={styles.calendarStripIcon}
+                  endDate={endDate}
                   onDateSelected={date => {
                     setSelectedDate(date);
                     if (isEvent) {
                       const myDate = new Date(date);
                       const onlyDate = getFormattedDate(myDate);
-                      const filteredRes = eventDates.filter((dt, index) => {
+                      eventDates.forEach((dt, index) => {
                         if (dt === onlyDate) {
                           setEventSelectedDateIndex(index);
                         }
@@ -162,7 +150,6 @@ const BookingDetailsScreen = () => {
                   showYear={false}
                   startingDate={startDate}
                   useIsoWeekday={false}
-                  //   renderDate={renderDate}
                 />
               </View>
               <View />
@@ -212,11 +199,6 @@ const BookingDetailsScreen = () => {
                       weekDayWiseTimeSlots?.map((item, index) => {
                         let isShow = true;
                         let isSelected = item?.id === selectedTimeFame?.id;
-                        // console.log(selectedTimeFame?.id, index === 0);
-                        // if (item?.id === selectedTimeFame?.id) {
-                        //   isSelected = true;
-                        //   setSelectedTimeFame(item);
-                        // }
                         const dayData = item?.weekdays?.filter(
                           wt => wt?.day === currentWeekDay,
                         );
@@ -248,54 +230,6 @@ const BookingDetailsScreen = () => {
                       })
                     )}
                   </View>
-                  {/* {!isDatesLoading && (
-                    <FlatList
-                      ListEmptyComponent={
-                        <View style={styles.listEmptyContainer}>
-                          <Text allowFontScaling={false}  style={styles.listEmptyText}>
-                            Not available on this day.
-                          </Text>
-                        </View>
-                      }
-                      data={weekDayWiseTimeSlots}
-                      keyExtractor={(_, index) => index.toString()}
-                      numColumns={2}
-                      renderItem={({item, index}) => {
-                        let isShow = true;
-                        let isSelected = item?.id === selectedTimeFame?.id;
-                        if (!selectedTimeFame?.id && index === 0) {
-                          isSelected = true;
-                          setSelectedTimeFame(item);
-                        }
-                        const dayData = item?.weekdays?.filter(
-                          wt => wt?.day === currentWeekDay,
-                        );
-                        if (dayData?.length === 0) {
-                          isShow = false;
-                        }
-                        return (
-                          isShow && (
-                            <TouchableOpacity
-                              onPress={() => setSelectedTimeFame(item)}
-                              style={[
-                                styles.hoursContainer,
-                                isSelected && styles.selectedTimeFrameStyle,
-                              ]}>
-                              <Image
-                                resizeMode="cover"
-                                source={IMAGES.timeCircle}
-                                style={styles.timeCircleIcon}
-                              />
-                              <Text allowFontScaling={false} 
-                                style={
-                                  styles.timingText
-                                }>{`${item?.Start}.${item?.Minute_Start} - ${item?.End}.${item?.Minute_End}`}</Text>
-                            </TouchableOpacity>
-                          )
-                        );
-                      }}
-                    />
-                  )} */}
                 </>
               )}
               <View style={styles.sendMessageTitleContainer}>
@@ -570,7 +504,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: verticalScale(40),
     justifyContent: 'space-evenly',
-    // marginRight: scale(20),
     marginTop: verticalScale(16),
     marginLeft: scale(10),
     width: '45%',
@@ -684,7 +617,6 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     height: verticalScale(88),
     marginHorizontal: scale(20),
-    // marginTop: verticalScale(-20),
   },
   sendMessageTitleContainer: {
     marginTop: verticalScale(24),

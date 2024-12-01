@@ -1,9 +1,12 @@
 import {Api} from '../constants';
 import Fetch from './ApiService';
 
-export const getTimeFrames = async params => {
+export const getTimeFrames = async (params, useHotFix = false) => {
   try {
-    const url = Api.RESTAURANTS.GET_TIME_FRAMES + params;
+    const url =
+      (!useHotFix
+        ? Api.RESTAURANTS.GET_TIME_FRAMES
+        : Api.RESTAURANTS.GET_TIME_FRAMES_HOTFIX) + params;
     const response = await Fetch.get(url);
     return response;
   } catch (error) {
