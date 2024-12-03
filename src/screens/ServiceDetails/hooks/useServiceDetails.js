@@ -117,8 +117,19 @@ const useServiceDetails = () => {
     } else {
       const params = `/${restaurantDetails?.id}`;
       const res = await getTimeFrames(params);
+
+      const correctTimeFramesResponse = await getTimeFrames(
+        `/${serviceDetails?.id}`,
+        true,
+      );
+      const correctItems =
+        correctTimeFramesResponse?.data?.timeframesTurbo_Id.map(
+          correctItem => correctItem.id,
+        );
+      const result = (res || []).filter(item => correctItems.includes(item.id));
+
       setTimeout(() => {
-        dispatch(setTimeFrameData(res));
+        dispatch(setTimeFrameData(result));
       }, 1000);
     }
   };
@@ -142,13 +153,6 @@ const useServiceDetails = () => {
     setIsBookBtnPressed(true);
     if (loginData?.id) {
       if (loginData?.UserStatus === 'approved') {
-        console.log(
-          'followers:',
-          userInstagramFollowers,
-          userTiktokFollowers,
-          minInstagramFollowers,
-          minTiktokFollowers,
-        );
         if (
           userInstagramFollowers >= minInstagramFollowers &&
           userTiktokFollowers >= minTiktokFollowers

@@ -11,7 +11,6 @@ export const Api = {
     GET_SERVICE_DEALS_LEFT: `${BASE_URL}/api:bwh6Xc5O/get_deal_left`,
     RESTAURANTS: `${BASE_URL}/api:WVfdccpj/restaurant`,
   },
-
   PROFILE: {
     GET_USER_APPROVAL_STATUS: `${BASE_URL}/api:bwh6Xc5O/getUserStatus`,
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
@@ -34,6 +33,8 @@ export const Api = {
     GET_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/get_bookings`,
     GET_DIARY_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/diary_action_turbo`,
     GET_TIME_FRAMES: `${BASE_URL}/api:bwh6Xc5O/get_timeframes_turbo`,
+    // TODO: Create endpoint for venue app to fetch correct timeframes
+    GET_TIME_FRAMES_HOTFIX: `${BASE_URL}/api:bwh6Xc5O/venue/getdeals`,
     UPDATE_ACTION: `${BASE_URL}/api:bwh6Xc5O/update_booking`,
     UPDATE_ACTION_DIARY: `${BASE_URL}/api:bwh6Xc5O/update_content`,
     GET_ALL_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/actions_turbo`,
