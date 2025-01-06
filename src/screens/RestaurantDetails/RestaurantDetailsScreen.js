@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -33,6 +33,7 @@ const RestaurantDetails = () => {
     handleBackPress,
     handleRedirection,
   } = useRestaurantDetails();
+  const [isScrolling, setIsScrolling] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
       {isLoading ? (
@@ -177,11 +178,14 @@ const RestaurantDetails = () => {
               }
               data={services}
               horizontal
+              scrollEnabled={!isScrolling}
               keyExtractor={(_, index) => index.toString()}
               renderItem={({item, index}) => {
                 const deals = item?.Deal_limit - item?.deal_done;
                 return (
                   <ServiceCard
+                    isScrolling={isScrolling}
+                    setIsScrolling={setIsScrolling}
                     index={index}
                     item={item}
                     deals={deals}

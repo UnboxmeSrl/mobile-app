@@ -16,7 +16,14 @@ import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
 import {perfectSize, xanoImageSize} from '../../../utils';
 
-const ServiceCard = ({item, index, deals, actionNumId}) => {
+const ServiceCard = ({
+  item,
+  index,
+  deals,
+  actionNumId,
+  isScrolling,
+  setIsScrolling,
+}) => {
   const {handleCardPress} = useServiceCard(item);
   let amenityDetails = {};
 
@@ -74,6 +81,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
     <TouchableOpacity
       activeOpacity={0.6}
       onPress={() => handleCardPress(item)}
+      disabled={isScrolling} // Disable the Touchable when scrolling
       style={styles.listItem}>
       <View style={styles.imageContainer}>
         <ImageBackground
@@ -156,24 +164,49 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
           </>
         </View>
       ) : (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        // <View
+        // // style={{
+        // //   backgroundColor: 'yellow',
+        // //   justifyContent: 'center',
+        // //   alignItems: 'center',
+        // // }}
+        // >
+        <ScrollView
+          contentContainerStyle={{
+            // width: '100%',
+            justifyContent: 'space-between',
+            paddingHorizontal: scale(9),
+            alignItems: 'center',
+            backgroundColor: 'cyan',
+          }}
+          onScrollBeginDrag={() => {
+            setIsScrolling(true);
+            console.log('checkOnScrollBeginDrag');
+          }} // Track start of scroll
+          onScrollEndDrag={() => {
+            console.log('checkOnScrollEndDrag');
+            console.log('isScrolling', isScrolling);
+            setIsScrolling(false);
+          }} // Track end of scroll
+          // scrollEventThrottle={16} // For smoother handling of touch events
+          horizontal
+          showsHorizontalScrollIndicator={false}>
           <View
             style={[
               styles.amenityMainContainer,
               styles.firstAmenityMainContainer,
+              // {backgroundColor: 'yellow'},
             ]}>
             <View style={styles.amenityIconContainer}>
               <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
             </View>
             <View style={styles.amenityTitleDescriptionContainer}>
-              <Text
-                allowFontScaling={false}
-                style={
-                  styles.amenitiesTitle
-                }>{`${item?._actions_turbo?.Plates} X Meals`}</Text>
+              <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                {`10 X Meals`}
+              </Text>
             </View>
           </View>
-
+          {/* `${item?._actions_turbo?.Plates} X Meals` */}
           <View style={styles.amenityMainContainer}>
             <View style={styles.amenityIconContainer}>
               <Image
@@ -182,14 +215,25 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
               />
             </View>
             <View style={styles.amenityTitleDescriptionContainer}>
-              <Text
-                allowFontScaling={false}
-                style={
-                  styles.amenitiesTitle
-                }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+              <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                {`10 X Drinks`}
+              </Text>
             </View>
           </View>
-
+          <View style={styles.amenityMainContainer}>
+            <View style={styles.amenityIconContainer}>
+              <Image
+                source={IMAGES.clinkingGlasses}
+                style={styles.amenityIcon}
+              />
+            </View>
+            <View style={styles.amenityTitleDescriptionContainer}>
+              <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                {`10 X Drinks`}
+              </Text>
+            </View>
+          </View>
+          {/* `${item?._actions_turbo?.Drinks} X Drinks` */}
           {/* <View
             style={[
               styles.amenityMainContainer,
@@ -211,6 +255,7 @@ const ServiceCard = ({item, index, deals, actionNumId}) => {
             </View>
               </View>*/}
         </ScrollView>
+        // </View>
       )}
 
       {/* <View style={styles.amenitiesMainContainer}>
@@ -248,7 +293,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   firstAmenityMainContainer: {
-    marginLeft: scale(10),
+    // marginLeft: scale(10),
   },
   friendAmenityTitle: {
     textAlign: 'center',
@@ -262,7 +307,7 @@ const styles = StyleSheet.create({
     marginRight: scale(30),
   },
   amenityMainContainer: {
-    alignSelf: 'center',
+    // alignSelf: 'center',
     // width: scale(120),
     height: verticalScale(30),
     flexDirection: 'row',
@@ -270,7 +315,7 @@ const styles = StyleSheet.create({
     // borderWidth: moderateScale(1),
     // marginLeft: scale(10),
     paddingHorizontal: scale(7),
-    marginHorizontal: scale(5),
+    // marginHorizontal: scale(5),
     // borderColor: COLORS.gainsboro,
     justifyContent: 'center',
     alignItems: 'center',
