@@ -11,6 +11,7 @@ import ScheduleStack from './ScheduleStack';
 import ProfileStack from './ProfileStack';
 import AppMap from '../components/AppMap';
 import {useChatClient} from '../hooks';
+import {ChatRoom} from '../screens/ChatRoom';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -43,7 +44,7 @@ const BottomTabNavigator = () => {
           },
         }}
       />
-      <BottomTabs.Screen
+      {/* <BottomTabs.Screen
         name={SCREEN_NAMES.MapScreen}
         component={AppMap}
         options={{
@@ -54,6 +55,22 @@ const BottomTabNavigator = () => {
                   focused ? styles.activeTabStyle : styles.inActiveTabStyle
                 }>
                 <TabBarIcon focused={focused} icon={IMAGES.location} />
+              </View>
+            );
+          },
+        }}
+      /> */}
+      <BottomTabs.Screen
+        name={SCREEN_NAMES.ChatRoom}
+        component={ChatRoom}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                style={
+                  focused ? styles.activeTabStyle : styles.inActiveTabStyle
+                }>
+                <TabBarIcon focused={focused} icon={IMAGES.chat} />
               </View>
             );
           },

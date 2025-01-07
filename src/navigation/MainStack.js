@@ -36,6 +36,7 @@ import {
   TutorialsScreen,
   YourScheduleDetailsScreen,
 } from '../screens';
+import {ChatRoom} from '../screens/ChatRoom';
 
 const StackMain = createStackNavigator();
 
@@ -170,6 +171,7 @@ const MainStack = () => {
         component={TutorialsScreen}
       />
       <StackMain.Screen name={SCREEN_NAMES.ChatScreen} component={ChatScreen} />
+      <StackMain.Screen name={SCREEN_NAMES.ChatRoom} component={ChatRoom} />
     </StackMain.Navigator>
   );
 };

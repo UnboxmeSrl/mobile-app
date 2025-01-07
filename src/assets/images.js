@@ -14,6 +14,7 @@ export const IMAGES = {
   back: require('./images/back.png'),
   bell: require('./images/bell.png'),
   calender: require('./images/calendar.png'),
+  chat: require('./images/chat-png.png'),
   check: require('./images/check.png'),
   close: require('./images/close.png'),
   claris: require('./images/CLARIS.png'),

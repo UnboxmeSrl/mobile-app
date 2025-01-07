@@ -49,7 +49,6 @@ const RestaurantsScreen = () => {
   const handleBottomSheet = () => {
     bottomSheetRef?.current?.open();
   };
-
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.btnStack}>

@@ -83,7 +83,7 @@ const useBookingDetails = () => {
     setStartDate(newStartDate);
     setEndDate(newEndDate);
   };
-
+  console.log(timeFrameData, 'timeFrameData');
   const showPreviousWeek = () => {
     if (getDateWeek(startDate) <= getDateWeek(currentDate)) {
       return;
@@ -117,7 +117,6 @@ const useBookingDetails = () => {
       console.log('ParsedHours: ' + parsedHours, 'Minutes: ' + parsedMinutes);
       currentBookingDateTime.setHours(parsedHours, parsedMinutes);
     }
-
 
     if (
       isEvent &&

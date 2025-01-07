@@ -1,7 +1,6 @@
-import {useEffect, useState} from 'react';
-import {useRoute} from '@react-navigation/native';
+import {useCallback, useEffect, useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {getRestaurantOwners} from '../../../services';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {chatClient} from '../../../hooks';
 
 const useChat = () => {
@@ -9,19 +8,20 @@ const useChat = () => {
   const [restaurantOwners, setRestaurantOwners] = useState([]);
   const [isChannelLoaded, setIsChannelLoaded] = useState(false);
   const route = useRoute();
+  const navigation = useNavigation();
   const {bookingDetails} = route.params;
   const bookingId = bookingDetails?.id;
-
-  const getRestaurantOwnersData = async () => {
+  const getRestaurantOwnersData = useCallback(async () => {
     const params = `/${bookingId}`;
     const res = await getRestaurantOwners(params);
-    console.log('RES OWNER', res);
     setRestaurantOwners(res);
-  };
+  }, [bookingId]);
 
   useEffect(() => {
-    getRestaurantOwnersData();
-  }, [bookingId]);
+    if (bookingId) {
+      getRestaurantOwnersData();
+    }
+  }, [bookingId, getRestaurantOwnersData]);
 
   useEffect(() => {
     const restaurantOwnersWithPrefix = restaurantOwners.map(
@@ -31,10 +31,9 @@ const useChat = () => {
       'influencer_' + bookingDetails?.user_turbo_id?.toString(),
       // ...restaurantOwnersWithPrefix,
     ];
-    console.log('object members: ', members, bookingId);
     const setupChannel = async () => {
       const newChannel = chatClient.channel('messaging', bookingId, {
-        name: `Chat with ${bookingId}`,
+        name: `Chat with ${bookingDetails?._offers_turbo?.Offer_Name}_${bookingId}`,
         members: members,
       });
 
@@ -48,11 +47,21 @@ const useChat = () => {
     };
 
     setupChannel();
-  }, [restaurantOwners]);
-
+  }, [
+    bookingDetails?._offers_turbo?.Offer_Name,
+    bookingDetails?.user_turbo_id,
+    bookingId,
+    restaurantOwners,
+  ]);
+  const onResetChannel = useCallback(() => {
+    setChannel(null);
+    setIsChannelLoaded(false);
+    navigation.goBack();
+  }, [navigation]);
   return {
     isChannelLoaded,
     channel,
+    onResetChannel,
   };
 };
 
