@@ -16,7 +16,7 @@ const ChatScreen = () => {
     <SafeAreaView style={styles.container}>
       {isChannelLoaded ? (
         <Channel channel={channel}>
-          <View>
+          <View style={styles.headerWrapper}>
             <TouchableOpacity
               style={{width: perfectSize(22)}}
               onPress={onResetChannel}>
@@ -50,5 +50,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
+  },
+  headerWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: perfectSize(40),
+    paddingHorizontal: perfectSize(20),
   },
 });

@@ -19,6 +19,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {currentUserData} from '../../redux';
 import {AppText, HStack} from '../../components';
 import {colors, perfectSize} from '../../utils';
+import {FONTS} from '../../constants';
 
 const ChatRoom = () => {
   const loginData = useSelector(currentUserData);
@@ -53,7 +54,14 @@ const ChatRoom = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* {!channel && <Header title="Chatroom" />} */}
-      {!channel && <AppText>ChatRoom</AppText>}
+      {!channel && (
+        <View style={styles.headerWrapperMain}>
+          <AppText
+            style={{fontSize: perfectSize(20), fontFamily: FONTS.interBold}}>
+            Chat-Room
+          </AppText>
+        </View>
+      )}
       <ChannelList
         filters={filters}
         sort={sort}
@@ -61,35 +69,13 @@ const ChatRoom = () => {
       />
       {channel && (
         <Channel channel={channel}>
-          {/* <HStack
-            style={{
-              padding: perfectSize(15),
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-            }}>
+          <View style={styles.headerWrapper}>
             <TouchableOpacity
               style={{width: perfectSize(22)}}
               onPress={() => setChannel(null)}>
               <AntDesign name="arrowleft" size={perfectSize(22)} />
             </TouchableOpacity>
             <AppText style={{fontSize: perfectSize(16), fontWeight: '500'}}>
-              {' '}
-              {channel.data?.name || 'Unnamed Channel'}
-            </AppText>
-            <View
-              style={{
-                width: perfectSize(22),
-              }}
-            />
-          </HStack> */}
-          <View>
-            <TouchableOpacity
-              style={{width: perfectSize(22)}}
-              onPress={() => setChannel(null)}>
-              <AntDesign name="arrowleft" size={perfectSize(22)} />
-            </TouchableOpacity>
-            <AppText style={{fontSize: perfectSize(16), fontWeight: '500'}}>
-              {' '}
               {channel.data?.name || 'Unnamed Channel'}
             </AppText>
             <View
@@ -102,21 +88,6 @@ const ChatRoom = () => {
           <MessageInput showMoreOptions={false} />
         </Channel>
       )}
-      {/* {!channel && (
-        <View style={styles.iconWrapper}>
-          <Ionicons
-            name="chatbox-ellipses-outline"
-            style={styles.icon}
-            onPress={() => {
-              setShowModal(true);
-            }}
-          />
-        </View>
-      )} */}
-      {/* <CreateChatModal
-        open={showModal}
-        onPressCancel={() => setShowModal(false)}
-      /> */}
     </SafeAreaView>
   );
 };
@@ -125,6 +96,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  headerWrapperMain: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: perfectSize(45),
   },
   iconWrapper: {
     position: 'absolute',
@@ -141,6 +118,13 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: perfectSize(30),
     color: colors.danger,
+  },
+  headerWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: perfectSize(40),
+    paddingHorizontal: perfectSize(20),
   },
 });
 
