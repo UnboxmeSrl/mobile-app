@@ -56,33 +56,10 @@ const ServiceCard = ({
     };
   }
   return (
-    // <TouchableOpacity onPress={() => handleCardPress(item)} style={styles.listItem}>
-    //   <ImageBackground resizeMode="cover" source={{ uri: item?.Offer_Cover?.url }} style={styles.itemImage}>
-    //     <View style={styles.mainContainer}>
-    //       <View style={styles.ratingsContainer}>
-    //         <Text allowFontScaling={false}  style={styles.ratingsText}>+250</Text>
-    //         <Image resizeMode="contain" source={IMAGES.ratingStar} style={styles.ratingIcon} />
-    //       </View>
-    //       {(item?.Influencer || item?.Model) && (
-    //         <View style={styles.forModelsContainer}>
-    //           <Text allowFontScaling={false}  style={styles.forModelsText}>
-    //             For {item?.Influencer && 'Influencer'}
-    //             {item?.Model && ' Models'}
-    //           </Text>
-    //         </View>
-    //       )}
-    //     </View>
-    //     <View style={styles.nameContainer}>
-    //       <Text allowFontScaling={false}  style={styles.restaurantNameText}>{item?.Offer_Name}</Text>
-    //     </View>
-    //   </ImageBackground>
-    // </TouchableOpacity>
-
     <TouchableOpacity
+      style={styles.listItem}
       activeOpacity={0.6}
-      onPress={() => handleCardPress(item)}
-      disabled={isScrolling} // Disable the Touchable when scrolling
-      style={styles.listItem}>
+      onPress={() => handleCardPress(item)}>
       <View style={styles.imageContainer}>
         <ImageBackground
           imageStyle={styles.actualPicture}
@@ -126,35 +103,34 @@ const ServiceCard = ({
           <Image source={IMAGES.star} style={styles.ratingIcon} />
         </View>
       </View>
-      {/* 
-      <View style={styles.descriptionContainer}>
-        <Text allowFontScaling={false}  style={styles.descriptionText}>To publish with 24 hours</Text>
-      </View> */}
-
-      {actionNumId === 7 ||
-      actionNumId === 10 ||
-      actionNumId === 14 ||
-      actionNumId === 15 ||
-      actionNumId === 16 ||
-      actionNumId === 17 ? (
-        <View style={styles.specialAmenity}>
+      <View
+        style={{
+          // width: '100%',
+          flex: 1,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          paddingHorizontal: scale(8),
+          gap: 8,
+          paddingVertical: 8,
+          marginBottom: verticalScale(4),
+          // backgroundColor: 'red',
+        }}>
+        {actionNumId === 7 ||
+        actionNumId === 10 ||
+        actionNumId === 14 ||
+        actionNumId === 15 ||
+        actionNumId === 16 ||
+        actionNumId === 17 ? (
           <>
-            <View
-              style={[
-                styles.amenityIconContainer,
-                styles.firstAmenityMainContainer,
-                styles.specialAmenitiesIconContainer,
-              ]}>
-              <Image
-                source={amenityDetails?.amenityIcon}
-                style={styles.amenityBigIcon}
-              />
-            </View>
             <View
               style={[
                 styles.amenityMainContainer,
                 styles.specialAmenitiesMainContainer,
               ]}>
+              <Image
+                source={amenityDetails?.amenityIcon}
+                style={styles.amenityBigIcon}
+              />
               <View style={styles.amenityTitleDescriptionContainer}>
                 <Text allowFontScaling={false} style={styles.amenitiesTitle}>
                   {amenityDetails?.amenityName}
@@ -162,119 +138,57 @@ const ServiceCard = ({
               </View>
             </View>
           </>
-        </View>
-      ) : (
-        // <View
-        // // style={{
-        // //   backgroundColor: 'yellow',
-        // //   justifyContent: 'center',
-        // //   alignItems: 'center',
-        // // }}
-        // >
-        <ScrollView
-          contentContainerStyle={{
-            // width: '100%',
-            justifyContent: 'space-between',
-            paddingHorizontal: scale(9),
-            alignItems: 'center',
-            backgroundColor: 'cyan',
-          }}
-          onScrollBeginDrag={() => {
-            setIsScrolling(true);
-            console.log('checkOnScrollBeginDrag');
-          }} // Track start of scroll
-          onScrollEndDrag={() => {
-            console.log('checkOnScrollEndDrag');
-            console.log('isScrolling', isScrolling);
-            setIsScrolling(false);
-          }} // Track end of scroll
-          // scrollEventThrottle={16} // For smoother handling of touch events
-          horizontal
-          showsHorizontalScrollIndicator={false}>
-          <View
-            style={[
-              styles.amenityMainContainer,
-              styles.firstAmenityMainContainer,
-              // {backgroundColor: 'yellow'},
-            ]}>
-            <View style={styles.amenityIconContainer}>
-              <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+        ) : (
+          <>
+            <View
+              style={[
+                styles.amenityMainContainer,
+                styles.firstAmenityMainContainer,
+                // {backgroundColor: 'yellow'},
+              ]}>
+              <View style={styles.amenityIconContainer}>
+                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+              </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                  {item?._actions_turbo?.Plates} x Meals
+                </Text>
+              </View>
             </View>
-            <View style={styles.amenityTitleDescriptionContainer}>
-              <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                {`10 X Meals`}
-              </Text>
-            </View>
-          </View>
-          {/* `${item?._actions_turbo?.Plates} X Meals` */}
-          <View style={styles.amenityMainContainer}>
-            <View style={styles.amenityIconContainer}>
-              <Image
-                source={IMAGES.clinkingGlasses}
-                style={styles.amenityIcon}
-              />
-            </View>
-            <View style={styles.amenityTitleDescriptionContainer}>
-              <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                {`10 X Drinks`}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.amenityMainContainer}>
-            <View style={styles.amenityIconContainer}>
-              <Image
-                source={IMAGES.clinkingGlasses}
-                style={styles.amenityIcon}
-              />
-            </View>
-            <View style={styles.amenityTitleDescriptionContainer}>
-              <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                {`10 X Drinks`}
-              </Text>
-            </View>
-          </View>
-          {/* `${item?._actions_turbo?.Drinks} X Drinks` */}
-          {/* <View
-            style={[
-              styles.amenityMainContainer,
-              styles.friendAmenityContainer,
-            ]}>
-            <View style={styles.amenityTitleDescriptionContainer}>
-              <Text allowFontScaling={false} 
-                style={[
-                  styles.amenitiesTitle,
-                  styles.friendAmenityText,
-                ]}>{`+${item?._actions_turbo?.Extra_People}`}</Text>
-              <Text allowFontScaling={false} 
-                style={[
-                  styles.amenitiesDescription,
-                  styles.friendAmenityTitle,
-                ]}>
-                Friend
-              </Text>
-            </View>
-              </View>*/}
-        </ScrollView>
-        // </View>
-      )}
 
-      {/* <View style={styles.amenitiesMainContainer}>
-        <View style={styles.amenitiesContainer}>
-          <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-          <Text allowFontScaling={false} 
-            style={
-              styles.amenityText
-            }>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
-        </View>
-        <View style={styles.amenitiesContainer}>
-          <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
-          <Text allowFontScaling={false} 
-            style={
-              styles.amenityText
-            }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-        </View>
-      </View> */}
+            <View style={styles.amenityMainContainer}>
+              <View style={styles.amenityIconContainer}>
+                <Image
+                  source={IMAGES.clinkingGlasses}
+                  style={styles.amenityIcon}
+                />
+              </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                  {item?._actions_turbo?.Drinks} x Drinks
+                </Text>
+              </View>
+            </View>
+          </>
+        )}
+      </View>
     </TouchableOpacity>
+    // {/* <View style={styles.amenitiesMainContainer}>
+    //   <View style={styles.amenitiesContainer}>
+    //     <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+    //     <Text allowFontScaling={false}
+    //       style={
+    //         styles.amenityText
+    //       }>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
+    //   </View>
+    //   <View style={styles.amenitiesContainer}>
+    //     <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
+    //     <Text allowFontScaling={false}
+    //       style={
+    //         styles.amenityText
+    //       }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
+    //   </View>
+    // </View> */}
   );
 };
 
@@ -283,11 +197,12 @@ export default ServiceCard;
 const styles = StyleSheet.create({
   specialAmenity: {
     flexDirection: 'row',
-    marginLeft: scale(5),
+    // marginLeft: scale(5),
+    backgroundColor: 'yellow',
   },
   specialAmenitiesMainContainer: {
-    marginLeft: scale(5),
-    marginTop: verticalScale(10),
+    // marginLeft: scale(5),
+    // marginTop: verticalScale(10),
   },
   specialAmenitiesIconContainer: {
     marginTop: verticalScale(10),
@@ -308,40 +223,44 @@ const styles = StyleSheet.create({
   },
   amenityMainContainer: {
     // alignSelf: 'center',
-    // width: scale(120),
+    width: scale(90),
     height: verticalScale(30),
     flexDirection: 'row',
     borderRadius: moderateScale(16),
     // borderWidth: moderateScale(1),
     // marginLeft: scale(10),
-    paddingHorizontal: scale(7),
+    paddingHorizontal: scale(5),
     // marginHorizontal: scale(5),
     // borderColor: COLORS.gainsboro,
+    // justifyContent: 'center',
     justifyContent: 'center',
+    gap: scale(6),
     alignItems: 'center',
     backgroundColor: COLORS.cultured,
   },
   amenityIconContainer: {
-    marginRight: scale(10),
+    // marginRight: scale(10),
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'green'
   },
   amenityIcon: {
     height: moderateScale(20),
     width: moderateScale(20),
   },
   amenityBigIcon: {
-    height: moderateScale(40),
-    width: moderateScale(40),
+    height: moderateScale(20),
+    width: moderateScale(20),
   },
   amenityTitleDescriptionContainer: {
     // width: '60%',
     justifyContent: 'center',
+    // backgroundColor: 'white',
   },
   amenitiesTitle: {
     color: COLORS.black,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(9),
   },
   amenitiesDescription: {
     color: COLORS.greyFont,
@@ -457,7 +376,7 @@ const styles = StyleSheet.create({
     width: perfectSize(260),
     alignSelf: 'center',
     // alignItems: 'center',
-    height: moderateScale(265),
+    // height: moderateScale(265),
     borderRadius: moderateScale(20.79),
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),

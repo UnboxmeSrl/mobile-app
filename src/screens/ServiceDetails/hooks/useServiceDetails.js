@@ -1,10 +1,10 @@
 import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import Toast from 'react-native-toast-message';
 import {useDispatch, useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
-import {setTimeFrameData} from '../../../redux';
+import {resetAuthData, setTimeFrameData} from '../../../redux';
 import {
   getDiaryActions,
   getServiceDealsLeft,
@@ -28,6 +28,7 @@ const useServiceDetails = () => {
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
+  console.log('restaurantDetails', restaurantDetails);
   const userInstagramFollowers = loginData?.instagram_followers;
   const userTiktokFollowers = loginData?.tiktok_followers;
   const minInstagramFollowers = restaurantDetails?.min_instagram_followers;
@@ -45,6 +46,15 @@ const useServiceDetails = () => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   let amenityDetails = {};
+  const WeekDays = {
+    Monday: 1,
+    Tuesday: 2,
+    Wednesday: 3,
+    Thursday: 4,
+    Friday: 5,
+    Saturday: 6,
+    Sunday: 7,
+  };
 
   if (
     actionNumId === 7 ||
@@ -112,26 +122,61 @@ const useServiceDetails = () => {
   };
 
   const getTimeFrameData = async () => {
-    if (serviceDetails?._timeframes_turbo?.id) {
-      dispatch(setTimeFrameData([serviceDetails?._timeframes_turbo]));
-    } else {
-      const params = `/${restaurantDetails?.id}`;
-      const res = await getTimeFrames(params);
+    // console.log('serviceDetails', serviceDetails?._timeframes_turbo);
+    // if (serviceDetails?._timeframes_turbo?.id) {
+    //   dispatch(setTimeFrameData([serviceDetails?._timeframes_turbo]));
+    // } else {
 
-      const correctTimeFramesResponse = await getTimeFrames(
-        `/${serviceDetails?.id}`,
-        true,
-      );
-      const correctItems =
-        correctTimeFramesResponse?.data?.timeframesTurbo_Id.map(
-          correctItem => correctItem.id,
-        );
-      const result = (res || []).filter(item => correctItems.includes(item.id));
+    const offer_id = serviceDetails?.id;
+    const endpoint = `/${restaurantDetails?.id}?`;
+    const queryParams = 'offer_id=' + offer_id; // Query params
+    const urlParams = `${endpoint}${queryParams}`;
+    console.log('urlParams', offer_id, urlParams);
+    const res = await getTimeFrames(urlParams);
+    console.log('resIn_getTimeFrameData', JSON.stringify(res));
+    // const timeGroups = () => {
+    //   return (res || [])?.reduce((acc, item) => {
+    //     if (item) {
+    //       if (item.DayOfWeek) {
+    //         acc[item.DayOfWeek] = acc[item.DayOfWeek] || [];
+    //         acc[item.DayOfWeek].push(item);
+    //       }
 
-      setTimeout(() => {
-        dispatch(setTimeFrameData(result));
-      }, 1000);
-    }
+    //       const filteredWeekdays = item.weekdays.filter(
+    //         day =>
+    //           !item?.pause_days.some(pauseDay => pauseDay?.day === day?.day),
+    //       );
+
+    //       filteredWeekdays?.forEach(daynum => {
+    //         const dayOfWeek = WeekDays[daynum.day];
+    //         if (dayOfWeek && item.DayOfWeek !== dayOfWeek) {
+    //           acc[dayOfWeek] = acc[dayOfWeek] || [];
+    //           acc[dayOfWeek].push(item);
+    //         }
+    //       });
+    //     }
+    //     return acc;
+    //   }, {});
+    // };
+    // const updatedTimeframeData = timeGroups();
+    // console.log('timeGroups', updatedTimeframeData);
+    dispatch(setTimeFrameData(res || []));
+
+    //   const correctTimeFramesResponse = await getTimeFrames(
+    //     `/${serviceDetails?.id}`,
+    //     true,
+    //   );
+    //   const correctItems =
+    //     correctTimeFramesResponse?.data?.timeframesTurbo_Id.map(
+    //       correctItem => correctItem.id,
+    //     );
+    //   console.log('correctTimeFramesResponse', correctTimeFramesResponse, res);
+    //   const result = (res || []).filter(item => correctItems.includes(item.id));
+
+    //   setTimeout(() => {
+    //     dispatch(setTimeFrameData(result));
+    //   }, 1000);
+    // }
   };
 
   // const onCategoryChange = (serviceCategoryId) => {
@@ -158,6 +203,7 @@ const useServiceDetails = () => {
           userTiktokFollowers >= minTiktokFollowers
         ) {
           // This setTimeout is important because till that time timeframe data is settled in redux so don't remove it.
+          getTimeFrameData();
           setTimeout(() => {
             setIsBookBtnPressed(false);
             navigate(SCREEN_NAMES.BookingDetails, {

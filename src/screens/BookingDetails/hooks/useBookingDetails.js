@@ -44,9 +44,17 @@ const useBookingDetails = () => {
     state => state.restaurantSlice.restaurantDetails,
   );
   const isEvent = restaurantDetails?.is_event;
+  console.log('isEvent', isEvent);
   const today = new Date();
   const todayUtcTime = today.getTime();
   let after24Hours = todayUtcTime;
+  console.log(
+    'restaurantDetails?.event_date_time',
+    restaurantDetails?.event_date_time,
+    restaurantDetails,
+    eventSelectedDateIndex,
+    isEvent,
+  );
 
   if (restaurantDetails?.booking_buffer_time) {
     after24Hours =
@@ -106,7 +114,11 @@ const useBookingDetails = () => {
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.ServiceDetails);
   };
-
+  console.log(
+    ' conditionCheck',
+    selectedDate,
+    // serviceDetails?.actions_turbo_id,
+  );
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
     const currentBookingDateTime = new Date(selectedDate);
@@ -117,7 +129,6 @@ const useBookingDetails = () => {
       console.log('ParsedHours: ' + parsedHours, 'Minutes: ' + parsedMinutes);
       currentBookingDateTime.setHours(parsedHours, parsedMinutes);
     }
-
 
     if (
       isEvent &&
@@ -378,7 +389,7 @@ const useBookingDetails = () => {
     if (getDateWeek(startDate) <= getDateWeek(currentDate)) {
       setIsLatestWeek(true);
     }
-  }, [startDate]);
+  }, [currentDate, startDate]);
 
   useEffect(() => {
     if (isEvent) {
@@ -388,11 +399,11 @@ const useBookingDetails = () => {
       const convertedEventTimes = restaurantDetails?.event_date_time.map(ts =>
         getFormattedTime(ts),
       );
-
+      console.log('convertedEventTimes', convertedEventTimes);
       setEventDates(convertedEventDates);
       setEventTimes(convertedEventTimes);
     }
-  }, [isEvent]);
+  }, [isEvent, restaurantDetails?.event_date_time]);
 
   useEffect(() => {
     if (isEvent) {
@@ -405,13 +416,13 @@ const useBookingDetails = () => {
         setIsBookingDateAvailable(false);
       }
     }
-  }, [selectedDate]);
+  }, [eventDates, isEvent, selectedDate]);
 
   useEffect(() => {
     return () => {
       dispatch(setTimeFrameData([]));
     };
-  }, []);
+  }, [dispatch]);
 
   return {
     actionNumId,

@@ -30,7 +30,7 @@ const useNotification = () => {
         ...stream, // extract and merge stream object if present
       };
       await notifee.displayNotification({
-        title: remoteMessage.notification.title,
+        title: remoteMessage?.notification?.title,
         body: message.message.text,
         data,
         android: {

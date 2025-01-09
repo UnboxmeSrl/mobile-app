@@ -1,0 +1,582 @@
+// restaurantDetails
+{
+    "restaurant": {
+        "About": "TOPSTRETCHING GYM & STUDIO CANGGU ABOUT THE OFFER Diary and Reels offers include a FREE CLASS at your choice. Check out the schedule here: https: //topstretching.id/schedule. A spacious gym spanning 400 square meters, equipped with everything needed for comfortable and effective workouts. Sports, stretching, and relaxation—all in one place!",
+        "Adress": "Jl. Pantai Batu Bolong No.12, Canggu, Kec. Kuta Utara, Kabupaten Badung, Bali 80361",
+        "Background": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "gallery_3b5c47a6-e93a-48e5-ac83-6b99720f29ae.jpg",
+            "path": "/vault/MY0UB_mA/Sm8fk8C1UtprIzC2xg9vVE9LlPk/zsO1iA../gallery_3b5c47a6-e93a-48e5-ac83-6b99720f29ae.jpg",
+            "size": 132612,
+            "type": "image",
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/Sm8fk8C1UtprIzC2xg9vVE9LlPk/zsO1iA../gallery_3b5c47a6-e93a-48e5-ac83-6b99720f29ae.jpg"
+        },
+        "Chi_siamo": "",
+        "Copertina": false,
+        "Cover": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "Snapinsta.app_457141312_2339079046433701_5995266410447500337_n_1080.jpg",
+            "path": "/vault/MY0UB_mA/V4uCdKhiiE_ensI49KfQPPg_t9I/Qh_AVg../Snapinsta.app_457141312_2339079046433701_5995266410447500337_n_1080.jpg",
+            "size": 136635,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/V4uCdKhiiE_ensI49KfQPPg_t9I/Qh_AVg../Snapinsta.app_457141312_2339079046433701_5995266410447500337_n_1080.jpg"
+        },
+        "Cover2": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "gallery_fcd313e6-2d66-4a59-8b85-a7d80bfc6943.jpg",
+            "path": "/vault/MY0UB_mA/49lr0XYjOGJktICsI3S4ntF_WK8/R5801g../gallery_fcd313e6-2d66-4a59-8b85-a7d80bfc6943.jpg",
+            "size": 97849,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/49lr0XYjOGJktICsI3S4ntF_WK8/R5801g../gallery_fcd313e6-2d66-4a59-8b85-a7d80bfc6943.jpg"
+        },
+        "GalleryRestaurant": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "Influencer": true,
+        "Instagram": "https://www.instagram.com/topstretching.bali/",
+        "Latitude": 0,
+        "LongLat": [],
+        "Longitude": 0,
+        "Maps_Link": "https://maps.app.goo.gl/b7UdPkUJuzHsttPi8?g_st=ic",
+        "Model": true,
+        "Name": "CLASS + GYM PASS by Top Stretching Gym",
+        "Offers_Limit": [],
+        "Owner": null,
+        "Status": false,
+        "Tag2": "@claris.app",
+        "Tags": "@topstretching.bali",
+        "Tiktok": "",
+        "Trattamenti": "",
+        "TrattamentiPicture": null,
+        "VenueType": "",
+        "Visibility": true,
+        "actions_turbo_id": [
+            1,
+            6,
+            12,
+            5
+        ],
+        "booking_buffer_time": 24,
+        "booking_limit_per_month": 0,
+        "booking_limit_three_month": 0,
+        "brief": "",
+        "category_venues_turbo_id": 17,
+        "cities2_id": 3,
+        "cities_id": 2,
+        "created_at": 1734088478629,
+        "event_date_time": [
+            0
+        ],
+        "id": 627,
+        "is_event": false,
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "offers_turbo_id": [],
+        "phone": "+79117845787",
+        "restaurant_owner_id": 0,
+        "timeframes_turbo_id": [
+            2279,
+            2278,
+            2196,
+            2192
+        ],
+        "usertype_id": [],
+        "venue_order": 3
+    },
+    "services": [
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 4,
+            "Description": "",
+            "Diary": false,
+            "Icon": null,
+            "Map": false,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "TOP STRETCHING GYM BALI",
+            "Reel": true,
+            "Story": false,
+            "Tiktok": true,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 25,
+            "approveByOwner": true,
+            "at_offer_description": "Post a Reel or Tiktok video and sharing your experience at Top Stretching Gym. In exchange, get 1 x Day Pass for Gym + 1 Group training class. Tag @topstretching.bali and @claris.app.",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 0,
+            "created_at": 1734088478723,
+            "deal_done": 0,
+            "deal_left": 5,
+            "id": 1296,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 627,
+            "services": [Array
+            ],
+            "slots_per_day": 1,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 8
+        },
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 4,
+            "Description": "",
+            "Diary": false,
+            "Icon": null,
+            "Map": false,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "TOP STRETCHING GYM BALI",
+            "Reel": true,
+            "Story": false,
+            "Tiktok": true,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 27,
+            "approveByOwner": true,
+            "at_offer_description": "Post a Reel video and sharing your experience at Top Stretching Gym. In exchange, get 1 x Day Pass Gym + 1 Group training class. Tag @topstretching.bali and @claris.app.",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 0,
+            "created_at": 1734088478740,
+            "deal_done": 1,
+            "deal_left": 4,
+            "id": 1297,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 627,
+            "services": [Array
+            ],
+            "slots_per_day": 1,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 8
+        }
+    ]
+},
+{
+    "restaurant": {
+        "About": "UKRAINIAN RESTAURANT in Bali🇺🇦 HUBBLE is HOME How to Order : 1. Book the date you want to visit and wait the approval. 2. After arriving at the restaurant, must show the coupon before placing the order.",
+        "Adress": "Jln. Subak Sari, Tibubeneng, Badung, Bali, Indonesia 80361",
+        "Background": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "gallery_849e20e6-a967-47c0-a218-4ce7f2e50950.jpg",
+            "path": "/vault/MY0UB_mA/HfK3uvkuPD2cDpkzdy7dyJaVbMg/NggxCQ../gallery_849e20e6-a967-47c0-a218-4ce7f2e50950.jpg",
+            "size": 65419,
+            "type": "image",
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/HfK3uvkuPD2cDpkzdy7dyJaVbMg/NggxCQ../gallery_849e20e6-a967-47c0-a218-4ce7f2e50950.jpg"
+        },
+        "Chi_siamo": "",
+        "Copertina": false,
+        "Cover": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "gallery_f4e761b5-9756-47ab-9b5e-a92714099a39.jpg",
+            "path": "/vault/MY0UB_mA/sCkvKyV17K3G_tcm1VM85iwsewQ/WJJtcw../gallery_f4e761b5-9756-47ab-9b5e-a92714099a39.jpg",
+            "size": 155534,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/sCkvKyV17K3G_tcm1VM85iwsewQ/WJJtcw../gallery_f4e761b5-9756-47ab-9b5e-a92714099a39.jpg"
+        },
+        "Cover2": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "gallery_368e441f-5335-4914-9eec-3718102b715d.jpg",
+            "path": "/vault/MY0UB_mA/ODczkekl0o6aUdIDct_LZJ0YOhE/mr5R1w../gallery_368e441f-5335-4914-9eec-3718102b715d.jpg",
+            "size": 73368,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/ODczkekl0o6aUdIDct_LZJ0YOhE/mr5R1w../gallery_368e441f-5335-4914-9eec-3718102b715d.jpg"
+        },
+        "GalleryRestaurant": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "Influencer": false,
+        "Instagram": "https://www.instagram.com/hubblebali/",
+        "Latitude": 0,
+        "LongLat": [],
+        "Longitude": 0,
+        "Maps_Link": "https://g.co/kgs/Tvhp6MC",
+        "Model": false,
+        "Name": "Hubble Bali",
+        "Offers_Limit": [],
+        "Owner": null,
+        "Status": false,
+        "Tag2": "@claris.app",
+        "Tags": "@hubblebali",
+        "Tiktok": "https://www.tiktok.com/@hubble.patisserie?_t=8sRsgRUvUl3&_r=1",
+        "Trattamenti": "",
+        "TrattamentiPicture": null,
+        "VenueType": "",
+        "Visibility": true,
+        "actions_turbo_id": [
+            1,
+            5,
+            6,
+            12
+        ],
+        "booking_buffer_time": 24,
+        "booking_limit_per_month": 1,
+        "booking_limit_three_month": 0,
+        "brief": "REQUIREMENT: MINIMUM 5K FOLLOWERS IN INSTAGRAM MINIMUM 10K LIKE IN TIKTOK UKRAINIAN RESTAURANT in Bali🇺🇦 HUBBLE is HOME",
+        "category_venues_turbo_id": 1,
+        "cities2_id": 3,
+        "cities_id": 0,
+        "created_at": 1733724166302,
+        "event_date_time": [
+            0
+        ],
+        "id": 612,
+        "is_event": false,
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "offers_turbo_id": [
+            1256,
+            1257,
+            1258,
+            1259
+        ],
+        "phone": "‪+62 811‑3883‑9888‬",
+        "restaurant_owner_id": 0,
+        "timeframes_turbo_id": [
+            2289
+        ],
+        "usertype_id": [],
+        "venue_order": 1
+    },
+    "services": [
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 3,
+            "Description": "after arriving at restaurant, must show the coupon",
+            "Diary": false,
+            "Icon": null,
+            "Map": false,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "Hubble Bali",
+            "Reel": false,
+            "Story": false,
+            "Tiktok": true,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 8,
+            "approveByOwner": true,
+            "at_offer_description": "",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 19,
+            "created_at": 1734373697768,
+            "deal_done": 0,
+            "deal_left": 3,
+            "id": 1306,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 612,
+            "services": [Array
+            ],
+            "slots_per_day": 2,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 8
+        },
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 3,
+            "Description": "undefined",
+            "Diary": false,
+            "Icon": null,
+            "Map": false,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "Hubble Bali",
+            "Reel": false,
+            "Story": true,
+            "Tiktok": false,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 1,
+            "approveByOwner": true,
+            "at_offer_description": "",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 19,
+            "created_at": 1733724166367,
+            "deal_done": -1,
+            "deal_left": 4,
+            "id": 1256,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 612,
+            "services": [Array
+            ],
+            "slots_per_day": 2,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 8
+        },
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 3,
+            "Description": "undefined",
+            "Diary": true,
+            "Icon": null,
+            "Map": false,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "Hubble Bali",
+            "Reel": true,
+            "Story": false,
+            "Tiktok": true,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 6,
+            "approveByOwner": true,
+            "at_offer_description": "",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 19,
+            "created_at": 1733724166421,
+            "deal_done": 0,
+            "deal_left": 3,
+            "id": 1258,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 612,
+            "services": [Array
+            ],
+            "slots_per_day": 2,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 8
+        },
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 3,
+            "Description": "undefined",
+            "Diary": false,
+            "Icon": null,
+            "Map": false,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "Hubble Bali",
+            "Reel": true,
+            "Story": false,
+            "Tiktok": true,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 7,
+            "approveByOwner": true,
+            "at_offer_description": "",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 19,
+            "created_at": 1733724166440,
+            "deal_done": 0,
+            "deal_left": 3,
+            "id": 1259,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 612,
+            "services": [Array
+            ],
+            "slots_per_day": 2,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 8
+        },
+        {
+            "Bonus_Bookings": 0,
+            "Credits": 0,
+            "Deal_limit": 3,
+            "Description": "undefined",
+            "Diary": false,
+            "Icon": null,
+            "Map": true,
+            "Offer_Cover": [Object
+            ],
+            "Offer_Name": "Hubble Bali",
+            "Reel": false,
+            "Story": false,
+            "Tiktok": false,
+            "_actions_turbo": [Object
+            ],
+            "actions_turbo_id": 5,
+            "approveByOwner": true,
+            "at_offer_description": "",
+            "at_offername": "",
+            "availability": true,
+            "category_offers_turbo2_id": [Array
+            ],
+            "category_offers_turbo_id": 19,
+            "created_at": 1733724166400,
+            "deal_done": 1,
+            "deal_left": 3,
+            "id": 1257,
+            "instructions": "",
+            "restaurant_turbo_bali_id": 0,
+            "restaurant_turbo_id": 612,
+            "services": [Array
+            ],
+            "slots_per_day": 2,
+            "timeframesTurbo_Id": [Array
+            ],
+            "timeframes_turbo_id": 0,
+            "topic": "",
+            "usertype_id": 7
+        }
+    ]
+}
+// service details
+{
+    "Bonus_Bookings": 0,
+    "Credits": 0,
+    "Deal_limit": 3,
+    "Description": "after arriving at restaurant, must show the coupon",
+    "Diary": false,
+    "Icon": null,
+    "Map": false,
+    "Offer_Cover": {
+        "access": "public",
+        "meta": {
+            "height": 808,
+            "width": 908
+        },
+        "mime": "image/png",
+        "name": "Screenshot 2024-12-20 at 17.56.39.png",
+        "path": "/vault/MY0UB_mA/cmxCvVK3pK2usZf_My2I5t_eoGc/Td2o3A../Screenshot+2024-12-20+at+17.56.39.png",
+        "size": 850404,
+        "type": "image",
+        "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/cmxCvVK3pK2usZf_My2I5t_eoGc/Td2o3A../Screenshot+2024-12-20+at+17.56.39.png"
+    },
+    "Offer_Name": "Hubble Bali",
+    "Reel": false,
+    "Story": false,
+    "Tiktok": true,
+    "_actions_turbo": {
+        "Accomodation": 0,
+        "Action_Name": "Tiktok",
+        "Action_icon": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "tiktok.png",
+            "path": "/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png",
+            "size": 4792,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png"
+        },
+        "Amount_left": 0,
+        "Beauty": "",
+        "Days_deadline": 3,
+        "Descrizione": "Publish a Tiktok showing this experience Minimum Followers Required for Tiktok collab10K",
+        "Drinks": 2,
+        "Extra_People": 1,
+        "Gym": "",
+        "Plates": 3,
+        "Social": "TikTok",
+        "action_num_id": 5,
+        "action_status_turbo_id": 8,
+        "actions_turbo_id": [],
+        "created_at": 1707321814549,
+        "id": 8,
+        "photos": 3,
+        "stories": 2
+    },
+    "actions_turbo_id": 8,
+    "approveByOwner": true,
+    "at_offer_description": "",
+    "at_offername": "",
+    "availability": true,
+    "category_offers_turbo2_id": [],
+    "category_offers_turbo_id": 19,
+    "created_at": 1734373697768,
+    "deal_done": 0,
+    "deal_left": 3,
+    "id": 1306,
+    "instructions": "",
+    "restaurant_turbo_bali_id": 0,
+    "restaurant_turbo_id": 612,
+    "services": [
+        {
+            "name": "Plates",
+            "quantity": 3
+        },
+        {
+            "name": "Drinks",
+            "quantity": 2
+        }
+    ],
+    "slots_per_day": 2,
+    "timeframesTurbo_Id": [
+        2289
+    ],
+    "timeframes_turbo_id": 0,
+    "topic": "",
+    "usertype_id": 8
+}
