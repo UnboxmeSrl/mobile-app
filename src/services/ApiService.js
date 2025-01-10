@@ -47,10 +47,7 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
     };
-    const response = await axios.post(url, data, options).catch(err => {
-      console.log('signupCatchError', err);
-    });
-    console.log('signupResponse', response);
+    const response = await axios.post(url, data, options).catch(err => {});
     return response?.data;
   },
 
@@ -66,7 +63,6 @@ export default {
         showToastError(err);
       });
     } else {
-      console.log(url, data);
       response = await axios.put(url, data, options).catch(err => {
         showToastError(err);
       });

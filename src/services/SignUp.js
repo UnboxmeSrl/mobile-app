@@ -20,7 +20,6 @@ export const verifyOtp = async data => {
       const url = Api.SIGN_UP_WITH_EMAIL.VERIFY_OTP;
       // console.log(data, url)
       const response = await Fetch.post(url, data);
-      console.log('res email', response);
       // response.success = true
       return response;
     }
@@ -33,7 +32,6 @@ export const getOtpByNumber = async data => {
   try {
     if (data) {
       const url = Api.SIGN_UP_WITH_PHONE.GET_OTP;
-      console.log('checkPRofile', url, data);
       const response = await Fetch.post(url, data);
       return response;
     }

@@ -51,18 +51,6 @@ const useSplash = () => {
   );
 
   /* const authData = useSelector((state) => state.authSlice.authData) */
-  console.log(
-    'isAuthenticated',
-    isAuthenticated,
-    hideOnBoarding,
-    isApplied,
-    rejectedUser,
-    approvedUser,
-    isSignUpProcessStarted,
-    signUpProcessStage,
-  );
-
-  console.log('isFirstVisit', isFirstLogin);
 
   const getUserApprovalStatusData = async () => {
     if (loginData?.id) {
@@ -99,13 +87,7 @@ const useSplash = () => {
       device_brand_name: DeviceInfo.getBrand(),
       device_model_name: DeviceInfo.getModel(),
     };
-    const res = await saveUserDeviceInfo(prepData);
-
-    if (res?.id) {
-      console.log('Data saved successfully');
-    } else {
-      console.log('Data not saved because some issue.');
-    }
+    await saveUserDeviceInfo(prepData);
   };
 
   const userAnalysis = async () => {
@@ -148,22 +130,16 @@ const useSplash = () => {
     if (isUserApprovalApiCalled) {
       setTimeout(() => {
         if (!hideOnBoarding) {
-          console.log('hideOnBoarding');
           navigation.replace(SCREEN_NAMES.OnboardingNew);
         } else if (isAuthenticated && isApplied) {
-          console.log('isApplied');
           navigation.replace(SCREEN_NAMES.AppliedScreen);
         } else if (isAuthenticated && isFirstLogin && approvedUser) {
-          console.log('isFirstLogin');
           navigation.replace(SCREEN_NAMES.LoginOnboarding);
         } else if (isAuthenticated && approvedUser) {
-          console.log('approvedUser');
           navigation.replace(STACK_NAMES.BottomStack);
         } else if (rejectedUser && isAuthenticated) {
-          console.log('rejectedUser');
           navigation.replace(SCREEN_NAMES.RejectedScreen);
         } else if (isSignUpProcessStarted) {
-          console.log('isSignUpProcessStarted');
           // checkSignUpProgress(signUpProcessStage);
           navigation.replace(SCREEN_NAMES.SignUpNew);
         } else {

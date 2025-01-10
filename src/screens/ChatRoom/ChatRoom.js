@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
 import {
   BackHandler,
   SafeAreaView,
@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   Channel,
   ChannelList,
@@ -16,30 +16,34 @@ import {
 } from 'stream-chat-react-native';
 
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {currentUserData} from '../../redux';
-import {AppText, HStack} from '../../components';
-import {colors, perfectSize} from '../../utils';
+import {AppText} from '../../components';
 import {FONTS} from '../../constants';
+import {
+  currentUserData,
+  selecteSelectedChannel,
+  setSelectedChannel,
+} from '../../redux';
+import {colors, perfectSize} from '../../utils';
 
 const ChatRoom = () => {
   const loginData = useSelector(currentUserData);
-  const [showModal, setShowModal] = useState(false);
-  const [channel, setChannel] = useState(null);
+  // const [channel, setChannel] = useState(null);
+  const channel = useSelector(selecteSelectedChannel);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const filters = loginData?.id
     ? {members: {$in: [`influencer_${loginData.id}`]}}
     : {};
   const sort = {last_message_at: -1};
   const handleBack = useCallback(() => {
-    console.log('Back button pressed');
     if (channel?.id) {
-      setChannel(null);
+      dispatch(setSelectedChannel(null));
       return true;
     } else {
       navigation.goBack();
       return true;
     }
-  }, [channel?.id, navigation, setChannel]);
+  }, [channel?.id, dispatch, navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -65,14 +69,16 @@ const ChatRoom = () => {
       <ChannelList
         filters={filters}
         sort={sort}
-        onSelect={selectedChannel => setChannel(selectedChannel)}
+        onSelect={selectedChannel =>
+          dispatch(setSelectedChannel(selectedChannel))
+        }
       />
       {channel && (
         <Channel channel={channel}>
           <View style={styles.headerWrapper}>
             <TouchableOpacity
               style={{width: perfectSize(22)}}
-              onPress={() => setChannel(null)}>
+              onPress={() => dispatch(setSelectedChannel(null))}>
               <AntDesign name="arrowleft" size={perfectSize(22)} />
             </TouchableOpacity>
             <AppText style={{fontSize: perfectSize(16), fontWeight: '500'}}>

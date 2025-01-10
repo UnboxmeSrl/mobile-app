@@ -14,7 +14,6 @@ const useAuthAgency = () => {
   const [selectedUserType, setSelectedUserType] = useState(
     userDetails?.userType || {},
   );
-  console.log('selectedUsertype', userDetails?.userType);
   const [selectedValue, setSelectedValue] = useState(
     userDetails?.agencyData?.freelance ? 1 : 2,
   );

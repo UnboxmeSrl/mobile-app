@@ -16,8 +16,7 @@ import {ChatRoom} from '../screens/ChatRoom';
 const BottomTabs = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-  const {clientIsReady} = useChatClient();
-  console.log('Client is ready', clientIsReady);
+  const {} = useChatClient();
   return (
     <BottomTabs.Navigator
       initialRouteName={SCREEN_NAMES.Home}

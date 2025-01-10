@@ -6,20 +6,16 @@ export const checkPermission = async permission => {
     .then(async result => {
       switch (result) {
         case RESULTS.UNAVAILABLE:
-          console.log('result Unavailable', result);
           return false;
 
         case RESULTS.DENIED:
-          console.log('result denied', result);
           const reqRes = await requestPermission(permission);
           return reqRes;
 
         case RESULTS.LIMITED:
-          console.log('result limited', result);
           return true;
 
         case RESULTS.GRANTED:
-          console.log('result granted', result);
           return true;
 
         case RESULTS.BLOCKED:
@@ -55,19 +51,15 @@ export const requestPermission = async permission => {
     .then(result => {
       switch (result) {
         case RESULTS.UNAVAILABLE:
-          console.log('result Unavailable', result);
           return false;
 
         case RESULTS.DENIED:
-          console.log('result denied', result);
           return false;
 
         case RESULTS.LIMITED:
-          console.log('result Limited', result);
           return true;
 
         case RESULTS.GRANTED:
-          console.log('result granted', result);
           return true;
 
         case RESULTS.BLOCKED:

@@ -44,7 +44,6 @@ const useAuthProfilePicture = () => {
     const isGranted = await handlePermission(permission);
     if (isGranted) {
       const res = await openCamera();
-      console.log('test', res?.assets[0]);
       if (res?.assets?.length > 0) {
         setProfilePicData(res?.assets);
       }
@@ -62,7 +61,6 @@ const useAuthProfilePicture = () => {
     const isGranted = await handlePermission(permission);
     if (isGranted) {
       const res = await openGallery({selectionLimit: 1});
-      console.log('test', pictureIndex, res?.assets[0]);
       if (res?.assets?.length > 0) {
         const updatedData = [...profilePicData];
         updatedData[pictureIndex] = res?.assets[0];

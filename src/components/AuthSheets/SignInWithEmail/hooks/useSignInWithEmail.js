@@ -44,13 +44,10 @@ const useSignInWithEmail = isFromBookRedirected => {
         device_brand_name: DeviceInfo.getBrand(),
         device_model_name: DeviceInfo.getModel(),
       };
-      console.log('PRep Data:', prepData);
       const res = await userLogin(prepData);
-      console.log(res, 'res');
       setLoading(false);
       dispatch(setCity({}));
       if (res?.UserStatus === 'approved') {
-        console.log('Login res:', res);
         OneSignal.login(res?.id?.toString());
         dispatch(setLoginData(res));
         await mixpanel.identify(res?.id?.toString());

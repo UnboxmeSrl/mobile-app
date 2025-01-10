@@ -55,7 +55,6 @@ const useRestaurants = () => {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
-        console.log('location granted check', granted);
         if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
           return Alert.alert(
             'Location Permission',
@@ -165,7 +164,6 @@ const useRestaurants = () => {
   const getCategoriesData = async () => {
     setIsLoading(true);
     const res = await getCategories();
-    console.log('res: ' + JSON.stringify(res));
     if (res?.data?.length > 0) {
       const addAllCategory = [
         {CategoryName: 'All categories', id: 0},
@@ -197,7 +195,6 @@ const useRestaurants = () => {
     if (search?.length > 0) {
       const timeoutID = setTimeout(() => {
         getInitialRestaurantsData();
-        console.log('Testing Restaurant data');
       }, 2000);
       return () => clearTimeout(timeoutID);
     } else {

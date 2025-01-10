@@ -251,7 +251,6 @@ const ServiceDetails = () => {
                   showsVerticalScrollIndicator={false}
                   data={serviceDetails?._actions_turbo?.actions_turbo_id}
                   renderItem={({item, index}) => {
-                    console.log(item);
                     return (
                       <View style={styles.villaActionContainer}>
                         <View style={styles.villaActionIconContainer}>

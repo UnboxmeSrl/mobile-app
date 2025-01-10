@@ -13,10 +13,8 @@ const useForgotPassword = () => {
     try {
       setLoading(true);
       // const prepData = {email};
-      console.log('body_OfForgotPassowrd_USE_FORGOT_PASSWORD', email);
       if (email) {
         const res = await forgotPassword({email});
-        console.log('resOfForgotPassowrd_USE_FORGOT_PASSWORD', res, email);
         setLoading(false);
         if (res.success) {
           // forgotPasswordRef.current?.close();

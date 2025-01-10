@@ -3,6 +3,7 @@ import {sliceNames} from '../../constants';
 
 const initialState = {
   experienceLevels: [],
+  selectedChannel: null,
 };
 
 const GeneralSlice = createSlice({
@@ -12,13 +13,18 @@ const GeneralSlice = createSlice({
     setExperienceLevels: (state, actions) => {
       state.experienceLevels = actions?.payload;
     },
+    setSelectedChannel: (state, {payload}) => {
+      state.selectedChannel = payload;
+    },
   },
 });
 
-export const {setExperienceLevels} = GeneralSlice.actions;
+export const {setExperienceLevels, setSelectedChannel} = GeneralSlice.actions;
 
 // Selectors
 export const selectExperienceLevels = state =>
   state.generalSlice.experienceLevels;
 
 export default GeneralSlice.reducer;
+export const selecteSelectedChannel = state =>
+  state.generalSlice.selectedChannel;

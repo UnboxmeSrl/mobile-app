@@ -36,11 +36,14 @@ import {
   TutorialsScreen,
   YourScheduleDetailsScreen,
 } from '../screens';
+import {useNotification} from '../hooks';
 import {ChatRoom} from '../screens/ChatRoom';
 
 const StackMain = createStackNavigator();
 
 const MainStack = () => {
+  const {} = useNotification();
+
   return (
     <StackMain.Navigator
       initialRouteName={SCREEN_NAMES.Splash}

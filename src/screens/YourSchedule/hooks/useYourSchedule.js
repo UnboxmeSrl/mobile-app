@@ -43,7 +43,6 @@ const useYourSchedule = () => {
   };
 
   const handleCardPress = (item, approvalStatus, actionName, actionNumId) => {
-    console.log(item, approvalStatus, actionName, actionNumId);
     if (approvalStatus === 'Pending') {
       if (
         (actionNumId === 6 || actionNumId === 3) &&

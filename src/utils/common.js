@@ -153,14 +153,6 @@ export const deadlineDaysCount = (bookDate, deadlineDays) => {
     calculatedDeadlineDays = 0;
   }
 
-  console.log(
-    'Deadline days',
-    currentDate.toDateString(),
-    '---',
-    bookingDate.toDateString(),
-    calculatedDeadlineDays,
-  );
-
   return calculatedDeadlineDays;
 };
 

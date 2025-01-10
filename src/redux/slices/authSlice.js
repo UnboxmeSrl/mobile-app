@@ -61,12 +61,8 @@ const AuthSlice = createSlice({
       state.visitCount += 1;
     },
     updateUserCount: (state, {payload}) => {
-      console.log('setPayload outer');
       if (payload && state.loginData?.id) {
-        console.log('setPayload');
-        console.log('firstVisit Before: ', state.loginData.firstVisit, payload);
         state.loginData.firstVisit += payload;
-        console.log('firstVisit After: ', state.loginData.firstVisit);
       }
     },
     setUserCurrentLocation: (state, {payload}) => {

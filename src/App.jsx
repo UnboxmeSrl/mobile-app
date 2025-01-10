@@ -1,7 +1,7 @@
 import firebase from '@react-native-firebase/app';
 import {NavigationContainer} from '@react-navigation/native';
 import {Mixpanel} from 'mixpanel-react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {I18nextProvider} from 'react-i18next';
 import {StatusBar} from 'react-native';
 import Config from 'react-native-config';
@@ -11,7 +11,7 @@ import Toast from 'react-native-toast-message';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import MainStack from './navigation/MainStack';
-import {persistor, store} from './redux';
+import {persistor, setSelectedChannel, store} from './redux';
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
@@ -20,6 +20,8 @@ import {StreamChat} from 'stream-chat';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {chatClient, useNotification} from './hooks';
 import {Chat, OverlayProvider} from 'stream-chat-react-native';
+import notifee from '@notifee/react-native';
+import {SCREEN_NAMES, STACK_NAMES} from './constants';
 
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
@@ -45,7 +47,6 @@ const App = () => {
   };
 
   const routeNameRef = React.useRef();
-  const {} = useNotification();
 
   console.log('Firebase Configurations: ', JSON.stringify(firebaseConfig));
 
@@ -88,6 +89,70 @@ const App = () => {
     //   console.log('OneSignal: notification opened:', notification);
     // });
   }, []);
+  const linking = {
+    prefixes: ['https://admin.joinclaris.com/influencer'],
+    async getInitialURL() {
+      // Try to get the initial URL from deep link or notification
+      try {
+        const message = await notifee.getInitialNotification();
+        if (message) {
+          return await handleNotification(message);
+        }
+      } catch (error) {
+        console.log('Error fetching initial URL or notification:', error);
+      }
+    },
+    config: {
+      screens: {
+        BottomStack: {
+          screens: {
+            ChatRoom: 'BottomStack/ChatRoom', // Map the deep link path to the ChatRoom screen
+          },
+        },
+      },
+    },
+  };
+  const handleNotification = useCallback(async remoteMessage => {
+    if (!remoteMessage?.notification) {
+      return;
+    }
+    const userId = remoteMessage.notification?.data?.receiver_id;
+
+    // Check if the chatClient is already connected with the user
+    if (!chatClient || !chatClient.userID) {
+      // Generate a development token for the user (ensure your backend supports this securely for production)
+      const token = chatClient.devToken(userId);
+
+      try {
+        await chatClient.connectUser({id: userId}, token);
+      } catch (error) {
+        console.error('Failed to connect user:', error);
+        return;
+      }
+    }
+    const channelId = remoteMessage.notification.data.channel_id;
+    const message = await chatClient.getMessage(
+      remoteMessage.notification.data?.id,
+    );
+    console.log(message, 'message');
+    // Ensure channel creation with necessary members
+    try {
+      const channel = chatClient.channel('messaging', channelId, {
+        name: message.message.channel?.name || 'No Name Found',
+        members: [
+          remoteMessage.notification.data.id,
+          remoteMessage.notification.data.receiver_id,
+        ],
+      });
+      console.log('beforestate');
+      store.dispatch(setSelectedChannel(channel));
+      console.log('afterstate');
+      // return `https://admin.joinclaris.com/owner/${ERootStack.bottomTabs}/${EBottomTabsStack.bookingsTab}/${EBookingStack.chat}`;
+      return 'https://admin.joinclaris.com/influencer/BottomStack';
+    } catch (error) {
+      console.error('Failed to create or retrieve channel:', error);
+    }
+  }, []);
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
@@ -97,6 +162,7 @@ const App = () => {
             <Chat client={chatClient}>
               <I18nextProvider i18n={i18n}>
                 <NavigationContainer
+                  linking={linking}
                   ref={navigationRef}
                   onReady={() => {
                     routeNameRef.current =

@@ -15,7 +15,6 @@ export default function AppSelect({
     <SelectDropdown
       data={data}
       onSelect={(selectedItem, index) => {
-        console.log(selectedItem, index);
         setSelectedValue(selectedItem);
       }}
       renderButton={(selectedItem, isOpened) => {

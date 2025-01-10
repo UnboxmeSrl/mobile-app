@@ -11,9 +11,7 @@ export const openCamera = async () => {
     const res = await launchCamera(options);
 
     if (res.didCancel) {
-      console.log('User cancelled camera');
     } else if (res.error) {
-      console.log('Camera Error: ', res.error);
     } else {
       return res;
     }
@@ -34,9 +32,7 @@ export const openGallery = async ({selectionLimit}) => {
     const res = await launchImageLibrary(options);
 
     if (res.didCancel) {
-      console.log('User cancelled camera');
     } else if (res.error) {
-      console.log('Camera Error: ', res.error);
     } else {
       return res;
     }

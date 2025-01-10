@@ -119,7 +119,6 @@ export const getProfile = async () => {
 export const deleteUserAccount = async userId => {
   try {
     const url = Api.PROFILE.DELETE_USER_ACCOUNT + userId;
-    console.log('url:', url);
     const response = await Fetch.delete(url);
     console.log('delete response', response);
     return response?.data;
