@@ -6,7 +6,7 @@ const initialState = {
   restaurantDetails: {},
   serviceDetails: {},
   canceledBookings: [],
-  timeFrameData: [],
+  timeFrameData: {},
   socialActions: [],
   // allNearerRestaurants: {},
   allRestaurants: {},

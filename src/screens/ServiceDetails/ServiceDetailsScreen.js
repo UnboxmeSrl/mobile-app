@@ -42,7 +42,13 @@ const ServiceDetails = () => {
     handleInfluencerPlus,
     handleInfluencerMinus,
   } = useServiceDetails();
-
+  console.log(
+    'serviceDetails?.at_offer_description',
+    serviceDetails,
+    // serviceDetails?.at_offer_description,
+    // serviceDetails?._actions_turbo?.Extra_People,
+    // serviceDetails,
+  );
   // console.log('Service Details: ' + JSON.stringify(serviceDetails))
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -203,38 +209,44 @@ const ServiceDetails = () => {
                 </View>
               </View>
 
-              <View
-                style={[
-                  styles.amenityMainContainer,
-                  styles.friendAmenityContainer,
-                ]}>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text
-                    allowFontScaling={false}
-                    style={[
-                      styles.amenitiesTitle,
-                      styles.friendAmenityText,
-                    ]}>{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
-                  <Text
-                    allowFontScaling={false}
-                    style={[
-                      styles.amenitiesDescription,
-                      styles.friendAmenityTitle,
-                    ]}>
-                    Friend
-                  </Text>
+              {serviceDetails?._actions_turbo?.Extra_People > 0 && (
+                <View
+                  style={[
+                    styles.amenityMainContainer,
+                    styles.friendAmenityContainer,
+                  ]}>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={[
+                        styles.amenitiesTitle,
+                        styles.friendAmenityText,
+                      ]}>{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={[
+                        styles.amenitiesDescription,
+                        styles.friendAmenityTitle,
+                      ]}>
+                      Friend
+                    </Text>
+                  </View>
                 </View>
-              </View>
+              )}
             </ScrollView>
           )}
 
           <View style={styles.divider} />
-          {serviceDetails?.at_offer_description && (
-            <View style={styles.beautyDescriptionContainer}>
-              <Text allowFontScaling={false} style={styles.beautyDescription}>
-                {serviceDetails?.at_offer_description}
-              </Text>
-            </View>
+          {(!typeof serviceDetails?.at_offer_description === 'undefined' ||
+            serviceDetails?.at_offer_description) && (
+            <>
+              <View style={styles.beautyDescriptionContainer}>
+                <Text allowFontScaling={false} style={styles.beautyDescription}>
+                  {serviceDetails?.at_offer_description || ''}
+                </Text>
+              </View>
+              <View style={[styles.divider, {marginTop: 0}]} />
+            </>
           )}
 
           {actionNumId === 9 ? (
@@ -392,7 +404,6 @@ const ServiceDetails = () => {
                                     }}
                                     style={styles.socialMediaImage}
                                   />
-                                  {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                                 </View>
                                 <View
                                   style={
@@ -457,7 +468,6 @@ const ServiceDetails = () => {
                                     }}
                                     style={styles.socialMediaImage}
                                   />
-                                  {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                                 </View>
                                 <View
                                   style={
@@ -488,9 +498,9 @@ const ServiceDetails = () => {
                                     }>
                                     <Text
                                       allowFontScaling={false}
-                                      style={
-                                        styles.socialMediaDescriptionText
-                                      }>{`${innerItem?.Descrizione}`}</Text>
+                                      style={styles.socialMediaDescriptionText}>
+                                      {`${innerItem?.Descrizione}`}
+                                    </Text>
                                   </View>
                                 </View>
                               </View>
@@ -518,7 +528,6 @@ const ServiceDetails = () => {
                                 }}
                                 style={styles.socialMediaImage}
                               />
-                              {/* <Image source={icon?.action_icon} style={styles.socialMediaImage} /> */}
                             </View>
                             <View
                               style={
@@ -593,10 +602,11 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   beautyDescriptionContainer: {
-    alignSelf: 'center',
+    // alignSelf: 'center',
     paddingHorizontal: scale(40),
     marginBottom: verticalScale(20),
-    marginTop: verticalScale(-10),
+    marginVertical: verticalScale(-10),
+    // marginTop: verticalScale(-10),
   },
   whatIsDiaryAnswer: {
     color: COLORS.davyGrey,
@@ -753,13 +763,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   mainSocialItemContainer: {
-    height: verticalScale(150),
+    minHeight: verticalScale(80),
     width: '90%',
     alignSelf: 'center',
     borderWidth: moderateScale(1),
     borderColor: COLORS.gainsboro,
     borderRadius: moderateScale(16),
     marginTop: verticalScale(24),
+    paddingVertical: verticalScale(8),
     flexDirection: 'row',
   },
   flatlistContainer: {

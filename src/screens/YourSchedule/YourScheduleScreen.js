@@ -237,8 +237,13 @@ const YourScheduleScreen = () => {
                         </Text>
                       </View>
                       <View style={styles.timeReelsContainer}>
-                        {actionNumId !== 9 ? (
+                        {/* {actionNumId !== 9  ? ( */}
+                        {actionNumId !== 9 &&
+                        (timeFrame || item.booking_time) ? (
                           <View style={styles.timeContainer}>
+                            {/* {Object.keys(timeFrame || {}).length &&
+                              item.booking_time && (
+                                <> */}
                             <Text
                               allowFontScaling={false}
                               style={styles.timeTitleText}>
@@ -251,6 +256,8 @@ const YourScheduleScreen = () => {
                                 ? `${getFormattedTime(item?.booking_time)}`
                                 : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`
                             }`}</Text>
+                            {/* </>
+                              )} */}
                           </View>
                         ) : (
                           <View style={styles.timeContainer} />

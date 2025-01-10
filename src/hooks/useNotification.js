@@ -90,8 +90,37 @@ const useNotification = () => {
       }
       prevNotificationId.current = remoteMessage.data?.id;
 
+<<<<<<< HEAD
       // Process and display the notification
       processNotification(remoteMessage);
+=======
+      const message = await chatClient.getMessage(remoteMessage.data.id);
+
+      // create the android channel to send the notification to
+      const channelId = await notifee.createChannel({
+        id: 'chat-messages',
+        name: 'Chat Messages',
+      });
+
+      // display the notification
+      const {stream, ...rest} = remoteMessage.data ?? {};
+      const data = {
+        ...rest,
+        ...stream, // extract and merge stream object if present
+      };
+      await notifee.displayNotification({
+        title: remoteMessage?.notification?.title,
+        body: message.message.text,
+        data,
+        android: {
+          channelId,
+          pressAction: {
+            id: 'default',
+          },
+        },
+      });
+      console.log('OKKK');
+>>>>>>> b90db9837e55b3551c02a962992588631398cea5
     });
 
     // Handle foreground notification interaction

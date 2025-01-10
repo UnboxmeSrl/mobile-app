@@ -15,7 +15,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useBookingDetails} from './hooks';
-import {getFormattedDate} from '../../utils';
+import {commonStyle, getFormattedDate} from '../../utils';
 
 const BookingDetailsScreen = () => {
   const {
@@ -48,6 +48,10 @@ const BookingDetailsScreen = () => {
     handleConfirmBtnPress,
     handleRemoveBtnPress,
   } = useBookingDetails();
+  console.log(
+    'weekDayWiseTimeSlots',
+    weekDayWiseTimeSlots?.map(e => e.weekdays),
+  );
 
   return (
     <KeyboardAwareScrollView
@@ -135,6 +139,7 @@ const BookingDetailsScreen = () => {
                   endDate={endDate}
                   onDateSelected={date => {
                     setSelectedDate(date);
+                    console.log('isEventIn_onDateSelected', date);
                     if (isEvent) {
                       const myDate = new Date(date);
                       const onlyDate = getFormattedDate(myDate);
@@ -201,6 +206,16 @@ const BookingDetailsScreen = () => {
                         let isSelected = item?.id === selectedTimeFame?.id;
                         const dayData = item?.weekdays?.filter(
                           wt => wt?.day === currentWeekDay,
+                        );
+                        console.log(
+                          'isSelected',
+                          isSelected,
+                          currentWeekDay,
+                          dayData,
+                          item.weekdays,
+                          item.pause_days,
+                          'itemm_______________',
+                          item,
                         );
                         if (dayData?.length === 0) {
                           isShow = false;
