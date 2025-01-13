@@ -54,7 +54,7 @@ const ChatRoom = () => {
       return () => backHandler.remove(); // Cleanup listener on screen blur
     }, [handleBack]),
   );
-  console.log(channel?.data);
+  console.log('screen is in chatRoom', channel?.data);
   return (
     <SafeAreaView style={styles.container}>
       {/* {!channel && <Header title="Chatroom" />} */}
