@@ -11,7 +11,6 @@ import {AppText} from '../../components';
 
 const ChatScreen = () => {
   const {channel, isChannelLoaded, onResetChannel} = useChat();
-  // console.log('Client Ready', clientIsReady);
   return (
     <SafeAreaView style={styles.container}>
       {isChannelLoaded ? (

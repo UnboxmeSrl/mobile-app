@@ -27,13 +27,15 @@ const useChat = () => {
     const restaurantOwnersWithPrefix = restaurantOwners.map(
       ownerId => 'owner_' + ownerId,
     );
+    console.log(restaurantOwnersWithPrefix, 'restaurantOwnersWithPrefix');
     const members = [
       'influencer_' + bookingDetails?.user_turbo_id?.toString(),
       // ...restaurantOwnersWithPrefix,
     ];
+
     const setupChannel = async () => {
       const newChannel = chatClient.channel('messaging', bookingId, {
-        name: `Chat with ${bookingDetails?._offers_turbo?.Offer_Name}_${bookingId}`,
+        name: `${bookingDetails?._offers_turbo?.Offer_Name}_${bookingId}`,
         members: members,
       });
 
