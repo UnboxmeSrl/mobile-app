@@ -45,6 +45,7 @@ const ChatRoom = () => {
     }
   }, [channel?.id, dispatch, navigation]);
 
+  console.log(channel?.state?.members, 'members');
   useFocusEffect(
     useCallback(() => {
       const backHandler = BackHandler.addEventListener(
@@ -82,7 +83,10 @@ const ChatRoom = () => {
               <AntDesign name="arrowleft" size={perfectSize(22)} />
             </TouchableOpacity>
             <AppText style={{fontSize: perfectSize(16), fontWeight: '500'}}>
-              {channel.data?.name || 'Unnamed Channel'}
+              {channel?.data?.name}
+              {/* {Object.values(channel?.state?.members || {}).find(member =>
+                member.user.id.startsWith('owner_'),
+              )?.user?.name || 'Unnamed Channel'} */}
             </AppText>
             <View
               style={{

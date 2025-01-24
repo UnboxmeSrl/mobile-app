@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Mixpanel} from 'mixpanel-react-native';
 import React, {useCallback, useEffect} from 'react';
 import {I18nextProvider} from 'react-i18next';
-import {StatusBar} from 'react-native';
+import {Linking, StatusBar} from 'react-native';
 import Config from 'react-native-config';
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -22,7 +22,7 @@ import {persistor, setSelectedChannel, store} from './redux';
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
-
+import messaging from '@react-native-firebase/messaging';
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
 export const mixpanel = new Mixpanel(
@@ -90,11 +90,27 @@ const App = () => {
     // });
   }, []);
   const linking = {
-    prefixes: ['https://admin.joinclaris.com/influencer'],
+    prefixes: [
+      'https://admin.joinclaris.com/influencer/',
+      'clarisinfluencer://',
+    ],
     async getInitialURL() {
       // Try to get the initial URL from deep link or notification
       try {
-        const message = await notifee.getInitialNotification();
+        let message = await messaging().getInitialNotification();
+        console.log('initial url1', message);
+        if (message) {
+          message = {
+            ...message,
+            notification: {
+              ...message.notification,
+              data: message.data,
+            },
+          };
+        }
+        if (!message) {
+          message = await notifee.getInitialNotification();
+        }
         if (message) {
           return await handleNotification(message);
         }
@@ -102,17 +118,44 @@ const App = () => {
         console.log('Error fetching initial URL or notification:', error);
       }
     },
+    subscribe(listener) {
+      // Listen to incoming links from deep linking
+      let subscribed = Linking.addEventListener('url', ({url}) => {
+        console.log(url);
+        return listener(url);
+      });
+      //onNotificationOpenedApp: When the application is running, but in the background.
+      const unsubscribe = messaging().onNotificationOpenedApp(
+        async remoteMessage => {
+          console.log('onOpen urlSubcribe', remoteMessage);
+          if (remoteMessage) {
+            const url = await handleNotification({
+              ...remoteMessage,
+              notification: {
+                ...remoteMessage.notification,
+                data: remoteMessage.data,
+              },
+            });
+            console.log('url', url);
+            if (typeof url === 'string') {
+              listener(url);
+            }
+          }
+        },
+      );
+      return () => {
+        subscribed.remove();
+        unsubscribe();
+      };
+    },
     config: {
       screens: {
-        [STACK_NAMES.BottomStack]: {
+        BottomStack: {
           screens: {
-            [SCREEN_NAMES.ChatRoom]: SCREEN_NAMES.ChatRoom,
+            ChatRoom: 'BottomStack/ChatRoom', // Map the deep link path to the ChatRoom screen
           },
         },
       },
-      // screens: {
-      //   [SCREEN_NAMES.ChatRoom]: SCREEN_NAMES.ChatRoom,
-      // },
     },
   };
   const handleNotification = useCallback(async remoteMessage => {
@@ -137,12 +180,14 @@ const App = () => {
     }
 
     const message = await chatClient.getMessage(otherUserId);
+    console.log(otherUserId, userId, notification?.data, 'notification');
+
     // Ensure channel creation with necessary members
     try {
-      const channel = chatClient.channel('messaging', channelId, {
-        name: message.message.channel?.name || 'No Name Found',
-        members: [otherUserId, userId],
+      const channel = await chatClient.channel('messaging', channelId, {
+        members: ['owner_284', userId],
       });
+      console.log(channel.state.members, 'channel noti');
       store.dispatch(setSelectedChannel(channel));
       // routeNameRef.current === 'ChatRoom';
       // await analytics().logScreenView({
