@@ -30,7 +30,7 @@ import {COLORS, FONTS} from '../../constants';
 import {colors, perfectSize, xanoImageSize} from '../../utils';
 import {useProfile} from './hooks';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
+// import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
 import {IMAGES} from '../../assets';
 import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
@@ -162,13 +162,13 @@ const ProfileScreen = () => {
                   </View>
                 </View>
                 <View style={styles.profileProgressBarContainer}>
-                  <SimpleGradientProgressbarView
+                  {/* <SimpleGradientProgressbarView
                     style={styles.profileProgressBar}
                     fromColor={COLORS.crayola}
                     toColor={COLORS.red}
                     progress={level / 10}
                     cornerRadius={5.0}
-                  />
+                  /> */}
                 </View>
 
                 <View style={styles.invitationDescriptionContainer}>

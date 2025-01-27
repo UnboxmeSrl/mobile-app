@@ -1,28 +1,28 @@
+import notifee from '@notifee/react-native';
+import analytics from '@react-native-firebase/analytics';
 import firebase from '@react-native-firebase/app';
 import {NavigationContainer} from '@react-navigation/native';
 import {Mixpanel} from 'mixpanel-react-native';
 import React, {useCallback, useEffect} from 'react';
 import {I18nextProvider} from 'react-i18next';
-import {StatusBar} from 'react-native';
+import {Linking, StatusBar} from 'react-native';
 import Config from 'react-native-config';
 import 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {OneSignal} from 'react-native-onesignal';
+import SplashScreen from 'react-native-splash-screen';
 import Toast from 'react-native-toast-message';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+import {Chat, OverlayProvider} from 'stream-chat-react-native';
+import {SCREEN_NAMES, STACK_NAMES} from './constants';
+import {chatClient} from './hooks';
 import MainStack from './navigation/MainStack';
 import {persistor, setSelectedChannel, store} from './redux';
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
-import analytics from '@react-native-firebase/analytics';
-import {StreamChat} from 'stream-chat';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {chatClient, useNotification} from './hooks';
-import {Chat, OverlayProvider} from 'stream-chat-react-native';
-import notifee from '@notifee/react-native';
-import {SCREEN_NAMES, STACK_NAMES} from './constants';
-
+import messaging from '@react-native-firebase/messaging';
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
 export const mixpanel = new Mixpanel(
@@ -90,17 +90,63 @@ const App = () => {
     // });
   }, []);
   const linking = {
-    prefixes: ['https://admin.joinclaris.com/influencer'],
+    prefixes: [
+      'https://admin.joinclaris.com/influencer/',
+      'clarisinfluencer://',
+    ],
     async getInitialURL() {
       // Try to get the initial URL from deep link or notification
       try {
-        const message = await notifee.getInitialNotification();
+        let message = await messaging().getInitialNotification();
+        console.log('initial url1', message);
+        if (message) {
+          message = {
+            ...message,
+            notification: {
+              ...message.notification,
+              data: message.data,
+            },
+          };
+        }
+        if (!message) {
+          message = await notifee.getInitialNotification();
+        }
         if (message) {
           return await handleNotification(message);
         }
       } catch (error) {
         console.log('Error fetching initial URL or notification:', error);
       }
+    },
+    subscribe(listener) {
+      // Listen to incoming links from deep linking
+      let subscribed = Linking.addEventListener('url', ({url}) => {
+        console.log(url);
+        return listener(url);
+      });
+      //onNotificationOpenedApp: When the application is running, but in the background.
+      const unsubscribe = messaging().onNotificationOpenedApp(
+        async remoteMessage => {
+          console.log('onOpen urlSubcribe', remoteMessage);
+          if (remoteMessage) {
+            const url = await handleNotification({
+              ...remoteMessage,
+              notification: {
+                ...remoteMessage.notification,
+                data: remoteMessage.data,
+              },
+            });
+            console.log('url', url);
+            if (typeof url === 'string') {
+              listener(url);
+            }
+          }
+        },
+      );
+      return () => {
+        subscribed.remove();
+        unsubscribe();
+      };
     },
     config: {
       screens: {
@@ -116,8 +162,10 @@ const App = () => {
     if (!remoteMessage?.notification) {
       return;
     }
-    const userId = remoteMessage.notification?.data?.receiver_id;
-
+    const notification = remoteMessage.notification;
+    const userId = notification?.data?.receiver_id;
+    const otherUserId = notification?.data?.id;
+    const channelId = notification.data.channel_id;
     // Check if the chatClient is already connected with the user
     if (!chatClient || !chatClient.userID) {
       // Generate a development token for the user (ensure your backend supports this securely for production)
@@ -130,25 +178,25 @@ const App = () => {
         return;
       }
     }
-    const channelId = remoteMessage.notification.data.channel_id;
-    const message = await chatClient.getMessage(
-      remoteMessage.notification.data?.id,
-    );
-    console.log(message, 'message');
+
+    const message = await chatClient.getMessage(otherUserId);
+    console.log(otherUserId, userId, notification?.data, 'notification');
+
     // Ensure channel creation with necessary members
     try {
-      const channel = chatClient.channel('messaging', channelId, {
-        name: message.message.channel?.name || 'No Name Found',
-        members: [
-          remoteMessage.notification.data.id,
-          remoteMessage.notification.data.receiver_id,
-        ],
+      const channel = await chatClient.channel('messaging', channelId, {
+        members: ['owner_284', userId],
       });
-      console.log('beforestate');
+      console.log(channel.state.members, 'channel noti');
       store.dispatch(setSelectedChannel(channel));
-      console.log('afterstate');
-      // return `https://admin.joinclaris.com/owner/${ERootStack.bottomTabs}/${EBottomTabsStack.bookingsTab}/${EBookingStack.chat}`;
-      return 'https://admin.joinclaris.com/influencer/BottomStack';
+      // routeNameRef.current === 'ChatRoom';
+      // await analytics().logScreenView({
+      //   screen_name: 'ChatRoom',
+      //   screen_class: 'ChatRoom',
+      // });
+      SplashScreen.hide();
+      // return `https://admin.joinclaris.com/influencer/Splash/BottomStack/ChatRoom`;
+      return 'https://admin.joinclaris.com/influencer/ChatRoom';
     } catch (error) {
       console.error('Failed to create or retrieve channel:', error);
     }
@@ -172,7 +220,7 @@ const App = () => {
                     const previousRouteName = routeNameRef.current;
                     const currentRouteName =
                       navigationRef.current.getCurrentRoute().name;
-                    // console.log('Current route: ' + currentRouteName);
+                    console.log('Current route: ' + currentRouteName);
 
                     if (previousRouteName !== currentRouteName) {
                       await analytics().logScreenView({

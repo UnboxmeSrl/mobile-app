@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,11 +11,16 @@ const useChatClient = () => {
   const [clientIsReady, setClientIsReady] = useState(false);
   const loginData = useSelector(state => state.authSlice.loginData);
   const unsubscribeTokenRefreshListenerRef = useRef();
-  const user = {
-    id: 'influencer_' + loginData?.id,
-    name: loginData?.name,
-  };
-
+  // console.log(loginData, 'data');
+  const user = useMemo(
+    () => ({
+      id: 'influencer_' + loginData?.id,
+      name: loginData?.name,
+      image: loginData?.Profile_pic?.url,
+    }),
+    [loginData?.Profile_pic?.url, loginData?.id, loginData?.name],
+  );
+  console.log(user, 'loginData?.Profile_pic?.url');
   // useEffect(() => {
   //   const setupClient = async () => {
   //     try {
@@ -126,7 +131,7 @@ const useChatClient = () => {
       await chatClient?.disconnectUser();
       unsubscribeTokenRefreshListenerRef.current?.();
     };
-  }, []);
+  }, [loginData?.id, user]);
 
   return {
     clientIsReady,

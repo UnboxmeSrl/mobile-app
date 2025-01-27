@@ -11,7 +11,7 @@ import {AppText} from '../../components';
 
 const ChatScreen = () => {
   const {channel, isChannelLoaded, onResetChannel} = useChat();
-  // console.log('Client Ready', clientIsReady);
+  console.log(channel?.data?.name, 'channel?.state?.members');
   return (
     <SafeAreaView style={styles.container}>
       {isChannelLoaded ? (
@@ -23,7 +23,10 @@ const ChatScreen = () => {
               <AntDesign name="arrowleft" size={perfectSize(22)} />
             </TouchableOpacity>
             <AppText style={{fontSize: perfectSize(16), fontWeight: '500'}}>
-              {channel.data?.name || 'Unnamed Channel'}
+              {/* {Object.values(channel?.state?.members || {}).find(member =>
+                member.user.id.startsWith('owner_'),
+              )?.user?.name || 'Unnamed Channel'} */}
+              {channel?.data?.name}
             </AppText>
             <View
               style={{
