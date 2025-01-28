@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
+import {Alert, TurboModuleRegistry} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES} from '../../../constants';
@@ -18,6 +18,10 @@ import {
 
 const useYourScheduleDetails = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
+  // const bookingsLength = useSelector(
+  //   state => state.restaurantSlice.bookings?.length,
+  // );
+  // console.log('bookingsLength', bookingsLength);
   const route = useRoute();
   const bookingDetails = route.params?.bookingDetails;
   const approvalStageValue = bookingDetails?.Approved
@@ -156,7 +160,8 @@ const useYourScheduleDetails = () => {
 
       setIsDeleting(false);
       setIsAlertVisible(false);
-      navigate(SCREEN_NAMES.ArchiveScreen);
+      Alert.alert('Your booking is cancelled, move into archive');
+      // navigate(SCREEN_NAMES.ArchiveScreen);
     } else {
       Alert.alert('Something went wrong');
     }

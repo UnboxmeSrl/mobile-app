@@ -217,6 +217,11 @@ const useRestaurants = () => {
     }
   }, [isFocused]);
 
+  // reset page to 1 if tab  change
+  useEffect(() => {
+    setPage(1);
+  }, [selectedIndex]);
+
   return {
     categories,
     // categoriesIds,

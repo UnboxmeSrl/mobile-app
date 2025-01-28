@@ -140,7 +140,7 @@ const RestaurantsScreen = () => {
                   length: verticalScale(200),
                   offset: verticalScale(200) * index,
                 })}
-                keyExtractor={(_, index) => index.toString()}
+                keyExtractor={item => item.id.toString()}
                 refreshControl={
                   <RefreshControl
                     onRefresh={onRefresh}

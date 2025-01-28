@@ -10,11 +10,11 @@ import notifee from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import {processNotification} from './src/hooks/useNotification';
 messaging().setBackgroundMessageHandler(async remotemesassge => {
-  console.log(remotemesassge, 'remotemesassge');
-  const channelId = await notifee.createChannel({
-    id: 'chat-messages',
-    name: 'Chat Messages',
-  });
+  // console.log(remotemesassge, 'remotemesassge');
+  // const channelId = await notifee.createChannel({
+  //   id: 'chat-messages',
+  //   name: 'Chat Messages',
+  // });
   await processNotification(remotemesassge);
   // await notifee.displayNotification({
   //   title: 'Claris',

@@ -13,6 +13,7 @@ export const processNotification = async remoteMessage => {
   if (!chatClient || !chatClient.userID) {
     // Generate a development token for the user (ensure your backend supports this securely for production)
     const token = chatClient.devToken(remoteMessage.data.receiver_id);
+    console.log('checkProcessNotification')
 
     try {
       await chatClient.connectUser({id: remoteMessage.data.receiver_id}, token);

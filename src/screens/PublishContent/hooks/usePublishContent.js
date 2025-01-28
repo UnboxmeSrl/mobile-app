@@ -151,7 +151,7 @@ const usePublishContent = () => {
     const isGranted = await handlePermission(permission);
     if (isGranted) {
       const res = await openCamera();
-      console.log('test', res?.assets[0]);
+      // console.log('test', res?.assets[0]);
       if (res?.assets?.length > 0) {
         const updatedData = [...contentPhotos];
         updatedData[pictureIndex] = res?.assets[0];
@@ -173,7 +173,7 @@ const usePublishContent = () => {
     if (isGranted) {
       const res = await openGallery({selectionLimit: 1});
       // console.log('IMAGE Results: ' + JSON.stringify(res));
-      console.log('test', pictureIndex, res?.assets[0]);
+      // console.log('test', pictureIndex, res?.assets[0]);
       if (res?.assets?.length > 0) {
         const updatedData = [...contentPhotos];
         updatedData[pictureIndex] = res?.assets[0];

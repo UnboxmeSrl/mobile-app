@@ -1,6 +1,7 @@
 import notifee from '@notifee/react-native';
 import analytics from '@react-native-firebase/analytics';
 import firebase from '@react-native-firebase/app';
+import messaging from '@react-native-firebase/messaging';
 import {NavigationContainer} from '@react-navigation/native';
 import {Mixpanel} from 'mixpanel-react-native';
 import React, {useCallback, useEffect} from 'react';
@@ -10,19 +11,17 @@ import Config from 'react-native-config';
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {OneSignal} from 'react-native-onesignal';
-import SplashScreen from 'react-native-splash-screen';
 import Toast from 'react-native-toast-message';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Chat, OverlayProvider} from 'stream-chat-react-native';
-import {SCREEN_NAMES, STACK_NAMES} from './constants';
 import {chatClient} from './hooks';
 import MainStack from './navigation/MainStack';
 import {persistor, setSelectedChannel, store} from './redux';
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
-import messaging from '@react-native-firebase/messaging';
+import SplashScreen from 'react-native-splash-screen';
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
 export const mixpanel = new Mixpanel(
@@ -52,6 +51,7 @@ const App = () => {
 
   // Initialize Firebase
   if (!firebase.apps.length) {
+    console.log('firebase.apps.length', firebase.apps?.length, firebase.apps);
     firebase.initializeApp(firebaseConfig);
   }
 
@@ -89,6 +89,7 @@ const App = () => {
     //   console.log('OneSignal: notification opened:', notification);
     // });
   }, []);
+
   const linking = {
     prefixes: [
       'https://admin.joinclaris.com/influencer/',
@@ -108,10 +109,13 @@ const App = () => {
             },
           };
         }
+        console.log('message', message);
         if (!message) {
           message = await notifee.getInitialNotification();
+          console.log('messageInsideNotifeeBlock', message);
         }
         if (message) {
+          console.log('messageInsideHandleNotifeeBlock', message);
           return await handleNotification(message);
         }
       } catch (error) {
@@ -121,7 +125,7 @@ const App = () => {
     subscribe(listener) {
       // Listen to incoming links from deep linking
       let subscribed = Linking.addEventListener('url', ({url}) => {
-        console.log(url);
+        console.log('url', url);
         return listener(url);
       });
       //onNotificationOpenedApp: When the application is running, but in the background.
@@ -162,10 +166,12 @@ const App = () => {
     if (!remoteMessage?.notification) {
       return;
     }
+    SplashScreen.hide();
     const notification = remoteMessage.notification;
     const userId = notification?.data?.receiver_id;
     const otherUserId = notification?.data?.id;
     const channelId = notification.data.channel_id;
+    console.log('channelId', channelId);
     // Check if the chatClient is already connected with the user
     if (!chatClient || !chatClient.userID) {
       // Generate a development token for the user (ensure your backend supports this securely for production)
@@ -180,23 +186,18 @@ const App = () => {
     }
 
     const message = await chatClient.getMessage(otherUserId);
-    console.log(otherUserId, userId, notification?.data, 'notification');
+    // console.log(otherUserId, userId, notification?.data, 'notification');
 
     // Ensure channel creation with necessary members
     try {
       const channel = await chatClient.channel('messaging', channelId, {
+        name: message.message?.channel?.name,
         members: ['owner_284', userId],
       });
       console.log(channel.state.members, 'channel noti');
       store.dispatch(setSelectedChannel(channel));
-      // routeNameRef.current === 'ChatRoom';
-      // await analytics().logScreenView({
-      //   screen_name: 'ChatRoom',
-      //   screen_class: 'ChatRoom',
-      // });
-      SplashScreen.hide();
-      // return `https://admin.joinclaris.com/influencer/Splash/BottomStack/ChatRoom`;
-      return 'https://admin.joinclaris.com/influencer/ChatRoom';
+      console.log('afterstate');
+      return 'https://admin.joinclaris.com/influencer/BottomStack/ChatRoom';
     } catch (error) {
       console.error('Failed to create or retrieve channel:', error);
     }

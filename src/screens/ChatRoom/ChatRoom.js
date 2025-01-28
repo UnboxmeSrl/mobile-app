@@ -45,7 +45,12 @@ const ChatRoom = () => {
     }
   }, [channel?.id, dispatch, navigation]);
 
-  console.log(channel?.state?.members, 'members');
+  console.log(
+    channel?.state?.members,
+    'members',
+    'channel?.state?.messageSets',
+    channel?.state?.messageSets,
+  );
   useFocusEffect(
     useCallback(() => {
       const backHandler = BackHandler.addEventListener(
@@ -55,7 +60,6 @@ const ChatRoom = () => {
       return () => backHandler.remove(); // Cleanup listener on screen blur
     }, [handleBack]),
   );
-
   return (
     <SafeAreaView style={styles.container}>
       {/* {!channel && <Header title="Chatroom" />} */}
@@ -74,7 +78,7 @@ const ChatRoom = () => {
           dispatch(setSelectedChannel(selectedChannel))
         }
       />
-      {channel && (
+      {!!channel && (
         <Channel channel={channel}>
           <View style={styles.headerWrapper}>
             <TouchableOpacity

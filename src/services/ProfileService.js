@@ -4,7 +4,7 @@ import Fetch from './ApiService';
 export const getUserApprovalStatus = async userId => {
   try {
     const url = Api.PROFILE.GET_USER_APPROVAL_STATUS + userId;
-    console.log('URL:', url);
+    // console.log('URL:', url);
     const response = await Fetch.get(url);
     return response;
   } catch (error) {
