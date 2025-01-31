@@ -11,7 +11,7 @@
 		<key>CFBundleIdentifier</key>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 		<key>CFBundleInfoDictionaryVersion</key>
-		<string>6.0</string>
+		<string>8.0</string>
 		<key>CFBundleName</key>
 		<string>$(PRODUCT_NAME)</string>
 		<key>CFBundlePackageType</key>
@@ -20,22 +20,6 @@
 		<string>$(MARKETING_VERSION)</string>
 		<key>CFBundleSignature</key>
 		<string>????</string>
-		<key>CFBundleVersion</key>
-		<string>$(CURRENT_PROJECT_VERSION)</string>
-		<key>ITSAppUsesNonExemptEncryption</key>
-		<false />
-		<key>LSRequiresIPhoneOS</key>
-		<true />
-		<key>MBXAccessToken</key>
-		<string>
-			pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg</string>
-		<key>NSAppTransportSecurity</key>
-		<dict>
-			<key>NSAllowsArbitraryLoads</key>
-			<false />
-			<key>NSAllowsLocalNetworking</key>
-			<true />
-		</dict>
 		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>
@@ -51,17 +35,32 @@
 				</array>
 			</dict>
 		</array>
+		<key>CFBundleVersion</key>
+		<string>$(CURRENT_PROJECT_VERSION)</string>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
+		<key>LSRequiresIPhoneOS</key>
+		<true/>
+		<key>MBXAccessToken</key>
+		<string>pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg</string>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<false/>
+			<key>NSAllowsLocalNetworking</key>
+			<true/>
+		</dict>
 		<key>NSAppleMusicUsageDescription</key>
 		<string>This app requires to access Apple Music</string>
 		<key>NSCameraUsageDescription</key>
 		<string>We are required to access your camera to capture your image and use as profile
-			picture</string>
+					picture</string>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>We need to access your location to find a proper place and calculate the distance
-			calculate the distance to store</string>
+					calculate the distance to store</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>We need to access your location to find a proper place and calculate the distance to
-			store</string>
+					store</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>This app requires to access Microphone</string>
 		<key>NSMotionUsageDescription</key>
@@ -130,6 +129,6 @@
 			<string>UIInterfaceOrientationPortrait</string>
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
-		<false />
+		<false/>
 	</dict>
 </plist>

@@ -4,7 +4,7 @@ import firebase from '@react-native-firebase/app';
 import messaging from '@react-native-firebase/messaging';
 import {NavigationContainer} from '@react-navigation/native';
 import {Mixpanel} from 'mixpanel-react-native';
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import {I18nextProvider} from 'react-i18next';
 import {Linking, StatusBar} from 'react-native';
 import Config from 'react-native-config';
@@ -21,7 +21,7 @@ import {persistor, setSelectedChannel, store} from './redux';
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
-import SplashScreen from 'react-native-splash-screen';
+// import SplashScreen from 'react-native-splash-screen';
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
 export const mixpanel = new Mixpanel(
@@ -89,84 +89,11 @@ const App = () => {
     //   console.log('OneSignal: notification opened:', notification);
     // });
   }, []);
-
-  const linking = {
-    prefixes: [
-      'https://admin.joinclaris.com/influencer/',
-      'clarisinfluencer://',
-    ],
-    async getInitialURL() {
-      // Try to get the initial URL from deep link or notification
-      try {
-        let message = await messaging().getInitialNotification();
-        console.log('initial url1', message);
-        if (message) {
-          message = {
-            ...message,
-            notification: {
-              ...message.notification,
-              data: message.data,
-            },
-          };
-        }
-        console.log('message', message);
-        if (!message) {
-          message = await notifee.getInitialNotification();
-          console.log('messageInsideNotifeeBlock', message);
-        }
-        if (message) {
-          console.log('messageInsideHandleNotifeeBlock', message);
-          return await handleNotification(message);
-        }
-      } catch (error) {
-        console.log('Error fetching initial URL or notification:', error);
-      }
-    },
-    subscribe(listener) {
-      // Listen to incoming links from deep linking
-      let subscribed = Linking.addEventListener('url', ({url}) => {
-        console.log('url', url);
-        return listener(url);
-      });
-      //onNotificationOpenedApp: When the application is running, but in the background.
-      const unsubscribe = messaging().onNotificationOpenedApp(
-        async remoteMessage => {
-          console.log('onOpen urlSubcribe', remoteMessage);
-          if (remoteMessage) {
-            const url = await handleNotification({
-              ...remoteMessage,
-              notification: {
-                ...remoteMessage.notification,
-                data: remoteMessage.data,
-              },
-            });
-            console.log('url', url);
-            if (typeof url === 'string') {
-              listener(url);
-            }
-          }
-        },
-      );
-      return () => {
-        subscribed.remove();
-        unsubscribe();
-      };
-    },
-    config: {
-      screens: {
-        BottomStack: {
-          screens: {
-            ChatRoom: 'BottomStack/ChatRoom', // Map the deep link path to the ChatRoom screen
-          },
-        },
-      },
-    },
-  };
   const handleNotification = useCallback(async remoteMessage => {
     if (!remoteMessage?.notification) {
       return;
     }
-    SplashScreen.hide();
+    // SplashScreen.hide();
     const notification = remoteMessage.notification;
     const userId = notification?.data?.receiver_id;
     const otherUserId = notification?.data?.id;
@@ -202,6 +129,83 @@ const App = () => {
       console.error('Failed to create or retrieve channel:', error);
     }
   }, []);
+
+  const linking = useMemo(
+    () => ({
+      prefixes: [
+        'https://admin.joinclaris.com/influencer/',
+        'clarisinfluencer://',
+      ],
+      async getInitialURL() {
+        // Try to get the initial URL from deep link or notification
+        try {
+          let message = await messaging().getInitialNotification();
+          console.log('initial url1', message);
+          if (message) {
+            message = {
+              ...message,
+              notification: {
+                ...message.notification,
+                data: message.data,
+              },
+            };
+          }
+          console.log('message', message);
+          if (!message) {
+            message = await notifee.getInitialNotification();
+            console.log('messageInsideNotifeeBlock', message);
+          }
+          if (message) {
+            console.log('messageInsideHandleNotifeeBlock', message);
+            return await handleNotification(message);
+          }
+        } catch (error) {
+          console.log('Error fetching initial URL or notification:', error);
+          return null;
+        }
+      },
+      subscribe(listener) {
+        // Listen to incoming links from deep linking
+        let subscribed = Linking.addEventListener('url', ({url}) => {
+          console.log('url', url);
+          return listener(url);
+        });
+        //onNotificationOpenedApp: When the application is running, but in the background.
+        const unsubscribe = messaging().onNotificationOpenedApp(
+          async remoteMessage => {
+            console.log('onOpen urlSubcribe', remoteMessage);
+            if (remoteMessage) {
+              const url = await handleNotification({
+                ...remoteMessage,
+                notification: {
+                  ...remoteMessage.notification,
+                  data: remoteMessage.data,
+                },
+              });
+              console.log('url', url);
+              if (typeof url === 'string') {
+                listener(url);
+              }
+            }
+          },
+        );
+        return () => {
+          subscribed.remove();
+          unsubscribe();
+        };
+      },
+      config: {
+        screens: {
+          BottomStack: {
+            screens: {
+              ChatRoom: 'BottomStack/ChatRoom', // Map the deep link path to the ChatRoom screen
+            },
+          },
+        },
+      },
+    }),
+    [handleNotification],
+  );
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
