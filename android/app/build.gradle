@@ -81,6 +81,7 @@ android {
     namespace "com.claris.app"
     defaultConfig {
         applicationId "com.claris.app"
+        buildConfigField"String", "ONE_SIGNAL_APP_ID", "\"${System.getenv("ONE_SIGNAL_APP_ID") ?: ""}\""
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
@@ -107,6 +108,9 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
   
 }
 
@@ -115,6 +119,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-vector-icons')
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
     // implementation "androidx.core:core:1.6.0"
 
 
@@ -128,3 +133,4 @@ dependencies {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 apply from: file("../../node_modules/react-native-config/android/dotenv.gradle")
+// apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"

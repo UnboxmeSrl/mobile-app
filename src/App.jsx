@@ -58,6 +58,7 @@ const App = () => {
   useEffect(() => {
     // OneSignal Initialization
     OneSignal.initialize(Config.ONE_SIGNAL_APP_ID);
+    // console.log('ONE_SIGNAL_APP_ID', Config.ONE_SIGNAL_APP_ID);
 
     // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
     // OneSignal.promptForPushNotificationsWithUserResponse();

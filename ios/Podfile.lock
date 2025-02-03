@@ -158,43 +158,48 @@ PODS:
     - nanopb/encode (= 2.30910.0)
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
-  - OneSignalXCFramework (5.1.5):
-    - OneSignalXCFramework/OneSignalComplete (= 5.1.5)
-  - OneSignalXCFramework/OneSignal (5.1.5):
+  - OneSignalXCFramework (5.2.9):
+    - OneSignalXCFramework/OneSignalComplete (= 5.2.9)
+  - OneSignalXCFramework/OneSignal (5.2.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalExtension
+    - OneSignalXCFramework/OneSignalLiveActivities
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalOutcomes
     - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalComplete (5.1.5):
+  - OneSignalXCFramework/OneSignalComplete (5.2.9):
     - OneSignalXCFramework/OneSignal
     - OneSignalXCFramework/OneSignalInAppMessages
     - OneSignalXCFramework/OneSignalLocation
-  - OneSignalXCFramework/OneSignalCore (5.1.5)
-  - OneSignalXCFramework/OneSignalExtension (5.1.5):
+  - OneSignalXCFramework/OneSignalCore (5.2.9)
+  - OneSignalXCFramework/OneSignalExtension (5.2.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalInAppMessages (5.1.5):
+  - OneSignalXCFramework/OneSignalInAppMessages (5.2.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalOutcomes
     - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalLocation (5.1.5):
+  - OneSignalXCFramework/OneSignalLiveActivities (5.2.9):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOSCore
+    - OneSignalXCFramework/OneSignalUser
+  - OneSignalXCFramework/OneSignalLocation (5.2.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalUser
-  - OneSignalXCFramework/OneSignalNotifications (5.1.5):
+  - OneSignalXCFramework/OneSignalNotifications (5.2.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalExtension
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOSCore (5.1.5):
+  - OneSignalXCFramework/OneSignalOSCore (5.2.9):
     - OneSignalXCFramework/OneSignalCore
-  - OneSignalXCFramework/OneSignalOutcomes (5.1.5):
+  - OneSignalXCFramework/OneSignalOutcomes (5.2.9):
     - OneSignalXCFramework/OneSignalCore
-  - OneSignalXCFramework/OneSignalUser (5.1.5):
+  - OneSignalXCFramework/OneSignalUser (5.2.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
@@ -1180,8 +1185,8 @@ PODS:
     - React-Core
   - react-native-netinfo (11.4.1):
     - React-Core
-  - react-native-onesignal (5.1.2):
-    - OneSignalXCFramework (= 5.1.5)
+  - react-native-onesignal (5.2.8):
+    - OneSignalXCFramework (= 5.2.9)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-safe-area-context (4.9.0):
     - React-Core
@@ -1462,7 +1467,7 @@ PODS:
     - React-logger (= 0.74.0)
     - React-perflogger (= 0.74.0)
     - React-utils (= 0.74.0)
-  - RNAudioRecorderPlayer (3.6.4):
+  - RNAudioRecorderPlayer (3.6.12):
     - React-Core
   - RNCAsyncStorage (1.24.0):
     - React-Core
@@ -1531,10 +1536,10 @@ PODS:
     - React
     - React-Core
     - Turf
-  - RNNotifee (9.1.8):
+  - RNNotifee (5.7.0):
     - React-Core
-    - RNNotifee/NotifeeCore (= 9.1.8)
-  - RNNotifee/NotifeeCore (9.1.8):
+    - RNNotifee/NotifeeCore (= 5.7.0)
+  - RNNotifee/NotifeeCore (5.7.0):
     - React-Core
   - RNPermissions (4.1.5):
     - React-Core
@@ -1967,7 +1972,7 @@ SPEC CHECKSUMS:
   Mixpanel-swift: 2192b9a24cf41b870749e4e0e10fbc9822bb2b4a
   MixpanelReactNative: cd3d7129cfc77d796d07e117846f1f2a9d2fe02d
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  OneSignalXCFramework: 0eeeb73a829a12ee05849b669494006236c4cc0b
+  OneSignalXCFramework: f5b2a3c4f130e4c910ead7bb25bed7455e976fbf
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: 045d6ecaa59d826c5736dfba0b2f4083ff8d79df
   RCTDeprecation: 3ca8b6c36bfb302e1895b72cfe7db0de0c92cd47
@@ -2002,7 +2007,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: bca292c7a8d92677d6faee2c166e6785621c7301
   react-native-image-resizer: d9fb629a867335bdc13230ac2a58702bb8c8828f
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
-  react-native-onesignal: 788854579298ce9c147ce21412efd03939f3a4a5
+  react-native-onesignal: 1795c532f8bd86c3307a032621c17d85998402d0
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-video: 1d92e4127b2fe113ea5e7613677c468ba3799d80
@@ -2029,7 +2034,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 203e25504974651c4472ad00e035658d32002305
   React-utils: 67c666fd04996cdb6bba26590586753d3e8ff7ed
   ReactCommon: 53dbd9a55e29188ded016078708d1da8de2db19d
-  RNAudioRecorderPlayer: 0f385cefff3f36b0f853c254b6ece7b76059d0fb
+  RNAudioRecorderPlayer: 224c7de87722938aedce04000d09baa633148f5b
   RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNCClipboard: d7a8903d32692b0a1e71738c3825465a9acae10e
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
@@ -2042,7 +2047,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: fa7c426ee9a9f99e7650424f1e9aea79c68074e2
   RNImageCropPicker: 8e39c01f205e00d739c31e682f068aac315587bf
   rnmapbox-maps: 8005faa8e35b413ea5f387d8e057e9c2d7bcfbff
-  RNNotifee: 4a6ee5c7deaf00e005050052d73ee6315dff7ec9
+  RNNotifee: 5155e0a5e0a97d0c839030d8192783cd63053999
   RNPermissions: 3e16511a1c4f98f6cb88d5530ac27a2a054bc352
   RNReactNativeHapticFeedback: d4c411574694446a5a2b1c116494e132941ebecc
   RNReanimated: 667f73ef89441b3cde1a640f617a162599792a1c
