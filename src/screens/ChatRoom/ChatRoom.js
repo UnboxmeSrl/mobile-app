@@ -50,6 +50,8 @@ const ChatRoom = () => {
     'members',
     'channel?.state?.messageSets',
     channel?.state?.messageSets,
+    'filtersList_____________________________________',
+    filters,
   );
   useFocusEffect(
     useCallback(() => {

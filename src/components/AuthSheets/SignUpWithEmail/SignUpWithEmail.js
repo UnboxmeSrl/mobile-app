@@ -90,6 +90,7 @@ export default SignUpWithEmail;
 
 const styles = StyleSheet.create({
   errorText: {
+    // color: COLORS.newPrimary,
     color: COLORS.error,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),

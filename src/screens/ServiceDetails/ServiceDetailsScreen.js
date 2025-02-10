@@ -44,6 +44,7 @@ const ServiceDetails = () => {
   } = useServiceDetails();
   console.log(
     'serviceDetails?.at_offer_description',
+    typeof serviceDetails?.at_offer_description,
     serviceDetails,
     // serviceDetails?.at_offer_description,
     // serviceDetails?._actions_turbo?.Extra_People,
@@ -237,17 +238,19 @@ const ServiceDetails = () => {
           )}
 
           <View style={styles.divider} />
-          {(!typeof serviceDetails?.at_offer_description === 'undefined' ||
-            serviceDetails?.at_offer_description) && (
-            <>
-              <View style={styles.beautyDescriptionContainer}>
-                <Text allowFontScaling={false} style={styles.beautyDescription}>
-                  {serviceDetails?.at_offer_description || ''}
-                </Text>
-              </View>
-              <View style={[styles.divider, {marginTop: 0}]} />
-            </>
-          )}
+          {!serviceDetails?.at_offer_description === 'undefined' &&
+            serviceDetails?.at_offer_description && (
+              <>
+                <View style={styles.beautyDescriptionContainer}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.beautyDescription}>
+                    {serviceDetails?.at_offer_description || ''}
+                  </Text>
+                </View>
+                <View style={[styles.divider, {marginTop: 0}]} />
+              </>
+            )}
 
           {actionNumId === 9 ? (
             <>
