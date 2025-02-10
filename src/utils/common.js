@@ -3,6 +3,7 @@ import DeviceInfo from 'react-native-device-info';
 import {verticalScale} from 'react-native-size-matters';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {IMAGES} from '../assets';
+import {chatClient} from '../hooks';
 
 export const checkActionName = actionName => {
   if (actionName) {
@@ -170,6 +171,73 @@ export const getFormattedTime = dt => {
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   return `${hours}:${minutes}`;
+};
+
+export const getOwnerNames = async ({
+  bookingDetails,
+  restaurantOwners,
+  formatDate,
+  setChannel,
+  setIsChannelLoaded,
+  setError,
+}) => {
+  try {
+    // Wait for all asynchronous operations (if any) within map to complete
+    // const ownerNamesArray = await Promise.all(
+    //   restaurantOwners.map(async owner => {
+    //     // If any async operation is needed per owner, it can go here.
+    //     // For example: const additionalData = await someAsyncFunction(owner.id);
+    //     return owner?.Owner_name;
+    //   }),
+    // );
+    // Join all owner names with commas
+    // const ownerNames = ownerNamesArray.join(',');
+    const channelName = `${bookingDetails._restaurant_turbo.Name}:${
+      bookingDetails?.user_turbo?.name || ''
+    }:${formatDate(bookingDetails?.BookingDay)}`;
+
+    // Proceed to create the channel if the name is valid
+    if (channelName && channelName.trim() !== '') {
+      const setupChannel = async () => {
+        try {
+          const newChannel = chatClient.channel(
+            'messaging',
+            bookingDetails?.id,
+            {
+              name: channelName,
+              members: [
+                'influencer_' + bookingDetails?.user_turbo_id?.toString(),
+              ],
+            },
+          );
+
+          await newChannel.watch();
+
+          const restaurantOwnersWithPrefix = restaurantOwners.map(
+            owner => 'owner_' + owner?.id,
+          );
+
+          // Add restaurant owners as members to the channel
+          restaurantOwnersWithPrefix.forEach(owner => {
+            newChannel.addMembers([owner]);
+          });
+
+          setChannel(newChannel);
+          setIsChannelLoaded(true);
+        } catch (error) {
+          console.error('Failed to create channel:', error);
+          setError('Failed to create channel'); // Optional error handling
+        }
+      };
+
+      setupChannel();
+    } else {
+      setError('Channel name is invalid or empty');
+    }
+  } catch (error) {
+    console.error('Error generating owner names:', error);
+    setError('Error generating owner names');
+  }
 };
 
 export const hasNotch = !DeviceInfo.hasNotch();

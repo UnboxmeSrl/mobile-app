@@ -14,6 +14,8 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useContentBrief} from './hooks';
+import {navigate} from '../../services';
+import {SCREEN_NAMES} from '../../constants';
 
 const ContentBriefScreen = () => {
   const {
@@ -142,7 +144,13 @@ const ContentBriefScreen = () => {
             {bookingDetails?._actions_turbo?.Descrizione}
           </Text>
         </View>
-        <TouchableOpacity style={styles.queryContainer}>
+        <TouchableOpacity
+          style={styles.queryContainer}
+          onPress={() =>
+            navigate(SCREEN_NAMES.ChatScreen, {
+              bookingDetails: bookingDetails,
+            })
+          }>
           <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
           <Text allowFontScaling={false} style={styles.queryText}>
             Questions? Send us a message
