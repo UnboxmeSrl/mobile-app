@@ -1,9 +1,7 @@
-import {useCallback, useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {getRestaurantOwners} from '../../../services';
-import {chatClient} from '../../../hooks';
+import {useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {getOwnerNames} from '../../../utils';
+import {createChatByBookingDetail} from '../../../utils';
 
 const useChat = () => {
   const [channel, setChannel] = useState(null);
@@ -15,42 +13,22 @@ const useChat = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const {bookingDetails} = route.params;
-  const bookingId = bookingDetails?.id;
 
-  const formatDate = date => {
-    const d = new Date(date); // Create a Date object from the input
-
-    const day = d.getDate().toString().padStart(2, '0'); // Get the day and pad it to two digits
-    const month = (d.getMonth() + 1).toString().padStart(2, '0'); // Get the month (0-indexed) and pad it
-    const year = d.getFullYear().toString().slice(2); // Get the last two digits of the year
-
-    return `${day}-${month}-${year}`;
+  const handleCreateChat = async () => {
+    const channel = await createChatByBookingDetail({
+      bookingDetails,
+    });
+    if (channel) {
+      setChannel(channel);
+      setIsChannelLoaded(true);
+    } else {
+      setError('Failed to create channel');
+    }
   };
 
-  // Fetch restaurant owners asynchronously
-  const getRestaurantOwnersData = useCallback(async () => {
-    const params = `/${bookingId}`;
-    const res = await getRestaurantOwners(params);
-    setRestaurantOwners(res);
-  }, [bookingId]);
-
   useEffect(() => {
-    if (bookingId) {
-      getRestaurantOwnersData();
-    }
-  }, [bookingId, getRestaurantOwnersData]);
-  console.log(bookingDetails, 'bookingDetails');
-  // Create channel only after the owner names are properly generated
-  useEffect(() => {
-    if (restaurantOwners.length > 0 && bookingDetails) {
-      getOwnerNames({
-        bookingDetails,
-        restaurantOwners,
-        formatDate,
-        setChannel,
-        setIsChannelLoaded,
-        setError,
-      });
+    if (bookingDetails) {
+      handleCreateChat();
     }
   }, [restaurantOwners, bookingDetails]);
 

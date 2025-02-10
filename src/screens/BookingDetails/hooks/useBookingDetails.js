@@ -1,3 +1,4 @@
+import analytics from '@react-native-firebase/analytics';
 import {useRoute} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,8 +10,11 @@ import {
   navigate,
   showToastError,
 } from '../../../services';
-import {getFormattedDate, getFormattedTime} from '../../../utils';
-import analytics from '@react-native-firebase/analytics';
+import {
+  createChatByBookingDetail,
+  getFormattedDate,
+  getFormattedTime,
+} from '../../../utils';
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector(
@@ -119,6 +123,17 @@ const useBookingDetails = () => {
     selectedDate,
     // serviceDetails?.actions_turbo_id,
   );
+
+  const formatDate = date => {
+    const d = new Date(date); // Create a Date object from the input
+
+    const day = d.getDate().toString().padStart(2, '0'); // Get the day and pad it to two digits
+    const month = (d.getMonth() + 1).toString().padStart(2, '0'); // Get the month (0-indexed) and pad it
+    const year = d.getFullYear().toString().slice(2); // Get the last two digits of the year
+
+    return `${day}-${month}-${year}`;
+  };
+
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
     const currentBookingDateTime = new Date(selectedDate);
@@ -159,13 +174,7 @@ const useBookingDetails = () => {
       const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
       const isApproved =
         actionNumId === 1 || actionNumId === 2 || actionNumId === 3;
-      console.log(
-        ' conditionCheck',
-        selectedDate,
-        currentBookingDateTime,
-        formattedDate,
-        serviceDetails?.actions_turbo_id,
-      );
+
       const prepData = {
         ApprovalStatus: false,
         Approved: isApproved,
@@ -201,7 +210,6 @@ const useBookingDetails = () => {
       if (actionNumId === 9) {
         prepData['additional_influencer'] = influencerCount;
       }
-      console.log('prepData: ', prepData);
       const res = await addRestaurantBooking(prepData);
       if (res?.status === 200) {
         console.log('Booking Details:', res);
@@ -222,7 +230,9 @@ const useBookingDetails = () => {
           bookingDate: formattedDate,
           bookingTimeStamp: bookingTimeStamp,
         });
-
+        const channel = await createChatByBookingDetail({
+          bookingDetails: res.data,
+        });
         navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
           bookingDetails: res?.data,
         });

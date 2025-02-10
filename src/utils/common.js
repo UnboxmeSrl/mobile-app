@@ -4,6 +4,7 @@ import {verticalScale} from 'react-native-size-matters';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {IMAGES} from '../assets';
 import {chatClient} from '../hooks';
+import {getRestaurantOwners} from '../services';
 
 export const checkActionName = actionName => {
   if (actionName) {
@@ -173,15 +174,22 @@ export const getFormattedTime = dt => {
   return `${hours}:${minutes}`;
 };
 
-export const getOwnerNames = async ({
-  bookingDetails,
-  restaurantOwners,
-  formatDate,
-  setChannel,
-  setIsChannelLoaded,
-  setError,
-}) => {
+export const createChatByBookingDetail = async ({bookingDetails}) => {
   try {
+    const bookingId = bookingDetails?.id;
+    const params = `/${bookingId}`;
+    const restaurantOwners = await getRestaurantOwners(params);
+
+    const formatDate = date => {
+      const d = new Date(date); // Create a Date object from the input
+
+      const day = d.getDate().toString().padStart(2, '0'); // Get the day and pad it to two digits
+      const month = (d.getMonth() + 1).toString().padStart(2, '0'); // Get the month (0-indexed) and pad it
+      const year = d.getFullYear().toString().slice(2); // Get the last two digits of the year
+
+      return `${day}-${month}-${year}`;
+    };
+
     // Wait for all asynchronous operations (if any) within map to complete
     // const ownerNamesArray = await Promise.all(
     //   restaurantOwners.map(async owner => {
@@ -192,51 +200,36 @@ export const getOwnerNames = async ({
     // );
     // Join all owner names with commas
     // const ownerNames = ownerNamesArray.join(',');
-    const channelName = `${bookingDetails._restaurant_turbo.Name}:${
-      bookingDetails?.user_turbo?.name || ''
-    }:${formatDate(bookingDetails?.BookingDay)}`;
+    if (restaurantOwners) {
+      const channelName = `${bookingDetails._restaurant_turbo.Name}:${
+        bookingDetails?.user_turbo?.name || ''
+      }:${formatDate(bookingDetails?.BookingDay)}`;
 
-    // Proceed to create the channel if the name is valid
-    if (channelName && channelName.trim() !== '') {
-      const setupChannel = async () => {
-        try {
-          const newChannel = chatClient.channel(
-            'messaging',
-            bookingDetails?.id,
-            {
-              name: channelName,
-              members: [
-                'influencer_' + bookingDetails?.user_turbo_id?.toString(),
-              ],
-            },
-          );
+      // Proceed to create the channel if the name is valid
+      if (channelName && channelName.trim() !== '') {
+        const newChannel = chatClient.channel('messaging', bookingDetails?.id, {
+          name: channelName,
+          members: ['influencer_' + bookingDetails?.user_turbo_id?.toString()],
+        });
 
-          await newChannel.watch();
+        await newChannel.watch();
 
-          const restaurantOwnersWithPrefix = restaurantOwners.map(
-            owner => 'owner_' + owner?.id,
-          );
+        const restaurantOwnersWithPrefix = restaurantOwners.map(
+          owner => 'owner_' + owner?.id,
+        );
 
-          // Add restaurant owners as members to the channel
-          restaurantOwnersWithPrefix.forEach(owner => {
-            newChannel.addMembers([owner]);
-          });
-
-          setChannel(newChannel);
-          setIsChannelLoaded(true);
-        } catch (error) {
-          console.error('Failed to create channel:', error);
-          setError('Failed to create channel'); // Optional error handling
-        }
-      };
-
-      setupChannel();
-    } else {
-      setError('Channel name is invalid or empty');
+        // Add restaurant owners as members to the channel
+        restaurantOwnersWithPrefix.forEach(owner => {
+          newChannel.addMembers([owner]);
+        });
+        return newChannel;
+      } else {
+        return false;
+      }
     }
   } catch (error) {
     console.error('Error generating owner names:', error);
-    setError('Error generating owner names');
+    return false;
   }
 };
 
