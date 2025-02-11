@@ -55,7 +55,7 @@ export const updateActionDiary = async (params, data) => {
 
 export const updateAction = async (params, data) => {
   try {
-    const url = Api.RESTAURANTS.UPDATE_ACTION + params;
+    const url = Api.RESTAURANTS.UPDATE_BOOKING + `/${params}`;
     const response = await Fetch.put(url, data);
     return response;
   } catch (error) {

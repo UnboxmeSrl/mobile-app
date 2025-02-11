@@ -1,5 +1,5 @@
 // import { Categories } from '@components/Categories'
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -42,6 +42,7 @@ const RestaurantsScreen = () => {
     restaurantsData,
     onCategoryChange,
     handleLocationPress,
+    requestLocationPermission,
   } = useRestaurants();
   const [view, setView] = useState('tabs');
   const bottomSheetRef = useRef();
@@ -49,6 +50,9 @@ const RestaurantsScreen = () => {
   const handleBottomSheet = () => {
     bottomSheetRef?.current?.open();
   };
+  useEffect(() => {
+    requestLocationPermission();
+  }, [requestLocationPermission]);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.btnStack}>

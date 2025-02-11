@@ -1,10 +1,13 @@
 import {useRoute} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../constants';
-import {navigate} from '../../../services';
+import {navigate, updateAction} from '../../../services';
+import {useSelector} from 'react-redux';
+import {selecteUserCoords} from '../../../redux';
 
 const useContentUploadGuide = () => {
   const route = useRoute();
   const bookingDetails = route.params?.bookingDetails;
+  const userLocation = useSelector(selecteUserCoords);
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
@@ -17,10 +20,22 @@ const useContentUploadGuide = () => {
     actionName = bookingDetails?._diary_action_turbo?.action;
   }
 
-  const handleOpenCouponPress = () => {
-    navigate(SCREEN_NAMES.NewCouponScreen, {
-      bookingDetails: bookingDetails,
-    });
+  const handleOpenCouponPress = async () => {
+    const body = {
+      location: {
+        type: 'point',
+        data: {
+          lng: userLocation?.[0],
+          lat: userLocation?.[1],
+        },
+      },
+    };
+    const res = await updateAction(bookingDetails?.id, body);
+    if (res) {
+      navigate(SCREEN_NAMES.NewCouponScreen, {
+        bookingDetails: bookingDetails,
+      });
+    }
   };
 
   const handleBackPress = () => {
