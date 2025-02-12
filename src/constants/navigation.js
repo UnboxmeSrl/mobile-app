@@ -63,6 +63,7 @@ export const SCREEN_NAMES = {
   Wizard: 'Wizard',
   YourScheduleDetailsScreen: 'YourScheduleDetailsScreen',
   YourScheduleScreen: 'YourScheduleScreen',
+  AppInfo: 'AppInfo',
   AuthPersonalDetailsScreen: 'AuthPersonalDetailsScreen',
   AuthGenderScreen: 'AuthGenderScreen',
   AuthDateOfBirthScreen: 'AuthDateOfBirthScreen',

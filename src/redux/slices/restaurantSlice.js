@@ -2,6 +2,7 @@ import {createDraftSafeSelector, createSlice} from '@reduxjs/toolkit';
 import {sliceNames} from '../../constants';
 
 const initialState = {
+  appInfo: {},
   bookings: [],
   restaurantDetails: {},
   serviceDetails: {},
@@ -17,6 +18,10 @@ const RestaurantSlice = createSlice({
   initialState: initialState,
   name: sliceNames.restaurantSlice,
   reducers: {
+    setAppInfo: (state, actions) => {
+      state.appInfo = actions?.payload;
+      console.log('appinfo_RestaurantSlice', state.appInfo);
+    },
     setBookings: (state, actions) => {
       state.bookings = actions?.payload;
     },
@@ -58,6 +63,7 @@ const RestaurantSlice = createSlice({
 export const {
   setRestaurantDetails,
   setServiceDetails,
+  setAppInfo,
   setBookings,
   setCanceledBookings,
   setTimeFrameData,
@@ -70,6 +76,10 @@ export const {
 
 export default RestaurantSlice.reducer;
 
+export const selectAppInfo = createDraftSafeSelector(
+  [state => state.restaurantSlice.appInfo],
+  appInfo => appInfo,
+);
 export const selectAllRestaurantsState = createDraftSafeSelector(
   [state => state.restaurantSlice.allRestaurants],
   restaurantsObject => restaurantsObject,

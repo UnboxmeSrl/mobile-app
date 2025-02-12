@@ -72,6 +72,11 @@ const useRestaurants = () => {
       }
       Geolocation.getCurrentPosition(
         position => {
+          console.log(
+            'userCurr_LatLng',
+            position.coords.longitude,
+            position.coords.latitude,
+          );
           dispatch(
             setUserCurrentLocation([
               position.coords.longitude,

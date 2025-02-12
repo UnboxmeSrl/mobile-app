@@ -48,10 +48,12 @@ const BookingDetailsScreen = () => {
     handleConfirmBtnPress,
     handleRemoveBtnPress,
   } = useBookingDetails();
-  console.log(
-    'weekDayWiseTimeSlots',
-    weekDayWiseTimeSlots?.map(e => e.weekdays),
-  );
+  // console.log(
+  //   'weekDayWiseTimeSlots',
+  //   weekDayWiseTimeSlots?.map(e => e.weekdays),
+  //   selectedTimeFame,
+  //   selectedDate,
+  // );
 
   return (
     <KeyboardAwareScrollView
@@ -207,16 +209,7 @@ const BookingDetailsScreen = () => {
                         const dayData = item?.weekdays?.filter(
                           wt => wt?.day === currentWeekDay,
                         );
-                        console.log(
-                          'isSelected',
-                          isSelected,
-                          currentWeekDay,
-                          dayData,
-                          item.weekdays,
-                          item.pause_days,
-                          'itemm_______________',
-                          item,
-                        );
+
                         if (dayData?.length === 0) {
                           isShow = false;
                         }

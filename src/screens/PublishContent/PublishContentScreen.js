@@ -15,9 +15,10 @@ import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets/images';
 import {ContentStatusModal, PickerModal} from '../../components';
-import {COLORS, FONTS} from '../../constants';
+import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
 import {usePublishContent} from './hooks';
 import {getFormattedTime, xanoImageSize} from '../../utils';
+import {navigate} from '../../services';
 
 const PublishContentScreen = () => {
   const {
@@ -317,7 +318,9 @@ const PublishContentScreen = () => {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.howItWorksContainer}>
+          <TouchableOpacity
+            style={styles.howItWorksContainer}
+            onPress={() => navigate(SCREEN_NAMES.AppInfo)}>
             <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
               How it works
             </Text>

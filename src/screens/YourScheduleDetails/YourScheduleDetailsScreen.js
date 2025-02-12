@@ -12,7 +12,7 @@ import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {CustomModal} from '../../components';
-import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
+import {COLORS, FONTS, SCREEN_NAMES, STACK_NAMES} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
 import SwipeButton from 'rn-swipe-button';
 import {getFormattedTime, xanoImageSize} from '../../utils';
@@ -377,7 +377,9 @@ const YourScheduleDetailsScreen = () => {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.howItWorksContainer}>
+          <TouchableOpacity
+            style={styles.howItWorksContainer}
+            onPress={() => navigate(SCREEN_NAMES.AppInfo)}>
             <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
               How it works
             </Text>

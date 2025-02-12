@@ -237,10 +237,17 @@ const useBookingDetails = () => {
           bookingDetails: res?.data,
         });
       } else {
+        let error;
         console.log('res: ', JSON.stringify(res));
-        const error = {
-          message: res?.data,
-        };
+        if (res?.error?.response?.data) {
+          error = {
+            message: JSON.stringify(res?.error?.response?.data?.message),
+          };
+        } else {
+          error = {
+            message: res?.data,
+          };
+        }
         showToastError(error);
       }
       setIsLoading(false);
@@ -326,6 +333,7 @@ const useBookingDetails = () => {
   };
 
   useEffect(() => {
+    console.log('check_useEffect_code_run_after_date_change');
     setSelectedTimeFame({});
     const myDate = new Date(selectedDate);
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
@@ -345,13 +353,18 @@ const useBookingDetails = () => {
       };
     });
 
+    setWeekDayWiseTimeSlots(updatedData || []);
+    let selectedTimeFrame = null;
     updatedData?.forEach(t => {
       const filteredRes = t?.weekdays?.filter(wt => wt?.day === weekDay);
-      if (filteredRes.length > 0) {
-        setWeekDayWiseTimeSlots(updatedData);
-        setSelectedTimeFame(updatedData?.[0]);
+      if (filteredRes.length > 0 && !selectedTimeFrame) {
+        // console.log('updatedData', filteredRes);
+        selectedTimeFrame = t;
       }
     });
+    if (selectedTimeFrame) {
+      setSelectedTimeFame(selectedTimeFrame);
+    }
 
     // This is for when user's date and booking date are same then to show event time we have done this.
     if (isEvent) {
@@ -360,7 +373,14 @@ const useBookingDetails = () => {
           setEventSelectedDateIndex(index);
       });
     }
-  }, [selectedDate]);
+  }, [
+    eventDates,
+    isEvent,
+    selectedDate,
+    timeFrameData,
+    setWeekDayWiseTimeSlots,
+    setSelectedTimeFame,
+  ]);
 
   useEffect(() => {
     const findClosestAvailableDate = () => {

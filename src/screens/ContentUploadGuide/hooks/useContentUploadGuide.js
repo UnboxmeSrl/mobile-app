@@ -1,10 +1,14 @@
 import {useRoute} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../constants';
-import {navigate} from '../../../services';
+import {navigate, showToastError} from '../../../services';
+import {useSelector} from 'react-redux';
+import {selecteUserCoords} from '../../../redux';
+import {calculateDis} from '../../../utils';
 
 const useContentUploadGuide = () => {
   const route = useRoute();
   const bookingDetails = route.params?.bookingDetails;
+  const userLocation = useSelector(selecteUserCoords);
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
@@ -18,9 +22,33 @@ const useContentUploadGuide = () => {
   }
 
   const handleOpenCouponPress = () => {
-    navigate(SCREEN_NAMES.NewCouponScreen, {
-      bookingDetails: bookingDetails,
-    });
+    const userLng = userLocation?.[0];
+    const userLat = userLocation?.[1];
+    const lat = bookingDetails?.location?.data?.lat;
+    const lng = bookingDetails?.location?.data?.lng;
+    const userDistantValue = calculateDis(lat, lng, userLat, userLng) * 1000;
+    // const userDistantValue =
+    //   calculateDis(37.27651669260897, -122.04641848163368, userLat, userLng) *
+    //   1000;
+    // console.log(
+    //   'bookingDetails',
+    //   userDistantValue,
+    //   lat,
+    //   lng,
+    //   userLat,
+    //   userLng,
+    //   // JSON.stringify(userLocation),
+    //   // JSON.stringify(bookingDetails),
+    // );
+    if (userDistantValue <= 200) {
+      navigate(SCREEN_NAMES.NewCouponScreen, {
+        bookingDetails: bookingDetails,
+      });
+    } else {
+      showToastError({
+        message: 'Coupon is not valid at this location',
+      });
+    }
   };
 
   const handleBackPress = () => {

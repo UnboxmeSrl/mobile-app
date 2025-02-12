@@ -233,6 +233,26 @@ export const createChatByBookingDetail = async ({bookingDetails}) => {
   }
 };
 
+function toRad(Value) {
+  return (Value * Math.PI) / 180;
+}
+
+export const calculateDis = (lat, lng, userLat, userLng) => {
+  var R = 6371; // km
+  var dLat = toRad(userLat - lat);
+  var dLon = toRad(userLng - lng);
+  var lat1 = toRad(lat);
+  var lat2 = toRad(userLat);
+
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+  // // console.log('DATA', d);
+  return d;
+};
+
 export const hasNotch = !DeviceInfo.hasNotch();
 export const isIos = Platform.OS === 'ios';
 export const isAndroid = Platform.OS === 'android';

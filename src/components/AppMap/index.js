@@ -67,6 +67,7 @@ const AppMap = () => {
   );
 
   useEffect(() => {
+    console.log('check_requestLocationPermission');
     requestLocationPermission();
   }, [requestLocationPermission]);
 

@@ -24,12 +24,14 @@ export const getTimeFrames = async params => {
 };
 
 export const addRestaurantBooking = async data => {
+  console.log('check_addRestaurantBooking');
   try {
     const url = Api.RESTAURANTS.ADD_BOOKING;
     const response = await Fetch.post(url, data);
+    console.log('res_addRestaurantBooking', response);
     return response;
   } catch (error) {
-    console.log(error);
+    console.log('error_addRestaurantBooking', error);
   }
 };
 
@@ -141,6 +143,28 @@ export const getRestaurantOwners = async params => {
     const url = Api.RESTAURANTS.GET_RESTAURANT_OWNERS + params;
     const response = await Fetch.get(url);
     // console.log('resInGetAllRestaurants', response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getRestaurant = async params => {
+  try {
+    const url = Api.RESTAURANTS.GET_RESTAURANT_OWNERS + params;
+    const response = await Fetch.get(url);
+    // console.log('resInGetAllRestaurants', response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAppInfo = async () => {
+  try {
+    const url = Api.RESTAURANTS.GET_APP_INFO;
+    const response = await Fetch.get(url);
+    console.log('resIn_getAppInfo', response);
     return response;
   } catch (error) {
     console.log(error);

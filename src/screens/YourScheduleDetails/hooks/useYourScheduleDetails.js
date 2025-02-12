@@ -1,13 +1,14 @@
 import {useRoute} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Alert, TurboModuleRegistry} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES} from '../../../constants';
-import {setBookings, setCanceledBookings} from '../../../redux';
+import {setAppInfo, setBookings, setCanceledBookings} from '../../../redux';
 import {
   cancelBooking,
   getAllCanceledBookings,
+  getAppInfo,
   getBookings,
   navigate,
 } from '../../../services';
@@ -175,6 +176,16 @@ const useYourScheduleDetails = () => {
     setCurrentWeekDay(weekDay);
     setCurrentDate(myDate.getDate());
   }, []);
+
+  const getAppInformation = useCallback(async () => {
+    const res = await getAppInfo();
+    console.log('res_getAppInformation', res);
+
+    dispatch(setAppInfo(res?.data));
+  }, [dispatch]);
+  useEffect(() => {
+    getAppInformation();
+  }, [getAppInformation]);
 
   return {
     actionNumId,

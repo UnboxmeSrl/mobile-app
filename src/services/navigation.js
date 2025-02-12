@@ -7,7 +7,9 @@ import {
 export const navigationRef = createNavigationContainerRef();
 
 export function navigate(routeName, params, action) {
-  typeof routeName === 'string'
+  routeName === 'back'
+    ? navigationRef.goBack()
+    : typeof routeName === 'string'
     ? navigationRef.navigate(routeName, params)
     : navigationRef.navigate(routeName);
 }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {showToastError} from './toast';
+import Toast from 'react-native-toast-message';
 
 export default {
   get: async (url, options = {}) => {
@@ -24,9 +25,9 @@ export default {
       },
     };
     const response = await axios.post(url, data, options).catch(err => {
-      console.error('response_POST', url, response);
-      showToastError(err);
-      console.error('🚀 ~ post: ~ error:', JSON.stringify(err));
+      if (err?.response?.data) {
+        // console.error('🚀 ~ post: ~ error:', JSON.stringify(err));
+      }
     });
     return response?.data;
   },
