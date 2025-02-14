@@ -28,7 +28,7 @@ const useServiceDetails = () => {
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
-  console.log('restaurantDetails', restaurantDetails);
+  // console.log('restaurantDetails', restaurantDetails);
   const userInstagramFollowers = loginData?.instagram_followers;
   const userTiktokFollowers = loginData?.tiktok_followers;
   const minInstagramFollowers = restaurantDetails?.min_instagram_followers;
@@ -133,7 +133,7 @@ const useServiceDetails = () => {
     const urlParams = `${endpoint}${queryParams}`;
     console.log('urlParams', offer_id, urlParams);
     const res = await getTimeFrames(urlParams);
-    console.log('resIn_getTimeFrameData', JSON.stringify(res));
+    // console.log('resIn_getTimeFrameData', JSON.stringify(res));
     // const timeGroups = () => {
     //   return (res || [])?.reduce((acc, item) => {
     //     if (item) {

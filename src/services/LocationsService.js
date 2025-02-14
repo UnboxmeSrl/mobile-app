@@ -17,7 +17,7 @@ export const getRestaurants = async data => {
     const response = await Fetch.post(url, data);
     return response;
   } catch (error) {
-    console.log(error);
+    console.log('error_getRestaurants', error);
   }
 };
 
@@ -25,9 +25,9 @@ export const getSponsoredRestaurants = async data => {
   try {
     const url = Api.LOCATIONS.GET_SPONSORED_RESTAURANTS;
     const response = await Fetch.post(url, data);
-    return response;
+    return response || [];
   } catch (error) {
-    console.log(error);
+    console.log('error_getSponsoredRestaurants', error);
   }
 };
 

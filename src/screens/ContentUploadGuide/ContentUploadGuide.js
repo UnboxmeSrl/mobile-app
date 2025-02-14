@@ -18,6 +18,7 @@ const ContentUploadGuide = () => {
   const {
     icon,
     actionName,
+    actionDescription,
     bookingDetails,
     handleOpenCouponPress,
     handleBackPress,
@@ -56,18 +57,18 @@ const ContentUploadGuide = () => {
           />
         </View>
         <View style={styles.guideTextMainContainer}>
-          {bookingDetails?._actions_turbo?.stories > 0 && (
+          {/* {bookingDetails?._actions_turbo?.stories > 0 && (
             <View style={styles.guideTextContainer}>
               <Text allowFontScaling={false} style={styles.guideText}>
                 {`\u2022   ${bookingDetails?._actions_turbo?.stories} x Stories`}
               </Text>
             </View>
-          )}
-          <View style={styles.guideTextContainer}>
+          )} */}
+          {/* <View style={styles.guideTextContainer}>
             <Text allowFontScaling={false} style={styles.guideText}>
               {`\u2022   ${1} x ${actionName}`}
             </Text>
-          </View>
+          </View> */}
           {bookingDetails?._actions_turbo?.photos > 0 && (
             <View style={styles.guideTextContainer}>
               <Text allowFontScaling={false} style={styles.guideText}>
@@ -78,10 +79,13 @@ const ContentUploadGuide = () => {
         </View>
         <View style={styles.descriptionContainer}>
           <Text allowFontScaling={false} style={styles.descriptionText}>
+            {actionDescription}
+          </Text>
+          {/* <Text allowFontScaling={false} style={styles.descriptionText}>
             You can publish the stories when you are at the venue and upload the
             {` ${actionName}`} respecting the deadline through the content
             schedule
-          </Text>
+          </Text> */}
         </View>
 
         <View style={styles.openCouponBtnMainContainer}>

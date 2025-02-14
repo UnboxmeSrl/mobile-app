@@ -1,5 +1,6 @@
 import {Api} from '../constants';
 import Fetch from './ApiService';
+import {showToastError} from './toast';
 
 // export const getTimeFrames = async (params, useHotFix = false) => {
 //   try {
@@ -17,6 +18,7 @@ export const getTimeFrames = async params => {
   try {
     const url = Api.RESTAURANTS.GET_TIME_FRAMES + params;
     const response = await Fetch.get(url);
+    console.log('response_getTimeFrames', response);
     return response;
   } catch (error) {
     console.log(error);
@@ -27,11 +29,19 @@ export const addRestaurantBooking = async data => {
   console.log('check_addRestaurantBooking');
   try {
     const url = Api.RESTAURANTS.ADD_BOOKING;
-    const response = await Fetch.post(url, data);
-    console.log('res_addRestaurantBooking', response);
-    return response;
+    const response = await Fetch.postNew(url, data);
+    return response.data;
   } catch (error) {
-    console.log('error_addRestaurantBooking', error);
+    if (error?.status === 400 && error?.response?.data) {
+      const responseError = JSON.stringify(error?.response?.data?.message);
+      showToastError({message: responseError});
+
+      return {
+        status: 400,
+        message: error?.response?.data?.message || error.message,
+      };
+      // return {status_400: responseError};
+    }
   }
 };
 
@@ -57,7 +67,7 @@ export const updateActionDiary = async (params, data) => {
 
 export const updateAction = async (params, data) => {
   try {
-    const url = Api.RESTAURANTS.UPDATE_ACTION + params;
+    const url = Api.RESTAURANTS.UPDATE_BOOKING + `/${params}`;
     const response = await Fetch.put(url, data);
     return response;
   } catch (error) {

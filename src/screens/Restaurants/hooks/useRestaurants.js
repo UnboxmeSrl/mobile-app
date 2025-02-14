@@ -72,11 +72,11 @@ const useRestaurants = () => {
       }
       Geolocation.getCurrentPosition(
         position => {
-          console.log(
-            'userCurr_LatLng',
-            position.coords.longitude,
-            position.coords.latitude,
-          );
+          // console.log(
+          //   'userCurr_LatLng',
+          //   position.coords.longitude,
+          //   position.coords.latitude,
+          // );
           dispatch(
             setUserCurrentLocation([
               position.coords.longitude,
@@ -118,7 +118,7 @@ const useRestaurants = () => {
       user_turbo_id: loginData?.id,
     };
     const sponsoredRes = await getSponsoredRestaurants(sponsoredPrepData);
-
+    // console.log('sponsoredRes', sponsoredRes);
     const prepData = {
       category_venue_id: filter,
       city_id: cityData?.id,
@@ -128,8 +128,9 @@ const useRestaurants = () => {
       ...(loginData?.id && {user_turbo_id: loginData.id}),
     };
     const res = await getRestaurants(prepData);
+    // console.log('check_getRestaurants_getInitialRestaurantsData', res);
     setRestaurantApiCallData(res);
-    setRestaurantsData([...sponsoredRes, ...res?.items]);
+    setRestaurantsData([...sponsoredRes, ...(res?.items || [])]);
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -145,6 +146,7 @@ const useRestaurants = () => {
       ...(loginData?.id && {user_turbo_id: loginData.id}),
     };
     const res = await getRestaurants(prepData);
+    // console.log('check_getRestaurants_getRestaurantsData', res);
     setRestaurantApiCallData(res);
     setRestaurantsData([...restaurantsData, ...res?.items]);
   };
@@ -191,6 +193,7 @@ const useRestaurants = () => {
 
   useEffect(() => {
     if (page > 1) {
+      // console.log('check_getRestaurants_useEffect');
       getRestaurantsData();
     }
 
@@ -220,7 +223,7 @@ const useRestaurants = () => {
     if (isFocused) {
       dispatch(setRestaurantDetails({}));
     }
-  }, [isFocused]);
+  }, [dispatch, isFocused]);
 
   // reset page to 1 if tab  change
   useEffect(() => {

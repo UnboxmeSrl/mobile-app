@@ -47,7 +47,7 @@ const App = () => {
 
   const routeNameRef = React.useRef();
 
-  console.log('Firebase Configurations: ', JSON.stringify(firebaseConfig));
+  // console.log('Firebase Configurations: ', JSON.stringify(firebaseConfig));
 
   // Initialize Firebase
   if (!firebase.apps.length) {
@@ -99,7 +99,7 @@ const App = () => {
     const userId = notification?.data?.receiver_id;
     const otherUserId = notification?.data?.id;
     const channelId = notification.data.channel_id;
-    console.log('channelId', channelId);
+    console.log('channelId', channelId, userId, otherUserId, notification);
     // Check if the chatClient is already connected with the user
     if (!chatClient || !chatClient.userID) {
       // Generate a development token for the user (ensure your backend supports this securely for production)
@@ -122,7 +122,7 @@ const App = () => {
         name: message.message?.channel?.name,
         members: ['owner_284', userId],
       });
-      console.log(channel.state.members, 'channel noti');
+      console.log(channel.state.members, channel, 'channel noti');
       store.dispatch(setSelectedChannel(channel));
       console.log('afterstate');
       return 'https://admin.joinclaris.com/influencer/BottomStack/ChatRoom';
@@ -151,7 +151,7 @@ const App = () => {
               },
             };
           }
-          console.log('message', message);
+          // console.log('message_linking', message);
           if (!message) {
             message = await notifee.getInitialNotification();
             console.log('messageInsideNotifeeBlock', message);
@@ -226,7 +226,7 @@ const App = () => {
                     const previousRouteName = routeNameRef.current;
                     const currentRouteName =
                       navigationRef.current.getCurrentRoute().name;
-                    console.log('Current route: ' + currentRouteName);
+                    // console.log('Current route: ' + currentRouteName);
 
                     if (previousRouteName !== currentRouteName) {
                       await analytics().logScreenView({

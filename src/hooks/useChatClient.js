@@ -20,7 +20,7 @@ const useChatClient = () => {
     }),
     [loginData?.Profile_pic?.url, loginData?.id, loginData?.name],
   );
-  console.log(user, 'loginData?.Profile_pic?.url');
+  // console.log(user, 'loginData?.Profile_pic?.url');
   // useEffect(() => {
   //   const setupClient = async () => {
   //     try {
@@ -57,7 +57,7 @@ const useChatClient = () => {
       // unsubscribe any previous listener
       unsubscribeTokenRefreshListenerRef.current?.();
       const token = await messaging().getToken();
-      console.log('TOken', token);
+      // console.log('TOken', token);
       const push_provider = 'firebase';
       const push_provider_name = 'ClarisAndroid'; // name an alias for your push provider (optional)
       await chatClient.setLocalDevice({
@@ -98,7 +98,7 @@ const useChatClient = () => {
         const token = chatClient.devToken(
           'influencer_' + loginData?.id?.toString(),
         );
-        console.log('Token generated', token);
+        // console.log('Token generated', token);
         await chatClient.connectUser(user, token);
 
         // connectUser is an async function. So you can choose to await for it or not depending on your use case (e.g. to show custom loading indicator)

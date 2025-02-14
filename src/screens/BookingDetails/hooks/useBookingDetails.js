@@ -20,6 +20,7 @@ const useBookingDetails = () => {
   const timeFrameData = useSelector(
     state => state.restaurantSlice.timeFrameData,
   );
+  // console.log('timeFrameData_useBookingDetails', JSON.stringify(timeFrameData));
   const loginData = useSelector(state => state.authSlice.loginData);
   const route = useRoute();
   const actionNumId = route.params?.actionNumId;
@@ -48,17 +49,17 @@ const useBookingDetails = () => {
     state => state.restaurantSlice.restaurantDetails,
   );
   const isEvent = restaurantDetails?.is_event;
-  console.log('isEvent', isEvent);
+  // console.log('isEvent', isEvent);
   const today = new Date();
   const todayUtcTime = today.getTime();
   let after24Hours = todayUtcTime;
-  console.log(
-    'restaurantDetails?.event_date_time',
-    restaurantDetails?.event_date_time,
-    restaurantDetails,
-    eventSelectedDateIndex,
-    isEvent,
-  );
+  // console.log(
+  //   'restaurantDetails?.event_date_time',
+  //   restaurantDetails?.event_date_time,
+  //   restaurantDetails,
+  //   eventSelectedDateIndex,
+  //   isEvent,
+  // );
 
   if (restaurantDetails?.booking_buffer_time) {
     after24Hours =
@@ -95,7 +96,7 @@ const useBookingDetails = () => {
     setStartDate(newStartDate);
     setEndDate(newEndDate);
   };
-  console.log(timeFrameData, 'timeFrameData');
+  // console.log(timeFrameData, 'timeFrameData');
   const showPreviousWeek = () => {
     if (getDateWeek(startDate) <= getDateWeek(currentDate)) {
       return;
@@ -118,11 +119,11 @@ const useBookingDetails = () => {
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.ServiceDetails);
   };
-  console.log(
-    ' conditionCheck',
-    selectedDate,
-    // serviceDetails?.actions_turbo_id,
-  );
+  // console.log(
+  //   ' conditionCheck',
+  //   selectedDate,
+  //   // serviceDetails?.actions_turbo_id,
+  // );
 
   const formatDate = date => {
     const d = new Date(date); // Create a Date object from the input
@@ -158,7 +159,13 @@ const useBookingDetails = () => {
       setIsLoading(false);
       return;
     }
-
+    // console.log(
+    //   'after24Hours',
+    //   currentBookingDateTime?.getTime(),
+    //   after24Hours,
+    //   currentBookingDateTime.getTime() >= after24Hours,
+    //   selectedDate,
+    // );
     if (currentBookingDateTime.getTime() >= after24Hours) {
       const bookingTimeStamp = currentBookingDateTime.valueOf();
       const formattedDate = `${currentBookingDateTime.getFullYear()}-${
@@ -211,6 +218,8 @@ const useBookingDetails = () => {
         prepData['additional_influencer'] = influencerCount;
       }
       const res = await addRestaurantBooking(prepData);
+      // console.log('res_handleConfirmBtnPress', res);
+
       if (res?.status === 200) {
         console.log('Booking Details:', res);
         mixpanel.track('Booking Made', {
@@ -236,18 +245,13 @@ const useBookingDetails = () => {
         navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
           bookingDetails: res?.data,
         });
-      } else {
+      } else if (res?.status !== 400) {
         let error;
         console.log('res: ', JSON.stringify(res));
-        if (res?.error?.response?.data) {
-          error = {
-            message: JSON.stringify(res?.error?.response?.data?.message),
-          };
-        } else {
-          error = {
-            message: res?.data,
-          };
-        }
+
+        error = {
+          message: res?.message || res?.data,
+        };
         showToastError(error);
       }
       setIsLoading(false);
@@ -333,7 +337,7 @@ const useBookingDetails = () => {
   };
 
   useEffect(() => {
-    console.log('check_useEffect_code_run_after_date_change');
+    // console.log('check_useEffect_code_run_after_date_change');
     setSelectedTimeFame({});
     const myDate = new Date(selectedDate);
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});

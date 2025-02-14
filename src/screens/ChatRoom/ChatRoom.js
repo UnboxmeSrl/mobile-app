@@ -45,14 +45,14 @@ const ChatRoom = () => {
     }
   }, [channel?.id, dispatch, navigation]);
 
-  console.log(
-    channel?.state?.members,
-    'members',
-    'channel?.state?.messageSets',
-    channel?.state?.messageSets,
-    'filtersList_____________________________________',
-    filters,
-  );
+  // console.log(
+  //   channel?.state?.members,
+  //   'members___________________',
+  //   'channel?.state?.messageSets',
+  //   channel?.state?.messageSets,
+  //   'filtersList_____________________________________',
+  //   filters,
+  // );
   useFocusEffect(
     useCallback(() => {
       const backHandler = BackHandler.addEventListener(

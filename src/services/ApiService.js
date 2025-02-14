@@ -12,7 +12,7 @@ export default {
     };
 
     const response = await axios.get(url, options).catch(err => {
-      console.error('error', url, err);
+      // console.error('error_getApi', url, err);
       showToastError(err);
     });
     return response?.data;
@@ -26,10 +26,21 @@ export default {
     };
     const response = await axios.post(url, data, options).catch(err => {
       if (err?.response?.data) {
-        // console.error('🚀 ~ post: ~ error:', JSON.stringify(err));
+        console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
       }
     });
     return response?.data;
+  },
+
+  postNew: async (url, data) => {
+    const options = {
+      headers: {
+        Accept: 'application/json',
+      },
+    };
+    const response = await axios.post(url, data, options);
+    console.log('response_post', response);
+    return response;
   },
 
   postMedia: async (url, data) => {

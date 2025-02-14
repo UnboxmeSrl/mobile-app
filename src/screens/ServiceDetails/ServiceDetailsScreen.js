@@ -42,14 +42,14 @@ const ServiceDetails = () => {
     handleInfluencerPlus,
     handleInfluencerMinus,
   } = useServiceDetails();
-  console.log(
-    'serviceDetails?.at_offer_description',
-    typeof serviceDetails?.at_offer_description,
-    serviceDetails,
-    // serviceDetails?.at_offer_description,
-    // serviceDetails?._actions_turbo?.Extra_People,
-    // serviceDetails,
-  );
+  // console.log(
+  //   'serviceDetails?.at_offer_description',
+  //   typeof serviceDetails?.at_offer_description,
+  //   serviceDetails,
+  //   // serviceDetails?.at_offer_description,
+  //   // serviceDetails?._actions_turbo?.Extra_People,
+  //   // serviceDetails,
+  // );
   // console.log('Service Details: ' + JSON.stringify(serviceDetails))
   return (
     <SafeAreaView style={styles.mainContainer}>

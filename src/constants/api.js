@@ -45,6 +45,7 @@ export const Api = {
     GET_RESTAURANT_OWNERS: `${BASE_URL}/api:bwh6Xc5O/get_restaurant_owner`,
     GET_APP_INFO: `${BASE_URL}/api:bwh6Xc5O/app_description`,
 
+    UPDATE_BOOKING: `${BASE_URL}/api:bwh6Xc5O/update_booking_location`,
   },
   CONTENT: {
     GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content_new`,
