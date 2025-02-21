@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   FlatList,
   Image,
@@ -28,7 +28,14 @@ const ContentBriefScreen = () => {
     handleTagCopyPress,
     handleOpenCouponPress,
   } = useContentBrief();
-
+  const tags = useMemo(
+    () =>
+      [
+        bookingDetails?._restaurant_turbo?.Tag2,
+        bookingDetails?._restaurant_turbo?.Tags,
+      ].filter(v => !!v),
+    [bookingDetails],
+  );
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView
@@ -58,38 +65,12 @@ const ContentBriefScreen = () => {
           </View>
         )}
 
-        <View style={styles.labelContainer}>
-          <Text allowFontScaling={false} style={styles.labelText}>
-            Tags
-          </Text>
-        </View>
+        {/* {(bookingDetails?._restaurant_turbo?.Tags ||
+          bookingDetails?._restaurant_turbo?.Tags) && (
+          <> */}
 
-        <FlatList
-          data={[0, 1]}
-          numColumns={2}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({item, index}) => {
-            let tag =
-              index === 1
-                ? bookingDetails?._restaurant_turbo?.Tag2
-                : bookingDetails?._restaurant_turbo?.Tags;
-
-            return (
-              <View style={styles.tagContainer}>
-                <Text allowFontScaling={false} style={styles.tagText}>
-                  {tag}
-                </Text>
-                <TouchableOpacity onPress={() => handleTagCopyPress(tag)}>
-                  <Image
-                    resizeMode="contain"
-                    source={IMAGES.copy}
-                    style={styles.copyIcon}
-                  />
-                </TouchableOpacity>
-              </View>
-            );
-          }}
-        />
+        {/* </>
+        )} */}
         {/* 
         <View style={styles.labelContainer}>
           <Text allowFontScaling={false}  style={styles.labelText}>Hashtags</Text>
@@ -144,6 +125,38 @@ const ContentBriefScreen = () => {
             {bookingDetails?._actions_turbo?.Descrizione}
           </Text>
         </View>
+        {tags.length > 0 && (
+          <>
+            <View style={styles.labelContainer}>
+              <Text allowFontScaling={false} style={styles.labelText}>
+                Tags
+              </Text>
+            </View>
+
+            <FlatList
+              data={tags}
+              numColumns={2}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({item, index}) => {
+                return (
+                  <View style={styles.tagContainer}>
+                    <Text allowFontScaling={false} style={styles.tagText}>
+                      {item}
+                      {/* working on tabs */}
+                    </Text>
+                    <TouchableOpacity onPress={() => handleTagCopyPress(item)}>
+                      <Image
+                        resizeMode="contain"
+                        source={IMAGES.copy}
+                        style={styles.copyIcon}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
+            />
+          </>
+        )}
         <TouchableOpacity
           style={styles.queryContainer}
           onPress={() =>
@@ -191,7 +204,8 @@ const styles = StyleSheet.create({
     width: '15%',
   },
   copyIcon: {
-    tintColor: COLORS.newPrimary,
+    // tintColor: COLORS.newPrimary,
+    tintColor: COLORS.greyFont,
     height: moderateScale(16),
     marginLeft: scale(7),
     width: moderateScale(16),
@@ -306,7 +320,8 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   socialMediaDescriptionText: {
-    color: COLORS.newPrimary,
+    // color: COLORS.newPrimary,
+    color: COLORS.davyGrey,
     fontFamily: FONTS.quicksand,
     fontSize: moderateScale(14),
   },

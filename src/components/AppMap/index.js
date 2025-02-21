@@ -66,10 +66,10 @@ const AppMap = () => {
     [userLocation, selectedResCoordinates],
   );
 
-  useEffect(() => {
-    console.log('check_requestLocationPermission');
-    requestLocationPermission();
-  }, [requestLocationPermission]);
+  // useEffect(() => {
+  //   console.log('check_requestLocationPermission');
+  //   requestLocationPermission();
+  // }, [requestLocationPermission]);
 
   const getAllRestaurantsHandler = useCallback(async () => {
     await handleGetAllRestaurants();

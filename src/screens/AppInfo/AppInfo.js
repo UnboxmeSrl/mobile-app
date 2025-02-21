@@ -21,31 +21,33 @@ const AppInfo = ({route}) => {
   const appInfo = useSelector(selectAppInfo)?.description;
   // console.log('appInfo', appInfo);
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.mainScrollView}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            onPress={() => navigate('back')}
-            style={styles.backIconContainer}>
-            <Image
-              resizeMode="cover"
-              source={IMAGES.back}
-              style={styles.backIcon}
-            />
-          </TouchableOpacity>
-          <View style={styles.headerTitleContainer}>
-            <Text allowFontScaling={false} style={styles.headerTitleText}>
-              How it works
-            </Text>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+      <View style={styles.mainContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.mainScrollView}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              onPress={() => navigate('back')}
+              style={styles.backIconContainer}>
+              <Image
+                resizeMode="cover"
+                source={IMAGES.back}
+                style={styles.backIcon}
+              />
+            </TouchableOpacity>
+            <View style={styles.headerTitleContainer}>
+              <Text allowFontScaling={false} style={styles.headerTitleText}>
+                How it works
+              </Text>
+            </View>
           </View>
-        </View>
-        <View>
-          {/* <Text>AppInfo</Text> */}
-          <Text>{appInfo}</Text>
-        </View>
-      </ScrollView>
+          <View>
+            {/* <Text>AppInfo</Text> */}
+            <Text>{appInfo}</Text>
+          </View>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -55,7 +57,6 @@ export default AppInfo;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    // backgroundColor: 'yellow',
     padding: scale(18),
     backgroundColor: COLORS.white,
   },

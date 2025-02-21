@@ -44,7 +44,8 @@ const useCreatePassword = () => {
     if (!REGEX.passwordRegExp.test(password)) {
       const errorObj = {
         message:
-          'Password needs to contain at least a capital letter, number and special character. ',
+          'Password needs to contain at least a capital letter, number and minimum 8 characters. ',
+        // 'Password needs to contain at least a capital letter, number and special character. ',
       };
       setError(errorObj);
       return false;

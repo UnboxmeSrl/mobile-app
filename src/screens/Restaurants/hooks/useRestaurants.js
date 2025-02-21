@@ -50,26 +50,8 @@ const useRestaurants = () => {
   };
 
   const requestLocationPermission = useCallback(async () => {
-    try {
-      if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        );
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          return Alert.alert(
-            'Location Permission',
-            'Location permission denied',
-          );
-        }
-      } else {
-        const granted = await Geolocation.requestAuthorization('whenInUse');
-        if (granted !== 'granted') {
-          return Alert.alert(
-            'Location Permission',
-            'Location permission denied',
-          );
-        }
-      }
+    console.log('check_requestLocationPermission');
+    const getCurrentPosition = () => {
       Geolocation.getCurrentPosition(
         position => {
           // console.log(
@@ -89,8 +71,38 @@ const useRestaurants = () => {
         },
         geolocationSetting,
       );
+    };
+    try {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        console.log('PermissionsAndroid_RESULTS', PermissionsAndroid.RESULTS);
+        console.log(
+          'PermissionsAndroid_RESULTS_GRANTED',
+          PermissionsAndroid.RESULTS.GRANTED,
+          PermissionsAndroid.RESULTS.DENIED,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          getCurrentPosition();
+          return 'granted';
+        } else {
+          if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+            return 'denied';
+          }
+        }
+      } else {
+        const granted = await Geolocation.requestAuthorization('whenInUse');
+        console.log('check_granted_requestLocationPermission', granted);
+        if (granted === 'granted') {
+          getCurrentPosition();
+          return 'granted';
+        } else {
+          return 'denied';
+        }
+      }
     } catch (err) {
-      Alert.alert('Location Permission', 'Something went wrong!');
+      return 'error';
     }
   }, [dispatch]);
 

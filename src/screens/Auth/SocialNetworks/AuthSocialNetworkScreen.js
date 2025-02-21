@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -17,12 +17,14 @@ import {
 import {COLORS, FONTS} from '../../../constants';
 import {useAuthSocialNetwork} from './hooks';
 import {setAuthData} from '../../../redux';
+import {formatTikTokUrl, TIKTOK_URL_REGEX} from '../../../navigation/constants';
 
 const AuthSocialNetworkScreen = () => {
   const {
     isLoading,
     dispatch,
     isBtnDisabled,
+    setIsBtnDisabled,
     tiktokUserName,
     setTiktokUserName,
     tiktokSheetRef,
@@ -37,6 +39,9 @@ const AuthSocialNetworkScreen = () => {
   const [tiktokInputValue, setTiktokInputValue] = useState('');
   const [instaUserNameValue, setInstaUserNameValue] = useState('');
 
+  const isValidTiktok = useMemo(() => {
+    return tiktokInputValue && TIKTOK_URL_REGEX.test(tiktokInputValue);
+  }, [tiktokInputValue]);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
@@ -49,7 +54,6 @@ const AuthSocialNetworkScreen = () => {
           <Text allowFontScaling={false} style={styles.descriptionText}>
             Register your social networks
           </Text>
-
           <View style={styles.socialMediaMainContainer}>
             <TouchableOpacity
               onPress={handleOnTikTokPress}
@@ -156,15 +160,18 @@ const AuthSocialNetworkScreen = () => {
         ref={tiktokSheetRef}
         title={'Connect Tiktok account'}
         description={'Enter your tiktok account username'}
-        placeholder={'your tiktok username'}
-        field={tiktokUserName}
+        placeholder={'your tiktok @username'}
+        field={tiktokInputValue}
+        showInfoText="If you have an account add user name after @ else keep blank"
         // onChangeText={setTiktokUserName}
+        disabled={!isValidTiktok}
         onChangeText={value => {
-          setTiktokUserName(value);
           setTiktokInputValue(value); // Update input value for TikTok
         }}
         handlePress={() => {
-          dispatch(setAuthData({tiktokUserName}));
+          let link = formatTikTokUrl(tiktokInputValue);
+          setTiktokUserName(link);
+          dispatch(setAuthData({tiktokUserName: link}));
           setTimeout(() => {
             tiktokSheetRef?.current?.close();
           }, 1000);
@@ -185,13 +192,12 @@ const AuthSocialNetworkScreen = () => {
         handlePress={() => {
           let link = instaUserName;
           if (instaUserName.search('instagram.com') === -1) {
-            // console.log("instaUserName.search('@')", instaUserName.search('@'));
+            console.log("instaUserName.search('@')", instaUserName.search('@'));
             if (instaUserName.search('@') !== -1) {
               link = instaUserName.replace(/@/g, '');
             }
             link = 'https://www.instagram.com/' + link;
           }
-          // console.log('link: ' + link);
           dispatch(setAuthData({instaUserName: link}));
           setTimeout(() => {
             instaSheetRef?.current?.close();
@@ -293,5 +299,19 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: moderateScale(14),
     marginLeft: scale(16),
+  },
+  skipContainer: {
+    flexDirection: 'row',
+    width: '90%',
+    marginTop: verticalScale(4),
+    marginBottom: verticalScale(8),
+    marginEnd: verticalScale(22),
+    justifyContent: 'flex-end',
+    backgroundColor: 'yellow ',
+  },
+  skipText: {
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(16),
+    color: COLORS.black,
   },
 });

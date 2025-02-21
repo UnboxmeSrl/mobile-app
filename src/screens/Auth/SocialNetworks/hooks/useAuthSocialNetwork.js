@@ -10,13 +10,13 @@ import DeviceInfo from 'react-native-device-info';
 
 const useAuthSocialNetwork = () => {
   const userDetails = useSelector(state => state.authSlice.authData);
-  const [tiktokUserName, setTiktokUserName] = useState('');
+  let [tiktokUserName, setTiktokUserName] = useState('');
   const [instaUserName, setInstaUserName] = useState('');
   const [isLoading, setIsLoading] = useState();
   const tiktokSheetRef = useRef();
   const instaSheetRef = useRef();
   const dispatch = useDispatch();
-  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
 
   const formData = new FormData();
   const navigation = useNavigation();
@@ -152,6 +152,7 @@ const useAuthSocialNetwork = () => {
     handleOnTikTokPress,
     instaUserName,
     isBtnDisabled,
+    setIsBtnDisabled,
     setInstaUserName,
     setTiktokUserName,
     tiktokSheetRef,

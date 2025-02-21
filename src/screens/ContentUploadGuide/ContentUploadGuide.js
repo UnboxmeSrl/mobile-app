@@ -20,9 +20,11 @@ const ContentUploadGuide = () => {
     actionName,
     actionDescription,
     bookingDetails,
+    permissionError,
     handleOpenCouponPress,
     handleBackPress,
   } = useContentUploadGuide();
+  // console.log('permissionError', permissionError);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -100,6 +102,20 @@ const ContentUploadGuide = () => {
               Open Coupon
             </Text>
           </TouchableOpacity>
+          {permissionError && (
+            <Text style={styles.permissionErrorText}>
+              {permissionError.includes('Enable permission') && (
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    color: 'black',
+                  }}>
+                  Location permission is denied: {'\n'}
+                </Text>
+              )}
+              {permissionError}
+            </Text>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -202,5 +218,11 @@ const styles = StyleSheet.create({
   disabledBtnContainer: {
     backgroundColor: COLORS.cultured,
     opacity: 0.7,
+  },
+  permissionErrorText: {
+    marginTop: verticalScale(15),
+    paddingHorizontal: scale(12),
+    color: 'red',
+    // color: COLORS.whiteShadedTransparent,
   },
 });

@@ -50,9 +50,9 @@ const RestaurantsScreen = () => {
   const handleBottomSheet = () => {
     bottomSheetRef?.current?.open();
   };
-  useEffect(() => {
-    requestLocationPermission();
-  }, [requestLocationPermission]);
+  // useEffect(() => {
+  //   requestLocationPermission();
+  // }, [requestLocationPermission]);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.btnStack}>

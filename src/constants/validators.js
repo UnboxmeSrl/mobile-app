@@ -36,6 +36,6 @@ export const REQUIRED_RULE = {
 };
 
 export const REGEX = {
-  passwordRegExp: /^(?=.*\d)(?=.*[a-z]).{8,}$/,
+  passwordRegExp: /^(?=.*\d)(?=.*[A-Z]).{8,}$/,
   emailRegExp: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
 };

@@ -1,14 +1,18 @@
-import {useRoute} from '@react-navigation/native';
+import {useFocusEffect, useRoute} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../constants';
 import {navigate, showToastError, updateAction} from '../../../services';
 import {useSelector} from 'react-redux';
 import {selecteUserCoords} from '../../../redux';
 import {calculateDis} from '../../../utils';
+import {useRestaurants} from '../../Restaurants/hooks';
+import {useCallback, useEffect, useState} from 'react';
 
 const useContentUploadGuide = () => {
   const route = useRoute();
   const bookingDetails = route.params?.bookingDetails;
   const userLocation = useSelector(selecteUserCoords);
+  const {requestLocationPermission} = useRestaurants();
+  const [permissionError, setPermissionError] = useState('');
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
@@ -21,70 +25,86 @@ const useContentUploadGuide = () => {
   } else if (bookingDetails?.diary_action_turbo_id) {
     actionName = bookingDetails?._diary_action_turbo?.action;
   }
+  const openCoupon = useCallback(
+    async (lat, lng, userLat, userLng) => {
+      const userDistantValue = calculateDis(lat, lng, userLat, userLng) * 1000;
 
-  const handleOpenCouponPress = async () => {
+      if (bookingDetails?.coupon_status === 'showed') {
+        console.log('checkShowed_block');
+        navigate(SCREEN_NAMES.NewCouponScreen, {
+          bookingDetails: bookingDetails,
+        });
+      } else if (
+        bookingDetails?.coupon_status !== 'not_show' &&
+        userDistantValue <= 200
+      ) {
+        // const body = {
+        //   location: {
+        //     type: 'point',
+        //     data: {
+        //       lng: userLocation?.[0],
+        //       lat: userLocation?.[1],
+        //     },
+        //   },
+        // };
+
+        // return;
+        const body = {
+          coupon_status: 'showed',
+        };
+
+        const res = await updateAction(bookingDetails?.id, body);
+        console.log('res_of_updateAction', res);
+        if (res) {
+          navigate(SCREEN_NAMES.NewCouponScreen, {
+            bookingDetails: bookingDetails,
+          });
+        }
+      } else {
+        // console.log(
+        //   'bookingDetails_handleOpenCouponPress',
+        //   JSON.stringify(bookingDetails),
+        // );
+        if (bookingDetails?.coupon_status === 'not_show') {
+          showToastError({message: 'coupon expired'});
+        } else {
+          showToastError({
+            message: 'Coupon is not valid at this location',
+          });
+        }
+      }
+    },
+    [bookingDetails],
+  );
+  const handleOpenCouponPress = useCallback(async () => {
     const userLng = userLocation?.[0];
     const userLat = userLocation?.[1];
     const lat = bookingDetails?.location?.data?.lat;
     const lng = bookingDetails?.location?.data?.lng;
-    const userDistantValue = calculateDis(lat, lng, userLat, userLng) * 1000;
-    // const userDistantValue =
-    //   calculateDis(37.27651669260897, -122.04641848163368, userLat, userLng) *
-    //   1000;
-    // console.log(
-    //   'bookingDetails',
-    //   userDistantValue,
-    //   lat,
-    //   lng,
-    //   userLat,
-    //   userLng,
-    //   bookingDetails?.coupon_status,
-    //   bookingDetails,
-    // );
-    if (bookingDetails?.coupon_status === 'showed') {
-      console.log('checkShowed_block');
-      navigate(SCREEN_NAMES.NewCouponScreen, {
-        bookingDetails: bookingDetails,
-      });
-    } else if (
-      bookingDetails?.coupon_status !== 'not_show' &&
-      userDistantValue <= 200
-    ) {
-      // const body = {
-      //   location: {
-      //     type: 'point',
-      //     data: {
-      //       lng: userLocation?.[0],
-      //       lat: userLocation?.[1],
-      //     },
-      //   },
-      // };
-
-      // return;
-      const body = {
-        coupon_status: 'showed',
-      };
-
-      const res = await updateAction(bookingDetails?.id, body);
-      if (res) {
-        navigate(SCREEN_NAMES.NewCouponScreen, {
-          bookingDetails: bookingDetails,
-        });
-      }
+    console.log(userLocation);
+    if (userLat && userLng) {
+      openCoupon(lat, lng, userLat, userLng);
     } else {
-      // console.log(
-      //   'bookingDetails_handleOpenCouponPress',
-      //   JSON.stringify(bookingDetails),
-      // );
-      if (bookingDetails?.coupon_status === 'not_show') {
-        showToastError({message: 'coupon expired'});
-      } else {
-        showToastError({
-          message: 'Coupon is not valid at this location',
-        });
+      const permission = await requestLocationPermission();
+      console.log('permission', permission);
+      if (permission === 'denied') {
+        setPermissionError(
+          'Enable permission from device settings to avail coupon',
+        );
+      } else if (permission === 'error') {
+        setPermissionError('Something went wrong, try again');
+      } else if (permission === 'granted') {
+        setPermissionError('');
+        openCoupon(lat, lng, userLat, userLng);
       }
     }
-  };
+  }, [
+    bookingDetails?.location?.data?.lat,
+    bookingDetails?.location?.data?.lng,
+    openCoupon,
+    requestLocationPermission,
+    userLocation,
+  ]);
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.YourScheduleDetailsScreen, {
@@ -99,6 +119,7 @@ const useContentUploadGuide = () => {
     bookingDetails,
     handleOpenCouponPress,
     handleBackPress,
+    permissionError,
   };
 };
 
