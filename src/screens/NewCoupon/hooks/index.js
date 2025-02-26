@@ -1,1 +1,1 @@
-export { default as useNewCoupon } from './useNewCoupon'
+export {default as useNewCoupon} from './useNewCoupon';

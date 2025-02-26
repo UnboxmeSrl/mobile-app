@@ -1,8 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES} from '../../../constants';
-import {setRestaurantDetails} from '../../../redux';
 import {navigate} from '../../../services';
 import {xanoImageSize} from '../../../utils';
 
@@ -10,7 +9,6 @@ const useNewCoupon = () => {
   const route = useRoute();
   const loginData = useSelector(state => state.authSlice.loginData);
   const bookingDetails = route.params?.bookingDetails;
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const isReel = bookingDetails?.reel === '1';
   const bookingDate = new Date(bookingDetails?.BookingDay);

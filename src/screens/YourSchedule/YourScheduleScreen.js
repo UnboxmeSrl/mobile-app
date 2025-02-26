@@ -128,14 +128,18 @@ const YourScheduleScreen = () => {
 
               return (
                 <TouchableOpacity
-                  onPress={() =>
+                  onPress={() => {
+                    console.log(
+                      'bookings_YourScheduleScreen',
+                      JSON.stringify(bookings),
+                    );
                     handleCardPress(
                       item,
                       approvalStatus,
                       actionName,
                       actionNumId,
-                    )
-                  }
+                    );
+                  }}
                   style={styles.cardContainer}>
                   <View
                     style={[

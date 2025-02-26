@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "33742659330",
     "project_id": "claris-c1821",
-    "storage_bucket": "claris-c1821.appspot.com"
+    "storage_bucket": "claris-c1821.firebasestorage.app"
   },
   "client": [
     {
@@ -97,6 +97,64 @@
         "mobilesdk_app_id": "1:33742659330:android:1b920dcc686bf02780ec1b",
         "android_client_info": {
           "package_name": "com.claris.restaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33742659330-kvgtbjni57dqur57s9vnfqmuct3bbbv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUtOL_jleyWVz2lFbfMKdEdQCRH_vPuuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33742659330-kvgtbjni57dqur57s9vnfqmuct3bbbv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33742659330:android:16e38d12a40ee0ad80ec1b",
+        "android_client_info": {
+          "package_name": "com.clarisapp.influencerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33742659330-kvgtbjni57dqur57s9vnfqmuct3bbbv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUtOL_jleyWVz2lFbfMKdEdQCRH_vPuuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33742659330-kvgtbjni57dqur57s9vnfqmuct3bbbv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33742659330:android:a984c410e2e2c56b80ec1b",
+        "android_client_info": {
+          "package_name": "com.clarisapp.venuerestaurant"
         }
       },
       "oauth_client": [

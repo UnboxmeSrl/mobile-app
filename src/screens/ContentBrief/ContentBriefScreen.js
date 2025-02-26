@@ -28,14 +28,16 @@ const ContentBriefScreen = () => {
     handleTagCopyPress,
     handleOpenCouponPress,
   } = useContentBrief();
-  const tags = useMemo(
-    () =>
-      [
-        bookingDetails?._restaurant_turbo?.Tag2,
-        bookingDetails?._restaurant_turbo?.Tags,
-      ].filter(v => !!v),
-    [bookingDetails],
-  );
+  // const tags = useMemo(
+  //   () =>
+  //     [
+  //       bookingDetails?._restaurant_turbo?.Tag2,
+  //       bookingDetails?._restaurant_turbo?.Tags,
+  //     ].filter(v => !!v),
+  //   [bookingDetails],
+  // );
+  const tags = bookingDetails?._restaurant_turbo?.Content_Tags || [];
+  // console.log('tags_ContentBriefScreen', tags, !!tags[0].length);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView
@@ -125,7 +127,7 @@ const ContentBriefScreen = () => {
             {bookingDetails?._actions_turbo?.Descrizione}
           </Text>
         </View>
-        {tags.length > 0 && (
+        {typeof tags?.[0] === 'string' && !!tags?.[0]?.length > 0 && (
           <>
             <View style={styles.labelContainer}>
               <Text allowFontScaling={false} style={styles.labelText}>
@@ -256,6 +258,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     backgroundColor: COLORS.white,
+    // backgroundColor: 'yellow',
     flex: 1,
   },
   openCouponBtnContainer: {

@@ -116,3 +116,4 @@ export const selectIsPending = createDraftSafeSelector(
 export const selectVisitCount = state => state.authSlice.visitCount === 1;
 
 export const selecteUserCoords = state => state.authSlice.userLocation;
+export const selectAuthData = state => state.authSlice.authData;

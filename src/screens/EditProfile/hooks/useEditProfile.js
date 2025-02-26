@@ -123,7 +123,7 @@ const useEditProfile = () => {
           user?.Profile_pic?.url ?? {
             name: 'rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
             type: 'image/jpeg',
-            uri: 'file:///data/user/0/com.claris.app/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+            uri: 'file:///data/user/0/com.clarisapp.influencerapp/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
           },
         );
       }

@@ -17,7 +17,12 @@ import {
 import {COLORS, FONTS} from '../../../constants';
 import {useAuthSocialNetwork} from './hooks';
 import {setAuthData} from '../../../redux';
-import {formatTikTokUrl, TIKTOK_URL_REGEX} from '../../../navigation/constants';
+import {
+  formatInstaUrl,
+  formatTikTokUrl,
+  INSTA_URL_REGEX,
+  TIKTOK_URL_REGEX,
+} from '../../../navigation/constants';
 
 const AuthSocialNetworkScreen = () => {
   const {
@@ -42,6 +47,10 @@ const AuthSocialNetworkScreen = () => {
   const isValidTiktok = useMemo(() => {
     return tiktokInputValue && TIKTOK_URL_REGEX.test(tiktokInputValue);
   }, [tiktokInputValue]);
+  const isValidInstagram = useMemo(() => {
+    return instaUserNameValue && INSTA_URL_REGEX.test(instaUserNameValue);
+  }, [instaUserNameValue]);
+  console.log(isValidInstagram, instaUserNameValue, 'isValidInstagram');
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
@@ -61,7 +70,7 @@ const AuthSocialNetworkScreen = () => {
                 styles.socialMediaItem,
                 {
                   backgroundColor:
-                    tiktokInputValue.trim() !== ''
+                    tiktokUserName.trim() !== ''
                       ? COLORS.newPrimary
                       : COLORS.lightNewPrimaryA6,
                 },
@@ -75,7 +84,7 @@ const AuthSocialNetworkScreen = () => {
                     styles.socialMediaNameText,
                     {
                       color:
-                        tiktokInputValue.trim() !== ''
+                        tiktokUserName.trim() !== ''
                           ? COLORS.white
                           : COLORS.gray,
                     },
@@ -90,7 +99,7 @@ const AuthSocialNetworkScreen = () => {
                     styles.loginIntoIcon,
                     {
                       tintColor:
-                        tiktokInputValue.trim() !== ''
+                        tiktokUserName.trim() !== ''
                           ? COLORS.white
                           : COLORS.black,
                     },
@@ -105,7 +114,7 @@ const AuthSocialNetworkScreen = () => {
                 styles.socialMediaItem,
                 {
                   backgroundColor:
-                    instaUserNameValue.trim() !== ''
+                    instaUserName?.trim() !== ''
                       ? COLORS.newPrimary
                       : COLORS.lightNewPrimaryA6,
                 },
@@ -122,7 +131,7 @@ const AuthSocialNetworkScreen = () => {
                     styles.socialMediaNameText,
                     {
                       color:
-                        instaUserNameValue.trim() !== ''
+                        instaUserName?.trim() !== ''
                           ? COLORS.white
                           : COLORS.gray,
                     },
@@ -166,12 +175,17 @@ const AuthSocialNetworkScreen = () => {
         // onChangeText={setTiktokUserName}
         disabled={!isValidTiktok}
         onChangeText={value => {
+          let link = formatTikTokUrl(value);
+          console.log(link, 'link');
+          setTiktokUserName(link);
           setTiktokInputValue(value); // Update input value for TikTok
+          // setAuthData({tiktokUserName: ''});
+          dispatch(setAuthData({tiktokUserName: ''}));
         }}
         handlePress={() => {
-          let link = formatTikTokUrl(tiktokInputValue);
-          setTiktokUserName(link);
-          dispatch(setAuthData({tiktokUserName: link}));
+          console.log('check_add_press', tiktokUserName);
+          dispatch(setAuthData({tiktokUserName}));
+          // }
           setTimeout(() => {
             tiktokSheetRef?.current?.close();
           }, 1000);
@@ -183,22 +197,28 @@ const AuthSocialNetworkScreen = () => {
         title={'Connect Instagram account'}
         description={'Enter your instagram account username'}
         placeholder={'your instagram username'}
-        field={instaUserName}
+        field={instaUserNameValue}
+        disabled={!isValidInstagram}
         // onChangeText={setInstaUserName}
         onChangeText={value => {
-          setInstaUserName(value);
+          const link = formatInstaUrl(value);
+          console.log('link_instagram', link);
+          setInstaUserName(link);
           setInstaUserNameValue(value); // Update input value for TikTok
+          // setAuthData({instaUserName: ''});
+          dispatch(setAuthData({instaUserName: ''}));
         }}
         handlePress={() => {
-          let link = instaUserName;
-          if (instaUserName.search('instagram.com') === -1) {
-            console.log("instaUserName.search('@')", instaUserName.search('@'));
-            if (instaUserName.search('@') !== -1) {
-              link = instaUserName.replace(/@/g, '');
-            }
-            link = 'https://www.instagram.com/' + link;
-          }
-          dispatch(setAuthData({instaUserName: link}));
+          console.log('check_add_press_InstaUserName', instaUserName);
+          // let link = instaUserName;
+          // if (instaUserName.search('instagram.com') === -1) {
+          //   console.log("instaUserName.search('@')", instaUserName.search('@'));
+          //   if (instaUserName.search('@') !== -1) {
+          //     link = instaUserName.replace(/@/g, '');
+          //   }
+          //   link = 'https://www.instagram.com/' + link;
+          // }
+          dispatch(setAuthData({instaUserName}));
           setTimeout(() => {
             instaSheetRef?.current?.close();
           }, 1000);

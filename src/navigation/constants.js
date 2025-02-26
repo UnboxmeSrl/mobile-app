@@ -20,7 +20,8 @@ export const DARK_STATUS_BAR = {
 
 export const TIKTOK_URL_REGEX =
   /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$|^@[a-zA-Z0-9_.]+$/;
-
+export const INSTA_URL_REGEX =
+  /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
 export function formatTikTokUrl(input) {
   // Regex to check if input is only @username
   const usernameRegex = /^@[a-zA-Z0-9_.]+$/;
@@ -36,6 +37,20 @@ export function formatTikTokUrl(input) {
       .replace(/\/$/, '');
   } else {
     // Invalid input, return null or handle accordingly
+    return '';
+  }
+}
+export function formatInstaUrl(input) {
+  console.log(INSTA_URL_REGEX.test(input), input, 'INSTA_URL_REGEX.test(input');
+  const userNameRegex =
+    /^([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
+  if (userNameRegex.test(input)) {
+    console.log('userNameRegex_block');
+    return 'https://www.instagram.com/' + input;
+  } else if (INSTA_URL_REGEX.test(input)) {
+    return input;
+  } else {
+    console.log('userNameRegex_elseBlock');
     return '';
   }
 }

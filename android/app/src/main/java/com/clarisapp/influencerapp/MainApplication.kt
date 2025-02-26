@@ -1,7 +1,7 @@
-package com.claris.app
+package com.clarisapp.influencerapp
 
 import android.app.Application
-import com.claris.app.BuildConfig
+import com.clarisapp.influencerapp.BuildConfig
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost

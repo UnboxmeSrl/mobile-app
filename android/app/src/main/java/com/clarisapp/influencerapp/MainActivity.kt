@@ -1,4 +1,4 @@
-package com.claris.app
+package com.clarisapp.influencerapp
 
 import android.os.Bundle
 import com.facebook.react.ReactActivity

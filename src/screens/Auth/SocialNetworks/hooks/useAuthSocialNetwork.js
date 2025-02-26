@@ -3,13 +3,18 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../../constants';
 import {navigate, showToastError, userSignUp} from '../../../../services';
-import {resetAuthData, setAuthData, setLoginData} from '../../../../redux';
+import {
+  resetAuthData,
+  selectAuthData,
+  setAuthData,
+  setLoginData,
+} from '../../../../redux';
 import {OneSignal} from 'react-native-onesignal';
 import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 const useAuthSocialNetwork = () => {
-  const userDetails = useSelector(state => state.authSlice.authData);
+  const userDetails = useSelector(selectAuthData);
   let [tiktokUserName, setTiktokUserName] = useState('');
   const [instaUserName, setInstaUserName] = useState('');
   const [isLoading, setIsLoading] = useState();
@@ -94,7 +99,7 @@ const useAuthSocialNetwork = () => {
       formData.append('profileImage', {
         name: 'rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
         type: 'image/jpeg',
-        uri: 'file:///data/user/0/com.claris.app/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
+        uri: 'file:///data/user/0/com.clarisapp.influencerapp/cache/rn_image_picker_lib_temp_44f5f42d-b4e7-4108-930d-498cbc3eab14.jpg',
       });
     }
 
@@ -135,12 +140,28 @@ const useAuthSocialNetwork = () => {
   };
 
   useEffect(() => {
-    if (tiktokUserName.trim().length > 0 || instaUserName.trim().length > 0) {
+    console.log(
+      'tiktokUserName_useEffect',
+      tiktokUserName,
+      instaUserName,
+      userDetails?.instaUserName,
+    );
+    if (
+      (tiktokUserName?.trim().length > 0 &&
+        userDetails?.tiktokUserName === tiktokUserName) ||
+      (instaUserName?.trim().length > 0 &&
+        userDetails?.instaUserName === instaUserName)
+    ) {
       setIsBtnDisabled(false);
     } else {
       setIsBtnDisabled(true);
     }
-  }, [tiktokUserName, instaUserName]);
+  }, [
+    tiktokUserName,
+    instaUserName,
+    userDetails?.tiktokUserName,
+    userDetails?.instaUserName,
+  ]);
 
   return {
     isLoading,

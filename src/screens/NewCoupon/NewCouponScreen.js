@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   firstAmenityMainContainer: {
-    marginLeft: scale(20),
+    marginLeft: scale(10),
   },
   friendAmenityTitle: {
     textAlign: 'center',
@@ -470,7 +470,8 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.lightNewPrimaryA6,
+    // backgroundColor: COLORS.lightNewPrimaryA6,
+    backgroundColor: COLORS.white,
   },
   mainInnerView: {
     alignSelf: 'center',

@@ -3,7 +3,7 @@ import {SCREEN_NAMES} from '../../../constants';
 import {navigate, showToastError, updateAction} from '../../../services';
 import {useSelector} from 'react-redux';
 import {selecteUserCoords} from '../../../redux';
-import {calculateDis} from '../../../utils';
+// import {calculateDis} from '../../../utils';
 import {useRestaurants} from '../../Restaurants/hooks';
 import {useCallback, useEffect, useState} from 'react';
 
@@ -27,7 +27,7 @@ const useContentUploadGuide = () => {
   }
   const openCoupon = useCallback(
     async (lat, lng, userLat, userLng) => {
-      const userDistantValue = calculateDis(lat, lng, userLat, userLng) * 1000;
+      // const userDistantValue = calculateDis(lat, lng, userLat, userLng) * 1000;
 
       if (bookingDetails?.coupon_status === 'showed') {
         console.log('checkShowed_block');
@@ -35,20 +35,10 @@ const useContentUploadGuide = () => {
           bookingDetails: bookingDetails,
         });
       } else if (
-        bookingDetails?.coupon_status !== 'not_show' &&
-        userDistantValue <= 200
+        bookingDetails?.coupon_status !== 'not_show'
+        // &&
+        // userDistantValue <= 200
       ) {
-        // const body = {
-        //   location: {
-        //     type: 'point',
-        //     data: {
-        //       lng: userLocation?.[0],
-        //       lat: userLocation?.[1],
-        //     },
-        //   },
-        // };
-
-        // return;
         const body = {
           coupon_status: 'showed',
         };
@@ -60,18 +50,12 @@ const useContentUploadGuide = () => {
             bookingDetails: bookingDetails,
           });
         }
+      } else if (bookingDetails?.coupon_status === 'not_show') {
+        showToastError({message: 'coupon expired'});
       } else {
-        // console.log(
-        //   'bookingDetails_handleOpenCouponPress',
-        //   JSON.stringify(bookingDetails),
-        // );
-        if (bookingDetails?.coupon_status === 'not_show') {
-          showToastError({message: 'coupon expired'});
-        } else {
-          showToastError({
-            message: 'Coupon is not valid at this location',
-          });
-        }
+        showToastError({
+          message: 'Coupon is not valid at this location',
+        });
       }
     },
     [bookingDetails],
@@ -79,9 +63,12 @@ const useContentUploadGuide = () => {
   const handleOpenCouponPress = useCallback(async () => {
     const userLng = userLocation?.[0];
     const userLat = userLocation?.[1];
-    const lat = bookingDetails?.location?.data?.lat;
-    const lng = bookingDetails?.location?.data?.lng;
-    console.log(userLocation);
+    const lat =
+      bookingDetails?._restaurant_turbo?.Latitude ??
+      bookingDetails?._restaurant_turbo?.location?.lat;
+    const lng =
+      bookingDetails?._restaurant_turbo?.Longitude ??
+      bookingDetails?._restaurant_turbo?.location?.lng;
     if (userLat && userLng) {
       openCoupon(lat, lng, userLat, userLng);
     } else {
@@ -99,8 +86,10 @@ const useContentUploadGuide = () => {
       }
     }
   }, [
-    bookingDetails?.location?.data?.lat,
-    bookingDetails?.location?.data?.lng,
+    bookingDetails?._restaurant_turbo?.Latitude,
+    bookingDetails?._restaurant_turbo?.Longitude,
+    bookingDetails?._restaurant_turbo?.location?.lat,
+    bookingDetails?._restaurant_turbo?.location?.lng,
     openCoupon,
     requestLocationPermission,
     userLocation,
