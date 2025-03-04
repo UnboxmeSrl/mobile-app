@@ -38,7 +38,7 @@ export const userSignUp = async data => {
   try {
     return await Fetch.postWithMedia(url, data);
   } catch (error) {
-    console.log('🛑 Error: ', error?.response);
+    // console.log('🛑 Error: ', error?.response, error);
     return {
       message: 'Something went wrong',
     };
@@ -101,6 +101,17 @@ export const updateProfile = async ({formData, userID}) => {
       console.log('response', response);
       return response;
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateInfluencerType = async (params, data) => {
+  try {
+    const url = Api.PROFILE.ADD_INFLUENCER_TYPE + `/${params}`;
+    const response = await Fetch.putData(url, data);
+    console.log('response_updateInfluencerType', response);
+    return response;
   } catch (error) {
     console.log(error);
   }

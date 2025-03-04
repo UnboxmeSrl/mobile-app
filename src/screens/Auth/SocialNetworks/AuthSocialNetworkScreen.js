@@ -23,6 +23,7 @@ import {
   INSTA_URL_REGEX,
   TIKTOK_URL_REGEX,
 } from '../../../navigation/constants';
+import AppSelect from '../../../components/Elements/AppSelect';
 
 const AuthSocialNetworkScreen = () => {
   const {
@@ -36,6 +37,12 @@ const AuthSocialNetworkScreen = () => {
     instaUserName,
     setInstaUserName,
     instaSheetRef,
+    influencer_type,
+    selectedInFluencer_type,
+    setSelectedInFluencer_type,
+    inFluencerTypeError,
+    setInFluencerTypeError,
+    handleInfluencerTypeChange,
     handleOnTikTokPress,
     handleOnInstaPress,
     handleBackPress,
@@ -63,6 +70,29 @@ const AuthSocialNetworkScreen = () => {
           <Text allowFontScaling={false} style={styles.descriptionText}>
             Register your social networks
           </Text>
+          <View style={{marginTop: verticalScale(12), marginHorizontal: '5%'}}>
+            <AppSelect
+              textStyle={{fontFamily: FONTS.quicksand}}
+              data={influencer_type || []}
+              // onSelect={onSelect}
+              setSelectedValue={value => {
+                setSelectedInFluencer_type(value);
+                setInFluencerTypeError('');
+              }}
+              selectedValue={selectedInFluencer_type}
+              placeholder={'Choose platforms where you qualify'}
+            />
+            {inFluencerTypeError && (
+              <Text
+                style={{
+                  marginLeft: scale(12),
+                  fontFamily: FONTS.quicksand,
+                  color: COLORS.error,
+                }}>
+                {inFluencerTypeError}
+              </Text>
+            )}
+          </View>
           <View style={styles.socialMediaMainContainer}>
             <TouchableOpacity
               onPress={handleOnTikTokPress}

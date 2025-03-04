@@ -13,6 +13,7 @@ export const Api = {
   },
   PROFILE: {
     GET_USER_APPROVAL_STATUS: `${BASE_URL}/api:bwh6Xc5O/getUserStatus`,
+    ADD_INFLUENCER_TYPE: `${BASE_URL}/api:bwh6Xc5O/social_account`,
     GET_GENDER_LIST: `${BASE_URL}/api:bwh6Xc5O/gender_list`,
     GET_INTEREST_TOPICS: `${BASE_URL}/api:bwh6Xc5O/interest_topics`,
     GET_USER_PROFILE: `${BASE_URL}/api:bwh6Xc5O/user_turbo_profile`,

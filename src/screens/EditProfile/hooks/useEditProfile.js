@@ -2,6 +2,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Platform} from 'react-native';
+import {Image} from 'react-native-compressor';
 import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateLoginData} from '../../../redux';
@@ -9,17 +10,26 @@ import {
   getInterestTopics,
   showToastError,
   showToastSuccess,
+  updateInfluencerType,
   updateProfile,
 } from '../../../services';
 import {checkPermission, openGallery} from '../../../utils';
-import {Image} from 'react-native-compressor';
 
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
   const dispatch = useDispatch();
   const [profilePicData, setProfilePicData] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [selectedInFluencer_type, setSelectedInFluencer_type] = useState(
+    {name: user?.social_strength} || {},
+  );
+  console.log('selectedInFluencer_type', selectedInFluencer_type);
+  const influencer_type = [
+    {id: 0, name: 'tiktok'},
+    {id: 1, name: 'instagram'},
+    {id: 2, name: 'both'},
+  ];
+  console.log('user_Social_Strength', user?.social_strength);
   const [country, setCountry] = useState({
     cca2: user?.countryCode,
     name: user?.nationality,
@@ -40,9 +50,11 @@ const useEditProfile = () => {
 
   const {
     control,
+    reset,
     handleSubmit,
     formState: {errors},
     setValue,
+    getValues,
   } = useForm({
     defaultValues: {
       biography: user?.bio ?? '',
@@ -93,8 +105,25 @@ const useEditProfile = () => {
     setValue(param, text);
   };
 
+  const handleInfluencerTypeChange = useCallback(async () => {
+    console.log(
+      'item_handleInfluencerTypeChange',
+      selectedInFluencer_type,
+      user?.id,
+    );
+    // return;
+    const res = await updateInfluencerType(user?.id, {
+      social_strength: selectedInFluencer_type?.name,
+    });
+    // if (res.success === true) {
+    //   console.log('checkSuccessCase');
+    //   setSelectedInFluencer_type(item);
+    // }
+  }, [selectedInFluencer_type, user?.id]);
+
   const onSubmit = useCallback(
     async data => {
+      // handleInfluencerTypeChange();
       const topicIds = Object.values({
         ...preIntrest,
         ...selectedIntrest,
@@ -105,6 +134,7 @@ const useEditProfile = () => {
       formData.append('name', data?.fullName);
       formData.append('nationality', country?.name);
       formData.append('countryCode', country?.cca2);
+      formData.append('social_strength', selectedInFluencer_type?.name);
       topicIds
         ?.filter(item => item?.id)
         .forEach(item => {
@@ -142,7 +172,17 @@ const useEditProfile = () => {
         setLoading(false);
       }
     },
-    [dispatch, profilePicData, selectedIntrest, user, preIntrest, country],
+    [
+      preIntrest,
+      selectedInFluencer_type?.name,
+      selectedIntrest,
+      country?.name,
+      country?.cca2,
+      profilePicData,
+      user?.id,
+      user?.Profile_pic?.url,
+      dispatch,
+    ],
   );
 
   const handleIntrest = useCallback(
@@ -168,10 +208,47 @@ const useEditProfile = () => {
       name: country.name,
     }));
   };
+  // const setSocialValues = useMemo(item => {
+  //   if (['instagram', 'both'].includes(item.name)) watch('instagram', );
+  // }, []);
 
   useEffect(() => {
     getInterestTopicsData();
   }, []);
+
+  // useEffect(() => {
+  //   const prevData = getValues();
+  //   if (selectedInFluencer_type?.name?.includes('tiktok')) {
+  //     reset({
+  //       ...prevData,
+  //       instagramLink: '',
+  //       tiktokLink: user?.Tiktok_account,
+  //     });
+  //     console.log('check_tiktok_condition');
+  //   } else if (selectedInFluencer_type?.name?.includes('instagram')) {
+  //     reset({
+  //       ...prevData,
+  //       instagramLink: user?.IG_account,
+  //       tiktokLink: '',
+  //     });
+  //     console.log('check_insta_condition');
+  //   } else {
+  //     console.log('check_Else_Condition');
+  //     console.log('prevData', prevData);
+  //     reset({
+  //       ...prevData,
+  //       instagramLink: user?.IG_account,
+  //       tiktokLink: user?.Tiktok_account,
+  //     });
+  //   }
+  // }, [
+  //   getValues,
+  //   reset,
+  //   selectedInFluencer_type?.name,
+  //   setValue,
+  //   user?.IG_account,
+  //   user?.Tiktok_account,
+  // ]);
 
   return {
     country,
@@ -185,6 +262,10 @@ const useEditProfile = () => {
     interests,
     preIntrest,
     selectedIntrest,
+    influencer_type,
+    selectedInFluencer_type,
+    setSelectedInFluencer_type,
+    handleInfluencerTypeChange,
     onSubmit,
     onSelect,
     handleIntrest,

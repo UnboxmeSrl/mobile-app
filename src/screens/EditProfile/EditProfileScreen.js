@@ -34,6 +34,7 @@ import {
 import {COLORS, FONTS} from '../../constants';
 import {colors, perfectSize} from '../../utils';
 import {useEditProfile} from './hooks';
+import AppSelect from '../../components/Elements/AppSelect';
 
 const EditProfileScreen = () => {
   const {
@@ -47,6 +48,10 @@ const EditProfileScreen = () => {
     interests,
     preIntrest,
     selectedIntrest,
+    influencer_type,
+    selectedInFluencer_type,
+    setSelectedInFluencer_type,
+    // handleInfluencerTypeChange,
     onSubmit,
     onSelect,
     handleIntrest,
@@ -148,6 +153,16 @@ const EditProfileScreen = () => {
             )}
             rules={{required: 'Biography is required'}}
           />
+          <View style={{marginVertical: verticalScale(12)}}>
+            <AppSelect
+              textStyle={{fontFamily: FONTS.quicksand}}
+              data={influencer_type || []}
+              setSelectedValue={item => setSelectedInFluencer_type(item)}
+              selectedValue={selectedInFluencer_type}
+              placeholder={'Choose platforms where you qualify'}
+            />
+          </View>
+          {/* <Text>Each platform must have at least 10K followers to qualify</Text> */}
           <Controller
             control={control}
             name="instagramLink"
@@ -157,6 +172,7 @@ const EditProfileScreen = () => {
                 img={insta}
                 label="Instagram link"
                 link
+                isDisabled={selectedInFluencer_type?.name === 'tiktok'}
                 onChange={onChange}
                 onPress={() => handlePaste('instagramLink')}
                 placeholder="Ex: instagram.com/uichakir"
@@ -175,6 +191,7 @@ const EditProfileScreen = () => {
                 img={tiktok}
                 label="Tiktok link"
                 link
+                isDisabled={selectedInFluencer_type?.name === 'instagram'}
                 onChange={onChange}
                 onPress={() => handlePaste('tiktokLink')}
                 placeholder="Ex: tiktok.com/uichakir"

@@ -34,6 +34,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
+import AppSelect from '../../components/Elements/AppSelect';
 
 const ProfileScreen = () => {
   const {
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
   },
   invitationDescriptionContainer: {
-    marginTop: verticalScale(20),
+    marginTop: verticalScale(10),
     marginLeft: scale(5),
   },
   xpInnerContainer: {

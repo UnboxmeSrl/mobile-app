@@ -23,6 +23,7 @@ const RestaurantDetails = () => {
   const {
     isLoading,
     services,
+    filteredServices,
     // categoriesIds,
     restaurantDetails,
     // filter,
@@ -168,7 +169,7 @@ const RestaurantDetails = () => {
             <FlatList
               ListEmptyComponent={
                 !isLoading &&
-                services?.length === 0 && (
+                filteredServices?.length === 0 && (
                   <View style={styles.listEmptyContainer}>
                     <Text allowFontScaling={false} style={styles.listEmptyText}>
                       No data found.
@@ -176,7 +177,7 @@ const RestaurantDetails = () => {
                   </View>
                 )
               }
-              data={services}
+              data={filteredServices}
               horizontal
               scrollEnabled={!isScrolling}
               keyExtractor={(_, index) => index.toString()}

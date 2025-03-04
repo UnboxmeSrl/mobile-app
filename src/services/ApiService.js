@@ -59,7 +59,10 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
     };
-    const response = await axios.post(url, data, options).catch(err => {});
+    const response = await axios.post(url, data, options).catch(err => {
+      console.log('err_postWithMedia', err);
+      showToastError(err);
+    });
     return response?.data;
   },
 
@@ -80,6 +83,20 @@ export default {
       });
     }
 
+    return response?.data;
+  },
+
+  putData: async (url, data) => {
+    const options = {
+      headers: {
+        Accept: 'application/json',
+      },
+    };
+    const response = await axios.put(url, data, options).catch(err => {
+      if (err?.response?.data) {
+        console.log('🚀 ~ post: ~ error:', JSON.stringify(err));
+      }
+    });
     return response?.data;
   },
 

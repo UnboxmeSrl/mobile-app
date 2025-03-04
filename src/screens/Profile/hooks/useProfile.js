@@ -21,6 +21,7 @@ const useProfile = () => {
   const isInstaAccount = user?.IG_account?.length > 0;
   const isTiktokAccount = user?.Tiktok_account?.length > 0;
   const isAuthenticated = useSelector(selectIsAuthenticated);
+
   const isFocused = useIsFocused();
   const xp = user?.xp;
   const [level, setLevel] = useState(1);

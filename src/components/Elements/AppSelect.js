@@ -9,7 +9,10 @@ export default function AppSelect({
   data,
   setSelectedValue,
   selectedValue,
+  onSelect,
   placeholder,
+  textStyle,
+  ...rest
 }) {
   return (
     <SelectDropdown
@@ -20,7 +23,7 @@ export default function AppSelect({
       renderButton={(selectedItem, isOpened) => {
         return (
           <View style={styles.dropdownButtonStyle}>
-            <Text style={styles.dropdownButtonTxtStyle}>
+            <Text style={[styles.dropdownButtonTxtStyle, textStyle]}>
               {(selectedValue && selectedValue.name) || placeholder}
             </Text>
             <Icon
@@ -43,6 +46,7 @@ export default function AppSelect({
       }}
       showsVerticalScrollIndicator={false}
       dropdownStyle={styles.dropdownMenuStyle}
+      {...rest}
     />
   );
 }

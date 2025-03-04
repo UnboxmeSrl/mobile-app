@@ -490,7 +490,7 @@
             "usertype_id": 7
         }
     ]
-}
+},
 // service details
 {
     "Bonus_Bookings": 0,
@@ -580,3 +580,343 @@
     "topic": "",
     "usertype_id": 8
 }
+// sevices under restaurant details
+[
+    {
+        "id": 1448,
+        "created_at": 1738648858096,
+        "restaurant_turbo_id": 711,
+        "actions_turbo_id": 6,
+        "timeframesTurbo_Id": [
+            2648
+        ],
+        "at_offer_description": "undefined",
+        "Deal_limit": 3,
+        "Description": "undefined",
+        "instructions": "",
+        "deal_done": 0,
+        "availability": true,
+        "approveByOwner": true,
+        "slots_per_day": 1,
+        "deal_left": 3,
+        "Credits": 0,
+        "category_offers_turbo_id": 0,
+        "category_offers_turbo2_id": [],
+        "Offer_Name": "Stacques Bali",
+        "Bonus_Bookings": 0,
+        "Diary": true,
+        "Story": false,
+        "Reel": true,
+        "Tiktok": true,
+        "Map": false,
+        "restaurant_turbo_bali_id": 0,
+        "topic": "",
+        "usertype_id": 8,
+        "at_offername": "",
+        "timeframes_turbo_id": 0,
+        "Offer_Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/-w7u9a_YijIKfmbluWLQGDmLT9M/3XV_YA../F2CF7510-7660-48E3-A73D-C224B1F6FACB.jpg",
+            "name": "F2CF7510-7660-48E3-A73D-C224B1F6FACB.jpg",
+            "type": "image",
+            "size": 181905,
+            "mime": "image/jpeg",
+            "meta": {
+                "width": 854,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/-w7u9a_YijIKfmbluWLQGDmLT9M/3XV_YA../F2CF7510-7660-48E3-A73D-C224B1F6FACB.jpg"
+        },
+        "services": [],
+        "Icon": null,
+        "_actions_turbo": {
+            "id": 6,
+            "created_at": 1707321806340,
+            "Social": "Diary-Both",
+            "action_num_id": 3,
+            "Descrizione": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief and tagging both the venue and @claris.app",
+            "Beauty": "",
+            "action_status_turbo_id": 8,
+            "Action_Name": "Diary",
+            "Days_deadline": 4,
+            "Extra_People": 0,
+            "Plates": 2,
+            "Drinks": 1,
+            "Gym": "",
+            "Accomodation": 0,
+            "Amount_left": 0,
+            "actions_turbo_id": [],
+            "stories": 2,
+            "photos": 3,
+            "Action_icon": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png",
+                "name": "diary.png",
+                "type": "image",
+                "size": 2810,
+                "mime": "image/png",
+                "meta": {
+                    "width": 256,
+                    "height": 256
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png"
+            }
+        }
+    },
+    {
+        "id": 1447,
+        "created_at": 1738648857989,
+        "restaurant_turbo_id": 711,
+        "actions_turbo_id": 5,
+        "timeframesTurbo_Id": [
+            2648
+        ],
+        "at_offer_description": "Give 5* google map review describing your experience\n+ publish 2 x Instagram Stories  tagging the venue & @claris.app",
+        "Deal_limit": 3,
+        "Description": "Give 5* google map review describing your experience\n+ publish 2 x Instagram Stories  tagging the venue & @claris.app",
+        "instructions": "",
+        "deal_done": 0,
+        "availability": true,
+        "approveByOwner": true,
+        "slots_per_day": 1,
+        "deal_left": 3,
+        "Credits": 0,
+        "category_offers_turbo_id": 0,
+        "category_offers_turbo2_id": [],
+        "Offer_Name": "Stacques Bali",
+        "Bonus_Bookings": 0,
+        "Diary": false,
+        "Story": false,
+        "Reel": false,
+        "Tiktok": false,
+        "Map": true,
+        "restaurant_turbo_bali_id": 0,
+        "topic": "",
+        "usertype_id": 8,
+        "at_offername": "",
+        "timeframes_turbo_id": 0,
+        "Offer_Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/T2-GK1948KQgu-m05KhYogoDKmU/gnyIEw../C52C0907-22D1-4E8C-8E07-E015801DF4E1.jpg",
+            "name": "C52C0907-22D1-4E8C-8E07-E015801DF4E1.jpg",
+            "type": "image",
+            "size": 208994,
+            "mime": "image/jpeg",
+            "meta": {
+                "width": 854,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/T2-GK1948KQgu-m05KhYogoDKmU/gnyIEw../C52C0907-22D1-4E8C-8E07-E015801DF4E1.jpg"
+        },
+        "services": [],
+        "Icon": null,
+        "_actions_turbo": {
+            "id": 5,
+            "created_at": 1707321794873,
+            "Social": "Google Maps",
+            "action_num_id": 2,
+            "Descrizione": "Give 5* google map review describing your experience\n+ publish 2 x Instagram Stories  tagging the venue & @claris.app",
+            "Beauty": "",
+            "action_status_turbo_id": 8,
+            "Action_Name": "G-maps review",
+            "Days_deadline": 1,
+            "Extra_People": 0,
+            "Plates": 1,
+            "Drinks": 1,
+            "Gym": "",
+            "Accomodation": 0,
+            "Amount_left": 0,
+            "actions_turbo_id": [],
+            "stories": 2,
+            "photos": 3,
+            "Action_icon": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/esDtjDMwgzmlb2X2nktEs4uHWNs/FfThsw../map.png",
+                "name": "map.png",
+                "type": "image",
+                "size": 5666,
+                "mime": "image/png",
+                "meta": {
+                    "width": 180,
+                    "height": 256
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/esDtjDMwgzmlb2X2nktEs4uHWNs/FfThsw../map.png"
+            }
+        }
+    }
+]
+// filteredSevices under restaurant details
+// sevices under restaurant details
+[
+    {
+        "id": 1497,
+        "created_at": 1739433024131,
+        "restaurant_turbo_id": 622,
+        "actions_turbo_id": 8,
+        "timeframesTurbo_Id": [
+            2670
+        ],
+        "at_offer_description": "",
+        "Deal_limit": 3,
+        "Description": "",
+        "instructions": "",
+        "deal_done": 0,
+        "availability": true,
+        "approveByOwner": true,
+        "slots_per_day": 1,
+        "deal_left": 3,
+        "Credits": 0,
+        "category_offers_turbo_id": 3,
+        "category_offers_turbo2_id": [],
+        "Offer_Name": "",
+        "Bonus_Bookings": 0,
+        "Diary": false,
+        "Story": false,
+        "Reel": false,
+        "Tiktok": true,
+        "Map": false,
+        "restaurant_turbo_bali_id": 0,
+        "topic": "",
+        "usertype_id": 8,
+        "at_offername": "",
+        "timeframes_turbo_id": 0,
+        "Offer_Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/4TXt1oEvyJHXtZOweZV4U6778A8/R31mog../Screenshot+2025-02-13+at+15.50.16.png",
+            "name": "Screenshot 2025-02-13 at 15.50.16.png",
+            "type": "image",
+            "size": 1351093,
+            "mime": "image/png",
+            "meta": {
+                "width": 1166,
+                "height": 922
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/4TXt1oEvyJHXtZOweZV4U6778A8/R31mog../Screenshot+2025-02-13+at+15.50.16.png"
+        },
+        "services": [
+            {
+                "name": "Plates",
+                "quantity": 1
+            },
+            {
+                "name": "Drinks",
+                "quantity": 1
+            }
+        ],
+        "Icon": null,
+        "_actions_turbo": {
+            "id": 8,
+            "created_at": 1707321814549,
+            "Social": "TikTok",
+            "action_num_id": 5,
+            "Descrizione": "Publish a Tiktok showing this experience\n\nMinimum Followers Required for Tiktok collab\n10K",
+            "Beauty": "",
+            "action_status_turbo_id": 8,
+            "Action_Name": "Tiktok",
+            "Days_deadline": 3,
+            "Extra_People": 1,
+            "Plates": 3,
+            "Drinks": 2,
+            "Gym": "",
+            "Accomodation": 0,
+            "Amount_left": 0,
+            "actions_turbo_id": [],
+            "stories": 2,
+            "photos": 3,
+            "Action_icon": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png",
+                "name": "tiktok.png",
+                "type": "image",
+                "size": 4792,
+                "mime": "image/png",
+                "meta": {
+                    "width": 256,
+                    "height": 256
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png"
+            }
+        }
+    },
+    {
+        "id": 1498,
+        "created_at": 1739433134640,
+        "restaurant_turbo_id": 622,
+        "actions_turbo_id": 6,
+        "timeframesTurbo_Id": [
+            2670
+        ],
+        "at_offer_description": "",
+        "Deal_limit": 2,
+        "Description": "",
+        "instructions": "",
+        "deal_done": 0,
+        "availability": true,
+        "approveByOwner": true,
+        "slots_per_day": 1,
+        "deal_left": 2,
+        "Credits": 0,
+        "category_offers_turbo_id": 3,
+        "category_offers_turbo2_id": [],
+        "Offer_Name": "",
+        "Bonus_Bookings": 0,
+        "Diary": true,
+        "Story": true,
+        "Reel": false,
+        "Tiktok": false,
+        "Map": false,
+        "restaurant_turbo_bali_id": 0,
+        "topic": "",
+        "usertype_id": 8,
+        "at_offername": "",
+        "timeframes_turbo_id": 0,
+        "Offer_Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/_gTVmn4bl4Vu0gT0cEKJa0h8Av4/3jdszQ../Screenshot+2025-02-13+at+15.53.04.png",
+            "name": "Screenshot 2025-02-13 at 15.53.04.png",
+            "type": "image",
+            "size": 1510474,
+            "mime": "image/png",
+            "meta": {
+                "width": 1136,
+                "height": 952
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/_gTVmn4bl4Vu0gT0cEKJa0h8Av4/3jdszQ../Screenshot+2025-02-13+at+15.53.04.png"
+        },
+        "services": [],
+        "Icon": null,
+        "_actions_turbo": {
+            "id": 6,
+            "created_at": 1707321806340,
+            "Social": "Diary-Both",
+            "action_num_id": 3,
+            "Descrizione": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief and tagging both the venue and @claris.app",
+            "Beauty": "",
+            "action_status_turbo_id": 8,
+            "Action_Name": "Diary",
+            "Days_deadline": 4,
+            "Extra_People": 0,
+            "Plates": 2,
+            "Drinks": 1,
+            "Gym": "",
+            "Accomodation": 0,
+            "Amount_left": 0,
+            "actions_turbo_id": [],
+            "stories": 2,
+            "photos": 3,
+            "Action_icon": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png",
+                "name": "diary.png",
+                "type": "image",
+                "size": 2810,
+                "mime": "image/png",
+                "meta": {
+                    "width": 256,
+                    "height": 256
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png"
+            }
+        }
+    }
+]

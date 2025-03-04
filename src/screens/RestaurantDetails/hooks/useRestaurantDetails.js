@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Linking} from 'react-native';
 import {
@@ -14,6 +14,7 @@ const useRestaurantDetails = () => {
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
+  const userDetails = useSelector(state => state.authSlice?.loginData);
   const route = useRoute();
   const restaurantId = route?.params?.restaurantId;
   const [services, setServices] = useState([]);
@@ -38,6 +39,19 @@ const useRestaurantDetails = () => {
     setServices(res?.services);
     setIsLoading(false);
   };
+  const filteredServices = useMemo(() => {
+    // services
+    const filterServices = services?.filter(el =>
+      userDetails?.social_strength === 'tiktok'
+        ? [6, 8, 12].includes(el.actions_turbo_id)
+        : userDetails?.social_strength === 'instagram'
+        ? [1, 5, 6, 16].includes(el.actions_turbo_id)
+        : el,
+    );
+    return filterServices;
+  }, [services, userDetails?.social_strength]);
+  // console.log('services', JSON.stringify(services));
+  console.log('filteredServices', JSON.stringify(filteredServices));
 
   const getServiceCategoriesData = async () => {
     const res = await getServiceCategories();
@@ -95,6 +109,7 @@ const useRestaurantDetails = () => {
     restaurantDetails,
     serviceCategories,
     services,
+    filteredServices,
     handleRedirection,
   };
 };
