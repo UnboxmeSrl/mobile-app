@@ -2,8 +2,9 @@ import SelectDropdown from 'react-native-select-dropdown';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import {StyleSheet, Text, View} from 'react-native';
-import {moderateScale, verticalScale} from 'react-native-size-matters';
-import {COLORS} from '../../constants';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {COLORS, FONTS} from '../../constants';
+import {colors} from '../../utils';
 
 export default function AppSelect({
   data,
@@ -11,7 +12,9 @@ export default function AppSelect({
   selectedValue,
   onSelect,
   placeholder,
-  textStyle,
+  btnStyle,
+  btnTextStyle,
+  selectStyle,
   ...rest
 }) {
   return (
@@ -22,8 +25,13 @@ export default function AppSelect({
       }}
       renderButton={(selectedItem, isOpened) => {
         return (
-          <View style={styles.dropdownButtonStyle}>
-            <Text style={[styles.dropdownButtonTxtStyle, textStyle]}>
+          <View style={[styles.dropdownButtonStyle, btnStyle]}>
+            <Text
+              style={[
+                styles.dropdownButtonTxtStyle,
+                btnTextStyle,
+                selectedItem && {color: 'black'},
+              ]}>
               {(selectedValue && selectedValue.name) || placeholder}
             </Text>
             <Icon
@@ -36,10 +44,13 @@ export default function AppSelect({
       renderItem={(item, index, isSelected) => {
         return (
           <View
-            style={{
-              ...styles.dropdownItemStyle,
-              ...(isSelected && {backgroundColor: '#D2D9DF'}),
-            }}>
+            style={[
+              {
+                ...styles.dropdownItemStyle,
+                ...(isSelected && {backgroundColor: '#D2D9DF'}),
+              },
+              selectStyle,
+            ]}>
             <Text style={styles.dropdownItemTxtStyle}>{item.name}</Text>
           </View>
         );
@@ -68,6 +79,8 @@ const styles = StyleSheet.create({
     flex: 1,
     color: COLORS.gray,
     fontSize: moderateScale(14),
+    fontFamily: FONTS.quicksand,
+    // backgroundColor: 'yellow',
   },
   dropdownButtonArrowStyle: {
     fontSize: moderateScale(20),
@@ -78,6 +91,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   dropdownMenuStyle: {
+    // backgroundColor: 'red',
     backgroundColor: '#E9ECEF',
     borderRadius: 8,
   },
@@ -93,6 +107,8 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: moderateScale(14),
     color: COLORS.dark,
+    fontFamily: FONTS.quicksand,
+    // padding: scale(4),
   },
   dropdownItemIconStyle: {
     fontSize: 28,

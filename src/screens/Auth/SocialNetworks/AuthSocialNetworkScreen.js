@@ -42,7 +42,7 @@ const AuthSocialNetworkScreen = () => {
     setSelectedInFluencer_type,
     inFluencerTypeError,
     setInFluencerTypeError,
-    handleInfluencerTypeChange,
+    // handleInfluencerTypeChange,
     handleOnTikTokPress,
     handleOnInstaPress,
     handleBackPress,
@@ -54,9 +54,11 @@ const AuthSocialNetworkScreen = () => {
   const isValidTiktok = useMemo(() => {
     return tiktokInputValue && TIKTOK_URL_REGEX.test(tiktokInputValue);
   }, [tiktokInputValue]);
+
   const isValidInstagram = useMemo(() => {
     return instaUserNameValue && INSTA_URL_REGEX.test(instaUserNameValue);
   }, [instaUserNameValue]);
+
   console.log(isValidInstagram, instaUserNameValue, 'isValidInstagram');
   return (
     <SafeAreaView style={styles.mainContainer}>

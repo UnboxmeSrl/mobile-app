@@ -21,7 +21,10 @@ export const DARK_STATUS_BAR = {
 export const TIKTOK_URL_REGEX =
   /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$|^@[a-zA-Z0-9_.]+$/;
 export const INSTA_URL_REGEX =
-  /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
+  /^(https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;
+// /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
+// /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?$|^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9_.]{1,30}(?<![_.])$/;
+
 export function formatTikTokUrl(input) {
   // Regex to check if input is only @username
   const usernameRegex = /^@[a-zA-Z0-9_.]+$/;

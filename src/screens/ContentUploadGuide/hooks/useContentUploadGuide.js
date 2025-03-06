@@ -52,11 +52,12 @@ const useContentUploadGuide = () => {
         }
       } else if (bookingDetails?.coupon_status === 'not_show') {
         showToastError({message: 'coupon expired'});
-      } else {
-        showToastError({
-          message: 'Coupon is not valid at this location',
-        });
       }
+      // else {
+      //   showToastError({
+      //     message: 'Coupon is not valid at this location',
+      //   });
+      // }
     },
     [bookingDetails],
   );
@@ -107,6 +108,7 @@ const useContentUploadGuide = () => {
     actionDescription,
     bookingDetails,
     handleOpenCouponPress,
+    openCoupon,
     handleBackPress,
     permissionError,
   };

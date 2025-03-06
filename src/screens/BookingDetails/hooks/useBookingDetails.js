@@ -51,7 +51,7 @@ const useBookingDetails = () => {
   const isEvent = restaurantDetails?.is_event;
   // console.log('isEvent', isEvent);
   const today = new Date();
-  const todayUtcTime = today.getTime();
+  const todayUtcTime = today?.getTime();
   let after24Hours = todayUtcTime;
   // console.log(
   //   'restaurantDetails?.event_date_time',
@@ -69,7 +69,7 @@ const useBookingDetails = () => {
 
   const getDateWeek = date => {
     const currentsDate = typeof date === 'object' ? date : new Date();
-    const januaryFirst = new Date(currentsDate.getFullYear(), 0, 1);
+    const januaryFirst = new Date(currentsDate?.getFullYear(), 0, 1);
     const daysToNextMonday =
       januaryFirst.getDay() === 1 ? 0 : (7 - januaryFirst.getDay()) % 7;
     const nextMonday = new Date(
@@ -103,9 +103,9 @@ const useBookingDetails = () => {
     }
     if (startDate >= currentDate) {
       const newStartDate = new Date(startDate);
-      newStartDate.setDate(startDate.getDate() - 7);
+      newStartDate?.setDate(startDate.getDate() - 7);
       const newEndDate = new Date(newStartDate);
-      newEndDate.setDate(newEndDate.getDate() + 6);
+      newEndDate?.setDate(newEndDate.getDate() + 6);
       setStartDate(newStartDate);
       setEndDate(newEndDate);
     }
@@ -143,7 +143,7 @@ const useBookingDetails = () => {
       const parsedHours = parseInt(selectedTimeFame?.Start);
       const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
       console.log('ParsedHours: ' + parsedHours, 'Minutes: ' + parsedMinutes);
-      currentBookingDateTime.setHours(parsedHours, parsedMinutes);
+      currentBookingDateTime?.setHours(parsedHours, parsedMinutes);
     }
 
     if (
@@ -166,16 +166,16 @@ const useBookingDetails = () => {
     //   currentBookingDateTime.getTime() >= after24Hours,
     //   selectedDate,
     // );
-    if (currentBookingDateTime.getTime() >= after24Hours) {
-      const bookingTimeStamp = currentBookingDateTime.valueOf();
-      const formattedDate = `${currentBookingDateTime.getFullYear()}-${
+    if (currentBookingDateTime?.getTime() >= after24Hours) {
+      const bookingTimeStamp = currentBookingDateTime?.valueOf();
+      const formattedDate = `${currentBookingDateTime?.getFullYear()}-${
         currentBookingDateTime.getMonth() + 1 < 10
-          ? `0${currentBookingDateTime.getMonth() + 1}`
-          : currentBookingDateTime.getMonth() + 1
+          ? `0${currentBookingDateTime?.getMonth() + 1}`
+          : currentBookingDateTime?.getMonth() + 1
       }-${
         currentBookingDateTime.getDate() < 10
-          ? `0${currentBookingDateTime.getDate()}`
-          : currentBookingDateTime.getDate()
+          ? `0${currentBookingDateTime?.getDate()}`
+          : currentBookingDateTime?.getDate()
       }`;
 
       const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
@@ -240,7 +240,7 @@ const useBookingDetails = () => {
           bookingTimeStamp: bookingTimeStamp,
         });
         const channel = await createChatByBookingDetail({
-          bookingDetails: res.data,
+          bookingDetails: res?.data,
         });
         navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
           bookingDetails: res?.data,
@@ -296,8 +296,8 @@ const useBookingDetails = () => {
 
     // Event Specific Condition because here time come in UTC format
     if (isEvent) {
-      const filteredRes = eventDates.filter(dt => dt === onlyDate);
-      if (filteredRes.length > 0) {
+      const filteredRes = eventDates?.filter(dt => dt === onlyDate);
+      if (filteredRes?.length > 0) {
         return false;
       } else {
         return true;
@@ -312,17 +312,17 @@ const useBookingDetails = () => {
       const pauseDays = t?.pause_days;
 
       if (pauseDays?.length > 0) {
-        const filteredWeekdays = weekdays.filter(
+        const filteredWeekdays = weekdays?.filter(
           weekday =>
-            !pauseDays.some(pauseDay => pauseDay?.day === weekday?.day),
+            !pauseDays?.some(pauseDay => pauseDay?.day === weekday?.day),
         );
-        const filteredRes = filteredWeekdays.filter(wt => {
+        const filteredRes = filteredWeekdays?.filter(wt => {
           return wt?.day === weekDay;
         });
 
         outerFilteredRes = [...outerFilteredRes, ...filteredRes];
       } else {
-        const filteredRes = weekdays.filter(wt => {
+        const filteredRes = weekdays?.filter(wt => {
           return wt?.day === weekDay;
         });
         outerFilteredRes = [...outerFilteredRes, ...filteredRes];
@@ -340,7 +340,7 @@ const useBookingDetails = () => {
     // console.log('check_useEffect_code_run_after_date_change');
     setSelectedTimeFame({});
     const myDate = new Date(selectedDate);
-    const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+    const weekDay = myDate?.toLocaleString('en-US', {weekday: 'long'});
 
     setCurrentWeekDay(weekDay);
 
@@ -348,8 +348,8 @@ const useBookingDetails = () => {
       const weekdays = item?.weekdays;
       const pauseDays = item?.pause_days;
 
-      const filteredWeekdays = weekdays.filter(
-        day => !pauseDays.some(pauseDay => pauseDay?.day === day?.day),
+      const filteredWeekdays = weekdays?.filter(
+        day => !pauseDays?.some(pauseDay => pauseDay?.day === day?.day),
       );
       return {
         ...item,
@@ -361,7 +361,7 @@ const useBookingDetails = () => {
     let selectedTimeFrame = null;
     updatedData?.forEach(t => {
       const filteredRes = t?.weekdays?.filter(wt => wt?.day === weekDay);
-      if (filteredRes.length > 0 && !selectedTimeFrame) {
+      if (filteredRes?.length > 0 && !selectedTimeFrame) {
         // console.log('updatedData', filteredRes);
         selectedTimeFrame = t;
       }
@@ -392,7 +392,7 @@ const useBookingDetails = () => {
       for (let i = 0; i < 30; i++) {
         // Check for the next 30 days
         const checkDate = new Date(today);
-        checkDate.setDate(today.getDate() + i);
+        checkDate?.setDate(today.getDate() + i);
         if (!datesBlacklistFunc(checkDate)) {
           return checkDate;
         }
@@ -415,7 +415,7 @@ const useBookingDetails = () => {
 
   useEffect(() => {
     const myDate = new Date(startDate);
-    const month = myDate.toLocaleString('en-US', {month: 'long'});
+    const month = myDate?.toLocaleString('en-US', {month: 'long'});
     setCurrentMonth(month);
   }, [startDate]);
 
@@ -443,8 +443,8 @@ const useBookingDetails = () => {
     if (isEvent) {
       setWeekDayWiseTimeSlots([]);
       const formattedDate = getFormattedDate(selectedDate);
-      const filteredRes = eventDates.filter(ed => ed === formattedDate);
-      if (filteredRes.length > 0) {
+      const filteredRes = eventDates?.filter(ed => ed === formattedDate);
+      if (filteredRes?.length > 0) {
         setIsBookingDateAvailable(true);
       } else {
         setIsBookingDateAvailable(false);

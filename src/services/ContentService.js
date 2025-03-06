@@ -15,8 +15,9 @@ export const updateContentUrl = async (params, data) => {
   try {
     const url = Api.CONTENT.UPDATE_CONTENT_URL + params;
     const response = await Fetch.put(url, data);
+    console.log('response_updateContentUrl', response);
     return response;
   } catch (error) {
-    console.log(error);
+    console.log('error_updateContentUrl', error);
   }
 };

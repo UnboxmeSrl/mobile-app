@@ -14,20 +14,24 @@ import {
   updateProfile,
 } from '../../../services';
 import {checkPermission, openGallery} from '../../../utils';
+import {formatInstaUrl, formatTikTokUrl} from '../../../navigation/constants';
 
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
+  const prevSocial_strength =
+    user?.social_strength.charAt(0)?.toUpperCase() +
+    user?.social_strength?.slice(1);
   const dispatch = useDispatch();
   const [profilePicData, setProfilePicData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedInFluencer_type, setSelectedInFluencer_type] = useState(
-    {name: user?.social_strength} || {},
+    {name: prevSocial_strength} || {},
   );
   console.log('selectedInFluencer_type', selectedInFluencer_type);
   const influencer_type = [
-    {id: 0, name: 'tiktok'},
-    {id: 1, name: 'instagram'},
-    {id: 2, name: 'both'},
+    {id: 0, name: 'Tiktok'},
+    {id: 1, name: 'Instagram'},
+    {id: 2, name: 'Both'},
   ];
   console.log('user_Social_Strength', user?.social_strength);
   const [country, setCountry] = useState({
@@ -60,7 +64,7 @@ const useEditProfile = () => {
       biography: user?.bio ?? '',
       fullName: user?.name ?? '',
       id: user?.id,
-      instagramLink: user.IG_account ?? '',
+      instagramLink: user?.IG_account ?? '',
       mapsAccount: '',
       nationality: user?.nationality ?? 'Anguilla',
       tiktokLink: user?.Tiktok_account ?? '',
@@ -113,7 +117,7 @@ const useEditProfile = () => {
     );
     // return;
     const res = await updateInfluencerType(user?.id, {
-      social_strength: selectedInFluencer_type?.name,
+      social_strength: selectedInFluencer_type?.name?.toLowerCase(),
     });
     // if (res.success === true) {
     //   console.log('checkSuccessCase');
@@ -124,6 +128,10 @@ const useEditProfile = () => {
   const onSubmit = useCallback(
     async data => {
       // handleInfluencerTypeChange();
+      console.log(
+        'selectedInFluencer_type?.name',
+        selectedInFluencer_type?.name,
+      );
       const topicIds = Object.values({
         ...preIntrest,
         ...selectedIntrest,
@@ -134,7 +142,10 @@ const useEditProfile = () => {
       formData.append('name', data?.fullName);
       formData.append('nationality', country?.name);
       formData.append('countryCode', country?.cca2);
-      formData.append('social_strength', selectedInFluencer_type?.name);
+      formData.append(
+        'social_strength',
+        selectedInFluencer_type?.name?.toLowerCase(),
+      );
       topicIds
         ?.filter(item => item?.id)
         .forEach(item => {
@@ -158,8 +169,11 @@ const useEditProfile = () => {
         );
       }
 
-      formData.append('IG_account', data?.instagramLink);
-      formData.append('Tiktok_account', data?.tiktokLink);
+      formData.append('IG_account', formatInstaUrl(data?.instagramLink || ''));
+      formData.append(
+        'Tiktok_account',
+        formatTikTokUrl(data?.tiktokLink || ''),
+      );
       const resProfile = await updateProfile({formData, userID: user?.id});
       if (resProfile && resProfile?.success) {
         dispatch(updateLoginData(resProfile.data));

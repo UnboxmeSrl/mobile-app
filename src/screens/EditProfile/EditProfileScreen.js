@@ -35,6 +35,7 @@ import {COLORS, FONTS} from '../../constants';
 import {colors, perfectSize} from '../../utils';
 import {useEditProfile} from './hooks';
 import AppSelect from '../../components/Elements/AppSelect';
+import {INSTA_URL_REGEX, TIKTOK_URL_REGEX} from '../../navigation/constants';
 
 const EditProfileScreen = () => {
   const {
@@ -154,9 +155,13 @@ const EditProfileScreen = () => {
             rules={{required: 'Biography is required'}}
           />
           <View style={{marginVertical: verticalScale(12)}}>
+            <Text style={styles.label}>Select Social Platform</Text>
             <AppSelect
-              textStyle={{fontFamily: FONTS.quicksand}}
+              btnTextStyle={{fontFamily: FONTS.quicksand}}
+              btnStyle={{backgroundColor: colors.light}}
               data={influencer_type || []}
+              // label={'Select Social Platform'}
+              selectStyle={{}}
               setSelectedValue={item => setSelectedInFluencer_type(item)}
               selectedValue={selectedInFluencer_type}
               placeholder={'Choose platforms where you qualify'}
@@ -166,6 +171,12 @@ const EditProfileScreen = () => {
           <Controller
             control={control}
             name="instagramLink"
+            rules={{
+              pattern: {
+                value: INSTA_URL_REGEX,
+                message: 'Enter a valid Instagram profile link',
+              },
+            }}
             render={({value, onChange, ref}) => (
               <AppInput
                 errors={errors.instagramLink?.message}
@@ -185,6 +196,12 @@ const EditProfileScreen = () => {
           <Controller
             control={control}
             name="tiktokLink"
+            rules={{
+              pattern: {
+                value: TIKTOK_URL_REGEX,
+                message: 'Enter a valid Tiktok profile link',
+              },
+            }}
             render={({value, onChange, ref}) => (
               <AppInput
                 errors={errors.tiktokLink?.message}
@@ -395,5 +412,15 @@ const styles = StyleSheet.create({
   hobbies: {
     marginTop: perfectSize(12),
     marginRight: perfectSize(8),
+  },
+  label: {
+    // fontFamily: fonts.inter500,
+    color: colors.infoLight,
+
+    fontSize: perfectSize(14),
+
+    fontWeight: '500',
+    marginBottom: perfectSize(8),
+    textTransform: 'capitalize',
   },
 });

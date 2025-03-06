@@ -32,9 +32,9 @@ const useAuthSocialNetwork = () => {
 
   const [selectedInFluencer_type, setSelectedInFluencer_type] = useState({});
   const influencer_type = [
-    {id: 0, name: 'tiktok'},
-    {id: 1, name: 'instagram'},
-    {id: 2, name: 'both'},
+    {id: 0, name: 'Tiktok'},
+    {id: 1, name: 'Instagram'},
+    {id: 2, name: 'Both'},
   ];
 
   const formData = new FormData();
@@ -122,7 +122,10 @@ const useAuthSocialNetwork = () => {
       formData.append('TikTok', userDetails?.tiktokUserName ? 'true' : 'false');
       formData.append('IG_account', userDetails?.instaUserName ?? '');
       formData.append('IG', userDetails?.instaUserName ? 'true' : 'false');
-      formData.append('social_strength', selectedInFluencer_type?.name);
+      formData.append(
+        'social_strength',
+        selectedInFluencer_type?.name?.toLowerCase(),
+      );
       formData.append('telegram_id', 0);
       isBothUserType
         ? userDetails?.userType?.data?.map(item =>

@@ -22,6 +22,7 @@ const ContentUploadGuide = () => {
     bookingDetails,
     permissionError,
     handleOpenCouponPress,
+    openCoupon,
     handleBackPress,
   } = useContentUploadGuide();
   // console.log('permissionError', permissionError);
@@ -92,7 +93,7 @@ const ContentUploadGuide = () => {
 
         <View style={styles.openCouponBtnMainContainer}>
           <TouchableOpacity
-            onPress={handleOpenCouponPress}
+            onPress={openCoupon}
             style={[
               styles.openCouponBtnContainer,
               !bookingDetails?.Approved && styles.disabledBtnContainer,
@@ -102,7 +103,7 @@ const ContentUploadGuide = () => {
               Open Coupon
             </Text>
           </TouchableOpacity>
-          {permissionError && (
+          {/* {permissionError && (
             <Text style={styles.permissionErrorText}>
               {permissionError.includes('Enable permission') && (
                 <Text
@@ -115,7 +116,7 @@ const ContentUploadGuide = () => {
               )}
               {permissionError}
             </Text>
-          )}
+          )} */}
         </View>
       </ScrollView>
     </SafeAreaView>
