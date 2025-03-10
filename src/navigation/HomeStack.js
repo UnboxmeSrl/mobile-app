@@ -9,10 +9,10 @@ const StackHome = createStackNavigator();
 
 const HomeStack = () => {
   const {requestLocationPermission, cityData} = useRestaurants();
-  useEffect(() => {
-    // console.log('check_requestLocationPermission_HomeStack');
-    requestLocationPermission();
-  }, [requestLocationPermission]);
+  // useEffect(() => {
+  //   // console.log('check_requestLocationPermission_HomeStack');
+  //   requestLocationPermission();
+  // }, [requestLocationPermission]);
   return (
     <StackHome.Navigator
       initialRouteName={SCREEN_NAMES.Cities}

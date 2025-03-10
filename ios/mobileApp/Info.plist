@@ -55,12 +55,12 @@
 		<key>NSCameraUsageDescription</key>
 		<string>We are required to access your camera to capture your image and use as profile
 					picture</string>
-		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<!-- <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>We need to access your location to find a proper place and calculate the distance
 					calculate the distance to store</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>We need to access your location to find a proper place and calculate the distance to
-					store</string>
+					store</string> -->
 		<key>NSMicrophoneUsageDescription</key>
 		<string>This app requires to access Microphone</string>
 		<key>NSMotionUsageDescription</key>

@@ -19,7 +19,7 @@ import {formatInstaUrl, formatTikTokUrl} from '../../../navigation/constants';
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
   const prevSocial_strength =
-    user?.social_strength.charAt(0)?.toUpperCase() +
+    user?.social_strength?.charAt(0)?.toUpperCase() +
     user?.social_strength?.slice(1);
   const dispatch = useDispatch();
   const [profilePicData, setProfilePicData] = useState(null);

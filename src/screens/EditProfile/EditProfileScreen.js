@@ -173,7 +173,8 @@ const EditProfileScreen = () => {
             name="instagramLink"
             rules={{
               pattern: {
-                value: INSTA_URL_REGEX,
+                value:
+                  /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/,
                 message: 'Enter a valid Instagram profile link',
               },
             }}
@@ -211,7 +212,7 @@ const EditProfileScreen = () => {
                 isDisabled={selectedInFluencer_type?.name === 'instagram'}
                 onChange={onChange}
                 onPress={() => handlePaste('tiktokLink')}
-                placeholder="Ex: tiktok.com/uichakir"
+                placeholder="Ex: @tiktok.com/uichakir"
                 ref={ref}
                 value={value}
               />

@@ -21,9 +21,8 @@ export const DARK_STATUS_BAR = {
 export const TIKTOK_URL_REGEX =
   /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$|^@[a-zA-Z0-9_.]+$/;
 export const INSTA_URL_REGEX =
-  /^(https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;
-// /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
-// /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?$|^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9_.]{1,30}(?<![_.])$/;
+  /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/
+  // /^(https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;
 
 export function formatTikTokUrl(input) {
   // Regex to check if input is only @username
@@ -44,19 +43,36 @@ export function formatTikTokUrl(input) {
   }
 }
 export function formatInstaUrl(input) {
-  console.log(INSTA_URL_REGEX.test(input), input, 'INSTA_URL_REGEX.test(input');
   const userNameRegex =
-    /^([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
+    /^(?!.*[@]|.*\.com)(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-zA-Z0-9_]+$/;
+  const instaUrlRegex =
+    /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_]+)\/?$/;
+
   if (userNameRegex.test(input)) {
-    console.log('userNameRegex_block');
-    return 'https://www.instagram.com/' + input;
-  } else if (INSTA_URL_REGEX.test(input)) {
-    return input;
+    return `https://www.instagram.com/${input}`;
+  } else if (instaUrlRegex.test(input)) {
+    return input.replace(
+      /^(?:https?:\/\/)?(?:www\.)?instagram\.com\//,
+      'https://www.instagram.com/',
+    );
   } else {
-    console.log('userNameRegex_elseBlock');
     return '';
   }
 }
+// export function formatInstaUrl(input) {
+//   console.log(INSTA_URL_REGEX.test(input), input, 'INSTA_URL_REGEX.test(input');
+//   const userNameRegex =
+//     /^([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
+//   if (userNameRegex.test(input)) {
+//     console.log('userNameRegex_block');
+//     return 'https://www.instagram.com/' + input;
+//   } else if (INSTA_URL_REGEX.test(input)) {
+//     return input;
+//   } else {
+//     console.log('userNameRegex_elseBlock');
+//     return '';
+//   }
+// }
 // export const screenOptions = ({ route }) => ({
 //   tabBarIcon: ({ focused, color, size }) => {
 //     let iconName
