@@ -130,11 +130,11 @@ const useRestaurants = () => {
       user_turbo_id: loginData?.id,
     };
     const sponsoredRes = await getSponsoredRestaurants(sponsoredPrepData);
-    console.log(
-      'sponsoredRes',
-      sponsoredRes?.length,
-      JSON.stringify(sponsoredRes),
-    );
+    // console.log(
+    //   'sponsoredRes',
+    //   sponsoredRes?.length,
+    //   JSON.stringify(sponsoredRes),
+    // );
     const prepData = {
       user_turbo_id: loginData?.id,
       category_venue_id: filter,

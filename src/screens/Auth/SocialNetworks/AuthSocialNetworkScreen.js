@@ -37,12 +37,6 @@ const AuthSocialNetworkScreen = () => {
     instaUserName,
     setInstaUserName,
     instaSheetRef,
-    influencer_type,
-    selectedInFluencer_type,
-    setSelectedInFluencer_type,
-    inFluencerTypeError,
-    setInFluencerTypeError,
-    // handleInfluencerTypeChange,
     handleOnTikTokPress,
     handleOnInstaPress,
     handleBackPress,
@@ -72,7 +66,7 @@ const AuthSocialNetworkScreen = () => {
           <Text allowFontScaling={false} style={styles.descriptionText}>
             Register your social networks
           </Text>
-          <View style={{marginTop: verticalScale(12), marginHorizontal: '5%'}}>
+          {/* <View style={{marginTop: verticalScale(12), marginHorizontal: '5%'}}>
             <AppSelect
               textStyle={{fontFamily: FONTS.quicksand}}
               data={influencer_type || []}
@@ -94,7 +88,7 @@ const AuthSocialNetworkScreen = () => {
                 {inFluencerTypeError}
               </Text>
             )}
-          </View>
+          </View> */}
           <View style={styles.socialMediaMainContainer}>
             <TouchableOpacity
               onPress={handleOnTikTokPress}

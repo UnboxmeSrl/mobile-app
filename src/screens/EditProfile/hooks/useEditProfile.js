@@ -18,22 +18,10 @@ import {formatInstaUrl, formatTikTokUrl} from '../../../navigation/constants';
 
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
-  const prevSocial_strength =
-    user?.social_strength?.charAt(0)?.toUpperCase() +
-    user?.social_strength?.slice(1);
   const dispatch = useDispatch();
   const [profilePicData, setProfilePicData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedInFluencer_type, setSelectedInFluencer_type] = useState(
-    {name: prevSocial_strength} || {},
-  );
-  console.log('selectedInFluencer_type', selectedInFluencer_type);
-  const influencer_type = [
-    {id: 0, name: 'Tiktok'},
-    {id: 1, name: 'Instagram'},
-    {id: 2, name: 'Both'},
-  ];
-  console.log('user_Social_Strength', user?.social_strength);
+
   const [country, setCountry] = useState({
     cca2: user?.countryCode,
     name: user?.nationality,
@@ -109,29 +97,8 @@ const useEditProfile = () => {
     setValue(param, text);
   };
 
-  const handleInfluencerTypeChange = useCallback(async () => {
-    console.log(
-      'item_handleInfluencerTypeChange',
-      selectedInFluencer_type,
-      user?.id,
-    );
-    // return;
-    const res = await updateInfluencerType(user?.id, {
-      social_strength: selectedInFluencer_type?.name?.toLowerCase(),
-    });
-    // if (res.success === true) {
-    //   console.log('checkSuccessCase');
-    //   setSelectedInFluencer_type(item);
-    // }
-  }, [selectedInFluencer_type, user?.id]);
-
   const onSubmit = useCallback(
     async data => {
-      // handleInfluencerTypeChange();
-      console.log(
-        'selectedInFluencer_type?.name',
-        selectedInFluencer_type?.name,
-      );
       const topicIds = Object.values({
         ...preIntrest,
         ...selectedIntrest,
@@ -142,10 +109,7 @@ const useEditProfile = () => {
       formData.append('name', data?.fullName);
       formData.append('nationality', country?.name);
       formData.append('countryCode', country?.cca2);
-      formData.append(
-        'social_strength',
-        selectedInFluencer_type?.name?.toLowerCase(),
-      );
+
       topicIds
         ?.filter(item => item?.id)
         .forEach(item => {
@@ -188,7 +152,6 @@ const useEditProfile = () => {
     },
     [
       preIntrest,
-      selectedInFluencer_type?.name,
       selectedIntrest,
       country?.name,
       country?.cca2,
@@ -222,9 +185,6 @@ const useEditProfile = () => {
       name: country.name,
     }));
   };
-  // const setSocialValues = useMemo(item => {
-  //   if (['instagram', 'both'].includes(item.name)) watch('instagram', );
-  // }, []);
 
   useEffect(() => {
     getInterestTopicsData();
@@ -276,10 +236,6 @@ const useEditProfile = () => {
     interests,
     preIntrest,
     selectedIntrest,
-    influencer_type,
-    selectedInFluencer_type,
-    setSelectedInFluencer_type,
-    handleInfluencerTypeChange,
     onSubmit,
     onSelect,
     handleIntrest,

@@ -39,19 +39,34 @@ const useRestaurantDetails = () => {
     setServices(res?.services);
     setIsLoading(false);
   };
-  const filteredServices = useMemo(() => {
-    // services
-    const filterServices = services?.filter(el =>
-      userDetails?.social_strength === 'tiktok'
-        ? [6, 8, 12].includes(el.actions_turbo_id)
-        : userDetails?.social_strength === 'instagram'
-        ? [1, 5, 6, 16].includes(el.actions_turbo_id)
-        : el,
-    );
-    return filterServices;
-  }, [services, userDetails?.social_strength]);
+  // const filteredServices = useMemo(() => {
+  //   console.log(
+  //     'services',
+  //     services?.map(e => e._actions_turbo?.Type),
+  //   );
+  //   const filterServices = services?.filter(el =>
+  //     userDetails?.social_strength === 'tiktok'
+  //       ? ['tiktok', 'both']?.includes(el._actions_turbo?.Type)
+  //       : userDetails?.social_strength === 'instagram'
+  //       ? ['instagram', 'both']?.includes(el._actions_turbo?.Type)
+  //       : el,
+  //   );
+  //   return filterServices;
+  // }, [services, userDetails?.social_strength]);
+
+  // const filteredServices = useMemo(() => {
+  //   // services
+  //   const filterServices = services?.filter(el =>
+  //     userDetails?.social_strength === 'tiktok'
+  //       ? [6, 8, 12].includes(el.actions_turbo_id)
+  //       : userDetails?.social_strength === 'instagram'
+  //       ? [1, 5, 6, 16].includes(el.actions_turbo_id)
+  //       : el,
+  //   );
+  //   return filterServices;
+  // }, [services, userDetails?.social_strength]);
   // console.log('services', JSON.stringify(services));
-  console.log('filteredServices', JSON.stringify(filteredServices));
+  // console.log('filteredServices', JSON.stringify(filteredServices));
 
   const getServiceCategoriesData = async () => {
     const res = await getServiceCategories();
@@ -109,7 +124,7 @@ const useRestaurantDetails = () => {
     restaurantDetails,
     serviceCategories,
     services,
-    filteredServices,
+    // filteredServices,
     handleRedirection,
   };
 };

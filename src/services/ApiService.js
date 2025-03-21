@@ -39,7 +39,7 @@ export default {
       },
     };
     const response = await axios.post(url, data, options);
-    console.log('response_post', response);
+    // console.log('response_post', response);
     return response;
   },
 

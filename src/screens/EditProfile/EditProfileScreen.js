@@ -49,10 +49,6 @@ const EditProfileScreen = () => {
     interests,
     preIntrest,
     selectedIntrest,
-    influencer_type,
-    selectedInFluencer_type,
-    setSelectedInFluencer_type,
-    // handleInfluencerTypeChange,
     onSubmit,
     onSelect,
     handleIntrest,
@@ -154,7 +150,7 @@ const EditProfileScreen = () => {
             )}
             rules={{required: 'Biography is required'}}
           />
-          <View style={{marginVertical: verticalScale(12)}}>
+          {/* <View style={{marginVertical: verticalScale(12)}}>
             <Text style={styles.label}>Select Social Platform</Text>
             <AppSelect
               btnTextStyle={{fontFamily: FONTS.quicksand}}
@@ -166,8 +162,7 @@ const EditProfileScreen = () => {
               selectedValue={selectedInFluencer_type}
               placeholder={'Choose platforms where you qualify'}
             />
-          </View>
-          {/* <Text>Each platform must have at least 10K followers to qualify</Text> */}
+          </View> */}
           <Controller
             control={control}
             name="instagramLink"
@@ -184,7 +179,6 @@ const EditProfileScreen = () => {
                 img={insta}
                 label="Instagram link"
                 link
-                isDisabled={selectedInFluencer_type?.name === 'tiktok'}
                 onChange={onChange}
                 onPress={() => handlePaste('instagramLink')}
                 placeholder="Ex: instagram.com/uichakir"
@@ -209,7 +203,6 @@ const EditProfileScreen = () => {
                 img={tiktok}
                 label="Tiktok link"
                 link
-                isDisabled={selectedInFluencer_type?.name === 'instagram'}
                 onChange={onChange}
                 onPress={() => handlePaste('tiktokLink')}
                 placeholder="Ex: @tiktok.com/uichakir"
