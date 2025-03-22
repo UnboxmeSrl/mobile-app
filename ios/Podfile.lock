@@ -138,15 +138,13 @@ PODS:
   - libwebp/sharpyuv (1.5.0)
   - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
-  - MapboxCommon (23.9.2)
-  - MapboxCoreMaps (10.17.0):
-    - MapboxCommon (~> 23.9)
-  - MapboxMaps (10.17.0):
-    - MapboxCommon (= 23.9.2)
-    - MapboxCoreMaps (= 10.17.0)
-    - MapboxMobileEvents (= 1.0.10)
+  - MapboxCommon (24.0.0)
+  - MapboxCoreMaps (11.0.0):
+    - MapboxCommon (~> 24.0)
+  - MapboxMaps (11.0.0):
+    - MapboxCommon (= 24.0.0)
+    - MapboxCoreMaps (= 11.0.0)
     - Turf (= 2.7.0)
-  - MapboxMobileEvents (1.0.10)
   - Mixpanel-swift (4.3.0):
     - Mixpanel-swift/Complete (= 4.3.0)
   - Mixpanel-swift/Complete (4.3.0)
@@ -1526,13 +1524,13 @@ PODS:
     - React-RCTImage
     - TOCropViewController (~> 2.7.4)
   - rnmapbox-maps (10.1.24):
-    - MapboxMaps (~> 10.17.0)
+    - MapboxMaps (= 11.0.0)
     - React
     - React-Core
     - rnmapbox-maps/DynamicLibrary (= 10.1.24)
     - Turf
   - rnmapbox-maps/DynamicLibrary (10.1.24):
-    - MapboxMaps (~> 10.17.0)
+    - MapboxMaps (= 11.0.0)
     - React
     - React-Core
     - Turf
@@ -1756,7 +1754,6 @@ SPEC REPOS:
     - MapboxCommon
     - MapboxCoreMaps
     - MapboxMaps
-    - MapboxMobileEvents
     - Mixpanel-swift
     - nanopb
     - OneSignalXCFramework
@@ -1965,10 +1962,9 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
-  MapboxCommon: 768660d6fca8193529ecf82eb6f5f9ae7a5acdf9
-  MapboxCoreMaps: be412ff97b16aa7820922c818115a9a0d8211caa
-  MapboxMaps: 87ef0003e6db46e45e7a16939f29ae87e38e7ce2
-  MapboxMobileEvents: de50b3a4de180dd129c326e09cd12c8adaaa46d6
+  MapboxCommon: 0cca816960ad2d21c86e1d32435fcb412cfdcf4f
+  MapboxCoreMaps: 633f5ecd7580a6d1342ff20cc8732170b2cd7ba3
+  MapboxMaps: 1c219108691a2000cb842b02e64d82158d74e6cd
   Mixpanel-swift: 2192b9a24cf41b870749e4e0e10fbc9822bb2b4a
   MixpanelReactNative: cd3d7129cfc77d796d07e117846f1f2a9d2fe02d
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
@@ -2046,7 +2042,7 @@ SPEC CHECKSUMS:
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 6eb45a0dca1dedb11bdf17500c0cb775e9b3ebd9
   RNImageCropPicker: 8e39c01f205e00d739c31e682f068aac315587bf
-  rnmapbox-maps: 8005faa8e35b413ea5f387d8e057e9c2d7bcfbff
+  rnmapbox-maps: 69c66c1334c1ed466620c26004c4f6353e4cbcc5
   RNNotifee: 5155e0a5e0a97d0c839030d8192783cd63053999
   RNPermissions: 3e16511a1c4f98f6cb88d5530ac27a2a054bc352
   RNReactNativeHapticFeedback: d4c411574694446a5a2b1c116494e132941ebecc
@@ -2062,6 +2058,6 @@ SPEC CHECKSUMS:
   Turf: 13d1a92d969ca0311bbc26e8356cca178ce95da2
   Yoga: ff1d575b119f510a5de23c22a794872562078ccf
 
-PODFILE CHECKSUM: 13c5be99ea5e155dd2abda5407dc2e01dda67e0c
+PODFILE CHECKSUM: 053593b0d9260378bbc14ef37315f376ed975646
 
 COCOAPODS: 1.16.2

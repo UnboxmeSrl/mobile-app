@@ -77,3 +77,23 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+## Quick fix for mapbox 
+
+# replace this 
+    //    public var annotations: [UIView: ViewAnnotationOptions] {
+    //        idsByView.compactMapValues { [mapboxMap] id in
+    //            try? mapboxMap.options(forViewAnnotationWithId: id)
+    //        }
+    //    }
+
+# with this 
+ public var annotations: [String: Optional<Any>] {
+         var result: [String: Optional<Any>] = [:]
+          for (view, options) in idsByView.compactMapValues({ [mapboxMap] id in try? mapboxMap.options(forViewAnnotationWithId: id) }) {
+             let key = String(describing: view)
+              result[key] = options
+          }
+          return result
+      }
