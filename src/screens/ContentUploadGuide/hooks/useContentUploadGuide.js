@@ -1,17 +1,24 @@
-import {useFocusEffect, useRoute} from '@react-navigation/native';
+import {
+  // useFocusEffect,
+  useRoute,
+} from '@react-navigation/native';
 import {SCREEN_NAMES} from '../../../constants';
 import {navigate, showToastError, updateAction} from '../../../services';
-import {useSelector} from 'react-redux';
-import {selecteUserCoords} from '../../../redux';
+// import {useSelector} from 'react-redux';
+// import {selecteUserCoords} from '../../../redux';
 // import {calculateDis} from '../../../utils';
-import {useRestaurants} from '../../Restaurants/hooks';
-import {useCallback, useEffect, useState} from 'react';
+// import {useRestaurants} from '../../Restaurants/hooks';
+import {
+  useCallback,
+  // useEffect,
+  useState,
+} from 'react';
 
 const useContentUploadGuide = () => {
   const route = useRoute();
   const bookingDetails = route.params?.bookingDetails;
-  const userLocation = useSelector(selecteUserCoords);
-  const {requestLocationPermission} = useRestaurants();
+  // const userLocation = useSelector(selecteUserCoords);
+  // const {requestLocationPermission} = useRestaurants();
   const [permissionError, setPermissionError] = useState('');
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
@@ -61,40 +68,40 @@ const useContentUploadGuide = () => {
     },
     [bookingDetails],
   );
-  const handleOpenCouponPress = useCallback(async () => {
-    const userLng = userLocation?.[0];
-    const userLat = userLocation?.[1];
-    const lat =
-      bookingDetails?._restaurant_turbo?.Latitude ??
-      bookingDetails?._restaurant_turbo?.location?.lat;
-    const lng =
-      bookingDetails?._restaurant_turbo?.Longitude ??
-      bookingDetails?._restaurant_turbo?.location?.lng;
-    if (userLat && userLng) {
-      openCoupon(lat, lng, userLat, userLng);
-    } else {
-      const permission = await requestLocationPermission();
-      console.log('permission', permission);
-      if (permission === 'denied') {
-        setPermissionError(
-          'Enable permission from device settings to avail coupon',
-        );
-      } else if (permission === 'error') {
-        setPermissionError('Something went wrong, try again');
-      } else if (permission === 'granted') {
-        setPermissionError('');
-        openCoupon(lat, lng, userLat, userLng);
-      }
-    }
-  }, [
-    bookingDetails?._restaurant_turbo?.Latitude,
-    bookingDetails?._restaurant_turbo?.Longitude,
-    bookingDetails?._restaurant_turbo?.location?.lat,
-    bookingDetails?._restaurant_turbo?.location?.lng,
-    openCoupon,
-    requestLocationPermission,
-    userLocation,
-  ]);
+  // const handleOpenCouponPress = useCallback(async () => {
+  //   // const userLng = userLocation?.[0];
+  //   // const userLat = userLocation?.[1];
+  //   const lat =
+  //     bookingDetails?._restaurant_turbo?.Latitude ??
+  //     bookingDetails?._restaurant_turbo?.location?.lat;
+  //   const lng =
+  //     bookingDetails?._restaurant_turbo?.Longitude ??
+  //     bookingDetails?._restaurant_turbo?.location?.lng;
+  //   if (userLat && userLng) {
+  //     openCoupon(lat, lng, userLat, userLng);
+  //   } else {
+  //     // const permission = await requestLocationPermission();
+  //     // console.log('permission', permission);
+  //     // if (permission === 'denied') {
+  //     //   setPermissionError(
+  //     //     'Enable permission from device settings to avail coupon',
+  //     //   );
+  //     // } else if (permission === 'error') {
+  //     //   setPermissionError('Something went wrong, try again');
+  //     // } else if (permission === 'granted') {
+  //     //   setPermissionError('');
+  //     //   openCoupon(lat, lng, userLat, userLng);
+  //     // }
+  //   }
+  // }, [
+  //   bookingDetails?._restaurant_turbo?.Latitude,
+  //   bookingDetails?._restaurant_turbo?.Longitude,
+  //   bookingDetails?._restaurant_turbo?.location?.lat,
+  //   bookingDetails?._restaurant_turbo?.location?.lng,
+  //   openCoupon,
+  //   requestLocationPermission,
+  //   userLocation,
+  // ]);
 
   const handleBackPress = () => {
     navigate(SCREEN_NAMES.YourScheduleDetailsScreen, {
@@ -107,7 +114,7 @@ const useContentUploadGuide = () => {
     actionName,
     actionDescription,
     bookingDetails,
-    handleOpenCouponPress,
+    // handleOpenCouponPress,
     openCoupon,
     handleBackPress,
     permissionError,

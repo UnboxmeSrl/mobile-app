@@ -1,16 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {useCallback, useEffect, useState} from 'react';
-import {Alert, PermissionsAndroid, Platform} from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
+// import {Alert, PermissionsAndroid, Platform} from 'react-native';
+// import Geolocation from 'react-native-geolocation-service';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
-import {setRestaurantDetails, setUserCurrentLocation} from '../../../redux';
+import {
+  setRestaurantDetails,
+  // setUserCurrentLocation
+} from '../../../redux';
 import {
   getCategories,
   getRestaurants,
   getSponsoredRestaurants,
 } from '../../../services';
-import {geolocationSetting} from '../../../utils';
+// import {geolocationSetting} from '../../../utils';
 
 const useRestaurants = () => {
   // const categoriesIds = useSelector(selectCategoryById)
@@ -49,62 +53,62 @@ const useRestaurants = () => {
     }
   };
 
-  const requestLocationPermission = useCallback(async () => {
-    console.log('check_requestLocationPermission');
-    const getCurrentPosition = () => {
-      Geolocation.getCurrentPosition(
-        position => {
-          // console.log(
-          //   'userCurr_LatLng',
-          //   position.coords.longitude,
-          //   position.coords.latitude,
-          // );
-          dispatch(
-            setUserCurrentLocation([
-              position.coords.longitude,
-              position.coords.latitude,
-            ]),
-          );
-        },
-        err => {
-          console.log('err', err);
-        },
-        geolocationSetting,
-      );
-    };
-    try {
-      if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        );
-        console.log('PermissionsAndroid_RESULTS', PermissionsAndroid.RESULTS);
-        console.log(
-          'PermissionsAndroid_RESULTS_GRANTED',
-          PermissionsAndroid.RESULTS.GRANTED,
-          PermissionsAndroid.RESULTS.DENIED,
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          getCurrentPosition();
-          return 'granted';
-        } else {
-          if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-            return 'denied';
-          }
-        }
-      } else {
-        const granted = await Geolocation.requestAuthorization('whenInUse');
-        console.log('check_granted_requestLocationPermission', granted);
-        if (granted === 'granted') {
-          getCurrentPosition();
-          return 'granted';
-        } else {
-          return 'denied';
-        }
-      }
-    } catch (err) {
-      return 'error';
-    }
-  }, [dispatch]);
+  // const requestLocationPermission = useCallback(async () => {
+  //   console.log('check_requestLocationPermission');
+  //   const getCurrentPosition = () => {
+  //     Geolocation.getCurrentPosition(
+  //       position => {
+  //         // console.log(
+  //         //   'userCurr_LatLng',
+  //         //   position.coords.longitude,
+  //         //   position.coords.latitude,
+  //         // );
+  //         dispatch(
+  //           setUserCurrentLocation([
+  //             position.coords.longitude,
+  //             position.coords.latitude,
+  //           ]),
+  //         );
+  //       },
+  //       err => {
+  //         console.log('err', err);
+  //       },
+  //       geolocationSetting,
+  //     );
+  //   };
+  //   try {
+  //     if (Platform.OS === 'android') {
+  //       const granted = await PermissionsAndroid.request(
+  //         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  //       );
+  //       console.log('PermissionsAndroid_RESULTS', PermissionsAndroid.RESULTS);
+  //       console.log(
+  //         'PermissionsAndroid_RESULTS_GRANTED',
+  //         PermissionsAndroid.RESULTS.GRANTED,
+  //         PermissionsAndroid.RESULTS.DENIED,
+  //       );
+  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //         getCurrentPosition();
+  //         return 'granted';
+  //       } else {
+  //         if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+  //           return 'denied';
+  //         }
+  //       }
+  //     } else {
+  //       const granted = await Geolocation.requestAuthorization('whenInUse');
+  //       console.log('check_granted_requestLocationPermission', granted);
+  //       if (granted === 'granted') {
+  //         getCurrentPosition();
+  //         return 'granted';
+  //       } else {
+  //         return 'denied';
+  //       }
+  //     }
+  //   } catch (err) {
+  //     return 'error';
+  //   }
+  // }, [dispatch]);
 
   // const getInitialSponsoredRestaurantsData = async () => {
   //   setIsLoading(true);
@@ -267,7 +271,7 @@ const useRestaurants = () => {
     restaurantsData,
     setFilter,
     setRestaurantsData,
-    requestLocationPermission,
+    // requestLocationPermission,
     // userLocation,
   };
 };

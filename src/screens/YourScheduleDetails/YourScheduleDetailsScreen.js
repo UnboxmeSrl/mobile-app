@@ -36,7 +36,7 @@ const YourScheduleDetailsScreen = () => {
     handleAlertVisible,
     handleBackPress,
     handleSwipeSuccess,
-    handleOpenCouponPress,
+    // handleOpenCouponPress,
     handleContentBriefPress,
     handlePositiveBtnPress,
   } = useYourScheduleDetails();

@@ -17,11 +17,11 @@ import FastImage from 'react-native-fast-image';
 const ContentUploadGuide = () => {
   const {
     icon,
-    actionName,
+    // actionName,
     actionDescription,
     bookingDetails,
-    permissionError,
-    handleOpenCouponPress,
+    // permissionError,
+    // handleOpenCouponPress,
     openCoupon,
     handleBackPress,
   } = useContentUploadGuide();

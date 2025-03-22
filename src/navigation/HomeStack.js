@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {CitiesScreen, RestaurantDetails, RestaurantsScreen} from '../screens';
 import {SCREEN_NAMES} from '../constants';
-import {useNotification} from '../hooks';
-import {useRestaurants} from '../screens/Restaurants/hooks';
+// import {useNotification} from '../hooks';
+// import {useRestaurants} from '../screens/Restaurants/hooks';
 
 const StackHome = createStackNavigator();
 
 const HomeStack = () => {
-  const {requestLocationPermission, cityData} = useRestaurants();
+  // const {requestLocationPermission, cityData} = useRestaurants();
   // useEffect(() => {
   //   // console.log('check_requestLocationPermission_HomeStack');
   //   requestLocationPermission();

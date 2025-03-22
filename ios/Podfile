@@ -13,7 +13,7 @@ node_require('react-native-permissions/scripts/setup.rb')
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
-$RNMapboxMapsVersion = '= 11.0.0'
+# $RNMapboxMapsVersion = '= 11.0.0'
 
 pod 'Firebase', :modular_headers => true
 pod 'FirebaseCoreInternal', :modular_headers => true
@@ -52,11 +52,11 @@ target 'mobileApp' do
     # Pods for testing
   end
 
-  pre_install do |installer|
-    $RNMapboxMaps.pre_install(installer)
-  end
+  # pre_install do |installer|
+  #   $RNMapboxMaps.pre_install(installer)
+  # end
   post_install do |installer|
-    $RNMapboxMaps.post_install(installer)
+    # $RNMapboxMaps.post_install(installer)
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,

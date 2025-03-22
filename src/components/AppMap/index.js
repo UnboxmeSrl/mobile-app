@@ -1,9 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import Mapbox from '@rnmapbox/maps';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+// import Mapbox from '@rnmapbox/maps';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {
   Image,
-  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -11,36 +10,31 @@ import {
   View,
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurantCard} from '../../screens/Restaurants/RestaurantCard/hooks';
-import {useRestaurants} from '../../screens/Restaurants/hooks';
+// import {useRestaurants} from '../../screens/Restaurants/hooks';
+import {useFocusEffect} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {selecteUserCoords, setSelectedResCoordinates} from '../../redux';
 import {getRestaurantDetails} from '../../services';
 import {xanoImageSize} from '../../utils';
 import {BottomSheet} from '../BottomSheet';
 import {AppButton} from '../Buttons';
 import RestaurantSearchInput from './RestaurantSearchInput';
 import useMap from './useMap';
-import {
-  selectAllRestaurants,
-  selecteUserCoords,
-  setSelectedResCoordinates,
-} from '../../redux';
-import {useDispatch, useSelector} from 'react-redux';
-import {useFocusEffect} from '@react-navigation/native';
 
-Mapbox.setAccessToken(
-  'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
-);
+// Mapbox.setAccessToken(
+//   'pk.eyJ1IjoiY2xhcmlzYXBwIiwiYSI6ImNsd3oyNDlpczAybWcycXIyNXp6bXVzbXMifQ.i3dwAgtGLJUvy9Ajw8CFgg',
+// );
 const AppMap = () => {
   const bottomSheetRef = useRef();
   const dispatch = useDispatch();
   const [selectedRest, setSelectedRest] = useState(null);
   const {handleCardPress} = useRestaurantCard();
 
-  const {requestLocationPermission, cityData} = useRestaurants();
+  // const {requestLocationPermission, cityData} = useRestaurants();
   const {handleGetNearerRestaurants, handleGetAllRestaurants} = useMap();
-  const allRestaurants = useSelector(selectAllRestaurants);
+  // const allRestaurants = useSelector(selectAllRestaurants);
   const loginData = useSelector(state => state.authSlice.loginData);
   const [showFullText, setShowFullText] = useState(false);
   const selectedResCoordinates = useSelector(
@@ -48,18 +42,18 @@ const AppMap = () => {
   );
   const userLocation = useSelector(selecteUserCoords);
 
-  const handleBottomSheet = useCallback(async rest => {
-    const prepData = {
-      category_id: 0,
-      restaurant_id: rest?.id,
-      user_id: loginData?.id,
-    };
-    const res = await getRestaurantDetails(prepData);
-    if (res?.restaurant) {
-      setSelectedRest(res?.restaurant);
-      bottomSheetRef?.current?.open();
-    }
-  }, []);
+  // const handleBottomSheet = useCallback(async rest => {
+  //   const prepData = {
+  //     category_id: 0,
+  //     restaurant_id: rest?.id,
+  //     user_id: loginData?.id,
+  //   };
+  //   const res = await getRestaurantDetails(prepData);
+  //   if (res?.restaurant) {
+  //     setSelectedRest(res?.restaurant);
+  //     bottomSheetRef?.current?.open();
+  //   }
+  // }, []);
 
   const cameraCoords = useMemo(
     () => selectedResCoordinates || userLocation,
@@ -84,7 +78,7 @@ const AppMap = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.mapView}>
-        <Mapbox.MapView
+        {/* <Mapbox.MapView
           style={styles.map}
           attributionControl={false}
           attributionEnabled={false}
@@ -137,7 +131,7 @@ const AppMap = () => {
               </View>
             </View>
           )}
-        </Mapbox.MapView>
+        </Mapbox.MapView> */}
 
         <RestaurantSearchInput
           onPressRestaurant={rest => {

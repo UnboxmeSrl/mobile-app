@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useRoute} from '@react-navigation/native';
 import {useCallback, useEffect, useState} from 'react';
 import {Alert, TurboModuleRegistry} from 'react-native';

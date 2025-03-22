@@ -1,17 +1,17 @@
 // import { Categories } from '@components/Categories'
-import Mapbox from '@rnmapbox/maps';
+// import Mapbox from '@rnmapbox/maps';
 import React, {useCallback, useRef, useState} from 'react';
-import {
-  Image,
-  Platform,
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+// import {
+//   Image,
+//   Platform,
+//   Pressable,
+//   SafeAreaView,
+//   ScrollView,
+//   StyleSheet,
+//   Text,
+//   TouchableOpacity,
+//   View,
+// } from 'react-native';
 import {Api} from '../../constants';
 import {getAllRestaurants, getNearerRestaurants} from '../../services';
 import {setAllRestaurants, setNearerRestaurants} from '../../redux';

@@ -23,7 +23,7 @@ import {
 import {COLORS, FONTS} from '../../constants';
 import {useRestaurants} from './hooks';
 import {RestaurantCard} from './RestaurantCard';
-import AppMap from '../../components/AppMap';
+// import AppMap from '../../components/AppMap';
 
 const RestaurantsScreen = () => {
   const {
@@ -42,7 +42,7 @@ const RestaurantsScreen = () => {
     restaurantsData,
     onCategoryChange,
     handleLocationPress,
-    requestLocationPermission,
+    // requestLocationPermission,
   } = useRestaurants();
   const [view, setView] = useState('tabs');
   const bottomSheetRef = useRef();
@@ -112,52 +112,47 @@ const RestaurantsScreen = () => {
         </View>
       ) : (
         <>
-          {view === 'map' ? (
+          {/* {view === 'map' ? (
             <AppMap />
-          ) : (
-            <View style={styles.restaurantsFlatlistContainer}>
-              <FlatList
-                ListEmptyComponent={
-                  !isLoading &&
-                  restaurantsData?.length === 0 && (
-                    <View style={styles.listEmptyContainer}>
-                      <Text
-                        allowFontScaling={false}
-                        style={styles.listEmptyText}>
-                        No data found.
-                      </Text>
-                    </View>
-                  )
-                }
-                contentContainerStyle={styles.listMain}
-                data={restaurantsData}
-                onEndReached={handleOnReached}
-                ListFooterComponent={
-                  isEndLoading && (
-                    <View style={styles.loaderContainer}>
-                      <ActivityIndicator color={COLORS.newPrimary} size={20} />
-                    </View>
-                  )
-                }
-                getItemLayout={(_, index) => ({
-                  index,
-                  length: verticalScale(200),
-                  offset: verticalScale(200) * index,
-                })}
-                keyExtractor={item => item.id.toString()}
-                refreshControl={
-                  <RefreshControl
-                    onRefresh={onRefresh}
-                    refreshing={refreshing}
-                  />
-                }
-                renderItem={({item, index}) => {
-                  return <RestaurantCard index={index} item={item} />;
-                }}
-                showsVerticalScrollIndicator={false}
-              />
-            </View>
-          )}
+          ) : ( */}
+          <View style={styles.restaurantsFlatlistContainer}>
+            <FlatList
+              ListEmptyComponent={
+                !isLoading &&
+                restaurantsData?.length === 0 && (
+                  <View style={styles.listEmptyContainer}>
+                    <Text allowFontScaling={false} style={styles.listEmptyText}>
+                      No data found.
+                    </Text>
+                  </View>
+                )
+              }
+              contentContainerStyle={styles.listMain}
+              data={restaurantsData}
+              onEndReached={handleOnReached}
+              ListFooterComponent={
+                isEndLoading && (
+                  <View style={styles.loaderContainer}>
+                    <ActivityIndicator color={COLORS.newPrimary} size={20} />
+                  </View>
+                )
+              }
+              getItemLayout={(_, index) => ({
+                index,
+                length: verticalScale(200),
+                offset: verticalScale(200) * index,
+              })}
+              keyExtractor={item => item.id.toString()}
+              refreshControl={
+                <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+              }
+              renderItem={({item, index}) => {
+                return <RestaurantCard index={index} item={item} />;
+              }}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+          {/* )} */}
         </>
       )}
     </SafeAreaView>
