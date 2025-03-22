@@ -4,8 +4,8 @@ export const Api = {
   LOCATIONS: {
     CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/category_venues_turbo`,
     CITIES: `${BASE_URL}/api:WVfdccpj/cities`,
-    CITY_WISE_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/getRestaurantByCity_22`,
-    GET_RESTAURANT_DETAILS: `${BASE_URL}/api:bwh6Xc5O/get_restaurant_and_service_4`,
+    CITY_WISE_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/getRestaurantByCity`,
+    GET_RESTAURANT_DETAILS: `${BASE_URL}/api:bwh6Xc5O/get_restaurant_and_service`,
     GET_SPONSORED_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/get_sponsored_restaurant`,
     GET_SERVICE_CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/serviceCategories`,
     GET_SERVICE_DEALS_LEFT: `${BASE_URL}/api:bwh6Xc5O/get_deal_left`,
