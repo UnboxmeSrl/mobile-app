@@ -1,11 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useRoute} from '@react-navigation/native';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {Alert, TurboModuleRegistry} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES} from '../../../constants';
-import {setAppInfo, setBookings, setCanceledBookings} from '../../../redux';
+import {
+  deleteCanceledBooking,
+  selectBookingsByID,
+  setAppInfo,
+  setBookings,
+  setCanceledBookings,
+  updateBooking,
+} from '../../../redux';
 import {
   cancelBooking,
   getAllCanceledBookings,
@@ -20,18 +27,35 @@ import {
 
 const useYourScheduleDetails = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
+  const route = useRoute();
+  const bookingDetail = useSelector(
+    selectBookingsByID(route?.params?.bookingDetails?.id),
+  );
   // const bookingsLength = useSelector(
   //   state => state.restaurantSlice.bookings?.length,
   // );
   // console.log('bookingsLength', bookingsLength);
-  const route = useRoute();
-  const bookingDetails = route.params?.bookingDetails;
-  const approvalStageValue = bookingDetails?.Approved
-    ? 'success'
-    : bookingDetails?.Rejectedstatus
-    ? 'reject'
-    : 'pending';
-  const [approvalStage, setApprovalStage] = useState(approvalStageValue);
+  const bookingDetailsParams = route.params?.bookingDetails;
+  const bookingDetails = useMemo(
+    () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
+    [bookingDetailsParams, bookingDetail],
+  );
+  // const bookingDetails = useMemo(
+  //   () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
+  //   [bookingDetailsParams, bookingDetail],
+  // );
+
+  const approvalStage = useMemo(
+    () =>
+      bookingDetails?.Approved
+        ? 'success'
+        : bookingDetails?.Rejectedstatus
+        ? 'reject'
+        : 'pending',
+    [bookingDetails],
+  );
+
+  // const [approvalStage, setApprovalStage] = useState(approvalStageValue);
   const [currentMonth, setCurrentMonth] = useState('');
   const [currentWeekDay, setCurrentWeekDay] = useState('');
   const [currentDate, setCurrentDate] = useState('');
@@ -141,14 +165,22 @@ const useYourScheduleDetails = () => {
   };
 
   const handleAlertVisible = () => {
+    if (approvalStage === 'reject') {
+      // console.log('check_handleAlertVisible');
+      return;
+    }
     setIsAlertVisible(!isAlertVisible);
   };
 
   const handlePositiveBtnPress = async () => {
     setIsDeleting(true);
     const params = `/${bookingDetails?.id}`;
+    // const params = `/${bookingDetails?.id}/clone_1`;
     const res = await cancelBooking(params);
     if (res?.id) {
+      // console.log('res_cancelBooking', res);
+      // return;
+      dispatch(deleteCanceledBooking(res));
       const params = `/${loginData?.id}`;
       const bookingRes = await getBookings(params);
       if (bookingRes?.length > 0) {
@@ -162,8 +194,8 @@ const useYourScheduleDetails = () => {
 
       setIsDeleting(false);
       setIsAlertVisible(false);
-      Alert.alert('Your booking is cancelled, move into archive');
-      // navigate(SCREEN_NAMES.ArchiveScreen);
+      // Alert.alert('Your booking is cancelled, move into archive');
+      navigate(SCREEN_NAMES.ArchiveScreen);
     } else {
       Alert.alert('Something went wrong');
     }

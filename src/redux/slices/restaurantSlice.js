@@ -3,7 +3,7 @@ import {sliceNames} from '../../constants';
 
 const initialState = {
   appInfo: {},
-  bookings: [],
+  bookings: {},
   restaurantDetails: {},
   serviceDetails: {},
   canceledBookings: [],
@@ -22,8 +22,31 @@ const RestaurantSlice = createSlice({
       state.appInfo = actions?.payload;
       console.log('appinfo_RestaurantSlice', state.appInfo);
     },
+    // setBookings: (state, actions) => {
+    //   state.bookings = actions?.payload;
+    // },
     setBookings: (state, actions) => {
-      state.bookings = actions?.payload;
+      state.bookings = {
+        ...state.bookings,
+        ...actions?.payload?.reduce(
+          (prev, next) => ({
+            ...prev,
+            [next?.id]: next,
+          }),
+          {},
+        ),
+      };
+    },
+    updateBooking: (state, actions) => {
+      if (state.bookings[actions.payload?.bookingId])
+        state.bookings[actions.payload?.bookingId] = {
+          ...state.bookings[actions.payload?.bookingId],
+          ...actions?.payload,
+        };
+    },
+    deleteCanceledBooking: (state, actions) => {
+      // state.bookings[actions.payload?.id] = actions.payload;
+      delete state.bookings[actions.payload?.id];
     },
     setRestaurantDetails: (state, actions) => {
       state.restaurantDetails = actions?.payload;
@@ -65,6 +88,8 @@ export const {
   setServiceDetails,
   setAppInfo,
   setBookings,
+  updateBooking,
+  deleteCanceledBooking,
   setCanceledBookings,
   setTimeFrameData,
   setSocialActions,
@@ -88,6 +113,16 @@ export const selectAllRestaurants = createDraftSafeSelector(
   [selectAllRestaurantsState],
   restaurantsData => Object.values(restaurantsData || {}),
 );
+
+export const selectBookingsList = createDraftSafeSelector(
+  [state => state.restaurantSlice.bookings],
+  bookings => Object.values(bookings) || [],
+);
+export const selectBookingsByID = id =>
+  createDraftSafeSelector(
+    [state => state.restaurantSlice.bookings],
+    bookings => bookings[id],
+  );
 
 // export const selectAllNearbyRestaurants = createDraftSafeSelector(
 //   [selectAllNearbyRestaurantsState],

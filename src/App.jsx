@@ -17,7 +17,13 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {Chat, OverlayProvider} from 'stream-chat-react-native';
 import {chatClient} from './hooks';
 import MainStack from './navigation/MainStack';
-import {persistor, setSelectedChannel, store} from './redux';
+import {
+  deleteCanceledBooking,
+  persistor,
+  setSelectedChannel,
+  store,
+  updateBooking,
+} from './redux';
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
@@ -84,12 +90,49 @@ const App = () => {
     //     // notificationReceivedEvent.complete(notification)
     //   },
     // );
+    OneSignal.Notifications.addEventListener('foregroundWillDisplay', event => {
+      const notification = event.getNotification();
+      // console.log(
+      //   'notification_Onesignal',
+      //   notification,
+      //   notification.additionalData,
+      // );
+      const data = notification?.additionalData || {};
+      store.dispatch(
+        updateBooking({
+          ...data,
+          ApprovalStatus: data.ApprovalStatus == '1',
+          Approved: data.Approved == '1',
+          Rejectedstatus: data.Rejectedstatus == '1',
+          canceled: data.canceled == '1',
+        }),
+      );
+    });
 
     // // Method for handling notifications opened
     // OneSignal.setNotificationOpenedHandler(notification => {
     //   console.log('OneSignal: notification opened:', notification);
     // });
   }, []);
+
+  // useEffect(() => {
+  //   // Handle foreground notifications
+  //   // OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
+  //   OneSignal.setNotificationWillShowInForegroundHandler(event => {
+  //     let notification = event.getNotification();
+  //     let additionalData = notification.additionalData;
+  //     console.log('notification_additionalData', notification.additionalData);
+  //     if (additionalData) {
+  //       console.log('Foreground Notification Data:', additionalData);
+
+  //       // Update state to trigger UI changes
+  //       store.dispatch(deleteCanceledBooking(additionalData));
+  //     }
+
+  //     // Optionally display the notification
+  //     event.complete(notification);
+  //   });
+  // }, []);
   const handleNotification = useCallback(async remoteMessage => {
     if (!remoteMessage?.notification) {
       return;

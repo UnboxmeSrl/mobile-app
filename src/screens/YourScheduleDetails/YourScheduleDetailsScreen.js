@@ -100,10 +100,12 @@ const YourScheduleDetailsScreen = () => {
               ]}>
               <Text allowFontScaling={false} style={styles.onApprovalText}>{`${
                 approvalStage === 'pending'
-                  ? `On Approval`
+                  ? 'On Approval'
                   : approvalStage === 'success'
-                  ? `Verified`
-                  : `Content Rejected`
+                  ? 'Verified'
+                  : approvalStage === 'reject'
+                  ? 'Rejected'
+                  : 'Content Rejected'
               }`}</Text>
             </View>
           </View>
@@ -276,12 +278,13 @@ const YourScheduleDetailsScreen = () => {
                   style={styles.selectedDateWithTimeText}>{`${currentWeekDay}${
                   isEvent
                     ? `, ${getFormattedTime(bookingDetails?.booking_time)}`
-                    : ``
+                    : ''
                 }`}</Text>
               )}
             </View>
             <TouchableOpacity
               style={styles.removeBtnContainer}
+              disabled={approvalStage === 'reject'}
               onPress={handleAlertVisible}>
               <Text allowFontScaling={false} style={styles.removeBtnText}>
                 Cancel

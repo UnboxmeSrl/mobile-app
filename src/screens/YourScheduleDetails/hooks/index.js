@@ -1,1 +1,1 @@
-export { default as useYourScheduleDetails } from './useYourScheduleDetails'
+export {default as useYourScheduleDetails} from './useYourScheduleDetails';

@@ -1022,3 +1022,290 @@
         }
     }
 ]
+// booking data
+{
+    "ApprovalStatus": true,
+    "Approved": false,
+    "BookingDay": "2025-04-03",
+    "BookingTimestamp": 1743624058895,
+    "BoxVisibility": true,
+    "ConfirmMissing": false,
+    "ConfirmPresence": false,
+    "CouponStatus": true,
+    "HourEnd": null,
+    "HourStart": "",
+    "Instagram_Status": "",
+    "Instructions": "",
+    "LinkAzione": "",
+    "MinuteEnd": "",
+    "MinuteStart": null,
+    "OfferVIsibility": false,
+    "Rejectedstatus": false,
+    "Submitbutton_": false,
+    "Title": "",
+    "_actions_turbo": {
+        "Accomodation": 0,
+        "Action_Name": "Diary",
+        "Action_icon": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "diary.png",
+            "path": "/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png",
+            "size": 2810,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png"
+        },
+        "Amount_left": 0,
+        "Beauty": "",
+        "Days_deadline": 4,
+        "Descrizione": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief Tagging both the venue and @claris.app",
+        "Drinks": 1,
+        "Extra_People": 0,
+        "Gym": "",
+        "Plates": 2,
+        "Social": "Diary-Both",
+        "Type": "both",
+        "action_num_id": 3,
+        "action_status_turbo_id": 8,
+        "actions_turbo_id": [],
+        "created_at": 1707321806340,
+        "id": 6,
+        "photos": 2,
+        "stories": 2
+    },
+    "_offers_turbo": {
+        "Bonus_Bookings": 0,
+        "Credits": 0,
+        "Deal_limit": 10,
+        "Description": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief Tagging both the venue and @claris.app",
+        "Diary": true,
+        "Icon": null,
+        "Map": false,
+        "Offer_Cover": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "1000000537.png",
+            "path": "/vault/MY0UB_mA/t6ya-CPfOieX_1DZUC9BfyDrCHg/41iQ_Q../1000000537.png",
+            "size": 68586,
+            "type": "image",
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/t6ya-CPfOieX_1DZUC9BfyDrCHg/41iQ_Q../1000000537.png"
+        },
+        "Offer_Name": "new-test",
+        "Reel": true,
+        "Story": false,
+        "Tiktok": true,
+        "actions_turbo_id": 6,
+        "approveByOwner": true,
+        "at_offer_description": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief Tagging both the venue and @claris.app",
+        "at_offername": "",
+        "availability": true,
+        "category_offers_turbo2_id": [],
+        "category_offers_turbo_id": 0,
+        "created_at": 1742384169554,
+        "days_limit": 42,
+        "deal_done": 1,
+        "deal_left": 10,
+        "id": 1642,
+        "instructions": "Testing",
+        "restaurant_turbo_bali_id": 0,
+        "restaurant_turbo_id": 788,
+        "services": [
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "slots_per_day": 6,
+        "timeframesTurbo_Id": [
+            2963
+        ],
+        "timeframes_turbo_id": 0,
+        "topic": "",
+        "usertype_id": 8
+    },
+    "_restaurant_turbo": {
+        "About": "testing res",
+        "Adress": "karachi",
+        "Background": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "gallery_649a98ed-b196-4e6a-8914-a53e17bb8b38.png",
+            "path": "/vault/MY0UB_mA/fQ4lGpNY0JTPaHkGKAbOWNbQKlk/WjPTHg../gallery_649a98ed-b196-4e6a-8914-a53e17bb8b38.png",
+            "size": 81611,
+            "type": "image",
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/fQ4lGpNY0JTPaHkGKAbOWNbQKlk/WjPTHg../gallery_649a98ed-b196-4e6a-8914-a53e17bb8b38.png"
+        },
+        "Chi_siamo": "",
+        "Content_Tags": [
+            ""
+        ],
+        "Copertina": false,
+        "Cover": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "gallery_6228a0ca-d898-4522-9204-b74b3103108b.png",
+            "path": "/vault/MY0UB_mA/qTy1-L7KCHM-4UEp3c8d5dDlfrE/JrlLTw../gallery_6228a0ca-d898-4522-9204-b74b3103108b.png",
+            "size": 119393,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qTy1-L7KCHM-4UEp3c8d5dDlfrE/JrlLTw../gallery_6228a0ca-d898-4522-9204-b74b3103108b.png"
+        },
+        "Cover2": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "gallery_b19202e6-910c-4ac6-bbee-5aae59009727.png",
+            "path": "/vault/MY0UB_mA/s3bMCyx6NA9h_43ZLOerLENj58s/J7GaMw../gallery_b19202e6-910c-4ac6-bbee-5aae59009727.png",
+            "size": 81611,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/s3bMCyx6NA9h_43ZLOerLENj58s/J7GaMw../gallery_b19202e6-910c-4ac6-bbee-5aae59009727.png"
+        },
+        "GalleryRestaurant": [],
+        "Influencer": false,
+        "Instagram": "http://www.instagram.com/demo",
+        "Latitude": 0,
+        "LongLat": [],
+        "Longitude": 0,
+        "Maps_Link": "https://maps.app.goo.gl/kFVeesJ6vksUze4y9",
+        "Model": false,
+        "Name": "new-test",
+        "Offers_Limit": [],
+        "Owner": null,
+        "Status": false,
+        "Tag2": "claris.app",
+        "Tags": "",
+        "Tiktok": "https://www.tiktok.com/@demo",
+        "Trattamenti": "",
+        "TrattamentiPicture": null,
+        "VenueType": "",
+        "Visibility": true,
+        "_cities": {
+            "City": [Object
+            ],
+            "CityName": "Bali",
+            "booking_buffer_time": 12,
+            "created_at": 1699441854051,
+            "id": 3
+        },
+        "_offers_turbo": null,
+        "actions_turbo_id": [
+            1,
+            5,
+            6
+        ],
+        "booking_buffer_time": 24,
+        "booking_limit_per_month": 0,
+        "booking_limit_three_month": 0,
+        "brief": "testing res",
+        "category_venues_turbo_id": 1,
+        "cities2_id": 3,
+        "cities_id": 0,
+        "created_at": 1742383937483,
+        "event_date_time": [
+            0
+        ],
+        "id": 788,
+        "is_event": false,
+        "location": null,
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "offers_turbo_id": [
+            1640,
+            1641,
+            1642
+        ],
+        "phone": "6363737383838383838",
+        "restaurant_owner_id": 0,
+        "timeframes_turbo_id": [
+            2963,
+            2927,
+            2918,
+            2919
+        ],
+        "usertype_id": [],
+        "venue_order": 0
+    },
+    "_timeframes_turbo": {
+        "Counter": 0,
+        "DayOfBooking": null,
+        "DayOfWeek": "",
+        "End": "02",
+        "Left": 0,
+        "Minute_End": "00",
+        "Minute_Start": "00",
+        "Name": "new-test",
+        "Spot_limit": false,
+        "Spots": 2,
+        "Start": "01",
+        "Visibility": true,
+        "categories_id": 0,
+        "created_at": 1742384361115,
+        "id": 2963,
+        "pause_days": [],
+        "restaurant_id": 788,
+        "usertype_id": 8,
+        "weekdays": [
+            4
+        ],
+        "weekdaysturbo_id": 0
+    },
+    "action_status_turbo_id": 0,
+    "actions_turbo_id": 6,
+    "additional_influencer": 0,
+    "booking_status_id": 0,
+    "booking_time": 0,
+    "canceled": false,
+    "contentSubmissionDate": null,
+    "content_status_turbo_id": 0,
+    "content_url": null,
+    "coupon_status": "pending",
+    "created_at": 1743251760129,
+    "diary_action_turbo_id": 0,
+    "events_id": 0,
+    "id": 15598,
+    "isOwnerStatus": false,
+    "message": "",
+    "offers_turbo_id": 1642,
+    "restaurant_id": 788,
+    "timeframes_id": 2963,
+    "user_turbo": {
+        "NickName": "tester",
+        "id": 550,
+        "name": "testing_user"
+    },
+    "user_turbo_id": 550,
+    "vanue_images": [
+        null
+    ]
+}
+// notification data
+{
+    "actionButtons": undefined,
+    "additionalData": undefined,
+    "androidNotificationId": -815693901,
+    "bigPicture": undefined,
+    "body": "Your booking has been rejected.",
+    "collapseId": undefined,
+    "fromProjectNumber": "33742659330",
+    "groupKey": undefined,
+    "groupMessage": undefined,
+    "largeIcon": undefined,
+    "launchURL": undefined,
+    "ledColor": undefined,
+    "lockScreenVisibility": 1,
+    "notificationId": "f23cc1a6-6d01-4080-9da7-045632b6277e",
+    "priority": 0,
+    "rawPayload": "{\"google.delivered_priority\":\"high\",\"google.sent_time\":1743165325869,\"google.ttl\":2419200,\"google.original_priority\":\"high\",\"custom\":\"{\\\"i\\\":\\\"f23cc1a6-6d01-4080-9da7-045632b6277e\\\"}\",\"from\":\"33742659330\",\"alert\":\"Your booking has been rejected.\",\"google.message_id\":\"0:1743165325884789%616af1e6f9fd7ecd\",\"google.c.sender.id\":\"33742659330\"}",
+    "smallIcon": undefined,
+    "smallIconAccentColor": undefined,
+    "sound": undefined,
+    "title": null
+}

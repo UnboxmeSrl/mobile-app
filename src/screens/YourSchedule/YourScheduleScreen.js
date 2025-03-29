@@ -22,6 +22,7 @@ import {deadlineDaysCount, getFormattedTime, xanoImageSize} from '../../utils';
 const YourScheduleScreen = () => {
   const {
     bookings,
+    bookingsWithoutCanceled,
     contentList,
     selectedTab,
     setSelectedTab,
@@ -36,6 +37,11 @@ const YourScheduleScreen = () => {
     handleContentCardPress,
     handleArchivePress,
   } = useYourSchedule();
+  console.log(
+    'cancel_booking',
+    // bookingsWithoutCanceled?.find(e => e.id === 15562),
+    bookings.length,
+  );
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -90,6 +96,7 @@ const YourScheduleScreen = () => {
         (selectedTab === 1 && (
           <FlatList
             data={bookings}
+            key={bookings.length}
             keyExtractor={(_, index) => index.toString()}
             refreshControl={
               <RefreshControl
@@ -129,10 +136,6 @@ const YourScheduleScreen = () => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    console.log(
-                      'bookings_YourScheduleScreen',
-                      JSON.stringify(bookings),
-                    );
                     handleCardPress(
                       item,
                       approvalStatus,

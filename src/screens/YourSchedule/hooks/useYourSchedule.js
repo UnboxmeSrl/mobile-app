@@ -1,7 +1,10 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants/navigation';
-import {setBookings} from '../../../redux/slices/restaurantSlice';
+import {
+  selectBookingsList,
+  setBookings,
+} from '../../../redux/slices/restaurantSlice';
 import {
   getBookingForContentList,
   getBookings,
@@ -17,7 +20,10 @@ const useYourSchedule = () => {
   const [selectedTab, setSelectedTab] = useState(selectedTabFromRoute ?? 1);
   const [updatedContentDetails, setUpdatedContentDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const bookings = useSelector(state => state.restaurantSlice.bookings);
+  const bookings = useSelector(selectBookingsList);
+  // const bookingsWithoutCanceled = useSelector(selectBookingsList).filter(
+  //   booking => !booking.canceled,
+  // );
   const contentList = useSelector(state => state.contentSlice.contentList);
 
   const isFromBookingDetails = route.params?.isFromBookingDetails;
@@ -132,6 +138,7 @@ const useYourSchedule = () => {
 
   return {
     bookings,
+    // bookingsWithoutCanceled,
     contentList,
     updatedContentDetails,
     isLoading,
