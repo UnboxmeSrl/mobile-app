@@ -34,6 +34,7 @@ export const mixpanel = new Mixpanel(
   Config.MIXPANEL_TOKEN,
   trackAutomaticEvents,
 );
+OneSignal.initialize(Config.ONE_SIGNAL_APP_ID);
 
 // Initialize Mixpanel
 mixpanel.init();
@@ -63,7 +64,6 @@ const App = () => {
 
   useEffect(() => {
     // OneSignal Initialization
-    OneSignal.initialize(Config.ONE_SIGNAL_APP_ID);
     // console.log('ONE_SIGNAL_APP_ID', Config.ONE_SIGNAL_APP_ID);
 
     // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
@@ -211,7 +211,7 @@ const App = () => {
       subscribe(listener) {
         // Listen to incoming links from deep linking
         let subscribed = Linking.addEventListener('url', ({url}) => {
-          console.log('url', url);
+          console.log('url_subscribed', url);
           return listener(url);
         });
         //onNotificationOpenedApp: When the application is running, but in the background.

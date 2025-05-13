@@ -94,6 +94,7 @@ const useYourSchedule = () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
     const res = await getBookingForContentList(params);
+    console.log('contentListRes_getBookingForContentListData', res);
     dispatch(setContentList(res));
     setIsLoading(false);
   };

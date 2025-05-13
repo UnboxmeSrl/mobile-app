@@ -3,8 +3,10 @@ import Fetch from './ApiService';
 
 export const getBookingForContentList = async params => {
   try {
-    const url = Api.CONTENT.GET_BOOKING_FOR_CONTENT + params;
+    // const url = Api.CONTENT.GET_BOOKING_FOR_CONTENT + params ;
+    const url = Api.CONTENT.GET_BOOKING_FOR_CONTENT + params + '/clone_1'; // need to revert to original route
     const response = await Fetch.get(url);
+    console.log('response_getBookingForContentList_API', response);
     return response;
   } catch (error) {
     console.log(error);

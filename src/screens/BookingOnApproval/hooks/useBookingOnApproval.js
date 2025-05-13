@@ -43,6 +43,7 @@ const useBookingOnApproval = () => {
 
     const newParams = `/${loginData?.id}`;
     const contentListRes = await getBookingForContentList(newParams);
+    console.log('contentListRes', contentListRes);
     dispatch(setContentList(contentListRes));
     setIsLoading(false);
     navigate(SCREEN_NAMES.Schedule, {

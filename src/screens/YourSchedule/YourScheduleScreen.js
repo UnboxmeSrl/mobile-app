@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -324,6 +324,15 @@ const YourScheduleScreen = () => {
               </View>
             }
             renderItem={({item, index}) => {
+              const missedDays = Math.floor(
+                (Date.parse(new Date()) - Date.parse(item?.BookingDay)) /
+                  86400000,
+              );
+              console.log(
+                missedDays,
+                Date.parse(item?.BookingDay),
+                'missedDays',
+              );
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0;
               let icon = item?._actions_turbo?.Action_icon?.url;
               let actionName = item?._actions_turbo?.Action_Name ?? 0;
@@ -339,7 +348,12 @@ const YourScheduleScreen = () => {
               if (item?.content_status_turbo_id) {
                 contentApprovalStatus = item?._content_status_turbo?.name;
               }
-
+              console.log(
+                'contentApprovalStatus',
+                contentApprovalStatus,
+                item?.content_status_turbo_id,
+                item?._content_status_turbo?.name,
+              );
               // For deadline days of content publish from (current date) to (booking date + deadline days)
               const deadlineDays = deadlineDaysCount(
                 item?.BookingDay,
@@ -456,10 +470,15 @@ const YourScheduleScreen = () => {
                             />
                             <Text
                               allowFontScaling={false}
-                              style={contentStyles.deadLineText}>
+                              style={[
+                                contentStyles.deadLineText,
+                                missedDays > 0 && {color: COLORS.newPrimary},
+                              ]}>
                               {deadlineDays > 0
                                 ? `${deadlineDays} Days left`
-                                : 'Missed Deadline'}
+                                : missedDays +
+                                  (missedDays === 1 ? ' Day ' : ' Days ') +
+                                  'Overdue'}
                             </Text>
                           </View>
                         )}
