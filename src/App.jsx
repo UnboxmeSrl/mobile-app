@@ -27,6 +27,7 @@ import {
 import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
+import {SCREEN_NAMES, STACK_NAMES} from './constants';
 // import SplashScreen from 'react-native-splash-screen';
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
@@ -72,9 +73,7 @@ const App = () => {
     OneSignal.Notifications.requestPermission(true);
 
     // Method for listening for notification clicks
-    OneSignal.Notifications.addEventListener('click', event => {
-      console.log('OneSignal: notification clicked:', event);
-    });
+
     // Method for handling notifications received while app in foreground
     // OneSignal.setNotificationWillShowInForegroundHandler(
     //   notificationReceivedEvent => {
@@ -133,6 +132,26 @@ const App = () => {
   //     event.complete(notification);
   //   });
   // }, []);
+  const handle_OneSignalNotification = useCallback(
+    (remoteNotification, notification) => {
+      if (!notification) {
+        return;
+      }
+      const data = notification?.additionalData;
+      const message = notification?.body;
+      console.log(
+        notification,
+        data,
+        message,
+        'notification_handle_OneSignalNotification',
+      );
+      const expectedMessage = `please upload content for ${data?.Name} of missing content venue`;
+      if (message === expectedMessage) {
+        return 'https://admin.joinclaris.com/influencer/BottomStack/Schedule/YourScheduleScreen/2}';
+      }
+    },
+    [],
+  );
   const handleNotification = useCallback(async remoteMessage => {
     if (!remoteMessage?.notification) {
       return;
@@ -176,10 +195,8 @@ const App = () => {
 
   const linking = useMemo(
     () => ({
-      prefixes: [
-        'https://admin.joinclaris.com/influencer/',
-        'clarisinfluencer://',
-      ],
+      prefixes: ['https://admin.joinclaris.com/influencer/', 'clarisOwner://'],
+      // 'clarisinfluencer://'
       async getInitialURL() {
         // Try to get the initial URL from deep link or notification
         try {
@@ -215,6 +232,18 @@ const App = () => {
           return listener(url);
         });
         //onNotificationOpenedApp: When the application is running, but in the background.
+        const onSignalCallback = remoteNotification => {
+          console.log('OneSignal: notification clicked:', remoteNotification);
+          const url = handle_OneSignalNotification(
+            remoteNotification,
+            remoteNotification.notification,
+          );
+          console.log(url, 'url_subscribe');
+          if (typeof url === 'string') {
+            listener(url);
+          }
+        };
+        OneSignal.Notifications.addEventListener('click', onSignalCallback);
         const unsubscribe = messaging().onNotificationOpenedApp(
           async remoteMessage => {
             console.log('onOpen urlSubcribe', remoteMessage);
@@ -236,21 +265,32 @@ const App = () => {
         return () => {
           subscribed.remove();
           unsubscribe();
+          OneSignal.Notifications.removeEventListener(
+            'click',
+            onSignalCallback,
+          );
         };
       },
       config: {
         screens: {
           BottomStack: {
+            // path: STACK_NAMES.BottomStack,
             screens: {
-              ChatRoom: 'BottomStack/ChatRoom', // Map the deep link path to the ChatRoom screen
+              Schedule: {
+                // path: 'Schedule',
+                screens: {
+                  YourScheduleScreen: 'YourScheduleScreen/:selectedTab',
+                },
+              },
+              ChatRoom: 'BottomStack/ChatRoom',
             },
           },
         },
       },
     }),
-    [handleNotification],
+    [handleNotification, handle_OneSignalNotification],
   );
-
+  console.log('linking', JSON.stringify(linking));
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <Provider store={store}>

@@ -24,6 +24,7 @@ const useYourSchedule = () => {
   // const bookingsWithoutCanceled = useSelector(selectBookingsList).filter(
   //   booking => !booking.canceled,
   // );
+  console.log(selectedTabFromRoute, 'selectedTabFromRoute');
   const contentList = useSelector(state => state.contentSlice.contentList);
 
   const isFromBookingDetails = route.params?.isFromBookingDetails;

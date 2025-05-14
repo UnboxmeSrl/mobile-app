@@ -25,7 +25,7 @@
 			<dict>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>clarisrestaurant</string>
+					<string>clarisOwner</string>
 				</array>
 			</dict>
 			<dict>

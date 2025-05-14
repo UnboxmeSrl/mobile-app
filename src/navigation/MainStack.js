@@ -35,6 +35,7 @@ import {
   SignUpNew,
   TutorialsScreen,
   YourScheduleDetailsScreen,
+  YourScheduleScreen,
 } from '../screens';
 import {useNotification} from '../hooks';
 import {ChatRoom} from '../screens/ChatRoom';
@@ -174,6 +175,10 @@ const MainStack = () => {
         component={TutorialsScreen}
       />
       <StackMain.Screen name={SCREEN_NAMES.ChatScreen} component={ChatScreen} />
+      <StackMain.Screen
+        name={SCREEN_NAMES.YourScheduleScreen}
+        component={YourScheduleScreen}
+      />
       {/* <StackMain.Screen name={SCREEN_NAMES.ChatRoom} component={ChatRoom} /> */}
     </StackMain.Navigator>
   );
