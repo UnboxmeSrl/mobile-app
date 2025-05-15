@@ -28,6 +28,7 @@ import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
 import {SCREEN_NAMES, STACK_NAMES} from './constants';
+
 // import SplashScreen from 'react-native-splash-screen';
 // Set up an instance of Mixpanel
 const trackAutomaticEvents = true;
@@ -147,7 +148,7 @@ const App = () => {
       );
       const expectedMessage = `please upload content for ${data?.Name} of missing content venue`;
       if (message === expectedMessage) {
-        return 'https://admin.joinclaris.com/influencer/BottomStack/Schedule/YourScheduleScreen/2}';
+        return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.ChatRoom}`;
       }
     },
     [],
@@ -187,7 +188,7 @@ const App = () => {
       console.log(channel.state.members, channel, 'channel noti');
       store.dispatch(setSelectedChannel(channel));
       console.log('afterstate');
-      return 'https://admin.joinclaris.com/influencer/BottomStack/ChatRoom';
+      return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.ChatRoom}`;
     } catch (error) {
       console.error('Failed to create or retrieve channel:', error);
     }
@@ -195,7 +196,10 @@ const App = () => {
 
   const linking = useMemo(
     () => ({
-      prefixes: ['https://admin.joinclaris.com/influencer/', 'clarisOwner://'],
+      prefixes: [
+        'clarisinfluencer://',
+        'https://admin.joinclaris.com/influencer/',
+      ],
       // 'clarisinfluencer://'
       async getInitialURL() {
         // Try to get the initial URL from deep link or notification
@@ -238,8 +242,8 @@ const App = () => {
             remoteNotification,
             remoteNotification.notification,
           );
-          console.log(url, 'url_subscribe');
           if (typeof url === 'string') {
+            console.log(url, 'url_subscribesdfsd');
             listener(url);
           }
         };
@@ -273,16 +277,18 @@ const App = () => {
       },
       config: {
         screens: {
-          BottomStack: {
-            // path: STACK_NAMES.BottomStack,
+          [STACK_NAMES.BottomStack]: {
+            path: STACK_NAMES.BottomStack,
             screens: {
-              Schedule: {
-                // path: 'Schedule',
+              [SCREEN_NAMES.Home]: SCREEN_NAMES.Home,
+              [SCREEN_NAMES.Schedule]: {
+                path: SCREEN_NAMES.Schedule,
                 screens: {
-                  YourScheduleScreen: 'YourScheduleScreen/:selectedTab',
+                  [SCREEN_NAMES.YourScheduleScreen]:
+                    'YourScheduleScreen/:selectedTab',
                 },
               },
-              ChatRoom: 'BottomStack/ChatRoom',
+              [SCREEN_NAMES.ChatRoom]: SCREEN_NAMES.ChatRoom,
             },
           },
         },

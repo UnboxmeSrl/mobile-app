@@ -17,7 +17,9 @@ const useYourSchedule = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
   const route = useRoute();
   const selectedTabFromRoute = route.params?.selectedTab;
-  const [selectedTab, setSelectedTab] = useState(selectedTabFromRoute ?? 1);
+  const [selectedTab, setSelectedTab] = useState(
+    selectedTabFromRoute ? +selectedTabFromRoute : 1,
+  );
   const [updatedContentDetails, setUpdatedContentDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const bookings = useSelector(selectBookingsList);
@@ -133,8 +135,9 @@ const useYourSchedule = () => {
   }, [selectedTab]);
 
   useEffect(() => {
+    console.log('calls', selectedTabFromRoute);
     if (selectedTabFromRoute) {
-      setSelectedTab(selectedTabFromRoute);
+      setSelectedTab(+selectedTabFromRoute);
     }
   }, [selectedTabFromRoute]);
 
