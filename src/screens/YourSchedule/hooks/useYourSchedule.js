@@ -23,10 +23,7 @@ const useYourSchedule = () => {
   const [updatedContentDetails, setUpdatedContentDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const bookings = useSelector(selectBookingsList);
-  // const bookingsWithoutCanceled = useSelector(selectBookingsList).filter(
-  //   booking => !booking.canceled,
-  // );
-  console.log(selectedTabFromRoute, 'selectedTabFromRoute');
+
   const contentList = useSelector(state => state.contentSlice.contentList);
 
   const isFromBookingDetails = route.params?.isFromBookingDetails;
@@ -135,11 +132,11 @@ const useYourSchedule = () => {
   }, [selectedTab]);
 
   useEffect(() => {
-    console.log('calls', selectedTabFromRoute);
     if (selectedTabFromRoute) {
       setSelectedTab(+selectedTabFromRoute);
+      route.params.selectedTab = undefined;
     }
-  }, [selectedTabFromRoute]);
+  }, [route.params, selectedTabFromRoute]);
 
   return {
     bookings,

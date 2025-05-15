@@ -196,14 +196,17 @@ const App = () => {
 
   const linking = useMemo(
     () => ({
-      prefixes: [
-        'clarisinfluencer://',
-        'https://admin.joinclaris.com/influencer/',
-      ],
+      prefixes: ['clarisinfluencer://', 'https://admin.joinclaris.com/'],
       // 'clarisinfluencer://'
       async getInitialURL() {
         // Try to get the initial URL from deep link or notification
         try {
+          const url = await Linking.getInitialURL();
+          console.log('initial url', url);
+          if (url) {
+            return url;
+          }
+
           let message = await messaging().getInitialNotification();
           console.log('initial url1', message);
           if (message) {
