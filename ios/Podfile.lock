@@ -138,11 +138,11 @@ PODS:
   - libwebp/sharpyuv (1.5.0)
   - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
-  - Mixpanel-swift (4.3.0):
-    - Mixpanel-swift/Complete (= 4.3.0)
-  - Mixpanel-swift/Complete (4.3.0)
-  - MixpanelReactNative (3.0.8):
-    - Mixpanel-swift (= 4.3.0)
+  - Mixpanel-swift (4.4.0):
+    - Mixpanel-swift/Complete (= 4.4.0)
+  - Mixpanel-swift/Complete (4.4.0)
+  - MixpanelReactNative (3.0.9):
+    - Mixpanel-swift (= 4.4.0)
     - React-Core
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
@@ -1099,7 +1099,7 @@ PODS:
   - React-Mapbuffer (0.74.0):
     - glog
     - React-debug
-  - react-native-cameraroll (7.9.0):
+  - react-native-cameraroll (7.10.0):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1120,7 +1120,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-compressor (1.10.4):
+  - react-native-compressor (1.11.0):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1145,7 +1145,7 @@ PODS:
     - react-native-config/App (= 1.5.5)
   - react-native-config/App (1.5.5):
     - React-Core
-  - react-native-date-picker (5.0.10):
+  - react-native-date-picker (5.0.12):
     - React-Core
   - react-native-document-picker (9.0.1):
     - React-Core
@@ -1174,14 +1174,14 @@ PODS:
     - React-Core
   - react-native-netinfo (11.4.1):
     - React-Core
-  - react-native-onesignal (5.2.9):
+  - react-native-onesignal (5.2.11):
     - OneSignalXCFramework (= 5.2.10)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-safe-area-context (4.9.0):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
-  - react-native-video (6.10.2):
+  - react-native-video (6.14.0):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1195,7 +1195,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-video/Video (= 6.10.2)
+    - react-native-video/Video (= 6.14.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-rendererdebug
@@ -1203,7 +1203,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-video/Video (6.10.2):
+  - react-native-video/Video (6.14.0):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1224,7 +1224,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-webview (13.13.2):
+  - react-native-webview (13.13.5):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1484,7 +1484,7 @@ PODS:
     - RNFBApp
   - RNFS (2.20.0):
     - React-Core
-  - RNGestureHandler (2.24.0):
+  - RNGestureHandler (2.25.0):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1586,7 +1586,7 @@ PODS:
     - Yoga
   - RNShare (10.2.1):
     - React-Core
-  - RNSVG (15.11.2):
+  - RNSVG (15.12.0):
     - React-Core
   - RNVectorIcons (10.2.0):
     - DoubleConversion
@@ -1931,8 +1931,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
-  Mixpanel-swift: 2192b9a24cf41b870749e4e0e10fbc9822bb2b4a
-  MixpanelReactNative: cd3d7129cfc77d796d07e117846f1f2a9d2fe02d
+  Mixpanel-swift: 478ff46d19de4a251244a9c9a582070d4bb94cf9
+  MixpanelReactNative: 155c9357e91e64d6b41205529ac8efb92b172947
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   OneSignalXCFramework: 1a3b28dfbff23aabce585796d23c1bef37772774
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
@@ -1960,19 +1960,19 @@ SPEC CHECKSUMS:
   React-jsitracing: 36a2bbc272300313653d980de5ab700ec86c534a
   React-logger: 03f2f7b955cfe24593a2b8c9705c23e142d1ad24
   React-Mapbuffer: 5e05d78fe6505f4a054b86f415733d4ad02dd314
-  react-native-cameraroll: 65460dc84ec03b99534f91759fd09f0c2be6c61f
-  react-native-compressor: c52175210db3a4e7351a76401f0cc5b8c32c9ce2
+  react-native-cameraroll: 565fd3c166d2504b85f4c2abda068ab66736fdce
+  react-native-compressor: 4caf822b3d7fe0c70ae529eed4d78ea9b158f2fa
   react-native-config: 3367df9c1f25bb96197007ec531c7087ed4554c3
-  react-native-date-picker: 58c231c37c1a9be5715018b369210c34e83f6e48
+  react-native-date-picker: 52078dd21bce8973b221607ff2472a34ae3d3e03
   react-native-document-picker: 2b8f18667caee73a96708a82b284a4f40b30a156
   react-native-image-picker: bca292c7a8d92677d6faee2c166e6785621c7301
   react-native-image-resizer: d9fb629a867335bdc13230ac2a58702bb8c8828f
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
-  react-native-onesignal: 33ade92bd91578374c31c5a5a91f45f49c2d6614
+  react-native-onesignal: 62ad0dfd1dabd68cc1dcc64746cb89e2ccd2ea70
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-video: 4edc3d89a1aefe1aa301ce2b2d9e3c8174a69ba6
-  react-native-webview: fe3b7faac44a6a10c27165b25f4804095b7f1161
+  react-native-video: 7cded5867dc7188e26fb2949fbc4767572006da8
+  react-native-webview: 6647f291dd0eafa2cd68c22ff47dfe8904e4e030
   React-nativeconfig: 951ec32f632e81cbd7d40aebb3211313251c092e
   React-NativeModulesApple: add06f130d91f3ca13b92d35861fdd6fdb9157e6
   React-perflogger: 271f1111779fef70f9502d1d38da5132e5585230
@@ -2005,21 +2005,21 @@ SPEC CHECKSUMS:
   RNFBApp: 2f83756f4d8be2859af5e2cf54130c20e380119d
   RNFBMessaging: 91592ea949854c66697757af648a2c07bcb583b9
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNGestureHandler: 6eb45a0dca1dedb11bdf17500c0cb775e9b3ebd9
+  RNGestureHandler: fe3ba8b3d6161e042fffb2a1e7348eb7806ec084
   RNImageCropPicker: 8e39c01f205e00d739c31e682f068aac315587bf
   RNNotifee: 5155e0a5e0a97d0c839030d8192783cd63053999
-  RNPermissions: 64b79ba2909e764337cb7ecb36f9047c028741e1
+  RNPermissions: 3e16511a1c4f98f6cb88d5530ac27a2a054bc352
   RNReactNativeHapticFeedback: d4c411574694446a5a2b1c116494e132941ebecc
   RNReanimated: 667f73ef89441b3cde1a640f617a162599792a1c
   RNScreens: 3fff9474dfbbbfa4551a40c8d34de8431ecd1925
   RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
-  RNSVG: e451741721b9fd3db71b06aafe9335d09a189692
+  RNSVG: d956b40703d2292f808d57c9ee5452c46ac6b4b1
   RNVectorIcons: a98ff1d74647e3de2eafd248466e7989bbac631c
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
-  Yoga: ff9b13693cd1eb4a00039a65b2be83154f598e80
+  Yoga: ff1d575b119f510a5de23c22a794872562078ccf
 
 PODFILE CHECKSUM: 0142864c8c5c8ec206a7580684769900ec7f1163
 
