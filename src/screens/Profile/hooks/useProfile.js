@@ -77,7 +77,7 @@ const useProfile = () => {
     if (user?.id) {
       const userId = `/${user?.id}`;
       const res = await getUserApprovalStatus(userId);
-      console.log('res: ' + JSON.stringify(res));
+      console.log('res_getProfileData' + JSON.stringify(res));
       if (res?.id) {
         dispatch(setLoginData(res));
       }

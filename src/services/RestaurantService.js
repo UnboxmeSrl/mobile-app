@@ -28,7 +28,7 @@ export const getTimeFrames = async params => {
 export const addRestaurantBooking = async data => {
   console.log('check_addRestaurantBooking');
   try {
-    const url = Api.RESTAURANTS.ADD_BOOKING;
+    const url = Api.RESTAURANTS.ADD_BOOKING_02;
     const response = await Fetch.postNew(url, data);
     return response.data;
   } catch (error) {

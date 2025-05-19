@@ -28,6 +28,7 @@ import {navigationRef} from './services';
 import i18n from './services/i18n';
 import {isIos} from './utils';
 import {SCREEN_NAMES, STACK_NAMES} from './constants';
+import SplashScreen from 'react-native-splash-screen';
 
 // import SplashScreen from 'react-native-splash-screen';
 // Set up an instance of Mixpanel
@@ -146,9 +147,12 @@ const App = () => {
         message,
         'notification_handle_OneSignalNotification',
       );
-      const expectedMessage = `please upload content for ${data?.Name} of missing content venue`;
-      if (message === expectedMessage) {
-        return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.ChatRoom}`;
+      const contentReminder = data?.contentReminder == '1';
+      // console.log(contentReminder, 'contentReminder');
+      // const expectedMessage = `please upload content for ${data?.Name} of missing content venue`;
+      if (contentReminder) {
+        // console.log(contentReminder, 'check_contentReminder_block');
+        return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.Schedule}/${SCREEN_NAMES.YourScheduleScreen}/2`;
       }
     },
     [],
@@ -313,6 +317,7 @@ const App = () => {
                   onReady={() => {
                     routeNameRef.current =
                       navigationRef.current.getCurrentRoute().name;
+                    SplashScreen.hide();
                   }}
                   onStateChange={async () => {
                     const previousRouteName = routeNameRef.current;

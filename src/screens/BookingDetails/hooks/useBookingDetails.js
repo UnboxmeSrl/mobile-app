@@ -247,7 +247,7 @@ const useBookingDetails = () => {
         });
       } else if (res?.status !== 400) {
         let error;
-        console.log('res: ', JSON.stringify(res));
+        console.log('res_', JSON.stringify(res));
 
         error = {
           message: res?.message || res?.data,

@@ -28,7 +28,8 @@ export const Api = {
     SAVE_USER_DEVICE_INFO: `${BASE_URL}/api:bwh6Xc5O/save_user_device_info`,
   },
   RESTAURANTS: {
-    ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
+    ADD_BOOKING_02: `${BASE_URL}/api:bwh6Xc5O/add_new_booking_clone_testing`,
+    // ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
     CANCEL_BOOKING: `${BASE_URL}/api:bwh6Xc5O/cancel_booking`,
     GET_ALL_CANCELED_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/canceled_booking`,
     GET_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/get_bookings`,

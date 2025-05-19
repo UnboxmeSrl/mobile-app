@@ -33,6 +33,7 @@ const useYourSchedule = () => {
   const dispatch = useDispatch();
 
   const onBookingRefresh = () => {
+    console.log('onBookingRefresh');
     setRefreshing(true);
     if (loginData?.id) {
       getBookingsData();
@@ -86,6 +87,7 @@ const useYourSchedule = () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
     const res = await getBookings(params);
+    console.log('getBookingsData', res);
     dispatch(setBookings(res));
     setIsLoading(false);
   };

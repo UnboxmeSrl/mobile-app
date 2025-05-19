@@ -175,10 +175,10 @@ const MainStack = () => {
         component={TutorialsScreen}
       />
       <StackMain.Screen name={SCREEN_NAMES.ChatScreen} component={ChatScreen} />
-      <StackMain.Screen
+      {/* <StackMain.Screen
         name={SCREEN_NAMES.YourScheduleScreen}
         component={YourScheduleScreen}
-      />
+      /> */}
       {/* <StackMain.Screen name={SCREEN_NAMES.ChatRoom} component={ChatRoom} /> */}
     </StackMain.Navigator>
   );
