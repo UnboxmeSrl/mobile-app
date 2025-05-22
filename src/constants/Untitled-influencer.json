@@ -1668,3 +1668,107 @@
         "user_turbo_id": 550
     }
 ]
+// Content review API get api and setting in redux state "getBookingForContentList(newParams);"
+{
+    "ApprovalStatus": false,
+    "Approved": true,
+    "BookingDay": "2025-05-20",
+    "BookingTimestamp": 0,
+    "Rejectedstatus": false,
+    "_actions_turbo": {
+        "Accomodation": 0,
+        "Action_Name": "3 x Story",
+        "Action_icon": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "story.png",
+            "path": "/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png",
+            "size": 9948,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png"
+        },
+        "Amount_left": 0,
+        "Beauty": "",
+        "Days_deadline": 1,
+        "Descrizione": "Publish 3 x STORY with portraying:-the ambience-food -yourself. Tag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+        "Drinks": 1,
+        "Extra_People": 0,
+        "Gym": "",
+        "Plates": 1,
+        "Social": "Instagram",
+        "Type": "instagram",
+        "action_num_id": 1,
+        "action_status_turbo_id": 8,
+        "actions_turbo_id": [],
+        "created_at": 1668719563878,
+        "id": 1,
+        "photos": 3,
+        "stories": 0
+    },
+    "_offers_turbo": {
+        "Credits": 0,
+        "Offer_Name": "cheezy hut",
+        "actions_turbo_id": 1,
+        "id": 936,
+        "restaurant_turbo_id": 496
+    },
+    "_restaurant_turbo": {
+        "Adress": "lahore pakistan",
+        "Cover": {
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/O6dTENBxM1qanI4oLv3Y4Pwfqrw/TkNHdw../1000366980.jpg"
+        },
+        "Name": "cheezy hut",
+        "Tag2": "",
+        "Tags": "",
+        "created_at": 1730130720450,
+        "event_date_time": [
+            0
+        ],
+        "id": 496,
+        "is_event": false
+    },
+    "_timeframes_turbo": {
+        "Counter": 0,
+        "DayOfBooking": null,
+        "DayOfWeek": "",
+        "End": "10",
+        "Left": 0,
+        "Minute_End": "00",
+        "Minute_Start": "00",
+        "Name": "cheezy hut",
+        "Spot_limit": false,
+        "Spots": 8,
+        "Start": "12",
+        "Visibility": true,
+        "categories_id": 0,
+        "created_at": 1730130720655,
+        "id": 1373,
+        "pause_days": [],
+        "restaurant_id": 496,
+        "usertype_id": 8,
+        "weekdays": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "weekdaysturbo_id": 0
+    },
+    "action_status_turbo_id": 0,
+    "actions_turbo_id": 1,
+    "additional_influencer": 0,
+    "booking_time": 0,
+    "canceled": false,
+    "content_status_turbo_id": 0,
+    "content_url": null,
+    "created_at": 1741881440000,
+    "diary_action_turbo_id": 0,
+    "id": 17880,
+    "offers_turbo_id": 936,
+    "restaurant_id": 496,
+    "timeframes_id": 1373,
+    "user_turbo_id": 550
+}
