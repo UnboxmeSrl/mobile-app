@@ -1,4 +1,17 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {convertImage} from 'react-native-simple-heic2jpg';
+
+export const modifyImagesFromHEICToJPG = async assets => {
+  for (const image of assets) {
+    if (image.fileName.endsWith('.heic') || image.fileName.endsWith('.HEIC')) {
+      const uri = await convertImage(image.uri);
+      image.fileName = `${image.fileName.split('.')[0]}.JPG`;
+      image.type = 'image/jpeg';
+      image.uri = uri;
+    }
+  }
+  return assets;
+};
 
 export const openCamera = async () => {
   const options = {
@@ -13,7 +26,10 @@ export const openCamera = async () => {
     if (res.didCancel) {
     } else if (res.error) {
     } else {
-      return res;
+      return {
+        ...res,
+        assets: await modifyImagesFromHEICToJPG(res.assets || []),
+      };
     }
   } catch (e) {
     console.log('Camera Error: ', e);
@@ -34,7 +50,10 @@ export const openGallery = async ({selectionLimit}) => {
     if (res.didCancel) {
     } else if (res.error) {
     } else {
-      return res;
+      return {
+        ...res,
+        assets: await modifyImagesFromHEICToJPG(res.assets || []),
+      };
     }
   } catch (e) {
     console.log('Camera Error: ', e);
