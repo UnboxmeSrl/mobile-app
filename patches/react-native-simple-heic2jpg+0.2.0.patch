@@ -1,0 +1,50 @@
+diff --git a/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec-generated.mm b/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec-generated.mm
+index fb42ee5..16557f7 100644
+--- a/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec-generated.mm
++++ b/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec-generated.mm
+@@ -14,14 +14,14 @@
+ #import "RNSimpleHeic2jpgSpec.h"
+ 
+ 
+-@implementation NativeSimpleHeic2jpgSpecBase
++//@implementation NativeSimpleHeic2jpgSpecBase
+ 
+ 
+-- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper
+-{
+-  _eventEmitterCallback = std::move(eventEmitterCallbackWrapper->_eventEmitterCallback);
+-}
+-@end
++//- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper
++//{
++//  _eventEmitterCallback = std::move(eventEmitterCallbackWrapper->_eventEmitterCallback);
++//}
++//@end
+ 
+ 
+ namespace facebook::react {
+diff --git a/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec.h b/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec.h
+index ef596c4..7fc2dd0 100644
+--- a/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec.h
++++ b/node_modules/react-native-simple-heic2jpg/ios/generated/RNSimpleHeic2jpgSpec/RNSimpleHeic2jpgSpec.h
+@@ -39,14 +39,14 @@
+ 
+ @end
+ 
+-@interface NativeSimpleHeic2jpgSpecBase : NSObject {
+-@protected
+-facebook::react::EventEmitterCallback _eventEmitterCallback;
+-}
+-- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
++//@interface NativeSimpleHeic2jpgSpecBase : NSObject {
++//@protected
++//facebook::react::EventEmitterCallback _eventEmitterCallback;
++//}
++//- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+ 
+ 
+-@end
++//@end
+ 
+ namespace facebook::react {
+   /**
