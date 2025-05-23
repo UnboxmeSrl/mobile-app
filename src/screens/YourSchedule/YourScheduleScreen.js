@@ -324,6 +324,7 @@ const YourScheduleScreen = () => {
               </View>
             }
             renderItem={({item, index}) => {
+              console.log('item_id', item?.id);
               const missedDays = Math.floor(
                 (Date.parse(new Date()) - Date.parse(item?.BookingDay)) /
                   86400000,
