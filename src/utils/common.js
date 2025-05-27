@@ -265,3 +265,26 @@ export const commonStyle = {
       getStatusBarHeight() + (isIos && hasNotch ? verticalScale(15) : 0),
   },
 };
+
+export const getDay = date => {
+  const day = date ? new Date(date).getDay() : new Date().getDay();
+  console.log('day_UTILS ', day);
+  switch (day) {
+    case 0:
+      return 'Sun';
+    case 1:
+      return 'Mon';
+    case 2:
+      return 'Tue';
+    case 3:
+      return 'Wed';
+    case 4:
+      return 'Thu';
+    case 5:
+      return 'Fri';
+    case 6:
+      return 'Sat';
+    default:
+      return '';
+  }
+};

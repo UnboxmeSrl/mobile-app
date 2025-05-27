@@ -31,6 +31,7 @@ export const Api = {
     // ADD_BOOKING_02: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
     ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
     CANCEL_BOOKING: `${BASE_URL}/api:bwh6Xc5O/cancel_booking`,
+    UPDATE_BOOKING_CHECKIN_STATUS: `${BASE_URL}/api:bwh6Xc5O/update_booking/checked_in`,
     GET_ALL_CANCELED_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/canceled_booking`,
     GET_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/get_bookings`,
     GET_DIARY_ACTIONS: `${BASE_URL}/api:bwh6Xc5O/diary_action_turbo`,

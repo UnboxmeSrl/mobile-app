@@ -4,6 +4,7 @@ import {SCREEN_NAMES} from '../../../constants/navigation';
 import {
   selectBookingsList,
   setBookings,
+  setFreshBookings,
 } from '../../../redux/slices/restaurantSlice';
 import {
   getBookingForContentList,
@@ -87,14 +88,25 @@ const useYourSchedule = () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
     const res = await getBookings(params);
-    console.log('getBookingsData', res);
-    dispatch(setBookings(res));
+    console.log(
+      'getBookingsData',
+      res?.map(item => item.id),
+    );
+    dispatch(setFreshBookings(res));
     setIsLoading(false);
   };
 
   const getBookingForContentListData = async () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
+    const res = await getBookingForContentList(params);
+    console.log('contentListRes_getBookingForContentListData', res);
+    dispatch(setContentList(res));
+    setIsLoading(false);
+  };
+  const updateBookingCheckin = async params => {
+    setIsLoading(true);
+    // const params = `/${loginData?.id}`;
     const res = await getBookingForContentList(params);
     console.log('contentListRes_getBookingForContentListData', res);
     dispatch(setContentList(res));
@@ -147,6 +159,7 @@ const useYourSchedule = () => {
     updatedContentDetails,
     isLoading,
     isContentStatusModalVisible,
+    updateBookingCheckin,
     refreshing,
     onBookingRefresh,
     onContentRefresh,

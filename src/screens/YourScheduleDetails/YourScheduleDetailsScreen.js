@@ -15,7 +15,7 @@ import {CustomModal} from '../../components';
 import {COLORS, FONTS, SCREEN_NAMES, STACK_NAMES} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
 import SwipeButton from 'rn-swipe-button';
-import {getFormattedTime, xanoImageSize} from '../../utils';
+import {getDay, getFormattedTime, xanoImageSize} from '../../utils';
 import {navigate} from '../../services';
 
 const YourScheduleDetailsScreen = () => {
@@ -40,6 +40,15 @@ const YourScheduleDetailsScreen = () => {
     handleContentBriefPress,
     handlePositiveBtnPress,
   } = useYourScheduleDetails();
+
+  console.log(
+    'bookingDetails',
+    bookingDetails?.Approved,
+    bookingDetails?.isCheckedIn,
+    bookingDetails?.BookingDay,
+    bookingDetails?.id,
+    bookingDetails,
+  );
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -399,7 +408,11 @@ const YourScheduleDetailsScreen = () => {
           height={verticalScale(60)}
           width={'90%'}
           shouldResetAfterSuccess={true}
-          disabled={!bookingDetails?.Approved}
+          disabled={
+            !bookingDetails?.Approved ||
+            bookingDetails?.isCheckedIn ||
+            getDay() !== getDay(bookingDetails?.BookingDay)
+          }
           onSwipeSuccess={handleSwipeSuccess}
           railStyles={swipeButtonStyles.swipeBtnRail}
           railBackgroundColor={COLORS.newPrimary}
@@ -414,7 +427,7 @@ const YourScheduleDetailsScreen = () => {
           // thumbIconImageSource={IMAGES.swipeButton}
           thumbIconStyles={swipeButtonStyles.swipeThumbIcon}
           // thumbIconWidth={100}
-          title={'Check in Now'}
+          title={bookingDetails?.isCheckedIn ? 'Checked in' : 'Check in Now'}
           titleColor={COLORS.white}
           titleStyles={swipeButtonStyles.swipeBtnTitle}
         />

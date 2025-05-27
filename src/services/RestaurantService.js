@@ -174,7 +174,7 @@ export const getAppInfo = async () => {
   try {
     const url = Api.RESTAURANTS.GET_APP_INFO;
     const response = await Fetch.get(url);
-    console.log('resIn_getAppInfo', response);
+    // console.log('resIn_getAppInfo', response);
     return response;
   } catch (error) {
     console.log(error);

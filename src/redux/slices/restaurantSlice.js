@@ -14,13 +14,15 @@ const initialState = {
   selectedResCoordinates: null,
 };
 
+const BookingsPrefix = 'Bookings_';
+
 const RestaurantSlice = createSlice({
   initialState: initialState,
   name: sliceNames.restaurantSlice,
   reducers: {
     setAppInfo: (state, actions) => {
       state.appInfo = actions?.payload;
-      console.log('appinfo_RestaurantSlice', state.appInfo);
+      // console.log('appinfo_RestaurantSlice', state.appInfo);
     },
     // setBookings: (state, actions) => {
     //   state.bookings = actions?.payload;
@@ -31,22 +33,54 @@ const RestaurantSlice = createSlice({
         ...actions?.payload?.reduce(
           (prev, next) => ({
             ...prev,
-            [next?.id]: next,
+            [BookingsPrefix + next?.id]: next,
+          }),
+          {},
+        ),
+      };
+    },
+    setFreshBookings: (state, actions) => {
+      state.bookings = {
+        ...actions?.payload?.reduce(
+          (prev, next) => ({
+            ...prev,
+            [BookingsPrefix + next?.id]: next,
           }),
           {},
         ),
       };
     },
     updateBooking: (state, actions) => {
-      if (state.bookings[actions.payload?.bookingId])
-        state.bookings[actions.payload?.bookingId] = {
-          ...state.bookings[actions.payload?.bookingId],
+      if (state.bookings[BookingsPrefix + actions.payload?.bookingId])
+        state.bookings[BookingsPrefix + actions.payload?.bookingId] = {
+          ...state.bookings[BookingsPrefix + actions.payload?.bookingId],
           ...actions?.payload,
         };
     },
+    updateCheckinStatus: (state, actions) => {
+      // if (state.bookings[actions.payload?.bookingId]) {
+      console.log(
+        'updateCheckinStatus_inside',
+        // actions?.payload?.isCheckedIn,
+        state.bookings[BookingsPrefix + actions.payload?.bookingId],
+        state.bookings[BookingsPrefix + actions.payload?.bookingId]
+          ?.isCheckedIn,
+      );
+      state.bookings[BookingsPrefix + actions.payload?.bookingId] = {
+        ...state.bookings[BookingsPrefix + actions.payload?.bookingId],
+        isCheckedIn: actions?.payload?.isCheckedIn,
+      };
+      // }
+      console.log(
+        'updateCheckinStatus',
+        actions?.payload?.isCheckedIn,
+        state.bookings[BookingsPrefix + actions.payload?.bookingId],
+      );
+      // state.bookings[actions.payload?.bookingId].checkedIn = actions?.payload?.checkedIn;
+    },
     deleteCanceledBooking: (state, actions) => {
       // state.bookings[actions.payload?.id] = actions.payload;
-      delete state.bookings[actions.payload?.id];
+      delete state.bookings[BookingsPrefix + actions.payload?.id];
     },
     setRestaurantDetails: (state, actions) => {
       state.restaurantDetails = actions?.payload;
@@ -74,7 +108,10 @@ const RestaurantSlice = createSlice({
     // },
     setAllRestaurants: (state, {payload}) => {
       state.allRestaurants = {
-        ...payload.reduce((prev, curr) => ({...prev, [curr?.id]: curr}), {}),
+        ...payload.reduce(
+          (prev, curr) => ({...prev, [BookingsPrefix + curr?.id]: curr}),
+          {},
+        ),
       };
     },
     setSelectedResCoordinates: (state, {payload}) => {
@@ -88,7 +125,9 @@ export const {
   setServiceDetails,
   setAppInfo,
   setBookings,
+  setFreshBookings,
   updateBooking,
+  updateCheckinStatus,
   deleteCanceledBooking,
   setCanceledBookings,
   setTimeFrameData,
@@ -121,7 +160,7 @@ export const selectBookingsList = createDraftSafeSelector(
 export const selectBookingsByID = id =>
   createDraftSafeSelector(
     [state => state.restaurantSlice.bookings],
-    bookings => bookings[id],
+    bookings => bookings[BookingsPrefix + id],
   );
 
 // export const selectAllNearbyRestaurants = createDraftSafeSelector(

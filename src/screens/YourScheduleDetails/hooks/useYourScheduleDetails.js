@@ -12,6 +12,7 @@ import {
   setBookings,
   setCanceledBookings,
   updateBooking,
+  updateCheckinStatus,
 } from '../../../redux';
 import {
   cancelBooking,
@@ -19,6 +20,7 @@ import {
   getAppInfo,
   getBookings,
   navigate,
+  updateBookingCheckinStatus,
 } from '../../../services';
 
 // import moment from 'moment'
@@ -31,15 +33,19 @@ const useYourScheduleDetails = () => {
   const bookingDetail = useSelector(
     selectBookingsByID(route?.params?.bookingDetails?.id),
   );
+  console.log(
+    'bookingDetails_useYourScheduleDetails',
+    bookingDetail?.isCheckedIn,
+  );
   // const bookingsLength = useSelector(
   //   state => state.restaurantSlice.bookings?.length,
   // );
   // console.log('bookingsLength', bookingsLength);
   const bookingDetailsParams = route.params?.bookingDetails;
-  const bookingDetails = useMemo(
-    () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
-    [bookingDetailsParams, bookingDetail],
-  );
+  const bookingDetails = useMemo(() => {
+    console.log('bookingDetails_useMemo', bookingDetail?.isCheckedIn);
+    return {...(bookingDetailsParams || {}), ...(bookingDetail || {})};
+  }, [bookingDetailsParams, bookingDetail]);
   // const bookingDetails = useMemo(
   //   () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
   //   [bookingDetailsParams, bookingDetail],
@@ -152,10 +158,22 @@ const useYourScheduleDetails = () => {
     });
   };
 
-  const handleSwipeSuccess = () => {
-    navigate(SCREEN_NAMES.ContentUploadGuide, {
-      bookingDetails: bookingDetails,
+  const handleSwipeSuccess = async () => {
+    const res = await updateBookingCheckinStatus(`/${bookingDetail?.id}`, {
+      isCheckedIn: true,
     });
+    console.log(
+      'res_updateBookingCheckinStatus_outside',
+      res?.data?.isCheckedIn,
+      bookingDetail?.id,
+    );
+    if (res?.success) {
+      console.log('res_updateBookingCheckinStatus', res?.data?.isCheckedIn);
+      dispatch(updateCheckinStatus(res?.data));
+      navigate(SCREEN_NAMES.ContentUploadGuide, {
+        bookingDetails: bookingDetails,
+      });
+    }
   };
 
   const handleOpenCouponPress = () => {
@@ -212,7 +230,7 @@ const useYourScheduleDetails = () => {
 
   const getAppInformation = useCallback(async () => {
     const res = await getAppInfo();
-    console.log('res_getAppInformation', res);
+    // console.log('res_getAppInformation', res);
 
     dispatch(setAppInfo(res?.data));
   }, [dispatch]);
