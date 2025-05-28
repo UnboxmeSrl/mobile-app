@@ -151,13 +151,14 @@ export const deadlineDaysCount = (bookDate, deadlineDays) => {
   let calculatedDeadlineDays =
     Math.round(millisecondsDiff / (1000 * 3600 * 24)) + deadlineDays;
 
-  if (calculatedDeadlineDays < 0) {
-    calculatedDeadlineDays = 0;
-  }
 
   return calculatedDeadlineDays;
 };
-
+export const getDeadlineDate = (startDateStr, daysToAdd) => {
+  const date = new Date(startDateStr); // e.g. "2025-05-28"
+  date.setDate(date.getDate() + daysToAdd); // add days
+  return date.toISOString().split('T')[0]; // returns in "YYYY-MM-DD" format
+};
 export const getFormattedDate = dt => {
   const date = new Date(dt);
   const year = date.getFullYear();

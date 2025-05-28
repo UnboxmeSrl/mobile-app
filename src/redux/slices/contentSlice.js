@@ -1,8 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createDraftSafeSelector, createSlice} from '@reduxjs/toolkit';
 import {sliceNames} from '../../constants';
 
 const initialState = {
-  contentList: [],
+  contentList: {},
 };
 
 const ContentSlice = createSlice({
@@ -10,8 +10,16 @@ const ContentSlice = createSlice({
   name: sliceNames.contentSlice,
   reducers: {
     setContentList: (state, actions) => {
-      state.contentList = actions?.payload;
+      state.contentList = {
+        ...actions.payload?.reduce(
+          (prev, next) => ({...prev, [next?.id]: next}),
+          {},
+        ),
+      };
     },
+    // setContentList: (state, actions) => {
+    //   state.contentList = actions?.payload;
+    // },
     resetContentSlice: (state, actions) => {
       state.contentList = [];
     },
@@ -21,3 +29,8 @@ const ContentSlice = createSlice({
 export const {setContentList, resetContentSlice} = ContentSlice.actions;
 
 export default ContentSlice.reducer;
+
+export const selectContentList = createDraftSafeSelector(
+  [state => state.contentSlice.contentList],
+  contentList => Object.values(contentList || {}),
+);

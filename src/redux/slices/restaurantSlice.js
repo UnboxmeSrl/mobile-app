@@ -155,7 +155,7 @@ export const selectAllRestaurants = createDraftSafeSelector(
 
 export const selectBookingsList = createDraftSafeSelector(
   [state => state.restaurantSlice.bookings],
-  bookings => Object.values(bookings) || [],
+  bookings => Object.values(bookings || {}),
 );
 export const selectBookingsByID = id =>
   createDraftSafeSelector(

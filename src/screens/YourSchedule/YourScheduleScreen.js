@@ -17,7 +17,13 @@ import {IMAGES} from '../../assets';
 import {ContentStatusModal} from '../../components';
 import {COLORS, FONTS} from '../../constants';
 import {useYourSchedule} from './hooks';
-import {deadlineDaysCount, getFormattedTime, xanoImageSize} from '../../utils';
+import {
+  deadlineDaysCount,
+  getDeadlineDate,
+  getFormattedTime,
+  perfectSize,
+  xanoImageSize,
+} from '../../utils';
 
 const YourScheduleScreen = () => {
   const {
@@ -37,11 +43,11 @@ const YourScheduleScreen = () => {
     handleContentCardPress,
     handleArchivePress,
   } = useYourSchedule();
-  console.log(
-    'cancel_booking',
-    // bookingsWithoutCanceled?.find(e => e.id === 15562),
-    bookings.length,
-  );
+  // console.log(
+  //   'cancel_booking',
+  //   // bookingsWithoutCanceled?.find(e => e.id === 15562),
+  //   bookings.length,
+  // );
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -142,6 +148,7 @@ const YourScheduleScreen = () => {
                       actionName,
                       actionNumId,
                     );
+                    // console.log('item_id_onBookingCardPress', item?.id);
                   }}
                   style={styles.cardContainer}>
                   <View
@@ -324,16 +331,6 @@ const YourScheduleScreen = () => {
               </View>
             }
             renderItem={({item, index}) => {
-              console.log('item_id', item?.id);
-              const missedDays = Math.floor(
-                (Date.parse(new Date()) - Date.parse(item?.BookingDay)) /
-                  86400000,
-              );
-              console.log(
-                missedDays,
-                Date.parse(item?.BookingDay),
-                'missedDays',
-              );
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0;
               let icon = item?._actions_turbo?.Action_icon?.url;
               let actionName = item?._actions_turbo?.Action_Name ?? 0;
@@ -349,22 +346,33 @@ const YourScheduleScreen = () => {
               if (item?.content_status_turbo_id) {
                 contentApprovalStatus = item?._content_status_turbo?.name;
               }
-              console.log(
-                'contentApprovalStatus',
-                contentApprovalStatus,
-                item?.content_status_turbo_id,
-                item?._content_status_turbo?.name,
-              );
+              // console.log(
+              //   'contentApprovalStatus',
+              //   contentApprovalStatus,
+              //   item?.content_status_turbo_id,
+              //   item?._content_status_turbo?.name,
+              // );
               // For deadline days of content publish from (current date) to (booking date + deadline days)
               const deadlineDays = deadlineDaysCount(
                 item?.BookingDay,
                 item?._actions_turbo?.Days_deadline,
               );
 
+
               return (
                 <TouchableOpacity
                   style={contentStyles.cardContainer}
-                  onPress={() => handleContentCardPress(item)}>
+                  onPress={() => {
+                    // console.log('item_id', item.id, item.content_url);
+                    // console.log(
+                    //   item.id,
+                    //   item?._actions_turbo?.Days_deadline,
+                    //   deadlineDays,
+                    //   Date.parse(item?.BookingDay),
+                    //   'missedDays',
+                    // );
+                    handleContentCardPress(item);
+                  }}>
                   <View style={contentStyles.cardContentContainer}>
                     <View style={contentStyles.ratingSocialMediaMainContainer}>
                       <View style={contentStyles.ratingSocialMediaContainer}>
@@ -406,24 +414,39 @@ const YourScheduleScreen = () => {
                       ]}>
                       <View style={contentStyles.deadLineContainer}>
                         <View style={contentStyles.deadLineMainRow}>
+                          
                           <View
                             style={[
                               contentStyles.deadLineTitleTextContainer,
                               (contentApprovalStatus === 'Under Review' ||
                                 contentApprovalStatus ===
                                   'Missed Deadline') && {
-                                width: '52%',
+                                width: '60%',
                               },
                               item?.content_status_turbo_id === 0 && {
                                 width: '100%',
                               },
                             ]}>
-                            <Text
-                              allowFontScaling={false}
-                              style={contentStyles.deadLineTitleText}>
-                              Deadline:
-                            </Text>
+                            {!item.content_url && (
+                              <Text
+                                allowFontScaling={false}
+                                style={contentStyles.deadLineTitleText}>
+                                Deadline:{' '}
+                                <Text
+                                  allowFontScaling={false}
+                                  style={[
+                                    contentStyles.deadLineTitleText,
+                                    {fontWeight: 'bold', color: '#00000090'},
+                                  ]}>
+                                  {getDeadlineDate(
+                                    item.BookingDay,
+                                    item?._actions_turbo?.Days_deadline,
+                                  )}
+                                </Text>
+                              </Text>
+                            )}
                           </View>
+                          
                           {item?.content_status_turbo_id > 0 && (
                             <View
                               style={[
@@ -462,7 +485,7 @@ const YourScheduleScreen = () => {
                             <Image resizeMode="contain" source={IMAGES.threeDots} style={contentStyles.threeDotsIcon} />
                           </View> */}
                         </View>
-                        {item?.content_status_turbo_id === 0 && (
+                        {item?.content_status_turbo_id === 0 ? (
                           <View style={contentStyles.infoContainer}>
                             <Image
                               resizeMode="contain"
@@ -473,15 +496,27 @@ const YourScheduleScreen = () => {
                               allowFontScaling={false}
                               style={[
                                 contentStyles.deadLineText,
-                                missedDays > 0 && {color: COLORS.newPrimary},
+                                deadlineDays <= 0 && {color: COLORS.newPrimary},
                               ]}>
-                              {deadlineDays > 0
+                              {deadlineDays == 0
+                                ? 'Last Day'
+                                : deadlineDays > 0
                                 ? `${deadlineDays} Days left`
-                                : missedDays +
-                                  (missedDays === 1 ? ' Day ' : ' Days ') +
+                                : Math.abs(deadlineDays) +
+                                  (Math.abs(deadlineDays) === 1
+                                    ? ' Day '
+                                    : ' Days ') +
                                   'Overdue'}
                             </Text>
                           </View>
+                        ) : (
+                          <Text
+                            style={[
+                              contentStyles.deadLineText,
+                              {marginTop: verticalScale(10)},
+                            ]}>
+                            Content Submitted
+                          </Text>
                         )}
                       </View>
                       <View style={contentStyles.divider} />
@@ -548,7 +583,7 @@ export default YourScheduleScreen;
 const styles = StyleSheet.create({
   underReviewContainer: {
     marginTop: verticalScale(10),
-    paddingBottom: verticalScale(30),
+    // paddingBottom: verticalScale(30),
   },
   listEmptyContainer: {
     alignItems: 'center',
@@ -826,6 +861,8 @@ const contentStyles = StyleSheet.create({
   },
   deadLineLocationContainer: {
     width: '75%',
+    // flex: 1,
+    // backgroundColor: 'red',
   },
   rightIconContainer: {
     // width: '10%',
@@ -939,7 +976,10 @@ const contentStyles = StyleSheet.create({
   deadLineContainer: {
     marginLeft: scale(15),
     marginTop: verticalScale(5),
-    width: '100%',
+    height: verticalScale(50),
+    flex: 1,
+    // width: '100%',
+    // backgroundColor: 'yellow',
   },
   deadLineText: {
     color: COLORS.black,
@@ -981,9 +1021,12 @@ const contentStyles = StyleSheet.create({
   deadLineMainRow: {
     flexDirection: 'row',
     width: '95%',
+    // backgroundColor: 'cyan',
   },
   deadLineTitleTextContainer: {
     width: '58%',
+    flexDirection: 'row',
+    // backgroundColor: 'yellow',
   },
   threeDotsContainer: {
     width: '5%',
@@ -997,6 +1040,8 @@ const contentStyles = StyleSheet.create({
   locationMainRow: {
     flexDirection: 'row',
     marginTop: verticalScale(10),
+    height: verticalScale(50),
+    // backgroundColor: 'green',
   },
   ratingSocialMediaContainer: {
     borderTopLeftRadius: moderateScale(10),

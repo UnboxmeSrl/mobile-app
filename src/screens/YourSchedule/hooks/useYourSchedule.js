@@ -11,7 +11,7 @@ import {
   getBookings,
   navigate,
 } from '../../../services';
-import {setContentList} from '../../../redux/slices';
+import {selectContentList, setContentList} from '../../../redux/slices';
 import {useRoute} from '@react-navigation/native';
 
 const useYourSchedule = () => {
@@ -25,7 +25,7 @@ const useYourSchedule = () => {
   const [isLoading, setIsLoading] = useState(false);
   const bookings = useSelector(selectBookingsList);
 
-  const contentList = useSelector(state => state.contentSlice.contentList);
+  const contentList = useSelector(selectContentList);
 
   const isFromBookingDetails = route.params?.isFromBookingDetails;
   const [isContentStatusModalVisible, setIsContentStatusModalVisible] =
