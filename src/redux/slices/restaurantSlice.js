@@ -51,6 +51,7 @@ const RestaurantSlice = createSlice({
       };
     },
     updateBooking: (state, actions) => {
+      // need t check this bookingId
       if (state.bookings[BookingsPrefix + actions.payload?.bookingId])
         state.bookings[BookingsPrefix + actions.payload?.bookingId] = {
           ...state.bookings[BookingsPrefix + actions.payload?.bookingId],
@@ -58,25 +59,12 @@ const RestaurantSlice = createSlice({
         };
     },
     updateCheckinStatus: (state, actions) => {
-      // if (state.bookings[actions.payload?.bookingId]) {
-      console.log(
-        'updateCheckinStatus_inside',
-        // actions?.payload?.isCheckedIn,
-        state.bookings[BookingsPrefix + actions.payload?.bookingId],
-        state.bookings[BookingsPrefix + actions.payload?.bookingId]
-          ?.isCheckedIn,
-      );
-      state.bookings[BookingsPrefix + actions.payload?.bookingId] = {
-        ...state.bookings[BookingsPrefix + actions.payload?.bookingId],
-        isCheckedIn: actions?.payload?.isCheckedIn,
-      };
-      // }
-      console.log(
-        'updateCheckinStatus',
-        actions?.payload?.isCheckedIn,
-        state.bookings[BookingsPrefix + actions.payload?.bookingId],
-      );
-      // state.bookings[actions.payload?.bookingId].checkedIn = actions?.payload?.checkedIn;
+      if (state.bookings[actions.payload?.id]) {
+        state.bookings[BookingsPrefix + actions.payload?.id] = {
+          ...state.bookings[BookingsPrefix + actions.payload?.id],
+          isCheckedIn: actions?.payload?.isCheckedIn,
+        };
+      }
     },
     deleteCanceledBooking: (state, actions) => {
       // state.bookings[actions.payload?.id] = actions.payload;

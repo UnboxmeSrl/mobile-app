@@ -358,7 +358,6 @@ const YourScheduleScreen = () => {
                 item?._actions_turbo?.Days_deadline,
               );
 
-
               return (
                 <TouchableOpacity
                   style={contentStyles.cardContainer}
@@ -414,7 +413,6 @@ const YourScheduleScreen = () => {
                       ]}>
                       <View style={contentStyles.deadLineContainer}>
                         <View style={contentStyles.deadLineMainRow}>
-                          
                           <View
                             style={[
                               contentStyles.deadLineTitleTextContainer,
@@ -446,7 +444,7 @@ const YourScheduleScreen = () => {
                               </Text>
                             )}
                           </View>
-                          
+
                           {item?.content_status_turbo_id > 0 && (
                             <View
                               style={[

@@ -151,7 +151,6 @@ export const deadlineDaysCount = (bookDate, deadlineDays) => {
   let calculatedDeadlineDays =
     Math.round(millisecondsDiff / (1000 * 3600 * 24)) + deadlineDays;
 
-
   return calculatedDeadlineDays;
 };
 export const getDeadlineDate = (startDateStr, daysToAdd) => {
@@ -173,6 +172,30 @@ export const getFormattedTime = dt => {
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   return `${hours}:${minutes}`;
+};
+
+export const compareWithCurrDate = date => {
+  const currDate = new Date(new Date().toUTCString());
+
+  currDate.setHours(23);
+  currDate.setMinutes(59);
+  currDate.setSeconds(59);
+  currDate.setMilliseconds(999);
+  const bookingDate = new Date(date);
+  // new Date(date).setSeconds(0);
+  // new Date(date).setMilliseconds(0);
+  // console.log('compareWithCurrDate1', bookingDate);
+  // console.log('compareWithCurrDate2', currDate);
+  // // console.log(
+  // //   'compareWithCurrDate',
+  // //   bookingDate > currDate ||
+  // //     !getFormattedDate(currDate) === getFormattedDate(bookingDate),
+  // // );
+
+  return (
+    bookingDate > currDate ||
+    !getFormattedDate(currDate) === getFormattedDate(bookingDate)
+  );
 };
 
 export const createChatByBookingDetail = async ({bookingDetails}) => {

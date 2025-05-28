@@ -41,11 +41,11 @@ const useYourScheduleDetails = () => {
   //   state => state.restaurantSlice.bookings?.length,
   // );
   // console.log('bookingsLength', bookingsLength);
-  const bookingDetailsParams = route.params?.bookingDetails;
+  // const bookingDetailsParams = route.params?.bookingDetails;
   const bookingDetails = useMemo(() => {
     console.log('bookingDetails_useMemo', bookingDetail?.isCheckedIn);
-    return {...(bookingDetailsParams || {}), ...(bookingDetail || {})};
-  }, [bookingDetailsParams, bookingDetail]);
+    return {...(bookingDetail || {})};
+  }, [bookingDetails, bookingDetail]);
   // const bookingDetails = useMemo(
   //   () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
   //   [bookingDetailsParams, bookingDetail],
@@ -162,11 +162,7 @@ const useYourScheduleDetails = () => {
     const res = await updateBookingCheckinStatus(`/${bookingDetail?.id}`, {
       isCheckedIn: true,
     });
-    console.log(
-      'res_updateBookingCheckinStatus_outside',
-      res?.data?.isCheckedIn,
-      bookingDetail?.id,
-    );
+
     if (res?.success) {
       console.log('res_updateBookingCheckinStatus', res?.data?.isCheckedIn);
       dispatch(updateCheckinStatus(res?.data));
