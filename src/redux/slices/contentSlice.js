@@ -4,6 +4,7 @@ import {sliceNames} from '../../constants';
 const initialState = {
   contentList: {},
 };
+const ContentsPrefix = 'Contents_';
 
 const ContentSlice = createSlice({
   initialState: initialState,
@@ -12,7 +13,7 @@ const ContentSlice = createSlice({
     setContentList: (state, actions) => {
       state.contentList = {
         ...actions.payload?.reduce(
-          (prev, next) => ({...prev, [next?.id]: next}),
+          (prev, next) => ({...prev, [ContentsPrefix + next?.id]: next}),
           {},
         ),
       };
@@ -34,3 +35,8 @@ export const selectContentList = createDraftSafeSelector(
   [state => state.contentSlice.contentList],
   contentList => Object.values(contentList || {}),
 );
+export const selectContentByID = id =>
+  createDraftSafeSelector(
+    [state => state.contentSlice.contentList],
+    contentList => contentList[ContentsPrefix + id] || {},
+  );

@@ -2,12 +2,16 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {SCREEN_NAMES} from '../../../constants';
 import {navigate, showToastSuccess} from '../../../services';
 import {useRoute} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import {selectBookingsByID} from '../../../redux';
 
 const useContentBrief = () => {
   const route = useRoute();
-  const bookingDetails = route.params?.bookingDetails;
+  const bookingId = route.params?.bookingDetails?.id;
+  const bookingDetails = useSelector(selectBookingsByID(bookingId));
+
   const isReel = bookingDetails?.reel === '1';
-  console.log('isReel', isReel, bookingDetails);
+  console.log('isReel', isReel, bookingDetails, bookingId);
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;

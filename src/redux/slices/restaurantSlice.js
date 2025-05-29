@@ -59,12 +59,14 @@ const RestaurantSlice = createSlice({
         };
     },
     updateCheckinStatus: (state, actions) => {
-      if (state.bookings[actions.payload?.id]) {
-        state.bookings[BookingsPrefix + actions.payload?.id] = {
-          ...state.bookings[BookingsPrefix + actions.payload?.id],
-          isCheckedIn: actions?.payload?.isCheckedIn,
-        };
-      }
+      // if (!!state.bookings[actions.payload?.id]) {
+      state.bookings[BookingsPrefix + actions.payload?.id] = {
+        ...state.bookings[BookingsPrefix + actions.payload?.id],
+        isCheckedIn: actions?.payload?.isCheckedIn,
+        Approved: actions?.payload?.Approved,
+        ApprovalStatus: actions?.payload?.ApprovalStatus,
+      };
+      // }
     },
     deleteCanceledBooking: (state, actions) => {
       // state.bookings[actions.payload?.id] = actions.payload;

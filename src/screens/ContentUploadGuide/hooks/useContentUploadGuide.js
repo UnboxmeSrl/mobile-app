@@ -13,10 +13,14 @@ import {
   // useEffect,
   useState,
 } from 'react';
+import {useSelector} from 'react-redux';
+import {selectBookingsByID} from '../../../redux';
 
 const useContentUploadGuide = () => {
   const route = useRoute();
-  const bookingDetails = route.params?.bookingDetails;
+  const bookingId = route.params?.bookingDetails?.id;
+  console.log('bookingId_useContentUploadGuide', bookingId);
+  const bookingDetails = useSelector(selectBookingsByID(bookingId));
   // const userLocation = useSelector(selecteUserCoords);
   // const {requestLocationPermission} = useRestaurants();
   const [permissionError, setPermissionError] = useState('');

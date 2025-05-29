@@ -18,7 +18,7 @@ import {ContentStatusModal, PickerModal} from '../../components';
 import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
 import {usePublishContent} from './hooks';
 import {getFormattedTime, xanoImageSize} from '../../utils';
-import {navigate} from '../../services';
+import {navigate, showToastError} from '../../services';
 
 const PublishContentScreen = () => {
   const {
@@ -50,6 +50,7 @@ const PublishContentScreen = () => {
     handleEditPress,
     handleBackPress,
   } = usePublishContent();
+  console.log('contentDetails', contentDetails?.isCheckedIn, contentDetails);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -170,7 +171,15 @@ const PublishContentScreen = () => {
                       placeholderTextColor={COLORS.newPrimary}
                       style={styles.linkUploadTextInput}
                       value={link}
-                      onChangeText={val => setLink(val)}
+                      onChangeText={val => {
+                        if (!contentDetails?.isCheckedIn) {
+                          showToastError({
+                            message: "You didn't Checked In to Upload Content ",
+                          });
+                        } else {
+                          setLink(val);
+                        }
+                      }}
                     />
                   </View>
                 </View>
@@ -339,7 +348,11 @@ const PublishContentScreen = () => {
           ) : (
             <TouchableOpacity
               onPress={handleSendToReviewBtnPress}
-              style={styles.sendToReviewBtnContainer}>
+              style={[
+                styles.sendToReviewBtnContainer,
+                !contentDetails?.isCheckedIn && {opacity: 0.4},
+              ]}
+              disabled={!contentDetails?.isCheckedIn}>
               <Text allowFontScaling={false} style={styles.sendToReviewBtnText}>
                 Send to review
               </Text>
