@@ -185,7 +185,7 @@ const YourScheduleDetailsScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    at your choice
+                    >100K followers DEALS
                   </Text>
                 </View>
               </View>
@@ -206,7 +206,7 @@ const YourScheduleDetailsScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    at your choice
+                    >100K followers DEALS
                   </Text>
                 </View>
               </View>

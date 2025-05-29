@@ -184,11 +184,10 @@ const ServiceDetails = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    at your choice
+                    >100K followers DEALS
                   </Text>
                 </View>
               </View>
-
               <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
                   <Image
@@ -205,7 +204,7 @@ const ServiceDetails = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    at your choice
+                    >100K followers DEALS
                   </Text>
                 </View>
               </View>

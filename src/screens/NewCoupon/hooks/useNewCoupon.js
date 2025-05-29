@@ -35,13 +35,13 @@ const useNewCoupon = () => {
     amenityDetails = {
       amenityName: `${bookingDetails?._actions_turbo?.Beauty} X Treatment`,
       amenityIcon: IMAGES.beauty,
-      amenityDescription: 'at your choice',
+      amenityDescription: '>100K followers DEALS',
     };
   } else if (actionNumId === 8) {
     amenityDetails = {
       amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,
-      amenityDescription: 'at your choice',
+      amenityDescription: '>100K followers DEALS',
     };
   } else if (actionNumId === 9) {
     amenityDetails = {
@@ -49,7 +49,7 @@ const useNewCoupon = () => {
         bookingDetails?._actions_turbo?.Accomodation - 1
       } nights)`,
       amenityIcon: IMAGES.resort,
-      amenityDescription: 'at your choice',
+      amenityDescription: '>100K followers DEALS',
     };
   }
 

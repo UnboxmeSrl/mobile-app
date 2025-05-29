@@ -73,7 +73,7 @@ const useServiceDetails = () => {
     amenityDetails = {
       amenityName: `${serviceDetails?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,
-      amenityDescription: 'at your choice',
+      amenityDescription: '>100K followers DEALS',
     };
   } else if (actionNumId === 9) {
     amenityDetails = {
@@ -81,7 +81,7 @@ const useServiceDetails = () => {
         serviceDetails?._actions_turbo?.Accomodation - 1
       } nights)`,
       amenityIcon: IMAGES.resort,
-      amenityDescription: 'at your choice',
+      amenityDescription: '>100K followers DEALS',
     };
   }
 
