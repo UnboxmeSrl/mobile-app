@@ -148,7 +148,12 @@ const YourScheduleScreen = () => {
                       actionName,
                       actionNumId,
                     );
-                    // console.log('item_id_onBookingCardPress', item?.id);
+                    // console.log(
+                    //   'item_id_onBookingCardPress',
+                    //   item?.id,
+                    //   item.BookingDay,
+                    //   item?._actions_turbo?.Days_deadline,
+                    // );
                   }}
                   style={styles.cardContainer}>
                   <View
@@ -357,12 +362,13 @@ const YourScheduleScreen = () => {
                 item?.BookingDay,
                 item?._actions_turbo?.Days_deadline,
               );
+              // console.log('item_id', item.id, item.content_url);
 
               return (
                 <TouchableOpacity
                   style={contentStyles.cardContainer}
                   onPress={() => {
-                    // console.log('item_id', item.id, item.content_url);
+                    // console.log('item_id_onPress', item.id, item.content_url);
                     // console.log(
                     //   item.id,
                     //   item?._actions_turbo?.Days_deadline,

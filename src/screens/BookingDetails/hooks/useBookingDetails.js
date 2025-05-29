@@ -85,6 +85,7 @@ const useBookingDetails = () => {
       : 1;
   };
 
+  // console.log('start date', startDate);
   const showNextWeek = () => {
     if (isLatestWeek) {
       setIsLatestWeek(false);
@@ -341,7 +342,10 @@ const useBookingDetails = () => {
     setSelectedTimeFame({});
     const myDate = new Date(selectedDate);
     const weekDay = myDate?.toLocaleString('en-US', {weekday: 'long'});
+    const newStartDate = new Date(myDate);
+    newStartDate.setDate(newStartDate.getDate() - 3);
 
+    setStartDate(newStartDate);
     setCurrentWeekDay(weekDay);
 
     const updatedData = timeFrameData?.map(item => {
@@ -408,16 +412,25 @@ const useBookingDetails = () => {
 
   useEffect(() => {
     const myDate = new Date(selectedDate);
-    const month = myDate.toLocaleString('en-US', {month: 'long'});
-    setCurrentMonth(month);
+    // const month = myDate.toLocaleString('en-US', {month: 'long'});
+    // setCurrentMonth(month);
     setCurrentDate(myDate.getDate());
   }, [selectedDate]);
 
   useEffect(() => {
+    const selectedDateTemp = new Date(selectedDate);
+    const selectedMonth = selectedDateTemp.toLocaleString('en-US', {
+      month: 'long',
+    });
+
     const myDate = new Date(startDate);
     const month = myDate?.toLocaleString('en-US', {month: 'long'});
-    setCurrentMonth(month);
-  }, [startDate]);
+    if (!selectedDate || myDate > selectedDateTemp) {
+      setCurrentMonth(month);
+    } else {
+      setCurrentMonth(selectedMonth);
+    }
+  }, [startDate, selectedDate]);
 
   useEffect(() => {
     if (getDateWeek(startDate) <= getDateWeek(currentDate)) {

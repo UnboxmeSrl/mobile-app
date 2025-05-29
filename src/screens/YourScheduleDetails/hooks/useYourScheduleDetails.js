@@ -30,26 +30,27 @@ import {
 const useYourScheduleDetails = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
   const route = useRoute();
+  const bookingDetailsParams = useMemo(
+    () => route.params?.bookingDetails || {},
+    [],
+  );
   const bookingDetail = useSelector(
-    selectBookingsByID(route?.params?.bookingDetails?.id),
+    selectBookingsByID(bookingDetailsParams?.id),
   );
-  console.log(
-    'bookingDetails_useYourScheduleDetails',
-    bookingDetail?.isCheckedIn,
-  );
+  // console.log('bookingDetails_useYourScheduleDetails', bookingDetail?.id);
   // const bookingsLength = useSelector(
   //   state => state.restaurantSlice.bookings?.length,
   // );
   // console.log('bookingsLength', bookingsLength);
-  // const bookingDetailsParams = route.params?.bookingDetails;
-  const bookingDetails = useMemo(() => {
-    console.log('bookingDetails_useMemo', bookingDetail?.isCheckedIn);
-    return {...(bookingDetail || {})};
-  }, [bookingDetails, bookingDetail]);
-  // const bookingDetails = useMemo(
-  //   () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
-  //   [bookingDetailsParams, bookingDetail],
-  // );
+
+  // const bookingDetails = useMemo(() => {
+  //   console.log('bookingDetails_useMemo', bookingDetail?.isCheckedIn);
+  //   return {...(bookingDetail || {})};
+  // }, [bookingDetail]);
+  const bookingDetails = useMemo(
+    () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
+    [bookingDetailsParams, bookingDetail],
+  );
 
   const approvalStage = useMemo(
     () =>
@@ -159,22 +160,22 @@ const useYourScheduleDetails = () => {
   };
 
   const handleSwipeSuccess = async () => {
-    const res = await updateBookingCheckinStatus(`/${bookingDetail?.id}`, {
-      isCheckedIn: true,
-    });
+    // const res = await updateBookingCheckinStatus(`/${bookingDetails?.id}`, {
+    //   isCheckedIn: true,
+    // });
 
-    if (res?.success) {
-      console.log(
-        'res_updateBookingCheckinStatus',
-        res?.data?.isCheckedIn,
-        res?.data.Approved,
-        res?.data?.ApprovalStatus,
-      );
-      dispatch(updateCheckinStatus(res?.data));
-      navigate(SCREEN_NAMES.ContentUploadGuide, {
-        bookingDetails: bookingDetails,
-      });
-    }
+    // if (res?.success) {
+    //   console.log(
+    //     'res_updateBookingCheckinStatus',
+    //     res?.data?.isCheckedIn,
+    //     res?.data.Approved,
+    //     res?.data?.ApprovalStatus,
+    //   );
+    //   dispatch(updateCheckinStatus(res?.data));
+    // }
+    navigate(SCREEN_NAMES.ContentUploadGuide, {
+      bookingDetails: bookingDetails,
+    });
   };
 
   const handleOpenCouponPress = () => {
@@ -192,31 +193,37 @@ const useYourScheduleDetails = () => {
   };
 
   const handlePositiveBtnPress = async () => {
-    setIsDeleting(true);
-    const params = `/${bookingDetails?.id}`;
-    // const params = `/${bookingDetails?.id}/clone_1`;
-    const res = await cancelBooking(params);
-    if (res?.id) {
-      // console.log('res_cancelBooking', res);
-      // return;
-      dispatch(deleteCanceledBooking(res));
-      const params = `/${loginData?.id}`;
-      const bookingRes = await getBookings(params);
-      if (bookingRes?.length > 0) {
-        dispatch(setBookings(bookingRes));
-      }
+    try {
+      setIsDeleting(true);
+      const params = `/${bookingDetails?.id}`;
+      // const params = `/${bookingDetails?.id}/clone_1`;
+      const res = await cancelBooking(params);
+      if (res?.id) {
+        // console.log('res_cancelBooking', res);
+        // return;
+        dispatch(deleteCanceledBooking(res));
+        const params = `/${loginData?.id}`;
+        const bookingRes = await getBookings(params);
+        if (bookingRes?.length > 0) {
+          dispatch(setBookings(bookingRes));
+        }
 
-      const canceledBookingRes = await getAllCanceledBookings(params);
-      if (canceledBookingRes?.length > 0) {
-        dispatch(setCanceledBookings(canceledBookingRes));
-      }
+        const canceledBookingRes = await getAllCanceledBookings(params);
+        if (canceledBookingRes?.length > 0) {
+          dispatch(setCanceledBookings(canceledBookingRes));
+        }
 
-      setIsDeleting(false);
-      setIsAlertVisible(false);
-      // Alert.alert('Your booking is cancelled, move into archive');
-      navigate(SCREEN_NAMES.ArchiveScreen);
-    } else {
+        setIsDeleting(false);
+        setIsAlertVisible(false);
+        // Alert.alert('Your booking is cancelled, move into archive');
+        navigate(SCREEN_NAMES.ArchiveScreen);
+      } else {
+        Alert.alert('Something went wrong');
+      }
+    } catch (error) {
       Alert.alert('Something went wrong');
+    } finally {
+      setIsDeleting(false);
     }
   };
 

@@ -52,7 +52,7 @@ const RestaurantSlice = createSlice({
     },
     updateBooking: (state, actions) => {
       // need t check this bookingId
-      if (state.bookings[BookingsPrefix + actions.payload?.bookingId])
+      if (!!state.bookings[BookingsPrefix + actions.payload?.bookingId])
         state.bookings[BookingsPrefix + actions.payload?.bookingId] = {
           ...state.bookings[BookingsPrefix + actions.payload?.bookingId],
           ...actions?.payload,

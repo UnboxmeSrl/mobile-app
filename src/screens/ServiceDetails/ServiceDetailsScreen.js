@@ -76,6 +76,7 @@ const ServiceDetails = () => {
       ) : (
         <ScrollView
           style={styles.mainScrollView}
+          nestedScrollEnabled
           showsVerticalScrollIndicator={false}>
           <View>
             <CustomCarousel
@@ -166,7 +167,10 @@ const ServiceDetails = () => {
               </>
             </View>
           ) : (
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <ScrollView
+              horizontal
+              nestedScrollEnabled
+              showsHorizontalScrollIndicator={false}>
               <View
                 style={[
                   styles.amenityMainContainer,
@@ -184,7 +188,7 @@ const ServiceDetails = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    >100K followers DEALS
+                    {'>'}100K followers DEALS
                   </Text>
                 </View>
               </View>
@@ -204,7 +208,7 @@ const ServiceDetails = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    >100K followers DEALS
+                    {'>'}100K followers DEALS
                   </Text>
                 </View>
               </View>
@@ -262,6 +266,7 @@ const ServiceDetails = () => {
               </View>
               <View style={styles.villaActionsMainContainer}>
                 <FlatList
+                  nestedScrollEnabled
                   showsVerticalScrollIndicator={false}
                   data={serviceDetails?._actions_turbo?.actions_turbo_id}
                   renderItem={({item, index}) => {
@@ -381,7 +386,12 @@ const ServiceDetails = () => {
                   </Text>
                 </View>
               )}
-              <View style={styles.flatlistContainer}>
+              <View
+                horizontal
+                scrollEnabled={false}
+                showsHorizontalScrollIndicator={false}
+                // style={{flex: 1}}
+                style={styles.flatlistContainer}>
                 <FlatList
                   data={[serviceDetails]}
                   keyExtractor={(_, index) => index.toString()}

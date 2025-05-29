@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
-import {setContentList} from '../../../redux';
+import {selectContentByID, setContentList} from '../../../redux';
 import {
   getBookingForContentList,
   navigate,
@@ -28,7 +28,9 @@ const usePublishContent = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
   const contentUploadRef = useRef();
   const approvalStage = 'Pending';
-  const contentDetails = route.params?.contentDetails;
+  const contentDetailsId = route.params?.contentDetails?.id;
+  console.log('contentDetailsId', contentDetailsId);
+  const contentDetails = useSelector(selectContentByID(contentDetailsId));
   const [link, setLink] = useState('');
   const [contentPhotos, setContentPhotos] = useState([1, 2, 3]);
   const [picturesForValidation, setPicturesForValidation] = useState([]);
@@ -140,8 +142,12 @@ const usePublishContent = () => {
   };
 
   const handleContentUpload = async index => {
+    // if (!contentDetails?.isCheckedIn) {
+    //   showToastError({message: "You didn't Checked in to Upload Content "});
+    // } else {
     setPictureIndex(index);
     contentUploadRef.current.open();
+    // }
   };
 
   const handleCameraPress = async () => {

@@ -50,7 +50,7 @@ const PublishContentScreen = () => {
     handleEditPress,
     handleBackPress,
   } = usePublishContent();
-  console.log('contentDetails', contentDetails?.isCheckedIn, contentDetails);
+  // console.log('contentDetails', contentDetails?.isCheckedIn, contentDetails);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -172,13 +172,13 @@ const PublishContentScreen = () => {
                       style={styles.linkUploadTextInput}
                       value={link}
                       onChangeText={val => {
-                        if (!contentDetails?.isCheckedIn) {
-                          showToastError({
-                            message: "You didn't Checked In to Upload Content ",
-                          });
-                        } else {
-                          setLink(val);
-                        }
+                        // if (!contentDetails?.isCheckedIn) {
+                        //   showToastError({
+                        //     message: "You didn't Checked In to Upload Content ",
+                        //   });
+                        // } else {
+                        setLink(val);
+                        // }
                       }}
                     />
                   </View>
@@ -350,9 +350,10 @@ const PublishContentScreen = () => {
               onPress={handleSendToReviewBtnPress}
               style={[
                 styles.sendToReviewBtnContainer,
-                !contentDetails?.isCheckedIn && {opacity: 0.4},
+                // !contentDetails?.isCheckedIn && {opacity: 0.4},
               ]}
-              disabled={!contentDetails?.isCheckedIn}>
+              // disabled={!contentDetails?.isCheckedIn}
+            >
               <Text allowFontScaling={false} style={styles.sendToReviewBtnText}>
                 Send to review
               </Text>

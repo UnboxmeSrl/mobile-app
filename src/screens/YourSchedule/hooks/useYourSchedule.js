@@ -71,12 +71,14 @@ const useYourSchedule = () => {
         (actionNumId === 6 || actionNumId === 3) &&
         !item?._diary_action_turbo?.id
       ) {
+        // console.log('check_contentNavigationBlock', item?.id);
         navigate(SCREEN_NAMES.ContentScreen, {
           actionName: actionName,
           actionNumId: actionNumId,
           bookingDetails: item,
         });
       } else {
+        // console.log('check_contentNavigationBlock_else');
         navigate(SCREEN_NAMES.YourScheduleDetailsScreen, {
           bookingDetails: item,
         });
@@ -88,10 +90,10 @@ const useYourSchedule = () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
     const res = await getBookings(params);
-    console.log(
-      'getBookingsData',
-      res?.map(item => item.id),
-    );
+    // console.log(
+    //   'getBookingsData',
+    //   res?.map(item => item.id),
+    // );
     dispatch(setFreshBookings(res));
     setIsLoading(false);
   };
@@ -108,7 +110,7 @@ const useYourSchedule = () => {
     setIsLoading(true);
     // const params = `/${loginData?.id}`;
     const res = await getBookingForContentList(params);
-    console.log('contentListRes_getBookingForContentListData', res);
+    // console.log('contentListRes_checkin', res);
     dispatch(setContentList(res));
     setIsLoading(false);
   };

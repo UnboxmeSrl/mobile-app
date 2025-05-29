@@ -29,6 +29,7 @@ import i18n from './services/i18n';
 import {isIos} from './utils';
 import {SCREEN_NAMES, STACK_NAMES} from './constants';
 import SplashScreen from 'react-native-splash-screen';
+import SocketProvider from './components/Providers/SocketProvider';
 
 // import SplashScreen from 'react-native-splash-screen';
 // Set up an instance of Mixpanel
@@ -99,6 +100,7 @@ const App = () => {
       //   notification.additionalData,
       // );
       const data = notification?.additionalData || {};
+      console.log('data_onSingalNotifications', data);
       store.dispatch(
         updateBooking({
           ...data,
@@ -303,43 +305,48 @@ const App = () => {
     }),
     [handleNotification, handle_OneSignalNotification],
   );
+
   console.log('linking', JSON.stringify(linking));
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <OverlayProvider>
-            <Chat client={chatClient}>
-              <I18nextProvider i18n={i18n}>
-                <NavigationContainer
-                  linking={linking}
-                  ref={navigationRef}
-                  onReady={() => {
-                    routeNameRef.current =
-                      navigationRef.current.getCurrentRoute().name;
-                    SplashScreen.hide();
-                  }}
-                  onStateChange={async () => {
-                    const previousRouteName = routeNameRef.current;
-                    const currentRouteName =
-                      navigationRef.current.getCurrentRoute().name;
-                    // console.log('Current route: ' + currentRouteName);
+          <SocketProvider>
+            <OverlayProvider>
+              <Chat client={chatClient}>
+                <I18nextProvider i18n={i18n}>
+                  <NavigationContainer
+                    linking={linking}
+                    ref={navigationRef}
+                    onReady={() => {
+                      routeNameRef.current =
+                        navigationRef.current.getCurrentRoute().name;
+                      SplashScreen.hide();
+                    }}
+                    onStateChange={async () => {
+                      const previousRouteName = routeNameRef.current;
+                      const currentRouteName =
+                        navigationRef.current.getCurrentRoute().name;
+                      // console.log('Current route: ' + currentRouteName);
 
-                    if (previousRouteName !== currentRouteName) {
-                      await analytics().logScreenView({
-                        screen_name: currentRouteName,
-                        screen_class: currentRouteName,
-                      });
-                    }
-                    routeNameRef.current = currentRouteName;
-                  }}>
-                  {isIos && <StatusBar translucent barStyle={'dark-content'} />}
-                  <MainStack />
-                </NavigationContainer>
-                <Toast ref={Toast.setRef} topOffset={50} />
-              </I18nextProvider>
-            </Chat>
-          </OverlayProvider>
+                      if (previousRouteName !== currentRouteName) {
+                        await analytics().logScreenView({
+                          screen_name: currentRouteName,
+                          screen_class: currentRouteName,
+                        });
+                      }
+                      routeNameRef.current = currentRouteName;
+                    }}>
+                    {isIos && (
+                      <StatusBar translucent barStyle={'dark-content'} />
+                    )}
+                    <MainStack />
+                  </NavigationContainer>
+                  <Toast ref={Toast.setRef} topOffset={50} />
+                </I18nextProvider>
+              </Chat>
+            </OverlayProvider>
+          </SocketProvider>
         </PersistGate>
       </Provider>
     </GestureHandlerRootView>

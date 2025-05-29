@@ -55,6 +55,11 @@ const BookingDetailsScreen = () => {
   //   selectedDate,
   // );
 
+  // console.log(selectedDate, 'checkoo 001');
+  // console.log(startDate);
+  // console.log(currentMonth);
+  // console.log(isLatestWeek);
+
   return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
@@ -140,6 +145,8 @@ const BookingDetailsScreen = () => {
                   iconRight={IMAGES.back}
                   endDate={endDate}
                   onDateSelected={date => {
+                    // console.log(date, 'checko');
+
                     setSelectedDate(date);
                     console.log('isEventIn_onDateSelected', date);
                     if (isEvent) {
