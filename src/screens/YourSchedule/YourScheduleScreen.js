@@ -154,6 +154,7 @@ const YourScheduleScreen = () => {
                     //   item.BookingDay,
                     //   item?._actions_turbo?.Days_deadline,
                     // );
+                    // console.log('timeFrame_onBookingCardPress', timeFrame);
                   }}
                   style={styles.cardContainer}>
                   <View
@@ -853,12 +854,13 @@ const contentStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: scale(5),
+    paddingVertical: scale(2),
   },
   contentApprovalStatusText: {
     color: COLORS.mayGreen,
     fontFamily: FONTS.quicksandBold,
-    fontSize: moderateScale(12),
-    marginLeft: scale(5),
+    lineHeight: moderateScale(12),
+    fontSize: moderateScale(10),
   },
   cardContentContainer: {
     flexDirection: 'row',
@@ -994,7 +996,7 @@ const contentStyles = StyleSheet.create({
   deadLineTitleText: {
     color: COLORS.gray,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(12),
   },
   infoContainer: {
     alignItems: 'center',
@@ -1012,19 +1014,23 @@ const contentStyles = StyleSheet.create({
     marginLeft: scale(8),
   },
   ratingIconImage: {
-    height: moderateScale(10.2),
+    height: moderateScale(10),
     marginLeft: scale(5),
     tintColor: COLORS.newPrimary,
-    width: moderateScale(10.58),
+    width: moderateScale(10),
+    backgroundColor: 'red',
   },
   ratingUsersText: {
     color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
-    fontSize: moderateScale(12.09),
+    fontSize: moderateScale(12),
+    backgroundColor: 'red',
+    lineHeight: moderateScale(14),
   },
   deadLineMainRow: {
     flexDirection: 'row',
     width: '95%',
+    justifyContent: 'space-between',
     // backgroundColor: 'cyan',
   },
   deadLineTitleTextContainer: {

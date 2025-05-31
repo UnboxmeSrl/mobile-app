@@ -185,7 +185,7 @@ const YourScheduleDetailsScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    >100K followers DEALS
+                    at your choice
                   </Text>
                 </View>
               </View>
@@ -206,7 +206,7 @@ const YourScheduleDetailsScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    >100K followers DEALS
+                    at your choice
                   </Text>
                 </View>
               </View>
@@ -422,9 +422,7 @@ const YourScheduleDetailsScreen = () => {
           width={'90%'}
           shouldResetAfterSuccess={true}
           disabled={
-            bookingDetails?.Rejectedstatus ||
-            bookingDetails?.canceled ||
-            bookingDetails?.isCheckedIn
+            bookingDetails?.Rejectedstatus || bookingDetails?.canceled
             // || compareWithCurrDate(bookingDetails?.BookingDay)
           }
           onSwipeSuccess={handleSwipeSuccess}
@@ -441,7 +439,7 @@ const YourScheduleDetailsScreen = () => {
           // thumbIconImageSource={IMAGES.swipeButton}
           thumbIconStyles={swipeButtonStyles.swipeThumbIcon}
           // thumbIconWidth={100}
-          title={bookingDetails?.isCheckedIn ? 'Checked in' : 'Check in Now'}
+          title={'Check in Now'}
           titleColor={COLORS.white}
           titleStyles={swipeButtonStyles.swipeBtnTitle}
         />

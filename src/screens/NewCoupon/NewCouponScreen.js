@@ -139,7 +139,7 @@ const NewCouponScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    >100K followers DEALS
+                    at your choice
                   </Text>
                 </View>
               </View>
@@ -160,7 +160,7 @@ const NewCouponScreen = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    >100K followers DEALS
+                    at your choice
                   </Text>
                 </View>
               </View>
@@ -211,7 +211,7 @@ const NewCouponScreen = () => {
                   styles.timeText
                 }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
             </View>
-            {actionNumId !== 9 && (
+            {actionNumId !== 9 && !!timeFrame && (
               <View style={styles.timeContainer}>
                 <Text allowFontScaling={false} style={styles.timeTitleText}>
                   Time
