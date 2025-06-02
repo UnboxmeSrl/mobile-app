@@ -168,8 +168,8 @@ const EditProfileScreen = () => {
             name="instagramLink"
             rules={{
               pattern: {
-                value:
-                  /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/,
+                value: INSTA_URL_REGEX,
+                // /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/,
                 message: 'Enter a valid Instagram profile link',
               },
             }}

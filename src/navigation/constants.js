@@ -19,38 +19,55 @@ export const DARK_STATUS_BAR = {
 };
 
 export const TIKTOK_URL_REGEX =
-  /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$|^@[a-zA-Z0-9_.]+$/;
+  /^(https?:\/\/)?(www\.)?tiktok\.com\/@?(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@?(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/;
+// /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$|^@[a-zA-Z0-9_.]+$/;
 export const INSTA_URL_REGEX =
-  /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/
-  // /^(https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;
+  /^(https?:\/\/)?(www\.)?instagram\.com\/(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}\/?$|^(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}$/;
+// /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;
 
-export function formatTikTokUrl(input) {
-  // Regex to check if input is only @username
-  const usernameRegex = /^@[a-zA-Z0-9_.]+$/;
-  // Regex to check if input is a valid TikTok URL but might be missing parts
-  const urlRegex = /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$/;
-  if (usernameRegex.test(input)) {
-    // If only @username is provided, return the full URL
-    return `https://www.tiktok.com/${input}`;
-  } else if (urlRegex.test(input)) {
-    // Ensure the full URL format if parts are missing
-    return input
-      .replace(/^(https?:\/\/)?(www\.)?/, 'https://www.')
+export function formatTiktokUrl(input) {
+  if (TIKTOK_URL_REGEX.test(input)) {
+    // Extract the username only
+    let username = input
+      .replace(/^(https?:\/\/)?(www\.)?tiktok\.com\/@?/, '')
+      .replace(/^@/, '')
       .replace(/\/$/, '');
+
+    // Add @ if missing
+    if (!username.startsWith('@')) {
+      username = `@${username}`;
+    }
+
+    return `http://www.tiktok.com/${username}`;
   } else {
-    // Invalid input, return null or handle accordingly
     return '';
   }
 }
+// export function formatTikTokUrl(input) {
+//   // Regex to check if input is only @username
+//   const usernameRegex = /^@[a-zA-Z0-9_.]+$/;
+//   // Regex to check if input is a valid TikTok URL but might be missing parts
+//   const urlRegex = /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$/;
+//   if (usernameRegex.test(input)) {
+//     // If only @username is provided, return the full URL
+//     return `https://www.tiktok.com/${input}`;
+//   } else if (urlRegex.test(input)) {
+//     // Ensure the full URL format if parts are missing
+//     return input
+//       .replace(/^(https?:\/\/)?(www\.)?/, 'https://www.')
+//       .replace(/\/$/, '');
+//   } else {
+//     // Invalid input, return null or handle accordingly
+//     return '';
+//   }
+// }
 export function formatInstaUrl(input) {
-  const userNameRegex =
-    /^(?!.*[@]|.*\.com)(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-zA-Z0-9_]+$/;
-  const instaUrlRegex =
-    /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_]+)\/?$/;
-
-  if (userNameRegex.test(input)) {
-    return `https://www.instagram.com/${input}`;
-  } else if (instaUrlRegex.test(input)) {
+  if (INSTA_URL_REGEX.test(input)) {
+    // If it's a plain username, format it as a URL
+    if (!input.includes('instagram.com')) {
+      return `https://www.instagram.com/${input}`;
+    }
+    // If it's already a URL, normalize it
     return input.replace(
       /^(?:https?:\/\/)?(?:www\.)?instagram\.com\//,
       'https://www.instagram.com/',
@@ -60,19 +77,23 @@ export function formatInstaUrl(input) {
   }
 }
 // export function formatInstaUrl(input) {
-//   console.log(INSTA_URL_REGEX.test(input), input, 'INSTA_URL_REGEX.test(input');
 //   const userNameRegex =
-//     /^([a-zA-Z0-9_.]+)\/?$|^(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-z\d_.]+$/;
+//     /^(?!.*[@]|.*\.com)(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-zA-Z0-9_]+$/;
+//   const instaUrlRegex =
+//     /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_]+)\/?$/;
+
 //   if (userNameRegex.test(input)) {
-//     console.log('userNameRegex_block');
-//     return 'https://www.instagram.com/' + input;
-//   } else if (INSTA_URL_REGEX.test(input)) {
-//     return input;
+//     return `https://www.instagram.com/${input}`;
+//   } else if (instaUrlRegex.test(input)) {
+//     return input.replace(
+//       /^(?:https?:\/\/)?(?:www\.)?instagram\.com\//,
+//       'https://www.instagram.com/',
+//     );
 //   } else {
-//     console.log('userNameRegex_elseBlock');
 //     return '';
 //   }
 // }
+
 // export const screenOptions = ({ route }) => ({
 //   tabBarIcon: ({ focused, color, size }) => {
 //     let iconName

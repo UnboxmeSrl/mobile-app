@@ -14,7 +14,7 @@ import {
   updateProfile,
 } from '../../../services';
 import {checkPermission, openGallery} from '../../../utils';
-import {formatInstaUrl, formatTikTokUrl} from '../../../navigation/constants';
+import {formatInstaUrl, formatTiktokUrl} from '../../../navigation/constants';
 
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
@@ -136,7 +136,7 @@ const useEditProfile = () => {
       formData.append('IG_account', formatInstaUrl(data?.instagramLink || ''));
       formData.append(
         'Tiktok_account',
-        formatTikTokUrl(data?.tiktokLink || ''),
+        formatTiktokUrl(data?.tiktokLink || ''),
       );
       const resProfile = await updateProfile({formData, userID: user?.id});
       if (resProfile && resProfile?.success) {
