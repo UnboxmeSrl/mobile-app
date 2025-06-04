@@ -53,11 +53,12 @@ const useAuthSocialNetwork = () => {
   };
 
   const handleNextPress = async () => {
+    console.log('arha he');
+
     // dispatch(setAuthData({instaUserName, tiktokUserName}));
     // User Type (Model, Influencer, Both)
     // if (selectedInFluencer_type?.name) {
-    setIsLoading(false);
-    setIsBtnDisabled(true);
+    setIsLoading(true);
     const isBothUserType = !!userDetails?.userType?.data;
 
     // Phone Number
@@ -138,23 +139,33 @@ const useAuthSocialNetwork = () => {
     );
 
     // console.log('🟩 Form Data', JSON.stringify(formData));
-    const res = await userSignUp(formData);
-    console.log('🟩 Success Data', res);
-    setIsBtnDisabled(false);
-    // console.log('🚀 ~ handleNextPress ~ res:', res.data)
-    if (res?.id) {
-      // OneSignal.setExternalUserId(res?.id?.toString());
-      OneSignal.login(res?.id?.toString());
-      console.log('🟩 Success Data', JSON.stringify(res));
-      dispatch(resetAuthData());
-      // dispatch(setproFileData(res.data))
-      dispatch(setLoginData(res));
-      // reset(MAIN_NAVIGATOR)
-      // dispatch(setIsApplied(true))
+    try {
+      const res = await userSignUp(formData);
+      console.log('🟩 Success Data', res);
+      // setIsBtnDisabled(false);
+      // if (res.success) {
+      //   setIsBtnDisabled(true);
+      // }
+      // console.log('🚀 ~ handleNextPress ~ res:', res.data)
+      if (res?.id) {
+        // OneSignal.setExternalUserId(res?.id?.toString());
+        setIsBtnDisabled(true);
+        OneSignal.login(res?.id?.toString());
+        console.log('🟩 Success Data', JSON.stringify(res));
+        dispatch(resetAuthData());
+        // dispatch(setproFileData(res.data))
+        dispatch(setLoginData(res));
+        // reset(MAIN_NAVIGATOR)
+        // dispatch(setIsApplied(true))
+        setIsLoading(false);
+        navigate(SCREEN_NAMES.AppliedScreen);
+      } else {
+        // showToastError(res);
+      }
+    } catch (err) {
       setIsLoading(false);
-      navigate(SCREEN_NAMES.AppliedScreen);
-    } else {
-      showToastError(res);
+    } finally {
+      setIsLoading(false);
     }
     // } else {
     //   setInFluencerTypeError('you need to select any one option to proceed');
@@ -177,13 +188,13 @@ const useAuthSocialNetwork = () => {
   // };
 
   useEffect(() => {
-    console.log(
-      'tiktokUserName_useEffect',
-      tiktokUserName,
-      userDetails?.tiktokUserName,
-      // isBtnDisabled
-      // instaUserName,
-    );
+    // console.log(
+    //   'tiktokUserName_useEffect',
+    //   tiktokUserName,
+    //   userDetails?.tiktokUserName,
+    //   // isBtnDisabled
+    //   // instaUserName,
+    // );
     // if (!inFluencerTypeError) {
     if (
       (tiktokUserName?.trim().length > 0 &&

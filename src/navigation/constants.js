@@ -19,8 +19,9 @@ export const DARK_STATUS_BAR = {
 };
 
 export const TIKTOK_URL_REGEX =
-  /^(https?:\/\/)?(www\.)?tiktok\.com\/@?(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@?(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/;
-// /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+)\/?$|^@[a-zA-Z0-9_.]+$/;
+  /^(https?:\/\/)?(www\.)?tiktok\.com\/@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/;
+// /^(https?:\/\/)?(www\.)?tiktok\.com\/@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@?(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/;
+
 export const INSTA_URL_REGEX =
   /^(https?:\/\/)?(www\.)?instagram\.com\/(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}\/?$|^(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}$/;
 // /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;

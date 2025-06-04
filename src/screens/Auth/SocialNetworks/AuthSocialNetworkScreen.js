@@ -19,9 +19,9 @@ import {useAuthSocialNetwork} from './hooks';
 import {setAuthData} from '../../../redux';
 import {
   formatInstaUrl,
-  formatTikTokUrl,
   INSTA_URL_REGEX,
   TIKTOK_URL_REGEX,
+  formatTiktokUrl,
 } from '../../../navigation/constants';
 import AppSelect from '../../../components/Elements/AppSelect';
 
@@ -42,6 +42,7 @@ const AuthSocialNetworkScreen = () => {
     handleBackPress,
     handleNextPress,
   } = useAuthSocialNetwork();
+  // console.log('isBtnDisabled', isBtnDisabled);
   const [tiktokInputValue, setTiktokInputValue] = useState('');
   const [instaUserNameValue, setInstaUserNameValue] = useState('');
 
@@ -53,7 +54,7 @@ const AuthSocialNetworkScreen = () => {
     return instaUserNameValue && INSTA_URL_REGEX.test(instaUserNameValue);
   }, [instaUserNameValue]);
 
-  console.log(isValidInstagram, instaUserNameValue, 'isValidInstagram');
+  // console.log(isValidInstagram, instaUserNameValue, 'isValidInstagram');
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.content}>
@@ -201,7 +202,7 @@ const AuthSocialNetworkScreen = () => {
         // onChangeText={setTiktokUserName}
         disabled={!isValidTiktok}
         onChangeText={value => {
-          let link = formatTikTokUrl(value);
+          let link = formatTiktokUrl(value);
           console.log(link, 'link');
           setTiktokUserName(link);
           setTiktokInputValue(value); // Update input value for TikTok
@@ -235,7 +236,7 @@ const AuthSocialNetworkScreen = () => {
           dispatch(setAuthData({instaUserName: ''}));
         }}
         handlePress={() => {
-          console.log('check_add_press_InstaUserName', instaUserName);
+          // console.log('check_add_press_InstaUserName', instaUserName);
           // let link = instaUserName;
           // if (instaUserName.search('instagram.com') === -1) {
           //   console.log("instaUserName.search('@')", instaUserName.search('@'));

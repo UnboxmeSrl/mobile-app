@@ -25,6 +25,7 @@ const SocialMediaSheet = React.forwardRef(
     // const [errorText, setErrorText] = useState(showInfoText ?? '');
 
     useEffect(() => {
+      // console.log(field.trim(), 'field');
       if (field?.trim()?.length > 2) {
         setIsBtnDisabled(false);
       } else {

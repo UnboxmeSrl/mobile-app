@@ -4,6 +4,7 @@ import Toast from 'react-native-toast-message';
 
 export default {
   get: async (url, options = {}) => {
+    console.log(url, ';get');
     options.headers = {
       'Content-Type': 'application/json',
       'Accept-Language': 'en-US',
@@ -19,6 +20,8 @@ export default {
   },
 
   post: async (url, data) => {
+    console.log(url, ';post');
+
     const options = {
       headers: {
         Accept: 'application/json',
@@ -33,6 +36,8 @@ export default {
   },
 
   postNew: async (url, data) => {
+    console.log(url, ';postNew');
+
     const options = {
       headers: {
         Accept: 'application/json',
@@ -44,6 +49,8 @@ export default {
   },
 
   postMedia: async (url, data) => {
+    console.log(url, ';postMedia');
+
     const options = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -54,19 +61,28 @@ export default {
   },
 
   postWithMedia: async (url, data) => {
+    console.log(url, ';postWithMedia');
+
     const options = {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     };
     const response = await axios.post(url, data, options).catch(err => {
-      console.log('err_postWithMedia', err);
+      console.log(err, err.message, 'errroror');
+
+      // if (err?.response?.data) {
+      //   console.log('err_postWithMedia', JSON.stringify(err?.message));
+      // }
       showToastError(err);
+      throw err;
     });
     return response?.data;
   },
 
   put: async (url, data) => {
+    console.log(url, ';put');
+
     let response;
     const options = {
       headers: {
@@ -87,6 +103,8 @@ export default {
   },
 
   putData: async (url, data) => {
+    console.log(url, ';putData');
+
     const options = {
       headers: {
         Accept: 'application/json',
@@ -101,6 +119,8 @@ export default {
   },
 
   delete: async url => {
+    console.log(url, ';delete');
+
     const response = await axios.delete(url).catch(err => {
       showToastError(err);
     });

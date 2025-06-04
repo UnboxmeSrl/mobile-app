@@ -35,6 +35,10 @@ const RestaurantDetails = () => {
     handleRedirection,
   } = useRestaurantDetails();
   const [isScrolling, setIsScrolling] = useState(false);
+  // console.log(
+  //   restaurantDetails?.GalleryRestaurant,
+  //   'restaurantDetails?.GalleryRestaurant',
+  // );
   return (
     <SafeAreaView style={styles.mainContainer}>
       {isLoading ? (
@@ -44,7 +48,7 @@ const RestaurantDetails = () => {
       ) : (
         <ScrollView>
           <View>
-            {restaurantDetails?.GalleryRestaurant ? (
+            {restaurantDetails?.GalleryRestaurant?.length > 0 ? (
               <CustomCarousel
                 Component={({item, index}) => {
                   const imageUrl = `${item?.url}?tpl=${xanoImageSize}.jpg`;

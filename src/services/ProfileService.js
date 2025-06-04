@@ -38,10 +38,11 @@ export const userSignUp = async data => {
   try {
     return await Fetch.postWithMedia(url, data);
   } catch (error) {
-    // console.log('🛑 Error: ', error?.response, error);
-    return {
-      message: 'Something went wrong',
-    };
+    // console.log('🛑 Error_userSignUp: ', error, error.message);
+    throw error;
+    // return {
+    //   message: 'Something went wrong',
+    // };
   }
 };
 

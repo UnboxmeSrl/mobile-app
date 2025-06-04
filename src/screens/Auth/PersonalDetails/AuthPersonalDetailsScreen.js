@@ -91,7 +91,7 @@ const AuthPersonalDetailsScreen = () => {
 
           <AppSelect
             data={
-              genderList.map(data => {
+              genderList?.map(data => {
                 return {
                   id: data.id,
                   name: data.Sex,

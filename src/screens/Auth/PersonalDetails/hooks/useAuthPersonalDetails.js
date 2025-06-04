@@ -32,7 +32,7 @@ const useAuthPersonalDetails = () => {
   const onSelect = country => {
     setCountry(country);
   };
-  console.log('selectedGender', selectedGender);
+  // console.log('selectedGender', selectedGender);
   const getGenderListData = async () => {
     const res = await getGenderList();
     setGenderList(res);

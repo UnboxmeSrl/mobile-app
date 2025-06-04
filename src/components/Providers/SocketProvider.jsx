@@ -16,7 +16,7 @@ const SocketProvider = ({children}) => {
   const user = useSelector(state => state.authSlice.loginData);
   const dispatch = useDispatch();
 
-  console.log(user?.id, 'user in socket');
+  // console.log(user?.id, 'user in socket');
 
   useEffect(() => {
     if (!user?.id) {
