@@ -40,7 +40,7 @@ const ServiceCard = ({
       amenityIcon: IMAGES.beauty,
       amenityDescription: 'at your choice',
     };
-  } else if (actionNumId === 8) {
+  } else if (actionNumId === 8 || actionNumId === 53) {
     amenityDetails = {
       amenityName: `${item?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,
@@ -55,6 +55,7 @@ const ServiceCard = ({
       amenityDescription: 'at your choice',
     };
   }
+  // console.log('actionNumId_ServiceCard', actionNumId, amenityDetails);
   return (
     <TouchableOpacity
       style={styles.listItem}
@@ -116,6 +117,8 @@ const ServiceCard = ({
           // backgroundColor: 'red',
         }}>
         {actionNumId === 7 ||
+        actionNumId === 8 ||
+        actionNumId === 53 ||
         actionNumId === 10 ||
         actionNumId === 14 ||
         actionNumId === 15 ||

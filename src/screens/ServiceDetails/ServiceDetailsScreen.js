@@ -127,6 +127,7 @@ const ServiceDetails = () => {
 
           {actionNumId === 7 ||
           actionNumId === 8 ||
+          actionNumId === 53 ||
           actionNumId === 9 ||
           actionNumId === 10 ||
           actionNumId === 14 ||
@@ -188,7 +189,7 @@ const ServiceDetails = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    {'>'}100K followers DEALS
+                    at your choice
                   </Text>
                 </View>
               </View>
@@ -208,7 +209,7 @@ const ServiceDetails = () => {
                   <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
-                    {'>'}100K followers DEALS
+                    at your choice
                   </Text>
                 </View>
               </View>

@@ -55,7 +55,7 @@ const useServiceDetails = () => {
     Saturday: 6,
     Sunday: 7,
   };
-
+  // console.log('actionNumId_useServiceDetials', actionNumId);
   if (
     actionNumId === 7 ||
     actionNumId === 10 ||
@@ -69,7 +69,7 @@ const useServiceDetails = () => {
       amenityIcon: IMAGES.beauty,
       amenityDescription: serviceDetails?.at_offername,
     };
-  } else if (actionNumId === 8) {
+  } else if (actionNumId === 8 || actionNumId === 53) {
     amenityDetails = {
       amenityName: `${serviceDetails?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,
