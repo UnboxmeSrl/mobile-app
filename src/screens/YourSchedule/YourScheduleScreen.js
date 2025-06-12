@@ -1018,13 +1018,13 @@ const contentStyles = StyleSheet.create({
     marginLeft: scale(5),
     tintColor: COLORS.newPrimary,
     width: moderateScale(10),
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   ratingUsersText: {
     color: COLORS.newPrimary,
     fontFamily: FONTS.quicksandMedium,
     fontSize: moderateScale(12),
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     lineHeight: moderateScale(14),
   },
   deadLineMainRow: {
