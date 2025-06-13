@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -48,21 +48,26 @@ const YourScheduleDetailsScreen = () => {
 
   // console.log(
   //   'bookingDetails_YourScheduleDetailsScreen',
-  //   // bookingDetails?.BookingTimestamp,
-  //   // new Date(bookingDetails?.BookingDay).getMilliseconds(),
-  //   // new Date().getMilliseconds(),
-  //   // new Date(bookingDetails?.BookingDay).getMilliseconds() <
-  //   //   new Date().getMilliseconds(),
-  //   // new Date(bookingDetails?.BookingDay) < new Date(),
+  //   bookingDetails?._offers_turbo?.services,
+  //   new Date(bookingDetails?.BookingDay).getMilliseconds(),
+  //   new Date().getMilliseconds(),
+  //   new Date(bookingDetails?.BookingDay).getMilliseconds() <
+  //     new Date().getMilliseconds(),
+  //   new Date(bookingDetails?.BookingDay) < new Date(),
   //   bookingDetails?.Rejectedstatus,
   //   bookingDetails?.canceled,
   //   bookingDetails?.isCheckedIn,
   //   compareWithCurrDate(bookingDetails?.BookingDay),
   //   bookingDetails?.BookingDay,
   //   bookingDetails?.id,
-  //   // bookingDetails,
+  //   bookingDetails,
   // );
-
+  const getIcons = useCallback(serviceName => {
+    if (serviceName === 'Plates') return IMAGES.mealDish;
+    else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
+    else if (serviceName === 'Side') return IMAGES.side;
+    else if (serviceName === 'Dessert') return IMAGES.dessert;
+  }, []);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView
@@ -132,7 +137,10 @@ const YourScheduleDetailsScreen = () => {
             </View>
           </View>
 
-          {actionNumId === 7 || actionNumId === 8 || actionNumId === 9 ? (
+          {actionNumId === 7 ||
+          actionNumId === 8 ||
+          actionNumId === 9 ||
+          actionNumId === 53 ? (
             <View style={styles.specialAmenity}>
               <>
                 <View
@@ -157,40 +165,51 @@ const YourScheduleDetailsScreen = () => {
                       style={styles.amenitiesTitle}>
                       {amenityDetails?.amenityName}
                     </Text>
-                    <Text
+                    {/* <Text
                       allowFontScaling={false}
                       style={styles.amenitiesDescription}>
                       {amenityDetails?.amenityDescription}
-                    </Text>
+                    </Text> */}
                   </View>
                 </View>
               </>
             </View>
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View
-                style={[
-                  styles.amenityMainContainer,
-                  styles.firstAmenityMainContainer,
-                ]}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text
-                    allowFontScaling={false}
-                    style={
-                      styles.amenitiesTitle
-                    }>{`${bookingDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text
+              {bookingDetails?._offers_turbo?.services.length > 0 &&
+                bookingDetails?._offers_turbo?.services?.map(subServices => (
+                  <View
+                    style={[
+                      styles.amenityMainContainer,
+                      // styles.firstAmenityMainContainer,
+                    ]}>
+                    <View style={styles.amenityIconContainer}>
+                      {getIcons(subServices?.name) && (
+                        <Image
+                          source={getIcons(subServices?.name)}
+                          style={styles.amenityIcon}
+                        />
+                      )}
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {subServices?.quantity} x{' '}
+                        {subServices?.name === 'Plates'
+                          ? 'meals'
+                          : subServices?.name}
+                      </Text>
+                      {/* <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
                     at your choice
-                  </Text>
-                </View>
-              </View>
+                  </Text> */}
+                    </View>
+                  </View>
+                ))}
 
-              <View style={styles.amenityMainContainer}>
+              {/* <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
                   <Image
                     source={IMAGES.clinkingGlasses}
@@ -203,13 +222,8 @@ const YourScheduleDetailsScreen = () => {
                     style={
                       styles.amenitiesTitle
                     }>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text
-                    allowFontScaling={false}
-                    style={styles.amenitiesDescription}>
-                    at your choice
-                  </Text>
                 </View>
-              </View>
+              </View> */}
 
               <View
                 style={[

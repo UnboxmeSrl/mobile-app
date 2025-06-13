@@ -67,6 +67,8 @@ export const IMAGES = {
   loginInto: require('./images/login-into.png'),
   locationNew: require('./images/location-new.png'),
   clinkingGlasses: require('./images/clinking-glasses.png'),
+  side: require('./images/sides.jpg'),
+  dessert: require('./images/dessert.jpg'),
   instagramReels: require('./images/instagram-reels.png'),
   mapsNew: require('./images/maps-new.png'),
   mealDish: require('./images/meal-dish.png'),

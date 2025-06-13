@@ -39,6 +39,7 @@ const RestaurantDetails = () => {
   //   restaurantDetails?.GalleryRestaurant,
   //   'restaurantDetails?.GalleryRestaurant',
   // );
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       {isLoading ? (
@@ -77,6 +78,11 @@ const RestaurantDetails = () => {
               </View>
             )}
             <TouchableOpacity
+              // onPress={() => {
+              //   // console.log('services_RestaurantDetails', services);
+              //   // return;
+              //   handleBackPress;
+              // }}
               onPress={handleBackPress}
               style={styles.backIconContainer}>
               <Image

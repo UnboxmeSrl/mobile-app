@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {
   Image,
   ImageBackground,
@@ -24,6 +24,21 @@ const ServiceCard = ({
   isScrolling,
   setIsScrolling,
 }) => {
+  // console.log(
+  //   'item_ServiceCard',
+  //   // item?._actions_turbo?.Plates > 0,
+  //   // item?._actions_turbo?.Dessert,
+  //   // item?._actions_turbo?.Side,
+
+  //   // item?._actions_turbo,
+  // );
+  const getIcons = useCallback(serviceName => {
+    if (serviceName === 'Plates') return IMAGES.mealDish;
+    else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
+    else if (serviceName === 'Side') return IMAGES.side;
+    else if (serviceName === 'Dessert') return IMAGES.dessert;
+  }, []);
+
   const {handleCardPress} = useServiceCard(item);
   let amenityDetails = {};
 
@@ -38,13 +53,13 @@ const ServiceCard = ({
     amenityDetails = {
       amenityName: `${item?._actions_turbo?.Beauty} X Treatment`,
       amenityIcon: IMAGES.beauty,
-      amenityDescription: 'at your choice',
+      // amenityDescription: 'at your choice',
     };
   } else if (actionNumId === 8 || actionNumId === 53) {
     amenityDetails = {
       amenityName: `${item?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,
-      amenityDescription: 'at your choice',
+      // amenityDescription: 'at your choice',
     };
   } else if (actionNumId === 9) {
     amenityDetails = {
@@ -52,15 +67,18 @@ const ServiceCard = ({
         item?._actions_turbo?.Accomodation - 1
       } nights)`,
       amenityIcon: IMAGES.resort,
-      amenityDescription: 'at your choice',
+      // amenityDescription: 'at your choice',
     };
   }
   // console.log('actionNumId_ServiceCard', actionNumId, amenityDetails);
+
   return (
     <TouchableOpacity
       style={styles.listItem}
       activeOpacity={0.6}
-      onPress={() => handleCardPress(item)}>
+      onPress={() => {
+        handleCardPress(item);
+      }}>
       <View style={styles.imageContainer}>
         <ImageBackground
           imageStyle={styles.actualPicture}
@@ -143,35 +161,71 @@ const ServiceCard = ({
           </>
         ) : (
           <>
-            <View
-              style={[
-                styles.amenityMainContainer,
-                styles.firstAmenityMainContainer,
-                // {backgroundColor: 'yellow'},
-              ]}>
-              <View style={styles.amenityIconContainer}>
-                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+            {item?.services.length > 0 &&
+              item?.services?.map(subServices => (
+                <View
+                  style={[
+                    styles.amenityMainContainer,
+                    styles.firstAmenityMainContainer,
+                    // {backgroundColor: 'yellow'},
+                  ]}>
+                  <View style={styles.amenityIconContainer}>
+                    <Image
+                      source={getIcons(subServices?.name)}
+                      style={styles.amenityIcon}
+                    />
+                  </View>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
+                      {subServices?.quantity} x{' '}
+                      {subServices?.name === 'Plates'
+                        ? 'meals'
+                        : subServices?.name}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            {/* {item?._actions_turbo?.Drinks > 0 && (
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image
+                    source={IMAGES.clinkingGlasses}
+                    style={styles.amenityIcon}
+                  />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {item?._actions_turbo?.Drinks} x Drinks
+                  </Text>
+                </View>
               </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                  {item?._actions_turbo?.Plates} x Meals
-                </Text>
+            )}
+            {item?._actions_turbo?.Dessert && (
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.dessert} style={styles.amenityIcon} />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {item?._actions_turbo?.Dessert} x Dessert
+                  </Text>
+                </View>
               </View>
-            </View>
-
-            <View style={styles.amenityMainContainer}>
-              <View style={styles.amenityIconContainer}>
-                <Image
-                  source={IMAGES.clinkingGlasses}
-                  style={styles.amenityIcon}
-                />
+            )}
+            {item?._actions_turbo?.Side && (
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.side} style={styles.amenityIcon} />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {item?._actions_turbo?.Side} x Side
+                  </Text>
+                </View>
               </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                  {item?._actions_turbo?.Drinks} x Drinks
-                </Text>
-              </View>
-            </View>
+            )} */}
           </>
         )}
       </View>

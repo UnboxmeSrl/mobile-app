@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -16,7 +16,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {CustomCarousel} from '../../components';
 import {COLORS, FONTS} from '../../constants';
-import {checkAction, xanoImageSize} from '../../utils';
+import {checkAction, perfectSize, xanoImageSize} from '../../utils';
 import {useServiceDetails} from './hooks';
 
 const ServiceDetails = () => {
@@ -50,7 +50,13 @@ const ServiceDetails = () => {
   //   // serviceDetails?._actions_turbo?.Extra_People,
   //   // serviceDetails,
   // );
-  // console.log('Service Details: ' + JSON.stringify(serviceDetails))
+  // console.log('ServiceDetails: ' + JSON.stringify(serviceDetails?.services));
+  const getIcons = useCallback(serviceName => {
+    if (serviceName === 'Plates') return IMAGES.mealDish;
+    else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
+    else if (serviceName === 'Side') return IMAGES.side;
+    else if (serviceName === 'Dessert') return IMAGES.dessert;
+  }, []);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -158,11 +164,11 @@ const ServiceDetails = () => {
                       style={styles.amenitiesTitle}>
                       {amenityDetails?.amenityName}
                     </Text>
-                    <Text
+                    {/* <Text
                       allowFontScaling={false}
                       style={styles.amenitiesDescription}>
                       {amenityDetails?.amenityDescription}
-                    </Text>
+                    </Text> */}
                   </View>
                 </View>
               </>
@@ -171,48 +177,38 @@ const ServiceDetails = () => {
             <ScrollView
               horizontal
               nestedScrollEnabled
-              showsHorizontalScrollIndicator={false}>
-              <View
-                style={[
-                  styles.amenityMainContainer,
-                  styles.firstAmenityMainContainer,
-                ]}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text
-                    allowFontScaling={false}
-                    style={
-                      styles.amenitiesTitle
-                    }>{`${serviceDetails?._actions_turbo?.Plates} X Meals`}</Text>
-                  <Text
-                    allowFontScaling={false}
-                    style={styles.amenitiesDescription}>
-                    at your choice
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image
-                    source={IMAGES.clinkingGlasses}
-                    style={styles.amenityIcon}
-                  />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text
-                    allowFontScaling={false}
-                    style={
-                      styles.amenitiesTitle
-                    }>{`${serviceDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
-                  <Text
+              showsHorizontalScrollIndicator={false}
+              style={{marginLeft: perfectSize(10)}}>
+              {serviceDetails?.services.length > 0 &&
+                serviceDetails?.services?.map(subServices => (
+                  <View
+                    style={[
+                      styles.amenityMainContainer,
+                      styles.firstAmenityMainContainer,
+                    ]}>
+                    <View style={styles.amenityIconContainer}>
+                      <Image
+                        source={getIcons(subServices?.name)}
+                        style={styles.amenityIcon}
+                      />
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {subServices?.quantity} x{' '}
+                        {subServices?.name === 'Plates'
+                          ? 'meals'
+                          : subServices?.name}
+                      </Text>
+                      {/* <Text
                     allowFontScaling={false}
                     style={styles.amenitiesDescription}>
                     at your choice
-                  </Text>
-                </View>
-              </View>
+                  </Text> */}
+                    </View>
+                  </View>
+                ))}
 
               {serviceDetails?._actions_turbo?.Extra_People > 0 && (
                 <View
@@ -719,7 +715,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   firstAmenityMainContainer: {
-    marginLeft: scale(20),
+    marginLeft: scale(8),
   },
   loaderContainer: {
     alignItems: 'center',
@@ -860,7 +856,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
     // marginLeft: scale(10),
     paddingHorizontal: scale(10),
-    marginHorizontal: scale(5),
+    marginHorizontal: scale(3),
     // borderColor: COLORS.gainsboro,
     justifyContent: 'center',
     alignItems: 'center',
