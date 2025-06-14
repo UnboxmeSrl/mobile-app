@@ -26,12 +26,14 @@ const ServiceCard = ({
 }) => {
   // console.log(
   //   'item_ServiceCard',
-  //   // item?._actions_turbo?.Plates > 0,
-  //   // item?._actions_turbo?.Dessert,
-  //   // item?._actions_turbo?.Side,
-
+  //   item?._actions_turbo?.Plates,
+  //   item?._actions_turbo?.Drinks,
+  //   item?._actions_turbo?.Dessert,
+  //   item?._actions_turbo?.Side,
   //   // item?._actions_turbo,
   // );
+
+  // const moreServices = Object.entries()
   const getIcons = useCallback(serviceName => {
     if (serviceName === 'Plates') return IMAGES.mealDish;
     else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
@@ -159,35 +161,47 @@ const ServiceCard = ({
               </View>
             </View>
           </>
+        ) : item?.services.length > 0 ? (
+          <>
+            {item?.services?.map(subServices => (
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.firstAmenityMainContainer,
+                  // {backgroundColor: 'yellow'},
+                ]}>
+                <View style={styles.amenityIconContainer}>
+                  <Image
+                    source={getIcons(subServices?.name)}
+                    style={styles.amenityIcon}
+                  />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {subServices?.quantity} x{' '}
+                    {subServices?.name === 'Plates'
+                      ? 'meals'
+                      : subServices?.name}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </>
         ) : (
           <>
-            {item?.services.length > 0 &&
-              item?.services?.map(subServices => (
-                <View
-                  style={[
-                    styles.amenityMainContainer,
-                    styles.firstAmenityMainContainer,
-                    // {backgroundColor: 'yellow'},
-                  ]}>
-                  <View style={styles.amenityIconContainer}>
-                    <Image
-                      source={getIcons(subServices?.name)}
-                      style={styles.amenityIcon}
-                    />
-                  </View>
-                  <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text
-                      allowFontScaling={false}
-                      style={styles.amenitiesTitle}>
-                      {subServices?.quantity} x{' '}
-                      {subServices?.name === 'Plates'
-                        ? 'meals'
-                        : subServices?.name}
-                    </Text>
-                  </View>
+            {item?._actions_turbo?.Plates > 0 && (
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
                 </View>
-              ))}
-            {/* {item?._actions_turbo?.Drinks > 0 && (
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {item?._actions_turbo?.Plates} x Meals
+                  </Text>
+                </View>
+              </View>
+            )}
+            {item?._actions_turbo?.Drinks > 0 && (
               <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
                   <Image
@@ -202,7 +216,7 @@ const ServiceCard = ({
                 </View>
               </View>
             )}
-            {item?._actions_turbo?.Dessert && (
+            {item?._actions_turbo?.Dessert > 0 && (
               <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
                   <Image source={IMAGES.dessert} style={styles.amenityIcon} />
@@ -225,7 +239,7 @@ const ServiceCard = ({
                   </Text>
                 </View>
               </View>
-            )} */}
+            )}
           </>
         )}
       </View>
