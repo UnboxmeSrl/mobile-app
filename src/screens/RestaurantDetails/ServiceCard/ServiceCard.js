@@ -161,85 +161,35 @@ const ServiceCard = ({
               </View>
             </View>
           </>
-        ) : item?.services.length > 0 ? (
-          <>
-            {item?.services?.map(subServices => (
-              <View
-                style={[
-                  styles.amenityMainContainer,
-                  styles.firstAmenityMainContainer,
-                  // {backgroundColor: 'yellow'},
-                ]}>
-                <View style={styles.amenityIconContainer}>
-                  <Image
-                    source={getIcons(subServices?.name)}
-                    style={styles.amenityIcon}
-                  />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {subServices?.quantity} x{' '}
-                    {subServices?.name === 'Plates'
-                      ? 'meals'
-                      : subServices?.name}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </>
         ) : (
           <>
-            {item?._actions_turbo?.Plates > 0 && (
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {item?._actions_turbo?.Plates} x Meals
-                  </Text>
-                </View>
+            {/* {item?._actions_turbo?.Plates > 0 && ( */}
+            <View style={styles.amenityMainContainer}>
+              <View style={styles.amenityIconContainer}>
+                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
               </View>
-            )}
-            {item?._actions_turbo?.Drinks > 0 && (
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image
-                    source={IMAGES.clinkingGlasses}
-                    style={styles.amenityIcon}
-                  />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {item?._actions_turbo?.Drinks} x Drinks
-                  </Text>
-                </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                  {item?._actions_turbo?.Plates} x Meals
+                </Text>
               </View>
-            )}
-            {item?._actions_turbo?.Dessert > 0 && (
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.dessert} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {item?._actions_turbo?.Dessert} x Dessert
-                  </Text>
-                </View>
+            </View>
+            {/* )}
+            {item?._actions_turbo?.Drinks > 0 && ( */}
+            <View style={styles.amenityMainContainer}>
+              <View style={styles.amenityIconContainer}>
+                <Image
+                  source={IMAGES.clinkingGlasses}
+                  style={styles.amenityIcon}
+                />
               </View>
-            )}
-            {item?._actions_turbo?.Side && (
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.side} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {item?._actions_turbo?.Side} x Side
-                  </Text>
-                </View>
+              <View style={styles.amenityTitleDescriptionContainer}>
+                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                  {item?._actions_turbo?.Drinks} x Drinks
+                </Text>
               </View>
-            )}
+            </View>
+            {/* )} */}
           </>
         )}
       </View>

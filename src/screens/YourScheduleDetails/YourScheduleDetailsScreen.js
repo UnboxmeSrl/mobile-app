@@ -176,7 +176,7 @@ const YourScheduleDetailsScreen = () => {
             </View>
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {bookingDetails?._offers_turbo?.services.length > 0 ? (
+              {/* {bookingDetails?._offers_turbo?.services.length > 0 ? (
                 bookingDetails?._offers_turbo?.services?.map(subServices => (
                   <View
                     style={[
@@ -200,88 +200,25 @@ const YourScheduleDetailsScreen = () => {
                           ? 'meals'
                           : subServices?.name}
                       </Text>
-                      {/* <Text
-                    allowFontScaling={false}
-                    style={styles.amenitiesDescription}>
-                    at your choice
-                  </Text> */}
                     </View>
                   </View>
                 ))
               ) : (
                 <>
-                  {bookingDetails?._actions_turbo?.Plates > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.mealDish}
-                          style={styles.amenityIcon}
-                        />
-                      </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {bookingDetails?._actions_turbo?.Plates} x Meals
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                  {bookingDetails?._actions_turbo?.Drinks > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.clinkingGlasses}
-                          style={styles.amenityIcon}
-                        />
-                      </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {bookingDetails?._actions_turbo?.Drinks} x Drinks
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                  {bookingDetails?._actions_turbo?.Dessert > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.dessert}
-                          style={styles.amenityIcon}
-                        />
-                      </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {bookingDetails?._actions_turbo?.Dessert} x Dessert
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                  {bookingDetails?._actions_turbo?.Side > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.side}
-                          style={styles.amenityIcon}
-                        />
-                      </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {bookingDetails?._actions_turbo?.Side} x Side
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                </>
-              )}
-
-              {/* <View style={styles.amenityMainContainer}>
+              {bookingDetails?._actions_turbo?.Plates > 0 && ( */}
+              <View style={styles.amenityMainContainer}>
+                <View style={styles.amenityIconContainer}>
+                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
+                </View>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {bookingDetails?._actions_turbo?.Plates} x Meals
+                  </Text>
+                </View>
+              </View>
+              {/* )}
+              {bookingDetails?._actions_turbo?.Drinks > 0 && ( */}
+              <View style={styles.amenityMainContainer}>
                 <View style={styles.amenityIconContainer}>
                   <Image
                     source={IMAGES.clinkingGlasses}
@@ -289,13 +226,42 @@ const YourScheduleDetailsScreen = () => {
                   />
                 </View>
                 <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text
-                    allowFontScaling={false}
-                    style={
-                      styles.amenitiesTitle
-                    }>{`${bookingDetails?._actions_turbo?.Drinks} X Drinks`}</Text>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {bookingDetails?._actions_turbo?.Drinks} x Drinks
+                  </Text>
                 </View>
-              </View> */}
+              </View>
+              {/* )}
+              {bookingDetails?._actions_turbo?.Dessert > 0 && (
+                <View style={styles.amenityMainContainer}>
+                  <View style={styles.amenityIconContainer}>
+                    <Image source={IMAGES.dessert} style={styles.amenityIcon} />
+                  </View>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
+                      {bookingDetails?._actions_turbo?.Dessert} x Dessert
+                    </Text>
+                  </View>
+                </View>
+              )}
+              {bookingDetails?._actions_turbo?.Side > 0 && (
+                <View style={styles.amenityMainContainer}>
+                  <View style={styles.amenityIconContainer}>
+                    <Image source={IMAGES.side} style={styles.amenityIcon} />
+                  </View>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
+                      {bookingDetails?._actions_turbo?.Side} x Side
+                    </Text>
+                  </View>
+                </View>
+              )} */}
+              {/* </>
+              )} */}
 
               <View
                 style={[
