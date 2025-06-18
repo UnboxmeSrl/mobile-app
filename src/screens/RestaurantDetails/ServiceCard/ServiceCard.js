@@ -33,13 +33,17 @@ const ServiceCard = ({
   //   // item?._actions_turbo,
   // );
 
-  // const moreServices = Object.entries()
   const getIcons = useCallback(serviceName => {
-    if (serviceName === 'Plates') return IMAGES.mealDish;
-    else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
-    else if (serviceName === 'Side') return IMAGES.side;
-    else if (serviceName === 'Dessert') return IMAGES.dessert;
+    const serviceNameKey = serviceName?.replace(' ', '');
+    // console.log('serviceName.trim()', serviceNameKey || '');
+    return IMAGES[serviceNameKey];
   }, []);
+  // const getIcons = useCallback(serviceName => {
+  //   if (serviceName === 'Plates') return IMAGES.mealDish;
+  //   else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
+  //   else if (serviceName === 'Side') return IMAGES.side;
+  //   else if (serviceName === 'Dessert') return IMAGES.dessert;
+  // }, []);
 
   const {handleCardPress} = useServiceCard(item);
   let amenityDetails = {};
@@ -79,6 +83,15 @@ const ServiceCard = ({
       style={styles.listItem}
       activeOpacity={0.6}
       onPress={() => {
+        // console.log(
+        //   'item?._offers_turbo?.isBigInfluencer',
+        //   item?.isBigInfluencer,
+        //   item?.services,
+        //   item?._actions_turbo?.Plates,
+        //   item?._actions_turbo?.Drinks,
+        //   // item,
+        //   // bookingDetails?._offers_turbo?.isBigInfluencer,
+        // );
         handleCardPress(item);
       }}>
       <View style={styles.imageContainer}>
@@ -163,53 +176,89 @@ const ServiceCard = ({
           </>
         ) : (
           <>
-            {/* {item?._actions_turbo?.Plates > 0 && ( */}
-            <View style={styles.amenityMainContainer}>
-              <View style={styles.amenityIconContainer}>
-                <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-              </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                  {item?._actions_turbo?.Plates} x Meals
-                </Text>
-              </View>
-            </View>
-            {/* )}
-            {item?._actions_turbo?.Drinks > 0 && ( */}
-            <View style={styles.amenityMainContainer}>
-              <View style={styles.amenityIconContainer}>
-                <Image
-                  source={IMAGES.clinkingGlasses}
-                  style={styles.amenityIcon}
-                />
-              </View>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                  {item?._actions_turbo?.Drinks} x Drinks
-                </Text>
-              </View>
-            </View>
-            {/* )} */}
+            {item?.isBigInfluencer && item?.services?.length > 0 ? (
+              item?.services?.map(subServices => {
+                console.log(
+                  'serviceName.trim()',
+                  subServices.name?.replace(' ', '') || '',
+                );
+                if (
+                  subServices?.quantity > 0 &&
+                  (subServices?.name === 'Plates' ||
+                    subServices?.name === 'Drinks' ||
+                    subServices?.name === 'Side' ||
+                    subServices?.name === 'Dessert')
+                ) {
+                  return (
+                    <View
+                      style={[
+                        styles.amenityMainContainer,
+                        styles.firstAmenityMainContainer,
+                      ]}>
+                      <View style={styles.amenityIconContainer}>
+                        {getIcons(subServices?.name) && (
+                          <Image
+                            source={getIcons(subServices?.name)}
+                            style={styles.amenityIcon}
+                          />
+                        )}
+                      </View>
+                      <View style={styles.amenityTitleDescriptionContainer}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.amenitiesTitle}>
+                          {subServices?.quantity} x{' '}
+                          {subServices?.name === 'Plates'
+                            ? 'meals'
+                            : subServices?.name}
+                        </Text>
+                      </View>
+                    </View>
+                  );
+                }
+              })
+            ) : (
+              <>
+                {item?._actions_turbo?.Plates > 0 && (
+                  <View style={styles.amenityMainContainer}>
+                    <View style={styles.amenityIconContainer}>
+                      <Image
+                        source={IMAGES.mealDish}
+                        style={styles.amenityIcon}
+                      />
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {item?._actions_turbo?.Plates} x Meals
+                      </Text>
+                    </View>
+                  </View>
+                )}
+                {item?._actions_turbo?.Drinks > 0 && (
+                  <View style={styles.amenityMainContainer}>
+                    <View style={styles.amenityIconContainer}>
+                      <Image
+                        source={IMAGES.clinkingGlasses}
+                        style={styles.amenityIcon}
+                      />
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {item?._actions_turbo?.Drinks} x Drinks
+                      </Text>
+                    </View>
+                  </View>
+                )}
+              </>
+            )}
           </>
         )}
       </View>
     </TouchableOpacity>
-    // {/* <View style={styles.amenitiesMainContainer}>
-    //   <View style={styles.amenitiesContainer}>
-    //     <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-    //     <Text allowFontScaling={false}
-    //       style={
-    //         styles.amenityText
-    //       }>{`${item?._actions_turbo?.Plates} X Meal`}</Text>
-    //   </View>
-    //   <View style={styles.amenitiesContainer}>
-    //     <Image source={IMAGES.clinkingGlasses} style={styles.amenityIcon} />
-    //     <Text allowFontScaling={false}
-    //       style={
-    //         styles.amenityText
-    //       }>{`${item?._actions_turbo?.Drinks} X Drinks`}</Text>
-    //   </View>
-    // </View> */}
   );
 };
 

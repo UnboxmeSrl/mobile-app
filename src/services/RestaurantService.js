@@ -18,7 +18,7 @@ export const getTimeFrames = async params => {
   try {
     const url = Api.RESTAURANTS.GET_TIME_FRAMES + params;
     const response = await Fetch.get(url);
-    console.log('response_getTimeFrames', response);
+    // console.log('response_getTimeFrames', response);
     return response;
   } catch (error) {
     console.log(error);

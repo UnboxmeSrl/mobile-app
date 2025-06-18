@@ -102,7 +102,7 @@ const YourScheduleScreen = () => {
         (selectedTab === 1 && (
           <FlatList
             data={bookings}
-            key={bookings.length}
+            // key={bookings.length}
             keyExtractor={(_, index) => index.toString()}
             refreshControl={
               <RefreshControl
@@ -119,8 +119,10 @@ const YourScheduleScreen = () => {
             }
             renderItem={({item, index}) => {
               const myDate = new Date(item?.BookingDay);
-              const month = myDate.toLocaleString('en-US', {month: 'long'});
-              const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+              const month = myDate?.toLocaleString('en-US', {month: 'long'});
+              const weekDay = myDate?.toLocaleString('en-US', {
+                weekday: 'long',
+              });
               const isEvent = item?._restaurant_turbo?.is_event;
               const timeFrame = item?._timeframes_turbo;
               const approvalStatus = item?.Approved
@@ -151,7 +153,7 @@ const YourScheduleScreen = () => {
                     // console.log(
                     //   'item_id_onBookingCardPress',
                     //   item?.id,
-                    //   item.BookingDay,
+                    //   item?.BookingDay,
                     //   item?._actions_turbo?.Days_deadline,
                     // );
                     // console.log('timeFrame_onBookingCardPress', timeFrame);
@@ -259,7 +261,7 @@ const YourScheduleScreen = () => {
                       <View style={styles.timeReelsContainer}>
                         {/* {actionNumId !== 9  ? ( */}
                         {actionNumId !== 9 &&
-                        (timeFrame || item.booking_time) ? (
+                        (timeFrame || item?.booking_time) ? (
                           <View style={styles.timeContainer}>
                             {/* {Object.keys(timeFrame || {}).length &&
                               item.booking_time && (
@@ -373,7 +375,7 @@ const YourScheduleScreen = () => {
                     // console.log(
                     //   item.id,
                     //   item?._actions_turbo?.Days_deadline,
-                    //   deadlineDays,
+                    //   deadlineDaysdeadlineDays,
                     //   Date.parse(item?.BookingDay),
                     //   'missedDays',
                     // );
@@ -432,7 +434,7 @@ const YourScheduleScreen = () => {
                                 width: '100%',
                               },
                             ]}>
-                            {!item.content_url && (
+                            {!item?.content_url && (
                               <Text
                                 allowFontScaling={false}
                                 style={contentStyles.deadLineTitleText}>

@@ -42,20 +42,27 @@ const ServiceDetails = () => {
     handleInfluencerPlus,
     handleInfluencerMinus,
   } = useServiceDetails();
+
   // console.log(
-  //   'serviceDetails?.at_offer_description',
-  //   typeof serviceDetails?.at_offer_description,
-  //   serviceDetails,
-  //   // serviceDetails?.at_offer_description,
-  //   // serviceDetails?._actions_turbo?.Extra_People,
-  //   // serviceDetails,
+  //   'serviceDetails?._offers_turbo?.isBigInfluencer_ServiceDetailsScreen',
+  //   serviceDetails?.isBigInfluencer,
+  //   serviceDetails?.services,
+  //   serviceDetails?._actions_turbo?.Plates,
+  //   serviceDetails?._actions_turbo?.Drinks,
+  //   // item,
+  //   // bookingDetails?._offers_turbo?.isBigInfluencer,
   // );
   // console.log('ServiceDetails: ' + JSON.stringify(serviceDetails?.services));
+  // const getIcons = useCallback(serviceName => {
+  //   if (serviceName === 'Plates') return IMAGES.mealDish;
+  //   else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
+  //   else if (serviceName === 'Side') return IMAGES.side;
+  //   else if (serviceName === 'Dessert') return IMAGES.dessert;
+  // }, []);
   const getIcons = useCallback(serviceName => {
-    if (serviceName === 'Plates') return IMAGES.mealDish;
-    else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
-    else if (serviceName === 'Side') return IMAGES.side;
-    else if (serviceName === 'Dessert') return IMAGES.dessert;
+    const serviceNameKey = serviceName?.replace(' ', '');
+    // console.log('serviceName.trim()', serviceNameKey || '');
+    return IMAGES[serviceNameKey];
   }, []);
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -179,61 +186,74 @@ const ServiceDetails = () => {
               nestedScrollEnabled
               showsHorizontalScrollIndicator={false}
               style={{marginLeft: perfectSize(10)}}>
-              {/* {serviceDetails?.services.length > 0 ? (
-                serviceDetails?.services?.map(subServices => (
-                  <View
-                    style={[
-                      styles.amenityMainContainer,
-                      styles.firstAmenityMainContainer,
-                    ]}>
-                    <View style={styles.amenityIconContainer}>
-                      <Image
-                        source={getIcons(subServices?.name)}
-                        style={styles.amenityIcon}
-                      />
-                    </View>
-                    <View style={styles.amenityTitleDescriptionContainer}>
-                      <Text
-                        allowFontScaling={false}
-                        style={styles.amenitiesTitle}>
-                        {subServices?.quantity} x{' '}
-                        {subServices?.name === 'Plates'
-                          ? 'meals'
-                          : subServices?.name}
-                      </Text>
-                    </View>
-                  </View>
-                ))
+              {serviceDetails?.isBigInfluencer &&
+              serviceDetails?.services.length > 0 ? (
+                serviceDetails?.services?.map(
+                  subServices =>
+                    subServices?.quantity > 0 && (
+                      <View
+                        style={[
+                          styles.amenityMainContainer,
+                          styles.firstAmenityMainContainer,
+                        ]}>
+                        <View style={styles.amenityIconContainer}>
+                          <Image
+                            source={getIcons(subServices?.name)}
+                            style={styles.amenityIcon}
+                          />
+                        </View>
+                        <View style={styles.amenityTitleDescriptionContainer}>
+                          <Text
+                            allowFontScaling={false}
+                            style={styles.amenitiesTitle}>
+                            {subServices?.quantity} x{' '}
+                            {subServices?.name === 'Plates'
+                              ? 'meals'
+                              : subServices?.name}
+                          </Text>
+                        </View>
+                      </View>
+                    ),
+                )
               ) : (
-                <> */}
-              {/* {serviceDetails?._actions_turbo?.Plates > 0 && ( */}
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image source={IMAGES.mealDish} style={styles.amenityIcon} />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {serviceDetails?._actions_turbo?.Plates} x Meals
-                  </Text>
-                </View>
-              </View>
-              {/* )}
-                  {serviceDetails?._actions_turbo?.Drinks > 0 && ( */}
-              <View style={styles.amenityMainContainer}>
-                <View style={styles.amenityIconContainer}>
-                  <Image
-                    source={IMAGES.clinkingGlasses}
-                    style={styles.amenityIcon}
-                  />
-                </View>
-                <View style={styles.amenityTitleDescriptionContainer}>
-                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                    {serviceDetails?._actions_turbo?.Drinks} x Drinks
-                  </Text>
-                </View>
-              </View>
-              {/* )} */}
-              {/* {serviceDetails?._actions_turbo?.Dessert > 0 && (
+                <>
+                  {/* {serviceDetails?._actions_turbo?.Plates > 0 && ( */}
+                  {serviceDetails?._actions_turbo?.Plates > 0 && (
+                    <View style={styles.amenityMainContainer}>
+                      <View style={styles.amenityIconContainer}>
+                        <Image
+                          source={IMAGES.mealDish}
+                          style={styles.amenityIcon}
+                        />
+                      </View>
+                      <View style={styles.amenityTitleDescriptionContainer}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.amenitiesTitle}>
+                          {serviceDetails?._actions_turbo?.Plates} x Meals
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                  {serviceDetails?._actions_turbo?.Drinks > 0 && (
+                    <View style={styles.amenityMainContainer}>
+                      <View style={styles.amenityIconContainer}>
+                        <Image
+                          source={IMAGES.clinkingGlasses}
+                          style={styles.amenityIcon}
+                        />
+                      </View>
+                      <View style={styles.amenityTitleDescriptionContainer}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.amenitiesTitle}>
+                          {serviceDetails?._actions_turbo?.Drinks} x Drinks
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                  {/* )} */}
+                  {/* {serviceDetails?._actions_turbo?.Dessert > 0 && (
                     <View style={styles.amenityMainContainer}>
                       <View style={styles.amenityIconContainer}>
                         <Image
@@ -267,8 +287,8 @@ const ServiceDetails = () => {
                       </View>
                     </View>
                   )} */}
-              {/* </>
-              )} */}
+                </>
+              )}
 
               {serviceDetails?._actions_turbo?.Extra_People > 0 && (
                 <View
