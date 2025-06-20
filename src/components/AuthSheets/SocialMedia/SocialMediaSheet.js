@@ -18,6 +18,7 @@ const SocialMediaSheet = React.forwardRef(
       onChangeText,
       handlePress,
       disabled,
+      defualtInfoMsg,
     },
     ref,
   ) => {
@@ -32,33 +33,41 @@ const SocialMediaSheet = React.forwardRef(
         setIsBtnDisabled(true);
       }
     }, [field]);
+    console.log(showInfoText, 'showInfoText', defualtInfoMsg, 'defualtInfoMsg');
 
     return (
       <BottomSheet ref={ref}>
         <View style={styles.mainContainer}>
-          <CustomTitle title={`${title}`} />
-          <View style={styles.descriptionContainer}>
-            <Text
-              allowFontScaling={false}
-              style={styles.descriptionText}>{`${description}`}</Text>
-          </View>
-          <View style={styles.fieldContainer}>
-            <CustomTextInput
-              placeholder={`${placeholder}`}
-              value={field}
-              handleOnChangeText={onChangeText}
-              isRemoveTextIconVisible={true}
-            />
-            {!!showInfoText && (
-              <View style={styles.infoContainer}>
-                <Image style={styles.infoIcon} source={IMAGES.info} />
-                <View style={{width: '90%', flexWrap: 'wrap'}}>
-                  <Text style={{width: '95%'}}>{showInfoText}</Text>
+          <View>
+            <CustomTitle title={`${title}`} />
+            <View style={styles.descriptionContainer}>
+              <Text
+                allowFontScaling={false}
+                style={styles.descriptionText}>{`${description}`}</Text>
+            </View>
+            <View style={styles.fieldContainer}>
+              <CustomTextInput
+                placeholder={`${placeholder}`}
+                value={field}
+                handleOnChangeText={onChangeText}
+                isRemoveTextIconVisible={true}
+              />
+              {!!showInfoText && (
+                <View style={styles.infoContainer}>
+                  <Image style={styles.infoIcon} source={IMAGES.info} />
+                  <View style={{width: '90%', flexWrap: 'wrap'}}>
+                    <Text
+                      style={[
+                        {width: '95%'},
+                        !defualtInfoMsg && {color: COLORS.redFont},
+                      ]}>
+                      {showInfoText}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            )}
+              )}
+            </View>
           </View>
-
           <View style={styles.belowContainer}>
             <View style={styles.descriptionContainer}>
               <Text
@@ -70,7 +79,7 @@ const SocialMediaSheet = React.forwardRef(
             <CustomButton
               title={'Add'}
               handlePress={handlePress}
-              disabled={disabled || isBtnDisabled}
+              // disabled={disabled || isBtnDisabled}
             />
           </View>
         </View>
@@ -86,6 +95,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     marginTop: verticalScale(24),
+    justifyContent: 'space-between',
+    // paddingBottom: verticalScale(12),
+    // backgroundColor: 'yellow',
   },
   descriptionText: {
     fontFamily: FONTS.quicksand,
@@ -101,9 +113,12 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     marginTop: verticalScale(10),
+    backgroundColor: COLORS.white,
   },
   belowContainer: {
-    marginTop: '30%',
+    // marginTop: '30%',
+    // backgroundColor: 'cyan',
+    paddingBottom: verticalScale(12),
   },
   infoContainer: {
     // width: '90%',
@@ -112,6 +127,8 @@ const styles = StyleSheet.create({
     marginHorizontal: '5%',
     marginTop: '2%',
     alignItems: 'flex-start',
+    fontFamily: FONTS.quicksand,
+    // fontWeight: '400',
     // backgroundColor: 'yellow',
   },
   infoIcon: {

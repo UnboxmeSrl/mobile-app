@@ -28,6 +28,7 @@ const useAuthSocialNetwork = () => {
   const instaSheetRef = useRef();
   const dispatch = useDispatch();
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  const [showErrorMsg, setShowErrorMsg] = useState('');
   // const [inFluencerTypeError, setInFluencerTypeError] = useState('');
 
   // const [selectedInFluencer_type, setSelectedInFluencer_type] = useState({});
@@ -41,11 +42,11 @@ const useAuthSocialNetwork = () => {
   const navigation = useNavigation();
 
   const handleOnTikTokPress = () => {
-    tiktokSheetRef?.current?.open();
+    !isLoading && tiktokSheetRef?.current?.open();
   };
 
   const handleOnInstaPress = () => {
-    instaSheetRef?.current?.open();
+    !isLoading && instaSheetRef?.current?.open();
   };
 
   const handleBackPress = () => {
@@ -54,7 +55,10 @@ const useAuthSocialNetwork = () => {
 
   const handleNextPress = async () => {
     console.log('arha he');
-
+    if (isLoading) {
+      // setIsBtnDisabled(true);
+      return;
+    }
     // dispatch(setAuthData({instaUserName, tiktokUserName}));
     // User Type (Model, Influencer, Both)
     // if (selectedInFluencer_type?.name) {
@@ -230,6 +234,8 @@ const useAuthSocialNetwork = () => {
     setTiktokUserName,
     tiktokSheetRef,
     tiktokUserName,
+    setShowErrorMsg,
+    showErrorMsg,
   };
 };
 

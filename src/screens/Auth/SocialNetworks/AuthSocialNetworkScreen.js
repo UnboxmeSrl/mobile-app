@@ -24,6 +24,7 @@ import {
   formatTiktokUrl,
 } from '../../../navigation/constants';
 import AppSelect from '../../../components/Elements/AppSelect';
+import {showToastError} from '../../../services';
 
 const AuthSocialNetworkScreen = () => {
   const {
@@ -41,6 +42,8 @@ const AuthSocialNetworkScreen = () => {
     handleOnInstaPress,
     handleBackPress,
     handleNextPress,
+    showErrorMsg,
+    setShowErrorMsg,
   } = useAuthSocialNetwork();
   // console.log('isBtnDisabled', isBtnDisabled);
   const [tiktokInputValue, setTiktokInputValue] = useState('');
@@ -198,24 +201,38 @@ const AuthSocialNetworkScreen = () => {
         description={'Enter your tiktok account username'}
         placeholder={'your tiktok @username'}
         field={tiktokInputValue}
-        showInfoText="If you have an account add user name after @ else keep blank"
+        showInfoText={
+          showErrorMsg ||
+          'If you have an account add user name after @ else keep blank'
+        }
+        defaultInfoMsg={!showErrorMsg}
         // onChangeText={setTiktokUserName}
-        disabled={!isValidTiktok}
+        // disabled={!isValidTiktok}
         onChangeText={value => {
           let link = formatTiktokUrl(value);
+          setTiktokInputValue(value); // Update input value for TikTok
+
           console.log(link, 'link');
           setTiktokUserName(link);
-          setTiktokInputValue(value); // Update input value for TikTok
-          // setAuthData({tiktokUserName: ''});
           dispatch(setAuthData({tiktokUserName: ''}));
+          // setAuthData({tiktokUserName: ''});
         }}
         handlePress={() => {
           console.log('check_add_press', tiktokUserName);
-          dispatch(setAuthData({tiktokUserName}));
-          // }
-          setTimeout(() => {
-            tiktokSheetRef?.current?.close();
-          }, 1000);
+          if (isValidTiktok) {
+            dispatch(setAuthData({tiktokUserName}));
+            // }
+            setTimeout(() => {
+              tiktokSheetRef?.current?.close();
+            }, 1000);
+            setShowErrorMsg('');
+          } else if (tiktokInputValue) {
+            setShowErrorMsg(
+              'Username must start with @ and can include lowercase letters, numbers, and underscores only. No spaces are allowed.',
+            );
+          } else {
+            setShowErrorMsg('');
+          }
         }}
       />
 
@@ -226,6 +243,10 @@ const AuthSocialNetworkScreen = () => {
         placeholder={'your instagram username'}
         field={instaUserNameValue}
         disabled={!isValidInstagram}
+        defaultInfoMsg={!showErrorMsg}
+        showInfoText={
+          showErrorMsg || "if you don't have an account keep it blank"
+        }
         // onChangeText={setInstaUserName}
         onChangeText={value => {
           const link = formatInstaUrl(value);
@@ -245,10 +266,17 @@ const AuthSocialNetworkScreen = () => {
           //   }
           //   link = 'https://www.instagram.com/' + link;
           // }
-          dispatch(setAuthData({instaUserName}));
-          setTimeout(() => {
-            instaSheetRef?.current?.close();
-          }, 1000);
+          if (isValidInstagram) {
+            dispatch(setAuthData({instaUserName}));
+            setTimeout(() => {
+              instaSheetRef?.current?.close();
+            }, 1000);
+            setShowErrorMsg('');
+          } else if (instaUserNameValue) {
+            setShowErrorMsg('Username cannot include @ or spaces');
+          } else {
+            setShowErrorMsg('');
+          }
         }}
       />
     </SafeAreaView>
