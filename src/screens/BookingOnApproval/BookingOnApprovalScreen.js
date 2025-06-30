@@ -37,7 +37,12 @@ const BookingOnApprovalScreen = () => {
       ? IMAGES.approvalSuccess
       : IMAGES.approvalReject;
 
-  console.log('ActionNumId: ' + actionNumId);
+  // console.log('ActionNumId: ' + actionNumId);
+  // console.log(
+  //   bookingDetails?.MinuteStart,
+  //   bookingDetails?.HourStart,
+  //   'HourStart_BookingOnApprovalScreen',
+  // );
 
   return (
     <ScrollView
@@ -177,12 +182,21 @@ const BookingOnApprovalScreen = () => {
             <Text allowFontScaling={false} style={styles.selectedDateTitleText}>
               Selected Date
             </Text>
-            {actionNumId !== 9 && !isEvent ? (
+            {actionNumId !== 9 &&
+            !isEvent &&
+            (!!timeFrame ||
+              (bookingDetails?.HourStart && bookingDetails?.HourEnd)) ? (
               <Text
                 allowFontScaling={false}
-                style={
-                  styles.selectedDateWithTimeText
-                }>{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                style={styles.selectedDateWithTimeText}>{`${currentWeekDay}, ${
+                timeFrame ? timeFrame?.Start : bookingDetails?.HourStart
+              }:${
+                timeFrame
+                  ? timeFrame?.Minute_Start
+                  : bookingDetails?.MinuteStart
+              } - ${timeFrame ? timeFrame?.End : bookingDetails?.HourEnd}:${
+                timeFrame ? timeFrame?.Minute_End : bookingDetails?.MinuteEnd
+              }`}</Text>
             ) : (
               <Text
                 allowFontScaling={false}

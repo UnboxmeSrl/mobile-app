@@ -55,7 +55,11 @@ export const getRestaurantDetails = async data => {
   try {
     const url = Api.LOCATIONS.GET_RESTAURANT_DETAILS;
     const response = await Fetch.post(url, data);
-    console.log('check_getRestaurantDetailsApiCall', data, response);
+    // console.log(
+    //   'check_getRestaurantDetailsApiCall',
+    //   data,
+    //   JSON.stringify(response),
+    // );
     return response;
   } catch (error) {
     console.log(error);

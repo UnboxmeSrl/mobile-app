@@ -58,7 +58,13 @@ const YourScheduleDetailsScreen = () => {
   //   // item,
   //   // bookingDetails?._offers_turbo?.isBigInfluencer,
   // );
- 
+  // console.log(
+  //   bookingDetails?.HourStart,
+  //   bookingDetails?.MinuteStart,
+  //   bookingDetails,
+  //   // timeFrame,
+  //   'HourStart_YourScheduleDetailsScreen',
+  // );
   const getIcons = useCallback(serviceName => {
     const serviceNameKey = serviceName?.replace(' ', '');
     // console.log('serviceName.trim()', serviceNameKey || '');
@@ -319,12 +325,23 @@ const YourScheduleDetailsScreen = () => {
                 style={styles.selectedDateTitleText}>
                 Selected Date
               </Text>
-              {actionNumId !== 9 && !isEvent && timeFrame ? (
+              {actionNumId !== 9 &&
+              !isEvent &&
+              (!!timeFrame ||
+                (bookingDetails?.HourStart && bookingDetails?.HourEnd)) ? (
                 <Text
                   allowFontScaling={false}
                   style={
                     styles.selectedDateWithTimeText
-                  }>{`${currentWeekDay}, ${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}</Text>
+                  }>{`${currentWeekDay}, ${
+                  timeFrame ? timeFrame?.Start : bookingDetails?.HourStart
+                }:${
+                  timeFrame
+                    ? timeFrame?.Minute_Start
+                    : bookingDetails?.MinuteStart
+                } - ${timeFrame ? timeFrame?.End : bookingDetails?.HourEnd}:${
+                  timeFrame ? timeFrame?.Minute_End : bookingDetails?.MinuteEnd
+                }`}</Text>
               ) : (
                 <Text
                   allowFontScaling={false}

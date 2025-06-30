@@ -85,11 +85,11 @@ const ServiceCard = ({
       onPress={() => {
         // console.log(
         //   'item?._offers_turbo?.isBigInfluencer',
-        //   item?.isBigInfluencer,
-        //   item?.services,
-        //   item?._actions_turbo?.Plates,
-        //   item?._actions_turbo?.Drinks,
-        //   // item,
+        //   // item?.isBigInfluencer,
+        //   // item?.services,
+        //   // item?._actions_turbo?.Plates,
+        //   // item?._actions_turbo?.Drinks,
+        //   item?.id,
         //   // bookingDetails?._offers_turbo?.isBigInfluencer,
         // );
         handleCardPress(item);

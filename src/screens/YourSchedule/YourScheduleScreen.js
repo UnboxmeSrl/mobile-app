@@ -153,8 +153,14 @@ const YourScheduleScreen = () => {
                     // console.log(
                     //   'item_id_onBookingCardPress',
                     //   item?.id,
-                    //   item?.BookingDay,
-                    //   item?._actions_turbo?.Days_deadline,
+                    //   // item,
+                    //   item?.HourStart,
+                    //   item?.HourEnd,
+                    //   item?.MinuteStart,
+                    //   item?.MinuteEnd,
+                    //   timeFrame,
+                    //   // item?.BookingDay,
+                    //   // item?._actions_turbo?.Days_deadline,
                     // );
                     // console.log('timeFrame_onBookingCardPress', timeFrame);
                   }}
@@ -261,7 +267,9 @@ const YourScheduleScreen = () => {
                       <View style={styles.timeReelsContainer}>
                         {/* {actionNumId !== 9  ? ( */}
                         {actionNumId !== 9 &&
-                        (timeFrame || item?.booking_time) ? (
+                        (timeFrame ||
+                          item?.booking_time ||
+                          (item?.HourStart && item?.HourEnd)) ? (
                           <View style={styles.timeContainer}>
                             {/* {Object.keys(timeFrame || {}).length &&
                               item.booking_time && (
@@ -276,7 +284,21 @@ const YourScheduleScreen = () => {
                               style={styles.timeText}>{`${
                               isEvent
                                 ? `${getFormattedTime(item?.booking_time)}`
-                                : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`
+                                : `${
+                                    timeFrame
+                                      ? timeFrame?.Start
+                                      : item?.HourStart
+                                  }:${
+                                    timeFrame
+                                      ? timeFrame?.Minute_Start
+                                      : item.MinuteStart
+                                  } - ${
+                                    timeFrame ? timeFrame?.End : item.HourEnd
+                                  }:${
+                                    timeFrame
+                                      ? timeFrame?.Minute_End
+                                      : item.MinuteEnd
+                                  }`
                             }`}</Text>
                             {/* </>
                               )} */}

@@ -40,6 +40,11 @@ const NewCouponScreen = () => {
   //   else if (serviceName === 'Side') return IMAGES.side;
   //   else if (serviceName === 'Dessert') return IMAGES.dessert;
   // }, []);
+  // console.log(
+  //   bookingDetails?.MinuteStart,
+  //   bookingDetails?.HourStart,
+  //   'HourStart',
+  // );
   const getIcons = useCallback(serviceName => {
     const serviceNameKey = serviceName?.replace(' ', '');
     // console.log('serviceName.trim()', serviceNameKey || '');
@@ -254,18 +259,34 @@ const NewCouponScreen = () => {
                   styles.timeText
                 }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
             </View>
-            {actionNumId !== 9 && !!timeFrame && (
-              <View style={styles.timeContainer}>
-                <Text allowFontScaling={false} style={styles.timeTitleText}>
-                  Time
-                </Text>
-                <Text allowFontScaling={false} style={styles.timeText}>
-                  {isEvent
-                    ? `${getFormattedTime(bookingDetails?.booking_time)}`
-                    : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
-                </Text>
-              </View>
-            )}
+            {actionNumId !== 9 &&
+              (!!timeFrame ||
+                (bookingDetails?.HourStart && bookingDetails?.HourEnd)) && (
+                <View style={styles.timeContainer}>
+                  <Text allowFontScaling={false} style={styles.timeTitleText}>
+                    Time
+                  </Text>
+                  <Text allowFontScaling={false} style={styles.timeText}>
+                    {isEvent
+                      ? `${getFormattedTime(bookingDetails?.booking_time)}`
+                      : `${
+                          timeFrame
+                            ? timeFrame?.Start
+                            : bookingDetails?.HourStart
+                        }:${
+                          timeFrame
+                            ? timeFrame?.Minute_Start
+                            : bookingDetails?.MinuteStart
+                        } - ${
+                          timeFrame ? timeFrame?.End : bookingDetails?.HourEnd
+                        }:${
+                          timeFrame
+                            ? timeFrame?.Minute_End
+                            : bookingDetails?.MinuteEnd
+                        }`}
+                  </Text>
+                </View>
+              )}
           </View>
 
           <View style={styles.tiktokContainer}>

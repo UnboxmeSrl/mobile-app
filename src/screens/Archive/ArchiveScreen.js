@@ -55,6 +55,7 @@ const ArchiveScreen = () => {
             </View>
           }
           renderItem={({item, index}) => {
+            // console.log(item, 'item_archiveScreen');
             const myDate = new Date(item?.BookingDay);
             const month = myDate.toLocaleString('en-US', {month: 'long'});
             const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
@@ -82,7 +83,8 @@ const ArchiveScreen = () => {
                   </View>
 
                   <View style={styles.timeServiceContainer}>
-                    {actionNumId !== 9 && timeFrame ? (
+                    {actionNumId !== 9 &&
+                    (timeFrame || (item?.HourStart && item?.HourEnd)) ? (
                       <>
                         <View style={styles.timeContainer}>
                           <Text
@@ -93,7 +95,15 @@ const ArchiveScreen = () => {
                           <Text
                             allowFontScaling={false}
                             style={styles.timeText}>
-                            {`${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+                            `${timeFrame ? timeFrame?.Start : item?.HourStart}:$
+                            {timeFrame
+                              ? timeFrame?.Minute_Start
+                              : item?.MinuteStart}{' '}
+                            - ${timeFrame ? timeFrame?.End : item?.HourEnd}:$
+                            {timeFrame
+                              ? timeFrame?.Minute_End
+                              : item?.MinuteEnd}
+                            `
                           </Text>
                         </View>
                         <View style={styles.divider} />
