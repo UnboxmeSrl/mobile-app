@@ -493,92 +493,92 @@
 },
 // service details
 {
-    "Bonus_Bookings": 0,
-    "Credits": 0,
+    "id": 1043,
+    "created_at": 1731318231558,
+    "restaurant_turbo_id": 540,
+    "actions_turbo_id": 53,
+    "timeframesTurbo_Id": [
+        1620
+    ],
+    "at_offer_description": "",
     "Deal_limit": 3,
-    "Description": "after arriving at restaurant, must show the coupon",
+    "Description": "undefined",
+    "instructions": "⁃For 3x IG STORY  \t⁃Free 2 Cocktails Drink \t⁃VIP Entry",
+    "deal_done": 1,
+    "availability": true,
+    "approveByOwner": true,
+    "slots_per_day": 1,
+    "deal_left": 4,
+    "Credits": 0,
+    "category_offers_turbo_id": 7,
+    "category_offers_turbo2_id": [],
+    "Offer_Name": "Vault Bali",
+    "Bonus_Bookings": 0,
     "Diary": false,
-    "Icon": null,
+    "Story": false,
+    "Reel": true,
+    "Tiktok": false,
     "Map": false,
+    "restaurant_turbo_bali_id": 0,
+    "topic": "",
+    "usertype_id": 8,
+    "at_offername": "",
+    "timeframes_turbo_id": 0,
+    "days_limit": 42,
+    "isBigInfluencer": false,
+    "bookingids": null,
     "Offer_Cover": {
         "access": "public",
-        "meta": {
-            "height": 808,
-            "width": 908
-        },
-        "mime": "image/png",
-        "name": "Screenshot 2024-12-20 at 17.56.39.png",
-        "path": "/vault/MY0UB_mA/cmxCvVK3pK2usZf_My2I5t_eoGc/Td2o3A../Screenshot+2024-12-20+at+17.56.39.png",
-        "size": 850404,
+        "path": "/vault/MY0UB_mA/Jb34gsG_HOJqqOzJ1r_HbjAJxIc/H8ZNOA../80C799D7-9DFE-4B53-81C1-1DF90A96F94B.jpg",
+        "name": "80C799D7-9DFE-4B53-81C1-1DF90A96F94B.jpg",
         "type": "image",
-        "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/cmxCvVK3pK2usZf_My2I5t_eoGc/Td2o3A../Screenshot+2024-12-20+at+17.56.39.png"
+        "size": 179625,
+        "mime": "image/jpeg",
+        "meta": {
+            "width": 1066,
+            "height": 1600
+        },
+        "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/Jb34gsG_HOJqqOzJ1r_HbjAJxIc/H8ZNOA../80C799D7-9DFE-4B53-81C1-1DF90A96F94B.jpg"
     },
-    "Offer_Name": "Hubble Bali",
-    "Reel": false,
-    "Story": false,
-    "Tiktok": true,
+    "services": [],
+    "Icon": null,
     "_actions_turbo": {
+        "id": 53,
+        "created_at": 1731395123931,
+        "Social": "Vault",
+        "action_num_id": 34,
+        "Descrizione": "1 Table + 1 Chosen Bottle with Mixer",
+        "Beauty": "",
+        "action_status_turbo_id": 8,
+        "Action_Name": "IG Reels + 2 x Stories",
+        "photos": 0,
+        "Days_deadline": 5,
+        "Type": "instagram",
+        "Extra_People": 5,
+        "Plates": 0,
+        "Drinks": 0,
+        "Gym": "",
         "Accomodation": 0,
-        "Action_Name": "Tiktok",
+        "Amount_left": 0,
+        "actions_turbo_id": [],
+        "stories": 2,
+        "Big_Plates": 0,
+        "Big_Drinks": 0,
         "Action_icon": {
             "access": "public",
-            "meta": [Object
-            ],
-            "mime": "image/png",
-            "name": "tiktok.png",
-            "path": "/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png",
-            "size": 4792,
+            "path": "/vault/MY0UB_mA/qpDOLmJVaqmYROQXtK_mrCQBrt8/fk2gYg../reel+%283%29+%281%29.png",
+            "name": "reel (3) (1).png",
             "type": "image",
-            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png"
-        },
-        "Amount_left": 0,
-        "Beauty": "",
-        "Days_deadline": 3,
-        "Descrizione": "Publish a Tiktok showing this experience Minimum Followers Required for Tiktok collab10K",
-        "Drinks": 2,
-        "Extra_People": 1,
-        "Gym": "",
-        "Plates": 3,
-        "Social": "TikTok",
-        "action_num_id": 5,
-        "action_status_turbo_id": 8,
-        "actions_turbo_id": [],
-        "created_at": 1707321814549,
-        "id": 8,
-        "photos": 3,
-        "stories": 2
-    },
-    "actions_turbo_id": 8,
-    "approveByOwner": true,
-    "at_offer_description": "",
-    "at_offername": "",
-    "availability": true,
-    "category_offers_turbo2_id": [],
-    "category_offers_turbo_id": 19,
-    "created_at": 1734373697768,
-    "deal_done": 0,
-    "deal_left": 3,
-    "id": 1306,
-    "instructions": "",
-    "restaurant_turbo_bali_id": 0,
-    "restaurant_turbo_id": 612,
-    "services": [
-        {
-            "name": "Plates",
-            "quantity": 3
-        },
-        {
-            "name": "Drinks",
-            "quantity": 2
+            "size": 6808,
+            "mime": "image/png",
+            "meta": {
+                "width": 256,
+                "height": 256
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qpDOLmJVaqmYROQXtK_mrCQBrt8/fk2gYg../reel+%283%29+%281%29.png"
         }
-    ],
-    "slots_per_day": 2,
-    "timeframesTurbo_Id": [
-        2289
-    ],
-    "timeframes_turbo_id": 0,
-    "topic": "",
-    "usertype_id": 8
+    },
+    "booking_exist": false
 }
 // sevices under restaurant details
 [
@@ -1024,95 +1024,98 @@
 ]
 // booking data
 {
-    "ApprovalStatus": true,
-    "Approved": false,
-    "BookingDay": "2025-04-03",
-    "BookingTimestamp": 1743624058895,
+    "ApprovalStatus": false,
+    "Approved": true,
+    "BookingDay": "2025-06-27",
+    "BookingTimestamp": 0,
     "BoxVisibility": true,
     "ConfirmMissing": false,
     "ConfirmPresence": false,
     "CouponStatus": true,
-    "HourEnd": null,
-    "HourStart": "",
+    "HourEnd": "02",
+    "HourStart": "00",
     "Instagram_Status": "",
     "Instructions": "",
     "LinkAzione": "",
-    "MinuteEnd": "",
-    "MinuteStart": null,
+    "MinuteEnd": "00",
+    "MinuteStart": "30",
     "OfferVIsibility": false,
     "Rejectedstatus": false,
     "Submitbutton_": false,
     "Title": "",
     "_actions_turbo": {
         "Accomodation": 0,
-        "Action_Name": "Diary",
+        "Action_Name": "G-maps review",
         "Action_icon": {
             "access": "public",
             "meta": [Object
             ],
             "mime": "image/png",
-            "name": "diary.png",
-            "path": "/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png",
-            "size": 2810,
+            "name": "map.png",
+            "path": "/vault/MY0UB_mA/esDtjDMwgzmlb2X2nktEs4uHWNs/FfThsw../map.png",
+            "size": 5666,
             "type": "image",
-            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/WVl2FXylLiMGVcOLWttsLbdqzPw/H6DuRg../diary.png"
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/esDtjDMwgzmlb2X2nktEs4uHWNs/FfThsw../map.png"
         },
         "Amount_left": 0,
         "Beauty": "",
-        "Days_deadline": 4,
-        "Descrizione": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief Tagging both the venue and @claris.app",
+        "Big_Drinks": 0,
+        "Big_Plates": 0,
+        "Days_deadline": 1,
+        "Descrizione": "Give 5* google map review describing your experience (+3 pictures) + publish 2 x Instagram Stories  tagging the venue & @claris.app",
         "Drinks": 1,
         "Extra_People": 0,
         "Gym": "",
-        "Plates": 2,
-        "Social": "Diary-Both",
-        "Type": "both",
-        "action_num_id": 3,
+        "Plates": 1,
+        "Social": "Google Maps",
+        "Type": "instagram",
+        "action_num_id": 2,
         "action_status_turbo_id": 8,
         "actions_turbo_id": [],
-        "created_at": 1707321806340,
-        "id": 6,
+        "created_at": 1707321794873,
+        "id": 5,
         "photos": 2,
         "stories": 2
     },
     "_offers_turbo": {
         "Bonus_Bookings": 0,
         "Credits": 0,
-        "Deal_limit": 10,
-        "Description": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief Tagging both the venue and @claris.app",
-        "Diary": true,
+        "Deal_limit": 20,
+        "Description": "",
+        "Diary": false,
         "Icon": null,
-        "Map": false,
+        "Map": true,
         "Offer_Cover": {
             "access": "public",
             "meta": [Object
             ],
-            "mime": "image/png",
-            "name": "1000000537.png",
-            "path": "/vault/MY0UB_mA/t6ya-CPfOieX_1DZUC9BfyDrCHg/41iQ_Q../1000000537.png",
-            "size": 68586,
+            "mime": "image/jpeg",
+            "name": "1000042374.jpg",
+            "path": "/vault/MY0UB_mA/63ckqAUuE9N-msO48NGwcHfGb3g/cwa_EQ../1000042374.jpg",
+            "size": 36215,
             "type": "image",
-            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/t6ya-CPfOieX_1DZUC9BfyDrCHg/41iQ_Q../1000000537.png"
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/63ckqAUuE9N-msO48NGwcHfGb3g/cwa_EQ../1000042374.jpg"
         },
-        "Offer_Name": "new-test",
-        "Reel": true,
+        "Offer_Name": "test 2",
+        "Reel": false,
         "Story": false,
-        "Tiktok": true,
-        "actions_turbo_id": 6,
-        "approveByOwner": true,
-        "at_offer_description": "Post 2 x Stories and 1 x Video Reel/Tiktok of Diary following the brief Tagging both the venue and @claris.app",
+        "Tiktok": false,
+        "actions_turbo_id": 5,
+        "approveByOwner": false,
+        "at_offer_description": "",
         "at_offername": "",
         "availability": true,
         "category_offers_turbo2_id": [],
         "category_offers_turbo_id": 0,
-        "created_at": 1742384169554,
+        "created_at": 1750866425464,
         "days_limit": 42,
-        "deal_done": 1,
-        "deal_left": 10,
-        "id": 1642,
-        "instructions": "Testing",
+        "deal_done": 5,
+        "deal_left": 0,
+        "id": 2105,
+        "instructions": "",
+        "isBigInfluencer": false,
         "restaurant_turbo_bali_id": 0,
-        "restaurant_turbo_id": 788,
+        "restaurant_turbo_id": 899,
         "services": [
             [Object
             ],
@@ -1121,26 +1124,17 @@
         ],
         "slots_per_day": 6,
         "timeframesTurbo_Id": [
-            2963
+            4109,
+            4110
         ],
         "timeframes_turbo_id": 0,
         "topic": "",
         "usertype_id": 8
     },
     "_restaurant_turbo": {
-        "About": "testing res",
-        "Adress": "karachi",
-        "Background": {
-            "access": "public",
-            "meta": [Object
-            ],
-            "mime": "image/png",
-            "name": "gallery_649a98ed-b196-4e6a-8914-a53e17bb8b38.png",
-            "path": "/vault/MY0UB_mA/fQ4lGpNY0JTPaHkGKAbOWNbQKlk/WjPTHg../gallery_649a98ed-b196-4e6a-8914-a53e17bb8b38.png",
-            "size": 81611,
-            "type": "image",
-            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/fQ4lGpNY0JTPaHkGKAbOWNbQKlk/WjPTHg../gallery_649a98ed-b196-4e6a-8914-a53e17bb8b38.png"
-        },
+        "About": "test2",
+        "Adress": "abc",
+        "Background": null,
         "Chi_siamo": "",
         "Content_Tags": [
             ""
@@ -1151,42 +1145,47 @@
             "meta": [Object
             ],
             "mime": "image/png",
-            "name": "gallery_6228a0ca-d898-4522-9204-b74b3103108b.png",
-            "path": "/vault/MY0UB_mA/qTy1-L7KCHM-4UEp3c8d5dDlfrE/JrlLTw../gallery_6228a0ca-d898-4522-9204-b74b3103108b.png",
-            "size": 119393,
+            "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "path": "/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "size": 67843,
             "type": "image",
-            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qTy1-L7KCHM-4UEp3c8d5dDlfrE/JrlLTw../gallery_6228a0ca-d898-4522-9204-b74b3103108b.png"
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
         },
         "Cover2": {
             "access": "public",
             "meta": [Object
             ],
-            "mime": "image/png",
-            "name": "gallery_b19202e6-910c-4ac6-bbee-5aae59009727.png",
-            "path": "/vault/MY0UB_mA/s3bMCyx6NA9h_43ZLOerLENj58s/J7GaMw../gallery_b19202e6-910c-4ac6-bbee-5aae59009727.png",
-            "size": 81611,
+            "mime": "image/jpeg",
+            "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "path": "/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "size": 216317,
             "type": "image",
-            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/s3bMCyx6NA9h_43ZLOerLENj58s/J7GaMw../gallery_b19202e6-910c-4ac6-bbee-5aae59009727.png"
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
         },
-        "GalleryRestaurant": [],
+        "GalleryRestaurant": [
+            [Object
+            ],
+            [Object
+            ]
+        ],
         "Influencer": false,
-        "Instagram": "http://www.instagram.com/demo",
+        "Instagram": "https://www.instagram.com/abc",
         "Latitude": 0,
         "LongLat": [],
         "Longitude": 0,
-        "Maps_Link": "https://maps.app.goo.gl/kFVeesJ6vksUze4y9",
+        "Maps_Link": "https://maps.app.goo.gl/aWMDhPAYY9TT1SCK7",
         "Model": false,
-        "Name": "new-test",
+        "Name": "test 2",
         "Offers_Limit": [],
         "Owner": null,
         "Status": false,
         "Tag2": "claris.app",
         "Tags": "",
-        "Tiktok": "https://www.tiktok.com/@demo",
+        "Tiktok": "http://www.tiktok.com/@abc",
         "Trattamenti": "",
         "TrattamentiPicture": null,
         "VenueType": "",
-        "Visibility": true,
+        "Visibility": false,
         "_cities": {
             "City": [Object
             ],
@@ -1198,37 +1197,46 @@
         "_offers_turbo": null,
         "actions_turbo_id": [
             1,
-            5,
-            6
+            8,
+            8,
+            8,
+            5
         ],
         "booking_buffer_time": 24,
         "booking_limit_per_month": 0,
         "booking_limit_three_month": 0,
-        "brief": "testing res",
+        "brief": "test2",
         "category_venues_turbo_id": 1,
         "cities2_id": 3,
         "cities_id": 0,
-        "created_at": 1742383937483,
+        "created_at": 1748898703870,
         "event_date_time": [
             0
         ],
-        "id": 788,
+        "id": 899,
         "is_event": false,
         "location": null,
         "min_instagram_followers": 0,
         "min_tiktok_followers": 0,
         "offers_turbo_id": [
-            1640,
-            1641,
-            1642
+            1957,
+            1958,
+            2096,
+            2104,
+            2105
         ],
-        "phone": "6363737383838383838",
+        "phone": "12345678",
         "restaurant_owner_id": 0,
         "timeframes_turbo_id": [
-            2963,
-            2927,
-            2918,
-            2919
+            4107,
+            4108,
+            4104,
+            4105,
+            4089,
+            4090,
+            4106,
+            4109,
+            4110
         ],
         "usertype_id": [],
         "venue_order": 0
@@ -1240,51 +1248,50 @@
         "End": "02",
         "Left": 0,
         "Minute_End": "00",
-        "Minute_Start": "00",
-        "Name": "new-test",
+        "Minute_Start": "30",
+        "Name": "test 2",
         "Spot_limit": false,
-        "Spots": 2,
-        "Start": "01",
+        "Spots": 6,
+        "Start": "00",
         "Visibility": true,
         "categories_id": 0,
-        "created_at": 1742384361115,
-        "id": 2963,
+        "created_at": 1750866425454,
+        "id": 4109,
         "pause_days": [],
-        "restaurant_id": 788,
+        "restaurant_id": 899,
         "usertype_id": 8,
         "weekdays": [
-            4
+            3
         ],
         "weekdaysturbo_id": 0
     },
     "action_status_turbo_id": 0,
-    "actions_turbo_id": 6,
+    "actions_turbo_id": 5,
     "additional_influencer": 0,
     "booking_status_id": 0,
     "booking_time": 0,
     "canceled": false,
     "contentSubmissionDate": null,
     "content_status_turbo_id": 0,
-    "content_url": null,
+    "content_url": "",
     "coupon_status": "pending",
-    "created_at": 1743251760129,
+    "created_at": 1746088918000,
     "diary_action_turbo_id": 0,
     "events_id": 0,
-    "id": 15598,
+    "id": 19857,
+    "isCheckedIn": false,
     "isOwnerStatus": false,
     "message": "",
-    "offers_turbo_id": 1642,
-    "restaurant_id": 788,
-    "timeframes_id": 2963,
+    "offers_turbo_id": 2105,
+    "restaurant_id": 899,
+    "timeframes_id": 4109,
     "user_turbo": {
         "NickName": "tester",
         "id": 550,
         "name": "testing_user"
     },
     "user_turbo_id": 550,
-    "vanue_images": [
-        null
-    ]
+    "vanue_images": []
 }
 // notification data
 {
@@ -2150,4 +2157,1256 @@
             "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/T2xUd2y8Faja3wOD7QggMWRW_t0/K6uQ-w../C020B343-BAE6-4C26-8A7B-DC68B5E9F799.jpg"
         }
     ]
+}
+// get restaurant and service userId: testinguser@gmail.com
+{
+    "services": [
+        {
+            "id": 1957,
+            "created_at": 1748898704003,
+            "restaurant_turbo_id": 899,
+            "actions_turbo_id": 1,
+            "timeframesTurbo_Id": [
+                4104,
+                4105
+            ],
+            "at_offer_description": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+            "Deal_limit": 7,
+            "Description": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+            "instructions": "",
+            "deal_done": 4,
+            "availability": true,
+            "approveByOwner": false,
+            "slots_per_day": 2,
+            "deal_left": 3,
+            "Credits": 0,
+            "category_offers_turbo_id": 21,
+            "category_offers_turbo2_id": [],
+            "Offer_Name": "test",
+            "Bonus_Bookings": 0,
+            "Diary": false,
+            "Story": true,
+            "Reel": false,
+            "Tiktok": false,
+            "Map": false,
+            "restaurant_turbo_bali_id": 0,
+            "topic": "",
+            "usertype_id": 7,
+            "at_offername": "",
+            "timeframes_turbo_id": 3774,
+            "days_limit": 42,
+            "isBigInfluencer": false,
+            "bookingids": null,
+            "Offer_Cover": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/xCP3VIgtTKZbUFngBimiAEzUeU0/FhJdxg../1000042295.jpg",
+                "name": "1000042295.jpg",
+                "type": "image",
+                "size": 75802,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 688,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/xCP3VIgtTKZbUFngBimiAEzUeU0/FhJdxg../1000042295.jpg"
+            },
+            "services": [
+                {
+                    "name": "Plates",
+                    "quantity": 3
+                },
+                {
+                    "name": "Drinks",
+                    "quantity": 3
+                }
+            ],
+            "Icon": null,
+            "_actions_turbo": {
+                "id": 1,
+                "created_at": 1668719563878,
+                "Social": "Instagram",
+                "action_num_id": 1,
+                "Descrizione": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+                "Beauty": "",
+                "action_status_turbo_id": 8,
+                "Action_Name": "3 x Story",
+                "photos": 3,
+                "Days_deadline": 1,
+                "Type": "instagram",
+                "Extra_People": 0,
+                "Plates": 1,
+                "Drinks": 1,
+                "Gym": "",
+                "Accomodation": 0,
+                "Amount_left": 0,
+                "actions_turbo_id": [],
+                "stories": 0,
+                "Big_Plates": 0,
+                "Big_Drinks": 0,
+                "Action_icon": {
+                    "access": "public",
+                    "path": "/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png",
+                    "name": "story.png",
+                    "type": "image",
+                    "size": 9948,
+                    "mime": "image/png",
+                    "meta": {
+                        "width": 256,
+                        "height": 256
+                    },
+                    "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png"
+                }
+            },
+            "booking_exist": false
+        },
+        {
+            "id": 1958,
+            "created_at": 1748898704097,
+            "restaurant_turbo_id": 899,
+            "actions_turbo_id": 8,
+            "timeframesTurbo_Id": [
+                3776,
+                3777
+            ],
+            "at_offer_description": "",
+            "Deal_limit": 15,
+            "Description": "",
+            "instructions": "",
+            "deal_done": 8,
+            "availability": true,
+            "approveByOwner": false,
+            "slots_per_day": 2,
+            "deal_left": 3,
+            "Credits": 0,
+            "category_offers_turbo_id": 21,
+            "category_offers_turbo2_id": [],
+            "Offer_Name": "test",
+            "Bonus_Bookings": 0,
+            "Diary": false,
+            "Story": false,
+            "Reel": false,
+            "Tiktok": true,
+            "Map": false,
+            "restaurant_turbo_bali_id": 0,
+            "topic": "",
+            "usertype_id": 7,
+            "at_offername": "",
+            "timeframes_turbo_id": 0,
+            "days_limit": 42,
+            "isBigInfluencer": false,
+            "bookingids": 19705,
+            "Offer_Cover": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/tjGftYoz-qdJ5TJ46MhZri3C5Z0/_w4weQ../F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg",
+                "name": "F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg",
+                "type": "image",
+                "size": 216857,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 720,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/tjGftYoz-qdJ5TJ46MhZri3C5Z0/_w4weQ../F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg"
+            },
+            "services": [
+                {
+                    "name": "Plates",
+                    "quantity": 3
+                },
+                {
+                    "name": "Drinks",
+                    "quantity": 2
+                }
+            ],
+            "Icon": null,
+            "_actions_turbo": {
+                "id": 8,
+                "created_at": 1707321814549,
+                "Social": "TikTok",
+                "action_num_id": 5,
+                "Descrizione": "📹 TikTok Video Review\n\n– Minimum 10 seconds\n– Show the food, interior, and yourself. \nBe creative and your style!\n– Add engaging caption and relevant, attractive hashtags\n\n2 x IG stories. \n(Show yourself on the stories).\n\nTags: @venues & @claris.app (hiddentag)",
+                "Beauty": "",
+                "action_status_turbo_id": 8,
+                "Action_Name": "Tiktok",
+                "photos": 0,
+                "Days_deadline": 3,
+                "Type": "tiktok",
+                "Extra_People": 1,
+                "Plates": 3,
+                "Drinks": 2,
+                "Gym": "",
+                "Accomodation": 0,
+                "Amount_left": 0,
+                "actions_turbo_id": [],
+                "stories": 2,
+                "Big_Plates": 0,
+                "Big_Drinks": 0,
+                "Action_icon": {
+                    "access": "public",
+                    "path": "/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png",
+                    "name": "tiktok.png",
+                    "type": "image",
+                    "size": 4792,
+                    "mime": "image/png",
+                    "meta": {
+                        "width": 256,
+                        "height": 256
+                    },
+                    "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png"
+                }
+            },
+            "booking_exist": true
+        }
+    ],
+    "restaurant": {
+        "id": 899,
+        "created_at": 1748898703870,
+        "About": "test2",
+        "Instagram": "https://www.instagram.com/abc",
+        "Tags": "",
+        "Tag2": "claris.app",
+        "venue_order": 0,
+        "Content_Tags": [
+            ""
+        ],
+        "Name": "test 2",
+        "Visibility": true,
+        "cities2_id": 3,
+        "Maps_Link": "https://maps.app.goo.gl/aWMDhPAYY9TT1SCK7",
+        "is_event": false,
+        "Adress": "abc",
+        "booking_limit_per_month": 0,
+        "event_date_time": [
+            0
+        ],
+        "timeframes_turbo_id": [
+            4104,
+            4105,
+            3776,
+            3777,
+            4089,
+            4090
+        ],
+        "booking_buffer_time": 24,
+        "category_venues_turbo_id": 1,
+        "brief": "test2",
+        "LongLat": [],
+        "Longitude": 0,
+        "Latitude": 0,
+        "actions_turbo_id": [
+            1,
+            8,
+            8
+        ],
+        "VenueType": "",
+        "offers_turbo_id": [
+            1957,
+            1958,
+            2096
+        ],
+        "restaurant_owner_id": 0,
+        "Chi_siamo": "",
+        "Trattamenti": "",
+        "Copertina": false,
+        "Status": false,
+        "Influencer": false,
+        "Model": false,
+        "cities_id": 0,
+        "Tiktok": "http://www.tiktok.com/@abc",
+        "phone": "12345678",
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "booking_limit_three_month": 0,
+        "usertype_id": [],
+        "Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "type": "image",
+            "size": 67843,
+            "mime": "image/png",
+            "meta": {
+                "width": 592,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+        },
+        "GalleryRestaurant": [
+            {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/PY9dRZrCbHyxzI91AI1exsdmuZo/Dl0O8A../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+                "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+                "type": "image",
+                "size": 216317,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 720,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PY9dRZrCbHyxzI91AI1exsdmuZo/Dl0O8A../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+            },
+            {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/YMW7WATnraQc_KNNN4QBZXyoJZs/MKgWeQ../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+                "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+                "type": "image",
+                "size": 67843,
+                "mime": "image/png",
+                "meta": {
+                    "width": 592,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/YMW7WATnraQc_KNNN4QBZXyoJZs/MKgWeQ../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+            }
+        ],
+        "Background": null,
+        "Cover2": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "type": "image",
+            "size": 216317,
+            "mime": "image/jpeg",
+            "meta": {
+                "width": 720,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+        },
+        "Offers_Limit": [],
+        "location": null,
+        "Owner": null,
+        "TrattamentiPicture": null
+    }
+}
+// get restaurant and service userId: testingfaisal@gmail.com before creating two bookings at the same time
+{
+    "services": [
+        {
+            "id": 1957,
+            "created_at": 1748898704003,
+            "restaurant_turbo_id": 899,
+            "actions_turbo_id": 1,
+            "timeframesTurbo_Id": [
+                4104,
+                4105
+            ],
+            "at_offer_description": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+            "Deal_limit": 7,
+            "Description": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+            "instructions": "",
+            "deal_done": 4,
+            "availability": true,
+            "approveByOwner": false,
+            "slots_per_day": 2,
+            "deal_left": 3,
+            "Credits": 0,
+            "category_offers_turbo_id": 21,
+            "category_offers_turbo2_id": [],
+            "Offer_Name": "test",
+            "Bonus_Bookings": 0,
+            "Diary": false,
+            "Story": true,
+            "Reel": false,
+            "Tiktok": false,
+            "Map": false,
+            "restaurant_turbo_bali_id": 0,
+            "topic": "",
+            "usertype_id": 7,
+            "at_offername": "",
+            "timeframes_turbo_id": 3774,
+            "days_limit": 42,
+            "isBigInfluencer": false,
+            "bookingids": null,
+            "Offer_Cover": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/xCP3VIgtTKZbUFngBimiAEzUeU0/FhJdxg../1000042295.jpg",
+                "name": "1000042295.jpg",
+                "type": "image",
+                "size": 75802,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 688,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/xCP3VIgtTKZbUFngBimiAEzUeU0/FhJdxg../1000042295.jpg"
+            },
+            "services": [
+                {
+                    "name": "Plates",
+                    "quantity": 3
+                },
+                {
+                    "name": "Drinks",
+                    "quantity": 3
+                }
+            ],
+            "Icon": null,
+            "_actions_turbo": {
+                "id": 1,
+                "created_at": 1668719563878,
+                "Social": "Instagram",
+                "action_num_id": 1,
+                "Descrizione": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+                "Beauty": "",
+                "action_status_turbo_id": 8,
+                "Action_Name": "3 x Story",
+                "photos": 3,
+                "Days_deadline": 1,
+                "Type": "instagram",
+                "Extra_People": 0,
+                "Plates": 1,
+                "Drinks": 1,
+                "Gym": "",
+                "Accomodation": 0,
+                "Amount_left": 0,
+                "actions_turbo_id": [],
+                "stories": 0,
+                "Big_Plates": 0,
+                "Big_Drinks": 0,
+                "Action_icon": {
+                    "access": "public",
+                    "path": "/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png",
+                    "name": "story.png",
+                    "type": "image",
+                    "size": 9948,
+                    "mime": "image/png",
+                    "meta": {
+                        "width": 256,
+                        "height": 256
+                    },
+                    "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png"
+                }
+            },
+            "booking_exist": false
+        },
+        {
+            "id": 1958,
+            "created_at": 1748898704097,
+            "restaurant_turbo_id": 899,
+            "actions_turbo_id": 8,
+            "timeframesTurbo_Id": [
+                3776,
+                3777
+            ],
+            "at_offer_description": "",
+            "Deal_limit": 15,
+            "Description": "",
+            "instructions": "",
+            "deal_done": 8,
+            "availability": true,
+            "approveByOwner": false,
+            "slots_per_day": 2,
+            "deal_left": 3,
+            "Credits": 0,
+            "category_offers_turbo_id": 21,
+            "category_offers_turbo2_id": [],
+            "Offer_Name": "test",
+            "Bonus_Bookings": 0,
+            "Diary": false,
+            "Story": false,
+            "Reel": false,
+            "Tiktok": true,
+            "Map": false,
+            "restaurant_turbo_bali_id": 0,
+            "topic": "",
+            "usertype_id": 7,
+            "at_offername": "",
+            "timeframes_turbo_id": 0,
+            "days_limit": 42,
+            "isBigInfluencer": false,
+            "bookingids": null,
+            "Offer_Cover": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/tjGftYoz-qdJ5TJ46MhZri3C5Z0/_w4weQ../F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg",
+                "name": "F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg",
+                "type": "image",
+                "size": 216857,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 720,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/tjGftYoz-qdJ5TJ46MhZri3C5Z0/_w4weQ../F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg"
+            },
+            "services": [
+                {
+                    "name": "Plates",
+                    "quantity": 3
+                },
+                {
+                    "name": "Drinks",
+                    "quantity": 2
+                }
+            ],
+            "Icon": null,
+            "_actions_turbo": {
+                "id": 8,
+                "created_at": 1707321814549,
+                "Social": "TikTok",
+                "action_num_id": 5,
+                "Descrizione": "📹 TikTok Video Review\n\n– Minimum 10 seconds\n– Show the food, interior, and yourself. \nBe creative and your style!\n– Add engaging caption and relevant, attractive hashtags\n\n2 x IG stories. \n(Show yourself on the stories).\n\nTags: @venues & @claris.app (hiddentag)",
+                "Beauty": "",
+                "action_status_turbo_id": 8,
+                "Action_Name": "Tiktok",
+                "photos": 0,
+                "Days_deadline": 3,
+                "Type": "tiktok",
+                "Extra_People": 1,
+                "Plates": 3,
+                "Drinks": 2,
+                "Gym": "",
+                "Accomodation": 0,
+                "Amount_left": 0,
+                "actions_turbo_id": [],
+                "stories": 2,
+                "Big_Plates": 0,
+                "Big_Drinks": 0,
+                "Action_icon": {
+                    "access": "public",
+                    "path": "/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png",
+                    "name": "tiktok.png",
+                    "type": "image",
+                    "size": 4792,
+                    "mime": "image/png",
+                    "meta": {
+                        "width": 256,
+                        "height": 256
+                    },
+                    "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png"
+                }
+            },
+            "booking_exist": false
+        }
+    ],
+    "restaurant": {
+        "id": 899,
+        "created_at": 1748898703870,
+        "About": "test2",
+        "Instagram": "https://www.instagram.com/abc",
+        "Tags": "",
+        "Tag2": "claris.app",
+        "venue_order": 0,
+        "Content_Tags": [
+            ""
+        ],
+        "Name": "test 2",
+        "Visibility": true,
+        "cities2_id": 3,
+        "Maps_Link": "https://maps.app.goo.gl/aWMDhPAYY9TT1SCK7",
+        "is_event": false,
+        "Adress": "abc",
+        "booking_limit_per_month": 0,
+        "event_date_time": [
+            0
+        ],
+        "timeframes_turbo_id": [
+            4104,
+            4105,
+            3776,
+            3777,
+            4089,
+            4090
+        ],
+        "booking_buffer_time": 24,
+        "category_venues_turbo_id": 1,
+        "brief": "test2",
+        "LongLat": [],
+        "Longitude": 0,
+        "Latitude": 0,
+        "actions_turbo_id": [
+            1,
+            8,
+            8
+        ],
+        "VenueType": "",
+        "offers_turbo_id": [
+            1957,
+            1958,
+            2096
+        ],
+        "restaurant_owner_id": 0,
+        "Chi_siamo": "",
+        "Trattamenti": "",
+        "Copertina": false,
+        "Status": false,
+        "Influencer": false,
+        "Model": false,
+        "cities_id": 0,
+        "Tiktok": "http://www.tiktok.com/@abc",
+        "phone": "12345678",
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "booking_limit_three_month": 0,
+        "usertype_id": [],
+        "Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "type": "image",
+            "size": 67843,
+            "mime": "image/png",
+            "meta": {
+                "width": 592,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+        },
+        "GalleryRestaurant": [
+            {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/PY9dRZrCbHyxzI91AI1exsdmuZo/Dl0O8A../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+                "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+                "type": "image",
+                "size": 216317,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 720,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PY9dRZrCbHyxzI91AI1exsdmuZo/Dl0O8A../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+            },
+            {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/YMW7WATnraQc_KNNN4QBZXyoJZs/MKgWeQ../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+                "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+                "type": "image",
+                "size": 67843,
+                "mime": "image/png",
+                "meta": {
+                    "width": 592,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/YMW7WATnraQc_KNNN4QBZXyoJZs/MKgWeQ../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+            }
+        ],
+        "Background": null,
+        "Cover2": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "type": "image",
+            "size": 216317,
+            "mime": "image/jpeg",
+            "meta": {
+                "width": 720,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+        },
+        "Offers_Limit": [],
+        "location": null,
+        "Owner": null,
+        "TrattamentiPicture": null
+    }
+}
+//
+{
+    "services": [
+        {
+            "id": 1957,
+            "created_at": 1748898704003,
+            "restaurant_turbo_id": 899,
+            "actions_turbo_id": 1,
+            "timeframesTurbo_Id": [
+                4104,
+                4105
+            ],
+            "at_offer_description": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+            "Deal_limit": 7,
+            "Description": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+            "instructions": "",
+            "deal_done": 4,
+            "availability": true,
+            "approveByOwner": false,
+            "slots_per_day": 2,
+            "deal_left": 3,
+            "Credits": 0,
+            "category_offers_turbo_id": 21,
+            "category_offers_turbo2_id": [],
+            "Offer_Name": "test",
+            "Bonus_Bookings": 0,
+            "Diary": false,
+            "Story": true,
+            "Reel": false,
+            "Tiktok": false,
+            "Map": false,
+            "restaurant_turbo_bali_id": 0,
+            "topic": "",
+            "usertype_id": 7,
+            "at_offername": "",
+            "timeframes_turbo_id": 3774,
+            "days_limit": 42,
+            "isBigInfluencer": false,
+            "bookingids": null,
+            "Offer_Cover": {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/xCP3VIgtTKZbUFngBimiAEzUeU0/FhJdxg../1000042295.jpg",
+                "name": "1000042295.jpg",
+                "type": "image",
+                "size": 75802,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 688,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/xCP3VIgtTKZbUFngBimiAEzUeU0/FhJdxg../1000042295.jpg"
+            },
+            "services": [
+                {
+                    "name": "Plates",
+                    "quantity": 3
+                },
+                {
+                    "name": "Drinks",
+                    "quantity": 3
+                }
+            ],
+            "Icon": null,
+            "_actions_turbo": {
+                "id": 1,
+                "created_at": 1668719563878,
+                "Social": "Instagram",
+                "action_num_id": 1,
+                "Descrizione": "Publish 3 x STORY with portraying:\n\n-the ambience\n-food \n-yourself. \n\nTag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+                "Beauty": "",
+                "action_status_turbo_id": 8,
+                "Action_Name": "3 x Story",
+                "photos": 3,
+                "Days_deadline": 1,
+                "Type": "instagram",
+                "Extra_People": 0,
+                "Plates": 1,
+                "Drinks": 1,
+                "Gym": "",
+                "Accomodation": 0,
+                "Amount_left": 0,
+                "actions_turbo_id": [],
+                "stories": 0,
+                "Big_Plates": 0,
+                "Big_Drinks": 0,
+                "Action_icon": {
+                    "access": "public",
+                    "path": "/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png",
+                    "name": "story.png",
+                    "type": "image",
+                    "size": 9948,
+                    "mime": "image/png",
+                    "meta": {
+                        "width": 256,
+                        "height": 256
+                    },
+                    "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png"
+                }
+            },
+            "booking_exist": false
+        }
+    ],
+    "restaurant": {
+        "id": 899,
+        "created_at": 1748898703870,
+        "About": "test2",
+        "Instagram": "https://www.instagram.com/abc",
+        "Tags": "",
+        "Tag2": "claris.app",
+        "venue_order": 0,
+        "Content_Tags": [
+            ""
+        ],
+        "Name": "test 2",
+        "Visibility": true,
+        "cities2_id": 3,
+        "Maps_Link": "https://maps.app.goo.gl/aWMDhPAYY9TT1SCK7",
+        "is_event": false,
+        "Adress": "abc",
+        "booking_limit_per_month": 0,
+        "event_date_time": [
+            0
+        ],
+        "timeframes_turbo_id": [
+            4104,
+            4105,
+            3776,
+            3777,
+            4089,
+            4090
+        ],
+        "booking_buffer_time": 24,
+        "category_venues_turbo_id": 1,
+        "brief": "test2",
+        "LongLat": [],
+        "Longitude": 0,
+        "Latitude": 0,
+        "actions_turbo_id": [
+            1,
+            8,
+            8
+        ],
+        "VenueType": "",
+        "offers_turbo_id": [
+            1957,
+            1958,
+            2096
+        ],
+        "restaurant_owner_id": 0,
+        "Chi_siamo": "",
+        "Trattamenti": "",
+        "Copertina": false,
+        "Status": false,
+        "Influencer": false,
+        "Model": false,
+        "cities_id": 0,
+        "Tiktok": "http://www.tiktok.com/@abc",
+        "phone": "12345678",
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "booking_limit_three_month": 0,
+        "usertype_id": [],
+        "Cover": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "type": "image",
+            "size": 67843,
+            "mime": "image/png",
+            "meta": {
+                "width": 592,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+        },
+        "GalleryRestaurant": [
+            {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/PY9dRZrCbHyxzI91AI1exsdmuZo/Dl0O8A../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+                "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+                "type": "image",
+                "size": 216317,
+                "mime": "image/jpeg",
+                "meta": {
+                    "width": 720,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PY9dRZrCbHyxzI91AI1exsdmuZo/Dl0O8A../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+            },
+            {
+                "access": "public",
+                "path": "/vault/MY0UB_mA/YMW7WATnraQc_KNNN4QBZXyoJZs/MKgWeQ../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+                "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+                "type": "image",
+                "size": 67843,
+                "mime": "image/png",
+                "meta": {
+                    "width": 592,
+                    "height": 1280
+                },
+                "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/YMW7WATnraQc_KNNN4QBZXyoJZs/MKgWeQ../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+            }
+        ],
+        "Background": null,
+        "Cover2": {
+            "access": "public",
+            "path": "/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "type": "image",
+            "size": 216317,
+            "mime": "image/jpeg",
+            "meta": {
+                "width": 720,
+                "height": 1280
+            },
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+        },
+        "Offers_Limit": [],
+        "location": null,
+        "Owner": null,
+        "TrattamentiPicture": null
+    }
+}
+// item in archive screen 
+{
+    "ApprovalStatus": false,
+    "Approved": false,
+    "BookingDay": "2025-06-30",
+    "BookingTimestamp": 1751227206769,
+    "BoxVisibility": true,
+    "ConfirmMissing": false,
+    "ConfirmPresence": false,
+    "CouponStatus": true,
+    "HourEnd": null,
+    "HourStart": "",
+    "Instagram_Status": "",
+    "Instructions": "",
+    "LinkAzione": "",
+    "MinuteEnd": "",
+    "MinuteStart": null,
+    "OfferVIsibility": false,
+    "Rejectedstatus": false,
+    "Submitbutton_": false,
+    "Title": "",
+    "_actions_turbo": {
+        "Accomodation": 0,
+        "Action_Name": "3 x Story",
+        "Action_icon": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "story.png",
+            "path": "/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png",
+            "size": 9948,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/qRiKx7SZCAa9ghmZbe91yIMuxbI/8R0iuQ../story.png"
+        },
+        "Amount_left": 0,
+        "Beauty": "",
+        "Big_Drinks": 0,
+        "Big_Plates": 0,
+        "Days_deadline": 1,
+        "Descrizione": "Publish 3 x STORY with portraying: -the ambience -food -yourself. Tag @venue, hidden tag @claris.app (add the tag after the publication of the story so it will look invisible)",
+        "Drinks": 1,
+        "Extra_People": 0,
+        "Gym": "",
+        "Plates": 1,
+        "Social": "Instagram",
+        "Type": "instagram",
+        "action_num_id": 1,
+        "action_status_turbo_id": 8,
+        "actions_turbo_id": [],
+        "created_at": 1668719563878,
+        "id": 1,
+        "photos": 3,
+        "stories": 0
+    },
+    "_offers_turbo": {
+        "Bonus_Bookings": 0,
+        "Credits": 0,
+        "Deal_limit": 26,
+        "Description": "📹 TikTok Video Review – Minimum 10 seconds – Show the food, interior, and yourself. Be creative and your style! – Add engaging caption and relevant, attractive hashtags 2 x IG stories. (Show yourself on the stories).Tags: @venues & @claris.app (hiddentag)",
+        "Diary": false,
+        "Icon": null,
+        "Map": false,
+        "Offer_Cover": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg",
+            "path": "/vault/MY0UB_mA/Y_8TinSW1xY1jRxnw0G7K9HWnZA/BZl6lA../F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg",
+            "size": 216857,
+            "type": "image",
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/Y_8TinSW1xY1jRxnw0G7K9HWnZA/BZl6lA../F80E33AF-CE6D-45D7-9891-2CE720FFB65A.jpg"
+        },
+        "Offer_Name": "test",
+        "Reel": false,
+        "Story": false,
+        "Tiktok": true,
+        "actions_turbo_id": 8,
+        "approveByOwner": false,
+        "at_offer_description": "📹 TikTok Video Review – Minimum 10 seconds – Show the food, interior, and yourself. Be creative and your style! – Add engaging caption and relevant, attractive hashtags 2 x IG stories. (Show yourself on the stories). Tags: @venues & @claris.app (hiddentag)",
+        "at_offername": "",
+        "availability": true,
+        "category_offers_turbo2_id": [],
+        "category_offers_turbo_id": 21,
+        "created_at": 1748898704097,
+        "days_limit": 42,
+        "deal_done": 20,
+        "deal_left": 3,
+        "id": 1958,
+        "instructions": "",
+        "isBigInfluencer": false,
+        "restaurant_turbo_bali_id": 0,
+        "restaurant_turbo_id": 899,
+        "services": [
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "slots_per_day": 2,
+        "timeframesTurbo_Id": [
+            4107,
+            4108
+        ],
+        "timeframes_turbo_id": 0,
+        "topic": "",
+        "usertype_id": 7
+    },
+    "_restaurant_turbo": {
+        "About": "test2",
+        "Adress": "abc",
+        "Background": null,
+        "Chi_siamo": "",
+        "Content_Tags": [
+            ""
+        ],
+        "Copertina": false,
+        "Cover": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "path": "/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png",
+            "size": 67843,
+            "type": "image",
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+        },
+        "Cover2": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/jpeg",
+            "name": "gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "path": "/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg",
+            "size": 216317,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/UpLUVGnxwzsV212b67g9FejuZ70/KY1Oqw../gallery_76f25ef0-166a-4326-ba5b-623db2676030.jpg"
+        },
+        "GalleryRestaurant": [
+            [Object
+            ],
+            [Object
+            ]
+        ],
+        "Influencer": false,
+        "Instagram": "https://www.instagram.com/abc",
+        "Latitude": 0,
+        "LongLat": [],
+        "Longitude": 0,
+        "Maps_Link": "https://maps.app.goo.gl/aWMDhPAYY9TT1SCK7",
+        "Model": false,
+        "Name": "test 2",
+        "Offers_Limit": [],
+        "Owner": null,
+        "Status": false,
+        "Tag2": "claris.app",
+        "Tags": "",
+        "Tiktok": "http://www.tiktok.com/@abc",
+        "Trattamenti": "",
+        "TrattamentiPicture": null,
+        "VenueType": "",
+        "Visibility": true,
+        "actions_turbo_id": [
+            1,
+            8,
+            8,
+            8,
+            5,
+            7
+        ],
+        "booking_buffer_time": 24,
+        "booking_limit_per_month": 0,
+        "booking_limit_three_month": 0,
+        "brief": "test2",
+        "category_venues_turbo_id": 1,
+        "cities2_id": 3,
+        "cities_id": 0,
+        "created_at": 1748898703870,
+        "event_date_time": [
+            0
+        ],
+        "id": 899,
+        "is_event": false,
+        "location": null,
+        "min_instagram_followers": 0,
+        "min_tiktok_followers": 0,
+        "offers_turbo_id": [
+            1957,
+            1958,
+            2096,
+            2104,
+            2105,
+            2110
+        ],
+        "phone": "12345678",
+        "restaurant_owner_id": 0,
+        "timeframes_turbo_id": [
+            4159,
+            4160,
+            4161,
+            4154,
+            4155,
+            4156,
+            4107,
+            4108,
+            4104,
+            4105,
+            4089,
+            4090,
+            4106
+        ],
+        "usertype_id": [],
+        "venue_order": 0
+    },
+    "action_status_turbo_id": 0,
+    "actions_turbo_id": 1,
+    "additional_influencer": 0,
+    "booking_status_id": 0,
+    "booking_time": 0,
+    "canceled": true,
+    "contentSubmissionDate": null,
+    "content_status_turbo_id": 0,
+    "content_url": null,
+    "coupon_status": "pending",
+    "created_at": 1747322395000,
+    "diary_action_turbo_id": 0,
+    "events_id": 0,
+    "id": 19624,
+    "isCheckedIn": false,
+    "isOwnerStatus": false,
+    "message": "",
+    "offers_turbo_id": 1958,
+    "restaurant_id": 899,
+    "timeframes_id": 3774,
+    "user_turbo_id": 550,
+    "vanue_images": [
+        null
+    ]
+}
+// content details
+{
+    "ApprovalStatus": false,
+    "Approved": true,
+    "BookingDay": "2025-05-21",
+    "BookingTimestamp": 1751752820078,
+    "Rejectedstatus": false,
+    "_actions_turbo": {
+        "Accomodation": 0,
+        "Action_Name": "Tiktok",
+        "Action_icon": {
+            "access": "public",
+            "meta": [Object
+            ],
+            "mime": "image/png",
+            "name": "tiktok.png",
+            "path": "/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png",
+            "size": 4792,
+            "type": "image",
+            "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/bCvWd98Pwi0AInMa97KWdXmQGvc/GWogog../tiktok.png"
+        },
+        "Amount_left": 0,
+        "Beauty": "",
+        "Big_Drinks": 0,
+        "Big_Plates": 0,
+        "Days_deadline": 3,
+        "Descrizione": "📹 TikTok Video Review – Minimum 10 seconds – Show the food, interior, and yourself. Be creative and your style! – Add engaging caption and relevant, attractive hashtags 2 x IG stories. (Show yourself on the stories). Tags: @venues & @claris.app (hiddentag)",
+        "Drinks": 2,
+        "Extra_People": 1,
+        "Gym": "",
+        "Plates": 3,
+        "Social": "TikTok",
+        "Type": "tiktok",
+        "action_num_id": 5,
+        "action_status_turbo_id": 8,
+        "actions_turbo_id": [],
+        "created_at": 1707321814549,
+        "id": 8,
+        "photos": 0,
+        "stories": 2
+    },
+    "_offers_turbo": {
+        "Credits": 0,
+        "Offer_Name": "test",
+        "actions_turbo_id": 8,
+        "id": 1958,
+        "restaurant_turbo_id": 899
+    },
+    "_restaurant_turbo": {
+        "Adress": "abc",
+        "Cover": {
+            "url": "https: //xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/PtY0likPvMHF8o_HL7JdrGrSKpE/cni78w../gallery_3530ae35-52c2-4742-81d3-4b3e1a1c2a6d.png"
+        },
+        "Name": "test 2",
+        "Tag2": "claris.app",
+        "Tags": "",
+        "created_at": 1748898703870,
+        "event_date_time": [
+            0
+        ],
+        "id": 899,
+        "is_event": false
+    },
+    "action_status_turbo_id": 0,
+    "actions_turbo_id": 8,
+    "additional_influencer": 0,
+    "booking_time": 0,
+    "canceled": false,
+    "content_status_turbo_id": 0,
+    "content_url": null,
+    "coupon_status": "not_show",
+    "created_at": 1746623126000,
+    "diary_action_turbo_id": 0,
+    "id": 19705,
+    "isCheckedIn": false,
+    "offers_turbo_id": 1958,
+    "restaurant_id": 899,
+    "timeframes_id": 3777,
+    "user_turbo_id": 550
+}
+
+{
+    "Accomodation": 0,
+    "Action_Name": "Pictures",
+    "Action_icon": {
+        "access": "public",
+        "meta": {
+            "height": 99,
+            "width": 119
+        },
+        "mime": "image/png",
+        "name": "Frame 1321314465 (6) 1.png",
+        "path": "/vault/MY0UB_mA/cv1dqPIKJkK861A4OI7K_b1cbYE/_6nCtA../Frame+1321314465+%286%29+1.png",
+        "size": 4853,
+        "type": "image",
+        "url": "https://xbut-eryu-hhsg.f2.xano.io/vault/MY0UB_mA/cv1dqPIKJkK861A4OI7K_b1cbYE/_6nCtA../Frame+1321314465+%286%29+1.png"
+    },
+    "Amount_left": 0,
+    "Beauty": "",
+    "Big_Drinks": 0,
+    "Big_Plates": 0,
+    "Days_deadline": 3,
+    "Descrizione": "📸 Publish 5+ Edited Carousel Photos Make sure at least one photo includes: 👑You 🌅The ambience 🍽️The food / service Set as a collaboration post with @venue (required) and @claris.app (optional) Tag @venue & @claris.app",
+    "Drinks": 2,
+    "Extra_People": 1,
+    "Gym": "",
+    "Plates": 3,
+    "Social": "Photos",
+    "Type": "instagram",
+    "action_num_id": 20,
+    "action_status_turbo_id": 8,
+    "actions_turbo_id": [],
+    "created_at": 1720273564322,
+    "id": 31,
+    "photos": 5,
+    "stories": 0
+}
+// timeframeData
+{
+    "Counter": 0,
+    "DayOfBooking": null,
+    "DayOfWeek": "",
+    "End": "16",
+    "Left": 0,
+    "Minute_End": "57",
+    "Minute_Start": "00",
+    "Name": "Twitter resturant",
+    "Spot_limit": false,
+    "Spots": 1,
+    "Start": "10",
+    "Visibility": true,
+    "categories_id": 0,
+    "created_at": 1748342249366,
+    "id": 4175,
+    "pause_days": [],
+    "restaurant_id": 615,
+    "usertype_id": 8,
+    "weekdays": [
+        {
+            "created_at": 1708084998664,
+            "day": "Thursday",
+            "id": 4
+        }
+    ],
+    "weekdaysturbo_id": 0
 }
