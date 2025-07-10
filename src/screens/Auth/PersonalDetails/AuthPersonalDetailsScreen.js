@@ -23,6 +23,7 @@ import {useAuthPersonalDetails} from './hooks';
 import CountryFlag from 'react-native-country-flag';
 import AppSelect from '../../../components/Elements/AppSelect';
 import DatePicker from 'react-native-date-picker';
+import {colors} from '../../../utils';
 
 const AuthPersonalDetailsScreen = () => {
   const {
@@ -50,6 +51,8 @@ const AuthPersonalDetailsScreen = () => {
     nationality,
     genderList,
     selectedGender,
+    birthDateErrorMsg,
+    setBirthDateErrorMsg,
     setSelectedGender,
   } = useAuthPersonalDetails();
 
@@ -222,9 +225,11 @@ const AuthPersonalDetailsScreen = () => {
               onConfirm={date => {
                 setIsDatePickerOpen(false);
                 setSelectedDate(date);
+                setBirthDateErrorMsg(''); // Clear error message on valid date selection
               }}
               open={isDatePickerOpen}
             />
+            <Text style={{color: colors.danger}}>{birthDateErrorMsg}</Text>
           </View>
         </View>
       </KeyboardAwareScrollView>

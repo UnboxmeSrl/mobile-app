@@ -1,13 +1,23 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {
+  InteractionManager,
+  Keyboard,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {COLORS, FONTS} from '../../../constants';
 import {BottomSheet} from '../../BottomSheet';
 import {CustomButton, CustomTextInput, CustomTitle} from '../../Custom';
 import {useCreatePassword} from '../CreatePassword/hooks';
+import {useFocusEffect} from '@react-navigation/native';
 // import {useSignUpWithEmail} from './hooks';
 
 const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
+  // const firstInputRef = useRef(null);
+  const [visibleBottomSheet, setVisibleBottomSheet] = useState(false);
   // const {
   //   email,
   //   setEmail,
@@ -40,21 +50,55 @@ const SignUpWithEmail = React.forwardRef(({closeSignUpSheet}, ref) => {
       closeSignUpSheet?.();
     }
   };
+  // useEffect(() => {
+  //   if (visibleBottomSheet) {
+  //     // console.log();
+  //     // Focus on the first input when component mounts
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [visibleBottomSheet]);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     const focusInput = () => {
+  //       firstInputRef.current?.blur(); // Clear previous state
+  //       setTimeout(() => {
+  //         firstInputRef.current?.focus(); // Fresh focus
+  //       }, 100);
+  //     };
+  //     const task = InteractionManager.runAfterInteractions(focusInput);
+  //     return () => task.cancel();
+  //   }, []),
+  // );
+  // console.log('SignUpWithEmail rendered', visibleBottomSheet);
   return (
     <BottomSheet
+      onOpen={() => {
+        const timer = setTimeout(() => {
+          setVisibleBottomSheet(true);
+          // firstInputRef.current?.focus();
+          clearTimeout(timer);
+        }, 50); // Small delay to ensure component is fully mounted
+      }}
       onClose={() => {
-        // setIsSendPress(false);
+        setVisibleBottomSheet(false);
       }}
       ref={ref}>
-      <View style={styles.mainContainer}>
+      <View key={visibleBottomSheet} style={styles.mainContainer}>
         <CustomTitle title={'Sign Up with Email'} />
         <CustomTextInput
+          // ref={firstInputRef}
           handleOnChangeText={setEmail}
           isRemoveTextIconVisible={true}
           keyboardType="email-address"
           handleReset={() => setEmail('')}
           placeholder={'Ex: Chakir@gmail.com'}
           value={email}
+          key={`${visibleBottomSheet}`}
+          autoFocus={true}
+          // onFocus={() => {
+          //   Keyboard?.emit('keyboardDidShow');
+          // }}
         />
 
         <CustomTextInput

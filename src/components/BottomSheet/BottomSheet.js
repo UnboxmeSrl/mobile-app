@@ -5,9 +5,10 @@ import {moderateScale, verticalScale} from 'react-native-size-matters';
 import Toast from 'react-native-toast-message';
 
 const BottomSheet = React.forwardRef(
-  ({children, onClose, height = verticalScale(450)}, ref) => {
+  ({children, onClose, onOpen, height = verticalScale(450)}, ref) => {
     return (
       <RBSheet
+        onOpen={onOpen}
         closeOnDragDown
         customStyles={{
           container: styles.containerStyle,

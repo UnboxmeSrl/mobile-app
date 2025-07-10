@@ -11,9 +11,11 @@ import {
   showToastError,
 } from '../../../services';
 import {
+  checkWithCurrentDateDifference,
   createChatByBookingDetail,
   getFormattedDate,
   getFormattedTime,
+  setCustomTimeFromISOString,
 } from '../../../utils';
 
 const useBookingDetails = () => {
@@ -135,6 +137,21 @@ const useBookingDetails = () => {
 
     return `${day}-${month}-${year}`;
   };
+  // console.log(
+  //   typeof timeFrameData?.[0]?.End,
+  //   typeof timeFrameData?.[0]?.Minute_End,
+  //   timeFrameData?.[0]?.End,
+  //   timeFrameData?.[0]?.Minute_End,
+  //   setCustomTimeFromISOString(
+  //     new Date(),
+  //     timeFrameData?.[0]?.End,
+  //     timeFrameData?.[0]?.Minute_End,
+  //   ),
+  //   setCustomTimeFromISOString(new Date(), 16, 48),
+  //   // timeFrameData?.[0],
+  //   // new Date().getTime(timeFrameData?/) / 6000 - new Date().getTime() / 6000,
+  //   'new Date().getMinutes',
+  // );
 
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
@@ -160,14 +177,29 @@ const useBookingDetails = () => {
       setIsLoading(false);
       return;
     }
+
     // console.log(
-    //   'after24Hours',
-    //   currentBookingDateTime?.getTime(),
-    //   after24Hours,
-    //   currentBookingDateTime.getTime() >= after24Hours,
-    //   selectedDate,
+    //   currentBookingDateTime,
+    //   timeFrameData?.[0]?.DayOfBooking,
+    //   timeFrameData?.[0]?.End,
+    //   timeFrameData?.[0]?.Minute_End,
+    //   checkWithCurrentDateDifference(
+    //     currentBookingDateTime,
+    //     timeFrameData?.[0]?.End,
+    //     timeFrameData?.[0]?.Minute_End,
+    //   ),
+    //   'checkWithCurrentDateDifference',
     // );
-    if (currentBookingDateTime?.getTime() >= after24Hours) {
+    if (
+      currentBookingDateTime?.getTime() >= after24Hours ||
+      ((restaurantDetails?.booking_buffer_time == 0 ||
+        !restaurantDetails?.booking_buffer_time) &&
+        checkWithCurrentDateDifference(
+          currentBookingDateTime,
+          timeFrameData?.[0]?.End,
+          timeFrameData?.[0]?.Minute_End,
+        ) >= 10)
+    ) {
       const bookingTimeStamp = currentBookingDateTime?.valueOf();
       const formattedDate = `${currentBookingDateTime?.getFullYear()}-${
         currentBookingDateTime.getMonth() + 1 < 10
@@ -258,10 +290,18 @@ const useBookingDetails = () => {
       setIsLoading(false);
     } else {
       let error = {};
-      if (restaurantDetails?.booking_buffer_time === 0) {
+      if (
+        (restaurantDetails?.booking_buffer_time == 0 ||
+          !restaurantDetails?.booking_buffer_time) &&
+        checkWithCurrentDateDifference(
+          currentBookingDateTime,
+          timeFrameData?.[0]?.End,
+          timeFrameData?.[0]?.Minute_End,
+        ) < 10
+      ) {
         error = {
           message:
-            'You can only book booking which starts after your current time.',
+            'You can only book booking which starts after your current date.',
         };
       } else {
         error = {

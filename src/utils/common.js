@@ -174,6 +174,29 @@ export const getFormattedTime = dt => {
   return `${hours}:${minutes}`;
 };
 
+export const setCustomTimeFromISOString = (givenDate, hour, minute) => {
+  const date = new Date(givenDate); // Parse original ISO date
+
+  const customDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    hour,
+    minute,
+    0,
+    0,
+  );
+
+  return customDate.getTime(); // Return in milliseconds
+};
+
+export const checkWithCurrentDateDifference = (givenDate, hour, minute) => {
+  const bookingEndTimeInMin =
+    setCustomTimeFromISOString(givenDate, hour, minute) / 60000;
+  const creatingBookingTimeInMin = new Date() / 60000;
+  return (bookingEndTimeInMin - creatingBookingTimeInMin).toFixed(2); // Return in milliseconds
+};
+
 export const compareWithCurrDate = date => {
   const currDate = new Date(new Date().toUTCString());
 

@@ -28,6 +28,7 @@ const useAuthPersonalDetails = () => {
   const [country, setCountry] = useState(userDetails?.country ?? {});
   const dispatch = useDispatch();
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  const [birthDateErrorMsg, setBirthDateErrorMsg] = useState(false);
 
   const onSelect = country => {
     setCountry(country);
@@ -45,6 +46,10 @@ const useAuthPersonalDetails = () => {
     setCountry(country);
   };
   const handleNextPress = () => {
+    if (!selectedDate) {
+      setBirthDateErrorMsg('Birth date is required');
+      return;
+    }
     dispatch(
       setAuthData({
         name: name.trim(),
@@ -70,7 +75,7 @@ const useAuthPersonalDetails = () => {
       phoneNumber &&
       country?.name &&
       city &&
-      selectedDate &&
+      // selectedDate &&
       nationality?.name &&
       selectedGender?.id
     ) {
@@ -92,6 +97,8 @@ const useAuthPersonalDetails = () => {
 
   return {
     isBtnDisabled,
+    birthDateErrorMsg,
+    setBirthDateErrorMsg,
     name,
     setName,
     surname,

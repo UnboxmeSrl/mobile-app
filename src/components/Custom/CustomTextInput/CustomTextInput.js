@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {
   Image,
   StyleSheet,
@@ -12,19 +12,22 @@ import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const CustomTextInput = ({
-  placeholder,
-  value,
-  style,
-  handleOnChangeText,
-  isRemoveTextIconVisible = false,
-  handleReset,
-  keyboardType = 'default',
-  isSecureTextInput = false,
-  inputWrapperStyle,
-  search,
-  ...props
-}) => {
+const CustomTextInput = (
+  {
+    placeholder,
+    value,
+    style,
+    handleOnChangeText,
+    isRemoveTextIconVisible = false,
+    handleReset,
+    keyboardType = 'default',
+    isSecureTextInput = false,
+    inputWrapperStyle,
+    search,
+    ...props
+  },
+  ref,
+) => {
   const [isFocused, setIsFocused] = useState();
   const [isSecureText, setIsSecureText] = useState(isSecureTextInput);
 
@@ -61,6 +64,7 @@ const CustomTextInput = ({
             secureTextEntry={isSecureText}
             returnKeyType="next"
             {...props}
+            ref={ref}
           />
         </View>
         {isRemoveTextIconVisible && value?.length > 0 && (
@@ -93,7 +97,7 @@ const CustomTextInput = ({
   );
 };
 
-export default CustomTextInput;
+export default forwardRef(CustomTextInput);
 
 const styles = StyleSheet.create({
   iconContainer: {

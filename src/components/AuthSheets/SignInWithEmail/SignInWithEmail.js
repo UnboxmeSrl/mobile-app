@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {COLORS, FONTS} from '../../../constants';
@@ -25,10 +25,22 @@ const SignInWithEmail = React.forwardRef(
     } = useSignInWithEmail(isFromBookRedirected);
     const {navigateToForgotPassword} = useSignUp;
     const navigation = useNavigation();
+    const [visibleBottomSheet, setVisibleBottomSheet] = useState(false);
     return (
       <>
-        <BottomSheet ref={ref}>
-          <View style={styles.mainContainer}>
+        <BottomSheet
+          onOpen={() => {
+            const timer = setTimeout(() => {
+              setVisibleBottomSheet(true);
+              // firstInputRef.current?.focus();
+              clearTimeout(timer);
+            }, 50); // Small delay to ensure component is fully mounted
+          }}
+          onClose={() => {
+            setVisibleBottomSheet(false);
+          }}
+          ref={ref}>
+          <View key={visibleBottomSheet} style={styles.mainContainer}>
             <CustomTitle title={'Enter your email'} />
             <CustomTextInput
               handleOnChangeText={setEmail}
@@ -37,6 +49,8 @@ const SignInWithEmail = React.forwardRef(
               placeholder={'Ex: Chakir@gmail.com'}
               handleReset={() => setEmail('')}
               value={email}
+              autoFocus={true}
+              key={`${visibleBottomSheet}`}
             />
             <CustomTextInput
               handleOnChangeText={setPassword}
