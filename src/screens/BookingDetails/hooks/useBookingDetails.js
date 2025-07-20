@@ -301,7 +301,7 @@ const useBookingDetails = () => {
       ) {
         error = {
           message:
-            'You can only book booking which starts after your current date.',
+            'This time slot isn’t available. Please select a different time or date.',
         };
       } else {
         error = {
