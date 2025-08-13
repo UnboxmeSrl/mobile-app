@@ -37,7 +37,7 @@ const useNewCoupon = () => {
       amenityIcon: IMAGES.beauty,
       // amenityDescription: 'at your choice',
     };
-  } else if (actionNumId === 8 || actionNumId === 53) {
+  } else if (actionNumId === 8 || actionNumId === 53 || actionNumId === 54) {
     amenityDetails = {
       amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,

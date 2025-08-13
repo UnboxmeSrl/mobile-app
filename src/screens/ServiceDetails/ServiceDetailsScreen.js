@@ -141,6 +141,7 @@ const ServiceDetails = () => {
           {actionNumId === 7 ||
           actionNumId === 8 ||
           actionNumId === 53 ||
+          actionNumId === 54 ||
           actionNumId === 9 ||
           actionNumId === 10 ||
           actionNumId === 14 ||

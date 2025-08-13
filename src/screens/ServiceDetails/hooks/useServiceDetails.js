@@ -69,7 +69,7 @@ const useServiceDetails = () => {
       amenityIcon: IMAGES.beauty,
       // amenityDescription: serviceDetails?.at_offername,
     };
-  } else if (actionNumId === 8 || actionNumId === 53) {
+  } else if (actionNumId === 8 || actionNumId === 53 || actionNumId === 54) {
     amenityDetails = {
       amenityName: `${serviceDetails?._actions_turbo?.Gym} X Pass`,
       amenityIcon: IMAGES.gym,

@@ -143,7 +143,8 @@ const YourScheduleDetailsScreen = () => {
           {actionNumId === 7 ||
           actionNumId === 8 ||
           actionNumId === 9 ||
-          actionNumId === 53 ? (
+          actionNumId === 53 ||
+          actionNumId === 54 ? (
             <View style={styles.specialAmenity}>
               <>
                 <View
