@@ -1,20 +1,23 @@
 import Clipboard from '@react-native-clipboard/clipboard';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Platform} from 'react-native';
 import {Image} from 'react-native-compressor';
 import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
+import {
+  formatInstagramUrl,
+  formatInstaUrl,
+  formatTiktokUrl,
+} from '../../../navigation/constants';
 import {updateLoginData} from '../../../redux';
 import {
   getInterestTopics,
   showToastError,
   showToastSuccess,
-  updateInfluencerType,
   updateProfile,
 } from '../../../services';
 import {checkPermission, openGallery} from '../../../utils';
-import {formatInstaUrl, formatTiktokUrl} from '../../../navigation/constants';
 
 const useEditProfile = () => {
   const user = useSelector(state => state.authSlice.loginData);
@@ -31,6 +34,14 @@ const useEditProfile = () => {
   const isIos = Platform.OS === 'ios';
   const isAndroid = Platform.OS === 'android';
   const androidVersion = Platform.Version;
+  const defaultTiktokUrl = 'https://www.tiktok.com/@';
+  const defaultInstagramUrl = 'https://www.instagram.com/';
+  let [tiktokUserName, setTiktokUserName] = useState('');
+  const {username: tiktokUserNameInput, link: tiktokUserNameLink} =
+    formatTiktokUrl(user?.Tiktok_account);
+  const {username: instaUserNameInput, link: instaUserNameLink} =
+    formatInstagramUrl(user?.IG_account);
+  // const [tiktokInputValue, setTiktokInputValue] = useState(defaultTiktokUrl);
 
   const preIntrest = useMemo(() => {
     const data = user?.user_interest_topics_turbo_id?.reduce(
@@ -39,6 +50,24 @@ const useEditProfile = () => {
     );
     return data;
   }, [user?.user_interest_topics_turbo_id]);
+  // const tiktokInputOnChange = useCallback((value, onChange) => {
+  //   let {username, link} = formatTiktokUrl(value);
+  //   // let withoutHttpValue = isInputValid ? link : value;
+  //   // console.log(link, value, 'link');
+  //   // return;
+  //   onChange(username); // Update input value for TikTok
+  //   setTiktokUserName(link);
+  // }, []);
+  const tiktokRef = useRef(null);
+  const instaRef = useRef(null);
+
+  const setDynamicInputTextSpacing = (ref, len) => {
+    // run on next frame so RN has applied focus
+    // requestAnimationFrame(() => {
+    ref.current?.setNativeProps({selection: {start: len}});
+    // });
+  };
+  // const tiktokInputRef = useRef(null);
 
   const {
     control,
@@ -52,10 +81,10 @@ const useEditProfile = () => {
       biography: user?.bio ?? '',
       fullName: user?.name ?? '',
       id: user?.id,
-      instagramLink: user?.IG_account ?? '',
+      instagramLink: instaUserNameInput || '',
       mapsAccount: '',
       nationality: user?.nationality ?? 'Anguilla',
-      tiktokLink: user?.Tiktok_account ?? '',
+      tiktokLink: tiktokUserNameInput || '',
     },
   });
 
@@ -99,6 +128,10 @@ const useEditProfile = () => {
 
   const onSubmit = useCallback(
     async data => {
+      const {link: tiktokUserNameLinkNew} = formatTiktokUrl(data?.tiktokLink);
+      const {link: instaUserNameLinkNew} = formatInstagramUrl(
+        data?.instagramLink,
+      );
       const topicIds = Object.values({
         ...preIntrest,
         ...selectedIntrest,
@@ -132,12 +165,13 @@ const useEditProfile = () => {
           },
         );
       }
-
-      formData.append('IG_account', formatInstaUrl(data?.instagramLink || ''));
-      formData.append(
-        'Tiktok_account',
-        formatTiktokUrl(data?.tiktokLink || ''),
-      );
+      // console.log(
+      //   'instaUserNameLinkNew',
+      //   instaUserNameLinkNew,
+      //   tiktokUserNameLinkNew,
+      // );
+      formData.append('IG_account', instaUserNameLinkNew || '');
+      formData.append('Tiktok_account', tiktokUserNameLinkNew || '');
       const resProfile = await updateProfile({formData, userID: user?.id});
       if (resProfile && resProfile?.success) {
         dispatch(updateLoginData(resProfile.data));
@@ -236,8 +270,16 @@ const useEditProfile = () => {
     interests,
     preIntrest,
     selectedIntrest,
+    tiktokUserName,
     onSubmit,
     onSelect,
+    // tiktokInputValue,
+    defaultTiktokUrl,
+    defaultInstagramUrl,
+    tiktokRef,
+    instaRef,
+    setTiktokUserName,
+    setDynamicInputTextSpacing,
     handleIntrest,
     handlePaste,
     handleGalleryPress,

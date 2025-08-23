@@ -22,9 +22,14 @@ import {
   INSTA_URL_REGEX,
   TIKTOK_URL_REGEX,
   formatTiktokUrl,
+  checkTiktokUrl,
+  formatInstagramUrl,
 } from '../../../navigation/constants';
 import AppSelect from '../../../components/Elements/AppSelect';
 import {showToastError} from '../../../services';
+
+const defaultTiktokUrl = 'https://www.tiktok.com/@';
+const defaultInstaUrl = 'https://www.instagram.com/';
 
 const AuthSocialNetworkScreen = () => {
   const {
@@ -50,12 +55,15 @@ const AuthSocialNetworkScreen = () => {
   const [instaUserNameValue, setInstaUserNameValue] = useState('');
 
   const isValidTiktok = useMemo(() => {
-    return tiktokInputValue && TIKTOK_URL_REGEX.test(tiktokInputValue);
-  }, [tiktokInputValue]);
+    return tiktokUserName && TIKTOK_URL_REGEX.test(tiktokUserName);
+  }, [tiktokUserName]);
+  // const default = useMemo(() => {
+  //   return tiktokInputValue && TIKTOK_URL_REGEX.test(tiktokInputValue);
+  // }, [tiktokInputValue]);
 
   const isValidInstagram = useMemo(() => {
-    return instaUserNameValue && INSTA_URL_REGEX.test(instaUserNameValue);
-  }, [instaUserNameValue]);
+    return instaUserName && INSTA_URL_REGEX.test(instaUserName);
+  }, [instaUserName]);
 
   // console.log(isValidInstagram, instaUserNameValue, 'isValidInstagram');
   return (
@@ -95,14 +103,16 @@ const AuthSocialNetworkScreen = () => {
           </View> */}
           <View style={styles.socialMediaMainContainer}>
             <TouchableOpacity
-              onPress={handleOnTikTokPress}
+              onPress={() => {
+                setShowErrorMsg('');
+                handleOnTikTokPress();
+              }}
               style={[
                 styles.socialMediaItem,
                 {
-                  backgroundColor:
-                    tiktokUserName.trim() !== ''
-                      ? COLORS.newPrimary
-                      : COLORS.lightNewPrimaryA6,
+                  backgroundColor: !tiktokUserName.trim()
+                    ? COLORS.lightNewPrimaryA6
+                    : COLORS.newPrimary,
                 },
               ]}
               activeOpacity={0.5}>
@@ -113,10 +123,9 @@ const AuthSocialNetworkScreen = () => {
                   style={[
                     styles.socialMediaNameText,
                     {
-                      color:
-                        tiktokUserName.trim() !== ''
-                          ? COLORS.white
-                          : COLORS.gray,
+                      color: !tiktokUserName.trim()
+                        ? COLORS.gray
+                        : COLORS.white,
                     },
                   ]}>
                   Tik tok account
@@ -128,10 +137,9 @@ const AuthSocialNetworkScreen = () => {
                   style={[
                     styles.loginIntoIcon,
                     {
-                      tintColor:
-                        tiktokUserName.trim() !== ''
-                          ? COLORS.white
-                          : COLORS.black,
+                      tintColor: !tiktokUserName.trim()
+                        ? COLORS.black
+                        : COLORS.white,
                     },
                   ]}
                 />
@@ -139,7 +147,10 @@ const AuthSocialNetworkScreen = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={handleOnInstaPress}
+              onPress={() => {
+                setShowErrorMsg('');
+                handleOnInstaPress();
+              }}
               style={[
                 styles.socialMediaItem,
                 {
@@ -199,37 +210,34 @@ const AuthSocialNetworkScreen = () => {
         ref={tiktokSheetRef}
         title={'Connect Tiktok account'}
         description={'Enter your tiktok account username'}
-        placeholder={'your tiktok @username'}
+        placeholder={'username'}
         field={tiktokInputValue}
-        showInfoText={
-          showErrorMsg ||
-          'If you have an account add user name after @ else keep blank'
-        }
-        defaultInfoMsg={!showErrorMsg}
-        // onChangeText={setTiktokUserName}
         // disabled={!isValidTiktok}
+        defaultInfoMsg={!showErrorMsg}
+        defaultUrl={defaultTiktokUrl}
+        showInfoText={
+          showErrorMsg
+          //  || 'If you have an account add user name after @ else keep blank'
+        }
+        // onChangeText={setTiktokUserName}
         onChangeText={value => {
-          let link = formatTiktokUrl(value);
-          setTiktokInputValue(value); // Update input value for TikTok
-
-          console.log(link, 'link');
+         
+          let {username, link} = formatTiktokUrl(value);
+         
+          setTiktokInputValue(username); // Update input value for TikTok
           setTiktokUserName(link);
           dispatch(setAuthData({tiktokUserName: ''}));
           // setAuthData({tiktokUserName: ''});
         }}
         handlePress={() => {
-          console.log('check_add_press', tiktokUserName);
           if (isValidTiktok) {
             dispatch(setAuthData({tiktokUserName}));
-            // }
             setTimeout(() => {
               tiktokSheetRef?.current?.close();
             }, 1000);
             setShowErrorMsg('');
           } else if (tiktokInputValue) {
-            setShowErrorMsg(
-              'Username must start with @ and can include lowercase letters, numbers, and underscores only. No spaces are allowed.',
-            );
+            setShowErrorMsg('https://www.tiktok.com/@username');
           } else {
             setShowErrorMsg('');
           }
@@ -240,21 +248,23 @@ const AuthSocialNetworkScreen = () => {
         ref={instaSheetRef}
         title={'Connect Instagram account'}
         description={'Enter your instagram account username'}
-        placeholder={'your instagram username'}
+        placeholder={'username'}
         field={instaUserNameValue}
-        disabled={!isValidInstagram}
+        // disabled={!isValidInstagram}
         defaultInfoMsg={!showErrorMsg}
+        defaultUrl={defaultInstaUrl}
         showInfoText={
-          showErrorMsg || "if you don't have an account keep it blank"
+          showErrorMsg
+          // || "if you don't have an account keep it blank"
         }
         // onChangeText={setInstaUserName}
         onChangeText={value => {
-          const link = formatInstaUrl(value);
-          console.log('link_instagram', link);
+          const {username, link} = formatInstagramUrl(value);
+          // console.log('link_instagram', link);
+          setInstaUserNameValue(username); // Update input value for TikTok
           setInstaUserName(link);
-          setInstaUserNameValue(value); // Update input value for TikTok
-          // setAuthData({instaUserName: ''});
           dispatch(setAuthData({instaUserName: ''}));
+          // setAuthData({instaUserName: ''});
         }}
         handlePress={() => {
           // console.log('check_add_press_InstaUserName', instaUserName);
@@ -273,7 +283,7 @@ const AuthSocialNetworkScreen = () => {
             }, 1000);
             setShowErrorMsg('');
           } else if (instaUserNameValue) {
-            setShowErrorMsg('Username cannot include @ or spaces');
+            setShowErrorMsg('https://www.instagram.com/username');
           } else {
             setShowErrorMsg('');
           }

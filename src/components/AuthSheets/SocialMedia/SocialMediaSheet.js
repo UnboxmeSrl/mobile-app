@@ -6,6 +6,7 @@ import {COLORS, FONTS} from '../../../constants';
 import {BottomSheet} from '../../BottomSheet';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 import {IMAGES} from '../../../assets';
+import {perfectSize} from '../../../utils';
 
 const SocialMediaSheet = React.forwardRef(
   (
@@ -19,10 +20,15 @@ const SocialMediaSheet = React.forwardRef(
       handlePress,
       disabled,
       defualtInfoMsg,
+      defaultUrl,
+      setTiktokInputValue,
     },
     ref,
   ) => {
     const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+    const inputRef = React.useRef(null);
+
+    // const [url, setUrl] = useState(defaultUrl);
     // const [errorText, setErrorText] = useState(showInfoText ?? '');
 
     useEffect(() => {
@@ -33,7 +39,16 @@ const SocialMediaSheet = React.forwardRef(
         setIsBtnDisabled(true);
       }
     }, [field]);
-    console.log(showInfoText, 'showInfoText', defualtInfoMsg, 'defualtInfoMsg');
+    // console.log(showInfoText, 'showInfoText', defualtInfoMsg, 'defualtInfoMsg');
+    useEffect(() => {
+      // Focus and position cursor at end
+      setTimeout(() => {
+        inputRef.current?.focus();
+        inputRef.current?.setNativeProps({
+          selection: {start: defaultUrl.length},
+        });
+      }, 100);
+    }, [defaultUrl?.length]);
 
     return (
       <BottomSheet ref={ref}>
@@ -47,10 +62,21 @@ const SocialMediaSheet = React.forwardRef(
             </View>
             <View style={styles.fieldContainer}>
               <CustomTextInput
+                inputWrapperStyle={{paddingLeft: scale(10)}}
+                textInputStyle={{
+                  minWidth: moderateScale(130),
+                  maxWidth: moderateScale(150),
+                  alignItems: 'center',
+                  marginLeft: moderateScale(-3),
+                }}
+                ref={inputRef}
                 placeholder={`${placeholder}`}
                 value={field}
+                PrefixValue={defaultUrl}
                 handleOnChangeText={onChangeText}
                 isRemoveTextIconVisible={true}
+                handleReset={() => onChangeText('')}
+                // multiLine
               />
               {!!showInfoText && (
                 <View style={styles.infoContainer}>

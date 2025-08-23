@@ -23,7 +23,9 @@ const CustomTextInput = (
     keyboardType = 'default',
     isSecureTextInput = false,
     inputWrapperStyle,
+    textInputStyle,
     search,
+    PrefixValue,
     ...props
   },
   ref,
@@ -48,6 +50,7 @@ const CustomTextInput = (
               style={{marginLeft: 12}}
             />
           )}
+          {!!PrefixValue && <Text>{PrefixValue}</Text>}
           <TextInput
             allowFontScaling={false}
             value={value}
@@ -56,7 +59,7 @@ const CustomTextInput = (
             }}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            style={styles.textInput}
+            style={[styles.textInput, textInputStyle]}
             autoCapitalize={'none'}
             placeholder={placeholder}
             placeholderTextColor={COLORS.grey}
@@ -109,6 +112,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor: 'yellow',
   },
+  prefixValue: {
+    paddingLeft: moderateScale(10),
+  },
   textInputContainerWithFocus: {
     borderWidth: moderateScale(2),
     borderColor: COLORS.black,
@@ -137,7 +143,7 @@ const styles = StyleSheet.create({
   textInput: {
     minWidth: moderateScale(200),
     maxWidth: moderateScale(350),
-    marginLeft: scale(10),
+    // marginLeft: scale(10),
     color: COLORS.black,
     fontFamily: FONTS.quicksand,
     fontWeight: '600',

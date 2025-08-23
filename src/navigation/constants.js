@@ -19,30 +19,72 @@ export const DARK_STATUS_BAR = {
 };
 
 export const TIKTOK_URL_REGEX =
-  /^(https?:\/\/)?(www\.)?tiktok\.com\/@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/;
-// /^(https?:\/\/)?(www\.)?tiktok\.com\/@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@?(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/;
+  /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-z0-9._]{2,24}\/?$|^@[a-z0-9._]{2,24}$/i;
+export const TIKTOK_USERNAME_REGEX =
+  /^[a-z0-9._]{2,24}\/?$|^@[a-z0-9._]{2,24}$/i;
 
+// /^(https?:\/\/)?(www\.)?tiktok\.com\/@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}\/?$|^@(?!.*\.\.)(?!\.)(?!.*\.$)[a-z0-9._]{2,24}$/
+
+export const INSTA_USERNAME_REGEX =
+  /^[a-zA-Z0-9._]{1,30}\/?$|^(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}$/;
 export const INSTA_URL_REGEX =
   /^(https?:\/\/)?(www\.)?instagram\.com\/(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}\/?$|^(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}$/;
 // /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/;
 
+export function checkTiktokUrl(input) {
+  // if (TIKTOK_URL_REGEX.test(input)) {
+  // Extract the username only
+  let username = input
+    .replace(/^(https?:\/\/)?(www\.)?tiktok\.com\/@?/, '')
+    .replace(/^@/, '')
+    .replace(/\/$/, '');
+
+  // Add @ if missing
+  // if (!username.startsWith('@')) {
+  //   username = `@${username}`;
+  // }
+
+  return username;
+  // } else {
+  //   return input;
+  // }
+}
 export function formatTiktokUrl(input) {
-  if (TIKTOK_URL_REGEX.test(input)) {
-    // Extract the username only
-    let username = input
-      .replace(/^(https?:\/\/)?(www\.)?tiktok\.com\/@?/, '')
-      .replace(/^@/, '')
-      .replace(/\/$/, '');
+  if (!input?.trim()) return {link: '', username: ''};
+  // Extract the username only
+  let username = input
+    .replace(/^(https?:\/\/)?(www\.)?tiktok\.com\/@?/, '')
+    .replace(/^@/, '')
+    .replace(/\/$/, '');
 
-    // Add @ if missing
-    if (!username.startsWith('@')) {
-      username = `@${username}`;
-    }
+  // Add @ if missing
+  // if (!username.startsWith('@')) {
+  //   username = `${username}`;
+  // }
 
-    return `http://www.tiktok.com/${username}`;
-  } else {
-    return '';
-  }
+  return {
+    link: `https://www.tiktok.com/@${username}`,
+    username,
+  };
+}
+export function formatInstagramUrl(input) {
+  // Extract the username only
+  if (!input?.trim()) return {link: '', username: ''};
+  let username = input
+    .trim()
+    .replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '')
+    .replace(/^@/, '') // in case user pasted a handle like "@user"
+    .replace(/\/$/, ''); // remove trailing slash
+
+  // Add @ if missing
+  // if (!username.startsWith('@')) {S
+  //   username = `${username}`;
+  // }
+
+  return {
+    link: `https://www.instagram.com/${username}`,
+    username,
+  };
 }
 // export function formatTikTokUrl(input) {
 //   // Regex to check if input is only @username
@@ -62,21 +104,21 @@ export function formatTiktokUrl(input) {
 //     return '';
 //   }
 // }
-export function formatInstaUrl(input) {
-  if (INSTA_URL_REGEX.test(input)) {
-    // If it's a plain username, format it as a URL
-    if (!input.includes('instagram.com')) {
-      return `https://www.instagram.com/${input}`;
-    }
-    // If it's already a URL, normalize it
-    return input.replace(
-      /^(?:https?:\/\/)?(?:www\.)?instagram\.com\//,
-      'https://www.instagram.com/',
-    );
-  } else {
-    return '';
-  }
-}
+// export function formatInstaUrl(input) {
+//   if (INSTA_URL_REGEX.test(input)) {
+//     // If it's a plain username, format it as a URL
+//     if (!input.includes('instagram.com')) {
+//       return `https://www.instagram.com/${input}`;
+//     }
+//     // If it's already a URL, normalize it
+//     return input.replace(
+//       /^(?:https?:\/\/)?(?:www\.)?instagram\.com\//,
+//       'https://www.instagram.com/',
+//     );
+//   } else {
+//     return '';
+//   }
+// }
 // export function formatInstaUrl(input) {
 //   const userNameRegex =
 //     /^(?!.*[@]|.*\.com)(?!\.|\d+$|.*[_.]{2}|.*\.$)[a-zA-Z0-9_]+$/;

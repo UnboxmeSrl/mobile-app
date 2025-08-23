@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import CountryFlag from 'react-native-country-flag';
 import CountryPicker from 'react-native-country-picker-modal';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import insta from '../../assets/icons/insta.png';
 import map from '../../assets/icons/map.png';
@@ -32,10 +32,14 @@ import {
   SubHeader,
 } from '../../components';
 import {COLORS, FONTS} from '../../constants';
+import {
+  formatInstagramUrl,
+  formatTiktokUrl,
+  INSTA_USERNAME_REGEX,
+  TIKTOK_USERNAME_REGEX,
+} from '../../navigation/constants';
 import {colors, perfectSize} from '../../utils';
 import {useEditProfile} from './hooks';
-import AppSelect from '../../components/Elements/AppSelect';
-import {INSTA_URL_REGEX, TIKTOK_URL_REGEX} from '../../navigation/constants';
 
 const EditProfileScreen = () => {
   const {
@@ -51,6 +55,14 @@ const EditProfileScreen = () => {
     selectedIntrest,
     onSubmit,
     onSelect,
+    defaultTiktokUrl,
+    defaultInstagramUrl,
+    tiktokRef,
+    instaRef,
+    setDynamicInputTextSpacing,
+    tiktokInputOnChange,
+    tiktokUserName,
+    setTiktokUserName,
     handleIntrest,
     handlePaste,
     handleGalleryPress,
@@ -168,20 +180,44 @@ const EditProfileScreen = () => {
             name="instagramLink"
             rules={{
               pattern: {
-                value: INSTA_URL_REGEX,
+                value: INSTA_USERNAME_REGEX,
                 // /^(https?:\/\/www\.instagram\.com\/[a-zA-Z0-9_]+|www\.instagram\.com\/[a-zA-Z0-9_]+|instagram\.com\/[a-zA-Z0-9_]+|[a-zA-Z0-9_]+)$/,
                 message: 'Enter a valid Instagram profile link',
               },
             }}
             render={({value, onChange, ref}) => (
               <AppInput
+                inputWrapperStyle={{
+                  paddingHorizontal: perfectSize(16),
+                  // backgroundColor: 'cyan',
+                }}
+                prefixStyle={{paddingLeft: perfectSize(6)}}
+                textInputStyle={{
+                  minWidth: moderateScale(80),
+                  maxWidth: moderateScale(100),
+                  alignItems: 'center',
+                  marginLeft: moderateScale(-7),
+                  // backgroundColor: 'cyan',
+                }}
+                iconStyle={{fontSize: perfectSize(20)}}
+                prefixValue={defaultInstagramUrl}
                 errors={errors.instagramLink?.message}
                 img={insta}
                 label="Instagram link"
                 link
-                onChange={onChange}
+                onChange={val => {
+                  let {username, link} = formatInstagramUrl(val);
+                  onChange(username);
+                  // setTiktokUserName(link);
+                }}
                 onPress={() => handlePaste('instagramLink')}
-                placeholder="Ex: instagram.com/uichakir"
+                onfocus={() =>
+                  setDynamicInputTextSpacing(
+                    tiktokRef,
+                    defaultTiktokUrl?.length,
+                  )
+                }
+                placeholder="user name"
                 ref={ref}
                 value={value}
               />
@@ -193,21 +229,45 @@ const EditProfileScreen = () => {
             name="tiktokLink"
             rules={{
               pattern: {
-                value: TIKTOK_URL_REGEX,
+                value: TIKTOK_USERNAME_REGEX,
                 message: 'Enter a valid Tiktok profile link',
               },
             }}
             render={({value, onChange, ref}) => (
               <AppInput
+                inputWrapperStyle={{
+                  paddingHorizontal: perfectSize(16),
+                  // backgroundColor: 'cyan',
+                }}
+                prefixStyle={{paddingLeft: perfectSize(4)}}
+                textInputStyle={{
+                  minWidth: moderateScale(80),
+                  maxWidth: moderateScale(100),
+                  alignItems: 'center',
+                  marginLeft: moderateScale(-7),
+                  // backgroundColor: 'cyan',
+                }}
+                iconStyle={{fontSize: perfectSize(20)}}
+                ref={tiktokRef}
                 errors={errors.tiktokLink?.message}
                 img={tiktok}
                 label="Tiktok link"
                 link
-                onChange={onChange}
+                prefixValue={defaultTiktokUrl}
+                onChange={val => {
+                  let {username, link} = formatTiktokUrl(val);
+                  onChange(username);
+                  // setTiktokUserName(link);
+                }}
                 onPress={() => handlePaste('tiktokLink')}
-                placeholder="Ex: @tiktok.com/uichakir"
-                ref={ref}
-                value={value}
+                onfocus={() =>
+                  setDynamicInputTextSpacing(
+                    tiktokRef,
+                    defaultTiktokUrl?.length,
+                  )
+                }
+                placeholder="user name"
+                value={tiktokUserName || value}
               />
             )}
             // rules={{ required: 'link is required' }}
@@ -217,6 +277,12 @@ const EditProfileScreen = () => {
             name="mapsAccount"
             render={({onChange, value, ref}) => (
               <AppInput
+                inputWrapperStyle={{
+                  paddingHorizontal: perfectSize(14),
+                  // backgroundColor: 'yellow',
+                }}
+                iconStyle={{fontSize: perfectSize(20)}}
+                ref={instaRef}
                 errors={errors.mapsAccount?.message}
                 img={map}
                 label="Maps Account"
@@ -224,8 +290,13 @@ const EditProfileScreen = () => {
                 onChange={onChange}
                 onPress={() => handlePaste('mapsAccount')}
                 placeholder="Ex: maps.com/uichakir"
-                ref={ref}
                 value={value}
+                onfocus={() =>
+                  setDynamicInputTextSpacing(
+                    instaRef,
+                    defaultInstagramUrl?.length,
+                  )
+                }
               />
             )}
           />

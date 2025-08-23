@@ -1,5 +1,12 @@
 import React, {forwardRef, memo} from 'react';
-import {Image, Pressable, StyleSheet, TextInput, View} from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors, perfectSize} from '../../utils';
 import AppText from './AppText';
@@ -10,7 +17,7 @@ const AppInput = (
     label,
     placeholder,
     style,
-    inputStyle,
+    inputWrapperStyle,
     textInputStyle,
     value,
     isDisabled,
@@ -21,6 +28,9 @@ const AppInput = (
     onPress,
     onChange,
     autoCapitalize = 'none',
+    prefixValue,
+    prefixStyle,
+    iconSyle,
     ...rest
   },
   ref,
@@ -29,9 +39,12 @@ const AppInput = (
   return (
     <View style={[styles.appInput, style]}>
       {label && <AppText style={styles.label}>{label}</AppText>}
-      <View style={[styles.inputWrapper, inputStyle]}>
-        {icon && <Icon name={icon} color={'yellow'} style={styles.icon} />}
+      <View style={[styles.inputWrapper, inputWrapperStyle]}>
+        {icon && (
+          <Icon name={icon} color={'yellow'} style={[styles.icon, iconSyle]} />
+        )}
         {img && <Image source={img} style={styles.img} />}
+        {!!prefixValue && <Text style={prefixStyle}>{prefixValue}</Text>}
         <TextInput
           allowFontScaling={false}
           autoCapitalize={autoCapitalize}
@@ -73,15 +86,16 @@ const styles = StyleSheet.create({
   appInput: {
     marginBottom: perfectSize(16),
     width: '100%',
+    // backgroundColor: 'yellow',
   },
   icon: {
     color: '#00000066',
     fontSize: perfectSize(24),
   },
   img: {
-    height: perfectSize(20),
+    height: perfectSize(18),
     resizeMode: 'contain',
-    width: perfectSize(20),
+    width: perfectSize(18),
   },
   inputWrapper: {
     alignItems: 'center',
