@@ -188,15 +188,13 @@ const EditProfileScreen = () => {
             render={({value, onChange, ref}) => (
               <AppInput
                 inputWrapperStyle={{
-                  paddingHorizontal: perfectSize(16),
+                  paddingHorizontal: perfectSize(14),
                   // backgroundColor: 'cyan',
                 }}
-                prefixStyle={{paddingLeft: perfectSize(6)}}
+                prefixStyle={{paddingLeft: perfectSize(10)}}
                 textInputStyle={{
-                  minWidth: moderateScale(80),
-                  maxWidth: moderateScale(100),
                   alignItems: 'center',
-                  marginLeft: moderateScale(-7),
+                  marginLeft: moderateScale(-9),
                   // backgroundColor: 'cyan',
                 }}
                 iconStyle={{fontSize: perfectSize(20)}}
@@ -211,12 +209,12 @@ const EditProfileScreen = () => {
                   // setTiktokUserName(link);
                 }}
                 onPress={() => handlePaste('instagramLink')}
-                onfocus={() =>
-                  setDynamicInputTextSpacing(
-                    tiktokRef,
-                    defaultTiktokUrl?.length,
-                  )
-                }
+                // onfocus={() =>
+                //   setDynamicInputTextSpacing(
+                //     tiktokRef,
+                //     defaultTiktokUrl?.length,
+                //   )
+                // }
                 placeholder="user name"
                 ref={ref}
                 value={value}
@@ -236,18 +234,24 @@ const EditProfileScreen = () => {
             render={({value, onChange, ref}) => (
               <AppInput
                 inputWrapperStyle={{
-                  paddingHorizontal: perfectSize(16),
+                  paddingHorizontal: perfectSize(14),
+                  // justifyContent: 'flex-end',
                   // backgroundColor: 'cyan',
                 }}
-                prefixStyle={{paddingLeft: perfectSize(4)}}
+                prefixStyle={{paddingLeft: perfectSize(10)}}
                 textInputStyle={{
-                  minWidth: moderateScale(80),
-                  maxWidth: moderateScale(100),
                   alignItems: 'center',
-                  marginLeft: moderateScale(-7),
+                  marginLeft: moderateScale(-9),
                   // backgroundColor: 'cyan',
                 }}
                 iconStyle={{fontSize: perfectSize(20)}}
+                // pasteBtnStyle={{
+                //   width: perfectSize(40),
+                //   flexDirection: 'row',
+                //   justifyContent: 'flex-end',
+                //   // alignItems: 'flex-end ',
+                //   backgroundColor: 'yellow',
+                // }}
                 ref={tiktokRef}
                 errors={errors.tiktokLink?.message}
                 img={tiktok}
@@ -260,12 +264,12 @@ const EditProfileScreen = () => {
                   // setTiktokUserName(link);
                 }}
                 onPress={() => handlePaste('tiktokLink')}
-                onfocus={() =>
-                  setDynamicInputTextSpacing(
-                    tiktokRef,
-                    defaultTiktokUrl?.length,
-                  )
-                }
+                // onfocus={() =>
+                //   setDynamicInputTextSpacing(
+                //     tiktokRef,
+                //     defaultTiktokUrl?.length,
+                //   )
+                // }
                 placeholder="user name"
                 value={tiktokUserName || value}
               />
@@ -282,6 +286,14 @@ const EditProfileScreen = () => {
                   // backgroundColor: 'yellow',
                 }}
                 iconStyle={{fontSize: perfectSize(20)}}
+                // pasteBtnStyle={{
+                //   width: perfectSize(40),
+                //   flexDirection: 'row',
+                //   justifyContent: 'flex-end',
+                //   // flex: .18,
+                //   // alignItems: 'flex-end ',
+                //   backgroundColor: 'yellow',
+                // }}
                 ref={instaRef}
                 errors={errors.mapsAccount?.message}
                 img={map}

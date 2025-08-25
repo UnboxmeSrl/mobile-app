@@ -28,8 +28,8 @@ import {
 import AppSelect from '../../../components/Elements/AppSelect';
 import {showToastError} from '../../../services';
 
-const defaultTiktokUrl = 'https://www.tiktok.com/@';
-const defaultInstaUrl = 'https://www.instagram.com/';
+const defaultTiktokUrl = 'tiktok.com/@';
+const defaultInstaUrl = 'instagram.com/';
 
 const AuthSocialNetworkScreen = () => {
   const {

@@ -34,8 +34,8 @@ const useEditProfile = () => {
   const isIos = Platform.OS === 'ios';
   const isAndroid = Platform.OS === 'android';
   const androidVersion = Platform.Version;
-  const defaultTiktokUrl = 'https://www.tiktok.com/@';
-  const defaultInstagramUrl = 'https://www.instagram.com/';
+  const defaultTiktokUrl = 'tiktok.com/@';
+  const defaultInstagramUrl = 'instagram.com/';
   let [tiktokUserName, setTiktokUserName] = useState('');
   const {username: tiktokUserNameInput, link: tiktokUserNameLink} =
     formatTiktokUrl(user?.Tiktok_account);
