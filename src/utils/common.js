@@ -149,13 +149,24 @@ export const deadlineDaysCount = (bookDate, deadlineDays) => {
   const bookingDate = new Date(bookDate);
   const millisecondsDiff = bookingDate.getTime() - currentDate.getTime();
   let calculatedDeadlineDays =
-    Math.round(millisecondsDiff / (1000 * 3600 * 24)) + deadlineDays;
-
+    Math.round(millisecondsDiff / (1000 * 3600 * 24)) + (deadlineDays || 0);
+  console.log('return_calculatedDeadlineDays', calculatedDeadlineDays);
   return calculatedDeadlineDays;
 };
 export const getDeadlineDate = (startDateStr, daysToAdd) => {
+  // console.log(
+  //   'date_prior',
+  //   startDateStr,
+  //   typeof startDateStr,
+  //   daysToAdd,
+  //   typeof daysToAdd,
+  // );
   const date = new Date(startDateStr); // e.g. "2025-05-28"
-  date.setDate(date.getDate() + daysToAdd); // add days
+  // console.log('date_before', date, date.getDate());
+  date.setDate(date.getDate() + (daysToAdd || 0)); // add days
+  // console.log('date', date, typeof date);
+  // console.log('return_date', date.toISOString().split('T')[0]);
+
   return date.toISOString().split('T')[0]; // returns in "YYYY-MM-DD" format
 };
 export const getFormattedDate = dt => {
