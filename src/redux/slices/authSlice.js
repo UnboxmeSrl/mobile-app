@@ -12,6 +12,7 @@ const initialState = {
   signUpProcessStage: 0,
   visitCount: 1,
   userLocation: null,
+  // fromLinking: false,
 };
 
 const AuthSlice = createSlice({
@@ -68,6 +69,9 @@ const AuthSlice = createSlice({
     setUserCurrentLocation: (state, {payload}) => {
       state.userLocation = payload;
     },
+    // setFromLinking: (state, actions) => {
+    //   state.fromLinking = actions?.payload;
+    // },
   },
 });
 
@@ -86,6 +90,7 @@ export const {
   updateUserCount,
   updateLoginData,
   setUserCurrentLocation,
+  // setFromLinking,
 } = AuthSlice.actions;
 
 export default AuthSlice.reducer;
@@ -117,3 +122,4 @@ export const selectVisitCount = state => state.authSlice.visitCount === 1;
 
 export const selecteUserCoords = state => state.authSlice.userLocation;
 export const selectAuthData = state => state.authSlice.authData;
+// export const selectFromLinking = state => state.authSlice.fromLinking;

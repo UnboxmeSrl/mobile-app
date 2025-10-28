@@ -12,10 +12,13 @@ import ProfileStack from './ProfileStack';
 import AppMap from '../components/AppMap';
 import {useChatClient} from '../hooks';
 import {ChatRoom} from '../screens/ChatRoom';
+import {useSelector} from 'react-redux';
+import {selectFromLinking} from '../redux';
 
 const BottomTabs = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  // const fromLinking = useSelector(selectFromLinking);
   const {} = useChatClient();
   return (
     <BottomTabs.Navigator

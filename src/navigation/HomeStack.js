@@ -2,12 +2,16 @@ import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {CitiesScreen, RestaurantDetails, RestaurantsScreen} from '../screens';
 import {SCREEN_NAMES} from '../constants';
+import {useSelector} from 'react-redux';
+import {selectFromLinking} from '../redux';
 // import {useNotification} from '../hooks';
 // import {useRestaurants} from '../screens/Restaurants/hooks';
 
 const StackHome = createStackNavigator();
 
 const HomeStack = () => {
+  // const fromLinking = useSelector(selectFromLinking);
+
   // const {requestLocationPermission, cityData} = useRestaurants();
   // useEffect(() => {
   //   // console.log('check_requestLocationPermission_HomeStack');

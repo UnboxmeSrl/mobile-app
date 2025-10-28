@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ActivityIndicator,
   Image,
@@ -30,6 +30,7 @@ const BookingOnApprovalScreen = () => {
     handleBackPress,
     handleGoToSchedulePress,
   } = useBookingOnApproval();
+  const [openBrief, setOpenBrief] = useState(false);
   const approvalIcon =
     approvalStage === 'pending'
       ? IMAGES.approvalPending
@@ -37,7 +38,7 @@ const BookingOnApprovalScreen = () => {
       ? IMAGES.approvalSuccess
       : IMAGES.approvalReject;
 
-  // console.log('ActionNumId: ' + actionNumId);
+  console.log('ActionNumId: ' + actionNumId, bookingDetails?._offers_turbo);
   // console.log(
   //   bookingDetails?.MinuteStart,
   //   bookingDetails?.HourStart,
@@ -218,16 +219,28 @@ const BookingOnApprovalScreen = () => {
           </View>
         )}
       </View>
-      <TouchableOpacity style={styles.howItWorksContainer}>
+      <TouchableOpacity
+        style={styles.howItWorksContainer}
+        onPress={() => setOpenBrief(prev => !prev)}>
         <Text allowFontScaling={false} style={styles.socialMediaTitleText}>
           Check brief
         </Text>
+        {/* <TouchableOpacity onPress={setOpenBrief}> */}
         <Image
           resizeMode="cover"
           source={IMAGES.back}
-          style={styles.rightIcon}
+          style={[
+            styles.rightIcon,
+            openBrief && {transform: [{rotate: '90deg'}]},
+          ]}
         />
+        {/* </TouchableOpacity> */}
       </TouchableOpacity>
+      {openBrief && (
+        <Text allowFontScaling={false} style={styles.briefText}>
+          {bookingDetails?._offers_turbo?.instructions}
+        </Text>
+      )}
 
       <View style={styles.goToScheduleBtnMainContainer}>
         {isLoading ? (
@@ -301,9 +314,11 @@ const styles = StyleSheet.create({
   howItWorksContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: verticalScale(56),
+    // height: verticalScale(20),
     justifyContent: 'space-between',
     paddingHorizontal: scale(15),
+    paddingTop: verticalScale(16),
+    // backgroundColor: 'yellow',
   },
   lastDescriptionContainer: {
     alignSelf: 'center',
@@ -418,7 +433,7 @@ const styles = StyleSheet.create({
     height: moderateScale(25),
     marginTop: verticalScale(10),
     tintColor: COLORS.black,
-    transform: [{rotate: '180deg'}],
+    transform: [{rotate: '270deg'}],
     width: moderateScale(25),
   },
   selectedDateContainer: {
@@ -472,6 +487,13 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.quicksandBold,
     fontSize: moderateScale(16),
     marginTop: verticalScale(5),
+  },
+  briefText: {
+    color: COLORS.greyFont,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+    // marginTop: verticalScale(8),
+    paddingHorizontal: scale(15),
   },
   timeContainer: {
     alignItems: 'flex-start',

@@ -2,7 +2,7 @@ import notifee from '@notifee/react-native';
 import analytics from '@react-native-firebase/analytics';
 import firebase from '@react-native-firebase/app';
 import messaging from '@react-native-firebase/messaging';
-import {NavigationContainer} from '@react-navigation/native';
+import {getStateFromPath, NavigationContainer} from '@react-navigation/native';
 import {Mixpanel} from 'mixpanel-react-native';
 import React, {useCallback, useEffect, useMemo} from 'react';
 import {I18nextProvider} from 'react-i18next';
@@ -20,6 +20,7 @@ import MainStack from './navigation/MainStack';
 import {
   deleteCanceledBooking,
   persistor,
+  setFromLinking,
   setSelectedChannel,
   store,
   updateBooking,
@@ -118,6 +119,8 @@ const App = () => {
     // });
   }, []);
 
+  // const [initialNavState, setInitialNavState] = React.useState();
+
   // useEffect(() => {
   //   // Handle foreground notifications
   //   // OneSignal.setAppId(Config.ONE_SIGNAL_APP_ID);
@@ -150,10 +153,13 @@ const App = () => {
         'notification_handle_OneSignalNotification',
       );
       const contentReminder = data?.contentReminder == '1';
+      // store.dispatch(setFromLinking(true));
       // console.log(contentReminder, 'contentReminder');
       // const expectedMessage = `please upload content for ${data?.Name} of missing content venue`;
-      if (contentReminder) {
-        // console.log(contentReminder, 'check_contentReminder_block');
+      if (Object.keys(data)?.includes('Approved' && 'Rejectedstatus')) {
+        return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.Schedule}/${SCREEN_NAMES.YourScheduleScreen}/1`;
+      } else if (contentReminder) {
+        console.log(contentReminder, 'check_contentReminder_block');
         return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.Schedule}/${SCREEN_NAMES.YourScheduleScreen}/2`;
       }
     },
@@ -194,6 +200,7 @@ const App = () => {
       console.log(channel.state.members, channel, 'channel noti');
       store.dispatch(setSelectedChannel(channel));
       console.log('afterstate');
+      // store.dispatch(setFromLinking(true));
       return `clarisinfluencer://${STACK_NAMES.BottomStack}/${SCREEN_NAMES.ChatRoom}`;
     } catch (error) {
       console.error('Failed to create or retrieve channel:', error);
@@ -269,6 +276,8 @@ const App = () => {
                 },
               });
               console.log('url', url);
+              // const state = getStateFromPath(url, linking.config);
+              // setInitialNavState(state);
               if (typeof url === 'string') {
                 listener(url);
               }
@@ -307,6 +316,10 @@ const App = () => {
   );
 
   console.log('linking', JSON.stringify(linking));
+  // useEffect(() => {
+  //   return () => store.dispatch(setFromLinking(false));
+  // }, []);
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <Provider store={store}>
@@ -318,6 +331,7 @@ const App = () => {
                   <NavigationContainer
                     linking={linking}
                     ref={navigationRef}
+                    // initialState={initialNavState}
                     onReady={() => {
                       routeNameRef.current =
                         navigationRef.current.getCurrentRoute().name;
