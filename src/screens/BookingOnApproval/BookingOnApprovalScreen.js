@@ -238,7 +238,8 @@ const BookingOnApprovalScreen = () => {
       </TouchableOpacity>
       {openBrief && (
         <Text allowFontScaling={false} style={styles.briefText}>
-          {bookingDetails?._offers_turbo?.instructions}
+          {bookingDetails?._offers_turbo?.instructions ||
+            'No Instructions given'}
         </Text>
       )}
 

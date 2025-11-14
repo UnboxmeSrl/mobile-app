@@ -51,6 +51,13 @@ const PublishContentScreen = () => {
     handleBackPress,
   } = usePublishContent();
   // console.log('contentDetails', contentDetails?.isCheckedIn, contentDetails);
+  // console.log(
+  //   contentDetails?.HourStart,
+  //   contentDetails?.MinuteStart,
+  //   contentDetails,
+  //   // timeFrame,
+  //   'HourStart_PublicContentScreen',
+  // );
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -292,18 +299,20 @@ const PublishContentScreen = () => {
                 styles.timeText
               }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
           </View>
-          {actionNumId !== 9 && (
-            <View style={styles.timeContainer}>
-              <Text allowFontScaling={false} style={styles.timeTitleText}>
-                Time
-              </Text>
-              <Text allowFontScaling={false} style={styles.timeText}>
-                {isEvent
-                  ? `${getFormattedTime(contentDetails?.booking_time)}`
-                  : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
-              </Text>
-            </View>
-          )}
+          {actionNumId !== 9 &&
+            (!!timeFrame ||
+              (contentDetails?.HourStart && contentDetails?.HourEnd)) && (
+              <View style={styles.timeContainer}>
+                <Text allowFontScaling={false} style={styles.timeTitleText}>
+                  Time
+                </Text>
+                <Text allowFontScaling={false} style={styles.timeText}>
+                  {isEvent
+                    ? `${getFormattedTime(contentDetails?.booking_time)}`
+                    : `${timeFrame?.Start}:${timeFrame?.Minute_Start} - ${timeFrame?.End}:${timeFrame?.Minute_End}`}
+                </Text>
+              </View>
+            )}
         </View>
 
         <View>

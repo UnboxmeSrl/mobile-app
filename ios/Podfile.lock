@@ -1172,7 +1172,7 @@ PODS:
     - Yoga
   - react-native-image-resizer (1.4.5):
     - React-Core
-  - react-native-netinfo (11.4.1):
+  - react-native-netinfo (11.3.3):
     - React-Core
   - react-native-onesignal (5.2.11):
     - OneSignalXCFramework (= 5.2.10)
@@ -1977,7 +1977,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 2b8f18667caee73a96708a82b284a4f40b30a156
   react-native-image-picker: bca292c7a8d92677d6faee2c166e6785621c7301
   react-native-image-resizer: d9fb629a867335bdc13230ac2a58702bb8c8828f
-  react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
+  react-native-netinfo: 9af975c142e5673d643093aa5afdfa26f46b71b4
   react-native-onesignal: 62ad0dfd1dabd68cc1dcc64746cb89e2ccd2ea70
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-simple-heic2jpg: ecfa59c3cd2d2531537ddfc9efc9285336dd91c2

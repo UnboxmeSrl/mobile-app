@@ -1,3 +1,4 @@
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Splash} from '../components';
 import {SCREEN_NAMES, STACK_NAMES} from '../constants';
@@ -175,6 +176,10 @@ const MainStack = () => {
         component={TutorialsScreen}
       />
       <StackMain.Screen name={SCREEN_NAMES.ChatScreen} component={ChatScreen} />
+      <StackMain.Screen
+        name={SCREEN_NAMES.YourScheduleScreen}
+        component={YourScheduleScreen}
+      />
       {/* <StackMain.Screen
         name={SCREEN_NAMES.YourScheduleScreen}
         component={YourScheduleScreen}

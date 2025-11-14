@@ -150,18 +150,18 @@ const YourScheduleScreen = () => {
                       actionName,
                       actionNumId,
                     );
-                    // console.log(
-                    //   'item_id_onBookingCardPress',
-                    //   item?.id,
-                    //   // item,
-                    //   item?.HourStart,
-                    //   item?.HourEnd,
-                    //   item?.MinuteStart,
-                    //   item?.MinuteEnd,
-                    //   timeFrame,
-                    //   // item?.BookingDay,
-                    //   // item?._actions_turbo?.Days_deadline,
-                    // );
+                    console.log(
+                      'item_id_onBookingCardPress',
+                      item?.id,
+                      // item,
+                      item?.HourStart,
+                      item?.HourEnd,
+                      item?.MinuteStart,
+                      item?.MinuteEnd,
+                      timeFrame,
+                      // item?.BookingDay,
+                      // item?._actions_turbo?.Days_deadline,
+                    );
                     // console.log('timeFrame_onBookingCardPress', timeFrame);
                   }}
                   style={styles.cardContainer}>
