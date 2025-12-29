@@ -22,7 +22,7 @@ import {useServiceDetails} from './hooks';
 const ServiceDetails = () => {
   const {
     actionNumId,
-    amenityDetailsWithCoupons,
+    amenityDetails,
     socialActions,
     diaryItems,
     // services,
@@ -59,16 +59,16 @@ const ServiceDetails = () => {
   //   else if (serviceName === 'Side') return IMAGES.side;
   //   else if (serviceName === 'Dessert') return IMAGES.dessert;
   // }, []);
-  // const getServicesWithCoupons = useMemo(
+  // const getAvailableServices = useMemo(
   //   () =>
-  //     serviceDetails?._actions_turbo?.Coupons_Services?.length > 0
-  //       ? serviceDetails?._actions_turbo?.Coupons_Services
+  //     serviceDetails?._actions_turbo?.Other_Services?.length > 0
+  //       ? serviceDetails?._actions_turbo?.Other_Services
   //       : serviceDetails?.services?.length > 0
   //       ? serviceDetails?.services
   //       : [],
-  //   [serviceDetails?._actions_turbo?.Coupons_Services, serviceDetails?.services],
+  //   [serviceDetails?._actions_turbo?.Other_Services, serviceDetails?.services],
   // );
-  const getServicesWithCoupons = useMemo(() => {
+  const getAvailableServices = useMemo(() => {
     const serviceMap = [
       // {key: 'Accomodation', label: 'Accomodation'},
       // {key: 'Gym', label: 'Gym'},
@@ -98,7 +98,7 @@ const ServiceDetails = () => {
     );
     return [
       ...specialServices,
-      ...(serviceDetails?._actions_turbo?.Coupons_Services ?? []),
+      ...(serviceDetails?._actions_turbo?.Other_Services ?? []),
     ];
   }, [
     serviceDetails?._actions_turbo,
@@ -110,18 +110,18 @@ const ServiceDetails = () => {
   //     const serviceNameKey = serviceName?.replace(' ', '');
   //     // console.log('serviceName.trim()', serviceNameKey || '');
   //     // get dynamic Icons added in xano
-  //     if (serviceDetails?._actions_turbo?.Coupons_Services?.length > 0) {
+  //     if (serviceDetails?._actions_turbo?.Other_Services?.length > 0) {
   //       console.log(
-  //         'serviceDetails?._actions_turbo?.Coupons_Services.service_ServiceDetailsScreen',
-  //         serviceDetails?._actions_turbo?.Coupons_Services?.find(
+  //         'serviceDetails?._actions_turbo?.Other_Services.service_ServiceDetailsScreen',
+  //         serviceDetails?._actions_turbo?.Other_Services?.find(
   //           service => service?.name === serviceNameKey,
   //         ),
   //         'serviceNameKey_ServiceDetailsScreen',
   //         serviceNameKey,
-  //         'serviceDetails?._actions_turbo?.Coupons_Services_ServiceDetailsScreen',
-  //         serviceDetails?._actions_turbo?.Coupons_Services,
+  //         'serviceDetails?._actions_turbo?.Other_Services_ServiceDetailsScreen',
+  //         serviceDetails?._actions_turbo?.Other_Services,
   //       );
-  //       return serviceDetails?._actions_turbo?.Coupons_Services?.find(
+  //       return serviceDetails?._actions_turbo?.Other_Services?.find(
   //         service => service?.name === serviceNameKey,
   //       )?.service_icon?.url;
   //     } else {
@@ -129,14 +129,14 @@ const ServiceDetails = () => {
   //       return IMAGES[serviceNameKey];
   //     }
   //   },
-  //   [serviceDetails?._actions_turbo?.Coupons_Services],
+  //   [serviceDetails?._actions_turbo?.Other_Services],
   // );
   const isOther_Service = useCallback(
     serviceNameKey =>
-      serviceDetails?._actions_turbo?.Coupons_Services?.some(
+      serviceDetails?._actions_turbo?.Other_Services?.some(
         service => service?.name === serviceNameKey,
       ),
-    [serviceDetails?._actions_turbo?.Coupons_Services],
+    [serviceDetails?._actions_turbo?.Other_Services],
   );
   const getIcons = useCallback(
     serviceName => {
@@ -147,12 +147,12 @@ const ServiceDetails = () => {
       // get dynamic Icons added in xano
       if (Other_Service) {
         console.log(
-          serviceDetails?._actions_turbo?.Coupons_Services?.find(
+          serviceDetails?._actions_turbo?.Other_Services?.find(
             service => service?.name === serviceName,
           )?.service_icon?.url,
           'icon_url',
         );
-        return serviceDetails?._actions_turbo?.Coupons_Services?.find(
+        return serviceDetails?._actions_turbo?.Other_Services?.find(
           service => service?.name === serviceName,
         )?.service_icon?.url;
       } else {
@@ -160,7 +160,7 @@ const ServiceDetails = () => {
         return IMAGES[serviceNameKey];
       }
     },
-    [isOther_Service, serviceDetails?._actions_turbo?.Coupons_Services],
+    [isOther_Service, serviceDetails?._actions_turbo?.Other_Services],
   );
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -240,8 +240,8 @@ const ServiceDetails = () => {
             // nestedScrollEnabled
             showsHorizontalScrollIndicator={false}
             style={{marginLeft: perfectSize(10)}}>
-            {amenityDetailsWithCoupons?.length > 0 ? (
-              amenityDetailsWithCoupons?.map((amenity, ind) => {
+            {amenityDetails?.length > 0 ? (
+              amenityDetails?.map((amenity, ind) => {
                 console.log('0', amenity);
                 return (
                   <View key={ind} style={styles.specialAmenity}>
@@ -271,7 +271,7 @@ const ServiceDetails = () => {
                         {/* <Text
                       allowFontScaling={false}
                       style={styles.amenitiesDescription}>
-                      {amenityDetailsWithCoupons?.amenityDescription}
+                      {amenityDetails?.amenityDescription}
                     </Text> */}
                       </View>
                     </View>
@@ -283,8 +283,8 @@ const ServiceDetails = () => {
               <>
                 {(serviceDetails?.isBigInfluencer &&
                   serviceDetails?.services?.length > 0) ||
-                getServicesWithCoupons.length > 0 ? (
-                  getServicesWithCoupons?.map(
+                getAvailableServices.length > 0 ? (
+                  getAvailableServices?.map(
                     subServices =>
                       subServices?.quantity > 0 && (
                         <View
