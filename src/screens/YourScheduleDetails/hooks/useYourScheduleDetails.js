@@ -82,29 +82,153 @@ const useYourScheduleDetails = () => {
     actionName = bookingDetails?._diary_action_turbo?.action;
   }
 
-  let amenityDetails = {};
+  // let amenityDetailsWithCoupons = {};
 
-  if (actionNumId === 7) {
-    amenityDetails = {
-      amenityName: `${bookingDetails?._actions_turbo?.Beauty} X Treatment`,
-      amenityIcon: IMAGES.beauty,
-      // amenityDescription: 'at your choice',
-    };
-  } else if (actionNumId === 8 || actionNumId === 53 || actionNumId === 54) {
-    amenityDetails = {
-      amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
-      amenityIcon: IMAGES.gym,
-      // amenityDescription: 'at your choice',
-    };
-  } else if (actionNumId === 9) {
-    amenityDetails = {
-      amenityName: `${bookingDetails?._actions_turbo?.Accomodation} x Days (${
-        bookingDetails?._actions_turbo?.Accomodation - 1
-      } nights)`,
-      amenityIcon: IMAGES.resort,
-      // amenityDescription: 'at your choice',
-    };
-  }
+  // if (actionNumId === 7) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${bookingDetails?._actions_turbo?.Beauty} X Treatment`,
+  //     amenityIcon: IMAGES.beauty,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // } else if (actionNumId === 8 || actionNumId === 53 || actionNumId === 54) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${bookingDetails?._actions_turbo?.Gym} X Pass`,
+  //     amenityIcon: IMAGES.gym,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // } else if (actionNumId === 9) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${bookingDetails?._actions_turbo?.Accomodation} x Days (${
+  //       bookingDetails?._actions_turbo?.Accomodation - 1
+  //     } nights)`,
+  //     amenityIcon: IMAGES.resort,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // }
+  const amenityDetailsWithCoupons = useMemo(() => {
+    const list = [];
+    if ([7, 10, 14, 15, 16, 17, 8, 53, 54, 9].includes(actionNumId)) {
+      // Primary amenities
+      if ([7, 10, 14, 15, 16, 17].includes(actionNumId)) {
+        if (bookingDetails?._actions_turbo?.Beauty) {
+          list.push({
+            amenityName: `${bookingDetails._actions_turbo.Beauty} X Treatment`,
+            amenityIcon: IMAGES.beauty,
+          });
+        }
+      }
+
+      if ([8, 53, 54].includes(actionNumId)) {
+        if (bookingDetails?._actions_turbo?.Gym) {
+          list.push({
+            amenityName: `${bookingDetails._actions_turbo.Gym} x Pass`,
+            amenityIcon: IMAGES.gym,
+          });
+        }
+      }
+
+      if (actionNumId === 9 && bookingDetails?._actions_turbo?.Accomodation) {
+        const days = bookingDetails._actions_turbo.Accomodation;
+        list.push({
+          amenityName: `${days} x Days (${days - 1} nights)`,
+          amenityIcon: IMAGES.resort,
+        });
+      }
+
+      // Other services
+      bookingDetails?._actions_turbo?.Coupons_Services?.forEach(service => {
+        if (service?.quantity > 0) {
+          list.push({
+            amenityName: `${service.quantity} x ${service.name}`,
+            amenityIcon: service?.service_icon?.url
+              ? {uri: service.service_icon.url}
+              : undefined,
+          });
+        }
+      });
+      return list;
+    } else {
+      [];
+    }
+  }, [
+    actionNumId,
+    bookingDetails._actions_turbo.Accomodation,
+    bookingDetails._actions_turbo.Beauty,
+    bookingDetails._actions_turbo.Gym,
+    bookingDetails._actions_turbo?.Coupons_Services,
+  ]);
+  const getServicesWithCoupons = useMemo(() => {
+    const serviceMap = [
+      // {key: 'Accomodation', label: 'Accomodation'},
+      // {key: 'Gym', label: 'Gym'},
+      // {key: 'Beauty', label: 'Beauty'},
+      {key: 'Plates', label: 'Plates'},
+      {key: 'Drinks', label: 'Drinks'},
+    ];
+    let specialServices = [];
+    if (
+      bookingDetails?._offers_turbo?.isBigInfluencer &&
+      bookingDetails?._offers_turbo?.services.length > 0
+    ) {
+      specialServices = [...bookingDetails?._offers_turbo?.services];
+    } else {
+      serviceMap.forEach(({key, label}) => {
+        const quantity = bookingDetails?._actions_turbo?.[key];
+        if (quantity) {
+          specialServices.push({name: label, quantity: Number(quantity)});
+        }
+      });
+    }
+    console.log(
+      specialServices,
+      bookingDetails?._offers_turbo?.isBigInfluencer,
+      bookingDetails?._offers_turbo?.services,
+      bookingDetails?._offers_turbo?.isBigInfluencer,
+      bookingDetails?._offers_turbo?.services.length,
+      'specialServices_useMemo_UseYourScheduleDetailsScreen',
+    );
+    return [
+      ...specialServices,
+      ...(bookingDetails?._actions_turbo?.Coupons_Services ?? []),
+    ];
+  }, [
+    bookingDetails?._actions_turbo,
+    bookingDetails?._offers_turbo?.isBigInfluencer,
+    bookingDetails?._offers_turbo?.services,
+  ]);
+  const isOther_Service = useCallback(
+    serviceNameKey =>
+      bookingDetails?._actions_turbo?.Coupons_Services?.some(
+        service => service?.name === serviceNameKey,
+      ),
+    [bookingDetails?._actions_turbo?.Coupons_Services],
+  );
+  const getIcons = useCallback(
+    serviceName => {
+      const serviceNameKey = serviceName?.replace(' ', '');
+      console.log('serviceName.trim()', serviceNameKey || '');
+      const Other_Service = isOther_Service(serviceName);
+      // console.log('Other_Service', serviceNameKey, Other_Service);
+      // get dynamic Icons added in xano
+      if (Other_Service) {
+        // console.log(
+        //   bookingDetails?._actions_turbo?.Coupons_Services?.find(
+        //     service => service?.name === serviceName,
+        //   )?.service_icon?.url,
+        //   'icon_url',
+        // );
+        return {
+          uri: bookingDetails?._actions_turbo?.Coupons_Services?.find(
+            service => service?.name === serviceName,
+          )?.service_icon?.url,
+        };
+      } else {
+        // get hard coded icons from frontend code
+        return IMAGES[serviceNameKey];
+      }
+    },
+    [isOther_Service, bookingDetails?._actions_turbo?.Coupons_Services],
+  );
 
   const dispatch = useDispatch();
 
@@ -242,6 +366,7 @@ const useYourScheduleDetails = () => {
 
     dispatch(setAppInfo(res?.data));
   }, [dispatch]);
+
   useEffect(() => {
     getAppInformation();
   }, [getAppInformation]);
@@ -249,7 +374,7 @@ const useYourScheduleDetails = () => {
   return {
     actionNumId,
     actionName,
-    amenityDetails,
+    amenityDetailsWithCoupons,
     approvalStage,
     bookingDetails,
     currentDate,
@@ -266,6 +391,8 @@ const useYourScheduleDetails = () => {
     handlePositiveBtnPress,
     icon,
     timeFrame,
+    getIcons,
+    getServicesWithCoupons,
   };
 };
 

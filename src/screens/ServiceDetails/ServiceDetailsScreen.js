@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -22,7 +22,7 @@ import {useServiceDetails} from './hooks';
 const ServiceDetails = () => {
   const {
     actionNumId,
-    amenityDetails,
+    amenityDetailsWithCoupons,
     socialActions,
     diaryItems,
     // services,
@@ -42,7 +42,7 @@ const ServiceDetails = () => {
     handleInfluencerPlus,
     handleInfluencerMinus,
   } = useServiceDetails();
-
+  console.log(actionNumId, 'actionNumId_ServiceDetailsScreen');
   // console.log(
   //   'serviceDetails?._offers_turbo?.isBigInfluencer_ServiceDetailsScreen',
   //   serviceDetails?.isBigInfluencer,
@@ -59,11 +59,109 @@ const ServiceDetails = () => {
   //   else if (serviceName === 'Side') return IMAGES.side;
   //   else if (serviceName === 'Dessert') return IMAGES.dessert;
   // }, []);
-  const getIcons = useCallback(serviceName => {
-    const serviceNameKey = serviceName?.replace(' ', '');
-    // console.log('serviceName.trim()', serviceNameKey || '');
-    return IMAGES[serviceNameKey];
-  }, []);
+  // const getServicesWithCoupons = useMemo(
+  //   () =>
+  //     serviceDetails?._actions_turbo?.Coupons_Services?.length > 0
+  //       ? serviceDetails?._actions_turbo?.Coupons_Services
+  //       : serviceDetails?.services?.length > 0
+  //       ? serviceDetails?.services
+  //       : [],
+  //   [serviceDetails?._actions_turbo?.Coupons_Services, serviceDetails?.services],
+  // );
+  const getServicesWithCoupons = useMemo(() => {
+    const serviceMap = [
+      // {key: 'Accomodation', label: 'Accomodation'},
+      // {key: 'Gym', label: 'Gym'},
+      // {key: 'Beauty', label: 'Beauty'},
+      {key: 'Plates', label: 'Plates'},
+      {key: 'Drinks', label: 'Drinks'},
+    ];
+    let specialServices = [];
+    if (
+      serviceDetails?.isBigInfluencer &&
+      serviceDetails?.services?.length > 0
+    ) {
+      specialServices = [...serviceDetails?.services];
+    } else {
+      serviceMap.forEach(({key, label}) => {
+        const quantity = serviceDetails?._actions_turbo?.[key];
+        if (quantity) {
+          specialServices.push({name: label, quantity: Number(quantity)});
+        }
+      });
+    }
+    console.log(
+      specialServices,
+      serviceDetails.isBigInfluencer,
+      serviceDetails.services,
+      'specialServices_useMemo',
+    );
+    return [
+      ...specialServices,
+      ...(serviceDetails?._actions_turbo?.Coupons_Services ?? []),
+    ];
+  }, [
+    serviceDetails?._actions_turbo,
+    serviceDetails.isBigInfluencer,
+    serviceDetails.services,
+  ]);
+  // const getIcons = useCallback(
+  //   serviceName => {
+  //     const serviceNameKey = serviceName?.replace(' ', '');
+  //     // console.log('serviceName.trim()', serviceNameKey || '');
+  //     // get dynamic Icons added in xano
+  //     if (serviceDetails?._actions_turbo?.Coupons_Services?.length > 0) {
+  //       console.log(
+  //         'serviceDetails?._actions_turbo?.Coupons_Services.service_ServiceDetailsScreen',
+  //         serviceDetails?._actions_turbo?.Coupons_Services?.find(
+  //           service => service?.name === serviceNameKey,
+  //         ),
+  //         'serviceNameKey_ServiceDetailsScreen',
+  //         serviceNameKey,
+  //         'serviceDetails?._actions_turbo?.Coupons_Services_ServiceDetailsScreen',
+  //         serviceDetails?._actions_turbo?.Coupons_Services,
+  //       );
+  //       return serviceDetails?._actions_turbo?.Coupons_Services?.find(
+  //         service => service?.name === serviceNameKey,
+  //       )?.service_icon?.url;
+  //     } else {
+  //       // get hard coded icons from frontend code
+  //       return IMAGES[serviceNameKey];
+  //     }
+  //   },
+  //   [serviceDetails?._actions_turbo?.Coupons_Services],
+  // );
+  const isOther_Service = useCallback(
+    serviceNameKey =>
+      serviceDetails?._actions_turbo?.Coupons_Services?.some(
+        service => service?.name === serviceNameKey,
+      ),
+    [serviceDetails?._actions_turbo?.Coupons_Services],
+  );
+  const getIcons = useCallback(
+    serviceName => {
+      const serviceNameKey = serviceName?.replace(' ', '');
+      console.log('serviceName.trim()', serviceNameKey || '');
+      const Other_Service = isOther_Service(serviceName);
+      console.log('Other_Service', serviceNameKey, Other_Service);
+      // get dynamic Icons added in xano
+      if (Other_Service) {
+        console.log(
+          serviceDetails?._actions_turbo?.Coupons_Services?.find(
+            service => service?.name === serviceName,
+          )?.service_icon?.url,
+          'icon_url',
+        );
+        return serviceDetails?._actions_turbo?.Coupons_Services?.find(
+          service => service?.name === serviceName,
+        )?.service_icon?.url;
+      } else {
+        // get hard coded icons from frontend code
+        return IMAGES[serviceNameKey];
+      }
+    },
+    [isOther_Service, serviceDetails?._actions_turbo?.Coupons_Services],
+  );
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -137,69 +235,98 @@ const ServiceDetails = () => {
                 style={styles.dealLeftText}>{`${dealsLeft}`}</Text>
             </View>
           </View>
-
-          {actionNumId === 7 ||
-          actionNumId === 8 ||
-          actionNumId === 53 ||
-          actionNumId === 54 ||
-          actionNumId === 9 ||
-          actionNumId === 10 ||
-          actionNumId === 14 ||
-          actionNumId === 15 ||
-          actionNumId === 16 ||
-          actionNumId === 17 ? (
-            <View style={styles.specialAmenity}>
-              <>
-                <View
-                  style={[
-                    styles.amenityIconContainer,
-                    styles.firstAmenityMainContainer,
-                    styles.specialAmenitiesIconContainer,
-                  ]}>
-                  <Image
-                    source={amenityDetails?.amenityIcon}
-                    style={styles.amenityBigIcon}
-                  />
-                </View>
-                <View
-                  style={[
-                    styles.amenityMainContainer,
-                    styles.specialAmenitiesMainContainer,
-                  ]}>
-                  <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text
-                      allowFontScaling={false}
-                      style={styles.amenitiesTitle}>
-                      {amenityDetails?.amenityName}
-                    </Text>
-                    {/* <Text
+          <ScrollView
+            horizontal
+            // nestedScrollEnabled
+            showsHorizontalScrollIndicator={false}
+            style={{marginLeft: perfectSize(10)}}>
+            {amenityDetailsWithCoupons?.length > 0 ? (
+              amenityDetailsWithCoupons?.map((amenity, ind) => {
+                console.log('0', amenity);
+                return (
+                  <View key={ind} style={styles.specialAmenity}>
+                    {/* <> */}
+                    <View
+                      style={[
+                        styles.amenityIconContainer,
+                        styles.firstAmenityMainContainer,
+                        styles.specialAmenitiesIconContainer,
+                      ]}>
+                      <Image
+                        source={amenity?.amenityIcon}
+                        style={styles.amenityBigIcon}
+                      />
+                    </View>
+                    <View
+                      style={[
+                        styles.amenityMainContainer,
+                        styles.specialAmenitiesMainContainer,
+                      ]}>
+                      <View style={styles.amenityTitleDescriptionContainer}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.amenitiesTitle}>
+                          {amenity?.amenityName}
+                        </Text>
+                        {/* <Text
                       allowFontScaling={false}
                       style={styles.amenitiesDescription}>
-                      {amenityDetails?.amenityDescription}
+                      {amenityDetailsWithCoupons?.amenityDescription}
                     </Text> */}
+                      </View>
+                    </View>
+                    {/* </> */}
                   </View>
-                </View>
-              </>
-            </View>
-          ) : (
-            <ScrollView
-              horizontal
-              nestedScrollEnabled
-              showsHorizontalScrollIndicator={false}
-              style={{marginLeft: perfectSize(10)}}>
-              {serviceDetails?.isBigInfluencer &&
-              serviceDetails?.services.length > 0 ? (
-                serviceDetails?.services?.map(
-                  subServices =>
-                    subServices?.quantity > 0 && (
-                      <View
-                        style={[
-                          styles.amenityMainContainer,
-                          styles.firstAmenityMainContainer,
-                        ]}>
+                );
+              })
+            ) : (
+              <>
+                {(serviceDetails?.isBigInfluencer &&
+                  serviceDetails?.services?.length > 0) ||
+                getServicesWithCoupons.length > 0 ? (
+                  getServicesWithCoupons?.map(
+                    subServices =>
+                      subServices?.quantity > 0 && (
+                        <View
+                          style={[
+                            styles.amenityMainContainer,
+                            styles.firstAmenityMainContainer,
+                          ]}>
+                          <View style={styles.amenityIconContainer}>
+                            {getIcons(subServices?.name) && (
+                              <Image
+                                source={
+                                  isOther_Service(subServices?.name)
+                                    ? {
+                                        uri: getIcons(subServices?.name),
+                                      }
+                                    : getIcons(subServices?.name)
+                                }
+                                style={styles.amenityIcon}
+                              />
+                            )}
+                          </View>
+                          <View style={styles.amenityTitleDescriptionContainer}>
+                            <Text
+                              allowFontScaling={false}
+                              style={styles.amenitiesTitle}>
+                              {subServices?.quantity} x{' '}
+                              {subServices?.name === 'Plates'
+                                ? 'meals'
+                                : subServices?.name}
+                            </Text>
+                          </View>
+                        </View>
+                      ),
+                  )
+                ) : (
+                  <>
+                    {/* {serviceDetails?._actions_turbo?.Plates > 0 && ( */}
+                    {serviceDetails?._actions_turbo?.Plates > 0 && (
+                      <View style={styles.amenityMainContainer}>
                         <View style={styles.amenityIconContainer}>
                           <Image
-                            source={getIcons(subServices?.name)}
+                            source={IMAGES.mealDish}
                             style={styles.amenityIcon}
                           />
                         </View>
@@ -207,54 +334,30 @@ const ServiceDetails = () => {
                           <Text
                             allowFontScaling={false}
                             style={styles.amenitiesTitle}>
-                            {subServices?.quantity} x{' '}
-                            {subServices?.name === 'Plates'
-                              ? 'meals'
-                              : subServices?.name}
+                            {serviceDetails?._actions_turbo?.Plates} x Meals
                           </Text>
                         </View>
                       </View>
-                    ),
-                )
-              ) : (
-                <>
-                  {/* {serviceDetails?._actions_turbo?.Plates > 0 && ( */}
-                  {serviceDetails?._actions_turbo?.Plates > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.mealDish}
-                          style={styles.amenityIcon}
-                        />
+                    )}
+                    {serviceDetails?._actions_turbo?.Drinks > 0 && (
+                      <View style={styles.amenityMainContainer}>
+                        <View style={styles.amenityIconContainer}>
+                          <Image
+                            source={IMAGES.clinkingGlasses}
+                            style={styles.amenityIcon}
+                          />
+                        </View>
+                        <View style={styles.amenityTitleDescriptionContainer}>
+                          <Text
+                            allowFontScaling={false}
+                            style={styles.amenitiesTitle}>
+                            {serviceDetails?._actions_turbo?.Drinks} x Drinks
+                          </Text>
+                        </View>
                       </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {serviceDetails?._actions_turbo?.Plates} x Meals
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                  {serviceDetails?._actions_turbo?.Drinks > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.clinkingGlasses}
-                          style={styles.amenityIcon}
-                        />
-                      </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {serviceDetails?._actions_turbo?.Drinks} x Drinks
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                  {/* )} */}
-                  {/* {serviceDetails?._actions_turbo?.Dessert > 0 && (
+                    )}
+                    {/* )} */}
+                    {/* {serviceDetails?._actions_turbo?.Dessert > 0 && (
                     <View style={styles.amenityMainContainer}>
                       <View style={styles.amenityIconContainer}>
                         <Image
@@ -288,35 +391,36 @@ const ServiceDetails = () => {
                       </View>
                     </View>
                   )} */}
-                </>
-              )}
+                  </>
+                )}
 
-              {serviceDetails?._actions_turbo?.Extra_People > 0 && (
-                <View
-                  style={[
-                    styles.amenityMainContainer,
-                    styles.friendAmenityContainer,
-                  ]}>
-                  <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text
-                      allowFontScaling={false}
-                      style={[
-                        styles.amenitiesTitle,
-                        styles.friendAmenityText,
-                      ]}>{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
-                    <Text
-                      allowFontScaling={false}
-                      style={[
-                        styles.amenitiesDescription,
-                        styles.friendAmenityTitle,
-                      ]}>
-                      Friend
-                    </Text>
+                {serviceDetails?._actions_turbo?.Extra_People > 0 && (
+                  <View
+                    style={[
+                      styles.amenityMainContainer,
+                      styles.friendAmenityContainer,
+                    ]}>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={[
+                          styles.amenitiesTitle,
+                          styles.friendAmenityText,
+                        ]}>{`+${serviceDetails?._actions_turbo?.Extra_People}`}</Text>
+                      <Text
+                        allowFontScaling={false}
+                        style={[
+                          styles.amenitiesDescription,
+                          styles.friendAmenityTitle,
+                        ]}>
+                        Friend
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              )}
-            </ScrollView>
-          )}
+                )}
+              </>
+            )}
+          </ScrollView>
 
           <View style={styles.divider} />
           {!serviceDetails?.at_offer_description === 'undefined' &&

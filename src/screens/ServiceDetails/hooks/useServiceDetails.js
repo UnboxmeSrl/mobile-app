@@ -45,7 +45,7 @@ const useServiceDetails = () => {
   const actionNumId = serviceDetails?._actions_turbo?.action_num_id;
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  let amenityDetails = {};
+  // let amenityDetailsWithCoupons = {};
   const WeekDays = {
     Monday: 1,
     Tuesday: 2,
@@ -55,35 +55,80 @@ const useServiceDetails = () => {
     Saturday: 6,
     Sunday: 7,
   };
+  const amenityDetailsWithCoupons = useMemo(() => {
+    const list = [];
+    if ([7, 10, 14, 15, 16, 17, 8, 53, 54, 9].includes(actionNumId)) {
+      // Primary amenities
+      if ([7, 10, 14, 15, 16, 17].includes(actionNumId)) {
+        if (serviceDetails?._actions_turbo?.Beauty) {
+          list.push({
+            amenityName: `${serviceDetails._actions_turbo.Beauty} X Treatment`,
+            amenityIcon: IMAGES.beauty,
+          });
+        }
+      }
+
+      if ([8, 53, 54].includes(actionNumId)) {
+        if (serviceDetails?._actions_turbo?.Gym) {
+          list.push({
+            amenityName: `${serviceDetails._actions_turbo.Gym} X Pass`,
+            amenityIcon: IMAGES.gym,
+          });
+        }
+      }
+
+      if (actionNumId === 9 && serviceDetails?._actions_turbo?.Accomodation) {
+        const days = serviceDetails._actions_turbo.Accomodation;
+        list.push({
+          amenityName: `${days} x Days (${days - 1} nights)`,
+          amenityIcon: IMAGES.resort,
+        });
+      }
+
+      // Other services
+      serviceDetails?._actions_turbo?.Coupons_Services?.forEach(service => {
+        if (service?.quantity > 0) {
+          list.push({
+            amenityName: `${service.quantity} X ${service.name}`,
+            amenityIcon: service?.service_icon?.url
+              ? {uri: service.service_icon.url}
+              : undefined,
+          });
+        }
+      });
+      return list;
+    } else {
+      [];
+    }
+  }, [
+    actionNumId,
+    serviceDetails._actions_turbo.Accomodation,
+    serviceDetails._actions_turbo.Beauty,
+    serviceDetails._actions_turbo.Gym,
+    serviceDetails._actions_turbo?.Coupons_Services,
+  ]);
   // console.log('actionNumId_useServiceDetials', actionNumId);
-  if (
-    actionNumId === 7 ||
-    actionNumId === 10 ||
-    actionNumId === 14 ||
-    actionNumId === 15 ||
-    actionNumId === 16 ||
-    actionNumId === 17
-  ) {
-    amenityDetails = {
-      amenityName: `${serviceDetails?._actions_turbo?.Beauty} X Treatment`,
-      amenityIcon: IMAGES.beauty,
-      // amenityDescription: serviceDetails?.at_offername,
-    };
-  } else if (actionNumId === 8 || actionNumId === 53 || actionNumId === 54) {
-    amenityDetails = {
-      amenityName: `${serviceDetails?._actions_turbo?.Gym} X Pass`,
-      amenityIcon: IMAGES.gym,
-      // amenityDescription: 'at your choice',
-    };
-  } else if (actionNumId === 9) {
-    amenityDetails = {
-      amenityName: `${serviceDetails?._actions_turbo?.Accomodation} x Days (${
-        serviceDetails?._actions_turbo?.Accomodation - 1
-      } nights)`,
-      amenityIcon: IMAGES.resort,
-      // amenityDescription: 'at your choice',
-    };
-  }
+  // if (serviceDetails?._actions_turbo?.Beauty > 0) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${serviceDetails?._actions_turbo?.Beauty} X Treatment`,
+  //     amenityIcon: IMAGES.beauty,
+  //     // amenityDescription: serviceDetails?.at_offername,
+  //   };
+  // } else if (serviceDetails?._actions_turbo?.Gym > 0) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${serviceDetails?._actions_turbo?.Gym} X Pass`,
+  //     amenityIcon: IMAGES.gym,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // } else if (serviceDetails?._actions_turbo?.Accomodation > 0) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${serviceDetails?._actions_turbo?.Accomodation} x Days (${
+  //       serviceDetails?._actions_turbo?.Accomodation - 1
+  //     } nights)`,
+  //     amenityIcon: IMAGES.resort,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // }
 
   const getServiceDealsLeftData = async () => {
     const prepData = {
@@ -258,7 +303,7 @@ const useServiceDetails = () => {
 
   return {
     actionNumId,
-    amenityDetails,
+    amenityDetailsWithCoupons,
     socialActions,
     // categoriesIds,
     dealsLeft,

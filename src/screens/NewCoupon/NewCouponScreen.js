@@ -19,7 +19,9 @@ const NewCouponScreen = () => {
   const {
     isEvent,
     profilePicUrl,
-    amenityDetails,
+    amenityDetailsWithCoupons,
+    getServicesWithCoupons,
+    getIcons,
     actionNumId,
     actionName,
     icon,
@@ -45,16 +47,13 @@ const NewCouponScreen = () => {
   //   bookingDetails?.HourStart,
   //   'HourStart',
   // );
-  const getIcons = useCallback(serviceName => {
-    const serviceNameKey = serviceName?.replace(' ', '');
-    // console.log('serviceName.trim()', serviceNameKey || '');
-    return IMAGES[serviceNameKey];
-  }, []);
+
   // console.log(
   //   bookingDetails?._offers_turbo?.isBigInfluencer,
   //   // bookingDetails?._offers_turbo?.isBigInfluencer,
   //   'bookingDetails?._offers_turbo?.isBigInfluencer',
   // );
+  // console.log(getServicesWithCoupons, 'getServicesWithCoupons_NewCouponScreen');
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView
@@ -105,140 +104,136 @@ const NewCouponScreen = () => {
           {/* <View style={styles.leftCutter} /> */}
           {/* <View style={styles.rightCutter} /> */}
           <View style={styles.divider} />
-
-          {actionNumId === 7 ||
-          actionNumId === 8 ||
-          actionNumId === 9 ||
-          actionNumId === 53 ||
-          actionNumId === 54 ? (
-            <View style={styles.specialAmenity}>
-              <>
-                <View
-                  style={[
-                    styles.amenityIconContainer,
-                    styles.firstAmenityMainContainer,
-                    styles.specialAmenitiesIconContainer,
-                  ]}>
-                  <Image
-                    source={amenityDetails?.amenityIcon}
-                    style={styles.amenityBigIcon}
-                  />
-                </View>
-                <View
-                  style={[
-                    styles.amenityMainContainer,
-                    styles.specialAmenitiesMainContainer,
-                  ]}>
-                  <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text
-                      allowFontScaling={false}
-                      style={styles.amenitiesTitle}>
-                      {amenityDetails?.amenityName}
-                    </Text>
-                    {/* <Text
-                      allowFontScaling={false}
-                      style={styles.amenitiesDescription}>
-                      {amenityDetails?.amenityDescription}
-                    </Text> */}
-                  </View>
-                </View>
-              </>
-            </View>
-          ) : (
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {bookingDetails?._offers_turbo?.isBigInfluencer &&
-              bookingDetails?._offers_turbo?.services?.length > 0 ? (
-                bookingDetails?._offers_turbo?.services?.map(
-                  subServices =>
-                    subServices?.quantity > 0 && (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {amenityDetailsWithCoupons?.length > 0 ? (
+              amenityDetailsWithCoupons?.map((amenity, ind) => {
+                return (
+                  <View style={styles.specialAmenity}>
+                    <>
+                      <View
+                        style={[
+                          styles.amenityIconContainer,
+                          styles.firstAmenityMainContainer,
+                          styles.specialAmenitiesIconContainer,
+                        ]}>
+                        <Image
+                          source={amenity?.amenityIcon}
+                          style={styles.amenityBigIcon}
+                        />
+                      </View>
                       <View
                         style={[
                           styles.amenityMainContainer,
-                          styles.firstAmenityMainContainer,
+                          styles.specialAmenitiesMainContainer,
                         ]}>
-                        <View style={styles.amenityIconContainer}>
-                          {getIcons(subServices?.name) && (
-                            <Image
-                              source={getIcons(subServices?.name)}
-                              style={styles.amenityIcon}
-                            />
-                          )}
-                        </View>
                         <View style={styles.amenityTitleDescriptionContainer}>
                           <Text
                             allowFontScaling={false}
                             style={styles.amenitiesTitle}>
-                            {subServices?.quantity} x{' '}
-                            {subServices?.name === 'Plates'
-                              ? 'meals'
-                              : subServices?.name}
+                            {amenity?.amenityName}
                           </Text>
+                          {/* <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesDescription}>
+                      {amenityDetailsWithCoupons?.amenityDescription}
+                    </Text> */}
                         </View>
                       </View>
-                    ),
-                )
-              ) : (
-                <>
-                  {bookingDetails?._actions_turbo?.Plates > 0 && (
-                    <View style={styles.amenityMainContainer}>
+                    </>
+                  </View>
+                );
+              })
+            ) : getServicesWithCoupons.length > 0 ? (
+              getServicesWithCoupons?.map(
+                subServices =>
+                  subServices?.quantity > 0 && (
+                    <View
+                      style={[
+                        styles.amenityMainContainer,
+                        styles.firstAmenityMainContainer,
+                      ]}>
                       <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.mealDish}
-                          style={styles.amenityIcon}
-                        />
+                        {getIcons(subServices?.name) && (
+                          <Image
+                            source={getIcons(subServices?.name)}
+                            style={styles.amenityIcon}
+                          />
+                        )}
                       </View>
                       <View style={styles.amenityTitleDescriptionContainer}>
                         <Text
                           allowFontScaling={false}
                           style={styles.amenitiesTitle}>
-                          {bookingDetails?._actions_turbo?.Plates} x Meals
+                          {subServices?.quantity} x{' '}
+                          {subServices?.name === 'Plates'
+                            ? 'meals'
+                            : subServices?.name}
                         </Text>
                       </View>
                     </View>
-                  )}
-                  {bookingDetails?._actions_turbo?.Drinks > 0 && (
-                    <View style={styles.amenityMainContainer}>
-                      <View style={styles.amenityIconContainer}>
-                        <Image
-                          source={IMAGES.clinkingGlasses}
-                          style={styles.amenityIcon}
-                        />
-                      </View>
-                      <View style={styles.amenityTitleDescriptionContainer}>
-                        <Text
-                          allowFontScaling={false}
-                          style={styles.amenitiesTitle}>
-                          {bookingDetails?._actions_turbo?.Drinks} x Drinks
-                        </Text>
-                      </View>
+                  ),
+              )
+            ) : (
+              <>
+                {bookingDetails?._actions_turbo?.Plates > 0 && (
+                  <View style={styles.amenityMainContainer}>
+                    <View style={styles.amenityIconContainer}>
+                      <Image
+                        source={IMAGES.mealDish}
+                        style={styles.amenityIcon}
+                      />
                     </View>
-                  )}
-                  <View
-                    style={[
-                      styles.amenityMainContainer,
-                      styles.friendAmenityContainer,
-                    ]}>
                     <View style={styles.amenityTitleDescriptionContainer}>
                       <Text
                         allowFontScaling={false}
-                        style={[
-                          styles.amenitiesTitle,
-                          styles.friendAmenityText,
-                        ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
-                      <Text
-                        allowFontScaling={false}
-                        style={[
-                          styles.amenitiesDescription,
-                          styles.friendAmenityTitle,
-                        ]}>
-                        Friend
+                        style={styles.amenitiesTitle}>
+                        {bookingDetails?._actions_turbo?.Plates} x Meals
                       </Text>
                     </View>
                   </View>
-                </>
-              )}
-            </ScrollView>
-          )}
+                )}
+                {bookingDetails?._actions_turbo?.Drinks > 0 && (
+                  <View style={styles.amenityMainContainer}>
+                    <View style={styles.amenityIconContainer}>
+                      <Image
+                        source={IMAGES.clinkingGlasses}
+                        style={styles.amenityIcon}
+                      />
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {bookingDetails?._actions_turbo?.Drinks} x Drinks
+                      </Text>
+                    </View>
+                  </View>
+                )}
+                <View
+                  style={[
+                    styles.amenityMainContainer,
+                    styles.friendAmenityContainer,
+                  ]}>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={[
+                        styles.amenitiesTitle,
+                        styles.friendAmenityText,
+                      ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={[
+                        styles.amenitiesDescription,
+                        styles.friendAmenityTitle,
+                      ]}>
+                      Friend
+                    </Text>
+                  </View>
+                </View>
+              </>
+            )}
+          </ScrollView>
           {actionNumId === 9 && (
             <View style={styles.comingWithInfluencerTextContainer}>
               <Text

@@ -33,11 +33,6 @@ const ServiceCard = ({
   //   // item?._actions_turbo,
   // );
 
-  const getIcons = useCallback(serviceName => {
-    const serviceNameKey = serviceName?.replace(' ', '');
-    // console.log('serviceName.trim()', serviceNameKey || '');
-    return IMAGES[serviceNameKey];
-  }, []);
   // const getIcons = useCallback(serviceName => {
   //   if (serviceName === 'Plates') return IMAGES.mealDish;
   //   else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
@@ -46,37 +41,166 @@ const ServiceCard = ({
   // }, []);
 
   const {handleCardPress} = useServiceCard(item);
-  let amenityDetails = {};
+  const amenityDetailsWithCoupons = useMemo(() => {
+    const list = [];
+    if ([7, 10, 14, 15, 16, 17, 8, 53, 54, 9].includes(actionNumId)) {
+      // Primary amenities
+      if ([7, 10, 14, 15, 16, 17].includes(actionNumId)) {
+        if (item?._actions_turbo?.Beauty) {
+          list.push({
+            amenityName: `${item._actions_turbo.Beauty} X Treatment`,
+            amenityIcon: IMAGES.beauty,
+          });
+        }
+      }
 
-  if (
-    actionNumId === 7 ||
-    actionNumId === 10 ||
-    actionNumId === 14 ||
-    actionNumId === 15 ||
-    actionNumId === 16 ||
-    actionNumId === 17
-  ) {
-    amenityDetails = {
-      amenityName: `${item?._actions_turbo?.Beauty} X Treatment`,
-      amenityIcon: IMAGES.beauty,
-      // amenityDescription: 'at your choice',
-    };
-  } else if (actionNumId === 8 || actionNumId === 53 || actionNumId === 54) {
-    amenityDetails = {
-      amenityName: `${item?._actions_turbo?.Gym} X Pass`,
-      amenityIcon: IMAGES.gym,
-      // amenityDescription: 'at your choice',
-    };
-  } else if (actionNumId === 9) {
-    amenityDetails = {
-      amenityName: `${item?._actions_turbo?.Accomodation} x Days (${
-        item?._actions_turbo?.Accomodation - 1
-      } nights)`,
-      amenityIcon: IMAGES.resort,
-      // amenityDescription: 'at your choice',
-    };
-  }
-  // console.log('actionNumId_ServiceCard', actionNumId, amenityDetails);
+      if ([8, 53, 54].includes(actionNumId)) {
+        if (item?._actions_turbo?.Gym) {
+          list.push({
+            amenityName: `${item._actions_turbo.Gym} X Pass`,
+            amenityIcon: IMAGES.gym,
+          });
+        }
+      }
+
+      if (actionNumId === 9 && item?._actions_turbo?.Accomodation) {
+        const days = item._actions_turbo.Accomodation;
+        list.push({
+          amenityName: `${days} x Days (${days - 1} nights)`,
+          amenityIcon: IMAGES.resort,
+        });
+      }
+
+      // Other services
+      item?._actions_turbo?.Coupons_Services?.forEach(service => {
+        if (service?.quantity > 0) {
+          list.push({
+            amenityName: `${service.quantity} X ${service.name}`,
+            amenityIcon: service?.service_icon?.url
+              ? {uri: service.service_icon.url}
+              : undefined,
+          });
+        }
+      });
+      return list;
+    } else {
+      [];
+    }
+  }, [actionNumId, item]);
+
+  // if (item?._actions_turbo?.Beauty > 0) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${item?._actions_turbo?.Beauty} X Treatment`,
+  //     amenityIcon: IMAGES.beauty,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // } else if (item?._actions_turbo?.Gym > 0) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${item?._actions_turbo?.Gym} X Pass`,
+  //     amenityIcon: IMAGES.gym,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // } else if (item?._actions_turbo?.Accomodation > 0) {
+  //   amenityDetailsWithCoupons = {
+  //     amenityName: `${item?._actions_turbo?.Accomodation} x Days (${
+  //       item?._actions_turbo?.Accomodation - 1
+  //     } nights)`,
+  //     amenityIcon: IMAGES.resort,
+  //     // amenityDescription: 'at your choice',
+  //   };
+  // }
+  // console.log(
+  //   amenityDetailsWithCoupons,
+  //   'amenityDetailsWithCoupons_ServiceCard',
+  // );
+
+  const getServicesWithCoupons = useMemo(() => {
+    const serviceMap = [
+      // {key: 'Accomodation', label: 'Accomodation'},
+      // {key: 'Gym', label: 'Gym'},
+      // {key: 'Beauty', label: 'Beauty'},
+      {key: 'Plates', label: 'Plates'},
+      {key: 'Drinks', label: 'Drinks'},
+    ];
+    let specialServices = [];
+    if (item?.isBigInfluencer && item?.services?.length > 0) {
+      specialServices = [...item?.services];
+    } else {
+      serviceMap.forEach(({key, label}) => {
+        const quantity = item?._actions_turbo?.[key];
+        if (quantity) {
+          specialServices.push({name: label, quantity: Number(quantity)});
+        }
+      });
+    }
+    console.log(
+      specialServices,
+      item.isBigInfluencer,
+      item.services,
+      'specialServices_useMemo',
+    );
+    return [
+      ...specialServices,
+      ...(item?._actions_turbo?.Coupons_Services ?? []),
+    ];
+  }, [item?._actions_turbo, item.isBigInfluencer, item.services]);
+
+  // const getServicesWithCoupons = useMemo(
+  //   () =>
+  //     item?._actions_turbo?.Coupons_Services?.length > 0
+  //       ? item?._actions_turbo?.Coupons_Services
+  //       : item?.services?.length > 0
+  //       ? item?.services
+  //       : [],
+  //   [item?._actions_turbo?.Coupons_Services, item?.services],
+  // );
+  const isOther_Service = useCallback(
+    serviceNameKey =>
+      item?._actions_turbo?.Coupons_Services?.some(
+        service => service?.name === serviceNameKey,
+      ),
+    [item?._actions_turbo?.Coupons_Services],
+  );
+  const getIcons = useCallback(
+    serviceName => {
+      const serviceNameKey = serviceName?.replace(' ', '');
+      console.log('serviceName.trim()', serviceNameKey, serviceName);
+      const Other_Service = isOther_Service(serviceName);
+      console.log(
+        'Other_Service_getIcons_ServiceCard',
+        serviceNameKey,
+        Other_Service,
+        item?._actions_turbo?.Coupons_Services?.find(
+          service => service?.name === serviceName,
+        )?.service_icon?.url,
+      );
+      // get dynamic Icons added in xano
+      if (Other_Service) {
+        return item?._actions_turbo?.Coupons_Services?.find(
+          service => service?.name === serviceName,
+        )?.service_icon?.url;
+      } else {
+        // get hard coded icons from frontend code
+        return IMAGES[serviceNameKey];
+      }
+    },
+    [isOther_Service, item?._actions_turbo?.Coupons_Services],
+  );
+
+  console.log(
+    'item_actionsTurbo',
+    // !!item?._actions_turbo?.Beauty,
+    // !!item?._actions_turbo?.Accomodation,
+    // !!item?._actions_turbo?.Gym,
+    // item?.isBigInfluencer,
+    item?.services,
+    item?._actions_turbo,
+    item?.services?.length > 0,
+    'getServicesWithCoupons',
+    getServicesWithCoupons,
+  );
+
+  // console.log('actionNumId_ServiceCard', actionNumId, amenityDetailsWithCoupons);
 
   return (
     <TouchableOpacity
@@ -137,61 +261,44 @@ const ServiceCard = ({
           <Image source={IMAGES.star} style={styles.ratingIcon} />
         </View>
       </View>
-      <View
-        style={{
-          // width: '100%',
-          flex: 1,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          paddingHorizontal: scale(8),
-          gap: 8,
-          paddingVertical: 8,
-          marginBottom: verticalScale(4),
-          // backgroundColor: 'red',
-        }}>
-        {actionNumId === 7 ||
-        actionNumId === 8 ||
-        actionNumId === 53 ||
-        actionNumId === 54 ||
-        actionNumId === 10 ||
-        actionNumId === 14 ||
-        actionNumId === 15 ||
-        actionNumId === 16 ||
-        actionNumId === 17 ? (
-          <>
-            <View
-              style={[
-                styles.amenityMainContainer,
-                styles.specialAmenitiesMainContainer,
-              ]}>
-              <Image
-                source={amenityDetails?.amenityIcon}
-                style={styles.amenityBigIcon}
-              />
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text allowFontScaling={false} style={styles.amenitiesTitle}>
-                  {amenityDetails?.amenityName}
-                </Text>
+      <View style={styles.amenityContainer}>
+        {amenityDetailsWithCoupons?.length > 0 ? (
+          amenityDetailsWithCoupons?.map((amenity, ind) => {
+            console.log('0', amenity);
+            return (
+              <View
+                key={amenity?.amenityName}
+                style={[
+                  styles.amenityMainContainer,
+                  styles.specialAmenitiesMainContainer,
+                ]}>
+                {amenity?.amenityIcon && (
+                  <Image
+                    source={amenity?.amenityIcon}
+                    style={styles.amenityBigIcon}
+                  />
+                )}
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text allowFontScaling={false} style={styles.amenitiesTitle}>
+                    {amenity?.amenityName}
+                  </Text>
+                </View>
               </View>
-            </View>
-          </>
+            );
+          })
         ) : (
           <>
-            {item?.isBigInfluencer && item?.services?.length > 0 ? (
-              item?.services?.map(subServices => {
+            {((item?.isBigInfluencer && item?.services?.length > 0) ||
+              getServicesWithCoupons.length > 0) &&
+              getServicesWithCoupons?.map((subServices, ind) => {
                 console.log(
                   'serviceName.trim()',
                   subServices.name?.replace(' ', '') || '',
                 );
-                if (
-                  subServices?.quantity > 0 &&
-                  (subServices?.name === 'Plates' ||
-                    subServices?.name === 'Drinks' ||
-                    subServices?.name === 'Side' ||
-                    subServices?.name === 'Dessert')
-                ) {
+                if (subServices?.quantity > 0) {
                   return (
                     <View
+                      key={subServices?.name}
                       style={[
                         styles.amenityMainContainer,
                         styles.firstAmenityMainContainer,
@@ -199,7 +306,11 @@ const ServiceCard = ({
                       <View style={styles.amenityIconContainer}>
                         {getIcons(subServices?.name) && (
                           <Image
-                            source={getIcons(subServices?.name)}
+                            source={
+                              isOther_Service(subServices?.name)
+                                ? {uri: getIcons(subServices?.name)}
+                                : getIcons(subServices?.name)
+                            }
                             style={styles.amenityIcon}
                           />
                         )}
@@ -217,45 +328,45 @@ const ServiceCard = ({
                     </View>
                   );
                 }
-              })
-            ) : (
-              <>
-                {item?._actions_turbo?.Plates > 0 && (
-                  <View style={styles.amenityMainContainer}>
-                    <View style={styles.amenityIconContainer}>
-                      <Image
-                        source={IMAGES.mealDish}
-                        style={styles.amenityIcon}
-                      />
-                    </View>
-                    <View style={styles.amenityTitleDescriptionContainer}>
-                      <Text
-                        allowFontScaling={false}
-                        style={styles.amenitiesTitle}>
-                        {item?._actions_turbo?.Plates} x Meals
-                      </Text>
-                    </View>
+              })}
+            {/* ) : (
+            <>
+              {item?._actions_turbo?.Plates > 0 && (
+                <View style={styles.amenityMainContainer}>
+                  <View style={styles.amenityIconContainer}>
+                    <Image
+                      source={IMAGES.mealDish}
+                      style={styles.amenityIcon}
+                    />
                   </View>
-                )}
-                {item?._actions_turbo?.Drinks > 0 && (
-                  <View style={styles.amenityMainContainer}>
-                    <View style={styles.amenityIconContainer}>
-                      <Image
-                        source={IMAGES.clinkingGlasses}
-                        style={styles.amenityIcon}
-                      />
-                    </View>
-                    <View style={styles.amenityTitleDescriptionContainer}>
-                      <Text
-                        allowFontScaling={false}
-                        style={styles.amenitiesTitle}>
-                        {item?._actions_turbo?.Drinks} x Drinks
-                      </Text>
-                    </View>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
+                      {item?._actions_turbo?.Plates} x Meals
+                    </Text>
                   </View>
-                )}
-              </>
-            )}
+                </View>
+              )}
+              {item?._actions_turbo?.Drinks > 0 && (
+                <View style={styles.amenityMainContainer}>
+                  <View style={styles.amenityIconContainer}>
+                    <Image
+                      source={IMAGES.clinkingGlasses}
+                      style={styles.amenityIcon}
+                    />
+                  </View>
+                  <View style={styles.amenityTitleDescriptionContainer}>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.amenitiesTitle}>
+                      {item?._actions_turbo?.Drinks} x Drinks
+                    </Text>
+                  </View>
+                </View>
+              )}
+            </>
+            )} */}
           </>
         )}
       </View>
@@ -294,8 +405,8 @@ const styles = StyleSheet.create({
   },
   amenityMainContainer: {
     // alignSelf: 'center',
-    width: scale(90),
-    height: verticalScale(30),
+    width: scale(107),
+    height: verticalScale(35),
     flexDirection: 'row',
     borderRadius: moderateScale(16),
     // borderWidth: moderateScale(1),
@@ -304,7 +415,8 @@ const styles = StyleSheet.create({
     // marginHorizontal: scale(5),
     // borderColor: COLORS.gainsboro,
     // justifyContent: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    paddingLeft: perfectSize(12),
     gap: scale(6),
     alignItems: 'center',
     backgroundColor: COLORS.cultured,
@@ -394,6 +506,17 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(20),
     flexDirection: 'row',
     // marginTop: verticalScale(10),
+  },
+  amenityContainer: {
+    // width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: scale(8),
+    gap: 8,
+    paddingVertical: 8,
+    marginBottom: verticalScale(4),
+    // backgroundColor: 'red',
   },
   titleText: {
     color: COLORS.black,
