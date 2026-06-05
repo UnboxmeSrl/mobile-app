@@ -108,7 +108,9 @@ const NewCouponScreen = () => {
             {amenityDetailsWithCoupons?.length > 0 ? (
               amenityDetailsWithCoupons?.map((amenity, ind) => {
                 return (
-                  <View style={styles.specialAmenity}>
+                  <View
+                    key={amenity.amenityName + ind}
+                    style={styles.specialAmenity}>
                     <>
                       <View
                         style={[
@@ -145,9 +147,10 @@ const NewCouponScreen = () => {
               })
             ) : getServicesWithCoupons.length > 0 ? (
               getServicesWithCoupons?.map(
-                subServices =>
+                (subServices, index) =>
                   subServices?.quantity > 0 && (
                     <View
+                      key={subServices?.name + index}
                       style={[
                         styles.amenityMainContainer,
                         styles.firstAmenityMainContainer,

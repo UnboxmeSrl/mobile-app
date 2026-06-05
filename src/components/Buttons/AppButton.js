@@ -50,7 +50,7 @@ const AppButton = ({
         styles.btnStyle,
         getButtonStyle(),
         style,
-        {opacity: pressed ? 0.8 : 1},
+        {opacity: pressed ? 0.6 : 1},
       ]}
       onPress={onPress}>
       {!!img && <Image source={img} style={[styles.imgStyle, imgStyle]} />}

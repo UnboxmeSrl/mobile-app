@@ -40,6 +40,7 @@ import {
 } from '../../navigation/constants';
 import {colors, perfectSize} from '../../utils';
 import {useEditProfile} from './hooks';
+import { opacity } from 'react-native-reanimated/lib/typescript/Colors';
 
 const EditProfileScreen = () => {
   const {
@@ -334,7 +335,8 @@ const EditProfileScreen = () => {
           <AppButton
             disabled={loading}
             onPress={handleSubmit(onSubmit)}
-            title="Save changes"
+            title={loading ? 'Saving...' : 'Save changes'}
+            // style={{}}
           />
         </Stack>
       </ScrollView>
