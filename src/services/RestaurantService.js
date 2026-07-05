@@ -136,6 +136,43 @@ export const checkInVenueDealBooking = async data => {
   }
 };
 
+export const cancelVenueDealBooking = async (bookingId, data) => {
+  console.log('check_cancelVenueDealBooking');
+  try {
+    const response = await Fetch.postNew(
+      `${Api.RESTAURANTS.CANCEL_VENUE_DEAL_BOOKING}/${bookingId}/cancel`,
+      data,
+    );
+    return {
+      data: response?.data?.data || response?.data,
+      raw: response?.data,
+      status: response?.status || response?.data?.status,
+    };
+  } catch (error) {
+    if (error?.response?.data) {
+      const responseError =
+        error?.response?.data?.message || error?.response?.data;
+      showToastError({
+        message:
+          typeof responseError === 'string'
+            ? responseError
+            : JSON.stringify(responseError),
+      });
+
+      return {
+        status: error?.response?.status,
+        message: responseError,
+      };
+    }
+
+    showToastError({message: error?.message || 'Something went wrong'});
+    return {
+      status: 500,
+      message: error?.message || 'Something went wrong',
+    };
+  }
+};
+
 export const getBookings = async params => {
   try {
     const url = Api.RESTAURANTS.GET_BOOKINGS + params;

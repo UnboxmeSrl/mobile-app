@@ -15,6 +15,7 @@ import {
 } from '../../../redux';
 import {
   cancelBooking,
+  cancelVenueDealBooking,
   checkInVenueDealBooking,
   getAllCanceledBookings,
   getAppInfo,
@@ -368,19 +369,64 @@ const useYourScheduleDetails = () => {
       // console.log('check_handleAlertVisible');
       return;
     }
-    if (bookingDetails?.isVenueDealBooking) {
-      Alert.alert(
-        'Cancel booking',
-        'Cancelling venue deal bookings is not available yet.',
-      );
-      return;
-    }
     setIsAlertVisible(!isAlertVisible);
   };
 
   const handlePositiveBtnPress = async () => {
     try {
       setIsDeleting(true);
+      if (bookingDetails?.isVenueDealBooking) {
+        const venueDealBookingId =
+          bookingDetails?.venue_deal_booking_id ||
+          bookingDetails?.rawVenueDealBooking?.id;
+        const turboUserId =
+          loginData?.id ||
+          bookingDetails?.user_turbo_id ||
+          bookingDetails?.rawVenueDealBooking?.user_turbo_id;
+
+        if (!venueDealBookingId || !turboUserId) {
+          showToastError({message: 'Missing booking cancellation data.'});
+          return;
+        }
+
+        const res = await cancelVenueDealBooking(venueDealBookingId, {
+          booking_id: venueDealBookingId,
+          user_id: turboUserId,
+        });
+        const isCanceled =
+          (res?.status >= 200 && res?.status < 300) ||
+          res?.raw?.success === true ||
+          res?.data?.success === true ||
+          !!res?.data?.id;
+
+        if (isCanceled) {
+          dispatch(
+            updateBooking({
+              bookingId: bookingDetails?.id,
+              canceled: true,
+              status: 'cancelled_by_user',
+              rawVenueDealBooking: {
+                ...(bookingDetails?.rawVenueDealBooking || {}),
+                canceled: true,
+                status: 'cancelled_by_user',
+              },
+            }),
+          );
+          setIsAlertVisible(false);
+          return;
+        }
+
+        const responseError =
+          res?.message || res?.data || 'Something went wrong';
+        showToastError({
+          message:
+            typeof responseError === 'string'
+              ? responseError
+              : JSON.stringify(responseError),
+        });
+        return;
+      }
+
       const params = `/${bookingDetails?.id}`;
       // const params = `/${bookingDetails?.id}/clone_1`;
       const res = await cancelBooking(params);

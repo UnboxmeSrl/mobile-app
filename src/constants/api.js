@@ -36,6 +36,7 @@ export const Api = {
     CREATE_VENUE_DEAL_BOOKING: `${BASE_URL}/api:0Zej3Obh/create_venue_deal_booking`,
     GET_VENUE_DEAL_BOOKINGS: `${BASE_URL}/api:0Zej3Obh/user/bookings`,
     CHECK_IN_VENUE_DEAL_BOOKING: `${BASE_URL}/api:0Zej3Obh/user/bookings/check_in`,
+    CANCEL_VENUE_DEAL_BOOKING: `${BASE_URL}/api:0Zej3Obh/user/bookings`,
     CANCEL_BOOKING: `${BASE_URL}/api:bwh6Xc5O/cancel_booking`,
     UPDATE_BOOKING_CHECKIN_STATUS: `${BASE_URL}/api:bwh6Xc5O/update_booking/checked_in`,
     GET_ALL_CANCELED_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/canceled_booking`,
