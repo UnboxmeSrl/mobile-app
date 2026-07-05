@@ -6,11 +6,15 @@ import {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
 import {
+  setActions,
+  setPerks,
   setRestaurantDetails,
   // setUserCurrentLocation
 } from '../../../redux';
 import {
+  getActions,
   getCategories,
+  getPerks,
   getRestaurants,
   getSponsoredRestaurants,
 } from '../../../services';
@@ -41,6 +45,8 @@ const useRestaurants = () => {
   const onRefresh = () => {
     setRefreshing(true);
     getCategoriesData();
+    getPerksData();
+    getActionsData();
     getInitialRestaurantsData();
     setRefreshing(false);
   };
@@ -203,6 +209,22 @@ const useRestaurants = () => {
     setIsLoading(false);
   };
 
+  const getPerksData = async () => {
+    const res = await getPerks();
+
+    if (Array.isArray(res)) {
+      dispatch(setPerks(res.filter(perk => perk?.is_active !== false)));
+    }
+  };
+
+  const getActionsData = async () => {
+    const res = await getActions();
+
+    if (Array.isArray(res)) {
+      dispatch(setActions(res.filter(action => action?.is_active !== false)));
+    }
+  };
+
   const handleLocationPress = () => {
     navigation.replace(SCREEN_NAMES.Cities, {isFromOtherScreen: true});
   };
@@ -234,6 +256,8 @@ const useRestaurants = () => {
 
   useEffect(() => {
     getCategoriesData();
+    getPerksData();
+    getActionsData();
   }, []);
 
   useEffect(() => {

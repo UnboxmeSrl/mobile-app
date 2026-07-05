@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {
   Image,
   SafeAreaView,
@@ -12,15 +12,10 @@ import FastImage from 'react-native-fast-image';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {CustomModal} from '../../components';
-import {COLORS, FONTS, SCREEN_NAMES, STACK_NAMES} from '../../constants';
+import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
 import {useYourScheduleDetails} from './hooks';
 import SwipeButton from 'rn-swipe-button';
-import {
-  compareWithCurrDate,
-  getDay,
-  getFormattedTime,
-  xanoImageSize,
-} from '../../utils';
+import {getFormattedTime, xanoImageSize} from '../../utils';
 import {navigate} from '../../services';
 
 const YourScheduleDetailsScreen = () => {
@@ -38,6 +33,7 @@ const YourScheduleDetailsScreen = () => {
     isAlertVisible,
     isDeleting,
     isEvent,
+    isBookingCheckedIn,
     handleAlertVisible,
     handleBackPress,
     handleSwipeSuccess,
@@ -47,6 +43,22 @@ const YourScheduleDetailsScreen = () => {
     getIcons,
     getServicesWithCoupons,
   } = useYourScheduleDetails();
+  const extraPeopleCount = Number(
+    bookingDetails?._actions_turbo?.Extra_People || 0,
+  );
+  const shouldShowFriendAmenity = extraPeopleCount > 0;
+  const offerCredits = bookingDetails?._offers_turbo?.Credits;
+  const shouldShowOfferCredits =
+    !bookingDetails?.isVenueDealBooking &&
+    offerCredits !== undefined &&
+    offerCredits !== null &&
+    offerCredits !== '';
+  const shouldShowVenueDealAmenity =
+    bookingDetails?.isVenueDealBooking &&
+    !amenityDetailsWithCoupons?.length &&
+    !getServicesWithCoupons?.length &&
+    !bookingDetails?._actions_turbo?.Plates &&
+    !bookingDetails?._actions_turbo?.Drinks;
 
   // console.log(
   //   'bookingDetails?._offers_turbo?.isBigInfluencer',
@@ -110,15 +122,17 @@ const YourScheduleDetailsScreen = () => {
               <Text allowFontScaling={false} style={styles.restaurantNameText}>
                 {bookingDetails?._offers_turbo?.Offer_Name}
               </Text>
-              <View style={styles.ratingContainer}>
-                <Text allowFontScaling={false} style={styles.ratingUsersText}>
-                  {bookingDetails?._offers_turbo?.Credits}
-                </Text>
-                <Image
-                  source={IMAGES.ratingStar}
-                  style={styles.ratingIconImage}
-                />
-              </View>
+              {shouldShowOfferCredits && (
+                <View style={styles.ratingContainer}>
+                  <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                    {offerCredits}
+                  </Text>
+                  <Image
+                    source={IMAGES.ratingStar}
+                    style={styles.ratingIconImage}
+                  />
+                </View>
+              )}
             </View>
             <View
               style={[
@@ -127,6 +141,8 @@ const YourScheduleDetailsScreen = () => {
                   ? {backgroundColor: COLORS.americanYellow, width: scale(90)}
                   : approvalStage === 'success'
                   ? {backgroundColor: COLORS.mayGreen}
+                  : approvalStage === 'cancelled'
+                  ? {backgroundColor: COLORS.tartOrange}
                   : {backgroundColor: COLORS.tartOrange},
               ]}>
               <Text allowFontScaling={false} style={styles.onApprovalText}>{`${
@@ -136,6 +152,8 @@ const YourScheduleDetailsScreen = () => {
                   ? 'Verified'
                   : approvalStage === 'reject'
                   ? 'Rejected'
+                  : approvalStage === 'cancelled'
+                  ? 'Cancelled'
                   : 'Content Rejected'
               }`}</Text>
             </View>
@@ -254,30 +272,56 @@ const YourScheduleDetailsScreen = () => {
                     </View>
                   </View>
                 )}
+                {shouldShowVenueDealAmenity && (
+                  <View style={styles.amenityMainContainer}>
+                    <View style={styles.amenityIconContainer}>
+                      {bookingDetails?._offers_turbo?.Offer_Cover?.url && (
+                        <FastImage
+                          resizeMode="cover"
+                          source={{
+                            priority: FastImage.priority.high,
+                            uri: `${bookingDetails?._offers_turbo?.Offer_Cover?.url}?tpl=${xanoImageSize}.jpg`,
+                          }}
+                          style={styles.amenityIcon}
+                        />
+                      )}
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {bookingDetails?._offers_turbo?.Offer_Name ||
+                          'Venue deal'}
+                      </Text>
+                    </View>
+                  </View>
+                )}
               </>
             )}
-            <View
-              style={[
-                styles.amenityMainContainer,
-                styles.friendAmenityContainer,
-              ]}>
-              <View style={styles.amenityTitleDescriptionContainer}>
-                <Text
-                  allowFontScaling={false}
-                  style={[
-                    styles.amenitiesTitle,
-                    styles.friendAmenityText,
-                  ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
-                <Text
-                  allowFontScaling={false}
-                  style={[
-                    styles.amenitiesDescription,
-                    styles.friendAmenityTitle,
-                  ]}>
-                  Friend
-                </Text>
+            {shouldShowFriendAmenity && (
+              <View
+                style={[
+                  styles.amenityMainContainer,
+                  styles.friendAmenityContainer,
+                ]}>
+                <View style={styles.amenityTitleDescriptionContainer}>
+                  <Text
+                    allowFontScaling={false}
+                    style={[
+                      styles.amenitiesTitle,
+                      styles.friendAmenityText,
+                    ]}>{`+${extraPeopleCount}`}</Text>
+                  <Text
+                    allowFontScaling={false}
+                    style={[
+                      styles.amenitiesDescription,
+                      styles.friendAmenityTitle,
+                    ]}>
+                    Friend
+                  </Text>
+                </View>
               </View>
-            </View>
+            )}
           </ScrollView>
 
           {actionNumId === 9 && (
@@ -361,7 +405,9 @@ const YourScheduleDetailsScreen = () => {
             </View>
             <TouchableOpacity
               style={styles.removeBtnContainer}
-              disabled={approvalStage === 'reject'}
+              disabled={
+                approvalStage === 'reject' || approvalStage === 'cancelled'
+              }
               onPress={handleAlertVisible}>
               <Text allowFontScaling={false} style={styles.removeBtnText}>
                 Cancel
@@ -370,24 +416,30 @@ const YourScheduleDetailsScreen = () => {
           </View>
         </View>
 
-        <View style={styles.needHelpContainer}>
-          <Text allowFontScaling={false} style={styles.contentDetailsText}>
-            Need help ?
-          </Text>
-        </View>
-        <View style={styles.chatWithOwnerBtnMainContainer}>
-          <TouchableOpacity
-            onPress={() =>
-              navigate(SCREEN_NAMES.ChatScreen, {
-                bookingDetails: bookingDetails,
-              })
-            }
-            style={[styles.chatWithOwnerBtnContainer]}>
-            <Text allowFontScaling={false} style={styles.chatWithOwnerBtnText}>
-              Chat with owner
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {!bookingDetails?.isVenueDealBooking && (
+          <>
+            <View style={styles.needHelpContainer}>
+              <Text allowFontScaling={false} style={styles.contentDetailsText}>
+                Need help ?
+              </Text>
+            </View>
+            <View style={styles.chatWithOwnerBtnMainContainer}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigate(SCREEN_NAMES.ChatScreen, {
+                    bookingDetails: bookingDetails,
+                  })
+                }
+                style={[styles.chatWithOwnerBtnContainer]}>
+                <Text
+                  allowFontScaling={false}
+                  style={styles.chatWithOwnerBtnText}>
+                  Chat with owner
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
 
         <View>
           <View style={styles.actionRequestedContainer}>
@@ -417,23 +469,25 @@ const YourScheduleDetailsScreen = () => {
                 style={styles.tiktokDesctiption}>{`${actionName}`}</Text>
             </View>
           </View>
-          <View style={styles.deadlineTimeContainer}>
-            <Text allowFontScaling={false} style={styles.timeTitleText}>
-              Deadline
-            </Text>
-            <View style={styles.infoContainer}>
-              <Image
-                resizeMode="contain"
-                source={IMAGES.info}
-                style={styles.infoIcon}
-              />
-              <Text
-                allowFontScaling={false}
-                style={
-                  styles.timeText
-                }>{`${bookingDetails?._actions_turbo?.Days_deadline} days after booking`}</Text>
+          {!bookingDetails?.isVenueDealBooking && (
+            <View style={styles.deadlineTimeContainer}>
+              <Text allowFontScaling={false} style={styles.timeTitleText}>
+                Deadline
+              </Text>
+              <View style={styles.infoContainer}>
+                <Image
+                  resizeMode="contain"
+                  source={IMAGES.info}
+                  style={styles.infoIcon}
+                />
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    styles.timeText
+                  }>{`${bookingDetails?._actions_turbo?.Days_deadline} days after booking`}</Text>
+              </View>
             </View>
-          </View>
+          )}
         </View>
 
         <View>
@@ -471,34 +525,36 @@ const YourScheduleDetailsScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <SwipeButton
-          containerStyles={swipeButtonStyles.swipeBtnMainContainer}
-          height={verticalScale(60)}
-          width={'90%'}
-          shouldResetAfterSuccess={true}
-          disabled={
-            bookingDetails?.Rejectedstatus || bookingDetails?.canceled
-            // || compareWithCurrDate(bookingDetails?.BookingDay)
-          }
-          onSwipeSuccess={handleSwipeSuccess}
-          railStyles={swipeButtonStyles.swipeBtnRail}
-          railBackgroundColor={COLORS.newPrimary}
-          railFillBackgroundColor={COLORS.newPrimary}
-          thumbIconBackgroundColor={COLORS.newPrimary}
-          // eslint-disable-next-line react/no-unstable-nested-components
-          thumbIconComponent={() => (
-            <Image
-              source={IMAGES.swipeButton}
-              style={swipeButtonStyles.swipeBtnIcon}
-            />
-          )}
-          // thumbIconImageSource={IMAGES.swipeButton}
-          thumbIconStyles={swipeButtonStyles.swipeThumbIcon}
-          // thumbIconWidth={100}
-          title={'Check in Now'}
-          titleColor={COLORS.white}
-          titleStyles={swipeButtonStyles.swipeBtnTitle}
-        />
+        {!isBookingCheckedIn && (
+          <SwipeButton
+            containerStyles={swipeButtonStyles.swipeBtnMainContainer}
+            height={verticalScale(60)}
+            width={'90%'}
+            shouldResetAfterSuccess={true}
+            disabled={
+              bookingDetails?.Rejectedstatus || bookingDetails?.canceled
+              // || compareWithCurrDate(bookingDetails?.BookingDay)
+            }
+            onSwipeSuccess={handleSwipeSuccess}
+            railStyles={swipeButtonStyles.swipeBtnRail}
+            railBackgroundColor={COLORS.newPrimary}
+            railFillBackgroundColor={COLORS.newPrimary}
+            thumbIconBackgroundColor={COLORS.newPrimary}
+            // eslint-disable-next-line react/no-unstable-nested-components
+            thumbIconComponent={() => (
+              <Image
+                source={IMAGES.swipeButton}
+                style={swipeButtonStyles.swipeBtnIcon}
+              />
+            )}
+            // thumbIconImageSource={IMAGES.swipeButton}
+            thumbIconStyles={swipeButtonStyles.swipeThumbIcon}
+            // thumbIconWidth={100}
+            title={'Check in Now'}
+            titleColor={COLORS.white}
+            titleStyles={swipeButtonStyles.swipeBtnTitle}
+          />
+        )}
 
         <CustomModal
           visible={isAlertVisible}

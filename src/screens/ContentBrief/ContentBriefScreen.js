@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {
   FlatList,
   Image,
@@ -19,8 +19,6 @@ import {SCREEN_NAMES} from '../../constants';
 
 const ContentBriefScreen = () => {
   const {
-    isReel,
-    actionNumId,
     icon,
     actionName,
     bookingDetails,
@@ -28,6 +26,9 @@ const ContentBriefScreen = () => {
     handleTagCopyPress,
     handleOpenCouponPress,
   } = useContentBrief();
+  const credits = bookingDetails?._offers_turbo?.Credits;
+  const shouldShowCredits =
+    credits !== undefined && credits !== null && credits !== '';
   // const tags = useMemo(
   //   () =>
   //     [
@@ -96,28 +97,40 @@ const ContentBriefScreen = () => {
 
         <View style={styles.socialMediaMainDetailsContainer}>
           <View style={styles.socialMediaImageContainer}>
-            <FastImage
-              resizeMode="contain"
-              source={{
-                priority: FastImage.priority.high,
-                uri: icon,
-              }}
-              style={styles.testImage}
-            />
+            {icon?.uri || typeof icon === 'string' ? (
+              <FastImage
+                resizeMode="contain"
+                source={{
+                  priority: FastImage.priority.high,
+                  uri: icon?.uri || icon,
+                }}
+                style={styles.testImage}
+              />
+            ) : (
+              !!icon && (
+                <Image
+                  resizeMode="contain"
+                  source={icon}
+                  style={styles.testImage}
+                />
+              )
+            )}
           </View>
           <View style={styles.socialMediaNameContainer}>
             <Text allowFontScaling={false} style={styles.socialMediaNameText}>
               {actionName}
             </Text>
-            <View style={styles.ratingContainer}>
-              <Text allowFontScaling={false} style={styles.ratingUsersText}>
-                {bookingDetails?._offers_turbo?.Credits}
-              </Text>
-              <Image
-                source={IMAGES.ratingStar}
-                style={styles.ratingIconImage}
-              />
-            </View>
+            {shouldShowCredits && (
+              <View style={styles.ratingContainer}>
+                <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                  {credits}
+                </Text>
+                <Image
+                  source={IMAGES.ratingStar}
+                  style={styles.ratingIconImage}
+                />
+              </View>
+            )}
           </View>
         </View>
         <View style={styles.socialMediaDescriptionContainer}>

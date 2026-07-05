@@ -16,7 +16,13 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {CustomCarousel} from '../../components';
 import {COLORS, FONTS} from '../../constants';
-import {checkAction, perfectSize, xanoImageSize} from '../../utils';
+import {
+  checkAction,
+  getActionIconSource,
+  getPerkIconSource,
+  perfectSize,
+  xanoImageSize,
+} from '../../utils';
 import {useServiceDetails} from './hooks';
 
 const ServiceDetails = () => {
@@ -42,6 +48,24 @@ const ServiceDetails = () => {
     handleInfluencerPlus,
     handleInfluencerMinus,
   } = useServiceDetails();
+  const fallbackAction = useMemo(
+    () => checkAction(actionNumId, socialActions),
+    [actionNumId, socialActions],
+  );
+  const actionIconUrl = serviceDetails?._actions_turbo?.Action_icon?.url;
+  const isVenueDeal = !!serviceDetails?.isVenueDeal;
+  const actionIconSource = useMemo(
+    () =>
+      getActionIconSource(serviceDetails?._actions_turbo?.action) ||
+      (actionIconUrl ? {uri: actionIconUrl} : undefined) ||
+      fallbackAction?.action_icon,
+    [
+      actionIconUrl,
+      fallbackAction?.action_icon,
+      serviceDetails?._actions_turbo?.action,
+    ],
+  );
+
   console.log(actionNumId, 'actionNumId_ServiceDetailsScreen');
   // console.log(
   //   'serviceDetails?._offers_turbo?.isBigInfluencer_ServiceDetailsScreen',
@@ -131,37 +155,50 @@ const ServiceDetails = () => {
   //   },
   //   [serviceDetails?._actions_turbo?.Other_Services],
   // );
-  const isOther_Service = useCallback(
-    serviceNameKey =>
-      serviceDetails?._actions_turbo?.Other_Services?.some(
-        service => service?.name === serviceNameKey,
-      ),
-    [serviceDetails?._actions_turbo?.Other_Services],
-  );
-  const getIcons = useCallback(
-    serviceName => {
-      const serviceNameKey = serviceName?.replace(' ', '');
-      console.log('serviceName.trim()', serviceNameKey || '');
-      const Other_Service = isOther_Service(serviceName);
-      console.log('Other_Service', serviceNameKey, Other_Service);
-      // get dynamic Icons added in xano
-      if (Other_Service) {
-        console.log(
-          serviceDetails?._actions_turbo?.Other_Services?.find(
-            service => service?.name === serviceName,
-          )?.service_icon?.url,
-          'icon_url',
-        );
-        return serviceDetails?._actions_turbo?.Other_Services?.find(
-          service => service?.name === serviceName,
-        )?.service_icon?.url;
-      } else {
-        // get hard coded icons from frontend code
-        return IMAGES[serviceNameKey];
+  const getIcons = useCallback(service => getPerkIconSource(service), []);
+  const contentRequiredItems = useMemo(() => {
+    if (isVenueDeal) {
+      return serviceDetails?._actions_turbo?.actions_turbo_id || [];
+    }
+
+    return [serviceDetails];
+  }, [isVenueDeal, serviceDetails]);
+
+  const getContentActionIconSource = useCallback(
+    item => {
+      if (isVenueDeal) {
+        return getActionIconSource(item?.action || item) || actionIconSource;
       }
+
+      return actionIconSource;
     },
-    [isOther_Service, serviceDetails?._actions_turbo?.Other_Services],
+    [actionIconSource, isVenueDeal],
   );
+
+  const getContentActionTitle = useCallback(
+    item => {
+      if (isVenueDeal) {
+        return item?.Action_Name || item?.action?.title || 'Deal';
+      }
+
+      return `${item?._actions_turbo?.Action_Name} video`;
+    },
+    [isVenueDeal],
+  );
+
+  const getContentActionDescription = useCallback(
+    item =>
+      isVenueDeal
+        ? item?.Descrizione || item?.action?.description || ''
+        : item?._actions_turbo?.Descrizione,
+    [isVenueDeal],
+  );
+
+  const getContentActionCredits = useCallback(
+    item => (isVenueDeal ? item?.coin_amount : item?.Credits),
+    [isVenueDeal],
+  );
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -214,14 +251,13 @@ const ServiceDetails = () => {
 
           <View style={styles.titleRatingMainRow}>
             <View style={styles.itemTitleIconContainer}>
-              <FastImage
-                resizeMode="contain"
-                source={{
-                  priority: FastImage.priority.high,
-                  uri: serviceDetails?._actions_turbo?.Action_icon?.url,
-                }}
-                style={styles.socialIcon}
-              />
+              {actionIconSource && (
+                <Image
+                  resizeMode="contain"
+                  source={actionIconSource}
+                  style={styles.socialIcon}
+                />
+              )}
               {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
               <Text
                 allowFontScaling={false}
@@ -284,8 +320,10 @@ const ServiceDetails = () => {
                 {(serviceDetails?.isBigInfluencer &&
                   serviceDetails?.services?.length > 0) ||
                 getAvailableServices.length > 0 ? (
-                  getAvailableServices?.map(
-                    subServices =>
+                  getAvailableServices?.map(subServices => {
+                    const iconSource = getIcons(subServices);
+
+                    return (
                       subServices?.quantity > 0 && (
                         <View
                           style={[
@@ -293,15 +331,9 @@ const ServiceDetails = () => {
                             styles.firstAmenityMainContainer,
                           ]}>
                           <View style={styles.amenityIconContainer}>
-                            {getIcons(subServices?.name) && (
+                            {iconSource && (
                               <Image
-                                source={
-                                  isOther_Service(subServices?.name)
-                                    ? {
-                                        uri: getIcons(subServices?.name),
-                                      }
-                                    : getIcons(subServices?.name)
-                                }
+                                source={iconSource}
                                 style={styles.amenityIcon}
                               />
                             )}
@@ -317,8 +349,9 @@ const ServiceDetails = () => {
                             </Text>
                           </View>
                         </View>
-                      ),
-                  )
+                      )
+                    );
+                  })
                 ) : (
                   <>
                     {/* {serviceDetails?._actions_turbo?.Plates > 0 && ( */}
@@ -437,7 +470,7 @@ const ServiceDetails = () => {
               </>
             )}
 
-          {actionNumId === 9 ? (
+          {!isVenueDeal && actionNumId === 9 ? (
             <>
               <View style={styles.villaDescriptionContainer}>
                 <Text
@@ -553,7 +586,7 @@ const ServiceDetails = () => {
                     }>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
                 </View>
               </View>
-              {actionNumId === 3 && (
+              {!isVenueDeal && actionNumId === 3 && (
                 <View style={styles.WhatIsDiaryContainer}>
                   <Text allowFontScaling={false} style={styles.whatIsDiaryText}>
                     What is a Diary?
@@ -575,16 +608,25 @@ const ServiceDetails = () => {
                 // style={{flex: 1}}
                 style={styles.flatlistContainer}>
                 <FlatList
-                  data={[serviceDetails]}
-                  keyExtractor={(_, index) => index.toString()}
+                  data={contentRequiredItems}
+                  keyExtractor={(item, index) =>
+                    `${item?.id || item?.action_id || index}`
+                  }
                   renderItem={({item, index}) => {
-                    const actionNumId = item?._actions_turbo?.action_num_id;
+                    const itemActionNumId = isVenueDeal
+                      ? item?.action_id
+                      : item?._actions_turbo?.action_num_id;
+                    const itemActionIconSource =
+                      getContentActionIconSource(item);
+                    const contentActionCredits = getContentActionCredits(item);
+                    const shouldShowContentActionCredits =
+                      !isVenueDeal || Number(contentActionCredits || 0) > 0;
                     // const diaryItems = ['TikTok Diary', 'Instagram Diary']
-                    const actions = checkAction(actionNumId, socialActions);
+                    const actions = checkAction(itemActionNumId, socialActions);
                     // console.log('icon', icon, actionNumId)
                     return (
                       <View>
-                        {actionNumId === 3 ? (
+                        {!isVenueDeal && itemActionNumId === 3 ? (
                           diaryItems?.map((diaryItem, innerIndex) => (
                             <View key={innerIndex}>
                               <View style={styles.mainSocialItemContainer}>
@@ -647,7 +689,7 @@ const ServiceDetails = () => {
                               )}
                             </View>
                           ))
-                        ) : actionNumId === 6 ? (
+                        ) : !isVenueDeal && itemActionNumId === 6 ? (
                           actions?.duo_actions?.map((innerItem, innerIndex) => (
                             <View key={innerIndex}>
                               <View
@@ -714,14 +756,13 @@ const ServiceDetails = () => {
                         ) : (
                           <View style={styles.mainSocialItemContainer}>
                             <View style={styles.socialMediaImageContainer}>
-                              <FastImage
-                                resizeMode="contain"
-                                source={{
-                                  priority: FastImage.priority.high,
-                                  uri: item?._actions_turbo?.Action_icon?.url,
-                                }}
-                                style={styles.socialMediaImage}
-                              />
+                              {itemActionIconSource && (
+                                <Image
+                                  resizeMode="contain"
+                                  source={itemActionIconSource}
+                                  style={styles.socialMediaImage}
+                                />
+                              )}
                             </View>
                             <View
                               style={
@@ -731,26 +772,30 @@ const ServiceDetails = () => {
                                 <Text
                                   allowFontScaling={false}
                                   style={styles.socialMediaTitle}>
-                                  {item?._actions_turbo?.Action_Name} video
+                                  {getContentActionTitle(item)}
                                 </Text>
-                                <View style={styles.ratingsContainer}>
-                                  <Text
-                                    allowFontScaling={false}
-                                    style={styles.ratingsText}>
-                                    {item?.Credits}
-                                  </Text>
-                                  <Image
-                                    source={IMAGES.star}
-                                    style={styles.ratingIcon}
-                                  />
-                                </View>
+                                {shouldShowContentActionCredits && (
+                                  <View style={styles.ratingsContainer}>
+                                    <Text
+                                      allowFontScaling={false}
+                                      style={styles.ratingsText}>
+                                      {contentActionCredits}
+                                    </Text>
+                                    {!isVenueDeal && (
+                                      <Image
+                                        source={IMAGES.star}
+                                        style={styles.ratingIcon}
+                                      />
+                                    )}
+                                  </View>
+                                )}
                               </View>
                               <View
                                 style={styles.socialMediaDescriptionContainer}>
                                 <Text
                                   allowFontScaling={false}
                                   style={styles.socialMediaDescriptionText}>
-                                  {`${item?._actions_turbo?.Descrizione}`}
+                                  {`${getContentActionDescription(item)}`}
                                 </Text>
                               </View>
                             </View>

@@ -7,6 +7,7 @@ import {SCREEN_NAMES} from '../../../constants';
 import {setTimeFrameData} from '../../../redux';
 import {
   addRestaurantBooking,
+  createVenueDealBooking,
   navigate,
   showToastError,
 } from '../../../services';
@@ -17,6 +18,65 @@ import {
   getFormattedTime,
   setCustomTimeFromISOString,
 } from '../../../utils';
+
+const normalizeDate = date => {
+  const normalizedDate = new Date(date);
+  normalizedDate.setHours(0, 0, 0, 0);
+  return normalizedDate;
+};
+
+const buildVenueDealApprovalDetails = ({
+  bookingData,
+  bookingTimestamp,
+  formattedDate,
+  loginData,
+  restaurantDetails,
+  selectedTimeFame,
+  serviceDetails,
+  venueDealBookingData,
+}) => ({
+  ...(bookingData || {}),
+  Approved: bookingData?.Approved ?? false,
+  BookingDay:
+    bookingData?.BookingDay || bookingData?.booking_date || formattedDate,
+  BookingTimestamp: bookingData?.BookingTimestamp || bookingTimestamp,
+  HourEnd: bookingData?.HourEnd || selectedTimeFame?.End,
+  HourStart: bookingData?.HourStart || selectedTimeFame?.Start,
+  MinuteEnd: bookingData?.MinuteEnd || selectedTimeFame?.Minute_End,
+  MinuteStart: bookingData?.MinuteStart || selectedTimeFame?.Minute_Start,
+  Rejectedstatus: bookingData?.Rejectedstatus ?? false,
+  actions_turbo: bookingData?.actions_turbo || serviceDetails?._actions_turbo,
+  isVenueDeal: true,
+  user_turbo: bookingData?.user_turbo || loginData,
+  user_turbo_id: bookingData?.user_turbo_id || loginData?.id,
+  venue_deal_id:
+    bookingData?.venue_deal_id || venueDealBookingData?.venue_deal_id,
+  venue_deal_timeframe_id:
+    bookingData?.venue_deal_timeframe_id ||
+    venueDealBookingData?.venue_deal_timeframe_id,
+  _offers_turbo: bookingData?._offers_turbo || {
+    Credits: serviceDetails?.Credits,
+    Offer_Cover: serviceDetails?.Offer_Cover || serviceDetails?.cover_image,
+    Offer_Name:
+      serviceDetails?.Deal_Title || serviceDetails?.title || 'Venue deal',
+    instructions:
+      serviceDetails?.content_instructions ||
+      serviceDetails?.at_offer_description ||
+      serviceDetails?.Description ||
+      '',
+  },
+  _restaurant_turbo: bookingData?._restaurant_turbo || {
+    Adress: restaurantDetails?.Adress || restaurantDetails?.address,
+    Cover:
+      restaurantDetails?.Cover ||
+      restaurantDetails?.cover_image ||
+      restaurantDetails?.Cover_Image,
+    Name: restaurantDetails?.Name || restaurantDetails?.name,
+    id: restaurantDetails?.id,
+    is_event: restaurantDetails?.is_event,
+  },
+  _timeframes_turbo: bookingData?._timeframes_turbo || selectedTimeFame,
+});
 
 const useBookingDetails = () => {
   const timeFrameData = useSelector(
@@ -47,6 +107,20 @@ const useBookingDetails = () => {
   const serviceDetails = useSelector(
     state => state.restaurantSlice.serviceDetails,
   );
+  const isVenueDeal = !!serviceDetails?.isVenueDeal;
+  const venueDealStartDate = serviceDetails?.start_date
+    ? normalizeDate(serviceDetails.start_date)
+    : null;
+  const venueDealEndDate = serviceDetails?.end_date
+    ? normalizeDate(serviceDetails.end_date)
+    : null;
+  const isOneTimeVenueDeal =
+    isVenueDeal && serviceDetails?.frequency_type === 'one_time';
+  const oneTimeStartDate = isOneTimeVenueDeal ? venueDealStartDate : null;
+  const oneTimeEndDate = isOneTimeVenueDeal
+    ? venueDealEndDate || venueDealStartDate
+    : null;
+  const maxBookingDate = isVenueDeal ? venueDealEndDate : null;
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
@@ -87,15 +161,45 @@ const useBookingDetails = () => {
       : 1;
   };
 
+  const getVisibleWeekEndDate = weekStartDate => {
+    const newEndDate = new Date(weekStartDate);
+    newEndDate.setDate(newEndDate.getDate() + 6);
+
+    if (
+      maxBookingDate &&
+      normalizeDate(newEndDate).getTime() > maxBookingDate.getTime()
+    ) {
+      return maxBookingDate;
+    }
+
+    return newEndDate;
+  };
+
+  const isLastAvailableWeek = (() => {
+    if (!maxBookingDate) {
+      return false;
+    }
+
+    const nextWeekStartDate = new Date(startDate);
+    nextWeekStartDate.setDate(nextWeekStartDate.getDate() + 7);
+
+    return (
+      normalizeDate(nextWeekStartDate).getTime() > maxBookingDate.getTime()
+    );
+  })();
+
   // console.log('start date', startDate);
   const showNextWeek = () => {
+    if (isLastAvailableWeek) {
+      return;
+    }
+
     if (isLatestWeek) {
       setIsLatestWeek(false);
     }
     const newStartDate = new Date(startDate);
     newStartDate.setDate(startDate.getDate() + 7);
-    const newEndDate = new Date(newStartDate);
-    newEndDate.setDate(newEndDate.getDate() + 6);
+    const newEndDate = getVisibleWeekEndDate(newStartDate);
     setStartDate(newStartDate);
     setEndDate(newEndDate);
   };
@@ -156,7 +260,21 @@ const useBookingDetails = () => {
   const handleConfirmBtnPress = async () => {
     setIsLoading(true);
     const currentBookingDateTime = new Date(selectedDate);
+    const availabilityTimeFrame = isVenueDeal
+      ? selectedTimeFame
+      : timeFrameData?.[0];
     console.log('Current booking date: ' + currentBookingDateTime);
+    if (
+      isVenueDeal &&
+      (!selectedTimeFame?.id ||
+        selectedTimeFame?.start_minutes == null ||
+        selectedTimeFame?.end_minutes == null)
+    ) {
+      showToastError({message: 'Please select an available time slot.'});
+      setIsLoading(false);
+      return;
+    }
+
     if (!isEvent && actionNumId !== 9) {
       const parsedHours = parseInt(selectedTimeFame?.Start);
       const parsedMinutes = parseInt(selectedTimeFame?.Minute_Start);
@@ -196,8 +314,8 @@ const useBookingDetails = () => {
         !restaurantDetails?.booking_buffer_time) &&
         checkWithCurrentDateDifference(
           currentBookingDateTime,
-          timeFrameData?.[0]?.End,
-          timeFrameData?.[0]?.Minute_End,
+          availabilityTimeFrame?.End,
+          availabilityTimeFrame?.Minute_End,
         ) >= 10)
     ) {
       const bookingTimeStamp = currentBookingDateTime?.valueOf();
@@ -250,6 +368,62 @@ const useBookingDetails = () => {
       if (actionNumId === 9) {
         prepData['additional_influencer'] = influencerCount;
       }
+      if (isVenueDeal) {
+        const venueDealBookingData = {
+          venue_deal_id: serviceDetails?.venueDeal?.id || serviceDetails?.id,
+          booking_date: formattedDate,
+          start_minutes: Number(selectedTimeFame?.start_minutes || 0),
+          end_minutes: Number(selectedTimeFame?.end_minutes || 0),
+          user_turbo_id: loginData?.id,
+          venue_deal_timeframe_id: selectedTimeFame?.id,
+        };
+        const res = await createVenueDealBooking(venueDealBookingData);
+        const bookingDetails = buildVenueDealApprovalDetails({
+          bookingData: res?.data,
+          bookingTimestamp: bookingTimeStamp,
+          formattedDate,
+          loginData,
+          restaurantDetails,
+          selectedTimeFame,
+          serviceDetails,
+          venueDealBookingData,
+        });
+        const isBookingCreated =
+          (res?.status >= 200 && res?.status < 300) ||
+          !!res?.data?.id ||
+          res?.raw?.success === true ||
+          res?.success === true;
+
+        if (isBookingCreated) {
+          mixpanel.track('Venue Deal Booking Made', {
+            'Booking Id': bookingDetails?.id,
+            'User Id': loginData?.id,
+            'Venue Deal Id': venueDealBookingData.venue_deal_id,
+            'Time Frame Id': venueDealBookingData.venue_deal_timeframe_id,
+            'Booking Date': venueDealBookingData.booking_date,
+          });
+
+          await analytics().logEvent('venue_deal_booking_made', {
+            bookingId: bookingDetails?.id,
+            userId: loginData?.id,
+            venueDealId: venueDealBookingData.venue_deal_id,
+            timeFrameId: venueDealBookingData.venue_deal_timeframe_id,
+            bookingDate: venueDealBookingData.booking_date,
+          });
+
+          navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
+            bookingDetails,
+          });
+        } else if (res?.status !== 400) {
+          showToastError({
+            message: res?.message || res?.data || 'Something went wrong',
+          });
+        }
+
+        setIsLoading(false);
+        return;
+      }
+
       const res = await addRestaurantBooking(prepData);
       // console.log('res_handleConfirmBtnPress', res);
 
@@ -295,8 +469,8 @@ const useBookingDetails = () => {
           !restaurantDetails?.booking_buffer_time) &&
         checkWithCurrentDateDifference(
           currentBookingDateTime,
-          timeFrameData?.[0]?.End,
-          timeFrameData?.[0]?.Minute_End,
+          availabilityTimeFrame?.End,
+          availabilityTimeFrame?.Minute_End,
         ) < 10
       ) {
         error = {
@@ -343,6 +517,25 @@ const useBookingDetails = () => {
       } else {
         return true;
       }
+    }
+
+    if (isOneTimeVenueDeal) {
+      if (!oneTimeStartDate || !oneTimeEndDate) {
+        return true;
+      }
+
+      const normalizedDate = normalizeDate(myDate);
+      return (
+        normalizedDate.getTime() < oneTimeStartDate.getTime() ||
+        normalizedDate.getTime() > oneTimeEndDate.getTime()
+      );
+    }
+
+    if (
+      maxBookingDate &&
+      normalizeDate(myDate).getTime() > maxBookingDate.getTime()
+    ) {
+      return true;
     }
 
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
@@ -432,6 +625,61 @@ const useBookingDetails = () => {
 
   useEffect(() => {
     const findClosestAvailableDate = () => {
+      if (isVenueDeal && maxBookingDate) {
+        const earliestBookingDate = normalizeDate(after24Hours);
+        const searchStartDate = new Date(
+          isOneTimeVenueDeal && oneTimeStartDate
+            ? Math.max(
+                earliestBookingDate.getTime(),
+                oneTimeStartDate.getTime(),
+              )
+            : earliestBookingDate.getTime(),
+        );
+        const firstCandidate =
+          searchStartDate.getTime() > maxBookingDate.getTime()
+            ? maxBookingDate
+            : searchStartDate;
+        const daysInRange =
+          Math.ceil(
+            (maxBookingDate.getTime() - firstCandidate.getTime()) /
+              (24 * 60 * 60 * 1000),
+          ) + 1;
+
+        for (let i = 0; i < Math.max(daysInRange, 0); i++) {
+          const checkDate = new Date(firstCandidate);
+          checkDate.setDate(firstCandidate.getDate() + i);
+          if (!datesBlacklistFunc(checkDate)) {
+            return checkDate;
+          }
+        }
+
+        return firstCandidate;
+      }
+
+      if (isOneTimeVenueDeal && oneTimeStartDate && oneTimeEndDate) {
+        const firstCandidate = new Date(
+          Math.max(
+            normalizeDate(after24Hours).getTime(),
+            oneTimeStartDate.getTime(),
+          ),
+        );
+        const daysInRange =
+          Math.ceil(
+            (oneTimeEndDate.getTime() - firstCandidate.getTime()) /
+              (24 * 60 * 60 * 1000),
+          ) + 1;
+
+        for (let i = 0; i < Math.max(daysInRange, 0); i++) {
+          const checkDate = new Date(firstCandidate);
+          checkDate.setDate(firstCandidate.getDate() + i);
+          if (!datesBlacklistFunc(checkDate)) {
+            return checkDate;
+          }
+        }
+
+        return firstCandidate;
+      }
+
       const today = new Date(after24Hours);
       for (let i = 0; i < 30; i++) {
         // Check for the next 30 days
@@ -448,6 +696,8 @@ const useBookingDetails = () => {
     setTimeout(() => {
       setIsDatesLoading(false);
     }, 2000);
+    // This effect initializes the booking calendar only once on screen mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -527,6 +777,7 @@ const useBookingDetails = () => {
     isLatestWeek,
     isLoading,
     isEvent,
+    isLastAvailableWeek,
     eventDates,
     eventTimes,
     eventSelectedDateIndex,
@@ -536,6 +787,7 @@ const useBookingDetails = () => {
     isDatesLoading,
     selectedDate,
     selectedTimeFame,
+    maxBookingDate,
     setSelectedDate,
     setSelectedTimeFame,
     showNextWeek,

@@ -45,6 +45,97 @@ export const addRestaurantBooking = async data => {
   }
 };
 
+export const createVenueDealBooking = async data => {
+  console.log('check_createVenueDealBooking');
+  try {
+    const url = Api.RESTAURANTS.CREATE_VENUE_DEAL_BOOKING;
+    const response = await Fetch.postNew(url, data);
+    return {
+      data: response?.data?.data || response?.data,
+      raw: response?.data,
+      status: response?.status || response?.data?.status,
+    };
+  } catch (error) {
+    if (error?.response?.data) {
+      const responseError =
+        error?.response?.data?.message || error?.response?.data;
+      showToastError({
+        message:
+          typeof responseError === 'string'
+            ? responseError
+            : JSON.stringify(responseError),
+      });
+
+      return {
+        status: error?.response?.status,
+        message: responseError,
+      };
+    }
+
+    showToastError({message: error?.message || 'Something went wrong'});
+    return {
+      status: 500,
+      message: error?.message || 'Something went wrong',
+    };
+  }
+};
+
+export const getVenueDealBookings = async userTurboId => {
+  if (!userTurboId) {
+    return [];
+  }
+
+  try {
+    const response = await Fetch.get(Api.RESTAURANTS.GET_VENUE_DEAL_BOOKINGS, {
+      params: {
+        user_turbo_id: userTurboId,
+      },
+    });
+
+    return response?.items || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const checkInVenueDealBooking = async data => {
+  console.log('check_checkInVenueDealBooking');
+  try {
+    const response = await Fetch.postNew(
+      Api.RESTAURANTS.CHECK_IN_VENUE_DEAL_BOOKING,
+      data,
+    );
+    return {
+      data: response?.data?.data || response?.data,
+      raw: response?.data,
+      status: response?.status || response?.data?.status,
+    };
+  } catch (error) {
+    if (error?.response?.data) {
+      const responseError =
+        error?.response?.data?.message || error?.response?.data;
+      showToastError({
+        message:
+          typeof responseError === 'string'
+            ? responseError
+            : JSON.stringify(responseError),
+      });
+
+      return {
+        status: error?.response?.status,
+        message: responseError,
+      };
+    }
+
+    showToastError({message: error?.message || 'Something went wrong'});
+    return {
+      status: 500,
+      message: error?.message || 'Something went wrong',
+    };
+  }
+};
+
 export const getBookings = async params => {
   try {
     const url = Api.RESTAURANTS.GET_BOOKINGS + params;

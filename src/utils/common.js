@@ -144,12 +144,27 @@ export const checkContentStatus = statusName => {
   }
 };
 
+const isValidDate = date =>
+  date instanceof Date && !Number.isNaN(date.getTime());
+
+const getSafeDaysCount = days => {
+  const parsedDays = Number(days);
+
+  return Number.isFinite(parsedDays) ? parsedDays : 0;
+};
+
 export const deadlineDaysCount = (bookDate, deadlineDays) => {
   const currentDate = new Date();
   const bookingDate = new Date(bookDate);
+
+  if (!bookDate || !isValidDate(bookingDate)) {
+    return null;
+  }
+
   const millisecondsDiff = bookingDate.getTime() - currentDate.getTime();
   let calculatedDeadlineDays =
-    Math.round(millisecondsDiff / (1000 * 3600 * 24)) + (deadlineDays || 0);
+    Math.round(millisecondsDiff / (1000 * 3600 * 24)) +
+    getSafeDaysCount(deadlineDays);
   console.log('return_calculatedDeadlineDays', calculatedDeadlineDays);
   return calculatedDeadlineDays;
 };
@@ -162,8 +177,13 @@ export const getDeadlineDate = (startDateStr, daysToAdd) => {
   //   typeof daysToAdd,
   // );
   const date = new Date(startDateStr); // e.g. "2025-05-28"
+
+  if (!startDateStr || !isValidDate(date)) {
+    return '';
+  }
+
   // console.log('date_before', date, date.getDate());
-  date.setDate(date.getDate() + (daysToAdd || 0)); // add days
+  date.setDate(date.getDate() + getSafeDaysCount(daysToAdd)); // add days
   // console.log('date', date, typeof date);
   // console.log('return_date', date.toISOString().split('T')[0]);
 

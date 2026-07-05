@@ -3,16 +3,21 @@ import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants/navigation';
 import {
   selectBookingsList,
-  setBookings,
   setFreshBookings,
 } from '../../../redux/slices/restaurantSlice';
 import {
   getBookingForContentList,
   getBookings,
+  getVenueDealBookings,
+  getVenueDealBookingActions,
   navigate,
 } from '../../../services';
 import {selectContentList, setContentList} from '../../../redux/slices';
 import {useRoute} from '@react-navigation/native';
+import {
+  mapVenueDealBookingActionsToContentList,
+  mapVenueDealBookingsToScheduleBookings,
+} from '../../../utils';
 
 const useYourSchedule = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
@@ -89,21 +94,36 @@ const useYourSchedule = () => {
   const getBookingsData = async () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
-    const res = await getBookings(params);
+    const [res, venueDealBookingsRes] = await Promise.all([
+      getBookings(params),
+      getVenueDealBookings(loginData?.id),
+    ]);
+    const legacyBookings = Array.isArray(res) ? res : [];
+    const venueDealBookings =
+      mapVenueDealBookingsToScheduleBookings(venueDealBookingsRes);
     // console.log(
     //   'getBookingsData',
     //   res?.map(item => item.id),
     // );
-    dispatch(setFreshBookings(res));
+    dispatch(setFreshBookings([...legacyBookings, ...venueDealBookings]));
     setIsLoading(false);
   };
 
   const getBookingForContentListData = async () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
-    const res = await getBookingForContentList(params);
+    const [res, venueDealActionsRes, venueDealBookingsRes] = await Promise.all([
+      getBookingForContentList(params),
+      getVenueDealBookingActions(loginData?.id),
+      getVenueDealBookings(loginData?.id),
+    ]);
+    const legacyContentList = Array.isArray(res) ? res : [];
+    const venueDealContentList = mapVenueDealBookingActionsToContentList(
+      venueDealActionsRes,
+      venueDealBookingsRes,
+    );
     // console.log('contentListRes_getBookingForContentListData', res);
-    dispatch(setContentList(res));
+    dispatch(setContentList([...legacyContentList, ...venueDealContentList]));
     setIsLoading(false);
   };
   const updateBookingCheckin = async params => {
@@ -138,6 +158,8 @@ const useYourSchedule = () => {
     if (isContentStatusModalVisible === false && updatedContentDetails?.id) {
       handleContentModalOpenClose();
     }
+    // Keep the existing modal reopen behavior tied only to updated details.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatedContentDetails]);
 
   useEffect(() => {
@@ -145,6 +167,8 @@ const useYourSchedule = () => {
       getBookingsData();
       getBookingForContentListData();
     }
+    // Preserve the existing refresh behavior when switching tabs.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTab]);
 
   useEffect(() => {

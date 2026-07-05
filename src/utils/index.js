@@ -5,3 +5,6 @@ export * from './conditions-helper';
 export * from './smallComponents';
 export * from './responsiveSize';
 export * from './theme';
+export * from './perkIcons';
+export * from './actionIcons';
+export * from './venueDealBookings';

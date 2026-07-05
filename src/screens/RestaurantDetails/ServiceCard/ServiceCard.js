@@ -10,11 +10,16 @@ import {
   View,
 } from 'react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import FastImage from 'react-native-fast-image';
 import {useServiceCard} from './hooks';
 import {IMAGES} from '../../../assets';
 import {COLORS, FONTS} from '../../../constants';
-import {perfectSize, xanoImageSize} from '../../../utils';
+import {
+  checkAction,
+  getActionIconSource,
+  getPerkIconSource,
+  perfectSize,
+  xanoImageSize,
+} from '../../../utils';
 
 const ServiceCard = ({
   item,
@@ -41,6 +46,16 @@ const ServiceCard = ({
   // }, []);
 
   const {handleCardPress} = useServiceCard(item);
+  const fallbackAction = useMemo(() => checkAction(actionNumId), [actionNumId]);
+  const actionIconUrl = item?._actions_turbo?.Action_icon?.url;
+  const actionIconSource = useMemo(
+    () =>
+      getActionIconSource(item?._actions_turbo?.action) ||
+      (actionIconUrl ? {uri: actionIconUrl} : undefined) ||
+      fallbackAction?.action_icon,
+    [actionIconUrl, fallbackAction?.action_icon, item?._actions_turbo?.action],
+  );
+
   const amenityDetailsWithCoupons = useMemo(() => {
     const list = [];
     if ([7, 10, 14, 15, 16, 17, 8, 53, 54, 9].includes(actionNumId)) {
@@ -76,9 +91,7 @@ const ServiceCard = ({
         if (service?.quantity > 0) {
           list.push({
             amenityName: `${service.quantity} X ${service.name}`,
-            amenityIcon: service?.service_icon?.url
-              ? {uri: service.service_icon.url}
-              : undefined,
+            amenityIcon: getPerkIconSource(service),
           });
         }
       });
@@ -154,38 +167,7 @@ const ServiceCard = ({
   //       : [],
   //   [item?._actions_turbo?.Coupons_Services, item?.services],
   // );
-  const isOther_Service = useCallback(
-    serviceNameKey =>
-      item?._actions_turbo?.Coupons_Services?.some(
-        service => service?.name === serviceNameKey,
-      ),
-    [item?._actions_turbo?.Coupons_Services],
-  );
-  const getIcons = useCallback(
-    serviceName => {
-      const serviceNameKey = serviceName?.replace(' ', '');
-      console.log('serviceName.trim()', serviceNameKey, serviceName);
-      const Other_Service = isOther_Service(serviceName);
-      console.log(
-        'Other_Service_getIcons_ServiceCard',
-        serviceNameKey,
-        Other_Service,
-        item?._actions_turbo?.Coupons_Services?.find(
-          service => service?.name === serviceName,
-        )?.service_icon?.url,
-      );
-      // get dynamic Icons added in xano
-      if (Other_Service) {
-        return item?._actions_turbo?.Coupons_Services?.find(
-          service => service?.name === serviceName,
-        )?.service_icon?.url;
-      } else {
-        // get hard coded icons from frontend code
-        return IMAGES[serviceNameKey];
-      }
-    },
-    [isOther_Service, item?._actions_turbo?.Coupons_Services],
-  );
+  const getIcons = useCallback(service => getPerkIconSource(service), []);
 
   console.log(
     'item_actionsTurbo',
@@ -204,7 +186,7 @@ const ServiceCard = ({
 
   return (
     <TouchableOpacity
-      style={styles.listItem}
+      style={[styles.listItem, item?.isVenueDeal && styles.venueDealListItem]}
       activeOpacity={0.6}
       onPress={() => {
         // console.log(
@@ -238,14 +220,13 @@ const ServiceCard = ({
       </View>
       <View style={styles.titleRatingMainRow}>
         <View style={styles.itemTitleIconContainer}>
-          <FastImage
-            resizeMode="contain"
-            source={{
-              priority: FastImage.priority.high,
-              uri: item?._actions_turbo?.Action_icon?.url,
-            }}
-            style={styles.socialIcon}
-          />
+          {actionIconSource && (
+            <Image
+              resizeMode="contain"
+              source={actionIconSource}
+              style={styles.socialIcon}
+            />
+          )}
           {/* <Image resizeMode="contain" source={IMAGES.storyIcon} style={styles.socialIcon} /> */}
           <Text
             allowFontScaling={false}
@@ -258,7 +239,9 @@ const ServiceCard = ({
           <Text allowFontScaling={false} style={styles.ratingsText}>
             {item?.Credits}
           </Text>
-          <Image source={IMAGES.star} style={styles.ratingIcon} />
+          {!item?.isVenueDeal && (
+            <Image source={IMAGES.star} style={styles.ratingIcon} />
+          )}
         </View>
       </View>
       <View style={styles.amenityContainer}>
@@ -291,6 +274,7 @@ const ServiceCard = ({
             {((item?.isBigInfluencer && item?.services?.length > 0) ||
               getServicesWithCoupons.length > 0) &&
               getServicesWithCoupons?.map((subServices, ind) => {
+                const iconSource = getIcons(subServices);
                 console.log(
                   'serviceName.trim()',
                   subServices.name?.replace(' ', '') || '',
@@ -304,13 +288,9 @@ const ServiceCard = ({
                         styles.firstAmenityMainContainer,
                       ]}>
                       <View style={styles.amenityIconContainer}>
-                        {getIcons(subServices?.name) && (
+                        {iconSource && (
                           <Image
-                            source={
-                              isOther_Service(subServices?.name)
-                                ? {uri: getIcons(subServices?.name)}
-                                : getIcons(subServices?.name)
-                            }
+                            source={iconSource}
                             style={styles.amenityIcon}
                           />
                         )}
@@ -575,6 +555,10 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),
     marginHorizontal: perfectSize(10),
+  },
+  venueDealListItem: {
+    borderColor: '#D7A82F',
+    borderWidth: moderateScale(2),
   },
   itemImage: {
     position: 'absolute',

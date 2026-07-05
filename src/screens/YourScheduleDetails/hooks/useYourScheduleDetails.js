@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useRoute} from '@react-navigation/native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import {Alert, TurboModuleRegistry} from 'react-native';
+import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
 import {SCREEN_NAMES} from '../../../constants';
@@ -12,20 +12,23 @@ import {
   setBookings,
   setCanceledBookings,
   updateBooking,
-  updateCheckinStatus,
 } from '../../../redux';
 import {
   cancelBooking,
+  checkInVenueDealBooking,
   getAllCanceledBookings,
   getAppInfo,
   getBookings,
   navigate,
-  updateBookingCheckinStatus,
+  showToastError,
 } from '../../../services';
 
 // import moment from 'moment'
 // import 'moment-timezone'
 // import { getTimeZone } from 'react-native-localize'
+
+const isTruthyValue = value =>
+  value === true || value === 1 || value === '1' || value === 'true';
 
 const useYourScheduleDetails = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
@@ -54,7 +57,9 @@ const useYourScheduleDetails = () => {
 
   const approvalStage = useMemo(
     () =>
-      bookingDetails?.Approved
+      bookingDetails?.canceled
+        ? 'cancelled'
+        : bookingDetails?.Approved
         ? 'success'
         : bookingDetails?.Rejectedstatus
         ? 'reject'
@@ -74,12 +79,20 @@ const useYourScheduleDetails = () => {
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
   let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0;
+  const isVenueDealBooking = !!bookingDetails?.isVenueDealBooking;
+  const isBookingCheckedIn =
+    isTruthyValue(bookingDetails?.checked_in) ||
+    isTruthyValue(bookingDetails?.checkedIn) ||
+    isTruthyValue(bookingDetails?.isCheckedIn);
 
   if (actionNumId === 6) {
     icon = bookingDetails?._diary_action_turbo?.action_icon?.url;
     actionName = bookingDetails?._diary_action_turbo?.action_for_others;
   } else if (bookingDetails?.diary_action_turbo_id) {
     actionName = bookingDetails?._diary_action_turbo?.action;
+  } else if (isVenueDealBooking) {
+    icon = bookingDetails?._offers_turbo?.Offer_Cover?.url;
+    actionName = bookingDetails?._offers_turbo?.Offer_Name || 'Venue deal';
   }
 
   // let amenityDetailsWithCoupons = {};
@@ -152,10 +165,10 @@ const useYourScheduleDetails = () => {
     }
   }, [
     actionNumId,
-    bookingDetails._actions_turbo.Accomodation,
-    bookingDetails._actions_turbo.Beauty,
-    bookingDetails._actions_turbo.Gym,
-    bookingDetails._actions_turbo?.Coupons_Services,
+    bookingDetails?._actions_turbo?.Accomodation,
+    bookingDetails?._actions_turbo?.Beauty,
+    bookingDetails?._actions_turbo?.Gym,
+    bookingDetails?._actions_turbo?.Coupons_Services,
   ]);
   const getServicesWithCoupons = useMemo(() => {
     const serviceMap = [
@@ -168,7 +181,7 @@ const useYourScheduleDetails = () => {
     let specialServices = [];
     if (
       bookingDetails?._offers_turbo?.isBigInfluencer &&
-      bookingDetails?._offers_turbo?.services.length > 0
+      bookingDetails?._offers_turbo?.services?.length > 0
     ) {
       specialServices = [...bookingDetails?._offers_turbo?.services];
     } else {
@@ -184,7 +197,7 @@ const useYourScheduleDetails = () => {
       bookingDetails?._offers_turbo?.isBigInfluencer,
       bookingDetails?._offers_turbo?.services,
       bookingDetails?._offers_turbo?.isBigInfluencer,
-      bookingDetails?._offers_turbo?.services.length,
+      bookingDetails?._offers_turbo?.services?.length,
       'specialServices_useMemo_UseYourScheduleDetailsScreen',
     );
     return [
@@ -284,6 +297,48 @@ const useYourScheduleDetails = () => {
   };
 
   const handleSwipeSuccess = async () => {
+    if (bookingDetails?.isVenueDealBooking) {
+      const venueDealBookingId =
+        bookingDetails?.venue_deal_booking_id ||
+        bookingDetails?.rawVenueDealBooking?.id;
+      const turboUserId = loginData?.id || bookingDetails?.user_turbo_id;
+
+      if (!turboUserId || !venueDealBookingId) {
+        showToastError({message: 'Missing booking check-in data.'});
+        return;
+      }
+
+      const res = await checkInVenueDealBooking({
+        turbo_user_id: turboUserId,
+        booking_id: venueDealBookingId,
+      });
+      const isCheckedIn =
+        (res?.status >= 200 && res?.status < 300) ||
+        res?.raw?.success === true ||
+        res?.data?.success === true ||
+        !!res?.data?.id;
+
+      if (!isCheckedIn) {
+        const responseError =
+          res?.message || res?.data || 'Something went wrong';
+        showToastError({
+          message:
+            typeof responseError === 'string'
+              ? responseError
+              : JSON.stringify(responseError),
+        });
+        return;
+      }
+
+      dispatch(
+        updateBooking({
+          bookingId: bookingDetails?.id,
+          checked_in: true,
+          isCheckedIn: true,
+        }),
+      );
+    }
+
     // const res = await updateBookingCheckinStatus(`/${bookingDetails?.id}`, {
     //   isCheckedIn: true,
     // });
@@ -309,8 +364,15 @@ const useYourScheduleDetails = () => {
   };
 
   const handleAlertVisible = () => {
-    if (approvalStage === 'reject') {
+    if (approvalStage === 'reject' || approvalStage === 'cancelled') {
       // console.log('check_handleAlertVisible');
+      return;
+    }
+    if (bookingDetails?.isVenueDealBooking) {
+      Alert.alert(
+        'Cancel booking',
+        'Cancelling venue deal bookings is not available yet.',
+      );
       return;
     }
     setIsAlertVisible(!isAlertVisible);
@@ -326,13 +388,13 @@ const useYourScheduleDetails = () => {
         // console.log('res_cancelBooking', res);
         // return;
         dispatch(deleteCanceledBooking(res));
-        const params = `/${loginData?.id}`;
-        const bookingRes = await getBookings(params);
+        const bookingsParams = `/${loginData?.id}`;
+        const bookingRes = await getBookings(bookingsParams);
         if (bookingRes?.length > 0) {
           dispatch(setBookings(bookingRes));
         }
 
-        const canceledBookingRes = await getAllCanceledBookings(params);
+        const canceledBookingRes = await getAllCanceledBookings(bookingsParams);
         if (canceledBookingRes?.length > 0) {
           dispatch(setCanceledBookings(canceledBookingRes));
         }
@@ -383,6 +445,7 @@ const useYourScheduleDetails = () => {
     isAlertVisible,
     isDeleting,
     isEvent,
+    isBookingCheckedIn,
     handleSwipeSuccess,
     handleAlertVisible,
     handleBackPress,

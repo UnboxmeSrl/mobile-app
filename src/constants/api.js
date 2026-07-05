@@ -6,6 +6,9 @@ export const Api = {
     CITIES: `${BASE_URL}/api:WVfdccpj/cities`,
     CITY_WISE_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/getRestaurantByCity`,
     GET_RESTAURANT_DETAILS: `${BASE_URL}/api:bwh6Xc5O/get_restaurant_and_service`,
+    GET_RESTAURANT_DEALS: `${BASE_URL}/api:0Zej3Obh/user/restaurants`,
+    GET_PERKS: `${BASE_URL}/api:0Zej3Obh/perks`,
+    GET_ACTIONS: `${BASE_URL}/api:0Zej3Obh/actions`,
     GET_SPONSORED_RESTAURANTS: `${BASE_URL}/api:bwh6Xc5O/get_sponsored_restaurant`,
     GET_SERVICE_CATEGORIES: `${BASE_URL}/api:bwh6Xc5O/serviceCategories`,
     GET_SERVICE_DEALS_LEFT: `${BASE_URL}/api:bwh6Xc5O/get_deal_left`,
@@ -30,6 +33,9 @@ export const Api = {
   RESTAURANTS: {
     // ADD_BOOKING_02: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
     ADD_BOOKING: `${BASE_URL}/api:bwh6Xc5O/add_new_booking`,
+    CREATE_VENUE_DEAL_BOOKING: `${BASE_URL}/api:0Zej3Obh/create_venue_deal_booking`,
+    GET_VENUE_DEAL_BOOKINGS: `${BASE_URL}/api:0Zej3Obh/user/bookings`,
+    CHECK_IN_VENUE_DEAL_BOOKING: `${BASE_URL}/api:0Zej3Obh/user/bookings/check_in`,
     CANCEL_BOOKING: `${BASE_URL}/api:bwh6Xc5O/cancel_booking`,
     UPDATE_BOOKING_CHECKIN_STATUS: `${BASE_URL}/api:bwh6Xc5O/update_booking/checked_in`,
     GET_ALL_CANCELED_BOOKINGS: `${BASE_URL}/api:bwh6Xc5O/canceled_booking`,
@@ -52,6 +58,8 @@ export const Api = {
   },
   CONTENT: {
     GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content_new`,
+    GET_VENUE_DEAL_BOOKING_ACTIONS: `${BASE_URL}/api:0Zej3Obh/user_venue_deal_actions`,
+    SUBMIT_VENUE_DEAL_ACTION_CONTENT: `${BASE_URL}/api:0Zej3Obh/user/action`,
     UPDATE_CONTENT_URL: `${BASE_URL}/api:bwh6Xc5O/update_content_url`,
   },
   SIGN_UP_WITH_EMAIL: {

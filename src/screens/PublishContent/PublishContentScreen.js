@@ -50,6 +50,20 @@ const PublishContentScreen = () => {
     handleEditPress,
     handleBackPress,
   } = usePublishContent();
+  const actionQuantity = Number(
+    contentDetails?._actions_turbo?.Action_quantity || 0,
+  );
+  const actionTitle =
+    contentDetails?.isVenueDealBookingAction && actionQuantity > 1
+      ? `${actionQuantity} X ${actionName}`
+      : actionName === 'Story'
+      ? `3 X ${actionName}`
+      : `${actionName}`;
+  const credits = contentDetails?._offers_turbo?.Credits;
+  const shouldShowCredits =
+    credits !== undefined && credits !== null && credits !== '';
+  const shouldShowVenuePicturesUpload =
+    !contentDetails?.isVenueDealBookingAction;
   // console.log('contentDetails', contentDetails?.isCheckedIn, contentDetails);
   // console.log(
   //   contentDetails?.HourStart,
@@ -69,8 +83,8 @@ const PublishContentScreen = () => {
             onPress={handleBackPress}
             style={styles.backIconContainer}>
             <Image
-              resizeMode="cover"
-              source={IMAGES.back}
+              resizeMode="contain"
+              source={IMAGES.arrowLeft}
               style={styles.backIcon}
             />
           </TouchableOpacity>
@@ -91,30 +105,40 @@ const PublishContentScreen = () => {
               </TouchableOpacity>
             )}
             <View style={styles.socialMediaImageContainer}>
-              <FastImage
-                resizeMode="contain"
-                source={{
-                  priority: FastImage.priority.high,
-                  uri: contentDetails?._actions_turbo?.Action_icon?.url,
-                }}
-                style={styles.socialMediaImage}
-              />
+              {icon?.uri ? (
+                <FastImage
+                  resizeMode="contain"
+                  source={{
+                    priority: FastImage.priority.high,
+                    uri: icon.uri,
+                  }}
+                  style={styles.socialMediaImage}
+                />
+              ) : (
+                !!icon && (
+                  <Image
+                    resizeMode="contain"
+                    source={icon}
+                    style={styles.socialMediaImage}
+                  />
+                )
+              )}
             </View>
             <View style={styles.socialMediaNameContainer}>
               <Text
                 allowFontScaling={false}
-                style={styles.socialMediaNameText}>{`${
-                actionName === 'Story' ? `3 X ${actionName}` : `${actionName}`
-              }`}</Text>
-              <View style={styles.ratingContainer}>
-                <Text allowFontScaling={false} style={styles.ratingUsersText}>
-                  {contentDetails?._offers_turbo?.Credits}
-                </Text>
-                <Image
-                  source={IMAGES.ratingStar}
-                  style={styles.ratingIconImage}
-                />
-              </View>
+                style={styles.socialMediaNameText}>{`${actionTitle}`}</Text>
+              {shouldShowCredits && (
+                <View style={styles.ratingContainer}>
+                  <Text allowFontScaling={false} style={styles.ratingUsersText}>
+                    {credits}
+                  </Text>
+                  <Image
+                    source={IMAGES.ratingStar}
+                    style={styles.ratingIconImage}
+                  />
+                </View>
+              )}
               <View style={styles.infoContainer}>
                 <Image
                   resizeMode="contain"
@@ -140,7 +164,7 @@ const PublishContentScreen = () => {
                   : approvalStage === 'Missed Deadline' && { backgroundColor: COLORS.paleRose },
               ]}
             >
-              <Text allowFontScaling={false} 
+              <Text allowFontScaling={false}
                 style={[
                   styles.onApprovalText,
                   approvalStage === 'Pending'
@@ -208,43 +232,47 @@ const PublishContentScreen = () => {
             </>
           )}
         </View>
-        <View style={styles.imageUploadMainContainer}>
-          <Text allowFontScaling={false} style={styles.uploadPictureTitle}>
-            Upload 3 pictures at the venue
-          </Text>
-          <FlatList
-            data={contentPhotos}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => handleContentUpload(index)}
-                  style={styles.imageUploadContainer}
-                  activeOpacity={0.4}>
-                  {item?.fileName ? (
-                    <Image
-                      source={{uri: item?.uri}}
-                      style={styles.actualUploadedPicture}
-                      resizeMode={'cover'}
-                    />
-                  ) : (
-                    <>
+        {shouldShowVenuePicturesUpload && (
+          <View style={styles.imageUploadMainContainer}>
+            <Text allowFontScaling={false} style={styles.uploadPictureTitle}>
+              Upload 3 pictures at the venue
+            </Text>
+            <FlatList
+              data={contentPhotos}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({item, index}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => handleContentUpload(index)}
+                    style={styles.imageUploadContainer}
+                    activeOpacity={0.4}>
+                    {item?.fileName ? (
                       <Image
-                        source={IMAGES.gallery}
-                        style={styles.galleryIcon}
+                        source={{uri: item?.uri}}
+                        style={styles.actualUploadedPicture}
+                        resizeMode={'cover'}
                       />
-                      <Text allowFontScaling={false} style={styles.uploadText}>
-                        Upload
-                      </Text>
-                    </>
-                  )}
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
+                    ) : (
+                      <>
+                        <Image
+                          source={IMAGES.gallery}
+                          style={styles.galleryIcon}
+                        />
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.uploadText}>
+                          Upload
+                        </Text>
+                      </>
+                    )}
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        )}
 
         <View>
           <View style={styles.bookingDetailsTitleContainer}>
@@ -516,12 +544,14 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(17.77),
   },
   backIcon: {
-    height: moderateScale(30),
+    height: moderateScale(24),
     tintColor: COLORS.achromaticBlack,
-    width: moderateScale(30),
+    width: moderateScale(24),
   },
   backIconContainer: {
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    height: moderateScale(44),
+    justifyContent: 'center',
     width: '15%',
   },
   contentBriefContainer: {
