@@ -46,13 +46,30 @@ const buildVenueDealApprovalDetails = ({
   MinuteStart: bookingData?.MinuteStart || selectedTimeFame?.Minute_Start,
   Rejectedstatus: bookingData?.Rejectedstatus ?? false,
   actions_turbo: bookingData?.actions_turbo || serviceDetails?._actions_turbo,
+  id: bookingData?.id || bookingData?.booking_id || bookingData?.booking?.id,
   isVenueDeal: true,
+  isVenueDealBooking: true,
+  rawVenueDealBooking: bookingData?.booking,
+  restaurant_turbo_id:
+    bookingData?.restaurant_turbo_id ||
+    bookingData?.booking?.restaurant_turbo_id ||
+    restaurantDetails?.id,
   user_turbo: bookingData?.user_turbo || loginData,
-  user_turbo_id: bookingData?.user_turbo_id || loginData?.id,
+  user_turbo_id:
+    bookingData?.user_turbo_id ||
+    bookingData?.booking?.user_turbo_id ||
+    loginData?.id,
+  venue_deal_booking_id:
+    bookingData?.venue_deal_booking_id ||
+    bookingData?.booking_id ||
+    bookingData?.booking?.id,
   venue_deal_id:
-    bookingData?.venue_deal_id || venueDealBookingData?.venue_deal_id,
+    bookingData?.venue_deal_id ||
+    bookingData?.booking?.venue_deal_id ||
+    venueDealBookingData?.venue_deal_id,
   venue_deal_timeframe_id:
     bookingData?.venue_deal_timeframe_id ||
+    bookingData?.booking?.venue_deal_timeframe_id ||
     venueDealBookingData?.venue_deal_timeframe_id,
   _offers_turbo: bookingData?._offers_turbo || {
     Credits: serviceDetails?.Credits,
@@ -388,6 +405,14 @@ const useBookingDetails = () => {
           serviceDetails,
           venueDealBookingData,
         });
+        console.log('VENUE_DEAL_BOOKING_CHAT_DEBUG', {
+          createVenueDealBookingPayload: venueDealBookingData,
+          createVenueDealBookingResponse: res,
+          builtBookingDetails: bookingDetails,
+          restaurantDetails,
+          serviceDetails,
+          selectedTimeFame,
+        });
         const isBookingCreated =
           (res?.status >= 200 && res?.status < 300) ||
           !!res?.data?.id ||
@@ -411,6 +436,10 @@ const useBookingDetails = () => {
             bookingDate: venueDealBookingData.booking_date,
           });
 
+          await createChatByBookingDetail({
+            bookingDetails,
+          });
+
           navigate(SCREEN_NAMES.BookingOnApprovalScreen, {
             bookingDetails,
           });
@@ -429,6 +458,11 @@ const useBookingDetails = () => {
 
       if (res?.status === 200) {
         console.log('Booking Details:', res);
+        console.log('LEGACY_BOOKING_CHAT_DEBUG', {
+          addRestaurantBookingPayload: prepData,
+          addRestaurantBookingResponse: res,
+          bookingDetails: res?.data,
+        });
         mixpanel.track('Booking Made', {
           'Booking Id': res?.data?.id,
           'User Id': res?.data?.user_turbo_id,

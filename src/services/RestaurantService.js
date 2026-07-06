@@ -287,6 +287,24 @@ export const getRestaurantOwners = async params => {
   }
 };
 
+export const getOwnersByRestaurant = async restaurantTurboId => {
+  if (!restaurantTurboId) {
+    return [];
+  }
+
+  try {
+    const response = await Fetch.get(Api.RESTAURANTS.GET_OWNERS_BY_RESTAURANT, {
+      params: {
+        restaurant_turbo_id: restaurantTurboId,
+      },
+    });
+    return Array.isArray(response) ? response : response?.data || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 export const getRestaurant = async params => {
   try {
     const url = Api.RESTAURANTS.GET_RESTAURANT_OWNERS + params;
