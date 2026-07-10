@@ -39,7 +39,21 @@ const RestaurantDetails = () => {
   //   restaurantDetails?.GalleryRestaurant,
   //   'restaurantDetails?.GalleryRestaurant',
   // );
-
+  // console.log(
+  //   `🌍 UTC Date: ${new Date(
+  //     '2026-07-09T23:45:00Z',
+  //   ).getUTCDate()} July | 🇳🇿 New Zealand Local Date: ${new Date(
+  //     '2026-07-09T23:45:00Z',
+  //   ).toLocaleDateString('en-US', {
+  //     timeZone: 'Pacific/Auckland',
+  //     day: 'numeric',
+  //   })} July`,
+  //   'date comparison______________________________',
+  //   new Date(),
+  //   new Date().getDate(),
+  //   new Date('2026-07-10T10:45:00Z').getDate(),
+  //   new Date('2026-07-10T10:45:00Z').getUTCDate(),
+  // );
   return (
     <SafeAreaView style={styles.mainContainer}>
       {isLoading ? (

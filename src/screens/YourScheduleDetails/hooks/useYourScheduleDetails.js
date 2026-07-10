@@ -352,13 +352,24 @@ const useYourScheduleDetails = () => {
   };
 
   useEffect(() => {
+    if (!bookingDetails?.BookingDay) return;
+
     const myDate = new Date(bookingDetails?.BookingDay);
-    const month = myDate.toLocaleString('en-US', {month: 'long'});
+
+    const month = myDate.toLocaleString('en-US', {
+      month: 'long',
+      timeZone: 'UTC',
+    });
     setCurrentMonth(month);
-    const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+
+    const weekDay = myDate.toLocaleString('en-US', {
+      weekday: 'long',
+      timeZone: 'UTC',
+    });
     setCurrentWeekDay(weekDay);
-    setCurrentDate(myDate.getDate());
-  }, []);
+
+    setCurrentDate(myDate.getUTCDate());
+  }, [bookingDetails?.BookingDay]); // Dependency array mein field daalna behtar hai
 
   const getAppInformation = useCallback(async () => {
     const res = await getAppInfo();
