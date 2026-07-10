@@ -13,6 +13,49 @@ import {
   showToastError,
 } from '../../../services';
 
+const WEEKDAY_BY_NUMBER = {
+  1: 'Monday',
+  2: 'Tuesday',
+  3: 'Wednesday',
+  4: 'Thursday',
+  5: 'Friday',
+  6: 'Saturday',
+  7: 'Sunday',
+};
+
+const ALL_WEEKDAYS = Object.values(WEEKDAY_BY_NUMBER).map(day => ({day}));
+
+const getTimeFromMinutes = minutes => {
+  const parsedMinutes = Number(minutes || 0);
+  const hours = Math.floor(parsedMinutes / 60);
+  const remainingMinutes = parsedMinutes % 60;
+
+  return {
+    hour: String(hours).padStart(2, '0'),
+    minute: String(remainingMinutes).padStart(2, '0'),
+  };
+};
+
+const mapVenueDealTimeframes = (timeframes, options = {}) =>
+  (timeframes || []).map(timeframe => {
+    const startTime = getTimeFromMinutes(timeframe?.start_minutes);
+    const endTime = getTimeFromMinutes(timeframe?.end_minutes);
+    const day = WEEKDAY_BY_NUMBER[timeframe?.day_of_week];
+    const weekdays = options.ignoreWeekday ? ALL_WEEKDAYS : day ? [{day}] : [];
+
+    return {
+      ...timeframe,
+      DayOfWeek: day || '',
+      End: endTime.hour,
+      Minute_End: endTime.minute,
+      Minute_Start: startTime.minute,
+      Name: `${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}`,
+      pause_days: [],
+      Start: startTime.hour,
+      weekdays,
+    };
+  });
+
 const useServiceDetails = () => {
   const route = useRoute();
   const isFromBookRedirected = route.params?.isFromBookRedirected;
@@ -28,6 +71,7 @@ const useServiceDetails = () => {
   const restaurantDetails = useSelector(
     state => state.restaurantSlice.restaurantDetails,
   );
+  const isVenueDeal = !!serviceDetails?.isVenueDeal;
   // console.log('restaurantDetails', restaurantDetails);
   const userInstagramFollowers = loginData?.instagram_followers;
   const userTiktokFollowers = loginData?.tiktok_followers;
@@ -131,6 +175,15 @@ const useServiceDetails = () => {
   // }
 
   const getServiceDealsLeftData = async () => {
+    if (isVenueDeal) {
+      const deals =
+        Number(serviceDetails?.Deal_limit || 0) -
+        Number(serviceDetails?.deal_done || 0);
+      setDealsLeft(`${Math.max(deals, 0)} deal left`);
+      setIsLoading(false);
+      return;
+    }
+
     const prepData = {
       offers_turbo_id: serviceDetails?.id,
       restaurant_turbo_id: restaurantDetails?.id,
@@ -167,6 +220,15 @@ const useServiceDetails = () => {
   };
 
   const getTimeFrameData = async () => {
+    if (isVenueDeal) {
+      const venueTimeframes = mapVenueDealTimeframes(
+        serviceDetails?.timeframes || serviceDetails?.venueDeal?.timeframes,
+        {ignoreWeekday: serviceDetails?.frequency_type === 'one_time'},
+      );
+      dispatch(setTimeFrameData(venueTimeframes));
+      return;
+    }
+
     // console.log('serviceDetails', serviceDetails?._timeframes_turbo);
     // if (serviceDetails?._timeframes_turbo?.id) {
     //   dispatch(setTimeFrameData([serviceDetails?._timeframes_turbo]));

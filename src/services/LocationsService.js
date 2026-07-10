@@ -41,6 +41,26 @@ export const getCategories = async () => {
   }
 };
 
+export const getPerks = async () => {
+  try {
+    const url = Api.LOCATIONS.GET_PERKS;
+    const response = await Fetch.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getActions = async () => {
+  try {
+    const url = Api.LOCATIONS.GET_ACTIONS;
+    const response = await Fetch.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getServiceCategories = async () => {
   try {
     const url = Api.LOCATIONS.GET_SERVICE_CATEGORIES;
@@ -60,6 +80,20 @@ export const getRestaurantDetails = async data => {
     //   data,
     //   JSON.stringify(response),
     // );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getRestaurantDeals = async restaurantId => {
+  try {
+    if (!restaurantId) {
+      return;
+    }
+
+    const url = `${Api.LOCATIONS.GET_RESTAURANT_DEALS}/${restaurantId}/deals`;
+    const response = await Fetch.get(url);
     return response;
   } catch (error) {
     console.log(error);

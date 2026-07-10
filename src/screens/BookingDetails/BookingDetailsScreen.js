@@ -41,6 +41,8 @@ const BookingDetailsScreen = () => {
     setEventSelectedDateIndex,
     isBookingDateAvailable,
     isDatesLoading,
+    isLastAvailableWeek,
+    maxBookingDate,
     showPreviousWeek,
     showNextWeek,
     handleBackPress,
@@ -120,11 +122,16 @@ const BookingDetailsScreen = () => {
                       />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={showNextWeek}>
+                    <TouchableOpacity
+                      onPress={showNextWeek}
+                      disabled={isLastAvailableWeek}>
                       <Image
                         resizeMode="cover"
                         source={IMAGES.back}
-                        style={styles.nextDatesIcon}
+                        style={[
+                          styles.nextDatesIcon,
+                          isLastAvailableWeek && styles.disabledPreviousWeek,
+                        ]}
                       />
                     </TouchableOpacity>
                   </View>
@@ -144,6 +151,7 @@ const BookingDetailsScreen = () => {
                   iconLeft={IMAGES.back}
                   iconRight={IMAGES.back}
                   endDate={endDate}
+                  maxDate={maxBookingDate || undefined}
                   onDateSelected={date => {
                     // console.log(date, 'checko');
 

@@ -3,11 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   getBookingForContentList,
   getBookings,
+  getVenueDealBookings,
   navigate,
 } from '../../../services';
 import {SCREEN_NAMES} from '../../../constants';
 import {setBookings, setContentList} from '../../../redux';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {mapVenueDealBookingsToScheduleBookings} from '../../../utils';
 
 const useBookingOnApproval = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
@@ -38,8 +40,14 @@ const useBookingOnApproval = () => {
     // dispatch(setServiceDetails({}))
     setIsLoading(true);
     const params = `/${loginData?.id}`;
-    const res = await getBookings(params);
-    dispatch(setBookings(res));
+    const [res, venueDealBookingsRes] = await Promise.all([
+      getBookings(params),
+      getVenueDealBookings(loginData?.id),
+    ]);
+    const legacyBookings = Array.isArray(res) ? res : [];
+    const venueDealBookings =
+      mapVenueDealBookingsToScheduleBookings(venueDealBookingsRes);
+    dispatch(setBookings([...legacyBookings, ...venueDealBookings]));
 
     const newParams = `/${loginData?.id}`;
     const contentListRes = await getBookingForContentList(newParams);
@@ -59,6 +67,8 @@ const useBookingOnApproval = () => {
     const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
     setCurrentWeekDay(weekDay);
     setCurrentDate(myDate.getDate());
+    // This screen initializes date labels from the route payload once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

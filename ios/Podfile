@@ -64,6 +64,18 @@ target 'mobileApp' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
+    installer.aggregate_targets.each do |aggregate_target|
+      aggregate_target.user_project.native_targets.each do |native_target|
+        next unless native_target.name == 'mobileApp'
+
+        native_target.build_configurations.each do |build_config|
+          build_config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = '$(inherited)'
+        end
+      end
+
+      aggregate_target.user_project.save
+    end
   end
 end
 

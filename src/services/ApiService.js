@@ -35,15 +35,18 @@ export default {
     return response?.data;
   },
 
-  postNew: async (url, data) => {
+  postNew: async (url, data, options = {}) => {
     console.log(url, ';postNew');
 
-    const options = {
+    const requestOptions = {
+      ...options,
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
+        ...(options?.headers || {}),
       },
     };
-    const response = await axios.post(url, data, options);
+    const response = await axios.post(url, data, requestOptions);
     // console.log('response_post', response);
     return response;
   },

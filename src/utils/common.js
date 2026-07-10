@@ -4,7 +4,37 @@ import {verticalScale} from 'react-native-size-matters';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {IMAGES} from '../assets';
 import {chatClient} from '../hooks';
-import {getRestaurantOwners} from '../services';
+import {getOwnersByRestaurant} from '../services';
+
+const VENUE_DEAL_BOOKING_CHANNEL_PREFIX = 'venueDealBooking_';
+
+const getChatChannelIdByBookingDetail = bookingDetails => {
+  const isVenueDealBooking =
+    bookingDetails?.isVenueDeal ||
+    bookingDetails?.isVenueDealBooking ||
+    bookingDetails?.isVenueDealBookingAction;
+  const bookingId =
+    bookingDetails?.venue_deal_booking_id ||
+    bookingDetails?.rawVenueDealBooking?.id ||
+    bookingDetails?.booking_id ||
+    bookingDetails?.booking?.id ||
+    bookingDetails?.id;
+
+  if (!bookingId) {
+    return null;
+  }
+
+  const channelId = bookingId.toString();
+
+  if (
+    isVenueDealBooking &&
+    !channelId.startsWith(VENUE_DEAL_BOOKING_CHANNEL_PREFIX)
+  ) {
+    return `${VENUE_DEAL_BOOKING_CHANNEL_PREFIX}${channelId}`;
+  }
+
+  return channelId;
+};
 
 export const checkActionName = actionName => {
   if (actionName) {
@@ -144,12 +174,27 @@ export const checkContentStatus = statusName => {
   }
 };
 
+const isValidDate = date =>
+  date instanceof Date && !Number.isNaN(date.getTime());
+
+const getSafeDaysCount = days => {
+  const parsedDays = Number(days);
+
+  return Number.isFinite(parsedDays) ? parsedDays : 0;
+};
+
 export const deadlineDaysCount = (bookDate, deadlineDays) => {
   const currentDate = new Date();
   const bookingDate = new Date(bookDate);
+
+  if (!bookDate || !isValidDate(bookingDate)) {
+    return null;
+  }
+
   const millisecondsDiff = bookingDate.getTime() - currentDate.getTime();
   let calculatedDeadlineDays =
-    Math.round(millisecondsDiff / (1000 * 3600 * 24)) + (deadlineDays || 0);
+    Math.round(millisecondsDiff / (1000 * 3600 * 24)) +
+    getSafeDaysCount(deadlineDays);
   console.log('return_calculatedDeadlineDays', calculatedDeadlineDays);
   return calculatedDeadlineDays;
 };
@@ -162,8 +207,13 @@ export const getDeadlineDate = (startDateStr, daysToAdd) => {
   //   typeof daysToAdd,
   // );
   const date = new Date(startDateStr); // e.g. "2025-05-28"
+
+  if (!startDateStr || !isValidDate(date)) {
+    return '';
+  }
+
   // console.log('date_before', date, date.getDate());
-  date.setDate(date.getDate() + (daysToAdd || 0)); // add days
+  date.setDate(date.getDate() + getSafeDaysCount(daysToAdd)); // add days
   // console.log('date', date, typeof date);
   // console.log('return_date', date.toISOString().split('T')[0]);
 
@@ -234,9 +284,34 @@ export const compareWithCurrDate = date => {
 
 export const createChatByBookingDetail = async ({bookingDetails}) => {
   try {
-    const bookingId = bookingDetails?.id;
-    const params = `/${bookingId}`;
-    const restaurantOwners = await getRestaurantOwners(params);
+    const channelId = getChatChannelIdByBookingDetail(bookingDetails);
+    const restaurantTurboId =
+      bookingDetails?.restaurant_turbo_id ||
+      bookingDetails?.rawVenueDealBooking?.restaurant_turbo_id ||
+      bookingDetails?._restaurant_turbo?.id ||
+      bookingDetails?.restaurant_id;
+    const restaurantOwnerIds = await getOwnersByRestaurant(restaurantTurboId);
+    const restaurantOwnersWithPrefix = restaurantOwnerIds
+      .filter(
+        ownerId => ownerId !== null && ownerId !== undefined && ownerId !== '',
+      )
+      .map(ownerId => 'owner_' + ownerId);
+    const influencerMemberId = bookingDetails?.user_turbo_id
+      ? 'influencer_' + bookingDetails.user_turbo_id.toString()
+      : null;
+    const channelMembers = [
+      influencerMemberId,
+      ...restaurantOwnersWithPrefix,
+    ].filter(Boolean);
+    console.log('CHAT_CREATE_BY_BOOKING_DETAIL_DEBUG', {
+      bookingDetails,
+      channelId,
+      restaurantTurboId,
+      restaurantOwnerIds,
+      restaurantOwnersWithPrefix,
+      influencerMemberId,
+      channelMembers,
+    });
 
     const formatDate = date => {
       const d = new Date(date); // Create a Date object from the input
@@ -258,35 +333,43 @@ export const createChatByBookingDetail = async ({bookingDetails}) => {
     // );
     // Join all owner names with commas
     // const ownerNames = ownerNamesArray.join(',');
-    if (restaurantOwners) {
+    if (channelId && channelMembers.length) {
       const channelName = `${bookingDetails._restaurant_turbo.Name}:${
         bookingDetails?.user_turbo?.name || ''
       }:${formatDate(bookingDetails?.BookingDay)}`;
 
       // Proceed to create the channel if the name is valid
       if (channelName && channelName.trim() !== '') {
-        const newChannel = chatClient.channel('messaging', bookingDetails?.id, {
+        const newChannel = chatClient.channel('messaging', channelId, {
           name: channelName,
-          members: ['influencer_' + bookingDetails?.user_turbo_id?.toString()],
+          members: channelMembers,
         });
 
         await newChannel.watch();
-
-        const restaurantOwnersWithPrefix = restaurantOwners.map(
-          owner => 'owner_' + owner?.id,
-        );
-
-        // Add restaurant owners as members to the channel
-        restaurantOwnersWithPrefix.forEach(owner => {
-          newChannel.addMembers([owner]);
+        console.log('CHAT_CREATE_BY_BOOKING_DETAIL_RESULT', {
+          cid: newChannel?.cid,
+          id: newChannel?.id,
+          data: newChannel?.data,
+          memberIds: Object.keys(newChannel?.state?.members || {}),
+          lastMessageAt: newChannel?.state?.last_message_at,
         });
         return newChannel;
       } else {
+        console.log('CHAT_CREATE_BY_BOOKING_DETAIL_SKIPPED', {
+          reason: 'empty_channel_name',
+          channelId,
+          channelName,
+        });
         return false;
       }
     }
+    console.log('CHAT_CREATE_BY_BOOKING_DETAIL_SKIPPED', {
+      reason: 'missing_channel_or_members',
+      channelId,
+      channelMembers,
+    });
   } catch (error) {
-    console.error('Error generating owner names:', error);
+    console.error('Error creating chat channel:', error);
     return false;
   }
 };

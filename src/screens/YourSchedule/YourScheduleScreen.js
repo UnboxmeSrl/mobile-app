@@ -19,6 +19,7 @@ import {COLORS, FONTS} from '../../constants';
 import {useYourSchedule} from './hooks';
 import {
   deadlineDaysCount,
+  getActionIconSource,
   getDeadlineDate,
   getFormattedTime,
   perfectSize,
@@ -125,7 +126,9 @@ const YourScheduleScreen = () => {
               });
               const isEvent = item?._restaurant_turbo?.is_event;
               const timeFrame = item?._timeframes_turbo;
-              const approvalStatus = item?.Approved
+              const approvalStatus = item?.canceled
+                ? 'Cancelled'
+                : item?.Approved
                 ? 'Accepted'
                 : item?.Rejectedstatus
                 ? 'Rejected'
@@ -170,7 +173,8 @@ const YourScheduleScreen = () => {
                       styles.approvalStatusContainer,
                       approvalStatus === 'Pending'
                         ? {backgroundColor: COLORS.cornSilk}
-                        : approvalStatus === 'Rejected' && {
+                        : (approvalStatus === 'Rejected' ||
+                            approvalStatus === 'Cancelled') && {
                             backgroundColor: COLORS.seaShellRed,
                           },
                     ]}>
@@ -179,7 +183,7 @@ const YourScheduleScreen = () => {
                       source={
                         item?.Approved
                           ? IMAGES.check
-                          : item?.Rejectedstatus
+                          : item?.Rejectedstatus || item?.canceled
                           ? IMAGES.reject
                           : IMAGES.pendingClock
                       }
@@ -187,7 +191,8 @@ const YourScheduleScreen = () => {
                         styles.approvalIcon,
                         approvalStatus === 'Pending'
                           ? {tintColor: COLORS.americanYellow}
-                          : approvalStatus === 'Rejected' && {
+                          : (approvalStatus === 'Rejected' ||
+                              approvalStatus === 'Cancelled') && {
                               tintColor: COLORS.error,
                             },
                       ]}
@@ -198,7 +203,8 @@ const YourScheduleScreen = () => {
                         styles.approvalStatusText,
                         approvalStatus === 'Pending'
                           ? {color: COLORS.americanYellow}
-                          : approvalStatus === 'Rejected' && {
+                          : (approvalStatus === 'Rejected' ||
+                              approvalStatus === 'Cancelled') && {
                               color: COLORS.error,
                             },
                       ]}>
@@ -223,7 +229,8 @@ const YourScheduleScreen = () => {
                           styles.dateContainer,
                           approvalStatus === 'Pending'
                             ? {backgroundColor: COLORS.cornSilk}
-                            : approvalStatus === 'Rejected' && {
+                            : (approvalStatus === 'Rejected' ||
+                                approvalStatus === 'Cancelled') && {
                                 backgroundColor: COLORS.seaShellRed,
                               },
                         ]}>
@@ -364,13 +371,18 @@ const YourScheduleScreen = () => {
               let actionNumId = item?._actions_turbo?.action_num_id ?? 0;
               let icon = item?._actions_turbo?.Action_icon?.url;
               let actionName = item?._actions_turbo?.Action_Name ?? 0;
+              let actionIconSource = getActionIconSource(item?._actions_turbo);
 
               if (actionNumId === 6 && item?._diary_action_turbo?.id) {
                 icon = item?._diary_action_turbo?.action_icon?.url;
                 actionName = item?._diary_action_turbo?.action_for_others;
+                actionIconSource = icon ? {uri: icon} : actionIconSource;
               } else if (item?.diary_action_turbo_id) {
                 actionName = item?._diary_action_turbo?.action;
               }
+              const credits = item?._offers_turbo?.Credits;
+              const shouldShowCredits =
+                credits !== undefined && credits !== null && credits !== '';
 
               let contentApprovalStatus = item?.content_status_turbo_id;
               if (item?.content_status_turbo_id) {
@@ -387,6 +399,11 @@ const YourScheduleScreen = () => {
                 item?.BookingDay,
                 item?._actions_turbo?.Days_deadline,
               );
+              const deadlineDate = getDeadlineDate(
+                item?.BookingDay,
+                item?._actions_turbo?.Days_deadline,
+              );
+              const hasDeadlineDays = Number.isFinite(deadlineDays);
               // console.log('item_id', item.id, item.content_url);
 
               return (
@@ -406,27 +423,39 @@ const YourScheduleScreen = () => {
                   <View style={contentStyles.cardContentContainer}>
                     <View style={contentStyles.ratingSocialMediaMainContainer}>
                       <View style={contentStyles.ratingSocialMediaContainer}>
-                        <View style={contentStyles.ratingContainer}>
-                          <Text
-                            allowFontScaling={false}
-                            style={contentStyles.ratingUsersText}>
-                            {item?._offers_turbo?.Credits}
-                          </Text>
-                          <Image
-                            source={IMAGES.ratingStar}
-                            style={contentStyles.ratingIconImage}
-                          />
-                        </View>
+                        {shouldShowCredits && (
+                          <View style={contentStyles.ratingContainer}>
+                            <Text
+                              allowFontScaling={false}
+                              style={contentStyles.ratingUsersText}>
+                              {credits}
+                            </Text>
+                            <Image
+                              source={IMAGES.ratingStar}
+                              style={contentStyles.ratingIconImage}
+                            />
+                          </View>
+                        )}
                       </View>
                       <View style={contentStyles.socialMediaIconNameContainer}>
-                        <FastImage
-                          resizeMode="contain"
-                          source={{
-                            priority: FastImage.priority.high,
-                            uri: icon,
-                          }}
-                          style={contentStyles.socialMediaIcon}
-                        />
+                        {actionIconSource?.uri ? (
+                          <FastImage
+                            resizeMode="contain"
+                            source={{
+                              priority: FastImage.priority.high,
+                              uri: actionIconSource.uri,
+                            }}
+                            style={contentStyles.socialMediaIcon}
+                          />
+                        ) : (
+                          !!actionIconSource && (
+                            <Image
+                              resizeMode="contain"
+                              source={actionIconSource}
+                              style={contentStyles.socialMediaIcon}
+                            />
+                          )
+                        )}
                         {/* <Image resizeMode="cover" source={icon} style={contentStyles.socialMediaIcon} /> */}
                         <Text
                           allowFontScaling={false}
@@ -456,7 +485,7 @@ const YourScheduleScreen = () => {
                                 width: '100%',
                               },
                             ]}>
-                            {!item?.content_url && (
+                            {!item?.content_url && deadlineDate ? (
                               <Text
                                 allowFontScaling={false}
                                 style={contentStyles.deadLineTitleText}>
@@ -467,13 +496,10 @@ const YourScheduleScreen = () => {
                                     contentStyles.deadLineTitleText,
                                     {fontWeight: 'bold', color: '#00000090'},
                                   ]}>
-                                  {getDeadlineDate(
-                                    item.BookingDay,
-                                    item?._actions_turbo?.Days_deadline,
-                                  )}
+                                  {deadlineDate}
                                 </Text>
                               </Text>
-                            )}
+                            ) : null}
                           </View>
 
                           {item?.content_status_turbo_id > 0 && (
@@ -515,29 +541,33 @@ const YourScheduleScreen = () => {
                           </View> */}
                         </View>
                         {item?.content_status_turbo_id === 0 ? (
-                          <View style={contentStyles.infoContainer}>
-                            <Image
-                              resizeMode="contain"
-                              source={IMAGES.info}
-                              style={contentStyles.infoIcon}
-                            />
-                            <Text
-                              allowFontScaling={false}
-                              style={[
-                                contentStyles.deadLineText,
-                                deadlineDays <= 0 && {color: COLORS.newPrimary},
-                              ]}>
-                              {deadlineDays == 0
-                                ? 'Last Day'
-                                : deadlineDays > 0
-                                ? `${deadlineDays} Days left`
-                                : Math.abs(deadlineDays) +
-                                  (Math.abs(deadlineDays) === 1
-                                    ? ' Day '
-                                    : ' Days ') +
-                                  'Overdue'}
-                            </Text>
-                          </View>
+                          hasDeadlineDays ? (
+                            <View style={contentStyles.infoContainer}>
+                              <Image
+                                resizeMode="contain"
+                                source={IMAGES.info}
+                                style={contentStyles.infoIcon}
+                              />
+                              <Text
+                                allowFontScaling={false}
+                                style={[
+                                  contentStyles.deadLineText,
+                                  deadlineDays <= 0 && {
+                                    color: COLORS.newPrimary,
+                                  },
+                                ]}>
+                                {deadlineDays === 0
+                                  ? 'Last Day'
+                                  : deadlineDays > 0
+                                  ? `${deadlineDays} Days left`
+                                  : Math.abs(deadlineDays) +
+                                    (Math.abs(deadlineDays) === 1
+                                      ? ' Day '
+                                      : ' Days ') +
+                                    'Overdue'}
+                              </Text>
+                            </View>
+                          ) : null
                         ) : (
                           <Text
                             style={[

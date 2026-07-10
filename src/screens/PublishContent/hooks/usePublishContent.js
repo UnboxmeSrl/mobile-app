@@ -1,4 +1,4 @@
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useEffect, useRef, useState} from 'react';
 import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
@@ -6,8 +6,11 @@ import {SCREEN_NAMES} from '../../../constants';
 import {selectContentByID, setContentList} from '../../../redux';
 import {
   getBookingForContentList,
+  getVenueDealBookingActions,
+  getVenueDealBookings,
   navigate,
   showToastError,
+  submitVenueDealActionContent,
   updateContentUrl,
 } from '../../../services';
 import {
@@ -15,8 +18,10 @@ import {
   checkActionName,
   checkPermission,
   deadlineDaysCount,
+  getActionIconSource,
   isAndroid,
   isIos,
+  mapVenueDealBookingActionsToContentList,
   openCamera,
   openGallery,
   platformVersion,
@@ -24,6 +29,7 @@ import {
 
 const usePublishContent = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const userDetails = useSelector(state => state.authSlice.authData);
   const loginData = useSelector(state => state.authSlice.loginData);
   const contentUploadRef = useRef();
@@ -43,7 +49,9 @@ const usePublishContent = () => {
   const [updatedContentDetails, setUpdatedContentDetails] = useState();
 
   let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0;
-  let icon = checkAction(actionNumId)?.action_icon;
+  let icon =
+    getActionIconSource(contentDetails?._actions_turbo) ||
+    checkAction(actionNumId)?.action_icon;
   let actionName = contentDetails?._actions_turbo?.Action_Name ?? 0;
   if (contentDetails?.diary_action_turbo_id) {
     actionName = contentDetails?._diary_action_turbo?.action_for_others;
@@ -51,6 +59,8 @@ const usePublishContent = () => {
       actionName = contentDetails?._diary_action_turbo?.action;
     }
     icon = checkActionName(actionName);
+  } else if (contentDetails?.isVenueDealBookingAction) {
+    icon = getActionIconSource(contentDetails?._actions_turbo);
   }
   const bookingDate = new Date(contentDetails?.BookingDay);
   const month = bookingDate.toLocaleString('en-US', {month: 'long'});
@@ -65,6 +75,11 @@ const usePublishContent = () => {
   );
 
   const handleBackPress = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+      return;
+    }
+
     navigate(SCREEN_NAMES.YourScheduleScreen, {
       selectedTab: 2,
     });
@@ -84,6 +99,8 @@ const usePublishContent = () => {
 
   const handleSendToReviewBtnPress = async () => {
     setIsSendToReview(true);
+    const isVenueDealBookingAction = contentDetails?.isVenueDealBookingAction;
+    const shouldRequireVenuePictures = !isVenueDealBookingAction;
     if (actionName !== 'Story' && link === '') {
       const error = {
         message: 'Please enter the content link',
@@ -91,7 +108,10 @@ const usePublishContent = () => {
       showToastError(error);
       setIsSendToReview(false);
       return;
-    } else if (picturesForValidation?.length < 3) {
+    } else if (
+      shouldRequireVenuePictures &&
+      picturesForValidation?.length < 3
+    ) {
       const error = {
         message: 'Please upload 3 pictures of venue',
       };
@@ -99,16 +119,59 @@ const usePublishContent = () => {
       setIsSendToReview(false);
       return;
     }
+
+    if (isVenueDealBookingAction) {
+      const userActionId =
+        contentDetails?.venue_deal_booking_action_id ||
+        contentDetails?.rawVenueDealBookingAction?.id;
+      const userTurboId =
+        loginData?.id ||
+        contentDetails?.user_turbo_id ||
+        contentDetails?.rawVenueDealBooking?.user_turbo_id;
+
+      if (!userTurboId || !userActionId) {
+        showToastError({message: 'Missing venue deal action details'});
+        setIsSendToReview(false);
+        return;
+      }
+
+      const res = await submitVenueDealActionContent(userActionId, {
+        user_turbo_id: userTurboId,
+        user_action_id: userActionId,
+        content: link,
+      });
+
+      if (res) {
+        setUpdatedContentDetails({
+          ...contentDetails,
+          ...res,
+          content_url: link,
+          content_status_turbo_id: 1,
+          _content_status_turbo: {
+            ...(contentDetails?._content_status_turbo || {}),
+            name: 'Under Review',
+          },
+        });
+      }
+
+      setIsSendToReview(false);
+      return;
+    }
+
     const params = `/${contentDetails?.id}`;
     const formData = new FormData();
     formData.append('content_url', link);
-    contentPhotos.map(item =>
-      formData.append('vanue_images[]', {
-        name: item.fileName,
-        type: item.type,
-        uri: item.uri,
-      }),
-    );
+    if (shouldRequireVenuePictures) {
+      contentPhotos.forEach(item => {
+        if (item?.fileName) {
+          formData.append('vanue_images[]', {
+            name: item.fileName,
+            type: item.type,
+            uri: item.uri,
+          });
+        }
+      });
+    }
     const res = await updateContentUrl(params, formData);
     if (res?.id) {
       setUpdatedContentDetails(res);
@@ -119,11 +182,21 @@ const usePublishContent = () => {
   const handlePositiveBtnPress = async () => {
     setIsLoading(true);
     const params = `/${loginData?.id}`;
-    const res = await getBookingForContentList(params);
-    dispatch(setContentList(res));
+    const [res, venueDealActionsRes, venueDealBookingsRes] = await Promise.all([
+      getBookingForContentList(params),
+      getVenueDealBookingActions(loginData?.id),
+      getVenueDealBookings(loginData?.id),
+    ]);
+    const legacyContentList = Array.isArray(res) ? res : [];
+    const venueDealContentList = mapVenueDealBookingActionsToContentList(
+      venueDealActionsRes,
+      venueDealBookingsRes,
+    );
+    const contentList = [...legacyContentList, ...venueDealContentList];
+    dispatch(setContentList(contentList));
     setIsLoading(false);
 
-    if (res?.length > 0) {
+    if (contentList?.length > 0) {
       navigate(SCREEN_NAMES.YourScheduleScreen, {
         selectedTab: 2,
       });
@@ -194,6 +267,8 @@ const usePublishContent = () => {
     if (!isContentStatusModalVisible && updatedContentDetails?.id) {
       handleContentModalOpenClose();
     }
+    // Preserve the existing modal reopen behavior tied only to updated details.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatedContentDetails]);
 
   return {

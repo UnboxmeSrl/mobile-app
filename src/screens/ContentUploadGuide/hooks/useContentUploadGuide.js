@@ -11,6 +11,7 @@ import {navigate, showToastError, updateAction} from '../../../services';
 import {
   useCallback,
   // useEffect,
+  useMemo,
   useState,
 } from 'react';
 import {useSelector} from 'react-redux';
@@ -18,29 +19,47 @@ import {selectBookingsByID} from '../../../redux';
 
 const useContentUploadGuide = () => {
   const route = useRoute();
-  const bookingId = route.params?.bookingDetails?.id;
+  const bookingDetailsParams = route.params?.bookingDetails;
+  const bookingId = bookingDetailsParams?.id;
   console.log('bookingId_useContentUploadGuide', bookingId);
-  const bookingDetails = useSelector(selectBookingsByID(bookingId));
+  const bookingDetail = useSelector(selectBookingsByID(bookingId));
+  const bookingDetails = useMemo(
+    () => ({...(bookingDetailsParams || {}), ...(bookingDetail || {})}),
+    [bookingDetailsParams, bookingDetail],
+  );
   // const userLocation = useSelector(selecteUserCoords);
   // const {requestLocationPermission} = useRestaurants();
-  const [permissionError, setPermissionError] = useState('');
+  const [permissionError] = useState('');
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
   let actionName = bookingDetails?._actions_turbo?.Action_Name ?? 0;
   let actionDescription = bookingDetails?._actions_turbo?.Descrizione ?? '';
+  const isVenueDealBooking = !!bookingDetails?.isVenueDealBooking;
 
   if (actionNumId === 6) {
     icon = bookingDetails?._diary_action_turbo?.action_icon?.url;
     actionName = bookingDetails?._diary_action_turbo?.action_for_others;
   } else if (bookingDetails?.diary_action_turbo_id) {
     actionName = bookingDetails?._diary_action_turbo?.action;
+  } else if (isVenueDealBooking) {
+    icon = bookingDetails?._offers_turbo?.Offer_Cover?.url;
+    actionName = bookingDetails?._offers_turbo?.Offer_Name || 'Venue deal';
+    actionDescription =
+      bookingDetails?.rawVenueDealBooking?.content_instructions ||
+      bookingDetails?.rawVenueDealBooking?.description ||
+      bookingDetails?._offers_turbo?.instructions ||
+      '';
   }
   const openCoupon = useCallback(
     async (lat, lng, userLat, userLng) => {
       // const userDistantValue = calculateDis(lat, lng, userLat, userLng) * 1000;
 
-      if (bookingDetails?.coupon_status === 'showed') {
+      if (bookingDetails?.isVenueDealBooking) {
+        navigate(SCREEN_NAMES.NewCouponScreen, {
+          bookingDetails: bookingDetails,
+        });
+      } else if (bookingDetails?.coupon_status === 'showed') {
         console.log('checkShowed_block');
         navigate(SCREEN_NAMES.NewCouponScreen, {
           bookingDetails: bookingDetails,

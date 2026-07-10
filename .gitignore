@@ -39,6 +39,9 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+# Ruby/Bundler local installs
+vendor/bundle/ruby/*/
+
 # BUCK
 buck-out/
 \.buckd/

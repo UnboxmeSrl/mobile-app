@@ -18,6 +18,7 @@ const useNewCoupon = () => {
   const isEvent = bookingDetails?._restaurant_turbo?.is_event;
   const timeFrame =
     bookingDetails?._timeframes ?? bookingDetails?._timeframes_turbo;
+  const isVenueDealBooking = !!bookingDetails?.isVenueDealBooking;
 
   let actionNumId = bookingDetails?._actions_turbo?.action_num_id ?? 0;
   let icon = bookingDetails?._actions_turbo?.Action_icon?.url;
@@ -28,6 +29,9 @@ const useNewCoupon = () => {
     actionName = bookingDetails?._diary_action_turbo?.action_for_others;
   } else if (bookingDetails?.diary_action_turbo_id) {
     actionName = bookingDetails?._diary_action_turbo?.action;
+  } else if (isVenueDealBooking) {
+    icon = bookingDetails?._offers_turbo?.Offer_Cover?.url;
+    actionName = bookingDetails?._offers_turbo?.Offer_Name || 'Venue deal';
   }
 
   const amenityDetailsWithCoupons = useMemo(() => {
@@ -77,10 +81,10 @@ const useNewCoupon = () => {
     }
   }, [
     actionNumId,
-    bookingDetails._actions_turbo.Accomodation,
-    bookingDetails._actions_turbo.Beauty,
-    bookingDetails._actions_turbo.Gym,
-    bookingDetails._actions_turbo?.Coupons_Services,
+    bookingDetails?._actions_turbo?.Accomodation,
+    bookingDetails?._actions_turbo?.Beauty,
+    bookingDetails?._actions_turbo?.Gym,
+    bookingDetails?._actions_turbo?.Coupons_Services,
   ]);
 
   const getServicesWithCoupons = useMemo(() => {
@@ -110,7 +114,7 @@ const useNewCoupon = () => {
       bookingDetails?._offers_turbo?.isBigInfluencer,
       bookingDetails?._offers_turbo?.services,
       bookingDetails?._offers_turbo?.isBigInfluencer,
-      bookingDetails?._offers_turbo?.services.length,
+      bookingDetails?._offers_turbo?.services?.length,
       'specialServices_useMemo_UseYourScheduleDetailsScreen',
     );
     return [

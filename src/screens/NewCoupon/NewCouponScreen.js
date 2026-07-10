@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {
   Image,
   SafeAreaView,
@@ -13,7 +13,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {IMAGES} from '../../assets';
 import {COLORS, FONTS} from '../../constants';
 import {useNewCoupon} from './hooks';
-import {getFormattedTime} from '../../utils';
+import {getFormattedTime, xanoImageSize} from '../../utils';
 
 const NewCouponScreen = () => {
   const {
@@ -26,7 +26,6 @@ const NewCouponScreen = () => {
     actionName,
     icon,
     timeFrame,
-    isReel,
     bookingDate,
     month,
     bookingDetails,
@@ -36,6 +35,16 @@ const NewCouponScreen = () => {
     handleContentBriefPress,
     handleRestaurantRedirect,
   } = useNewCoupon();
+  const extraPeopleCount = Number(
+    bookingDetails?._actions_turbo?.Extra_People || 0,
+  );
+  const shouldShowFriendAmenity = extraPeopleCount > 0;
+  const shouldShowVenueDealAmenity =
+    bookingDetails?.isVenueDealBooking &&
+    !amenityDetailsWithCoupons?.length &&
+    !getServicesWithCoupons?.length &&
+    !bookingDetails?._actions_turbo?.Plates &&
+    !bookingDetails?._actions_turbo?.Drinks;
   // const getIcons = useCallback(serviceName => {
   //   if (serviceName === 'Plates') return IMAGES.mealDish;
   //   else if (serviceName === 'Drinks') return IMAGES.clinkingGlasses;
@@ -212,28 +221,54 @@ const NewCouponScreen = () => {
                     </View>
                   </View>
                 )}
-                <View
-                  style={[
-                    styles.amenityMainContainer,
-                    styles.friendAmenityContainer,
-                  ]}>
-                  <View style={styles.amenityTitleDescriptionContainer}>
-                    <Text
-                      allowFontScaling={false}
-                      style={[
-                        styles.amenitiesTitle,
-                        styles.friendAmenityText,
-                      ]}>{`+${bookingDetails?._actions_turbo?.Extra_People}`}</Text>
-                    <Text
-                      allowFontScaling={false}
-                      style={[
-                        styles.amenitiesDescription,
-                        styles.friendAmenityTitle,
-                      ]}>
-                      Friend
-                    </Text>
+                {shouldShowVenueDealAmenity && (
+                  <View style={styles.amenityMainContainer}>
+                    <View style={styles.amenityIconContainer}>
+                      {bookingDetails?._offers_turbo?.Offer_Cover?.url && (
+                        <FastImage
+                          resizeMode="cover"
+                          source={{
+                            priority: FastImage.priority.high,
+                            uri: `${bookingDetails?._offers_turbo?.Offer_Cover?.url}?tpl=${xanoImageSize}.jpg`,
+                          }}
+                          style={styles.amenityIcon}
+                        />
+                      )}
+                    </View>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={styles.amenitiesTitle}>
+                        {bookingDetails?._offers_turbo?.Offer_Name ||
+                          'Venue deal'}
+                      </Text>
+                    </View>
                   </View>
-                </View>
+                )}
+                {shouldShowFriendAmenity && (
+                  <View
+                    style={[
+                      styles.amenityMainContainer,
+                      styles.friendAmenityContainer,
+                    ]}>
+                    <View style={styles.amenityTitleDescriptionContainer}>
+                      <Text
+                        allowFontScaling={false}
+                        style={[
+                          styles.amenitiesTitle,
+                          styles.friendAmenityText,
+                        ]}>{`+${extraPeopleCount}`}</Text>
+                      <Text
+                        allowFontScaling={false}
+                        style={[
+                          styles.amenitiesDescription,
+                          styles.friendAmenityTitle,
+                        ]}>
+                        Friend
+                      </Text>
+                    </View>
+                  </View>
+                )}
               </>
             )}
           </ScrollView>
