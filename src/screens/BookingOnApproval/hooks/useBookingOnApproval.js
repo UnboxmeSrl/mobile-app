@@ -62,11 +62,17 @@ const useBookingOnApproval = () => {
 
   useEffect(() => {
     const myDate = new Date(bookingDetails?.BookingDay);
-    const month = myDate.toLocaleString('en-US', {month: 'long'});
+    const month = myDate.toLocaleString('en-US', {
+      month: 'long',
+      timeZone: 'UTC',
+    });
     setCurrentMonth(month);
-    const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+    const weekDay = myDate.toLocaleString('en-US', {
+      weekday: 'long',
+      timeZone: 'UTC',
+    });
     setCurrentWeekDay(weekDay);
-    setCurrentDate(myDate.getDate());
+    setCurrentDate(myDate.getUTCDate());
     // This screen initializes date labels from the route payload once.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

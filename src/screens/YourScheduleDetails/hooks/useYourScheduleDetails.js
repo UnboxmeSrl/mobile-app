@@ -476,6 +476,7 @@ const useYourScheduleDetails = () => {
     });
     setCurrentWeekDay(weekDay);
 
+    // setCurrentDate(myDate.getDate());
     setCurrentDate(myDate.getUTCDate());
   }, [bookingDetails?.BookingDay]); // Dependency array mein field daalna behtar hai
 

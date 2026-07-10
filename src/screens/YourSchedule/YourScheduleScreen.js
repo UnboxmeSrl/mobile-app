@@ -119,10 +119,16 @@ const YourScheduleScreen = () => {
               </View>
             }
             renderItem={({item, index}) => {
+              // const myDate = new Date('2026-08-01T00:00:00.000Z');
               const myDate = new Date(item?.BookingDay);
-              const month = myDate?.toLocaleString('en-US', {month: 'long'});
+              const month = myDate?.toLocaleString('en-US', {
+                month: 'long',
+                timeZone: 'UTC',
+              });
+              // console.log('myDate', myDate, month);
               const weekDay = myDate?.toLocaleString('en-US', {
                 weekday: 'long',
+                timeZone: 'UTC',
               });
               const isEvent = item?._restaurant_turbo?.is_event;
               const timeFrame = item?._timeframes_turbo;
@@ -242,7 +248,7 @@ const YourScheduleScreen = () => {
                         <Text
                           allowFontScaling={false}
                           style={styles.selectedDateNumberText}>
-                          {myDate?.getDate()}
+                          {myDate?.getUTCDate()}
                         </Text>
                         <Text
                           allowFontScaling={false}

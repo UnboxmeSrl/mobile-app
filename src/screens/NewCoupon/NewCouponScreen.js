@@ -291,7 +291,7 @@ const NewCouponScreen = () => {
                 allowFontScaling={false}
                 style={
                   styles.timeText
-                }>{`${bookingDate?.getDate()} ${month} ${bookingDate?.getFullYear()}`}</Text>
+                }>{`${bookingDate?.getUTCDate()} ${month} ${bookingDate?.getUTCFullYear()}`}</Text>
             </View>
             {actionNumId !== 9 &&
               (!!timeFrame ||

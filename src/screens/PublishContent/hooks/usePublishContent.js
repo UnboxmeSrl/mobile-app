@@ -63,7 +63,10 @@ const usePublishContent = () => {
     icon = getActionIconSource(contentDetails?._actions_turbo);
   }
   const bookingDate = new Date(contentDetails?.BookingDay);
-  const month = bookingDate.toLocaleString('en-US', {month: 'long'});
+  const month = bookingDate.toLocaleString('en-US', {
+    month: 'long',
+    timezone: 'UTC',
+  });
   const timeFrame =
     contentDetails?._timeframes ?? contentDetails?._timeframes_turbo;
   const dispatch = useDispatch();

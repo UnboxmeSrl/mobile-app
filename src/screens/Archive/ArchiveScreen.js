@@ -57,8 +57,14 @@ const ArchiveScreen = () => {
           renderItem={({item, index}) => {
             // console.log(item, 'item_archiveScreen');
             const myDate = new Date(item?.BookingDay);
-            const month = myDate.toLocaleString('en-US', {month: 'long'});
-            const weekDay = myDate.toLocaleString('en-US', {weekday: 'long'});
+            const month = myDate.toLocaleString('en-US', {
+              month: 'long',
+              timeZone: 'UTC',
+            });
+            const weekDay = myDate.toLocaleString('en-US', {
+              weekday: 'long',
+              timeZone: 'UTC',
+            });
             const timeFrame = item?._timeframes_turbo;
             const actionNumId = item?._actions_turbo?.action_num_id;
             return (
@@ -73,7 +79,7 @@ const ArchiveScreen = () => {
                     <Text
                       allowFontScaling={false}
                       style={styles.selectedDateNumberText}>
-                      {myDate?.getDate()}
+                      {myDate?.getUTCDate()}
                     </Text>
                     <Text
                       allowFontScaling={false}

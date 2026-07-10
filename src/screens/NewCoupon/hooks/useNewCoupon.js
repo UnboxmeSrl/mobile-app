@@ -13,7 +13,10 @@ const useNewCoupon = () => {
   const navigation = useNavigation();
   const isReel = bookingDetails?.reel === '1';
   const bookingDate = new Date(bookingDetails?.BookingDay);
-  const month = bookingDate.toLocaleString('en-US', {month: 'long'});
+  const month = bookingDate.toLocaleString('en-US', {
+    month: 'long',
+    timeZone: 'UTC',
+  });
   const profilePicUrl = `${loginData?.Profile_pic?.url}?tpl=${xanoImageSize}.jpg`;
   const isEvent = bookingDetails?._restaurant_turbo?.is_event;
   const timeFrame =
