@@ -18,6 +18,7 @@ import {COLORS, FONTS} from '../../constants';
 import {useRestaurantDetails} from './hooks';
 import {ServiceCard} from './ServiceCard';
 import {xanoImageSize} from '../../utils';
+import {GloeeLogo} from '../../components/GloeeLogo';
 
 const RestaurantDetails = () => {
   const {
@@ -35,6 +36,11 @@ const RestaurantDetails = () => {
     handleRedirection,
   } = useRestaurantDetails();
   const [isScrolling, setIsScrolling] = useState(false);
+  const isGloeeToGo =
+    String(restaurantDetails?.Name || '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .toUpperCase() === 'GLOEE TO GO';
   // console.log(
   //   restaurantDetails?.GalleryRestaurant,
   //   'restaurantDetails?.GalleryRestaurant',
@@ -112,6 +118,11 @@ const RestaurantDetails = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.restaurantDetailsContainer}>
+            {isGloeeToGo && (
+              <View style={styles.gloeeLogoContainer}>
+                <GloeeLogo height={50} width={86} />
+              </View>
+            )}
             <Text allowFontScaling={false} style={styles.restaurantNameText}>
               {restaurantDetails?.Name}
             </Text>
@@ -222,6 +233,16 @@ const RestaurantDetails = () => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
+          {isGloeeToGo && (
+            <View style={styles.gloeeFooterContainer}>
+              <GloeeLogo
+                color={COLORS.grey}
+                height={66}
+                style={styles.gloeeFooterLogo}
+                width={112}
+              />
+            </View>
+          )}
         </ScrollView>
       )}
     </SafeAreaView>
@@ -229,6 +250,21 @@ const RestaurantDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  gloeeFooterContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: verticalScale(120),
+    paddingBottom: verticalScale(24),
+    paddingTop: verticalScale(32),
+  },
+  gloeeFooterLogo: {
+    opacity: 0.42,
+  },
+  gloeeLogoContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: verticalScale(14),
+  },
   serviceCardsContainer: {
     paddingLeft: scale(10),
   },

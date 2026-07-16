@@ -70,6 +70,30 @@ export const submitVenueDealActionContent = async (userActionId, data) => {
   }
 };
 
+export const submitVenueDealActionPhotos = async (userActionId, data) => {
+  try {
+    const url = `${Api.CONTENT.SUBMIT_VENUE_DEAL_ACTION_PHOTOS}/${userActionId}/photos`;
+    const response = await Fetch.postNew(url, data, {
+      headers: {'Content-Type': 'multipart/form-data'},
+    });
+    return response?.data ?? {status: response?.status};
+  } catch (error) {
+    if (error?.response?.data) {
+      const responseError =
+        error?.response?.data?.message || error?.response?.data;
+      showToastError({
+        message:
+          typeof responseError === 'string'
+            ? responseError
+            : JSON.stringify(responseError),
+      });
+      return;
+    }
+
+    showToastError({message: error?.message || 'Something went wrong'});
+  }
+};
+
 export const updateContentUrl = async (params, data) => {
   try {
     const url = Api.CONTENT.UPDATE_CONTENT_URL + params;

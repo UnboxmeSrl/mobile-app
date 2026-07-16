@@ -62,6 +62,7 @@ export const Api = {
     GET_BOOKING_FOR_CONTENT: `${BASE_URL}/api:bwh6Xc5O/get_booking_for_content_new`,
     GET_VENUE_DEAL_BOOKING_ACTIONS: `${BASE_URL}/api:0Zej3Obh/user_venue_deal_actions`,
     SUBMIT_VENUE_DEAL_ACTION_CONTENT: `${BASE_URL}/api:0Zej3Obh/user/action`,
+    SUBMIT_VENUE_DEAL_ACTION_PHOTOS: `${BASE_URL}/api:0Zej3Obh/user/action`,
     UPDATE_CONTENT_URL: `${BASE_URL}/api:bwh6Xc5O/update_content_url`,
   },
   SIGN_UP_WITH_EMAIL: {

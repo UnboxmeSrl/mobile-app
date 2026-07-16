@@ -37,6 +37,9 @@ const PublishContentScreen = () => {
     bookingDate,
     month,
     timeFrame,
+    shouldShowContentLinkInput,
+    shouldShowContentBrief,
+    shouldShowVenuePicturesUpload,
     isLoading,
     isSendToReview,
     isContentStatusModalVisible,
@@ -47,7 +50,6 @@ const PublishContentScreen = () => {
     handleContentUpload,
     handleCameraPress,
     handleGalleryPress,
-    handleEditPress,
     handleBackPress,
   } = usePublishContent();
   const actionQuantity = Number(
@@ -62,8 +64,6 @@ const PublishContentScreen = () => {
   const credits = contentDetails?._offers_turbo?.Credits;
   const shouldShowCredits =
     credits !== undefined && credits !== null && credits !== '';
-  const shouldShowVenuePicturesUpload =
-    !contentDetails?.isVenueDealBookingAction;
   // console.log('contentDetails', contentDetails?.isCheckedIn, contentDetails);
   // console.log(
   //   contentDetails?.HourStart,
@@ -97,13 +97,6 @@ const PublishContentScreen = () => {
 
         <View style={styles.onApprovalItemsMainContainer}>
           <View style={styles.socialMediaDetailsMainRow}>
-            {actionName !== 'Story' && (
-              <TouchableOpacity
-                style={styles.editIconContainer}
-                onPress={handleEditPress}>
-                <Image source={IMAGES.edit} style={styles.editIcon} />
-              </TouchableOpacity>
-            )}
             <View style={styles.socialMediaImageContainer}>
               {icon?.uri ? (
                 <FastImage
@@ -179,57 +172,49 @@ const PublishContentScreen = () => {
             </View> */}
           </View>
 
-          {actionName !== 'Story' && (
-            <>
-              <View style={styles.linkUploadDescriptionContainer}>
-                <Text
-                  allowFontScaling={false}
-                  style={styles.linkUploadDescriptionText}>
-                  Enter the link to your content and sent to review
-                </Text>
-                <View style={styles.linkUploadTextInputMainContainer}>
-                  <View style={styles.linkUploadIconContainer}>
-                    <Image
-                      source={IMAGES.link}
-                      style={styles.linkUploadIcon}
-                      resizeMode="contain"
-                    />
-                  </View>
-                  <View style={styles.linkUploadTextInputContainer}>
-                    <TextInput
-                      allowFontScaling={false}
-                      placeholder="Paste content link here"
-                      placeholderTextColor={COLORS.newPrimary}
-                      style={styles.linkUploadTextInput}
-                      value={link}
-                      onChangeText={val => {
-                        // if (!contentDetails?.isCheckedIn) {
-                        //   showToastError({
-                        //     message: "You didn't Checked In to Upload Content ",
-                        //   });
-                        // } else {
-                        setLink(val);
-                        // }
-                      }}
-                    />
-                  </View>
+          {shouldShowContentLinkInput && (
+            <View style={styles.linkUploadDescriptionContainer}>
+              <Text
+                allowFontScaling={false}
+                style={styles.linkUploadDescriptionText}>
+                Enter the link to your content and sent to review
+              </Text>
+              <View style={styles.linkUploadTextInputMainContainer}>
+                <View style={styles.linkUploadIconContainer}>
+                  <Image
+                    source={IMAGES.link}
+                    style={styles.linkUploadIcon}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={styles.linkUploadTextInputContainer}>
+                  <TextInput
+                    allowFontScaling={false}
+                    placeholder="Paste content link here"
+                    placeholderTextColor={COLORS.newPrimary}
+                    style={styles.linkUploadTextInput}
+                    value={link}
+                    onChangeText={setLink}
+                  />
                 </View>
               </View>
-              <TouchableOpacity
-                style={styles.readContentBriefContainer}
-                onPress={handleContentBriefPress}>
-                <Text
-                  allowFontScaling={false}
-                  style={styles.contentBriefTitleText}>
-                  Read Content Brief & Tags
-                </Text>
-                <Image
-                  resizeMode="contain"
-                  source={IMAGES.back}
-                  style={styles.rightIcon}
-                />
-              </TouchableOpacity>
-            </>
+            </View>
+          )}
+          {shouldShowContentBrief && (
+            <TouchableOpacity
+              style={styles.readContentBriefContainer}
+              onPress={handleContentBriefPress}>
+              <Text
+                allowFontScaling={false}
+                style={styles.contentBriefTitleText}>
+                Read Content Brief & Tags
+              </Text>
+              <Image
+                resizeMode="contain"
+                source={IMAGES.back}
+                style={styles.rightIcon}
+              />
+            </TouchableOpacity>
           )}
         </View>
         {shouldShowVenuePicturesUpload && (
@@ -460,23 +445,6 @@ const styles = StyleSheet.create({
 
   mainScrollView: {
     backgroundColor: COLORS.white,
-  },
-  editIcon: {
-    tintColor: COLORS.newPrimary,
-    height: moderateScale(16),
-    width: moderateScale(16),
-  },
-  editIconContainer: {
-    height: moderateScale(25),
-    width: moderateScale(25),
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    zIndex: 1,
-    left: scale(10),
-    top: verticalScale(-5),
-    backgroundColor: COLORS.white,
-    borderRadius: moderateScale(25),
   },
   serviceNameText: {
     color: COLORS.black,

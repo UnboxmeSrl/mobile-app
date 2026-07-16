@@ -1,5 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useEffect, useRef, useState} from 'react';
+import {Image as ImageCompressor} from 'react-native-compressor';
 import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAMES} from '../../../constants';
@@ -11,6 +12,7 @@ import {
   navigate,
   showToastError,
   submitVenueDealActionContent,
+  submitVenueDealActionPhotos,
   updateContentUrl,
 } from '../../../services';
 import {
@@ -27,6 +29,62 @@ import {
   platformVersion,
 } from '../../../utils';
 
+const normalizePositiveInteger = value => {
+  const parsedValue = Number(value);
+
+  return Number.isInteger(parsedValue) && parsedValue > 0
+    ? parsedValue
+    : undefined;
+};
+
+const compressContentPhoto = async photo => {
+  if (!photo?.uri) {
+    return photo;
+  }
+
+  try {
+    const compressedUri = await ImageCompressor.compress(photo.uri, {
+      compressionMethod: 'manual',
+      maxHeight: 1600,
+      maxWidth: 1600,
+      output: 'jpg',
+      quality: 0.8,
+    });
+    const originalName =
+      photo?.fileName || photo.uri.split('/').pop() || 'venue-photo.jpg';
+    const fileName = `${originalName.replace(/\.[^/.]+$/, '')}.jpg`;
+
+    return {
+      ...photo,
+      fileName,
+      type: 'image/jpeg',
+      uri: compressedUri,
+    };
+  } catch (error) {
+    console.log('Image compression error:', error);
+    return photo;
+  }
+};
+
+const createContentThumbnail = async (photo, index) => {
+  const thumbnailUri = await ImageCompressor.compress(photo.uri, {
+    compressionMethod: 'manual',
+    maxHeight: 600,
+    maxWidth: 600,
+    output: 'jpg',
+    quality: 0.3,
+  });
+  const originalName =
+    photo?.fileName || photo.uri.split('/').pop() || `venue-photo-${index + 1}`;
+  const baseName = originalName.replace(/\.[^/.]+$/, '');
+
+  return {
+    fileName: `${baseName}-thumbnail.jpg`,
+    type: 'image/jpeg',
+    uri: thumbnailUri,
+  };
+};
+
 const usePublishContent = () => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -39,7 +97,6 @@ const usePublishContent = () => {
   const contentDetails = useSelector(selectContentByID(contentDetailsId));
   const [link, setLink] = useState('');
   const [contentPhotos, setContentPhotos] = useState([1, 2, 3]);
-  const [picturesForValidation, setPicturesForValidation] = useState([]);
   const [pictureIndex, setPictureIndex] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isSendToReview, setIsSendToReview] = useState(false);
@@ -62,6 +119,15 @@ const usePublishContent = () => {
   } else if (contentDetails?.isVenueDealBookingAction) {
     icon = getActionIconSource(contentDetails?._actions_turbo);
   }
+  const isVenueDealBookingAction = !!contentDetails?.isVenueDealBookingAction;
+  const isVenueDealPicturesAction =
+    isVenueDealBookingAction &&
+    Number(contentDetails?._actions_turbo?.action_id) === 6;
+  const shouldShowContentLinkInput =
+    actionName !== 'Story' && !isVenueDealPicturesAction;
+  const shouldShowContentBrief = actionName !== 'Story';
+  const shouldShowVenuePicturesUpload =
+    !isVenueDealBookingAction || isVenueDealPicturesAction;
   const bookingDate = new Date(contentDetails?.BookingDay);
   const month = bookingDate.toLocaleString('en-US', {
     month: 'long',
@@ -88,33 +154,24 @@ const usePublishContent = () => {
     });
   };
 
-  const handleEditPress = () => {
-    navigate(SCREEN_NAMES.ContentScreen, {
-      actionName: actionName,
-      actionNumId: actionNumId,
-      bookingDetails: contentDetails,
-    });
-  };
-
   const handleContentModalOpenClose = () => {
     setIsContentStatusModalVisible(!isContentStatusModalVisible);
   };
 
   const handleSendToReviewBtnPress = async () => {
     setIsSendToReview(true);
-    const isVenueDealBookingAction = contentDetails?.isVenueDealBookingAction;
-    const shouldRequireVenuePictures = !isVenueDealBookingAction;
-    if (actionName !== 'Story' && link === '') {
+    const uploadedPicturesCount = contentPhotos.filter(
+      item => item?.uri,
+    ).length;
+    const shouldRequireVenuePictures = shouldShowVenuePicturesUpload;
+    if (shouldShowContentLinkInput && link === '') {
       const error = {
         message: 'Please enter the content link',
       };
       showToastError(error);
       setIsSendToReview(false);
       return;
-    } else if (
-      shouldRequireVenuePictures &&
-      picturesForValidation?.length < 3
-    ) {
+    } else if (shouldRequireVenuePictures && uploadedPicturesCount < 3) {
       const error = {
         message: 'Please upload 3 pictures of venue',
       };
@@ -124,31 +181,83 @@ const usePublishContent = () => {
     }
 
     if (isVenueDealBookingAction) {
-      const userActionId =
-        contentDetails?.venue_deal_booking_action_id ||
-        contentDetails?.rawVenueDealBookingAction?.id;
-      const userTurboId =
-        loginData?.id ||
-        contentDetails?.user_turbo_id ||
-        contentDetails?.rawVenueDealBooking?.user_turbo_id;
+      let res;
 
-      if (!userTurboId || !userActionId) {
-        showToastError({message: 'Missing venue deal action details'});
-        setIsSendToReview(false);
-        return;
+      if (isVenueDealPicturesAction) {
+        const userActionId = normalizePositiveInteger(
+          contentDetails?.venue_deal_booking_action_id ??
+            contentDetails?.rawVenueDealBookingAction?.id,
+        );
+
+        if (!userActionId) {
+          showToastError({message: 'Missing venue deal photo details'});
+          setIsSendToReview(false);
+          return;
+        }
+
+        try {
+          const thumbnails = await Promise.all(
+            contentPhotos.map(createContentThumbnail),
+          );
+          const photosFormData = new FormData();
+
+          contentPhotos.forEach((photo, index) => {
+            const fallbackName =
+              photo?.uri?.split('/').pop() || `venue-photo-${index + 1}.jpg`;
+            photosFormData.append('photos[]', {
+              name: photo?.fileName || fallbackName,
+              type: photo?.type || 'image/jpeg',
+              uri: photo?.uri,
+            });
+            photosFormData.append('thumbnails[]', {
+              name: thumbnails[index].fileName,
+              type: thumbnails[index].type,
+              uri: thumbnails[index].uri,
+            });
+          });
+
+          res = await submitVenueDealActionPhotos(userActionId, photosFormData);
+        } catch (error) {
+          console.log('Thumbnail creation error:', error);
+          showToastError({message: 'Unable to prepare photo thumbnails'});
+          setIsSendToReview(false);
+          return;
+        }
+      } else {
+        const userTurboId =
+          loginData?.id ||
+          contentDetails?.user_turbo_id ||
+          contentDetails?.rawVenueDealBooking?.user_turbo_id;
+        const userActionId =
+          contentDetails?.venue_deal_booking_action_id ||
+          contentDetails?.rawVenueDealBookingAction?.id;
+
+        if (!userTurboId || !userActionId) {
+          showToastError({message: 'Missing venue deal action details'});
+          setIsSendToReview(false);
+          return;
+        }
+
+        const actionContentPayload = {
+          user_turbo_id: userTurboId,
+          user_action_id: userActionId,
+        };
+
+        if (shouldShowContentLinkInput) {
+          actionContentPayload.content = link;
+        }
+
+        res = await submitVenueDealActionContent(
+          userActionId,
+          actionContentPayload,
+        );
       }
-
-      const res = await submitVenueDealActionContent(userActionId, {
-        user_turbo_id: userTurboId,
-        user_action_id: userActionId,
-        content: link,
-      });
 
       if (res) {
         setUpdatedContentDetails({
           ...contentDetails,
           ...res,
-          content_url: link,
+          ...(shouldShowContentLinkInput && {content_url: link}),
           content_status_turbo_id: 1,
           _content_status_turbo: {
             ...(contentDetails?._content_status_turbo || {}),
@@ -235,10 +344,10 @@ const usePublishContent = () => {
       const res = await openCamera();
       // console.log('test', res?.assets[0]);
       if (res?.assets?.length > 0) {
+        const compressedPhoto = await compressContentPhoto(res.assets[0]);
         const updatedData = [...contentPhotos];
-        updatedData[pictureIndex] = res?.assets[0];
+        updatedData[pictureIndex] = compressedPhoto;
         setContentPhotos([...updatedData]);
-        setPicturesForValidation([...picturesForValidation, res?.assets[0]]);
       }
     }
     contentUploadRef.current.close();
@@ -253,14 +362,27 @@ const usePublishContent = () => {
           : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
     const isGranted = await handlePermission(permission);
     if (isGranted) {
-      const res = await openGallery({selectionLimit: 1});
+      const targetIndexes = [
+        pictureIndex,
+        ...contentPhotos.reduce((indexes, photo, index) => {
+          if (index !== pictureIndex && !photo?.uri) {
+            indexes.push(index);
+          }
+          return indexes;
+        }, []),
+      ];
+      const res = await openGallery({selectionLimit: targetIndexes.length});
       // console.log('IMAGE Results: ' + JSON.stringify(res));
       // console.log('test', pictureIndex, res?.assets[0]);
       if (res?.assets?.length > 0) {
+        const compressedPhotos = await Promise.all(
+          res.assets.slice(0, targetIndexes.length).map(compressContentPhoto),
+        );
         const updatedData = [...contentPhotos];
-        updatedData[pictureIndex] = res?.assets[0];
+        compressedPhotos.forEach((photo, index) => {
+          updatedData[targetIndexes[index]] = photo;
+        });
         setContentPhotos([...updatedData]);
-        setPicturesForValidation([...picturesForValidation, res?.assets[0]]);
       }
     }
     contentUploadRef.current.close();
@@ -286,6 +408,9 @@ const usePublishContent = () => {
     actionName,
     icon,
     isEvent,
+    shouldShowContentLinkInput,
+    shouldShowContentBrief,
+    shouldShowVenuePicturesUpload,
     bookingDate,
     month,
     timeFrame,
@@ -300,7 +425,6 @@ const usePublishContent = () => {
     handleContentUpload,
     handleCameraPress,
     handleGalleryPress,
-    handleEditPress,
     handleBackPress,
   };
 };

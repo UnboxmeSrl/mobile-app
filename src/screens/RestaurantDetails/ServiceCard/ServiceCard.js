@@ -86,15 +86,6 @@ const ServiceCard = ({
         });
       }
 
-      // Other services
-      item?._actions_turbo?.Coupons_Services?.forEach(service => {
-        if (service?.quantity > 0) {
-          list.push({
-            amenityName: `${service.quantity} X ${service.name}`,
-            amenityIcon: getPerkIconSource(service),
-          });
-        }
-      });
       return list;
     } else {
       [];
@@ -127,7 +118,7 @@ const ServiceCard = ({
   //   'amenityDetailsWithCoupons_ServiceCard',
   // );
 
-  const getServicesWithCoupons = useMemo(() => {
+  const displayServices = useMemo(() => {
     const serviceMap = [
       // {key: 'Accomodation', label: 'Accomodation'},
       // {key: 'Gym', label: 'Gym'},
@@ -136,7 +127,10 @@ const ServiceCard = ({
       {key: 'Drinks', label: 'Drinks'},
     ];
     let specialServices = [];
-    if (item?.isBigInfluencer && item?.services?.length > 0) {
+    if (
+      (item?.isBigInfluencer || item?.isVenueDeal) &&
+      item?.services?.length > 0
+    ) {
       specialServices = [...item?.services];
     } else {
       serviceMap.forEach(({key, label}) => {
@@ -152,21 +146,14 @@ const ServiceCard = ({
       item.services,
       'specialServices_useMemo',
     );
-    return [
-      ...specialServices,
-      ...(item?._actions_turbo?.Coupons_Services ?? []),
-    ];
-  }, [item?._actions_turbo, item.isBigInfluencer, item.services]);
+    return specialServices;
+  }, [
+    item?._actions_turbo,
+    item.isBigInfluencer,
+    item.isVenueDeal,
+    item.services,
+  ]);
 
-  // const getServicesWithCoupons = useMemo(
-  //   () =>
-  //     item?._actions_turbo?.Coupons_Services?.length > 0
-  //       ? item?._actions_turbo?.Coupons_Services
-  //       : item?.services?.length > 0
-  //       ? item?.services
-  //       : [],
-  //   [item?._actions_turbo?.Coupons_Services, item?.services],
-  // );
   const getIcons = useCallback(service => getPerkIconSource(service), []);
 
   console.log(
@@ -178,8 +165,8 @@ const ServiceCard = ({
     item?.services,
     item?._actions_turbo,
     item?.services?.length > 0,
-    'getServicesWithCoupons',
-    getServicesWithCoupons,
+    'displayServices',
+    displayServices,
   );
 
   // console.log('actionNumId_ServiceCard', actionNumId, amenityDetailsWithCoupons);
@@ -272,8 +259,8 @@ const ServiceCard = ({
         ) : (
           <>
             {((item?.isBigInfluencer && item?.services?.length > 0) ||
-              getServicesWithCoupons.length > 0) &&
-              getServicesWithCoupons?.map((subServices, ind) => {
+              displayServices.length > 0) &&
+              displayServices?.map((subServices, ind) => {
                 const iconSource = getIcons(subServices);
                 console.log(
                   'serviceName.trim()',

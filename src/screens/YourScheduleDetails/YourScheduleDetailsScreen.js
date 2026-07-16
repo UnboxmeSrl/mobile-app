@@ -416,30 +416,24 @@ const YourScheduleDetailsScreen = () => {
           </View>
         </View>
 
-        {!bookingDetails?.isVenueDealBooking && (
-          <>
-            <View style={styles.needHelpContainer}>
-              <Text allowFontScaling={false} style={styles.contentDetailsText}>
-                Need help ?
-              </Text>
-            </View>
-            <View style={styles.chatWithOwnerBtnMainContainer}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigate(SCREEN_NAMES.ChatScreen, {
-                    bookingDetails: bookingDetails,
-                  })
-                }
-                style={[styles.chatWithOwnerBtnContainer]}>
-                <Text
-                  allowFontScaling={false}
-                  style={styles.chatWithOwnerBtnText}>
-                  Chat with owner
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </>
-        )}
+        <View style={styles.needHelpContainer}>
+          <Text allowFontScaling={false} style={styles.contentDetailsText}>
+            Need help ?
+          </Text>
+        </View>
+        <View style={styles.chatWithOwnerBtnMainContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              navigate(SCREEN_NAMES.ChatScreen, {
+                bookingDetails: bookingDetails,
+              })
+            }
+            style={[styles.chatWithOwnerBtnContainer]}>
+            <Text allowFontScaling={false} style={styles.chatWithOwnerBtnText}>
+              Chat with owner
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         <View>
           <View style={styles.actionRequestedContainer}>
@@ -525,7 +519,7 @@ const YourScheduleDetailsScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {!isBookingCheckedIn && (
+        {(bookingDetails?.isVenueDealBooking || !isBookingCheckedIn) && (
           <SwipeButton
             containerStyles={swipeButtonStyles.swipeBtnMainContainer}
             height={verticalScale(60)}

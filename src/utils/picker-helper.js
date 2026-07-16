@@ -3,9 +3,12 @@ import {convertImage} from 'react-native-simple-heic2jpg';
 
 export const modifyImagesFromHEICToJPG = async assets => {
   for (const image of assets) {
-    if (image.fileName.endsWith('.heic') || image.fileName.endsWith('.HEIC')) {
+    const fileName =
+      image?.fileName || image?.uri?.split('/').pop() || 'venue-photo';
+
+    if (fileName.toLowerCase().endsWith('.heic')) {
       const uri = await convertImage(image.uri);
-      image.fileName = `${image.fileName.split('.')[0]}.JPG`;
+      image.fileName = `${fileName.replace(/\.heic$/i, '')}.JPG`;
       image.type = 'image/jpeg';
       image.uri = uri;
     }
