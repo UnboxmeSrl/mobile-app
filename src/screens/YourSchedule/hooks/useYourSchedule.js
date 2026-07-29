@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {SCREEN_NAMES} from '../../../constants/navigation';
+import {SCREEN_NAMES, STACK_NAMES} from '../../../constants/navigation';
 import {
   selectBookingsList,
   setFreshBookings,
@@ -11,10 +11,16 @@ import {
   getVenueDealBookings,
   getVenueDealBookingActions,
   navigate,
+  showToastError,
 } from '../../../services';
-import {selectContentList, setContentList} from '../../../redux/slices';
-import {useRoute} from '@react-navigation/native';
 import {
+  selectContentList,
+  setContentList,
+  setSelectedChannel,
+} from '../../../redux/slices';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {
+  getChatByBookingDetail,
   mapVenueDealBookingActionsToContentList,
   mapVenueDealBookingsToScheduleBookings,
 } from '../../../utils';
@@ -22,6 +28,7 @@ import {
 const useYourSchedule = () => {
   const loginData = useSelector(state => state.authSlice.loginData);
   const route = useRoute();
+  const navigation = useNavigation();
   const selectedTabFromRoute = route.params?.selectedTab;
   const [selectedTab, setSelectedTab] = useState(
     selectedTabFromRoute ? +selectedTabFromRoute : 1,
@@ -144,14 +151,33 @@ const useYourSchedule = () => {
   };
 
   const handleContentCardPress = item => {
-    if (item?.content_status_turbo_id > 0) {
-      setUpdatedContentDetails(item);
-      handleContentModalOpenClose();
-    } else {
+    const contentStatus = item?._content_status_turbo?.name;
+
+    if (contentStatus === 'Rejected' || !item?.content_status_turbo_id) {
       navigate(SCREEN_NAMES.PublishContentScreen, {
         contentDetails: item,
       });
+    } else {
+      setUpdatedContentDetails(item);
+      handleContentModalOpenClose();
     }
+  };
+
+  const handleSendMessagePress = async () => {
+    const channel = await getChatByBookingDetail({
+      bookingDetails: updatedContentDetails,
+    });
+
+    if (!channel) {
+      showToastError({message: 'Chat is not available for this booking'});
+      return;
+    }
+
+    dispatch(setSelectedChannel(channel));
+    setIsContentStatusModalVisible(false);
+    navigation.navigate(STACK_NAMES.BottomStack, {
+      screen: SCREEN_NAMES.ChatRoom,
+    });
   };
 
   useEffect(() => {
@@ -190,6 +216,7 @@ const useYourSchedule = () => {
     onBookingRefresh,
     onContentRefresh,
     handleContentModalOpenClose,
+    handleSendMessagePress,
     handleCardPress,
     handleContentCardPress,
     handleArchivePress,

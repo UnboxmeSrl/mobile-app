@@ -5,7 +5,7 @@ import {useChatClient} from '../../hooks';
 import {useChat} from './hooks';
 import {COLORS} from '../../constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {perfectSize} from '../../utils';
+import {getInfluencerChatChannelTitle, perfectSize} from '../../utils';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {AppText} from '../../components';
 
@@ -26,7 +26,7 @@ const ChatScreen = () => {
               {/* {Object.values(channel?.state?.members || {}).find(member =>
                 member.user.id.startsWith('owner_'),
               )?.user?.name || 'Unnamed Channel'} */}
-              {channel?.data?.name}
+              {getInfluencerChatChannelTitle(channel?.data?.name)}
             </AppText>
             <View
               style={{

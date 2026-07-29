@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {IMAGES} from '../../../assets';
-import {SCREEN_NAMES} from '../../../constants';
+import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
 import {navigate} from '../../../services';
 import {xanoImageSize} from '../../../utils';
 import {useCallback, useMemo} from 'react';
@@ -185,8 +185,14 @@ const useNewCoupon = () => {
   };
 
   const handleGoToContentPress = () => {
-    navigate(SCREEN_NAMES.YourScheduleScreen, {
-      selectedTab: 2,
+    navigation.navigate(STACK_NAMES.BottomStack, {
+      screen: SCREEN_NAMES.Schedule,
+      params: {
+        screen: SCREEN_NAMES.YourScheduleScreen,
+        params: {
+          selectedTab: 2,
+        },
+      },
     });
   };
 

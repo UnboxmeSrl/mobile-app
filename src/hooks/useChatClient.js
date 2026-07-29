@@ -1,4 +1,5 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
+import {Platform} from 'react-native';
 import {useSelector} from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -56,16 +57,19 @@ const useChatClient = () => {
     const registerPushToken = async () => {
       // unsubscribe any previous listener
       unsubscribeTokenRefreshListenerRef.current?.();
+      if (Platform.OS === 'ios') {
+        // FCM cannot mint a token on iOS until APNs has handed one over.
+        console.log('[stream] APNs token:', await messaging().getAPNSToken());
+      }
       const token = await messaging().getToken();
-      // console.log('TOken', token);
+      console.log('[stream] FCM token:', token);
       const push_provider = 'firebase';
       const push_provider_name = 'ClarisAndroid'; // name an alias for your push provider (optional)
-      await chatClient.setLocalDevice({
-        id: token,
-        push_provider,
-        // push_provider_name is meant for optional multiple providers support, see: https://getstream.io/chat/docs/react/push_providers_and_multi_bundle
-        push_provider_name,
-      });
+      // addDevice, not setLocalDevice: this runs after connectUser, and
+      // setLocalDevice throws once the websocket is open.
+      // push_provider_name is meant for optional multiple providers support, see: https://getstream.io/chat/docs/react/push_providers_and_multi_bundle
+      await chatClient.addDevice(token, push_provider, user.id, push_provider_name);
+      console.log('[stream] device registered', user.id, token);
 
       await AsyncStorage.setItem('@current_push_token', token);
 
@@ -78,16 +82,14 @@ const useChatClient = () => {
 
       unsubscribeTokenRefreshListenerRef.current = messaging().onTokenRefresh(
         async newToken => {
-          await Promise.all([
-            removeOldToken(),
-            chatClient.addDevice(
-              newToken,
-              push_provider,
-              loginData?.id?.toString(),
-              push_provider_name,
-            ),
-            await AsyncStorage.setItem('@current_push_token', newToken),
-          ]);
+          await removeOldToken();
+          await chatClient.addDevice(
+            newToken,
+            push_provider,
+            user.id,
+            push_provider_name,
+          );
+          await AsyncStorage.setItem('@current_push_token', newToken);
         },
       );
     };
@@ -117,9 +119,18 @@ const useChatClient = () => {
     // If the chat client has a value in the field `userID`, a user is already connected
     // and we can skip trying to connect the user again.
     const init = async () => {
+      if (!loginData?.id) {
+        return;
+      }
+
       if (!chatClient.userID) {
+        await setupClient();
+      }
+
+      try {
         await registerPushToken();
-        setupClient();
+      } catch (error) {
+        console.error('Failed to register Stream push token:', error);
       }
 
       setClientIsReady(true); // Add loginData as a dependency to re-run the effect if loginData changes

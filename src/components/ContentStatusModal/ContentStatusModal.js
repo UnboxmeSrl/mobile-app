@@ -25,6 +25,7 @@ const ContentStatusModal = ({
   contentDetails,
   handleNegativeBtnPress,
   handlePositiveBtnPress,
+  handleSendMessagePress,
 }) => {
   const approvalStage = contentDetails?._content_status_turbo?.name;
   let actionNumId = contentDetails?._actions_turbo?.action_num_id ?? 0;
@@ -193,7 +194,9 @@ const ContentStatusModal = ({
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.queryContainer}>
+          <TouchableOpacity
+            onPress={handleSendMessagePress}
+            style={styles.queryContainer}>
             <Image source={IMAGES.aeroplane} style={styles.queryIcon} />
             <Text allowFontScaling={false} style={styles.queryText}>
               Send us a message

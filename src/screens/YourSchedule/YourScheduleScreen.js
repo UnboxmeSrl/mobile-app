@@ -40,6 +40,7 @@ const YourScheduleScreen = () => {
     onBookingRefresh,
     onContentRefresh,
     handleContentModalOpenClose,
+    handleSendMessagePress,
     handleCardPress,
     handleContentCardPress,
     handleArchivePress,
@@ -637,6 +638,7 @@ const YourScheduleScreen = () => {
           contentDetails={updatedContentDetails}
           handleNegativeBtnPress={handleContentModalOpenClose}
           handlePositiveBtnPress={handleContentModalOpenClose}
+          handleSendMessagePress={handleSendMessagePress}
         />
       )}
     </SafeAreaView>

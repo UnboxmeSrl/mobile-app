@@ -46,6 +46,7 @@ const PublishContentScreen = () => {
     handleContentModalOpenClose,
     handleSendToReviewBtnPress,
     handlePositiveBtnPress,
+    handleSendMessagePress,
     handleContentBriefPress,
     handleContentUpload,
     handleCameraPress,
@@ -389,6 +390,7 @@ const PublishContentScreen = () => {
             contentDetails={updatedContentDetails}
             handleNegativeBtnPress={handleContentModalOpenClose}
             handlePositiveBtnPress={handlePositiveBtnPress}
+            handleSendMessagePress={handleSendMessagePress}
           />
         )}
         <PickerModal

@@ -3,8 +3,12 @@ import {useEffect, useRef, useState} from 'react';
 import {Image as ImageCompressor} from 'react-native-compressor';
 import {PERMISSIONS} from 'react-native-permissions';
 import {useDispatch, useSelector} from 'react-redux';
-import {SCREEN_NAMES} from '../../../constants';
-import {selectContentByID, setContentList} from '../../../redux';
+import {SCREEN_NAMES, STACK_NAMES} from '../../../constants';
+import {
+  selectContentByID,
+  setContentList,
+  setSelectedChannel,
+} from '../../../redux';
 import {
   getBookingForContentList,
   getVenueDealBookingActions,
@@ -21,6 +25,7 @@ import {
   checkPermission,
   deadlineDaysCount,
   getActionIconSource,
+  getChatByBookingDetail,
   isAndroid,
   isIos,
   mapVenueDealBookingActionsToContentList,
@@ -123,8 +128,7 @@ const usePublishContent = () => {
   const isVenueDealPicturesAction =
     isVenueDealBookingAction &&
     Number(contentDetails?._actions_turbo?.action_id) === 6;
-  const shouldShowContentLinkInput =
-    actionName !== 'Story' && !isVenueDealPicturesAction;
+  const shouldShowContentLinkInput = !isVenueDealPicturesAction;
   const shouldShowContentBrief = actionName !== 'Story';
   const shouldShowVenuePicturesUpload =
     !isVenueDealBookingAction || isVenueDealPicturesAction;
@@ -149,8 +153,14 @@ const usePublishContent = () => {
       return;
     }
 
-    navigate(SCREEN_NAMES.YourScheduleScreen, {
-      selectedTab: 2,
+    navigation.navigate(STACK_NAMES.BottomStack, {
+      screen: SCREEN_NAMES.Schedule,
+      params: {
+        screen: SCREEN_NAMES.YourScheduleScreen,
+        params: {
+          selectedTab: 2,
+        },
+      },
     });
   };
 
@@ -188,8 +198,12 @@ const usePublishContent = () => {
           contentDetails?.venue_deal_booking_action_id ??
             contentDetails?.rawVenueDealBookingAction?.id,
         );
+        const bookingId = normalizePositiveInteger(
+          contentDetails?.venue_deal_booking_id ??
+            contentDetails?.rawVenueDealBookingAction?.venue_deal_bookings_id,
+        );
 
-        if (!userActionId) {
+        if (!userActionId || !bookingId) {
           showToastError({message: 'Missing venue deal photo details'});
           setIsSendToReview(false);
           return;
@@ -200,6 +214,7 @@ const usePublishContent = () => {
             contentPhotos.map(createContentThumbnail),
           );
           const photosFormData = new FormData();
+          photosFormData.append('booking_id', String(bookingId));
 
           contentPhotos.forEach((photo, index) => {
             const fallbackName =
@@ -308,11 +323,32 @@ const usePublishContent = () => {
     dispatch(setContentList(contentList));
     setIsLoading(false);
 
-    if (contentList?.length > 0) {
-      navigate(SCREEN_NAMES.YourScheduleScreen, {
-        selectedTab: 2,
-      });
+    navigation.navigate(STACK_NAMES.BottomStack, {
+      screen: SCREEN_NAMES.Schedule,
+      params: {
+        screen: SCREEN_NAMES.YourScheduleScreen,
+        params: {
+          selectedTab: 2,
+        },
+      },
+    });
+  };
+
+  const handleSendMessagePress = async () => {
+    const channel = await getChatByBookingDetail({
+      bookingDetails: updatedContentDetails || contentDetails,
+    });
+
+    if (!channel) {
+      showToastError({message: 'Chat is not available for this booking'});
+      return;
     }
+
+    dispatch(setSelectedChannel(channel));
+    setIsContentStatusModalVisible(false);
+    navigation.navigate(STACK_NAMES.BottomStack, {
+      screen: SCREEN_NAMES.ChatRoom,
+    });
   };
 
   const handleContentBriefPress = () => {
@@ -421,6 +457,7 @@ const usePublishContent = () => {
     handleContentModalOpenClose,
     handleSendToReviewBtnPress,
     handlePositiveBtnPress,
+    handleSendMessagePress,
     handleContentBriefPress,
     handleContentUpload,
     handleCameraPress,

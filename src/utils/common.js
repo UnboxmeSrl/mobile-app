@@ -8,11 +8,18 @@ import {getOwnersByRestaurant} from '../services';
 
 const VENUE_DEAL_BOOKING_CHANNEL_PREFIX = 'venueDealBooking_';
 
-const getChatChannelIdByBookingDetail = bookingDetails => {
-  const isVenueDealBooking =
-    bookingDetails?.isVenueDeal ||
-    bookingDetails?.isVenueDealBooking ||
-    bookingDetails?.isVenueDealBookingAction;
+const getMissingStreamUserIds = error => {
+  const errorMessage = error?.message || error?.response?.data?.message || '';
+  const missingUsersMatch = errorMessage.match(/don't exist:\s*\[([^\]]+)\]/);
+
+  if (!missingUsersMatch?.[1]) {
+    return [];
+  }
+
+  return missingUsersMatch[1].split(/\s+/).filter(Boolean);
+};
+
+const getBookingIdByBookingDetail = bookingDetails => {
   const bookingId =
     bookingDetails?.venue_deal_booking_id ||
     bookingDetails?.rawVenueDealBooking?.id ||
@@ -24,7 +31,21 @@ const getChatChannelIdByBookingDetail = bookingDetails => {
     return null;
   }
 
-  const channelId = bookingId.toString();
+  return bookingId.toString();
+};
+
+const getChatChannelIdByBookingDetail = bookingDetails => {
+  const isVenueDealBooking =
+    bookingDetails?.isVenueDeal ||
+    bookingDetails?.isVenueDealBooking ||
+    bookingDetails?.isVenueDealBookingAction;
+  const bookingId = getBookingIdByBookingDetail(bookingDetails);
+
+  if (!bookingId) {
+    return null;
+  }
+
+  const channelId = bookingId;
 
   if (
     isVenueDealBooking &&
@@ -34,6 +55,40 @@ const getChatChannelIdByBookingDetail = bookingDetails => {
   }
 
   return channelId;
+};
+
+export const getInfluencerChatChannelTitle = channelName => {
+  const nameParts = String(channelName || '')
+    .split(':')
+    .map(part => part.trim())
+    .filter(Boolean);
+
+  if (nameParts.length < 3) {
+    return channelName || '';
+  }
+
+  return `${nameParts[0]} · ${nameParts[nameParts.length - 1]}`;
+};
+
+export const getChatByBookingDetail = async ({bookingDetails}) => {
+  try {
+    const channelId = getChatChannelIdByBookingDetail(bookingDetails);
+
+    if (!channelId) {
+      return false;
+    }
+
+    const channels = await chatClient.queryChannels(
+      {cid: `messaging:${channelId}`},
+      {},
+      {state: true, watch: true},
+    );
+
+    return channels?.[0] || false;
+  } catch (error) {
+    console.error('Error opening chat channel:', error);
+    return false;
+  }
 };
 
 export const checkActionName = actionName => {
@@ -152,7 +207,7 @@ export const checkContentStatus = statusName => {
       };
     case 'Under Review':
       statusIcon = IMAGES.approvalUnderReview;
-      title = 'Your content in under review!';
+      title = 'Your content is under review!';
       description =
         'Your content is under review. We are checking it, you will be notified once approved!';
       return {
@@ -334,18 +389,53 @@ export const createChatByBookingDetail = async ({bookingDetails}) => {
     // Join all owner names with commas
     // const ownerNames = ownerNamesArray.join(',');
     if (channelId && channelMembers.length) {
-      const channelName = `${bookingDetails._restaurant_turbo.Name}:${
-        bookingDetails?.user_turbo?.name || ''
-      }:${formatDate(bookingDetails?.BookingDay)}`;
+      const restaurantName = bookingDetails?._restaurant_turbo?.Name || '';
+      const influencerName = bookingDetails?.user_turbo?.name || '';
+      const bookingId = getBookingIdByBookingDetail(bookingDetails);
+      const bookingDateLabel = formatDate(bookingDetails?.BookingDay);
+      const channelName = `${restaurantName}:${influencerName}:${bookingDateLabel}`;
 
       // Proceed to create the channel if the name is valid
       if (channelName && channelName.trim() !== '') {
-        const newChannel = chatClient.channel('messaging', channelId, {
-          name: channelName,
-          members: channelMembers,
-        });
+        const watchChannel = async members => {
+          const channel = chatClient.channel('messaging', channelId, {
+            name: channelName,
+            restaurant_name: restaurantName,
+            influencer_name: influencerName,
+            booking_date_label: bookingDateLabel,
+            booking_id: bookingId,
+            restaurant_id: restaurantTurboId,
+            members,
+          });
 
-        await newChannel.watch();
+          await channel.watch();
+          return channel;
+        };
+
+        let newChannel;
+
+        try {
+          newChannel = await watchChannel(channelMembers);
+        } catch (error) {
+          const missingUserIds = getMissingStreamUserIds(error);
+          const retryChannelMembers = channelMembers.filter(
+            memberId => !missingUserIds.includes(memberId),
+          );
+
+          if (!missingUserIds.length || !retryChannelMembers.length) {
+            throw error;
+          }
+
+          console.log('CHAT_CREATE_BY_BOOKING_DETAIL_RETRY', {
+            reason: 'missing_stream_users',
+            missingUserIds,
+            originalChannelMembers: channelMembers,
+            retryChannelMembers,
+          });
+
+          newChannel = await watchChannel(retryChannelMembers);
+        }
+
         console.log('CHAT_CREATE_BY_BOOKING_DETAIL_RESULT', {
           cid: newChannel?.cid,
           id: newChannel?.id,

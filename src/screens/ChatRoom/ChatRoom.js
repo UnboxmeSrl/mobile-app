@@ -3,6 +3,7 @@ import {
   BackHandler,
   SafeAreaView,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -23,7 +24,13 @@ import {
   selecteSelectedChannel,
   setSelectedChannel,
 } from '../../redux';
-import {colors, perfectSize} from '../../utils';
+import {colors, getInfluencerChatChannelTitle, perfectSize} from '../../utils';
+
+const ChatChannelPreviewTitle = ({channel, displayName}) => (
+  <Text numberOfLines={1} style={styles.channelPreviewTitle}>
+    {getInfluencerChatChannelTitle(channel?.data?.name || displayName)}
+  </Text>
+);
 
 const ChatRoom = () => {
   const loginData = useSelector(currentUserData);
@@ -75,6 +82,7 @@ const ChatRoom = () => {
       )}
       <ChannelList
         filters={filters}
+        PreviewTitle={ChatChannelPreviewTitle}
         sort={sort}
         onSelect={selectedChannel =>
           dispatch(setSelectedChannel(selectedChannel))
@@ -89,7 +97,7 @@ const ChatRoom = () => {
               <AntDesign name="arrowleft" size={perfectSize(22)} />
             </TouchableOpacity>
             <AppText style={{fontSize: perfectSize(16), fontWeight: '500'}}>
-              {channel?.data?.name}
+              {getInfluencerChatChannelTitle(channel?.data?.name)}
               {/* {Object.values(channel?.state?.members || {}).find(member =>
                 member.user.id.startsWith('owner_'),
               )?.user?.name || 'Unnamed Channel'} */}
@@ -141,6 +149,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: perfectSize(40),
     paddingHorizontal: perfectSize(20),
+  },
+  channelPreviewTitle: {
+    color: colors.black,
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
 

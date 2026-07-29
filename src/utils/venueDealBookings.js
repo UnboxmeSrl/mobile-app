@@ -38,6 +38,19 @@ const getDeadlineDaysFromActionNotes = notes => {
   return 0;
 };
 
+const getContentStatusFromActionStatus = actionStatus => {
+  switch (normalizeStatus(actionStatus)) {
+    case 'approved':
+      return 'Approved';
+    case 'pending':
+      return 'Under Review';
+    case 'rejected':
+      return 'Rejected';
+    default:
+      return null;
+  }
+};
+
 export const getUserToken = loginData =>
   loginData?.authToken ||
   loginData?.auth_token ||
@@ -144,7 +157,9 @@ export const mapVenueDealBookingActionsToContentList = (
   return (actions || []).map(action => {
     const booking = bookingsById[action?.venue_deal_bookings_id];
     const mappedBooking = mapVenueDealBookingToScheduleBooking(booking || {});
-    const isSubmitted = !!action?.completed_at;
+    const contentStatus = getContentStatusFromActionStatus(
+      action?.action_status,
+    );
     const actionIcon =
       typeof action?.action_icon === 'string' && action.action_icon
         ? {url: action.action_icon}
@@ -160,7 +175,7 @@ export const mapVenueDealBookingActionsToContentList = (
       venue_deal_booking_id: action?.venue_deal_bookings_id,
       isVenueDealBooking: true,
       isVenueDealBookingAction: true,
-      content_status_turbo_id: isSubmitted ? 1 : 0,
+      content_status_turbo_id: contentStatus ? 1 : 0,
       content_url: '',
       completed_at: action?.completed_at,
       _actions_turbo: {
@@ -177,7 +192,7 @@ export const mapVenueDealBookingActionsToContentList = (
         notes: action?.action_notes,
       },
       _content_status_turbo: {
-        name: isSubmitted ? 'Under Review' : 'To Publish',
+        name: contentStatus,
       },
       _offers_turbo: {
         ...(mappedBooking?._offers_turbo || {}),
