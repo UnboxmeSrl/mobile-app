@@ -189,7 +189,11 @@ const ServiceDetails = () => {
   const getContentActionDescription = useCallback(
     item =>
       isVenueDeal
-        ? item?.Descrizione || item?.action?.description || ''
+        ? item?.content_instructions ||
+          item?.action?.content_instructions ||
+          item?.Descrizione ||
+          item?.action?.description ||
+          ''
         : item?._actions_turbo?.Descrizione,
     [isVenueDeal],
   );

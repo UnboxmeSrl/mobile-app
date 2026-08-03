@@ -185,9 +185,11 @@ export const mapVenueDealBookingActionsToContentList = (
         Action_quantity: action?.action_quantity,
         Coupons_Services: [],
         Days_deadline: getDeadlineDaysFromActionNotes(action?.action_notes),
-        Descrizione: action?.action_description || '',
+        Descrizione:
+          action?.content_instructions || action?.action_description || '',
         action_id: action?.action_id,
         action_num_id: 0,
+        content_instructions: action?.content_instructions || '',
         key: action?.action_title,
         notes: action?.action_notes,
       },

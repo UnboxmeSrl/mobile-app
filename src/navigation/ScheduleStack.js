@@ -1,7 +1,7 @@
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SCREEN_NAMES} from '../constants';
 import {ArchiveScreen, YourScheduleScreen} from '../screens';
-import {AppInfo} from '../screens/AppInfo';
 
 const StackSchedule = createStackNavigator();
 
@@ -16,7 +16,6 @@ const ScheduleStack = () => {
         name={SCREEN_NAMES.YourScheduleScreen}
         component={YourScheduleScreen}
       />
-      <StackSchedule.Screen name={SCREEN_NAMES.AppInfo} component={AppInfo} />
       <StackSchedule.Screen
         name={SCREEN_NAMES.ArchiveScreen}
         component={ArchiveScreen}

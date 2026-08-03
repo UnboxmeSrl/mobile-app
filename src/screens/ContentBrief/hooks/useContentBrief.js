@@ -1,13 +1,14 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import {SCREEN_NAMES} from '../../../constants';
 import {navigate, showToastSuccess} from '../../../services';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectBookingsByID} from '../../../redux';
 import {getActionIconSource} from '../../../utils';
 
 const useContentBrief = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const bookingDetailsParams = route.params?.bookingDetails || {};
   const bookingId = bookingDetailsParams?.id;
   const bookingDetail = useSelector(selectBookingsByID(bookingId));
@@ -46,6 +47,11 @@ const useContentBrief = () => {
   };
 
   const handleBackPress = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+      return;
+    }
+
     navigate(SCREEN_NAMES.YourScheduleScreen);
   };
 

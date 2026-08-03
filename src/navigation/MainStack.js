@@ -6,6 +6,7 @@ import BottomTabNavigator from './BottomNavigator';
 
 import {
   AppliedScreen,
+  AppInfo,
   AuthAgencyScreen,
   AuthCityScreen,
   AuthCodeFromFriendScreen,
@@ -78,6 +79,7 @@ const MainStack = () => {
         name={SCREEN_NAMES.ContentBriefScreen}
         component={ContentBriefScreen}
       />
+      <StackMain.Screen name={SCREEN_NAMES.AppInfo} component={AppInfo} />
       <StackMain.Screen
         name={SCREEN_NAMES.NewCouponScreen}
         component={NewCouponScreen}

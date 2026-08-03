@@ -39,6 +39,8 @@ const getActionName = (action, actionDetails) =>
   getFallbackActionName(action);
 
 const getActionDescription = (deal, action, actionDetails) =>
+  action?.content_instructions ||
+  actionDetails?.content_instructions ||
   actionDetails?.description ||
   action?.Descrizione ||
   action?.description ||

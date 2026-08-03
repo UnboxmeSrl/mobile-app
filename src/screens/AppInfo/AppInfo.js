@@ -11,12 +11,11 @@ import {
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {useSelector} from 'react-redux';
 import {IMAGES} from '../../assets';
-import {COLORS, FONTS, SCREEN_NAMES} from '../../constants';
+import {COLORS, FONTS} from '../../constants';
 import {selectAppInfo} from '../../redux';
-import {useYourScheduleDetails} from './hooks';
 import {navigate} from '../../services';
 
-const AppInfo = ({route}) => {
+const AppInfo = () => {
   // const appInfo = useSelector(selectAppInfo);
   const appInfo = useSelector(selectAppInfo)?.description;
   // console.log('appInfo', appInfo);

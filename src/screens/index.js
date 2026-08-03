@@ -1,4 +1,5 @@
 export * from './Cities';
+export * from './AppInfo';
 export * from './YourSchedule';
 export * from './Archive';
 export * from './Restaurants';
