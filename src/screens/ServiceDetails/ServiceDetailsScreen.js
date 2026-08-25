@@ -54,6 +54,10 @@ const ServiceDetails = () => {
   );
   const actionIconUrl = serviceDetails?._actions_turbo?.Action_icon?.url;
   const isVenueDeal = !!serviceDetails?.isVenueDeal;
+  const contentGuideline =
+    serviceDetails?.content_instructions ||
+    serviceDetails?.venueDeal?.content_instructions ||
+    '';
   const actionIconSource = useMemo(
     () =>
       getActionIconSource(serviceDetails?._actions_turbo?.action) ||
@@ -202,6 +206,23 @@ const ServiceDetails = () => {
     item => (isVenueDeal ? item?.coin_amount : item?.Credits),
     [isVenueDeal],
   );
+
+  const getContentActionDeadline = useCallback(item => {
+    const deadline = item?.day_deadline ?? item?.action?.day_deadline;
+    const normalizedDeadline = String(deadline ?? '').trim();
+
+    if (!normalizedDeadline) {
+      return '';
+    }
+
+    if (/\bdays?\b/i.test(normalizedDeadline)) {
+      return `Deadline: ${normalizedDeadline}`;
+    }
+
+    return `Deadline: ${normalizedDeadline} ${
+      Number(normalizedDeadline) === 1 ? 'Day' : 'Days'
+    }`;
+  }, []);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -570,25 +591,45 @@ const ServiceDetails = () => {
             </>
           ) : (
             <>
+              {isVenueDeal && !!contentGuideline && (
+                <View style={styles.contentGuidelineContainer}>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.contentGuidelineTitle}>
+                    Content Guideline
+                  </Text>
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.contentGuidelineDescription}>
+                    {contentGuideline}
+                  </Text>
+                </View>
+              )}
               <View style={styles.contentRequiredRow}>
-                <View style={styles.contentRequiredContainer}>
+                <View
+                  style={[
+                    styles.contentRequiredContainer,
+                    isVenueDeal && styles.venueDealContentRequiredContainer,
+                  ]}>
                   <Text
                     allowFontScaling={false}
                     style={styles.contentRequiredText}>
                     Content required
                   </Text>
                 </View>
-                <View style={styles.deadlineContainer}>
-                  <Image
-                    source={IMAGES.timeCircle}
-                    style={styles.timeCircleIcon}
-                  />
-                  <Text
-                    allowFontScaling={false}
-                    style={
-                      styles.deadlineText
-                    }>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
-                </View>
+                {!isVenueDeal && (
+                  <View style={styles.deadlineContainer}>
+                    <Image
+                      source={IMAGES.timeCircle}
+                      style={styles.timeCircleIcon}
+                    />
+                    <Text
+                      allowFontScaling={false}
+                      style={
+                        styles.deadlineText
+                      }>{`Deadline: ${serviceDetails?._actions_turbo?.Days_deadline} Days`}</Text>
+                  </View>
+                )}
               </View>
               {!isVenueDeal && actionNumId === 3 && (
                 <View style={styles.WhatIsDiaryContainer}>
@@ -623,6 +664,9 @@ const ServiceDetails = () => {
                     const itemActionIconSource =
                       getContentActionIconSource(item);
                     const contentActionCredits = getContentActionCredits(item);
+                    const contentActionDeadline = isVenueDeal
+                      ? getContentActionDeadline(item)
+                      : '';
                     const shouldShowContentActionCredits =
                       !isVenueDeal || Number(contentActionCredits || 0) > 0;
                     // const diaryItems = ['TikTok Diary', 'Instagram Diary']
@@ -802,6 +846,19 @@ const ServiceDetails = () => {
                                   {`${getContentActionDescription(item)}`}
                                 </Text>
                               </View>
+                              {!!contentActionDeadline && (
+                                <View style={styles.actionDeadlineContainer}>
+                                  <Image
+                                    source={IMAGES.timeCircle}
+                                    style={styles.actionDeadlineIcon}
+                                  />
+                                  <Text
+                                    allowFontScaling={false}
+                                    style={styles.actionDeadlineText}>
+                                    {contentActionDeadline}
+                                  </Text>
+                                </View>
+                              )}
                             </View>
                           </View>
                         )}
@@ -839,6 +896,38 @@ const ServiceDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  actionDeadlineContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: verticalScale(10),
+  },
+  actionDeadlineIcon: {
+    height: moderateScale(14),
+    tintColor: COLORS.newPrimary,
+    width: moderateScale(14),
+  },
+  actionDeadlineText: {
+    color: COLORS.newPrimary,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(13),
+    marginLeft: scale(6),
+  },
+  contentGuidelineContainer: {
+    marginBottom: verticalScale(20),
+    paddingHorizontal: scale(20),
+  },
+  contentGuidelineDescription: {
+    color: COLORS.davyGrey,
+    fontFamily: FONTS.quicksand,
+    fontSize: moderateScale(14),
+    lineHeight: verticalScale(20),
+    marginTop: verticalScale(8),
+  },
+  contentGuidelineTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.quicksandBold,
+    fontSize: moderateScale(18),
+  },
   beautyDescription: {
     color: COLORS.davyGrey,
     fontFamily: FONTS.quicksand,
@@ -1044,6 +1133,9 @@ const styles = StyleSheet.create({
   contentRequiredContainer: {
     width: '50%',
     alignItems: 'center',
+  },
+  venueDealContentRequiredContainer: {
+    width: '100%',
   },
   contentRequiredRow: {
     flexDirection: 'row',

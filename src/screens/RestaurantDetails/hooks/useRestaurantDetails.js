@@ -73,6 +73,7 @@ const mapDealAction = (deal, action, actionsById) => {
     ...action,
     action: actionDetails,
     action_num_id: action?.action_id,
+    day_deadline: action?.day_deadline ?? actionDetails?.day_deadline,
     Action_Name: getActionName(action, actionDetails),
     Action_icon:
       getActionIcon(actionDetails) ||
